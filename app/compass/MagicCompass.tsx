@@ -30,6 +30,12 @@ import {
   type UnitItem,
   RING_KINDS,
   rng,
+  EMPTY_MIX,
+  mixCounts,
+  mixKey,
+  mixSize,
+  mixUnit,
+  type Mix,
 } from "./compass";
 import { Halftone } from "./halftone";
 import { CompassShelveButton, CompassShelvePanel } from "./CompassShelve";
@@ -41,6 +47,9 @@ const PREVIEW = process.env.NEXT_PUBLIC_PREVIEW_FEATURES === "1";
 //   頁のJSは水和より前に評価されるので、ここで基点を変えれば最初の読み込みから /prod-idx になる。
 //   module キャッシュは全頁共有 → テスト環境ではこの頁から出る時は <a>(全頁読み込み)で出る(next/link を使わない)。
 if (PREVIEW && typeof window !== "undefined") setIndexBase("/prod-idx");
+// ★案C「掛け合わせて広げる」(2026-10-05): 要素・ジャンルをいくつでも選んで広げる引き出し。 いまはテスト環境だけ。
+//   ★今の形(帯に要素の多い順4つ)に戻す = ここを false にするだけ。 本番にも出す = true にする。
+const MIX = PREVIEW;
 
 const TOP = 100; // 糸の色チップ列 44 + 旅路 56
 const SHEET = 96;
@@ -57,7 +66,7 @@ type Step = { slug: string; kind: ThreadKind | null; seed?: string };
 const newSeed = () => Math.random().toString(36).slice(2, 10);
 /** 詳細(作品頁)へ飛ぶ直前に旅の状態を書く = OS の戻るで帰ってきた時に復元する(2026-09-30 ユーザ要望) */
 const RESUME_KEY = "mangal:compass:resume:v1";
-type Resume = { path: Step[]; prev: string | null; backAng: number | null; sel: string | null; exp: string | null; drawn: { key: string; items: UnitItem[] } | null; t: number };
+type Resume = { path: Step[]; prev: string | null; backAng: number | null; sel: string | null; exp: string | null; drawn: { key: string; items: UnitItem[] } | null; mix?: Mix | null; t: number };
 type Spawn = { fx: number; fy: number; fs: number; d: number };
 type NodeView = {
   slug: string;
@@ -193,6 +202,10 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
   const [sel, setSel] = useState<string | null>(null);
   const [off, setOff] = useState<Set<UnitKind>>(() => new Set());
   const [exp, setExp] = useState<string | null>(null);
+  // 掛け合わせ(案C): 引き出しが開いているか / 引き出しで選んでいる組 / 広げた組(exp = mixKey(広げた組))
+  const [mixOpen, setMixOpen] = useState(false);
+  const [mix, setMix] = useState<Mix>(EMPTY_MIX);
+  const [mixApplied, setMixApplied] = useState<Mix | null>(null);
   // ★札(シート)の実際の高さ。 札は中身に合わせて伸びる(紹介文3行/選んでいる時は5行+進む)ので、
   //   「広げる」の帯を固定位置(下から98px)に置くと札の裏に潜って読めなくなった(2026-10-03 ユーザ指摘)。
   //   帯はいつも札のすぐ上に乗せる。 callback ref = 札が後から描かれても測れる。
@@ -253,6 +266,10 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
           setBackAng(r.backAng);
           setSel(r.sel);
           setExp(r.exp);
+          if (r.mix) {
+            setMix(r.mix);
+            setMixApplied(r.mix);
+          }
           return;
         }
       }
@@ -299,7 +316,24 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
     [graph, curItem, magName, genreName],
   );
   const placed = useMemo(() => (nb ? placeRing(nb.ring, prev, backAng, geom.rx, geom.ry) : []), [nb, prev, backAng, geom]);
-  const unitFull = useMemo(() => (exp && nb ? (nb.units.find((u) => u.key === exp) ?? null) : null), [exp, nb]);
+  const mixFull = useMemo(
+    () => (graph && curItem && mixApplied ? mixUnit(graph, curItem, mixApplied, genreName) : null),
+    [graph, curItem, mixApplied, genreName],
+  );
+  const unitFull = useMemo(
+    () => (exp && nb ? (mixFull?.key === exp ? mixFull : (nb.units.find((u) => u.key === exp) ?? null)) : null),
+    [exp, nb, mixFull],
+  );
+  // 引き出しの札(中心の本の要素・ジャンル全部・冊数の多い順)と冊数
+  const mixBase = useMemo(() => (MIX && graph && curItem ? mixCounts(graph, curItem, EMPTY_MIX) : null), [graph, curItem]);
+  const mixInfo = useMemo(() => {
+    if (!mixBase || !graph || !curItem) return null;
+    const c = mixSize(mix) ? mixCounts(graph, curItem, mix) : mixBase;
+    const byN = (m: Map<string, number>) => [...m.keys()].sort((a, b) => (m.get(b) ?? 0) - (m.get(a) ?? 0));
+    return { c, themes: byN(mixBase.themes), genres: byN(mixBase.genres) };
+  }, [mixBase, graph, curItem, mix]);
+  // 帯に出す単位: 掛け合わせの時は要素の単位(多い順4つ)を出さない = 引き出しから選ぶ
+  const bandUnits = useMemo(() => (nb ? (MIX ? nb.units.filter((u) => u.kind !== "elem") : nb.units) : []), [nb]);
   // 開くたびに候補全体から24冊をくじで引く(引き直しは直前の24冊を外して引く)
   useEffect(() => {
     if (!unitFull) {
@@ -397,6 +431,9 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
       toneRef.current?.setCover(item?.cover ?? null, { x: -rel.x * 0.6, y: -rel.y * 0.6 });
       const finish = () => {
         setPath(commit);
+        setMixOpen(false);
+        setMix(EMPTY_MIX);
+        setMixApplied(null);
         setPrev(from);
         setBackAng(ang);
         setSel(null);
@@ -501,11 +538,26 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
       if (busy.current) return;
       setSel(null);
       setGrowFor(null);
+      setMixOpen(false);
       setExp((e) => (!key || key === e ? null : key));
       bumpSheet();
     },
     [bumpSheet],
   );
+
+  // 掛け合わせ: 札を押すたび 選ぶ/外す。 「広げる」で今の組を広げる(同じ組をもう一度でも引き直す)
+  const toggleMix = useCallback((part: "themes" | "genres", v: string) => {
+    setMix((m) => ({ ...m, [part]: m[part].includes(v) ? m[part].filter((x) => x !== v) : [...m[part], v] }));
+  }, []);
+  const applyMix = useCallback(() => {
+    if (busy.current || !mixSize(mix)) return;
+    setSel(null);
+    setGrowFor(null);
+    setMixOpen(false);
+    setMixApplied({ themes: [...mix.themes], genres: [...mix.genres] });
+    setExp(mixKey(mix));
+    bumpSheet();
+  }, [mix, bumpSheet]);
 
   const chooseSpread = useCallback((k: UnitKind, s: Spread) => {
     setSel(null);
@@ -523,12 +575,13 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== "Escape" || busy.current) return;
-      if (sel) setSel(null);
+      if (mixOpen) setMixOpen(false);
+      else if (sel) setSel(null);
       else if (exp) setExp(null);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [sel, exp]);
+  }, [sel, exp, mixOpen]);
 
   // ── 描く本(世界座標) ──
   const nodes = useMemo<NodeView[]>(() => {
@@ -753,7 +806,7 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
       : `/manga/${encodeURIComponent(slug)}`;
   const saveResume = () => {
     try {
-      const r: Resume = { path, prev, backAng, sel, exp, drawn, t: Date.now() };
+      const r: Resume = { path, prev, backAng, sel, exp, drawn, mix: exp && mixFull?.key === exp ? mixApplied : null, t: Date.now() };
       window.sessionStorage.setItem(RESUME_KEY, JSON.stringify(r));
     } catch {
       /* 書けなくても飛ぶ(戻った時は新しい旅) */
@@ -782,6 +835,31 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
     transform: zoom
       ? `translate(${zoom.tx}px, ${zoom.ty}px) scale(${zoom.s})`
       : `translate(${-cam.x}px, ${-cam.y}px) scale(1)`,
+  };
+
+  // 掛け合わせの入口: 要素 ▾ / ジャンル ▾(どちらも同じ引き出しを開く)。 広げた組の札は「✕ 閉じる」の隣(押すと引き出しで組み直す)
+  const mixShown = exp && mixFull?.key === exp ? mixFull : null;
+  const toggleMixOpen = () => {
+    if (busy.current) return;
+    setMixOpen((o) => !o);
+  };
+  const mixChips = () => {
+    if (!mixInfo) return null;
+    const open = toggleMixOpen;
+    return (
+      <>
+        {mixInfo.themes.length > 0 && (
+          <button type="button" className="cp-uc" style={{ "--c": KIND_COLOR.elem } as CSSProperties} aria-expanded={mixOpen} onClick={open}>
+            要素<i>{mixInfo.themes.length}</i> {mixOpen ? "▴" : "▾"}
+          </button>
+        )}
+        {mixInfo.genres.length > 0 && (
+          <button type="button" className="cp-uc" style={{ "--c": KIND_COLOR.genre } as CSSProperties} aria-expanded={mixOpen} onClick={open}>
+            ジャンル<i>{mixInfo.genres.length}</i> {mixOpen ? "▴" : "▾"}
+          </button>
+        )}
+      </>
+    );
   };
 
   return (
@@ -1018,21 +1096,106 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
             ✕ 閉じる
           </button>
         )}
-        {nb?.units.map((u) => (
+        {MIX && mixShown && (
           <button
-            key={u.key}
             type="button"
-            className={`cp-uc${exp === u.key ? " on" : ""}`}
-            style={{ "--c": KIND_COLOR[u.kind] } as CSSProperties}
-            aria-pressed={exp === u.key}
-            onClick={() => openUnit(u.key)}
+            className="cp-uc on"
+            style={{ "--c": KIND_COLOR[mixShown.kind] } as CSSProperties}
+            aria-pressed
+            title="引き出しで組み直す"
+            onClick={toggleMixOpen}
           >
-            {u.label}
-            <i>{u.items.length}</i>
+            {mixShown.label}
+            <i>{mixShown.items.length}</i>
           </button>
+        )}
+        {bandUnits.map((u) => (
+          <span key={u.key} className="cp-ucw">
+            {/* 掛け合わせの入口(要素 ▾ / ジャンル ▾)は「似たジャンル」の前に置く */}
+            {MIX && u.kind === "genre" && mixChips()}
+            <button
+              type="button"
+              className={`cp-uc${exp === u.key ? " on" : ""}`}
+              style={{ "--c": KIND_COLOR[u.kind] } as CSSProperties}
+              aria-pressed={exp === u.key}
+              onClick={() => openUnit(u.key)}
+            >
+              {u.label}
+              <i>{u.items.length}</i>
+            </button>
+          </span>
         ))}
-        {nb && !nb.units.length && <span className="cp-ul">この本から広げられる糸はありません</span>}
+        {MIX && !bandUnits.some((u) => u.kind === "genre") && mixChips()}
+        {nb && !nb.units.length && !(mixInfo && (mixInfo.themes.length || mixInfo.genres.length)) && (
+          <span className="cp-ul">この本から広げられる糸はありません</span>
+        )}
       </div>
+
+      {/* 4b. 掛け合わせの引き出し(案C・テスト環境だけ) */}
+      {MIX && mixOpen && mixInfo && (
+        <div className="cp-mix" style={{ bottom: Math.max(SHEET + 2, sheetH + 2) + 30 }} role="dialog" aria-label="掛け合わせて広げる">
+          <div className="cp-mix-h">
+            <span>掛け合わせる ・ いくつでも選べる</span>
+            {mixSize(mix) > 0 && (
+              <button type="button" className="cp-mix-clr" onClick={() => setMix(EMPTY_MIX)}>
+                選び直す
+              </button>
+            )}
+            <button type="button" className="cp-mix-x" aria-label="閉じる" onClick={() => setMixOpen(false)}>
+              ✕
+            </button>
+          </div>
+          <div className="cp-mix-body">
+            {(["themes", "genres"] as const).map((part) => {
+              const keys = mixInfo[part];
+              if (!keys.length) return null;
+              const kind = part === "themes" ? "elem" : "genre";
+              const counts = mixInfo.c[part];
+              const any = mixSize(mix) > 0;
+              return (
+                <div key={part}>
+                  <div className="cp-mix-sec">{part === "themes" ? "要素" : "ジャンル"}</div>
+                  <div className="cp-mix-tags">
+                    {keys.map((k) => {
+                      const on = mix[part].includes(k);
+                      const n = counts.get(k) ?? 0;
+                      return (
+                        <button
+                          key={k}
+                          type="button"
+                          className={`cp-mt${on ? " on" : ""}`}
+                          style={{ "--c": KIND_COLOR[kind] } as CSSProperties}
+                          aria-pressed={on}
+                          disabled={!on && n === 0}
+                          onClick={() => toggleMix(part, k)}
+                        >
+                          {part === "genres" ? genreName(k) : k}
+                          {!on && <i>{any ? `→${n.toLocaleString()}` : n.toLocaleString()}</i>}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <button
+            type="button"
+            className="cp-mix-go"
+            style={{ "--c": KIND_COLOR[mix.themes.length ? "elem" : "genre"] } as CSSProperties}
+            disabled={!mixSize(mix) || !mixInfo.c.total}
+            onClick={applyMix}
+          >
+            {mixSize(mix) ? (
+              <>
+                {[...mix.themes, ...mix.genres.map(genreName)].join(" × ")} で広げる <b>{mixInfo.c.total.toLocaleString()}冊</b>
+              </>
+            ) : (
+              "要素・ジャンルを選ぶ"
+            )}
+          </button>
+        </div>
+      )}
 
       {/* 5. シート */}
       <div

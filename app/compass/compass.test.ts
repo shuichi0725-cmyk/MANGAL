@@ -23,6 +23,11 @@ import {
   type Kind,
   type RingEntry,
   type Spread,
+  EMPTY_MIX,
+  mixCands,
+  mixCounts,
+  mixKey,
+  mixUnit,
 } from "./compass";
 
 function book(slug: string, o: Partial<MangaListItem> = {}): MangaListItem {
@@ -530,5 +535,50 @@ describe("網点の出方", () => {
       last = k;
     }
     expect(pickTone("inner", () => 0.9999)).not.toBe("inner");
+  });
+});
+
+describe("掛け合わせ(案C)", () => {
+  const center = book("c", { themes: ["悲劇", "剣劇", "復讐"], genres: ["action", "horror"] });
+  const list = [
+    center,
+    book("a", { themes: ["悲劇", "剣劇", "復讐"], genres: ["action"] }),
+    book("b", { themes: ["悲劇", "剣劇"], genres: ["action", "horror"] }),
+    book("d", { themes: ["悲劇"], genres: ["horror"] }),
+    book("e", { themes: ["剣劇"], genres: [] }),
+  ];
+  const g = buildGraph(list);
+
+  it("選んだ要素・ジャンルを全部持つ本だけ(中央の本は除く)・何も選ばなければ空", () => {
+    const slugs = (m: Parameters<typeof mixCands>[2]) => mixCands(g, center, m).map((i) => g.items[i].slug).sort();
+    expect(slugs(EMPTY_MIX)).toEqual([]);
+    expect(slugs({ themes: ["悲劇"], genres: [] })).toEqual(["a", "b", "d"]);
+    expect(slugs({ themes: ["悲劇", "剣劇"], genres: [] })).toEqual(["a", "b"]);
+    expect(slugs({ themes: ["悲劇"], genres: ["horror"] })).toEqual(["b", "d"]);
+  });
+
+  it("札の冊数: 何も選ばなければ札ごとの冊数・選んだら「足したら何冊か」(選んだ札は出さない・0もある)", () => {
+    const base = mixCounts(g, center, EMPTY_MIX);
+    expect(base.total).toBe(0);
+    expect(Object.fromEntries(base.themes)).toEqual({ 悲劇: 3, 剣劇: 3, 復讐: 1 });
+    expect(Object.fromEntries(base.genres)).toEqual({ action: 2, horror: 2 });
+    const c = mixCounts(g, center, { themes: ["悲劇", "剣劇"], genres: [] });
+    expect(c.total).toBe(2);
+    expect(Object.fromEntries(c.themes)).toEqual({ 復讐: 1 });
+    expect(Object.fromEntries(c.genres)).toEqual({ action: 2, horror: 1 });
+    const z = mixCounts(g, center, { themes: ["復讐"], genres: ["horror"] });
+    expect(z.total).toBe(0);
+  });
+
+  it("広げる単位: 色は要素を1つでも選べば要素・ジャンルだけならジャンル、近い本ほど先", () => {
+    const u = mixUnit(g, center, { themes: ["悲劇"], genres: ["action"] }, (k) => (k === "action" ? "アクション" : k));
+    expect(u?.kind).toBe("elem");
+    expect(u?.label).toBe("悲劇×アクション");
+    expect(u?.key).toBe(mixKey({ themes: ["悲劇"], genres: ["action"] }));
+    // 近さ = 共通の要素 + 4×ジャンルの重なり: a = 3 + 4×0.5 = 5 / b = 2 + 4×1 = 6
+    expect(u?.items.map((i) => i.slug)).toEqual(["b", "a"]);
+    expect(mixUnit(g, center, { themes: [], genres: ["horror"] })?.kind).toBe("genre");
+    expect(mixUnit(g, center, EMPTY_MIX)).toBeNull();
+    expect(mixUnit(g, center, { themes: ["復讐"], genres: ["horror"] })).toBeNull();
   });
 });

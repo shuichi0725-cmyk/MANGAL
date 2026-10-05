@@ -326,6 +326,94 @@ export function neighborhood(
   return { ring, units };
 }
 
+// ───────────────────────── 掛け合わせ(案C・2026-10-05) ─────────────────────────
+// 要素・ジャンルが多い本(ベルセルク=要素11)は、広げる帯の「要素の多い順4つ」に入らない糸が選べなかった。
+// 中心の本の要素・ジャンルを いくつでも選び、全部を持つ本を広げる。 選んでいない札には「足したら何冊か」を出す。
+
+export type Mix = { themes: string[]; genres: string[] };
+export const EMPTY_MIX: Mix = { themes: [], genres: [] };
+
+export function mixKey(m: Mix): string {
+  return `mix:${m.themes.join("+")}|${m.genres.join("+")}`;
+}
+export function mixSize(m: Mix): number {
+  return m.themes.length + m.genres.length;
+}
+
+/** 選んだ要素・ジャンルを全部持つ本(中央の本は除く)。 何も選んでいなければ空 */
+export function mixCands(g: Graph, center: Pick<MangaListItem, "slug">, m: Mix): number[] {
+  const lists = [...m.themes.map((t) => g.byTheme.get(t) ?? []), ...m.genres.map((k) => g.byGenre.get(k) ?? [])];
+  if (!lists.length) return [];
+  lists.sort((a, b) => a.length - b.length);
+  const rest = lists.slice(1).map((l) => new Set(l));
+  return lists[0].filter((i) => g.items[i].slug !== center.slug && rest.every((s) => s.has(i)));
+}
+
+/**
+ * 引き出しの札に出す冊数。 total = いまの組の冊数(何も選んでいなければ 0)。
+ * themes/genres = 選んでいない札ごとの「足したら何冊か」(何も選んでいなければ その札だけの冊数)。
+ */
+export function mixCounts(
+  g: Graph,
+  center: Pick<MangaListItem, "slug" | "themes" | "genres">,
+  m: Mix,
+): { total: number; themes: Map<string, number>; genres: Map<string, number> } {
+  const cT = uniq(center.themes ?? []);
+  const cG = uniq(center.genres ?? []);
+  const themes = new Map<string, number>();
+  const genres = new Map<string, number>();
+  const notSelf = (i: number) => g.items[i].slug !== center.slug;
+  if (!mixSize(m)) {
+    for (const t of cT) themes.set(t, (g.byTheme.get(t) ?? []).filter(notSelf).length);
+    for (const k of cG) genres.set(k, (g.byGenre.get(k) ?? []).filter(notSelf).length);
+    return { total: 0, themes, genres };
+  }
+  const cands = mixCands(g, center, m);
+  for (const t of cT) if (!m.themes.includes(t)) themes.set(t, 0);
+  for (const k of cG) if (!m.genres.includes(k)) genres.set(k, 0);
+  for (const i of cands) {
+    const it = g.items[i];
+    for (const t of uniq(it.themes ?? [])) if (themes.has(t)) themes.set(t, (themes.get(t) as number) + 1);
+    for (const k of uniq(it.genres ?? [])) if (genres.has(k)) genres.set(k, (genres.get(k) as number) + 1);
+  }
+  return { total: cands.length, themes, genres };
+}
+
+/**
+ * 掛け合わせの広げる単位。 色 = 要素を1つでも選べば要素(青)・ジャンルだけならジャンル(橙)。
+ * くじの近さ = 中央との共通の要素の数 + 4×ジャンルの重なり(残りの要素・ジャンルも近い本ほど当たりやすい)。
+ */
+export function mixUnit(
+  g: Graph,
+  center: Pick<MangaListItem, "slug" | "themes" | "genres">,
+  m: Mix,
+  genreName: (key: string) => string = (k) => k,
+): Unit | null {
+  if (!mixSize(m)) return null;
+  const cT = new Set(center.themes ?? []);
+  const cG = new Set(center.genres ?? []);
+  const items = mixCands(g, center, m)
+    .map((i) => {
+      const it = g.items[i];
+      const ts = uniq(it.themes ?? []);
+      const gs = uniq(it.genres ?? []);
+      const sh = ts.filter((t) => cT.has(t)).length;
+      const n = gs.filter((k) => cG.has(k)).length;
+      const jac = n ? n / (cG.size + gs.length - n) : 0;
+      const u: UnitItem = { slug: it.slug, shared: sh, year: it.year_started || null, score: sh + 4 * jac };
+      return { u, pop: it.popularity ?? 0 };
+    })
+    .sort((a, b) => b.u.score - a.u.score || b.pop - a.pop || (a.u.slug < b.u.slug ? -1 : a.u.slug > b.u.slug ? 1 : 0))
+    .map((x) => x.u);
+  if (!items.length) return null;
+  return {
+    key: mixKey(m),
+    kind: m.themes.length ? "elem" : "genre",
+    label: [...m.themes, ...m.genres.map(genreName)].join("×"),
+    items,
+  };
+}
+
 // ───────────────────────── 羅針盤の配置 ─────────────────────────
 
 export type Geom = {
