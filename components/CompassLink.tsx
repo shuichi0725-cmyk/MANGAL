@@ -5,26 +5,52 @@
  *   サイト内遷移で入るとテスト環境の抜粋の索引を持ち込む(components/GlobalNav.tsx と同じ理由)。 本番では害は無い。
  *   見た目は style で持つ(Tailwind の新しいクラスを足さない)。
  */
-export default function CompassLink({ slug, title }: { slug: string; title: string }) {
+export default function CompassLink({
+  slug,
+  title,
+}: {
+  slug: string;
+  title: string;
+}) {
+  // ★2026-10-05 ユーザ裁定(見本 案3・マークは今のまま): 同ジャンル検索と間を空けて縦線で区切る = 別のボタンに見せる
   return (
-    <a
-      href={`/compass?from=${encodeURIComponent(slug)}`}
-      aria-label={`${title}から羅針盤で旅をする`}
-      title="羅針盤でこの作品から旅をする"
-      className="spring-press inline-flex items-center"
-      style={{
-        marginLeft: 8,
-        padding: "5px 9px",
-        border: "2px solid var(--color-accent)",
-        borderRadius: "var(--radius-tag)",
-        color: "var(--color-accent)",
-        verticalAlign: "middle",
-      }}
-    >
-      <svg viewBox="0 0 24 24" aria-hidden="true" width={18} height={18} style={{ stroke: "currentColor", fill: "none", strokeWidth: 1.9 }}>
-        <circle cx={12} cy={12} r={8.5} />
-        <path d="M15.5 8.5l-2 5-5 2 2-5z" />
-      </svg>
-    </a>
+    <>
+      <span
+        aria-hidden="true"
+        style={{
+          display: "inline-block",
+          width: 1,
+          height: 26,
+          marginLeft: 12,
+          background: "color-mix(in srgb, var(--color-ink) 35%, transparent)",
+          verticalAlign: "middle",
+        }}
+      />
+      <a
+        href={`/compass?from=${encodeURIComponent(slug)}`}
+        aria-label={`${title}から羅針盤で旅をする`}
+        title="羅針盤でこの作品から旅をする"
+        className="spring-press inline-flex items-center"
+        style={{
+          marginLeft: 12,
+          padding: "5px 9px",
+          border: "2px solid var(--color-accent)",
+          borderRadius: "var(--radius-tag)",
+          color: "var(--color-accent)",
+          verticalAlign: "middle",
+        }}
+      >
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          width={18}
+          height={18}
+          style={{ stroke: "currentColor", fill: "none", strokeWidth: 1.9 }}
+        >
+          <circle cx={12} cy={12} r={8.5} />
+          <path d="M15.5 8.5l-2 5-5 2 2-5z" />
+        </svg>
+      </a>
+    </>
   );
 }
