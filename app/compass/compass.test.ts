@@ -606,13 +606,21 @@ describe("案2+3: ジャンルの組み替え・要素の星雲", () => {
     );
   });
 
-  it("★ホラーを外すと、ホラー抜きの組に似た本(よく似たジャンルと同じ段階)・何も変えなければ null", () => {
+  it("★ホラーを外すと、ホラー抜きの組に似た本・ホラーを持つ本は出さない・何も変えなければ null", () => {
     const u = regenreUnit(g, center, { drop: ["horror"], add: [] });
     expect(u?.kind).toBe("genre");
-    // action+fantasy に対して: af=1.0 / afh=0.67 / afx=0.67 → 24冊に届かないので50%まで下げて3冊
-    expect(u?.items.map((i) => i.slug)).toEqual(["af", "afh", "afx"]);
+    // action+fantasy に対して: af=1.0 / afx=0.67(afh はホラーを持つので出さない)
+    expect(u?.items.map((i) => i.slug)).toEqual(["af", "afx"]);
     expect(regenreUnit(g, center, { drop: [], add: [] })).toBeNull();
     expect(regenreUnit(g, center, { drop: ["action", "fantasy", "horror"], add: [] })).toBeNull();
+  });
+
+  it("★足したジャンルは必ず持つ本だけ。 50%でも24冊に届かなければ、持つ本を全部(近い順)", () => {
+    const u = regenreUnit(g, center, { drop: [], add: ["historical"] });
+    // action+fantasy+horror+historical: 重なり50%以上なら af/afh も入るが、歴史を持たないので出さない
+    expect(u?.items.map((i) => i.slug)).toEqual(["afx"]);
+    const v = regenreUnit(g, center, { drop: ["horror"], add: ["historical"] });
+    expect(v?.items.map((i) => i.slug)).toEqual(["afx"]);
   });
 
   it("島 = 要素ごとの冊数(多い順)と代表の書影(共通の要素が多い順 → popularity)", () => {

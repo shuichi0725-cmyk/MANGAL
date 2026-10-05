@@ -436,6 +436,9 @@ export function regenreLabel(r: Regenre, genreName: (key: string) => string = (k
 
 /**
  * 組み替えたジャンルに似た本 = 「よく似たジャンル」と同じ測り方(重なり75% → 24冊に届かなければ60% → 50%)。
+ * ★足したジャンルは必ず持つ本だけ・外したジャンルを持つ本は出さない(2026-10-05 ユーザ指摘: ブラック・ジャック＋魔法少女で
+ *   50%まで下げると「ドラマ+超常」だけの本が155冊中148冊を占め、魔法少女が7冊しか出なかった)。
+ *   足した時は 50% でも24冊に届かなければ、条件に合う本を全部(近い順)にする(＋魔法少女 = 魔法少女の本全部)。
  * くじの近さ = 4×重なり + 中心と共通の要素の数。 何も変えていない・ジャンルが空 = null。
  */
 export function regenreUnit(
@@ -453,11 +456,17 @@ export function regenreUnit(
     const n = cnt.get(i) ?? 0;
     return n / (keys.length + uniq(g.items[i].genres ?? []).length - n);
   };
+  const ok = (i: number) => {
+    const gs = g.items[i].genres ?? [];
+    return g.items[i].slug !== center.slug && r.add.every((k) => gs.includes(k)) && !r.drop.some((k) => gs.includes(k));
+  };
+  const pool = [...cnt.keys()].filter(ok);
   let chosen: number[] = [];
   for (const t of GENRE_TIERS) {
-    chosen = [...cnt.keys()].filter((i) => g.items[i].slug !== center.slug && jac(i) >= t.min - 1e-9);
+    chosen = pool.filter((i) => jac(i) >= t.min - 1e-9);
     if (chosen.length >= UNIT_MAX) break;
   }
+  if (r.add.length && chosen.length < UNIT_MAX) chosen = pool;
   if (!chosen.length) return null;
   const cT = new Set(center.themes ?? []);
   const items = chosen
