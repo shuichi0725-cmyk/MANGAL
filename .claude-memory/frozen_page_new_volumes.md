@@ -13,7 +13,6 @@ metadata:
 - 初回: 1,191頁 → 本物5作(サンダー3 10・ゴルゴ13 222・釣りバカ119・金瓶梅64・少年ケニヤ角川文庫19-20)= 追加済(3775a384e)。
 - 入れ口: overrides頁=edition-overridesの巻の並び / canonical頁=canonical本体。 ★文字として差し込む(JSON/YAMLを丸ごと
   書き直すと書式が変わり差分数万行=実踏)。 書影は実物だけ cover-override(発売前 .gif は入れない=差し替えを止める)。
-- 残(2026-10-05 調査済・未適用): 昭和極道史34(9784821192434・1988-09・楽天のみ=NDL/MADB無し・ISBN連番は整合)/
-  サーキットの狼 JC は全27巻=23〜27欠け(NDLで確認・ISBN 23=9784088524733/26=…764/27=…771、24/25はISBN無し)/
-  エスパー魔美 = 頁のてんとう虫版がISBNはてんとう虫・日付はマンガくん/少年ビッグ版の取り違え(奇子型)= per-case で版を組み直す。
+- 要確認3作 = 全部適用済(2026-10-05): サーキットの狼 JC 27巻(cbaaefd5d)/ エスパー魔美 = 原版を通常版に組み直し(a78b6a941)/
+  昭和極道史 34巻 = ユーザ提示のNDL TSV+Wikipedia で確定して追加(d5a3130b0)。 詳細は [[old_work_reprint_date_class]]。
 関連 [[edition_canonical_mechanism]] [[edition_overrides_key_is_public_slug]] [[ebook_only_volumes_mechanism]]
