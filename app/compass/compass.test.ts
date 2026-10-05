@@ -28,6 +28,11 @@ import {
   mixCounts,
   mixKey,
   mixUnit,
+  islandPages,
+  regenreKeys,
+  regenreLabel,
+  regenreUnit,
+  themeIslands,
 } from "./compass";
 
 function book(slug: string, o: Partial<MangaListItem> = {}): MangaListItem {
@@ -580,5 +585,47 @@ describe("掛け合わせ(案C)", () => {
     expect(mixUnit(g, center, { themes: [], genres: ["horror"] })?.kind).toBe("genre");
     expect(mixUnit(g, center, EMPTY_MIX)).toBeNull();
     expect(mixUnit(g, center, { themes: ["復讐"], genres: ["horror"] })).toBeNull();
+  });
+});
+
+describe("案2+3: ジャンルの組み替え・要素の星雲", () => {
+  const center = book("c", { themes: ["悲劇", "剣劇"], genres: ["action", "fantasy", "horror"] });
+  const list = [
+    center,
+    book("af", { themes: ["悲劇", "剣劇"], genres: ["action", "fantasy"], popularity: 5 }),
+    book("afh", { themes: ["悲劇"], genres: ["action", "fantasy", "horror"], popularity: 9 }),
+    book("afx", { themes: [], genres: ["action", "fantasy", "historical"] }),
+    book("h", { themes: ["剣劇"], genres: ["horror"] }),
+  ];
+  const g = buildGraph(list);
+
+  it("組み替え後のジャンル = 中心 − 外した + 足した・ラベルは「〜抜き・〜入り」", () => {
+    expect(regenreKeys(center, { drop: ["horror"], add: ["historical"] })).toEqual(["action", "fantasy", "historical"]);
+    expect(regenreLabel({ drop: ["horror"], add: ["historical"] }, (k) => ({ horror: "ホラー", historical: "歴史" })[k] ?? k)).toBe(
+      "ホラー抜き・歴史入り",
+    );
+  });
+
+  it("★ホラーを外すと、ホラー抜きの組に似た本(よく似たジャンルと同じ段階)・何も変えなければ null", () => {
+    const u = regenreUnit(g, center, { drop: ["horror"], add: [] });
+    expect(u?.kind).toBe("genre");
+    // action+fantasy に対して: af=1.0 / afh=0.67 / afx=0.67 → 24冊に届かないので50%まで下げて3冊
+    expect(u?.items.map((i) => i.slug)).toEqual(["af", "afh", "afx"]);
+    expect(regenreUnit(g, center, { drop: [], add: [] })).toBeNull();
+    expect(regenreUnit(g, center, { drop: ["action", "fantasy", "horror"], add: [] })).toBeNull();
+  });
+
+  it("島 = 要素ごとの冊数(多い順)と代表の書影(共通の要素が多い順 → popularity)", () => {
+    const isl = themeIslands(g, center);
+    expect(isl.map((x) => [x.theme, x.count])).toEqual([
+      ["悲劇", 2],
+      ["剣劇", 2],
+    ]);
+    expect(isl[0].covers).toEqual(["af", "afh"]);
+  });
+
+  it("島の頁分け: 10個までは1頁・11個は6+5", () => {
+    expect(islandPages([...Array(10).keys()]).map((p) => p.length)).toEqual([10]);
+    expect(islandPages([...Array(11).keys()]).map((p) => p.length)).toEqual([6, 5]);
   });
 });

@@ -949,3 +949,134 @@
   color: #9aa6b0;
   cursor: default;
 }
+
+/* ── 4d. 案2+3(2026-10-05): 要素=星雲 / ジャンル=組み替える ── */
+.cp-neb {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+.cp-neb > * {
+  pointer-events: auto;
+}
+.cp-isl {
+  position: absolute;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  animation: cp-isl-in 0.35s ease-out both;
+}
+@keyframes cp-isl-in {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}
+.cp-isl-stk {
+  position: relative;
+  display: block;
+  height: 66px;
+}
+.cp-isl-stk img {
+  position: absolute;
+  width: 40px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 2px;
+  box-shadow: 0 2px 6px #000;
+  transition: box-shadow 0.2s;
+}
+.cp-isl b {
+  display: inline-block;
+  margin-top: 2px;
+  font-size: 11px;
+  color: #6ea8ff;
+  white-space: nowrap;
+  text-shadow: 0 1px 3px #000, 0 0 4px #000;
+}
+.cp-isl b i {
+  font-style: normal;
+  opacity: 0.75;
+  margin-left: 4px;
+  font-size: 9.5px;
+}
+.cp-isl.on b {
+  background: #6ea8ff;
+  color: #0b0e14;
+  padding: 0 6px;
+  border-radius: 10px;
+  text-shadow: none;
+}
+.cp-isl.on .cp-isl-stk img {
+  box-shadow: 0 0 0 2px #6ea8ff, 0 0 14px #6ea8ff;
+}
+.cp-isl:disabled {
+  opacity: 0.28;
+  cursor: default;
+}
+.cp-neb-foot {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 160px;
+  text-align: center;
+}
+.cp-neb-go {
+  border: 0;
+  border-radius: 14px;
+  background: #6ea8ff;
+  color: #0b0e14;
+  font-weight: 800;
+  font-size: 11.5px;
+  padding: 4px 10px;
+  cursor: pointer;
+  box-shadow: 0 0 14px #6ea8ff88;
+}
+.cp-neb-go b {
+  font-size: 13px;
+}
+.cp-neb-go-t {
+  display: block;
+  font-size: 11px;
+}
+.cp-neb-hint {
+  font-size: 11px;
+  color: #cfe0ff;
+  text-shadow: 0 1px 3px #000;
+}
+.cp-neb-page,
+.cp-neb-clr {
+  position: absolute;
+  bottom: 40px;
+  border: 1px solid #6ea8ff;
+  color: #6ea8ff;
+  background: #0b0e14d9;
+  border-radius: 12px;
+  font-size: 10px;
+  padding: 1px 8px;
+  cursor: pointer;
+}
+.cp-neb-page {
+  right: 10px;
+}
+.cp-neb-clr {
+  left: 10px;
+}
+/* 組み替えの引き出し = 橙の縁。 外した札は赤い破線+取り消し線、足す札は「＋」 */
+.cp-mix.cp-re {
+  border-top-color: #ff9f5a;
+}
+.cp-mix.cp-re .cp-mix-h {
+  color: #ff9f5a;
+}
+.cp-mt.ng {
+  border-style: dashed;
+  border-color: #ff6b6b;
+  color: #ff6b6b;
+  text-decoration: line-through;
+}
+.cp-mt.add:not(.on) {
+  opacity: 0.75;
+}

@@ -414,6 +414,96 @@ export function mixUnit(
   };
 }
 
+// ───────────────────────── 案2+3(2026-10-05): ジャンル=組み替える / 要素=星雲 ─────────────────────────
+// 「要素 ▾」と「ジャンル ▾」が同じ引き出しで同じ働きなのは つまらない(ユーザ)。
+//   ジャンル = 中心の本のジャンルを外したり足したりして、その「もしも」の本に似た本(ホラー抜きのベルセルク)。
+//   要素 = 要素ごとの本の束(島)を押して重ねる(計算は掛け合わせと同じ mixCounts / mixUnit)。
+
+export type Regenre = { drop: string[]; add: string[] };
+export const EMPTY_REGENRE: Regenre = { drop: [], add: [] };
+
+export function regenreKey(r: Regenre): string {
+  return `re:${r.drop.join("+")}|${r.add.join("+")}`;
+}
+/** 組み替えた後のジャンル(中心のジャンル − 外した + 足した) */
+export function regenreKeys(center: Pick<MangaListItem, "genres">, r: Regenre): string[] {
+  return uniq([...(center.genres ?? []).filter((k) => !r.drop.includes(k)), ...r.add]);
+}
+/** 「ホラー抜き・歴史入り」 */
+export function regenreLabel(r: Regenre, genreName: (key: string) => string = (k) => k): string {
+  return [...r.drop.map((k) => `${genreName(k)}抜き`), ...r.add.map((k) => `${genreName(k)}入り`)].join("・");
+}
+
+/**
+ * 組み替えたジャンルに似た本 = 「よく似たジャンル」と同じ測り方(重なり75% → 24冊に届かなければ60% → 50%)。
+ * くじの近さ = 4×重なり + 中心と共通の要素の数。 何も変えていない・ジャンルが空 = null。
+ */
+export function regenreUnit(
+  g: Graph,
+  center: Pick<MangaListItem, "slug" | "themes" | "genres">,
+  r: Regenre,
+  genreName: (key: string) => string = (k) => k,
+): Unit | null {
+  if (!r.drop.length && !r.add.length) return null;
+  const keys = regenreKeys(center, r);
+  if (!keys.length) return null;
+  const cnt = new Map<number, number>();
+  for (const k of keys) for (const i of g.byGenre.get(k) ?? []) cnt.set(i, (cnt.get(i) ?? 0) + 1);
+  const jac = (i: number) => {
+    const n = cnt.get(i) ?? 0;
+    return n / (keys.length + uniq(g.items[i].genres ?? []).length - n);
+  };
+  let chosen: number[] = [];
+  for (const t of GENRE_TIERS) {
+    chosen = [...cnt.keys()].filter((i) => g.items[i].slug !== center.slug && jac(i) >= t.min - 1e-9);
+    if (chosen.length >= UNIT_MAX) break;
+  }
+  if (!chosen.length) return null;
+  const cT = new Set(center.themes ?? []);
+  const items = chosen
+    .map((i) => {
+      const it = g.items[i];
+      const sh = uniq(it.themes ?? []).filter((t) => cT.has(t)).length;
+      const u: UnitItem = { slug: it.slug, shared: sh, year: it.year_started || null, score: 4 * jac(i) + sh };
+      return { u, pop: it.popularity ?? 0 };
+    })
+    .sort((a, b) => b.u.score - a.u.score || b.pop - a.pop || (a.u.slug < b.u.slug ? -1 : a.u.slug > b.u.slug ? 1 : 0))
+    .map((x) => x.u);
+  return { key: regenreKey(r), kind: "genre", label: regenreLabel(r, genreName), items };
+}
+
+/** 要素の島 = 中心の本の要素ごとに 冊数 + 代表の書影(中心と共通の要素が多い順 → popularity)。 冊数の多い順 */
+export type Island = { theme: string; count: number; covers: string[] };
+export function themeIslands(g: Graph, center: Pick<MangaListItem, "slug" | "themes">, per = 3): Island[] {
+  const cT = uniq(center.themes ?? []);
+  const shared = new Map<number, number>();
+  for (const t of cT) for (const i of g.byTheme.get(t) ?? []) shared.set(i, (shared.get(i) ?? 0) + 1);
+  const sh = (i: number) => shared.get(i) ?? 0;
+  const pop = (i: number) => g.items[i].popularity ?? 0;
+  const lists = cT
+    .map((t) => ({ theme: t, list: (g.byTheme.get(t) ?? []).filter((i) => g.items[i].slug !== center.slug) }))
+    .filter((x) => x.list.length > 0)
+    .sort((a, b) => b.list.length - a.list.length);
+  // ★代表の書影は島どうしで使い回さない(同じ数冊が全部の島に出ると島の違いが見えない)。 足りなければ使い回す
+  const used = new Set<number>();
+  return lists.map(({ theme, list }) => {
+    const ranked = [...list].sort((a, b) => sh(b) - sh(a) || pop(b) - pop(a) || (g.items[a].slug < g.items[b].slug ? -1 : 1));
+    const pick = [...ranked.filter((i) => !used.has(i)), ...ranked.filter((i) => used.has(i))].slice(0, per);
+    for (const i of pick) used.add(i);
+    return { theme, count: list.length, covers: pick.map((i) => g.items[i].slug) };
+  });
+}
+
+/** 島の頁分け: 10個までは1頁。 それより多ければ同じくらいの数に割る(11 → 6+5) */
+export function islandPages<T>(xs: readonly T[], max = 10): T[][] {
+  if (xs.length <= max) return [xs.slice()];
+  const pages = Math.ceil(xs.length / max);
+  const per = Math.ceil(xs.length / pages);
+  const out: T[][] = [];
+  for (let i = 0; i < xs.length; i += per) out.push(xs.slice(i, i + per));
+  return out;
+}
+
 // ───────────────────────── 羅針盤の配置 ─────────────────────────
 
 export type Geom = {

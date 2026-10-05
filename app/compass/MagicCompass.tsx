@@ -36,6 +36,14 @@ import {
   mixSize,
   mixUnit,
   type Mix,
+  EMPTY_REGENRE,
+  islandPages,
+  regenreKey,
+  regenreKeys,
+  regenreLabel,
+  regenreUnit,
+  themeIslands,
+  type Regenre,
 } from "./compass";
 import { Halftone } from "./halftone";
 import { CompassShelveButton, CompassShelvePanel } from "./CompassShelve";
@@ -53,6 +61,12 @@ const MIX = PREVIEW;
 // ★「よく似たジャンル」の糸は「ジャンル ▾」(橙)と別物に見せる = 羅針盤マーク・同ジャンル検索と同じ黄(2026-10-05 ユーザ指示)。
 //   帯の札・広げた本・糸・札の色だけ。 周りの本(ジャンル枠)と上のジャンルの札は橙のまま。 MIX と一緒に戻る。
 const SIM_COLOR = "#d9f843";
+// ★案2+3(2026-10-05): 「要素 ▾」= 星雲(要素ごとの本の島を押して重ねる)/「ジャンル ▾」= 組み替える(ホラー抜きのベルセルク)。
+//   ★掛け合わせの引き出し(案C=要素もジャンルも同じ引き出し)に戻す = ここを false にするだけ。
+const SPLIT = MIX;
+/** 島の大きさ(書影3冊の束+名札) */
+const IW = 66;
+const IH = 86;
 const unitColor = (u: { key: string; kind: UnitKind }) => (MIX && u.key === "genre" ? SIM_COLOR : KIND_COLOR[u.kind]);
 
 const TOP = 100; // 糸の色チップ列 44 + 旅路 56
@@ -70,7 +84,7 @@ type Step = { slug: string; kind: ThreadKind | null; seed?: string };
 const newSeed = () => Math.random().toString(36).slice(2, 10);
 /** 詳細(作品頁)へ飛ぶ直前に旅の状態を書く = OS の戻るで帰ってきた時に復元する(2026-09-30 ユーザ要望) */
 const RESUME_KEY = "mangal:compass:resume:v1";
-type Resume = { path: Step[]; prev: string | null; backAng: number | null; sel: string | null; exp: string | null; drawn: { key: string; items: UnitItem[] } | null; mix?: Mix | null; t: number };
+type Resume = { path: Step[]; prev: string | null; backAng: number | null; sel: string | null; exp: string | null; drawn: { key: string; items: UnitItem[] } | null; mix?: Mix | null; re?: Regenre | null; t: number };
 type Spawn = { fx: number; fy: number; fs: number; d: number };
 type NodeView = {
   slug: string;
@@ -210,6 +224,12 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
   const [mixOpen, setMixOpen] = useState(false);
   const [mix, setMix] = useState<Mix>(EMPTY_MIX);
   const [mixApplied, setMixApplied] = useState<Mix | null>(null);
+  // 案2+3: 星雲が開いているか(頁) / 組み替えの引き出し・組み替え中の組・広げた組
+  const [nebOpen, setNebOpen] = useState(false);
+  const [nebPage, setNebPage] = useState(0);
+  const [reOpen, setReOpen] = useState(false);
+  const [re, setRe] = useState<Regenre>(EMPTY_REGENRE);
+  const [reApplied, setReApplied] = useState<Regenre | null>(null);
   // ★札(シート)の実際の高さ。 札は中身に合わせて伸びる(紹介文3行/選んでいる時は5行+進む)ので、
   //   「広げる」の帯を固定位置(下から98px)に置くと札の裏に潜って読めなくなった(2026-10-03 ユーザ指摘)。
   //   帯はいつも札のすぐ上に乗せる。 callback ref = 札が後から描かれても測れる。
@@ -274,6 +294,10 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
             setMix(r.mix);
             setMixApplied(r.mix);
           }
+          if (r.re) {
+            setRe(r.re);
+            setReApplied(r.re);
+          }
           return;
         }
       }
@@ -324,9 +348,26 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
     () => (graph && curItem && mixApplied ? mixUnit(graph, curItem, mixApplied, genreName) : null),
     [graph, curItem, mixApplied, genreName],
   );
+  const reFull = useMemo(
+    () => (SPLIT && graph && curItem && reApplied ? regenreUnit(graph, curItem, reApplied, genreName) : null),
+    [graph, curItem, reApplied, genreName],
+  );
   const unitFull = useMemo(
-    () => (exp && nb ? (mixFull?.key === exp ? mixFull : (nb.units.find((u) => u.key === exp) ?? null)) : null),
-    [exp, nb, mixFull],
+    () =>
+      exp && nb
+        ? mixFull?.key === exp
+          ? mixFull
+          : reFull?.key === exp
+            ? reFull
+            : (nb.units.find((u) => u.key === exp) ?? null)
+        : null,
+    [exp, nb, mixFull, reFull],
+  );
+  // 星雲の島(中心の本の要素ごと)と、組み替えの引き出しの冊数
+  const islands = useMemo(() => (SPLIT && graph && curItem ? islandPages(themeIslands(graph, curItem)) : null), [graph, curItem]);
+  const reDraft = useMemo(
+    () => (SPLIT && reOpen && graph && curItem ? regenreUnit(graph, curItem, re, genreName) : null),
+    [reOpen, graph, curItem, re, genreName],
   );
   // 引き出しの札(中心の本の要素・ジャンル全部・冊数の多い順)と冊数
   const mixBase = useMemo(() => (MIX && graph && curItem ? mixCounts(graph, curItem, EMPTY_MIX) : null), [graph, curItem]);
@@ -438,6 +479,11 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
         setMixOpen(false);
         setMix(EMPTY_MIX);
         setMixApplied(null);
+        setNebOpen(false);
+        setNebPage(0);
+        setReOpen(false);
+        setRe(EMPTY_REGENRE);
+        setReApplied(null);
         setPrev(from);
         setBackAng(ang);
         setSel(null);
@@ -543,6 +589,8 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
       setSel(null);
       setGrowFor(null);
       setMixOpen(false);
+      setNebOpen(false);
+      setReOpen(false);
       setExp((e) => (!key || key === e ? null : key));
       bumpSheet();
     },
@@ -558,10 +606,44 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
     setSel(null);
     setGrowFor(null);
     setMixOpen(false);
+    setNebOpen(false);
     setMixApplied({ themes: [...mix.themes], genres: [...mix.genres] });
     setExp(mixKey(mix));
     bumpSheet();
   }, [mix, bumpSheet]);
+
+  // 星雲: 開くと周りの本が退いて要素の島が浮かぶ(広げている糸は閉じる)
+  const toggleNeb = useCallback(() => {
+    if (busy.current) return;
+    setSel(null);
+    setReOpen(false);
+    setNebOpen((o) => {
+      if (!o) setExp(null);
+      return !o;
+    });
+  }, []);
+  // 組み替え: 中心のジャンルは押すと外す/戻す、ほかのジャンルは押すと足す/やめる
+  const toggleRe = useCallback((k: string, own: boolean) => {
+    setRe((r) =>
+      own
+        ? { ...r, drop: r.drop.includes(k) ? r.drop.filter((x) => x !== k) : [...r.drop, k] }
+        : { ...r, add: r.add.includes(k) ? r.add.filter((x) => x !== k) : [...r.add, k] },
+    );
+  }, []);
+  const toggleReOpen = useCallback(() => {
+    if (busy.current) return;
+    setNebOpen(false);
+    setReOpen((o) => !o);
+  }, []);
+  const applyRe = useCallback(() => {
+    if (busy.current || (!re.drop.length && !re.add.length)) return;
+    setSel(null);
+    setGrowFor(null);
+    setReOpen(false);
+    setReApplied({ drop: [...re.drop], add: [...re.add] });
+    setExp(regenreKey(re));
+    bumpSheet();
+  }, [re, bumpSheet]);
 
   const chooseSpread = useCallback((k: UnitKind, s: Spread) => {
     setSel(null);
@@ -580,12 +662,14 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== "Escape" || busy.current) return;
       if (mixOpen) setMixOpen(false);
+      else if (nebOpen) setNebOpen(false);
+      else if (reOpen) setReOpen(false);
       else if (sel) setSel(null);
       else if (exp) setExp(null);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [sel, exp, mixOpen]);
+  }, [sel, exp, mixOpen, nebOpen, reOpen]);
 
   // ── 描く本(世界座標) ──
   const nodes = useMemo<NodeView[]>(() => {
@@ -630,7 +714,7 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
         label: o.back ? "← 来た道" : o.label,
         color,
         back: o.back,
-        hidden: !!xs || (!o.back && off.has(o.kind as UnitKind)),
+        hidden: !!xs || nebOpen || (!o.back && off.has(o.kind as UnitKind)),
         pick: !xs && sel === o.slug,
         dim: !xs && !!sel && sel !== o.slug,
         spawn: firstRing
@@ -660,7 +744,7 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
       });
     }
     return out;
-  }, [cur, curItem, cw, geom, pan, spread, unit, placed, off, sel, firstRing]);
+  }, [cur, curItem, cw, geom, pan, spread, unit, placed, off, sel, firstRing, nebOpen]);
 
   const lines = useMemo<LineView[]>(() => {
     if (!cur || !curItem) return [];
@@ -709,13 +793,13 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
           y2: cw.y + o.dy,
           color: KIND_COLOR[o.back ? "back" : o.kind],
           width: isSel ? 3.4 : sel ? 1.2 : o.back ? 1.4 : 2.2,
-          opacity: hidden ? 0 : o.back ? 0.7 : 0.9,
+          opacity: hidden || nebOpen ? 0 : o.back ? 0.7 : 0.9,
           dash: o.back && !isSel ? "3 5" : undefined,
           sel: isSel,
           lineIn: !o.back && (growFor === cur || growFor === FIRST),
         };
       });
-  }, [cur, curItem, cw, geom, pan, spread, unit, placed, off, sel, growFor]);
+  }, [cur, curItem, cw, geom, pan, spread, unit, placed, off, sel, growFor, nebOpen]);
 
   // ── 出ていく本は0.5秒だけ残して薄れさせる(同じ要素のまま) ──
   const seen = useRef(new Map<string, { seq: number; spawn: Spawn | null; lineIn: number | null }>());
@@ -810,7 +894,7 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
       : `/manga/${encodeURIComponent(slug)}`;
   const saveResume = () => {
     try {
-      const r: Resume = { path, prev, backAng, sel, exp, drawn, mix: exp && mixFull?.key === exp ? mixApplied : null, t: Date.now() };
+      const r: Resume = { path, prev, backAng, sel, exp, drawn, mix: exp && mixFull?.key === exp ? mixApplied : null, re: exp && reFull?.key === exp ? reApplied : null, t: Date.now() };
       window.sessionStorage.setItem(RESUME_KEY, JSON.stringify(r));
     } catch {
       /* 書けなくても飛ぶ(戻った時は新しい旅) */
@@ -843,23 +927,38 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
 
   // 掛け合わせの入口: 要素 ▾ / ジャンル ▾(どちらも同じ引き出しを開く)。 広げた組の札は「✕ 閉じる」の隣(押すと引き出しで組み直す)
   const mixShown = exp && mixFull?.key === exp ? mixFull : null;
+  const reShown = exp && reFull?.key === exp ? reFull : null;
   const toggleMixOpen = () => {
     if (busy.current) return;
     setMixOpen((o) => !o);
   };
   const mixChips = () => {
     if (!mixInfo) return null;
-    const open = toggleMixOpen;
+    // 案2+3: 要素 = 星雲 / ジャンル = 組み替え。 SPLIT=false なら両方とも掛け合わせの引き出し
+    const eOpen = SPLIT ? nebOpen : mixOpen;
+    const gOpen = SPLIT ? reOpen : mixOpen;
     return (
       <>
         {mixInfo.themes.length > 0 && (
-          <button type="button" className="cp-uc" style={{ "--c": KIND_COLOR.elem } as CSSProperties} aria-expanded={mixOpen} onClick={open}>
-            要素<i>{mixInfo.themes.length}</i> {mixOpen ? "▴" : "▾"}
+          <button
+            type="button"
+            className={`cp-uc${SPLIT && eOpen ? " on" : ""}`}
+            style={{ "--c": KIND_COLOR.elem } as CSSProperties}
+            aria-expanded={eOpen}
+            onClick={SPLIT ? toggleNeb : toggleMixOpen}
+          >
+            要素<i>{mixInfo.themes.length}</i> {eOpen ? "▴" : "▾"}
           </button>
         )}
         {mixInfo.genres.length > 0 && (
-          <button type="button" className="cp-uc" style={{ "--c": KIND_COLOR.genre } as CSSProperties} aria-expanded={mixOpen} onClick={open}>
-            ジャンル<i>{mixInfo.genres.length}</i> {mixOpen ? "▴" : "▾"}
+          <button
+            type="button"
+            className={`cp-uc${SPLIT && gOpen ? " on" : ""}`}
+            style={{ "--c": KIND_COLOR.genre } as CSSProperties}
+            aria-expanded={gOpen}
+            onClick={SPLIT ? toggleReOpen : toggleMixOpen}
+          >
+            ジャンル<i>{mixInfo.genres.length}</i> {gOpen ? "▴" : "▾"}
           </button>
         )}
       </>
@@ -1090,6 +1189,69 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
             )}
           </div>
         )}
+        {/* 案2+3: 要素の星雲 = 周りの本が退き、要素ごとの本の束(島)が中心を囲む。 島を押して重ね、下の札で広げる */}
+        {SPLIT && nebOpen && islands && mixInfo && !pan && (
+          <div className="cp-neb">
+            {(() => {
+              const page = islands[Math.min(nebPage, islands.length - 1)] ?? [];
+              const any = mix.themes.length > 0;
+              return page.map((isl, k) => {
+                // 島が偶数なら半歩ずらす = 真下(下の札・広げるボタンの所)に島を置かない
+                const start = page.length % 2 ? -90 : -90 + 180 / page.length;
+                const a = ((start + (k * 360) / page.length) * Math.PI) / 180;
+                const x = geom.CX + geom.rx * Math.cos(a);
+                const y = geom.CY + geom.ry * Math.sin(a);
+                const on = mix.themes.includes(isl.theme);
+                const n = any ? (mixInfo.c.themes.get(isl.theme) ?? 0) : isl.count;
+                return (
+                  <button
+                    key={isl.theme}
+                    type="button"
+                    className={`cp-isl${on ? " on" : ""}`}
+                    style={{ left: x - IW / 2, top: y - IH / 2, width: IW, height: IH }}
+                    aria-pressed={on}
+                    disabled={!on && any && n === 0}
+                    onClick={() => toggleMix("themes", isl.theme)}
+                  >
+                    <span className="cp-isl-stk">
+                      {isl.covers.map((slug, i) => {
+                        const m = lookup(slug);
+                        return m?.cover ? (
+                          // eslint-disable-next-line @next/next/no-img-element -- 外部CDN直リンク(images.unoptimized)
+                          <img key={slug} src={m.cover} alt="" className="bg-white" draggable={false} style={{ left: i * 12, top: 8 - i * 4 }} />
+                        ) : null;
+                      })}
+                    </span>
+                    <b>
+                      {isl.theme}
+                      {!on && <i>{any ? `→${n.toLocaleString()}` : n.toLocaleString()}</i>}
+                    </b>
+                  </button>
+                );
+              });
+            })()}
+            <div className="cp-neb-foot" style={{ top: geom.CY + CH / 2 + 10 }}>
+              {mix.themes.length ? (
+                <button type="button" className="cp-neb-go" disabled={!mixInfo.c.total} onClick={applyMix}>
+                  <span className="cp-neb-go-t">{mix.themes.join(" × ")}</span>
+                  <b>{mixInfo.c.total.toLocaleString()}冊</b>を広げる ›
+                </button>
+              ) : (
+                <span className="cp-neb-hint">要素の島を押して重ねる</span>
+              )}
+            </div>
+            {islands.length > 1 && (
+              <button type="button" className="cp-neb-page" onClick={() => setNebPage((p) => (p + 1) % islands.length)}>
+                ほかの島 {Math.min(nebPage, islands.length - 1) + 1}/{islands.length} ▸
+              </button>
+            )}
+            {mix.themes.length > 0 && (
+              <button type="button" className="cp-neb-clr" onClick={() => setMix(EMPTY_MIX)}>
+                選び直す
+              </button>
+            )}
+          </div>
+        )}
       </div>
 
       {/* 4. 広げる ▸ */}
@@ -1106,11 +1268,24 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
             className="cp-uc on"
             style={{ "--c": KIND_COLOR[mixShown.kind] } as CSSProperties}
             aria-pressed
-            title="引き出しで組み直す"
-            onClick={toggleMixOpen}
+            title="組み直す"
+            onClick={SPLIT ? toggleNeb : toggleMixOpen}
           >
             {mixShown.label}
             <i>{mixShown.items.length}</i>
+          </button>
+        )}
+        {SPLIT && reShown && (
+          <button
+            type="button"
+            className="cp-uc on"
+            style={{ "--c": KIND_COLOR.genre } as CSSProperties}
+            aria-pressed
+            title="組み替え直す"
+            onClick={toggleReOpen}
+          >
+            {reShown.label}
+            <i>{reShown.items.length}</i>
           </button>
         )}
         {bandUnits.map((u) => (
@@ -1196,6 +1371,88 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
               </>
             ) : (
               "要素・ジャンルを選ぶ"
+            )}
+          </button>
+        </div>
+      )}
+
+      {/* 4c. ジャンルを組み替える(案2) */}
+      {SPLIT && reOpen && curItem && (
+        <div
+          className="cp-mix cp-re"
+          style={{ bottom: Math.max(SHEET + 2, sheetH + 2) + 30 }}
+          role="dialog"
+          aria-label="ジャンルを組み替える"
+        >
+          <div className="cp-mix-h">
+            <span>ジャンルを組み替える</span>
+            {(re.drop.length > 0 || re.add.length > 0) && (
+              <button type="button" className="cp-mix-clr" onClick={() => setRe(EMPTY_REGENRE)}>
+                元に戻す
+              </button>
+            )}
+            <button type="button" className="cp-mix-x" aria-label="閉じる" onClick={() => setReOpen(false)}>
+              ✕
+            </button>
+          </div>
+          <div className="cp-mix-body">
+            <div className="cp-mix-sec">{curItem.title}のジャンル(押すと外す)</div>
+            <div className="cp-mix-tags">
+              {[...new Set(curItem.genres ?? [])].map((k) => {
+                const ng = re.drop.includes(k);
+                return (
+                  <button
+                    key={k}
+                    type="button"
+                    className={`cp-mt${ng ? " ng" : " on"}`}
+                    style={{ "--c": KIND_COLOR.genre } as CSSProperties}
+                    aria-pressed={!ng}
+                    onClick={() => toggleRe(k, true)}
+                  >
+                    {ng ? "✕ " : ""}
+                    {genreName(k)}
+                  </button>
+                );
+              })}
+            </div>
+            <div className="cp-mix-sec">足してみる</div>
+            <div className="cp-mix-tags">
+              {Object.keys(genres)
+                .filter((k) => !(curItem.genres ?? []).includes(k))
+                .map((k) => {
+                  const on = re.add.includes(k);
+                  return (
+                    <button
+                      key={k}
+                      type="button"
+                      className={`cp-mt add${on ? " on" : ""}`}
+                      style={{ "--c": KIND_COLOR.genre } as CSSProperties}
+                      aria-pressed={on}
+                      onClick={() => toggleRe(k, false)}
+                    >
+                      ＋{genreName(k)}
+                    </button>
+                  );
+                })}
+            </div>
+          </div>
+          <button
+            type="button"
+            className="cp-mix-go"
+            style={{ "--c": KIND_COLOR.genre } as CSSProperties}
+            disabled={!reDraft}
+            onClick={applyRe}
+          >
+            {!re.drop.length && !re.add.length ? (
+              "外すか足すと、その本に似た本を探す"
+            ) : !regenreKeys(curItem, re).length ? (
+              "ジャンルが1つも残っていません"
+            ) : reDraft ? (
+              <>
+                {regenreLabel(re, genreName)}の{curItem.title}に似た本 <b>{reDraft.items.length.toLocaleString()}冊</b>
+              </>
+            ) : (
+              "似た本が見つかりません"
             )}
           </button>
         </div>
