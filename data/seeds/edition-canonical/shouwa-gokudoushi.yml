@@ -2,11 +2,11 @@ slug: shouwa-gokudoushi
 canonical_label: 通常版
 canonical_publisher: 日本文華社
 canonical_imprint: 文華コミックス
-source: 'ギャラ型(ISBN消えるクラス) 2026-08-17: 文華コミックス v1-33。v1-3は1974原日付へ後年刷ISBNを添付(dedupがISBN行を捨てて1984再刷日付が枠に残っていた)。竹書房再刊(1997-98)をタブへ / ★2026-09-07 巻抜け充填: ローカル楽天種とNDLで欠番巻を確認し 2 巻を追加(題完全一致+版元+ISBN連番+発売日+著者の5ゲート) / ★2026-09-07 巻抜け充填: ローカル楽天種とNDLで欠番巻を確認し 1 巻を追加(題完全一致+版元+ISBN連番+発売日+著者の5ゲート)'
+source: 'ギャラ型(ISBN消えるクラス) 2026-08-17: 文華コミックス v1-33。v1-3は1974原日付へ後年刷ISBNを添付(dedupがISBN行を捨てて1984再刷日付が枠に残っていた)。竹書房再刊(1997-98)をタブへ / ★2026-09-07 巻抜け充填: ローカル楽天種とNDLで欠番巻を確認し 2 巻を追加(題完全一致+版元+ISBN連番+発売日+著者の5ゲート) / ★2026-09-07 巻抜け充填: ローカル楽天種とNDLで欠番巻を確認し 1 巻を追加(題完全一致+版元+ISBN連番+発売日+著者の5ゲート) / ★2026-10-05 ユーザ提示(NDL書誌TSV+Wikipedia 日本極道史): 文華版=全34巻。34巻(9784821192434・1988-09-01)をWikipedia×楽天で追加。v1/5/6/7/8/10/11/13/15 の日付が後年刷(1981等)だった→NDL初版年月へ(v1=Wikipedia 1974-07-01)。バンブー版=全20巻(Wikipedia)→7-20巻を楽天(ISBN連番・竹書房・1998-99)で追加'
 volumes:
 - number: 1
   isbn13: '9784821190010'
-  release_date: '1974'
+  release_date: '1974-07-01'
 - number: 2
   isbn13: '9784821190027'
   release_date: '1974'
@@ -18,35 +18,35 @@ volumes:
   release_date: '1977-12-31'
 - number: 5
   isbn13: '9784821190133'
-  release_date: '1981-02-25'
+  release_date: '1978-04'
 - number: 6
   isbn13: '9784821190171'
-  release_date: '1981-02-25'
+  release_date: '1978-09'
 - number: 7
   isbn13: '9784821190195'
-  release_date: '1981-08-15'
+  release_date: '1978-11'
 - number: 8
-  release_date: 1980-10
+  release_date: '1979-03'
 - number: 9
   release_date: 1979-08
 - number: 10
   isbn13: '9784821190317'
-  release_date: 1979-01
+  release_date: '1979-10'
 - number: 11
   isbn13: '9784821190362'
-  release_date: '1981-02-25'
+  release_date: '1980-03'
 - number: 12
   isbn13: '9784821190379'
   release_date: 1980-04
 - number: 13
   isbn13: '9784821190386'
-  release_date: '1981-06-05'
+  release_date: '1980-06'
 - number: 14
   isbn13: '9784821190393'
   release_date: '1980-09-01'
 - number: 15
   isbn13: '9784821190409'
-  release_date: '1981-08-15'
+  release_date: '1980-10'
 - number: 16
   release_date: 1980-11
 - number: 17
@@ -100,6 +100,9 @@ volumes:
 - number: 33
   isbn13: '9784821192113'
   release_date: 1987-11
+- number: 34
+  isbn13: '9784821192434'
+  release_date: '1988-09-01'
 extra_editions:
 - type: shinsoban
   label: バンブーコミックス(1997)
@@ -124,3 +127,45 @@ extra_editions:
   - number: 6
     isbn13: '9784812451748'
     release_date: 1998-02
+  - number: 7
+    isbn13: '9784812451762'
+    release_date: '1998-02-27'
+  - number: 8
+    isbn13: '9784812451779'
+    release_date: '1998-02-27'
+  - number: 9
+    isbn13: '9784812451793'
+    release_date: '1998-03-27'
+  - number: 10
+    isbn13: '9784812451809'
+    release_date: '1998-03-27'
+  - number: 11
+    isbn13: '9784812452516'
+    release_date: '1998-10-27'
+  - number: 12
+    isbn13: '9784812452523'
+    release_date: '1998-10-27'
+  - number: 13
+    isbn13: '9784812452530'
+    release_date: '1998-11-27'
+  - number: 14
+    isbn13: '9784812452547'
+    release_date: '1998-11-27'
+  - number: 15
+    isbn13: '9784812452554'
+    release_date: '1998-12-14'
+  - number: 16
+    isbn13: '9784812452561'
+    release_date: '1998-12-14'
+  - number: 17
+    isbn13: '9784812452578'
+    release_date: '1999-01-27'
+  - number: 18
+    isbn13: '9784812452585'
+    release_date: '1999-01-27'
+  - number: 19
+    isbn13: '9784812452592'
+    release_date: '1999-02-27'
+  - number: 20
+    isbn13: '9784812452608'
+    release_date: '1999-02-27'
