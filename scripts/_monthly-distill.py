@@ -745,6 +745,10 @@ DETECTORS = [
     # ★同一slugを名乗るファイル複数層(白と黒型 2026-09-15): 索引に同一作品が2行出る。
     #   #19(year-suffix-dup)は索引を by_slug で畳むため構造的に見えない=ファイル実体を走査。
     ("duplicate-slug-files", ["_audit-duplicate-slug-files.py", "--tsv"], "duplicate-slug-files.tsv", False),
+    # ★手で巻を固定した頁の新刊取りこぼし(SHIORI EXPERIENCE型 2026-10-05): edition-overrides / edition-canonical で
+    #   巻を固定した頁は、種2にも楽天キャッシュにも無い新刊が永久に出ない(#27第2部は種2の続巻しか見ない)。
+    #   楽天 live で「題+次の巻番号」を引く=約25分(1,200頁)= heavy。 報告のみ(足すのは1件ずつ確かめてから)。
+    ("frozen-page-new-volumes", ["_audit-frozen-page-new-volumes.py"], "frozen-page-new-volumes.tsv", True),
 ]
 
 

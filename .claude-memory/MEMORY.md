@@ -58,7 +58,7 @@
 - [【機構】.5の半端巻(番外編)を通す](half_volume_number_mechanism.md) ／ [【✅】がきデカ型=一部ISBN欠け機械是正](partial_isbn_gap_mechanism.md) ／ [【未決】版違い統合](multi_edition_unification_pending.md) ／ [【型】騎士ガンダム型=新装版が編ごとに散る](kishi_gundam_shinsoban_consolidation.md)
 - [【型】巻表示の読み落とし(ローマ数字・第N集等)](volume_marker_blindspots_latin_roman.md) ／ [【型】Sugar&Spice型=巻題が別sidで末尾巻欠け](subtitle_orphan_volume_split_sugar_spice.md) ／ [【型】canonicalを後段edisupのreplaceが上書き](promote_post_stage_overwrites_canonical.md)
 - [【機構】巻抜け充填のラノベ/非漫画ゲート](volgap_novel_gate_g5.md) ／ [【型】版分離前の混入除去が正しい巻を消す](stale_volume_exclude_after_edition_split.md) ／ [【型】重複頁はファイル削除だけだと復活=page-dedup.yml](dedup_without_seed_revives.md) ／ [【型】covers seedに在るのに頁がnull](cover_null_despite_seed.md)
-- [【GO待ち】レーベル欄に巻番号56頁/旅ボン頁バラバラ](pending_go_imprint_volnum_tabibon.md) ／ [【機構】電子のみの巻=巻の並びの続きに札(案2)](ebook_only_volumes_mechanism.md)
+- [【GO待ち】レーベル欄に巻番号56頁/旅ボン頁バラバラ](pending_go_imprint_volnum_tabibon.md) ／ [【機構】電子のみの巻=巻の並びの続きに札(案2)](ebook_only_volumes_mechanism.md) ／ [【型#35】手で巻を固定した頁は新刊が出ない(SHIORI型)](frozen_page_new_volumes.md)
 
 ## キャッチ・あらすじ・ジャンル・要素
 - [【保留TODO】巻説明=次スライスから再開](voldesc_next_slice_todo.md) ／ [巻説明=着手作は全巻終わらせる](voldesc_finish_started_series.md) ／ [【保留】巻説明が先頭タブに無い93頁](voldesc_not_in_top_block_93.md) ／ [1巻もキャッチ+要素(09-30裁定・3,308作済)](onevol_catch_themes_enrich_2026_10.md)
