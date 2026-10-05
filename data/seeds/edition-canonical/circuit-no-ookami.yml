@@ -4,10 +4,8 @@ canonical_publisher: 集英社
 canonical_imprint: ジャンプコミックス
 suppress_types:
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 / ★2026-10-05 per-case(Wikipedia 書誌情報=ジャンプ・コミックス全27巻+NDL): 0巻(1980-06-15)は23巻「狼旅立つ」の巻番号潰れ→23へ。24〜27巻を追加(日付=Wikipediaの初版発行日。25巻はWikipediaが24巻と同日1980-08-15と記すが写し誤りとみてNDLの1980.10を採用)。ISBNはNDLにある23/26/27のみ(24/25はISBN記録なし=付けない)。'
 volumes:
-- number: 0
-  release_date: '1980-06-15'
 - number: 1
   release_date: '1976-01-31'
 - number: 2
@@ -52,6 +50,19 @@ volumes:
   release_date: '1979-11-15'
 - number: 22
   release_date: '1980-02-15'
+- number: 23
+  isbn13: '9784088524733'
+  release_date: '1980-06-15'
+- number: 24
+  release_date: '1980-08-15'
+- number: 25
+  release_date: 1980-10
+- number: 26
+  isbn13: '9784088524764'
+  release_date: '1981-01-15'
+- number: 27
+  isbn13: '9784088524771'
+  release_date: '1981-04-15'
 extra_editions:
 - type: shinsoban
   label: Motor Magazine Mook
