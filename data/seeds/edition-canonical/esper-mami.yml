@@ -1,8 +1,8 @@
 slug: esper-mami
-canonical_label: 通常版
-canonical_imprint: てんとう虫コミックス
+canonical_label: 少年ビッグコミックス(旧マンガくんコミックス)
+canonical_imprint: 少年ビッグコミックス
 canonical_publisher: 小学館
-source: '★ユーザ指摘 2026-08-07「エスパー魔美が分裂していて足りていない」+ てんとう虫コミックス3巻(9784091415035)の提示。楽天書誌の出版社・叢書名で5版を確定: てんとう虫コミックス9巻(ISBN 9784091415011-097の連番)/中公コミックス藤子不二雄ランド9巻/小学館コロコロ文庫6巻/藤子・F・不二雄大全集5巻/てんとう虫コミックス2017年新装9巻。★従来は3頁に割れ、さらに大全集タブに2017新装の6-9巻が混入し、てんとう虫版はv3欠番+v6,v7がISBN無しの幽霊だった'
+source: '★ユーザ指摘 2026-08-07「エスパー魔美が分裂していて足りていない」+ てんとう虫コミックス3巻(9784091415035)の提示。楽天書誌の出版社・叢書名で5版を確定: てんとう虫コミックス9巻(ISBN 9784091415011-097の連番)/中公コミックス藤子不二雄ランド9巻/小学館コロコロ文庫6巻/藤子・F・不二雄大全集5巻/てんとう虫コミックス2017年新装9巻。★従来は3頁に割れ、さらに大全集タブに2017新装の6-9巻が混入し、てんとう虫版はv3欠番+v6,v7がISBN無しの幽霊だった。★2026-10-05 ユーザ再提示(Wikipedia エスパー魔美)で是正: 単行本節=少年ビッグコミックス9巻(1-8巻は当初マンガくんコミックス)/てんとう虫コミックス9巻(昭和62年4月25日付から刊行=少年ビッグ版の新装)/藤子不二雄ランド9/コロコロ文庫6/大全集5/てんとう虫2017新装9 の6版。従来の通常版=てんとう虫(97840914150xx)に1978-83年の日付が付いていた(楽天の旧版日付の流用。NDL TC-1504=1987.04.25)→原版を通常版に、てんとう虫1987を新装版タブへ。原版の日付=NDL(マンガくん1-8/少年ビッグ9)×MADB(4,5,9巻)、ISBN=MADB(4,5,9)×NDL(6,7,9)。1-3,8巻のISBNはどの源にも無い=空(推測しない)。8/7に幽霊として外したv6,v7(ISBN無し)は実在の原版巻'
 publisher: 小学館
 suppress_types:
 - null
@@ -15,33 +15,65 @@ suppress_types:
 - deluxe
 volumes:
 - number: 1
-  isbn13: '9784091415011'
-  release_date: '1978-01-13'
+  isbn13: null
+  release_date: '1978-02'
 - number: 2
-  isbn13: '9784091415028'
-  release_date: '1978-03-04'
+  isbn13: null
+  release_date: '1978-04'
 - number: 3
-  isbn13: '9784091415035'
-  release_date: '1978-05'
+  isbn13: null
+  release_date: '1978-06'
 - number: 4
-  isbn13: '9784091415042'
+  isbn13: '9784091500342'
   release_date: '1978-09-05'
 - number: 5
-  isbn13: '9784091415059'
-  release_date: '1978-10-05'
+  isbn13: '9784091500359'
+  release_date: '1978-11-05'
 - number: 6
-  isbn13: '9784091415066'
-  release_date: '1980-08-05'
+  isbn13: '9784091500366'
+  release_date: '1980-09-05'
 - number: 7
-  isbn13: '9784091415073'
-  release_date: '1980-10-06'
+  isbn13: '9784091500373'
+  release_date: '1980-11-05'
 - number: 8
-  isbn13: '9784091415080'
-  release_date: '1981-10-05'
+  isbn13: null
+  release_date: '1981-11'
 - number: 9
-  isbn13: '9784091415097'
-  release_date: '1983-06-04'
+  isbn13: '9784091500397'
+  release_date: '1983-07-05'
 extra_editions:
+- label: てんとう虫コミックス(1987年新装)
+  type: shinsoban
+  publisher: 小学館
+  imprint: てんとう虫コミックス
+  volumes:
+  - number: 1
+    isbn13: '9784091415011'
+    release_date: '1987'
+  - number: 2
+    isbn13: '9784091415028'
+    release_date: '1987'
+  - number: 3
+    isbn13: '9784091415035'
+    release_date: '1987'
+  - number: 4
+    isbn13: '9784091415042'
+    release_date: '1987-04-25'
+  - number: 5
+    isbn13: '9784091415059'
+    release_date: '1987'
+  - number: 6
+    isbn13: '9784091415066'
+    release_date: '1987'
+  - number: 7
+    isbn13: '9784091415073'
+    release_date: '1987'
+  - number: 8
+    isbn13: '9784091415080'
+    release_date: '1987'
+  - number: 9
+    isbn13: '9784091415097'
+    release_date: '1987'
 - label: 藤子不二雄ランド
   type: shinsoban
   publisher: 中央公論社
