@@ -35,3 +35,5 @@ Bashツールが `bash: -c: line 90: unexpected EOF while looking for matching '
   (ログの sample で発覚)。 回避= `MSYS_NO_PATHCONV=1` を付ける / PowerShell で叩く /
   `python -c` から関数を直接呼ぶ。 ★根治は**受け手側で形を検査**すること
   (`_indexnow.sanitize_urls` = パス以外[空白・`:`・`\`・`//`]を送信の一点で破棄)。
+
+- 2026-10-05 また2回踏んだ(JSX/TSXを置換するpythonをheredocで書いた時)。 **TSX/JSを触る置換スクリプトは最初から Write で scratchpad へ**。 heredoc は クォートもバックスラッシュも無い短い物だけ。
