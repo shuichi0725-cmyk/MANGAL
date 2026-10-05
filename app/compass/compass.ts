@@ -136,6 +136,8 @@ export type Unit = {
   label: string;
   /** 候補全体(近い順)。 画面に出す24冊は drawUnit でくじ引きする */
   items: UnitItem[];
+  /** どこまで条件を緩めたか(組み替え: 「残した6つのうち2つ以上一致」)。 無ければ出さない */
+  note?: string;
 };
 export type Neighborhood = { ring: RingEntry[]; units: Unit[] };
 
@@ -435,11 +437,13 @@ export function regenreLabel(r: Regenre, genreName: (key: string) => string = (k
 }
 
 /**
- * 組み替えたジャンルに似た本 = 「よく似たジャンル」と同じ測り方(重なり75% → 24冊に届かなければ60% → 50%)。
- * ★足したジャンルは必ず持つ本だけ・外したジャンルを持つ本は出さない(2026-10-05 ユーザ指摘: ブラック・ジャック＋魔法少女で
- *   50%まで下げると「ドラマ+超常」だけの本が155冊中148冊を占め、魔法少女が7冊しか出なかった)。
- *   足した時は 50% でも24冊に届かなければ、条件に合う本を全部(近い順)にする(＋魔法少女 = 魔法少女の本全部)。
- * くじの近さ = 4×重なり + 中心と共通の要素の数。 何も変えていない・ジャンルが空 = null。
+ * 組み替えたジャンルに近い本。 ★2026-10-05 ユーザ裁定で測り方を変えた:
+ *   ① 足したジャンルは必ず持つ・外したジャンルは持たない(ブラック・ジャック＋魔法少女で魔法少女が7冊しか出なかった件)。
+ *   ② そのうえで、上に残したジャンルに「いくつ当てはまるか」の多い順に段を下げ、24冊以上になった段で止める
+ *      (旧=重なり率75→60→50%+足りなければ足したジャンルの本を全部 → 地獄楽＋ラブコメで3,854冊中3,410冊が
+ *      地獄楽のジャンルに1つも当てはまらなかった)。
+ *   当てはまり0の段は、足したジャンルがある時だけ使う(外すだけの時は「残したジャンルと無関係な本」になるので出さない)。
+ * くじの近さ = 4×(当てはまった数 ÷ 残した数) + 中心と共通の要素の数。 note = 「残した6つのうち2つ以上一致」。
  */
 export function regenreUnit(
   g: Graph,
@@ -448,37 +452,81 @@ export function regenreUnit(
   genreName: (key: string) => string = (k) => k,
 ): Unit | null {
   if (!r.drop.length && !r.add.length) return null;
-  const keys = regenreKeys(center, r);
-  if (!keys.length) return null;
-  const cnt = new Map<number, number>();
-  for (const k of keys) for (const i of g.byGenre.get(k) ?? []) cnt.set(i, (cnt.get(i) ?? 0) + 1);
-  const jac = (i: number) => {
-    const n = cnt.get(i) ?? 0;
-    return n / (keys.length + uniq(g.items[i].genres ?? []).length - n);
-  };
-  const ok = (i: number) => {
-    const gs = g.items[i].genres ?? [];
-    return g.items[i].slug !== center.slug && r.add.every((k) => gs.includes(k)) && !r.drop.some((k) => gs.includes(k));
-  };
-  const pool = [...cnt.keys()].filter(ok);
-  let chosen: number[] = [];
-  for (const t of GENRE_TIERS) {
-    chosen = pool.filter((i) => jac(i) >= t.min - 1e-9);
+  if (!regenreKeys(center, r).length) return null;
+  const kept = uniq(center.genres ?? []).filter((k) => !r.drop.includes(k));
+  const byLevel = new Map<number, number[]>();
+  g.items.forEach((it, i) => {
+    if (it.slug === center.slug) return;
+    const gs = it.genres ?? [];
+    if (!r.add.every((k) => gs.includes(k)) || r.drop.some((k) => gs.includes(k))) return;
+    const lv = kept.filter((k) => gs.includes(k)).length;
+    if (lv === 0 && !r.add.length) return;
+    const a = byLevel.get(lv);
+    if (a) a.push(i);
+    else byLevel.set(lv, [i]);
+  });
+  const chosen: number[] = [];
+  let min = -1;
+  for (const lv of [...byLevel.keys()].sort((a, b) => b - a)) {
+    chosen.push(...(byLevel.get(lv) as number[]));
+    min = lv;
     if (chosen.length >= UNIT_MAX) break;
   }
-  if (r.add.length && chosen.length < UNIT_MAX) chosen = pool;
   if (!chosen.length) return null;
   const cT = new Set(center.themes ?? []);
+  const level = (i: number) => kept.filter((k) => (g.items[i].genres ?? []).includes(k)).length;
   const items = chosen
     .map((i) => {
       const it = g.items[i];
       const sh = uniq(it.themes ?? []).filter((t) => cT.has(t)).length;
-      const u: UnitItem = { slug: it.slug, shared: sh, year: it.year_started || null, score: 4 * jac(i) + sh };
+      const u: UnitItem = { slug: it.slug, shared: sh, year: it.year_started || null, score: (4 * level(i)) / Math.max(1, kept.length) + sh };
       return { u, pop: it.popularity ?? 0 };
     })
     .sort((a, b) => b.u.score - a.u.score || b.pop - a.pop || (a.u.slug < b.u.slug ? -1 : a.u.slug > b.u.slug ? 1 : 0))
     .map((x) => x.u);
-  return { key: regenreKey(r), kind: "genre", label: regenreLabel(r, genreName), items };
+  const note = !kept.length
+    ? undefined
+    : min === kept.length
+      ? `残した${kept.length}つ全部に一致`
+      : min === 0
+        ? `残した${kept.length}つに一致しない本も含む`
+        : `残した${kept.length}つのうち${min}つ以上一致`;
+  return { key: regenreKey(r), kind: "genre", label: regenreLabel(r, genreName), items, note };
+}
+
+// ───────────────────────── 案4(2026-10-05): 広げた後に「さらに絞る」 ─────────────────────────
+// 星雲・組み替え・作者など、どの糸で広げた後でも、いま広げている本を中心の本の要素・ジャンルで絞る(掛け合わせの引き出しの働き)。
+
+const hasAll = (it: MangaListItem | undefined, m: Mix) =>
+  !!it && m.themes.every((t) => (it.themes ?? []).includes(t)) && m.genres.every((k) => (it.genres ?? []).includes(k));
+
+/** 絞った単位(何も選んでいなければ元のまま・1冊も残らなければ null) */
+export function narrowUnit(g: Graph, base: Unit, m: Mix, genreName: (key: string) => string = (k) => k): Unit | null {
+  if (!mixSize(m)) return base;
+  const items = base.items.filter((u) => hasAll(g.all.get(u.slug), m));
+  if (!items.length) return null;
+  return {
+    key: `${base.key}|n:${mixKey(m)}`,
+    kind: base.kind,
+    label: `${base.label} › ${[...m.themes, ...m.genres.map(genreName)].join("×")}`,
+    items,
+    note: base.note,
+  };
+}
+
+/** 絞り込みの札の冊数 = いま絞っている本のうち、その要素/ジャンルも持つ本の数(選んだ札は出さない) */
+export function narrowCounts(
+  g: Graph,
+  base: Unit,
+  center: Pick<MangaListItem, "themes" | "genres">,
+  m: Mix,
+): { total: number; themes: Map<string, number>; genres: Map<string, number> } {
+  const cur = base.items.map((u) => g.all.get(u.slug)).filter((it): it is MangaListItem => hasAll(it, m));
+  const themes = new Map<string, number>();
+  const genres = new Map<string, number>();
+  for (const t of uniq(center.themes ?? [])) if (!m.themes.includes(t)) themes.set(t, cur.filter((it) => (it.themes ?? []).includes(t)).length);
+  for (const k of uniq(center.genres ?? [])) if (!m.genres.includes(k)) genres.set(k, cur.filter((it) => (it.genres ?? []).includes(k)).length);
+  return { total: cur.length, themes, genres };
 }
 
 /** 要素の島 = 中心の本の要素ごとに 冊数 + 代表の書影(中心と共通の要素が多い順 → popularity)。 冊数の多い順 */

@@ -1080,3 +1080,27 @@
 .cp-mt.add:not(.on) {
   opacity: 0.75;
 }
+
+/* ── 4e. 案4(2026-10-05): 広げた後に「⚗ さらに絞る」= 白の破線札・白縁の引き出し。 組み替えの緩め具合(note) ── */
+.cp-uc-nar {
+  --c: #e6ecf0;
+  border-style: dashed;
+}
+.cp-uc-nar.on {
+  border-style: solid;
+}
+.cp-mix.cp-nar {
+  border-top-color: #e6ecf0;
+}
+.cp-mix.cp-nar .cp-mix-h {
+  color: #e6ecf0;
+}
+.cp-nar-go {
+  --c: #e6ecf0;
+}
+.cp-mix-note {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 600;
+  opacity: 0.8;
+}

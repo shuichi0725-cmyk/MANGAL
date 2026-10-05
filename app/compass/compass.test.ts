@@ -33,6 +33,8 @@ import {
   regenreLabel,
   regenreUnit,
   themeIslands,
+  narrowCounts,
+  narrowUnit,
 } from "./compass";
 
 function book(slug: string, o: Partial<MangaListItem> = {}): MangaListItem {
@@ -635,5 +637,45 @@ describe("案2+3: ジャンルの組み替え・要素の星雲", () => {
   it("島の頁分け: 10個までは1頁・11個は6+5", () => {
     expect(islandPages([...Array(10).keys()]).map((p) => p.length)).toEqual([10]);
     expect(islandPages([...Array(11).keys()]).map((p) => p.length)).toEqual([6, 5]);
+  });
+});
+
+describe("組み替えの段 = 残したジャンルにいくつ当てはまるか / さらに絞る", () => {
+  // 中心: action+adventure+historical。 ＋romcom を足す
+  const center = book("c", { themes: ["剣劇"], genres: ["action", "adventure", "historical"] });
+  const list = [
+    center,
+    book("r3", { genres: ["romcom", "action", "adventure", "historical"], themes: ["剣劇"] }),
+    book("r1", { genres: ["romcom", "action"] }),
+    book("r0", { genres: ["romcom", "school"] }),
+    book("x3", { genres: ["action", "adventure", "historical"] }),
+  ];
+  const g = buildGraph(list);
+
+  it("★足したジャンルを持つ本を、残したジャンルに多く当てはまる順に段を下げて集める(24冊に届くまで)・note で緩め具合", () => {
+    const u = regenreUnit(g, center, { drop: [], add: ["romcom"] });
+    // 24冊に届かないので 3→1→0 と全部の段を使う。 並びは当てはまりの多い順
+    expect(u?.items.map((i) => i.slug)).toEqual(["r3", "r1", "r0"]);
+    expect(u?.note).toBe("残した3つに一致しない本も含む");
+  });
+
+  it("外すだけの時は、残したジャンルに1つも当てはまらない本は出さない", () => {
+    const u = regenreUnit(g, center, { drop: ["historical"], add: [] });
+    // 歴史を持つ r3/x3 は出さない・r0 は action/adventure のどちらにも当てはまらないので出さない
+    expect(u?.items.map((i) => i.slug)).toEqual(["r1"]);
+    expect(u?.note).toBe("残した2つのうち1つ以上一致");
+  });
+
+  it("さらに絞る: いま広げている本のうち、選んだ要素/ジャンルを全部持つ本だけ・札の冊数は絞った後の数", () => {
+    const base = regenreUnit(g, center, { drop: [], add: ["romcom"] })!;
+    const n = narrowUnit(g, base, { themes: [], genres: ["adventure"] });
+    expect(n?.items.map((i) => i.slug)).toEqual(["r3"]);
+    expect(n?.label).toBe("romcom入り › adventure");
+    expect(narrowUnit(g, base, { themes: [], genres: [] })).toBe(base);
+    expect(narrowUnit(g, base, { themes: [], genres: ["school", "adventure"] })).toBeNull();
+    const c = narrowCounts(g, base, center, { themes: [], genres: ["action"] });
+    expect(c.total).toBe(2);
+    expect(Object.fromEntries(c.genres)).toEqual({ adventure: 1, historical: 1 });
+    expect(Object.fromEntries(c.themes)).toEqual({ 剣劇: 1 });
   });
 });

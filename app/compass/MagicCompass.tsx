@@ -44,6 +44,8 @@ import {
   regenreUnit,
   themeIslands,
   type Regenre,
+  narrowCounts,
+  narrowUnit,
 } from "./compass";
 import { Halftone } from "./halftone";
 import { CompassShelveButton, CompassShelvePanel } from "./CompassShelve";
@@ -84,7 +86,7 @@ type Step = { slug: string; kind: ThreadKind | null; seed?: string };
 const newSeed = () => Math.random().toString(36).slice(2, 10);
 /** 詳細(作品頁)へ飛ぶ直前に旅の状態を書く = OS の戻るで帰ってきた時に復元する(2026-09-30 ユーザ要望) */
 const RESUME_KEY = "mangal:compass:resume:v1";
-type Resume = { path: Step[]; prev: string | null; backAng: number | null; sel: string | null; exp: string | null; drawn: { key: string; items: UnitItem[] } | null; mix?: Mix | null; re?: Regenre | null; t: number };
+type Resume = { path: Step[]; prev: string | null; backAng: number | null; sel: string | null; exp: string | null; drawn: { key: string; items: UnitItem[] } | null; mix?: Mix | null; re?: Regenre | null; narrow?: Mix | null; t: number };
 type Spawn = { fx: number; fy: number; fs: number; d: number };
 type NodeView = {
   slug: string;
@@ -230,6 +232,15 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
   const [reOpen, setReOpen] = useState(false);
   const [re, setRe] = useState<Regenre>(EMPTY_REGENRE);
   const [reApplied, setReApplied] = useState<Regenre | null>(null);
+  // 案4: 広げた後に「さらに絞る」(引き出しが開いているか / 選んでいる組 / 絞った組)
+  const [narrowOpen, setNarrowOpen] = useState(false);
+  const [narrow, setNarrow] = useState<Mix>(EMPTY_MIX);
+  const [narrowApplied, setNarrowApplied] = useState<Mix | null>(null);
+  const clearNarrow = useCallback(() => {
+    setNarrowOpen(false);
+    setNarrow(EMPTY_MIX);
+    setNarrowApplied(null);
+  }, []);
   // ★札(シート)の実際の高さ。 札は中身に合わせて伸びる(紹介文3行/選んでいる時は5行+進む)ので、
   //   「広げる」の帯を固定位置(下から98px)に置くと札の裏に潜って読めなくなった(2026-10-03 ユーザ指摘)。
   //   帯はいつも札のすぐ上に乗せる。 callback ref = 札が後から描かれても測れる。
@@ -298,6 +309,10 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
             setRe(r.re);
             setReApplied(r.re);
           }
+          if (r.narrow) {
+            setNarrow(r.narrow);
+            setNarrowApplied(r.narrow);
+          }
           return;
         }
       }
@@ -352,7 +367,7 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
     () => (SPLIT && graph && curItem && reApplied ? regenreUnit(graph, curItem, reApplied, genreName) : null),
     [graph, curItem, reApplied, genreName],
   );
-  const unitFull = useMemo(
+  const baseFull = useMemo(
     () =>
       exp && nb
         ? mixFull?.key === exp
@@ -362,6 +377,15 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
             : (nb.units.find((u) => u.key === exp) ?? null)
         : null,
     [exp, nb, mixFull, reFull],
+  );
+  // 「さらに絞る」を掛けた後の単位(何も絞っていなければ元のまま)
+  const unitFull = useMemo(
+    () => (baseFull && graph && SPLIT && narrowApplied ? (narrowUnit(graph, baseFull, narrowApplied, genreName) ?? baseFull) : baseFull),
+    [baseFull, graph, narrowApplied, genreName],
+  );
+  const narrowInfo = useMemo(
+    () => (SPLIT && narrowOpen && baseFull && graph && curItem ? narrowCounts(graph, baseFull, curItem, narrow) : null),
+    [narrowOpen, baseFull, graph, curItem, narrow],
   );
   // 星雲の島(中心の本の要素ごと)と、組み替えの引き出しの冊数
   const islands = useMemo(() => (SPLIT && graph && curItem ? islandPages(themeIslands(graph, curItem)) : null), [graph, curItem]);
@@ -484,6 +508,9 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
         setReOpen(false);
         setRe(EMPTY_REGENRE);
         setReApplied(null);
+        setNarrowOpen(false);
+        setNarrow(EMPTY_MIX);
+        setNarrowApplied(null);
         setPrev(from);
         setBackAng(ang);
         setSel(null);
@@ -591,10 +618,11 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
       setMixOpen(false);
       setNebOpen(false);
       setReOpen(false);
+      clearNarrow();
       setExp((e) => (!key || key === e ? null : key));
       bumpSheet();
     },
-    [bumpSheet],
+    [bumpSheet, clearNarrow],
   );
 
   // 掛け合わせ: 札を押すたび 選ぶ/外す。 「広げる」で今の組を広げる(同じ組をもう一度でも引き直す)
@@ -607,16 +635,18 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
     setGrowFor(null);
     setMixOpen(false);
     setNebOpen(false);
+    clearNarrow();
     setMixApplied({ themes: [...mix.themes], genres: [...mix.genres] });
     setExp(mixKey(mix));
     bumpSheet();
-  }, [mix, bumpSheet]);
+  }, [mix, bumpSheet, clearNarrow]);
 
   // 星雲: 開くと周りの本が退いて要素の島が浮かぶ(広げている糸は閉じる)
   const toggleNeb = useCallback(() => {
     if (busy.current) return;
     setSel(null);
     setReOpen(false);
+    setNarrowOpen(false);
     setNebOpen((o) => {
       if (!o) setExp(null);
       return !o;
@@ -633,6 +663,7 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
   const toggleReOpen = useCallback(() => {
     if (busy.current) return;
     setNebOpen(false);
+    setNarrowOpen(false);
     setReOpen((o) => !o);
   }, []);
   const applyRe = useCallback(() => {
@@ -640,10 +671,23 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
     setSel(null);
     setGrowFor(null);
     setReOpen(false);
+    clearNarrow();
     setReApplied({ drop: [...re.drop], add: [...re.add] });
     setExp(regenreKey(re));
     bumpSheet();
-  }, [re, bumpSheet]);
+  }, [re, bumpSheet, clearNarrow]);
+
+  // さらに絞る: 札を押すたび選ぶ/外す →「〜に絞る」で掛ける(何も選ばずに押せば絞りを外す)
+  const toggleNarrow = useCallback((part: "themes" | "genres", v: string) => {
+    setNarrow((m) => ({ ...m, [part]: m[part].includes(v) ? m[part].filter((x) => x !== v) : [...m[part], v] }));
+  }, []);
+  const applyNarrow = useCallback(() => {
+    if (busy.current) return;
+    setSel(null);
+    setNarrowOpen(false);
+    setNarrowApplied(mixSize(narrow) ? { themes: [...narrow.themes], genres: [...narrow.genres] } : null);
+    bumpSheet();
+  }, [narrow, bumpSheet]);
 
   const chooseSpread = useCallback((k: UnitKind, s: Spread) => {
     setSel(null);
@@ -664,12 +708,13 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
       if (mixOpen) setMixOpen(false);
       else if (nebOpen) setNebOpen(false);
       else if (reOpen) setReOpen(false);
+      else if (narrowOpen) setNarrowOpen(false);
       else if (sel) setSel(null);
       else if (exp) setExp(null);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [sel, exp, mixOpen, nebOpen, reOpen]);
+  }, [sel, exp, mixOpen, nebOpen, reOpen, narrowOpen]);
 
   // ── 描く本(世界座標) ──
   const nodes = useMemo<NodeView[]>(() => {
@@ -872,7 +917,7 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
       why = `${KIND_NAME[unit.kind]} — ${unit.label}${it?.shared ? ` ・ 共通の要素${it.shared}つ` : ""}`;
       goLabel = `〈${unit.label}〉の糸で進む →`;
     } else {
-      why = `「${unit.label}」の糸を広げています(候補${(unitFull?.items.length ?? unit.items.length).toLocaleString()}冊から${unit.items.length}冊) ・ 本に触れて選ぶ`;
+      why = `「${unit.label}」の糸を広げています(候補${(unitFull?.items.length ?? unit.items.length).toLocaleString()}冊から${unit.items.length}冊) ・ ${unit.note ? `${unit.note} ・ ` : ""}本に触れて選ぶ`;
     }
   } else {
     const o = sel ? placed.find((x) => x.slug === sel) : null;
@@ -894,7 +939,7 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
       : `/manga/${encodeURIComponent(slug)}`;
   const saveResume = () => {
     try {
-      const r: Resume = { path, prev, backAng, sel, exp, drawn, mix: exp && mixFull?.key === exp ? mixApplied : null, re: exp && reFull?.key === exp ? reApplied : null, t: Date.now() };
+      const r: Resume = { path, prev, backAng, sel, exp, drawn, mix: exp && mixFull?.key === exp ? mixApplied : null, re: exp && reFull?.key === exp ? reApplied : null, narrow: exp ? narrowApplied : null, t: Date.now() };
       window.sessionStorage.setItem(RESUME_KEY, JSON.stringify(r));
     } catch {
       /* 書けなくても飛ぶ(戻った時は新しい旅) */
@@ -1288,6 +1333,24 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
             <i>{reShown.items.length}</i>
           </button>
         )}
+        {/* 案4: どの糸で広げた後でも「⚗ さらに絞る」(絞った後は 絞った組+冊数) */}
+        {SPLIT && exp && baseFull && (
+          <button
+            type="button"
+            className={`cp-uc cp-uc-nar${narrowApplied || narrowOpen ? " on" : ""}`}
+            aria-expanded={narrowOpen}
+            onClick={() => {
+              if (busy.current) return;
+              setNebOpen(false);
+              setReOpen(false);
+              setNarrow(narrowApplied ?? EMPTY_MIX);
+              setNarrowOpen((o) => !o);
+            }}
+          >
+            ⚗ {narrowApplied ? [...narrowApplied.themes, ...narrowApplied.genres.map(genreName)].join("×") : "さらに絞る"}
+            {narrowApplied && unitFull && <i>{unitFull.items.length}</i>} {narrowOpen ? "▴" : "▾"}
+          </button>
+        )}
         {bandUnits.map((u) => (
           <span key={u.key} className="cp-ucw">
             {/* 掛け合わせの入口(要素 ▾ / ジャンル ▾)は「似たジャンル」の前に置く */}
@@ -1450,9 +1513,77 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
             ) : reDraft ? (
               <>
                 {regenreLabel(re, genreName)}の{curItem.title}に似た本 <b>{reDraft.items.length.toLocaleString()}冊</b>
+                {reDraft.note && <span className="cp-mix-note">{reDraft.note}</span>}
               </>
             ) : (
               "似た本が見つかりません"
+            )}
+          </button>
+        </div>
+      )}
+
+      {/* 4e. さらに絞る(案4): いま広げている本を、中心の本の要素・ジャンルで絞る */}
+      {SPLIT && narrowOpen && narrowInfo && baseFull && (
+        <div
+          className="cp-mix cp-nar"
+          style={{ bottom: Math.max(SHEET + 2, sheetH + 2) + 30 }}
+          role="dialog"
+          aria-label="さらに絞る"
+        >
+          <div className="cp-mix-h">
+            <span>さらに絞る ・ いま広げている{baseFull.items.length.toLocaleString()}冊から</span>
+            {mixSize(narrow) > 0 && (
+              <button type="button" className="cp-mix-clr" onClick={() => setNarrow(EMPTY_MIX)}>
+                選び直す
+              </button>
+            )}
+            <button type="button" className="cp-mix-x" aria-label="閉じる" onClick={() => setNarrowOpen(false)}>
+              ✕
+            </button>
+          </div>
+          <div className="cp-mix-body">
+            {(["genres", "themes"] as const).map((part) => {
+              const kind = part === "themes" ? "elem" : "genre";
+              // 全部の本が持っている札(絞っても変わらない)は出さない。 選んだ札は残す
+              const keys = [...narrowInfo[part].keys()].filter((k) => (narrowInfo[part].get(k) ?? 0) < narrowInfo.total);
+              const shown = [...narrow[part], ...keys.sort((a, b) => (narrowInfo[part].get(b) ?? 0) - (narrowInfo[part].get(a) ?? 0))];
+              if (!shown.length) return null;
+              return (
+                <div key={part}>
+                  <div className="cp-mix-sec">{part === "themes" ? "要素" : "ジャンル"}</div>
+                  <div className="cp-mix-tags">
+                    {shown.map((k) => {
+                      const on = narrow[part].includes(k);
+                      const n = narrowInfo[part].get(k) ?? 0;
+                      return (
+                        <button
+                          key={k}
+                          type="button"
+                          className={`cp-mt${on ? " on" : ""}`}
+                          style={{ "--c": KIND_COLOR[kind] } as CSSProperties}
+                          aria-pressed={on}
+                          disabled={!on && n === 0}
+                          onClick={() => toggleNarrow(part, k)}
+                        >
+                          {part === "genres" ? genreName(k) : k}
+                          {!on && <i>→{n.toLocaleString()}</i>}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <button type="button" className="cp-mix-go cp-nar-go" disabled={mixSize(narrow) > 0 && !narrowInfo.total} onClick={applyNarrow}>
+            {mixSize(narrow) ? (
+              <>
+                {[...narrow.themes, ...narrow.genres.map(genreName)].join(" × ")} <b>{narrowInfo.total.toLocaleString()}冊</b> に絞る
+              </>
+            ) : narrowApplied ? (
+              "絞りを外す"
+            ) : (
+              "要素・ジャンルを選ぶ"
             )}
           </button>
         </div>
