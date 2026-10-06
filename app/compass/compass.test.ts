@@ -39,6 +39,7 @@ import {
   komaNarration,
   komaTitleSize,
   komaVolumes,
+  threadEntrances,
 } from "./compass";
 
 function book(slug: string, o: Partial<MangaListItem> = {}): MangaListItem {
@@ -706,5 +707,51 @@ describe("真ん中の本のコマ割り(案6)の判断", () => {
       "2015年、「週刊少年ジャンプ」で連載開始。全38巻。",
     );
     expect(komaNarration({ year_started: 1999, magazine: null, status: "ongoing", max_edition_volumes: 0, total_volumes: 0 })).toBe("1999年に始まった作品。");
+  });
+});
+
+describe("糸の入口の輪(案B)", () => {
+  // 中心: 要素6・ジャンル3 → 固定4(作者/似たジャンル/雑誌/年)+ 要素・ジャンル9 は10枠に入らない
+  const T6 = ["悲劇", "復讐", "旅", "剣劇", "神話", "哲学"];
+  const center = book("c", { themes: T6, genres: ["action", "horror", "drama"], magazine: "m", year_started: 1990, authors: [{ name: "作者A" }] });
+  const list = [
+    center,
+    ...T6.map((t, i) => book(`t${i}`, { themes: T6.slice(0, i + 1), genres: ["action"], magazine: "m", year_started: 1990, authors: [{ name: "作者A" }] })),
+    book("h1", { themes: ["悲劇"], genres: ["horror", "action", "drama"] }),
+    book("d1", { themes: [], genres: ["drama", "action"] }),
+  ];
+  const g = buildGraph(list);
+  const nb = neighborhood(g, center, (k) => k);
+
+  it("固定(作者・よく似たジャンル・雑誌・年)は必ず輪に出し、残りの枠に要素(多い順)とジャンル(少ない順)。入らない分は「ほか」", () => {
+    const e = threadEntrances(g, center, nb.units, (k) => k);
+    const kinds = e.ring.map((x) => x.kind);
+    expect(kinds.filter((k) => k === "author" || k === "mag" || k === "year")).toHaveLength(3);
+    expect(e.ring.length + 1).toBeLessThanOrEqual(10); // +1 = 「ほか」の枠
+    expect(e.ring.length + e.more.length).toBe(nb.units.filter((u) => u.kind !== "elem").length + 6 + 3);
+    // 要素は冊数の多い順(悲劇=6冊が先頭)・ジャンルは冊数の少ない順(horror=1冊が先頭)
+    const ringE = e.ring.filter((x) => x.kind === "elem");
+    expect(ringE[0].label).toBe("要素 悲劇");
+    const ringG = e.ring.filter((x) => x.kind === "genre");
+    expect(ringG[0].label).toBe("ジャンル horror");
+    expect(e.more.length).toBeGreaterThan(0);
+  });
+
+  it("入口の代表の書影は輪の中で重ならない(本が足りる時)", () => {
+    // 全部の糸に当てはまる本を12冊足す = どの入口にも別の本を割り当てられる
+    const many = Array.from({ length: 12 }, (_, i) =>
+      book(`x${i}`, { themes: T6, genres: ["action", "horror", "drama"], magazine: "m", year_started: 1990, authors: [{ name: "作者A" }] }),
+    );
+    const g3 = buildGraph([...list, ...many]);
+    const e = threadEntrances(g3, center, neighborhood(g3, center, (k) => k).units, (k) => k);
+    const covers = e.ring.map((x) => x.cover).filter(Boolean);
+    expect(new Set(covers).size).toBe(covers.length);
+  });
+
+  it("入口が10枠に収まる本は「ほか」を作らない", () => {
+    const small = book("s", { themes: ["悲劇"], genres: ["action"], magazine: "m", year_started: 1990, authors: [{ name: "作者A" }] });
+    const g2 = buildGraph([small, ...list.slice(1)]);
+    const e = threadEntrances(g2, small, neighborhood(g2, small, (k) => k).units, (k) => k);
+    expect(e.more).toEqual([]);
   });
 });

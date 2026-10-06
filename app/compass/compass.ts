@@ -1110,3 +1110,89 @@ export function komaNarration(
   const v = komaVolumes(m);
   return `${head}${v ? `${v}。` : ""}`;
 }
+
+// ───────────────────────── 糸の入口の輪(案B・2026-10-06) ─────────────────────────
+// 下の帯(作者/雑誌/年/要素/ジャンル/よく似たジャンル)を、書影付きの「糸の入口」として周りの輪へ上げる。
+//   書影 = その糸の代表の1冊(入口どうしで同じ本を使い回さない)。 輪は最大10枠: 作者・雑誌・年・よく似たジャンルは必ず出し、
+//   残りの枠に 要素(冊数の多い順)とジャンル(冊数の少ない順=特徴的な順)を入れる。 入りきらない分は「ほか ▸」(2段目)。
+
+export type Entrance =
+  | { key: string; kind: "author" | "mag" | "year" | "sim"; label: string; count: number; cover: string | null; unitKey: string }
+  | { key: string; kind: "elem" | "genre"; label: string; value: string; count: number; cover: string | null };
+export type EntranceSet = { ring: Entrance[]; more: Entrance[] };
+
+export function threadEntrances(
+  g: Graph,
+  center: Pick<MangaListItem, "slug" | "themes" | "genres">,
+  units: readonly Unit[],
+  genreName: (key: string) => string = (k) => k,
+  max = 10,
+): EntranceSet {
+  const used = new Set<string>();
+  const coverOf = (slugs: readonly string[]): string | null => {
+    const pick = slugs.find((s) => !used.has(s) && g.all.get(s)?.cover) ?? slugs.find((s) => g.all.get(s)?.cover);
+    if (!pick) return null;
+    used.add(pick);
+    return g.all.get(pick)?.cover ?? null;
+  };
+  // 固定の入口(帯にあった順): 作者(名前ごと)・よく似たジャンル・雑誌・年
+  const fixedU = (k: UnitKind | "sim") =>
+    units.filter((u) => (k === "sim" ? u.key === "genre" : u.kind === k && u.key !== "genre"));
+  const fx = (u: Unit, kind: "author" | "mag" | "year" | "sim"): Entrance => ({
+    key: `u:${u.key}`,
+    kind,
+    label: kind === "author" ? `作者 ${u.label}` : kind === "year" ? `${u.label}に開始` : u.label,
+    count: u.items.length,
+    cover: coverOf(u.items.map((i) => i.slug)),
+    unitKey: u.key,
+  });
+  const authors = fixedU("author").map((u) => fx(u, "author"));
+  const sims = fixedU("sim").map((u) => fx(u, "sim"));
+  const mags = fixedU("mag").map((u) => fx(u, "mag"));
+  const years = fixedU("year").map((u) => fx(u, "year"));
+
+  // 要素・ジャンル: 代表の書影は中心と共通の要素が多い順 → popularity(島と同じ)
+  const cT = uniq(center.themes ?? []);
+  const shared = new Map<number, number>();
+  for (const t of cT) for (const i of g.byTheme.get(t) ?? []) shared.set(i, (shared.get(i) ?? 0) + 1);
+  const rank = (list: readonly number[]) =>
+    [...list]
+      .filter((i) => g.items[i].slug !== center.slug)
+      .sort((a, b) => (shared.get(b) ?? 0) - (shared.get(a) ?? 0) || (g.items[b].popularity ?? 0) - (g.items[a].popularity ?? 0) || (g.items[a].slug < g.items[b].slug ? -1 : 1))
+      .map((i) => g.items[i].slug);
+  const elems = cT
+    .map((t) => ({ t, list: rank(g.byTheme.get(t) ?? []) }))
+    .filter((x) => x.list.length)
+    .sort((a, b) => b.list.length - a.list.length);
+  const genres = uniq(center.genres ?? [])
+    .map((k) => ({ k, list: rank(g.byGenre.get(k) ?? []) }))
+    .filter((x) => x.list.length)
+    .sort((a, b) => a.list.length - b.list.length);
+
+  const fixed = [...authors, ...sims, ...mags, ...years];
+  let room = Math.max(0, max - fixed.length);
+  const total = elems.length + genres.length;
+  let nE = elems.length;
+  let nG = genres.length;
+  if (total > room) {
+    room = Math.max(0, room - 1); // 「ほか ▸」の1枠
+    nE = Math.min(elems.length, Math.ceil((room * 3) / 5));
+    nG = Math.min(genres.length, room - nE);
+    nE = Math.min(elems.length, room - nG);
+  }
+  // 輪に出す入口から先に代表の書影を決める(輪の書影が重ならないことを優先)
+  const eAt = (x: { t: string; list: string[] }): Entrance => ({ key: `e:${x.t}`, kind: "elem", label: `要素 ${x.t}`, value: x.t, count: x.list.length, cover: coverOf(x.list) });
+  const gAt = (x: { k: string; list: string[] }): Entrance => ({
+    key: `g:${x.k}`,
+    kind: "genre",
+    label: `ジャンル ${genreName(x.k)}`,
+    value: x.k,
+    count: x.list.length,
+    cover: coverOf(x.list),
+  });
+  const ringG = genres.slice(0, nG).map(gAt);
+  const ringE = elems.slice(0, nE).map(eAt);
+  const more = [...elems.slice(nE).map(eAt), ...genres.slice(nG).map(gAt)];
+  // 輪の並び(上から時計回り): 作者 → よく似たジャンル → ジャンル → 雑誌 → 年 → 要素
+  return { ring: [...authors, ...sims, ...ringG, ...mags, ...years, ...ringE], more };
+}
