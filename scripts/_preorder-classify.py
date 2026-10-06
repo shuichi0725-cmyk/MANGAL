@@ -233,6 +233,19 @@ for r in rows:
     else:
         out["new1b"].append(r)
 
+# ★再投入行(2026-10-06 _preorder-increment.py が付ける _requeue)は「既存頁の続巻」と判定された時だけ適用に回す。
+#   新作(new1a/new1b)・途中巻(ex_mid)に落ちた行は過去に見送った分 = ここでドラフト生成に渡すと backlog を毎回「新規」に
+#   水増しする(previewは今回分のみの規則)。 → requeue_hold に退避して簿にだけ出す(生成器は読まない)。
+out["requeue_hold"] = []
+for k in ("new1a", "new1b", "ex_mid"):
+    keep = []
+    for r in out[k]:
+        if r.get("_requeue"):
+            r["reason"] = f"再投入={k}(続巻でない=保留見直しの流れで扱う)"
+            out["requeue_hold"].append(r)
+        else:
+            keep.append(r)
+    out[k] = keep
 json.dump(out, open(f"{ROOT}/.cache/preorders/classified.json", "w", encoding="utf-8"), ensure_ascii=False)
 with open(f"{ROOT}/docs/production-diagnostics/preorder-triage.tsv", "w", encoding="utf-8") as fo:
     fo.write("class\tisbn\tym\ttitle\tauthor\tpublisher\tslug\treason\n")

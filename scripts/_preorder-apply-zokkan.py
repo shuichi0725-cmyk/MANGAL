@@ -11,6 +11,11 @@ classified.json の zokkan を volumes-supplement-auto.yml へ純粋追加。
 ★2026-09-02 同巻番号ゲート: 特装版/限定版が通常版と同じ巻番号で種4に入り二重化していた(ゆるゆり25/大室家9/コナン109 等11件)。
   ①特装版/限定版は保留(分類器も skip するが二重の安全弁) ②頁のstandard版 or 種4-auto(同series_keys)に同巻番号が既在なら保留、
   ただし既在が特装版entryなら通常版で置換(特装版entryを退役し volumes-supplement-retire-changelog.jsonl に記帳)。
+★2026-10-06 予約頁の続巻=seed直接追記: 予約頁(preorder-pages)出身の頁は種2に series が無く series_key を逆引きできない
+  (=種4が効かない)。従来は「seed直接追記が正」と保留に書くだけで手作業待ちだった(カクリキ2/猩猩姫3 が発売日を過ぎても出なかった)。
+  → 通常版が1つ・同ISBN/同巻番号なし・巻が連続(予約頁max+1..+3)の時だけ、その seed の巻の並びに1冊差し込む
+  ([[preorder_page_zokkan_direct_append]])。全体を書き直すと長文(rakuten_caption)の折り返しが変わるので行を差し込み、
+  読み直して「その1冊が増えただけ」を検算してから書く。記帳=data/seeds/preorder-page-zokkan-changelog.jsonl / 退避=.cache/preorder-page-zokkan-bak-<日付>/
 出力: 追加件数 + touched slugリスト(.cache/preorders/zokkan-touched.json) + 不備worklist追記
 """
 import sys as _sys_h
@@ -92,7 +97,81 @@ def keys_for_slug(slug):
             break
     return sorted(ks) or None
 
+PP_LOG = os.path.join(ROOT, "data", "seeds", "preorder-page-zokkan-changelog.jsonl")
+
+
+def release_date_of(r):
+    rd = r.get("ym")
+    if rd and r.get("day"):
+        rd = f"{rd}-{r['day']:02d}"
+    return rd
+
+
+def append_to_preorder_page(stem, r, vol):
+    """予約頁 seed の通常版の巻の並びに1冊差し込む。成功=None / 失敗=保留理由。"""
+    import copy, shutil
+    pp = f"{ROOT}/data/seeds/preorder-pages/{stem}.yml"
+    txt = open(pp, encoding="utf-8").read()
+    d0 = yaml.safe_load(txt) or {}
+    eds = d0.get("editions") or []
+    std = [i for i, e in enumerate(eds) if (e.get("type") or "standard") == "standard"]
+    if len(std) != 1:
+        return f"予約頁の通常版が{len(std)}個(足し先を決められない)"
+    vols = eds[std[0]].get("volumes") or []
+    if any(str(v.get("isbn13")) == str(r["isbn"]) for e in eds for v in e.get("volumes") or []):
+        return "同ISBN既在(予約頁)"
+    nums = [v.get("number") for v in vols if isinstance(v.get("number"), int)]
+    if int(vol) in nums:
+        return f"同巻番号{vol}既在(予約頁)"
+    mx = max(nums or [0])
+    if not (mx < int(vol) <= mx + 3):
+        return f"巻が連続しない(予約頁max{mx}→{vol}=全巻回収側)"
+    cov = r.get("cover") if r.get("cover") and "noimage" not in str(r.get("cover")) else None
+    newv = {"number": int(vol), "asin": None, "isbn13": str(r["isbn"]), "cover_url": cov,
+            "release_date": release_date_of(r)}
+    # 通常版の volumes ブロックの末尾を探す(editions は col0 の「- 」、版のキーは2字下げ、巻は「  - 」+4字下げ)
+    lines = txt.split("\n")
+    try:
+        ei = lines.index("editions:")
+    except ValueError:
+        return "editions: 行が無い(差し込めない)"
+    starts, j = [], ei + 1
+    while j < len(lines) and (lines[j].startswith("- ") or lines[j].startswith("  ") or lines[j] == ""):
+        if lines[j].startswith("- "):
+            starts.append(j)
+        j += 1
+    span_end = starts[std[0] + 1] if std[0] + 1 < len(starts) else j
+    vi = next((k for k in range(starts[std[0]], span_end) if lines[k].startswith("  volumes:")), None)
+    if vi is None:
+        return "volumes: 行が無い(差し込めない)"
+    snippet = ["  " + ln for ln in yaml.dump([newv], allow_unicode=True, sort_keys=False, width=200).rstrip("\n").split("\n")]
+    if lines[vi].strip() == "volumes: []":
+        lines[vi:vi + 1] = ["  volumes:"] + snippet
+    else:
+        k = vi + 1
+        while k < span_end and (lines[k].startswith("  - ") or lines[k].startswith("    ")):
+            k += 1
+        lines[k:k] = snippet
+    new_txt = "\n".join(lines)
+    want = copy.deepcopy(d0)
+    want["editions"][std[0]].setdefault("volumes", []).append(newv)
+    if yaml.safe_load(new_txt) != want:
+        return "差し込み検算NG(読み直した内容が1冊追加と一致しない)"
+    bak_dir = os.path.join(ROOT, ".cache", f"preorder-page-zokkan-bak-{TODAY}")
+    os.makedirs(bak_dir, exist_ok=True)
+    if not os.path.exists(os.path.join(bak_dir, f"{stem}.yml")):
+        shutil.copy2(pp, os.path.join(bak_dir, f"{stem}.yml"))
+    open(pp, "w", encoding="utf-8").write(new_txt)
+    with open(PP_LOG, "a", encoding="utf-8") as f:
+        f.write(json.dumps({"op": "preorder_page_zokkan_append", "slug": stem, "isbn13": str(r["isbn"]), "number": int(vol),
+                            "before": None, "after": newv, "at": TODAY, "reversible": True,
+                            "backup": os.path.relpath(os.path.join(bak_dir, f"{stem}.yml"), ROOT),
+                            "source": "rakuten-preorder", "title": r.get("title")}, ensure_ascii=False) + "\n")
+    return None
+
+
 added = 0
+added_pp = 0
 replaced = 0
 touched = set()
 wl = []
@@ -114,8 +193,15 @@ for r in cls["zokkan"]:
         key_cache[stem] = keys_for_slug(stem)
     ks = key_cache[stem]
     if not ks:
-        why = "series_key逆引き不可(preorder-pages由来=種2不在→seed直接追記が正)" if os.path.exists(f"{ROOT}/data/seeds/preorder-pages/{stem}.yml") else "series_key逆引き不可"
-        wl.append((isbn, r["title"], f"{why} slug={slug}" + (f" stem={stem}" if stem != slug else ""))); continue
+        if os.path.exists(f"{ROOT}/data/seeds/preorder-pages/{stem}.yml"):
+            # ★予約頁=種4が効かない → seed の巻の並びへ直接差し込む(2026-10-06)
+            why = append_to_preorder_page(stem, r, vol)
+            if why is None:
+                have.add(isbn); touched.add(stem); added_pp += 1
+            else:
+                wl.append((isbn, r["title"], f"予約頁への直接追記を保留: {why} slug={slug}"))
+            continue
+        wl.append((isbn, r["title"], f"series_key逆引き不可 slug={slug}" + (f" stem={stem}" if stem != slug else ""))); continue
     # ★同巻番号ゲート(2026-09-02): 頁standard版 or 種4-auto(同series_keys)に同じ巻番号が既在
     dup_auto = [v for v in doc["volumes"] if int(v.get("number") or -1) == int(vol)
                 and set(v.get("series_keys") or []) & set(ks) and str(v.get("isbn13")) != isbn]
@@ -133,9 +219,7 @@ for r in cls["zokkan"]:
         else:
             ex = ",".join(str(v.get("isbn13")) for v in dup_auto) or "頁既在"
             wl.append((isbn, r["title"], f"同巻番号{vol}既在(版違い/二重登録?) 既存={ex} slug={slug}")); continue
-    rd = r.get("ym")
-    if rd and r.get("day"):
-        rd = f"{rd}-{r['day']:02d}"
+    rd = release_date_of(r)
     doc["volumes"].append({"series_keys": ks, "qid": None, "number": int(vol), "isbn13": isbn,
                            "release_date": rd, "pages": None, "publisher": r.get("publisher"),
                            "edition_type": "standard", "title_display": r.get("title"),
@@ -169,4 +253,4 @@ with _gz.open(_cp, "at", encoding="utf-8") as _f:
             _f.write(json.dumps({"isbn13": _r["isbn"], "cover_url": _c}, ensure_ascii=False) + "\n")
             _have.add(_r["isbn"]); _added_cov += 1
 print(f"covers seed追記: {_added_cov}件(新刊書影)")
-print(f"種4追加 {added} / 対象頁 {len(touched)} / 保留 {len(wl)} (worklist追記) / 特装版→通常版置換 {replaced}")
+print(f"種4追加 {added} / 予約頁へ直接追記 {added_pp} / 対象頁 {len(touched)} / 保留 {len(wl)} (worklist追記) / 特装版→通常版置換 {replaced}")
