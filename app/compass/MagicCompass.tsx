@@ -1125,7 +1125,13 @@ export default function MagicCompass({
         className={`cp-stage${zoom ? " zoom" : ""}`}
         onClick={(e) => {
           if ((e.target as HTMLElement).closest("button, a")) return;
-          if (sel && !busy.current) setSel(null);
+          if (busy.current) return;
+          // ★何もない所を押す = 1段ずつ取り消す(2026-10-06 ユーザ「関係ないところを押してもキャンセル」):
+          //   選んだ本 → 「ほか」の一覧 → 広げた糸(= ✕ 閉じる と同じ) → 選んだ要素・ジャンル
+          if (sel) setSel(null);
+          else if (THREADS && moreOpen) setMoreOpen(false);
+          else if (THREADS && exp) openUnit(null);
+          else if (THREADS && mixSize(mix)) setMix(EMPTY_MIX);
         }}
       >
         {curItem && !nb && (
@@ -1388,7 +1394,10 @@ export default function MagicCompass({
                         onClick={() => {
                           if (busy.current) return;
                           if ("unitKey" in ent) openUnit(ent.unitKey);
-                          else toggleMix(part, ent.value);
+                          // ★選んである入口をもう一度押す = 広げる(2026-10-06 ユーザ指示。 下の「広げる」ボタンと同じ)
+                          else if (on) {
+                            if (mixInfo.c.total) applyMix();
+                          } else toggleMix(part, ent.value);
                         }}
                       >
                         {e.cover ? (
