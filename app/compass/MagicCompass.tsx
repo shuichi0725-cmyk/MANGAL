@@ -1321,6 +1321,15 @@ export default function MagicCompass({
                 const a = ((-90 + (k * 360) / Math.max(1, n)) * Math.PI) / 180;
                 return { x: geom.CX + geom.rx * Math.cos(a), y: geom.CY + geom.ry * Math.sin(a) };
               });
+              // ★線は書影の縁から縁まで(2026-10-06 ユーザ指摘「線が書影をつきぬけてる」: 入口の線は中心の本より上の層にある)
+              const edgeLine = (x1: number, y1: number, x2: number, y2: number) => {
+                const dx = x2 - x1;
+                const dy = y2 - y1;
+                const cut = (hw: number, hh: number) => Math.min(dx ? hw / Math.abs(dx) : Infinity, dy ? hh / Math.abs(dy) : Infinity);
+                const a = cut(CW / 2 + 3, CH / 2 + 3);
+                const b = 1 - cut(EW / 2 + 2, EH / 2 + 2);
+                return { x1: x1 + dx * a, y1: y1 + dy * a, x2: x1 + dx * Math.max(a, b), y2: y1 + dy * Math.max(a, b) };
+              };
               const colorOf = (e: Entrance | "more") =>
                 e === "more" ? "#8a96a0" : e.kind === "sim" ? SIM_COLOR : KIND_COLOR[e.kind as UnitKind];
               return (
@@ -1331,10 +1340,7 @@ export default function MagicCompass({
                       return (
                         <line
                           key={k}
-                          x1={geom.CX}
-                          y1={geom.CY}
-                          x2={pts[k].x}
-                          y2={pts[k].y}
+                          {...edgeLine(geom.CX, geom.CY, pts[k].x, pts[k].y)}
                           style={{
                             stroke: colorOf(e),
                             strokeWidth: on ? 3.4 : e === "more" ? 1.4 : 2,
