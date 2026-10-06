@@ -1,11 +1,11 @@
 ---
 name: daily_distill_hold_not_requeued
-description: 【未決・構造穴】日次蒸留で保留(hold)になったISBNは prev に入るので次回以降の増加分に二度と出ない=triage簿だけが痕跡。2026-09-02時点9件
+description: 【2026-10-06 実装済】日次は前回差分しか分類しない=初見で頁に入らなかった巻が二度と拾われない穴 → 再投入+予約頁seedへ直接追記+検出器#36で封鎖。初回回収153冊
 metadata: 
   node_type: memory
   type: project
   originSessionId: 450de73b-b605-4986-907d-85f528e9a408
-  modified: 2026-10-06T13:41:12.545Z
+  modified: 2026-10-06T14:47:18.045Z
 ---
 
 2026-09-02 日次蒸留で確認。`_preorder-increment.py` の fresh = latest − prev(ISBN差分)で、`--commit-prev` は
@@ -56,3 +56,15 @@ KANA_VOLNUM レビューは slug 側しか見ないので title_kana に漏れ�
 - ★穴は「hold」だけでなく**「初見で適用されなかった物すべて」**。再投入の対象は triage の hold に限らず、
   「full harvest に在る × ISBN索引に無い × preorder-deny に無い」全件にするのが正しい(=簿に載らない経路も拾える)。
 - 同じ「拾ったのに頁に無い」は 7/24 の種4-auto全消し由来の消失も拾える([[seed4_auto_wipe_accident]])= 検出器を1本にまとめられる。
+
+## ★2026-10-06 実装済み(GO)= 再投入 + 予約頁への直接追記 + 検出器#36
+- `_preorder-increment.py`: prev在でも「本番頁(ISBN索引)/種2/予約頁seed/ドラフト/ISBN除外簿」に無いISBNを毎回 fresh へ戻す(`_requeue`)。
+  ★**種4は「載っている」に数えない**(下の③)。特装版は戻さない。過去draft題の除外から**本番頁が在る題を外す**(deny は常に効かせる)。
+- `_preorder-classify.py`: `_requeue` 行は**続巻(zokkan)の時だけ**適用へ。新作/途中巻は `requeue_hold`(簿のみ)=backlogをドラフトに水増ししない。
+  著者照合で**括弧書き(スタジオ注記)を剥がし全角「／」でも分ける**(孟倫（SDwing）/Stonehead(AKEO STUDIO) で ex_mid に落ちていた6冊)。
+- `_preorder-apply-zokkan.py`: 予約頁で作られる頁(`is_preorder_produced`=preorder-pages在・data/manga と source-pages に元頁無し)は
+  **series_key が引けても seed へ行差し込み**(読み直し検算・記帳 preorder-page-zokkan-changelog.jsonl・退避)。巻番号順に処理・途中欠けは通し遠い飛び番だけ止める。
+- 初回の回収: 再投入695 → 続巻182 + 欠番補充10 → 種4 122冊 + 予約頁へ 30+95冊(153冊すべて頁に出たことを検算)。保留38=新装版/愛蔵版/大全集/巻番号なし単巻。
+- ★見つかった型3つ: ①予約頁出身の頁の続巻は「過去draft題」除外で**分類前に消えていた**(triageにも出ない)②**予約頁で作られる頁は種4を読まない**
+  =作品が後から種2に入っても seed が頁の正。種4に入れた97冊が出ていなかった ③ホイホ・ホイホイホ「/3」= 斜線区切りの巻表示は分類器が読めず skip(個別追加済・型は未封鎖)。
+- 監視 = 月次サニティ#36 `_audit-harvested-not-on-page.py`(A=種4の git 全版 / B=予約harvest / C=予約頁seed のうち ISBN 索引に無いもの)。

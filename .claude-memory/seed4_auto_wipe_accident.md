@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: cfda7af4-88ad-4470-82ac-6238868c9f0c
-  modified: 2026-10-06T13:40:45.818Z
+  modified: 2026-10-06T14:47:04.551Z
 ---
 
 2026-08-21の月次蒸留1.2.19が `data/seeds/volumes-supplement-auto.yml`(日次蒸留の続巻台帳)を**全消し**(916巻)。うち**種2未収録の883巻が本番から黙って消失**(異種族レビュアーズ12巻等806頁)。2026-08-26に週次前preflightの**ISBN消失監視**(`_audit-isbn-loss.py`)が検知→git履歴(8d02dbf88~1)から914巻を復元し806頁再生成で解消。
@@ -35,4 +35,11 @@ mangaseek の発売日一覧との突き合わせ([[competitor_mangaseek_teardow
 - ★再取得されない理由 = 日次の楽天予約は「前回から増えたISBN」しか分類しない([[daily_distill_hold_not_requeued]])ので、
   7月に一度拾った巻は二度と拾われない。巻抜け監査は**途中の欠け**しか見ないので、**最新巻(末尾)の欠け**は誰も検出しない。
 - 再算出の仕方: `git show 1e107d9a4 -- data/seeds/volumes-supplement-auto.yml` の削除行 × 現在の `.cache/isbn-page-index.json`(先に `_exists.py --build`)× 種2 `volumes.isbn13` × `data/seeds` 全文。
-- 復元は**未着手(GO待ち)**。戻す時は 1e107d9a4~1 の行を merge 書込で純粋追加し、版違い(愛蔵版/特装版)・発売日ドリフト・除外裁定のゲートを通してから targeted 反映。
+- ★**2026-10-06 GO→復元済み**(`scripts/_restore-seed4-wipe-0724.py --plan/--apply`・判定表 `docs/production-diagnostics/seed4-restore-0724.tsv`):
+  225件 → 復元74冊/71頁(日次続巻と同じ検問+楽天ISBN照合=題が頁題で**始まる**・著者・巻番号・漫画ジャンル・**楽天題でも特装版判定**)+仮書影50冊を実物に。
+  保留139の大半(約110)は「同巻番号が別ISBNで既に頁に在る」= 7/11 stale-backfill の古い巻はその後別経路で埋まっていた(実害なし)。
+  ★検問を締めた実例: ねこぱんち頁に「お江戸/おとなのねこぱんち」(別シリーズ)7冊=題を「含む」判定ですり抜けた / 傷モノの花嫁12・アイマス5 = 古い記録に題が無く特装版検問をすり抜けた /
+  アンゴルモア博多編13 = 頁が元寇合戦記1-10+博多編11-12の版混在(**頁の分離が未着手**)。
+  個別: マンガ法律の抜け穴4/9/10/11・学研まんが世界の歴史9(楽天分類が漫画外でも同じ頁の他巻は掲載済み)・ねぇ、ぴよちゃん11(ねえ/ねぇ)・canonical本体へ ざこ検4/完全版 飛ぶ教室3。
+  **残(人の裁定)**: 男一匹ガキ大将の本宮ひろ志漫画大全集1-8(11/19刊・新しい版=canonicalに版を足すか)/ sandman頁=アメコミ翻訳(THE SANDMAN新訳)の疑い・頁ごと / bolt-and-nut 10(canonicalは別ISBN …1866 で確定済み)。
+  以後の監視 = 月次サニティ#36 `_audit-harvested-not-on-page.py`(確認済み簿 data/seeds/harvested-not-on-page-ack.jsonl)。

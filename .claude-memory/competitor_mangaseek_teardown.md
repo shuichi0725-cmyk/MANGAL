@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: reference
   originSessionId: f0744808-d697-4640-bcd9-3f109fc1665e
-  modified: 2026-10-06T13:41:18.850Z
+  modified: 2026-10-06T14:47:54.095Z
 ---
 
 ユーザ「mangaseek は Google に78,000インデックスされている。参考になることある?」→ robots/sitemap/実HTMLを実測した結果。
@@ -63,3 +63,5 @@ metadata:
 - 他の機能(誕生日の漫画家/Web漫画更新/note感想の紹介/誰でも編集/X・Bluesky・はてなブログ・プレスセンター)はGoogle差の原因ではない。
   効くのは場外の露出=外部被リンクだけ(既知の結論どおり)。
 - Amazon API 自体の現況 → [[openbd_eol_amazon_required]](PA-APIは2026-05-15停止→Creators API・直近30日10件)。
+- ★同日GOで是正済み: 7/24消失74冊復元 / 日次の再投入+予約頁seed直接追記で取りこぼし続巻153冊回収 / 個別9冊 / 呪具師の重複頁解消 / 月次サニティ#36 新設。
+  ★外部サイトの一覧は「自分のデータの穴を見つける物差し」として効いた(データは取り込まない)。次に使うなら発売日一覧を数日分だけ件数照合する。

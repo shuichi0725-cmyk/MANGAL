@@ -2,7 +2,10 @@
 name: preorder_page_bypasses_mainline_class
 description: 【型・総論】予約頁(preorder-pages)は種2本流を通らない=本流に足した機構が1つずつ落ちる。既知6件目まで実測。新しい充填を足したら予約合流ループにも足す
 metadata:
+  node_type: memory
   type: project
+  originSessionId: 3694f556-496e-4196-90f0-578fafaf2df4
+  modified: 2026-10-06T14:47:47.088Z
 ---
 
 `_promote-bulk-v2.py` の頁producerは2系統ある。
@@ -21,6 +24,8 @@ metadata:
 | 4 | cover-override / 書影補完 | 2026-08-04 (仮書影.gifが永久に置き換わらない) |
 | 5 | release-date-override / 発売日補完 | 2026-09-04 [[preorder_date_drift_sutegoro_type]] |
 | 6 | **巻説明(volume-desc-ja.jsonl)** | **2026-09-17** |
+| 7 | **続巻の分類**(日次の「過去draft題」除外が予約頁の題も含み、続巻が分類前に消えていた) | **2026-10-06** [[daily_distill_hold_not_requeued]] |
+| 8 | **種4(volumes-supplement)**= 作品が後から種2に入って series_key が引けても、元頁(data/manga・source-pages)が無い限り seed が頁の正=種4は読まれない(97冊) | **2026-10-06**(apply-zokkan が seed へ直接追記に変更) |
 
 ★#6 の実測: seed に文章が在るのに **何度 promote しても出ない** 頁が213頁358巻。
 検証は `bff`(seed 4件が 8/16 から在る)= 修正前は `promote --only` を回しても
