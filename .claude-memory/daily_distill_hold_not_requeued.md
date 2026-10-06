@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 450de73b-b605-4986-907d-85f528e9a408
-  modified: 2026-09-02T11:51:52.825Z
+  modified: 2026-10-06T13:41:12.545Z
 ---
 
 2026-09-02 日次蒸留で確認。`_preorder-increment.py` の fresh = latest − prev(ISBN差分)で、`--commit-prev` は
@@ -47,3 +47,12 @@ KANA_VOLNUM レビューは slug 側しか見ないので title_kana に漏れ�
   = preview ドラフト生成→ユーザ確認が要る(未実施)/ 版違い疑い17 / 巻番号不明・同巻既在 11。
 - ★**構造穴(再投入が無い)は依然未実装**。次にやるなら: 保留を永続台帳に積み、`_preorder-increment.py` が毎回
   「未解決の保留」を fresh に混ぜて再分類する(今回の和集合+再分類を自動化する形)。
+
+## ★2026-10-06 実害の実例(mangaseek の発売日一覧との突き合わせで発見 = [[competitor_mangaseek_teardown]])
+- 10/6発売の **カクリキ2・猩猩姫3・ホイホ・ホイホイホ3・呪具師15** は 10/3 の full harvest(`preorders-latest-full.jsonl`)に**全部在る**のに頁に無い。
+  4冊とも 10/3 の増分(`preorders-latest.jsonl`)には居ない=もっと前の回で初見→適用されず→以後二度と分類されない。
+  3冊は**triage のどの版にも出てこない**(保留簿にすら載らない経路がある)。呪具師15は 8/26 に ex_mid(頁が2枚ある重複のせい?)。
+- 9/17発売の **4軍くん(仮)14** は 7/20 に ex_mid のまま(頁は13巻まで在る)。
+- ★穴は「hold」だけでなく**「初見で適用されなかった物すべて」**。再投入の対象は triage の hold に限らず、
+  「full harvest に在る × ISBN索引に無い × preorder-deny に無い」全件にするのが正しい(=簿に載らない経路も拾える)。
+- 同じ「拾ったのに頁に無い」は 7/24 の種4-auto全消し由来の消失も拾える([[seed4_auto_wipe_accident]])= 検出器を1本にまとめられる。

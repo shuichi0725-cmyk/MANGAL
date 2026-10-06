@@ -5,9 +5,16 @@ metadata:
   node_type: memory
   type: reference
   originSessionId: 6146d01a-d071-41e5-9ffa-4568e252bbb1
+  modified: 2026-10-06T13:41:02.791Z
 ---
 
 # OpenBD = サービス終了予定 + 書影は Amazon API 必須
+
+## ★2026-10-06 更新: PA-API は終了 → **Creators API**
+- PA-API v5 は **2026-05-15 にエンドポイント完全停止**(Offers v1 は 2026-01-31 終了)。後継 = **Amazon Creators API**(OAuth 2.0 Bearer)。
+- 利用資格 = アソシエイト参加 + **直近30日で対象売上10件以上**(Web上の移行解説複数で確認。旧PA-APIの「180日で3件」より重い)。
+- MANGAL = 2026-07-29 アソシエイト開設(mangal08-22)。まず本登録(180日で3件)→ API は月10件の売上が要る = **流入が先**。
+- 以下の本文の「PA-API」は Creators API と読み替える。
 
 ## OpenBD 状況
 
