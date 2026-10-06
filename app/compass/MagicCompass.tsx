@@ -49,6 +49,7 @@ import {
 } from "./compass";
 import { Halftone } from "./halftone";
 import { CompassShelveButton, CompassShelvePanel } from "./CompassShelve";
+import KomaPage from "./KomaPage";
 
 // ★テスト環境か(next.config.ts がビルド時の定数で埋める)。 本番は false = 下のテスト専用分岐ごと刈り取られる。
 const PREVIEW = process.env.NEXT_PUBLIC_PREVIEW_FEATURES === "1";
@@ -66,6 +67,9 @@ const SIM_COLOR = "#d9f843";
 // ★案2+3(2026-10-05): 「要素 ▾」= 星雲(要素ごとの本の島を押して重ねる)/「ジャンル ▾」= 組み替える(ホラー抜きのベルセルク)。
 //   ★掛け合わせの引き出し(案C=要素もジャンルも同じ引き出し)に戻す = ここを false にするだけ。
 const SPLIT = MIX;
+// ★案6(2026-10-06): 何も選んでいない時に真ん中の本を押すと、その本の書誌が漫画の1ページ(コマ割り)になって重なる。
+//   いまはテスト環境だけ。 出さない = false。
+const KOMA = PREVIEW;
 /** 島の大きさ(書影3冊の束+名札) */
 const IW = 66;
 const IH = 86;
@@ -147,7 +151,15 @@ function SpreadIcon({ k }: { k: Spread }) {
   );
 }
 
-export default function MagicCompass({ magazines, genres = {} }: { magazines: Record<string, string>; genres?: Record<string, string> }) {
+export default function MagicCompass({
+  magazines,
+  genres = {},
+  demographics = {},
+}: {
+  magazines: Record<string, string>;
+  genres?: Record<string, string>;
+  demographics?: Record<string, string>;
+}) {
   // ── データ: useMangaIndex(先頭100件 → 列形式の全件)+ キャッチ ──
   const index = useMangaIndex({ withCatch: true });
   const [failed, setFailed] = useState(false);
@@ -161,6 +173,9 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
   const graph = useMemo(() => (fullIndex && catchReady ? buildGraph(fullIndex) : null), [fullIndex, catchReady]);
   const magName = useCallback((k: string) => magazines[k] ?? k, [magazines]);
   const genreName = useCallback((k: string) => genres[k] ?? k, [genres]);
+  const demoName = useCallback((k: string) => demographics[k] ?? k, [demographics]);
+  // 真ん中の本のコマ割り(案6)が開いているか
+  const [komaOpen, setKomaOpen] = useState(false);
 
   // ── 画面の大きさ ──
   const rootRef = useRef<HTMLDivElement>(null);
@@ -511,6 +526,7 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
         setNarrowOpen(false);
         setNarrow(EMPTY_MIX);
         setNarrowApplied(null);
+        setKomaOpen(false);
         setPrev(from);
         setBackAng(ang);
         setSel(null);
@@ -581,6 +597,8 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
     (slug: string) => {
       if (busy.current) return;
       if (slug === cur) {
+        // 何も選んでいない時に真ん中を押す = その本のコマ割り(案6)。 選んでいる時は今までどおり選択を外すだけ
+        if (KOMA && !sel) setKomaOpen(true);
         setSel(null);
         return;
       }
@@ -705,7 +723,8 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== "Escape" || busy.current) return;
-      if (mixOpen) setMixOpen(false);
+      if (komaOpen) setKomaOpen(false);
+      else if (mixOpen) setMixOpen(false);
       else if (nebOpen) setNebOpen(false);
       else if (reOpen) setReOpen(false);
       else if (narrowOpen) setNarrowOpen(false);
@@ -714,7 +733,7 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [sel, exp, mixOpen, nebOpen, reOpen, narrowOpen]);
+  }, [sel, exp, mixOpen, nebOpen, reOpen, narrowOpen, komaOpen]);
 
   // ── 描く本(世界座標) ──
   const nodes = useMemo<NodeView[]>(() => {
@@ -1658,6 +1677,17 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
           )}
         </div>
       </div>
+      {KOMA && komaOpen && curItem && (
+        <KomaPage
+          item={curItem}
+          magName={magName}
+          genreName={genreName}
+          demoName={demoName}
+          href={detailHref(curItem.slug)}
+          onDetail={saveResume}
+          onClose={() => setKomaOpen(false)}
+        />
+      )}
       {big && (
         <button type="button" className="cp-big" aria-label="閉じる" onClick={() => setBig(null)}>
           {/* eslint-disable-next-line @next/next/no-img-element -- 外部CDN直リンク(images.unoptimized) */}

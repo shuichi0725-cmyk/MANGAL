@@ -1065,3 +1065,48 @@ export function pickTone(
 export function toneName(key: ToneKey): string {
   return TONES.find((t) => t.key === key)?.name ?? key;
 }
+
+// ───────────────────────── 真ん中の本を押す = 漫画のコマ割り(案6・2026-10-06) ─────────────────────────
+// 中心の本の索引データを流し込むと1ページの漫画に組み上がる。 ここは「長さ・欠け」の判断だけ(見た目は KomaPage.tsx)。
+
+/** 題名コマの文字の大きさ(px)。 短い題は大きく書き文字、長い題(ラノベ原作の長題など)は小さく4行まで */
+export function komaTitleSize(title: string): number {
+  const n = [...title].length;
+  // 列の幅は約160px。 9字の題が2行に収まる大きさまで(10字/行を超える大きさにしない)
+  if (n <= 5) return 28;
+  if (n <= 9) return 23;
+  if (n <= 16) return 19;
+  if (n <= 28) return 15;
+  return 13;
+}
+
+/** 吹き出しの文字の大きさ(px)。 キャッチは約30〜90字 */
+export function komaCatchSize(text: string): number {
+  const n = [...text].length;
+  if (n <= 40) return 12.5;
+  if (n <= 70) return 11.5;
+  return 10.5;
+}
+
+/** 巻数の言い方: 完結=全N巻 / それ以外=既刊N巻(いちばん長い版の巻数)。 0巻なら出さない */
+export function komaVolumes(m: Pick<MangaListItem, "status" | "max_edition_volumes" | "total_volumes">): string | null {
+  const n = m.max_edition_volumes || m.total_volumes || 0;
+  if (!n) return null;
+  return m.status === "completed" ? `全${n}巻` : `既刊${n}巻`;
+}
+
+/** キャッチが無い本の吹き出しのコマ = 書誌から言えることだけのナレーション(作らない・推測しない) */
+export function komaNarration(
+  m: Pick<MangaListItem, "year_started" | "magazine" | "status" | "max_edition_volumes" | "total_volumes">,
+  magName: (key: string) => string = (k) => k,
+): string {
+  const head = m.year_started
+    ? m.magazine
+      ? `${m.year_started}年、「${magName(m.magazine)}」で連載開始。`
+      : `${m.year_started}年に始まった作品。`
+    : m.magazine
+      ? `「${magName(m.magazine)}」の作品。`
+      : "";
+  const v = komaVolumes(m);
+  return `${head}${v ? `${v}。` : ""}`;
+}

@@ -35,6 +35,10 @@ import {
   themeIslands,
   narrowCounts,
   narrowUnit,
+  komaCatchSize,
+  komaNarration,
+  komaTitleSize,
+  komaVolumes,
 } from "./compass";
 
 function book(slug: string, o: Partial<MangaListItem> = {}): MangaListItem {
@@ -677,5 +681,30 @@ describe("組み替えの段 = 残したジャンルにいくつ当てはまる�
     expect(c.total).toBe(2);
     expect(Object.fromEntries(c.genres)).toEqual({ adventure: 1, historical: 1 });
     expect(Object.fromEntries(c.themes)).toEqual({ 剣劇: 1 });
+  });
+});
+
+describe("真ん中の本のコマ割り(案6)の判断", () => {
+  it("題名は短いほど大きく(長題は小さく)・吹き出しはキャッチが長いほど小さく", () => {
+    expect(komaTitleSize("AKIRA")).toBe(28);
+    expect(komaTitleSize("ブラッククローバー")).toBe(23);
+    expect(komaTitleSize("転生したらスライムだった件")).toBe(19);
+    expect(komaTitleSize("「お前ごときが魔王に勝てると思うな」と勇者パーティを追放されたので、王都で気ままに暮らしたい")).toBe(13);
+    expect(komaCatchSize("短いキャッチ")).toBe(12.5);
+    expect(komaCatchSize("あ".repeat(90))).toBe(10.5);
+  });
+
+  it("巻数: 完結=全N巻・連載中=既刊N巻(いちばん長い版)・0巻は出さない", () => {
+    expect(komaVolumes({ status: "completed", max_edition_volumes: 38, total_volumes: 40 })).toBe("全38巻");
+    expect(komaVolumes({ status: "ongoing", max_edition_volumes: 12, total_volumes: 12 })).toBe("既刊12巻");
+    expect(komaVolumes({ status: "ongoing", max_edition_volumes: 0, total_volumes: 0 })).toBeNull();
+  });
+
+  it("キャッチが無い本のナレーション = 書誌から言えることだけ(掲載誌が無ければ言わない)", () => {
+    const mag = (k: string) => (k === "weekly-shonen-jump" ? "週刊少年ジャンプ" : k);
+    expect(komaNarration({ year_started: 2015, magazine: "weekly-shonen-jump", status: "completed", max_edition_volumes: 38, total_volumes: 38 }, mag)).toBe(
+      "2015年、「週刊少年ジャンプ」で連載開始。全38巻。",
+    );
+    expect(komaNarration({ year_started: 1999, magazine: null, status: "ongoing", max_edition_volumes: 0, total_volumes: 0 })).toBe("1999年に始まった作品。");
   });
 });

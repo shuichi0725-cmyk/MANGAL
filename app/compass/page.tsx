@@ -34,5 +34,7 @@ export default function CompassPage() {
   const magazines = Object.fromEntries(masters.magazines.map((m) => [m.key, m.name]));
   // ジャンル名(周りの本のラベル「歴史・時代劇」用・2026-09-30)
   const genres = Object.fromEntries(masters.genres.map((g) => [g.key, g.name]));
-  return <MagicCompass magazines={magazines} genres={genres} />;
+  // 分野名(少年・青年…・真ん中の本のコマ割り用・2026-10-06)。 166B
+  const demographics = Object.fromEntries(masters.demographics.map((d) => [d.key, d.name]));
+  return <MagicCompass magazines={magazines} genres={genres} demographics={demographics} />;
 }
