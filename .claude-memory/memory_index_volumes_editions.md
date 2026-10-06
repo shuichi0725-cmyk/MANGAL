@@ -65,3 +65,4 @@ metadata:
 - [電子のみの巻=札](ebook_only_volumes_mechanism.md)
 - [固定頁は新刊が出ない(#35)](frozen_page_new_volumes.md)
 - [旧作の日付が後年刷に化ける](old_work_reprint_date_class.md)
+- [canonicalのISBN連番採番は後年ムック化で誤る(ボルト&ナット)](canonical_isbn_sequence_renumber_trap.md)
