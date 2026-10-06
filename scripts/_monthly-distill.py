@@ -749,6 +749,10 @@ DETECTORS = [
     #   巻を固定した頁は、種2にも楽天キャッシュにも無い新刊が永久に出ない(#27第2部は種2の続巻しか見ない)。
     #   楽天 live で「題+次の巻番号」を引く=約25分(1,200頁)= heavy。 報告のみ(足すのは1件ずつ確かめてから)。
     ("frozen-page-new-volumes", ["_audit-frozen-page-new-volumes.py"], "frozen-page-new-volumes.tsv", True),
+    # ★拾ったのに頁に無い(カクリキ2型 / 7/24種4全消し型 2026-10-06): 種4 の git 全版に一度でも載った ISBN と
+    #   楽天予約 harvest のうち、今どの頁にも種2/種4/除外簿にも無いもの。 isbn-loss は連続2回の差しか見ず、
+    #   巻抜け監査は途中の欠けしか見ない=末尾巻の黙った消失が誰にも見えなかった。 ローカルのみ(git 全版はキャッシュ)。
+    ("harvested-not-on-page", ["_audit-harvested-not-on-page.py"], "harvested-not-on-page.tsv", False),
 ]
 
 

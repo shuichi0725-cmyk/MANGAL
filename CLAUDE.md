@@ -101,6 +101,7 @@
 | 33 | 同一slugを名乗るファイル複数層 (白と黒型) | `scripts/_audit-duplicate-slug-files.py` | duplicate-slug-files.tsv | **0組**を確認。★#19では見えない(索引をby_slugで畳むため)=ファイル実体を走査。判定=`promote --only`のtotal |
 | 34 | 源(SRC)なし頁層 | `scripts/_audit-orphan-source-pages.py` | orphan-source-pages.tsv | **件数の増加**。源が無い頁は次のフルpromoteで**公開中のまま黙って消える**。復元は源stub(_skey=頁ISBNの種2逆引き)だが★親シリーズを指すと別頁と重複 |
 | 35 | 固定頁の新刊取りこぼし層 (SHIORI EXPERIENCE型) | `scripts/_audit-frozen-page-new-volumes.py` | frozen-page-new-volumes.tsv | ★heavy(楽天live)。手で巻を固定した頁(overrides/canonical)に出ていない新刊。足すのは1件ずつ確かめて=overridesは巻の並び/canonicalは本体へ |
+| 36 | 拾ったのに頁に無い層 (カクリキ2型・7/24種4全消し型) | `scripts/_audit-harvested-not-on-page.py` | harvested-not-on-page.tsv | ★LOST/NO_PAGE/HARVEST の新規増加。種4の全版・楽天予約・予約頁seedに一度来た巻が頁に無い(isbn-lossは連続2回の差、巻抜けは途中欠けしか見ない)。確認済みは -ack.jsonl |
 
 - 既知の例外型: 再登録の別 ID 二重化 / MADB 形式変更 (= タグ消失・年→巻番号) / 成年誤 flag (= 新レーベル未カバー) / 雑誌漏れ (= cm105 凍結) / 巻番号水増し (= 下=3型)。
 
