@@ -1,25 +1,9491 @@
 {
  "generated_for": "data/manga.v2",
- "generated_at": "2026-07-02",
- "pages": 66827,
- "pages_no_holes": 914,
+ "generated_at": "2026-10-06",
+ "pages": 69515,
+ "pages_no_holes": 3271,
  "by_field": {
-  "release_date_month_only": 54707,
-  "magazine": 52862,
-  "catch": 38943,
-  "synopsis": 36313,
-  "anilist_unmatched": 31661,
-  "alt_title_en": 28364,
-  "cover_all_missing": 11084,
-  "synonyms_japanese": 3818,
-  "author_kana_missing": 3212,
-  "genre_other": 929,
-  "author_unknown": 92,
-  "demographic_other": 50
+  "magazine": 55303,
+  "anilist_unmatched": 34015,
+  "alt_title_en": 30949,
+  "release_date_month_only": 30555,
+  "synopsis": 29825,
+  "catch": 22549,
+  "cover_all_missing": 10812,
+  "author_kana_missing": 6587,
+  "synonyms_japanese": 3868,
+  "demographic": 1358,
+  "genres": 1008,
+  "author_unknown": 89
  },
  "by_severity": {
-  "T2": 257752,
-  "T1": 4283
+  "T2": 217876,
+  "T1": 6676,
+  "T0": 2366
  },
- "t0_blockers": []
+ "t0_blockers": [
+  {
+   "slug": "1-nen-kagiri-no-keiyaku-kon-koushaku-sama-no-dekiai-tsuki",
+   "field": "demographic"
+  },
+  {
+   "slug": "1-noshitsuketokenkou",
+   "field": "genres"
+  },
+  {
+   "slug": "18-koi",
+   "field": "genres"
+  },
+  {
+   "slug": "21-seiki-no-tame-no-azuma-hideo",
+   "field": "genres"
+  },
+  {
+   "slug": "3-dome-no-jinsei-wa-wasuresararete-ita-oujo-sama-deshita",
+   "field": "demographic"
+  },
+  {
+   "slug": "6-banme-no-sefure-da-kedo-isshoubun-no-omoide-ga-dekitakara-mou-juubun",
+   "field": "demographic"
+  },
+  {
+   "slug": "a-akuma-chan",
+   "field": "genres"
+  },
+  {
+   "slug": "aatsu-megamisamatsu-colours",
+   "field": "genres"
+  },
+  {
+   "slug": "action-poozu-5000",
+   "field": "genres"
+  },
+  {
+   "slug": "addict",
+   "field": "genres"
+  },
+  {
+   "slug": "ai-aoi2026",
+   "field": "demographic"
+  },
+  {
+   "slug": "ai-aoi2026",
+   "field": "genres"
+  },
+  {
+   "slug": "ai-no-kiwami",
+   "field": "demographic"
+  },
+  {
+   "slug": "ai-no-kiwami",
+   "field": "genres"
+  },
+  {
+   "slug": "ai-wa-iranai-koi-sasete-yo",
+   "field": "demographic"
+  },
+  {
+   "slug": "ai-wa-jokyoku-ni-hajimatte",
+   "field": "demographic"
+  },
+  {
+   "slug": "ai-wa-jokyoku-ni-hajimatte",
+   "field": "genres"
+  },
+  {
+   "slug": "aisarenai-hanayome-wa-shoya-o-hitori-de-sugosu",
+   "field": "demographic"
+  },
+  {
+   "slug": "aishisugiruniizuma",
+   "field": "genres"
+  },
+  {
+   "slug": "akazukin-chanto-ookamisan",
+   "field": "genres"
+  },
+  {
+   "slug": "akira-club",
+   "field": "genres"
+  },
+  {
+   "slug": "akogare-no-keijibu-ni-haizoku-saretara-joushi-ga-oni",
+   "field": "demographic"
+  },
+  {
+   "slug": "akujo-ga-ikinokoru-houhou-hakushaku-reijou-ni-tensei-shitakedo-shokei",
+   "field": "demographic"
+  },
+  {
+   "slug": "akujo-no-koohii-monogatari",
+   "field": "demographic"
+  },
+  {
+   "slug": "akujo-wa-rakude-saikoudesu-ga",
+   "field": "demographic"
+  },
+  {
+   "slug": "akujo-wa-rakude-saikoudesu-ga",
+   "field": "genres"
+  },
+  {
+   "slug": "akuma-ga-kitarite-fue-o-fuku-jet2002",
+   "field": "genres"
+  },
+  {
+   "slug": "akuma-to-ore-to",
+   "field": "demographic"
+  },
+  {
+   "slug": "akumade-konyaku-ninmu-desu",
+   "field": "demographic"
+  },
+  {
+   "slug": "akumade-konyaku-ninmu-desu",
+   "field": "genres"
+  },
+  {
+   "slug": "akumajo-grimoire",
+   "field": "genres"
+  },
+  {
+   "slug": "akuyaku-reijou-no-nariagari",
+   "field": "demographic"
+  },
+  {
+   "slug": "akuyaku-reijou-no-o-yome-sama",
+   "field": "demographic"
+  },
+  {
+   "slug": "akuyaku-reijou-no-shitsuke-ke-hou",
+   "field": "demographic"
+  },
+  {
+   "slug": "akuyaku-reijou-o-enjiteimasuga-oshiga-kirattekuremasen",
+   "field": "genres"
+  },
+  {
+   "slug": "all-colour-but-the-black",
+   "field": "genres"
+  },
+  {
+   "slug": "all-rezu-princess",
+   "field": "genres"
+  },
+  {
+   "slug": "amakuteaoi-unmeino",
+   "field": "genres"
+  },
+  {
+   "slug": "amaneojousama-no-iuko-to-ni-wa",
+   "field": "genres"
+  },
+  {
+   "slug": "ame-no-miko-wa-ryuuou-no-hatsukoi-ni-mau",
+   "field": "demographic"
+  },
+  {
+   "slug": "anata-ni-furetai-dake-nanoni",
+   "field": "genres"
+  },
+  {
+   "slug": "anata-ni-kamau-hima-wa-nai-to-iwareta-koushaku-reijou-no-shiawasesugi",
+   "field": "demographic"
+  },
+  {
+   "slug": "anata-no-tame-no-gekigateki-shouhinshuu",
+   "field": "genres"
+  },
+  {
+   "slug": "anata-o-korosu-tabi-ss",
+   "field": "demographic"
+  },
+  {
+   "slug": "anata-to-sayonara-surutame-no-houhou",
+   "field": "demographic"
+  },
+  {
+   "slug": "anna-karenina-igarashi1997",
+   "field": "genres"
+  },
+  {
+   "slug": "ano-saisekijou-de-hanataba-o",
+   "field": "genres"
+  },
+  {
+   "slug": "ano-yama-koete-michikusa-kutte-uchi-ni-kaerou",
+   "field": "demographic"
+  },
+  {
+   "slug": "anonemitchan",
+   "field": "genres"
+  },
+  {
+   "slug": "ansatsusha-wa-fushi-no-majo-o-koroshitaini",
+   "field": "demographic"
+  },
+  {
+   "slug": "antikamagia-wa-amari-ni-mo",
+   "field": "demographic"
+  },
+  {
+   "slug": "ao-mugi-to-hototogisu",
+   "field": "demographic"
+  },
+  {
+   "slug": "ao-no-mama-2500-km-kita-e",
+   "field": "demographic"
+  },
+  {
+   "slug": "ao-no-mama-2500-km-kita-e",
+   "field": "genres"
+  },
+  {
+   "slug": "ao-to-haru",
+   "field": "genres"
+  },
+  {
+   "slug": "ao-wa-mijikashi-koiseyo-otome",
+   "field": "demographic"
+  },
+  {
+   "slug": "ao-wa-mijikashi-koiseyo-otome",
+   "field": "genres"
+  },
+  {
+   "slug": "aoi-me-no-koneko-no-shaa-ko",
+   "field": "demographic"
+  },
+  {
+   "slug": "aoike-yasuko-kareinaru-genga-no-sekai",
+   "field": "genres"
+  },
+  {
+   "slug": "aotokun-no-shuuai-wa-amakuteomoi-to",
+   "field": "demographic"
+  },
+  {
+   "slug": "aotte-kita-no-wa-kimi-no-hou-desho",
+   "field": "demographic"
+  },
+  {
+   "slug": "arigatou-cheat",
+   "field": "genres"
+  },
+  {
+   "slug": "arufa-girai-no-omega-reisoku-ga-kamokuna-kishi-ni-dekiai-sarerumade",
+   "field": "demographic"
+  },
+  {
+   "slug": "ashiya-yamanote-odougu-geihinkan-comic",
+   "field": "genres"
+  },
+  {
+   "slug": "asufaruto-ni-aka",
+   "field": "genres"
+  },
+  {
+   "slug": "atama-ga-yokunaru-kotowaza-manga",
+   "field": "genres"
+  },
+  {
+   "slug": "atarashii-kokugo-ichinen",
+   "field": "genres"
+  },
+  {
+   "slug": "atashi-ni-otero-o-odorasete-goran",
+   "field": "demographic"
+  },
+  {
+   "slug": "atashinchi-super",
+   "field": "demographic"
+  },
+  {
+   "slug": "ayakashi-dungeon-haishinki",
+   "field": "demographic"
+  },
+  {
+   "slug": "ayakashi-dungeon-haishinki",
+   "field": "genres"
+  },
+  {
+   "slug": "azuma-hideo-shiidii-romu-world",
+   "field": "genres"
+  },
+  {
+   "slug": "azumichantokochouchan",
+   "field": "genres"
+  },
+  {
+   "slug": "b-q-the-fly-book",
+   "field": "genres"
+  },
+  {
+   "slug": "b-q-the-mouse-book",
+   "field": "genres"
+  },
+  {
+   "slug": "baito-saki-no-net-cafe-ga-naze-ka-class-no-bishoujotachi-no-tamariba",
+   "field": "demographic"
+  },
+  {
+   "slug": "baito-saki-no-net-cafe-ga-naze-ka-class-no-bishoujotachi-no-tamariba",
+   "field": "genres"
+  },
+  {
+   "slug": "bakunyuu-bunny-obasan",
+   "field": "genres"
+  },
+  {
+   "slug": "ban-wa-nidome-ni-hanahiraku-taishou-omegaverse",
+   "field": "demographic"
+  },
+  {
+   "slug": "bandage",
+   "field": "genres"
+  },
+  {
+   "slug": "bang-dream-yume-mita-arare-ara-bu-reeshon",
+   "field": "demographic"
+  },
+  {
+   "slug": "bannou-maryoku-no-aisare-reijou-wa-mahouseki-zaiku-o-kiwametai",
+   "field": "demographic"
+  },
+  {
+   "slug": "bannou-maryoku-no-aisare-reijou-wa-mahouseki-zaiku-o-kiwametai",
+   "field": "genres"
+  },
+  {
+   "slug": "bar-arisa-ka-e-youkoso",
+   "field": "genres"
+  },
+  {
+   "slug": "bashou-oku-no-hosomichi",
+   "field": "demographic"
+  },
+  {
+   "slug": "batsu-ichi-ningyo-koi-ni-oboreru",
+   "field": "genres"
+  },
+  {
+   "slug": "beisutaza",
+   "field": "demographic"
+  },
+  {
+   "slug": "bekkyo-kon",
+   "field": "genres"
+  },
+  {
+   "slug": "benri-neko-zakkaten-neko-no-te-dou",
+   "field": "genres"
+  },
+  {
+   "slug": "bessatsu-yosumi",
+   "field": "genres"
+  },
+  {
+   "slug": "bijin-gahou-hyper",
+   "field": "genres"
+  },
+  {
+   "slug": "binbou-reijou-wa-noroi-no-hakushaku-to-kekkon-shitai",
+   "field": "genres"
+  },
+  {
+   "slug": "birei-tensei",
+   "field": "demographic"
+  },
+  {
+   "slug": "bishon-enikki",
+   "field": "genres"
+  },
+  {
+   "slug": "bisuta-da-gigantessa",
+   "field": "genres"
+  },
+  {
+   "slug": "biyaku-o-motta-hannin-ni-natta-kekka-hatsukoi-no-hito-ni-semarareteima",
+   "field": "demographic"
+  },
+  {
+   "slug": "bl-sakka-wa-risou-no-seme-ni-saretai",
+   "field": "demographic"
+  },
+  {
+   "slug": "black-jack-bj-x-bj",
+   "field": "genres"
+  },
+  {
+   "slug": "black-jack-historical-color-pieces",
+   "field": "genres"
+  },
+  {
+   "slug": "black-jack-missing-pieces",
+   "field": "genres"
+  },
+  {
+   "slug": "black-jack-treasure-book",
+   "field": "genres"
+  },
+  {
+   "slug": "blades",
+   "field": "genres"
+  },
+  {
+   "slug": "blame-and-so-on",
+   "field": "genres"
+  },
+  {
+   "slug": "blanc-et-noir",
+   "field": "genres"
+  },
+  {
+   "slug": "blood-end-love",
+   "field": "demographic"
+  },
+  {
+   "slug": "blue-bird-reader",
+   "field": "demographic"
+  },
+  {
+   "slug": "blue-bird-reader",
+   "field": "genres"
+  },
+  {
+   "slug": "blue-print",
+   "field": "genres"
+  },
+  {
+   "slug": "boitaboine",
+   "field": "genres"
+  },
+  {
+   "slug": "boku-dake-no-daken-kun",
+   "field": "demographic"
+  },
+  {
+   "slug": "boku-dake-no-daken-kun",
+   "field": "genres"
+  },
+  {
+   "slug": "boku-dake-yomeru-kinsho-majutsu",
+   "field": "demographic"
+  },
+  {
+   "slug": "boku-no-kanojo-wa-kessen-heiki",
+   "field": "genres"
+  },
+  {
+   "slug": "boku-no-oshi-o-bl-sekai-kara-mamoritai",
+   "field": "demographic"
+  },
+  {
+   "slug": "boku-no-shokugyou-tekisei-ni-wa-jinken-ga-nakattarashii",
+   "field": "demographic"
+  },
+  {
+   "slug": "boku-to-kanojo-to-norimono-to",
+   "field": "genres"
+  },
+  {
+   "slug": "boku-wa-kimi-to-yume-o-miru",
+   "field": "demographic"
+  },
+  {
+   "slug": "boku-wa-youkai-ni-naritai",
+   "field": "genres"
+  },
+  {
+   "slug": "bokura-no-uchi",
+   "field": "genres"
+  },
+  {
+   "slug": "bokura-wa-koi-ni-ochiru-setogiwa-de",
+   "field": "demographic"
+  },
+  {
+   "slug": "bokutachi-wa-tada-no-osananajimi",
+   "field": "demographic"
+  },
+  {
+   "slug": "booto-girl",
+   "field": "demographic"
+  },
+  {
+   "slug": "botsuraku-hakushaku-reijou-wa-kazoku-o-yashinaitai",
+   "field": "demographic"
+  },
+  {
+   "slug": "botsuraku-reijou-no-akutou-sanka",
+   "field": "demographic"
+  },
+  {
+   "slug": "bouken-shinai-watashi-no-isekai-manual",
+   "field": "demographic"
+  },
+  {
+   "slug": "boukun-ouji-no-keiyakuhi",
+   "field": "demographic"
+  },
+  {
+   "slug": "boukunou-no-hatsukoi",
+   "field": "demographic"
+  },
+  {
+   "slug": "bounty-parade",
+   "field": "demographic"
+  },
+  {
+   "slug": "bounty-parade",
+   "field": "genres"
+  },
+  {
+   "slug": "bouya-to-akuma",
+   "field": "genres"
+  },
+  {
+   "slug": "bread-barber-shop",
+   "field": "genres"
+  },
+  {
+   "slug": "break-new-world",
+   "field": "demographic"
+  },
+  {
+   "slug": "bujutsu-no-meishudesu-ga-sokushitsu-ni-tensei-shimashita",
+   "field": "demographic"
+  },
+  {
+   "slug": "bunsuu-no-kakezan-warizan-ga-wakaru",
+   "field": "genres"
+  },
+  {
+   "slug": "burari-i-sekai-kemo-no-tabi",
+   "field": "demographic"
+  },
+  {
+   "slug": "butsurigata-shiromadoushi-no-kiseki",
+   "field": "demographic"
+  },
+  {
+   "slug": "butsurigata-shiromadoushi-no-kiseki",
+   "field": "genres"
+  },
+  {
+   "slug": "byoujaku-na-kizumono-reijou-no-himitsu-no-kekkon",
+   "field": "demographic"
+  },
+  {
+   "slug": "byouki-no-himitsu",
+   "field": "demographic"
+  },
+  {
+   "slug": "byouki-no-himitsu",
+   "field": "genres"
+  },
+  {
+   "slug": "camping-car-de-yuku-isekai-tsurezure-kikou",
+   "field": "demographic"
+  },
+  {
+   "slug": "card-game-de-sekai-ga-horobu-sekai-ni-tensei-shite-card-shop-o-kaiten-shitara",
+   "field": "demographic"
+  },
+  {
+   "slug": "cardfight-vanguard-full-fighters",
+   "field": "genres"
+  },
+  {
+   "slug": "chan-no-result",
+   "field": "demographic"
+  },
+  {
+   "slug": "channel-vampire",
+   "field": "demographic"
+  },
+  {
+   "slug": "channel-vampire",
+   "field": "genres"
+  },
+  {
+   "slug": "chanpon",
+   "field": "demographic"
+  },
+  {
+   "slug": "chi-chigiri-no-anasutashia",
+   "field": "demographic"
+  },
+  {
+   "slug": "chibimaruko-chan-no-heren-keraa",
+   "field": "genres"
+  },
+  {
+   "slug": "chibimaruko-chan-no-higuchi-ichiyou",
+   "field": "genres"
+  },
+  {
+   "slug": "chibimaruko-chan-no-nightingale",
+   "field": "genres"
+  },
+  {
+   "slug": "chigau-class-no-sukina-hito",
+   "field": "demographic"
+  },
+  {
+   "slug": "chikuwa-senki-ore-no-kawaii-de-chikyuu-shinryaku",
+   "field": "demographic"
+  },
+  {
+   "slug": "chikyuu-ga-owarurashii-node-ima-kara-kimi-o-kankin-shimasu",
+   "field": "demographic"
+  },
+  {
+   "slug": "chikyuu-no-himitsu-2006",
+   "field": "genres"
+  },
+  {
+   "slug": "chikyuu-no-himitsu",
+   "field": "genres"
+  },
+  {
+   "slug": "chimi-no-hanayome",
+   "field": "demographic"
+  },
+  {
+   "slug": "chirizokonai-no-hiraeth",
+   "field": "demographic"
+  },
+  {
+   "slug": "chirizokonai-no-hiraeth",
+   "field": "genres"
+  },
+  {
+   "slug": "chiropino-futari-no-hachamecha-yurutto-life",
+   "field": "demographic"
+  },
+  {
+   "slug": "chizu-dai-tanken",
+   "field": "genres"
+  },
+  {
+   "slug": "chizu-ni-nai-koi-o-shita",
+   "field": "demographic"
+  },
+  {
+   "slug": "chocola-2008",
+   "field": "genres"
+  },
+  {
+   "slug": "chotto-kii-te-yo-miyazawasan",
+   "field": "genres"
+  },
+  {
+   "slug": "chou-ana-riron",
+   "field": "demographic"
+  },
+  {
+   "slug": "choubibiri-na-haishinsha-demo-henshuu-shichaeba-kowakunaisetsu",
+   "field": "genres"
+  },
+  {
+   "slug": "choujin-rokku-hitoribocchi-no-princess",
+   "field": "genres"
+  },
+  {
+   "slug": "choujin-rokku-menuetto",
+   "field": "genres"
+  },
+  {
+   "slug": "choujin-rokku-miraaringu",
+   "field": "genres"
+  },
+  {
+   "slug": "choujinrokku-kadetto",
+   "field": "genres"
+  },
+  {
+   "slug": "choujinrokku-kouyanokishi",
+   "field": "genres"
+  },
+  {
+   "slug": "choujinrokku-kuranbeerunotsuki",
+   "field": "genres"
+  },
+  {
+   "slug": "choujinrokku-seishinnomon",
+   "field": "genres"
+  },
+  {
+   "slug": "choujou-michi-to-no-souguu",
+   "field": "demographic"
+  },
+  {
+   "slug": "choujou-michi-to-no-souguu",
+   "field": "genres"
+  },
+  {
+   "slug": "chuu-inu-dom-wa-higashi-shunin-o-amayakashitai",
+   "field": "demographic"
+  },
+  {
+   "slug": "chuu-inu-dom-wa-higashi-shunin-o-amayakashitai",
+   "field": "genres"
+  },
+  {
+   "slug": "cinderella-na-gitei-to-nigerarenai-watashi",
+   "field": "demographic"
+  },
+  {
+   "slug": "cinderella-no-kakushigoto",
+   "field": "demographic"
+  },
+  {
+   "slug": "cinderella-no-kakushigoto",
+   "field": "genres"
+  },
+  {
+   "slug": "cinderella-wa-nakanai",
+   "field": "demographic"
+  },
+  {
+   "slug": "clamp-premium-collection-angelic-layer",
+   "field": "demographic"
+  },
+  {
+   "slug": "class-goto-i-sekai-teni-shitara-boku-dake-yoru-no-keikenchi-de-level-up-suru-ken",
+   "field": "demographic"
+  },
+  {
+   "slug": "class-teni-de-kyoten-mahou-o-te-ni-iretara-harem-kyoudou-seikatsu-ga-hajimarimas",
+   "field": "demographic"
+  },
+  {
+   "slug": "class-teni-de-kyoten-mahou-o-te-ni-iretara-harem-kyoudou-seikatsu-ga-hajimarimas",
+   "field": "genres"
+  },
+  {
+   "slug": "comic-essay-jihei-spectrum-shou-to-no-jouzuna-tsukiaikata-nyuumon",
+   "field": "demographic"
+  },
+  {
+   "slug": "comic-essay-jihei-spectrum-shou-to-no-jouzuna-tsukiaikata-nyuumon",
+   "field": "genres"
+  },
+  {
+   "slug": "comic-furusato",
+   "field": "genres"
+  },
+  {
+   "slug": "comic-indeep",
+   "field": "genres"
+  },
+  {
+   "slug": "comic-manaberu",
+   "field": "genres"
+  },
+  {
+   "slug": "comic-shingenjitsu",
+   "field": "genres"
+  },
+  {
+   "slug": "comics-climax",
+   "field": "genres"
+  },
+  {
+   "slug": "confused-symmetry",
+   "field": "demographic"
+  },
+  {
+   "slug": "cover-girls",
+   "field": "genres"
+  },
+  {
+   "slug": "crash-berry-quartet",
+   "field": "demographic"
+  },
+  {
+   "slug": "crash-berry-quartet",
+   "field": "genres"
+  },
+  {
+   "slug": "crazy-high-maintenance",
+   "field": "demographic"
+  },
+  {
+   "slug": "crbr-crazy-raccoon-battle-royale",
+   "field": "demographic"
+  },
+  {
+   "slug": "crbr-crazy-raccoon-battle-royale",
+   "field": "genres"
+  },
+  {
+   "slug": "curry-o-tabe-te-level-up",
+   "field": "demographic"
+  },
+  {
+   "slug": "cutie-honey-nova",
+   "field": "demographic"
+  },
+  {
+   "slug": "cyborg-009-sono-sekai",
+   "field": "genres"
+  },
+  {
+   "slug": "dai-17-ouji-no-meidai",
+   "field": "demographic"
+  },
+  {
+   "slug": "dai-17-ouji-no-meidai",
+   "field": "genres"
+  },
+  {
+   "slug": "daijishin-no-nazo",
+   "field": "genres"
+  },
+  {
+   "slug": "daikirainamama-de-ii-de-su-no-dewatashi-to-kodomo-o-tsukutte-mo",
+   "field": "demographic"
+  },
+  {
+   "slug": "dainamikku-itte-shinan",
+   "field": "genres"
+  },
+  {
+   "slug": "daishizen-no-fushigi-50-no-himitsu",
+   "field": "genres"
+  },
+  {
+   "slug": "daishouwa-robot-sousasen",
+   "field": "genres"
+  },
+  {
+   "slug": "daisukina-kimi-e-negaukoto",
+   "field": "demographic"
+  },
+  {
+   "slug": "dakara-akuyaku-reisoku-no-koshiginchaku",
+   "field": "demographic"
+  },
+  {
+   "slug": "dakara-watashi-itta-wa-yo-ne",
+   "field": "demographic"
+  },
+  {
+   "slug": "dame-yuni",
+   "field": "genres"
+  },
+  {
+   "slug": "dameo-no-shiina-senpai-to-yabao-no-sasaki-kun-season2",
+   "field": "demographic"
+  },
+  {
+   "slug": "dameo-no-shiina-senpai-to-yabao-no-sasaki-kun-season2",
+   "field": "genres"
+  },
+  {
+   "slug": "danchi-kaidan-kaidan",
+   "field": "genres"
+  },
+  {
+   "slug": "danchi-no-futari",
+   "field": "demographic"
+  },
+  {
+   "slug": "danchou-aratame-kyouken-kishi-no-shitsukeyaku",
+   "field": "demographic"
+  },
+  {
+   "slug": "danjohi-bagu-tte-irunoni-akuyaku-tenseida-to-omoikondeiru-yatsu",
+   "field": "demographic"
+  },
+  {
+   "slug": "danna-no-douryou-ga-elf-kamo-shiremasen",
+   "field": "demographic"
+  },
+  {
+   "slug": "danna-sama-wa-taihen-isogashii-okata-na-no-desu",
+   "field": "demographic"
+  },
+  {
+   "slug": "dannasama-rien-wa-ok-desu-ga-slow-life-wa-keizoku-kiboudesu-migawari-oujo-wa-dok",
+   "field": "demographic"
+  },
+  {
+   "slug": "danzai-no-girishia-fugou",
+   "field": "demographic"
+  },
+  {
+   "slug": "danzai-sareru-koushaku-reijou-umarekawatte-rasu-bosu-no-ouhisama",
+   "field": "demographic"
+  },
+  {
+   "slug": "danzai-sareta-ateuma-ouji-to-aishitagari-kokuryuu-heika-no-shiawasena-kekkon",
+   "field": "demographic"
+  },
+  {
+   "slug": "dare-ga-komadori-nigashita-no",
+   "field": "demographic"
+  },
+  {
+   "slug": "dare-hitori-kaeranai-naraku-ni-otosareta-ossan",
+   "field": "demographic"
+  },
+  {
+   "slug": "dare-ka-ookamisan-no-shitsukekata-shirimasen-ka",
+   "field": "genres"
+  },
+  {
+   "slug": "dare-mo-scenario-doori-ni-ugoite-kurenain-desu-kedo",
+   "field": "demographic"
+  },
+  {
+   "slug": "dare-nokoto-mo-suki-janaihazu-ga-jiyuusugiru-ou-otouto-denka",
+   "field": "demographic"
+  },
+  {
+   "slug": "dark-souls-redemption",
+   "field": "demographic"
+  },
+  {
+   "slug": "darwin-ga-kita",
+   "field": "genres"
+  },
+  {
+   "slug": "datenshi-koumori-kun-no-junai",
+   "field": "demographic"
+  },
+  {
+   "slug": "datte-anata-ga-uwaki-o-shitakara",
+   "field": "demographic"
+  },
+  {
+   "slug": "deathless-bride",
+   "field": "demographic"
+  },
+  {
+   "slug": "deatte-3-pun-de-mimikaki",
+   "field": "demographic"
+  },
+  {
+   "slug": "deep-blue-abyss",
+   "field": "demographic"
+  },
+  {
+   "slug": "dekai-wa-chi",
+   "field": "demographic"
+  },
+  {
+   "slug": "dekiai-risou-shugi",
+   "field": "genres"
+  },
+  {
+   "slug": "dekiru-onna-no-ikinukijutsu",
+   "field": "demographic"
+  },
+  {
+   "slug": "dekisokonai-no-love-song-riff",
+   "field": "demographic"
+  },
+  {
+   "slug": "dekoboko-march",
+   "field": "demographic"
+  },
+  {
+   "slug": "dengeki-madara-kaizokubon",
+   "field": "genres"
+  },
+  {
+   "slug": "dengon-neko-ga-cafe-ni-imasu",
+   "field": "demographic"
+  },
+  {
+   "slug": "densetsu-no-akuyaku-reijou-rashii-node-honpen-ni-wa-denai-koto",
+   "field": "demographic"
+  },
+  {
+   "slug": "densetsu-no-akuyaku-reijou-rashii-node-honpen-ni-wa-denai-koto",
+   "field": "genres"
+  },
+  {
+   "slug": "der-mond",
+   "field": "genres"
+  },
+  {
+   "slug": "derikatesse",
+   "field": "demographic"
+  },
+  {
+   "slug": "derikatesse",
+   "field": "genres"
+  },
+  {
+   "slug": "devilman-no-sekai",
+   "field": "genres"
+  },
+  {
+   "slug": "diy",
+   "field": "genres"
+  },
+  {
+   "slug": "dn-angel-illustrations-feder",
+   "field": "genres"
+  },
+  {
+   "slug": "dna-angel",
+   "field": "genres"
+  },
+  {
+   "slug": "dokidoki-sasende-hatano-kun",
+   "field": "demographic"
+  },
+  {
+   "slug": "dokidoki-sasende-hatano-kun",
+   "field": "genres"
+  },
+  {
+   "slug": "doku-bara-no-majo-wa-shizuka-ni-kurashitai-noni",
+   "field": "demographic"
+  },
+  {
+   "slug": "doku-bara-no-majo-wa-shizuka-ni-kurashitai-noni",
+   "field": "genres"
+  },
+  {
+   "slug": "doku-o-kurawa-ba-sara-made",
+   "field": "demographic"
+  },
+  {
+   "slug": "doku-oya-gari",
+   "field": "genres"
+  },
+  {
+   "slug": "dokuiri-hime-no-yomeiri",
+   "field": "demographic"
+  },
+  {
+   "slug": "dokuiri-hime-no-yomeiri",
+   "field": "genres"
+  },
+  {
+   "slug": "dokusen-kyuukon",
+   "field": "genres"
+  },
+  {
+   "slug": "dokushin-kizoku",
+   "field": "genres"
+  },
+  {
+   "slug": "donkederiko",
+   "field": "genres"
+  },
+  {
+   "slug": "doom-satsujin-keisatsukan-no-danzairoku",
+   "field": "demographic"
+  },
+  {
+   "slug": "doraemon-fushigi-saiensu",
+   "field": "genres"
+  },
+  {
+   "slug": "doraemon-kagaku-world-special-chikyuu-no-houmotsu-koubutsu-to-houseki",
+   "field": "genres"
+  },
+  {
+   "slug": "doraemon-kagaku-world",
+   "field": "genres"
+  },
+  {
+   "slug": "doraemon-no-kokugo-omoshiro-kouryaku-shin-kaiteiban-kotowaza-jiten",
+   "field": "genres"
+  },
+  {
+   "slug": "doraemon-no-kokugo-omoshiro-kouryaku-surasura-sakubun-ga-kakeru",
+   "field": "genres"
+  },
+  {
+   "slug": "doraemon-shakai-world",
+   "field": "genres"
+  },
+  {
+   "slug": "doryoku-musou-no-tensei-exorcist",
+   "field": "demographic"
+  },
+  {
+   "slug": "doryokusuki-no-tensai-renkinjutsushi",
+   "field": "demographic"
+  },
+  {
+   "slug": "doubutsu-tachi",
+   "field": "demographic"
+  },
+  {
+   "slug": "doumo-uwasa-no-akujodegozaimasu-seijo-no-chikara-wa-sashiageru-node-watashi-wa-o",
+   "field": "demographic"
+  },
+  {
+   "slug": "dousenara-higan-made",
+   "field": "demographic"
+  },
+  {
+   "slug": "downer-na-kouhai-wa-sex-da-to",
+   "field": "demographic"
+  },
+  {
+   "slug": "dream-meikaazu-retsuten",
+   "field": "genres"
+  },
+  {
+   "slug": "dress-o-suteta-hanayome",
+   "field": "demographic"
+  },
+  {
+   "slug": "duel-masters-keikou-shoujo-neon-light-girl",
+   "field": "genres"
+  },
+  {
+   "slug": "duel-masters-rx",
+   "field": "genres"
+  },
+  {
+   "slug": "dungeon-gakuen-no-teihen-ni-tensei-shitakedo-naze-ka-ore-ni-wa-kouryak",
+   "field": "demographic"
+  },
+  {
+   "slug": "dungeon-master-madarame",
+   "field": "demographic"
+  },
+  {
+   "slug": "dungeon-ryoushu-no-gekokujou-ikinari-do-teihen-dungeon-no-master",
+   "field": "genres"
+  },
+  {
+   "slug": "e-guild-nai-de-yuiitsu-o-kiwameteru-ore-o-kubi-desu-ka-comic",
+   "field": "demographic"
+  },
+  {
+   "slug": "edozeni",
+   "field": "demographic"
+  },
+  {
+   "slug": "efu-manga-golden-retriever-no-come-to-ikura-to-hogo-neko-ume",
+   "field": "demographic"
+  },
+  {
+   "slug": "eien-no-tendai-daishi",
+   "field": "demographic"
+  },
+  {
+   "slug": "eireitachi-kara-shugyou-o-uketsuzuketa-saigo-no-eiyuu-wa-yagate-saikyou-e-to-nar",
+   "field": "demographic"
+  },
+  {
+   "slug": "eiyuu-shoujo-to-noroware-no-gin-hime",
+   "field": "genres"
+  },
+  {
+   "slug": "eizu-michi-e-no-chousen",
+   "field": "demographic"
+  },
+  {
+   "slug": "elf-ni-sodaterare-te-jinrui-yuiitsu-no-seireijutsushi-ni-narimashita",
+   "field": "genres"
+  },
+  {
+   "slug": "elf-wa-zettai-tokimekanai",
+   "field": "demographic"
+  },
+  {
+   "slug": "elf-wa-zettai-tokimekanai",
+   "field": "genres"
+  },
+  {
+   "slug": "elite-kun-wa-ai-ga-hoshii",
+   "field": "demographic"
+  },
+  {
+   "slug": "embalming-magic",
+   "field": "demographic"
+  },
+  {
+   "slug": "embalming-magic",
+   "field": "genres"
+  },
+  {
+   "slug": "end-mark-no-tsuzuki-kara",
+   "field": "demographic"
+  },
+  {
+   "slug": "enerugii-no-himitsu",
+   "field": "genres"
+  },
+  {
+   "slug": "engi-no-uragawa-o-mise-shimasu",
+   "field": "demographic"
+  },
+  {
+   "slug": "engideii-kara-tabe-tekure",
+   "field": "demographic"
+  },
+  {
+   "slug": "enmoku-noroi-no-akuyaku-reijou",
+   "field": "demographic"
+  },
+  {
+   "slug": "enueichikee-darwin-ga-kita",
+   "field": "genres"
+  },
+  {
+   "slug": "ereki-seed",
+   "field": "demographic"
+  },
+  {
+   "slug": "eriito-shain-wa-tanuki-kei-douki-o-kyou-mo-amaku-ijimetai",
+   "field": "demographic"
+  },
+  {
+   "slug": "espresso-cola-jidou-hattatsu-shien-momo-no-ki-school",
+   "field": "demographic"
+  },
+  {
+   "slug": "exist",
+   "field": "genres"
+  },
+  {
+   "slug": "faaburu-no-konchuuki",
+   "field": "genres"
+  },
+  {
+   "slug": "fairy-tail-re-fantasia",
+   "field": "genres"
+  },
+  {
+   "slug": "family-show",
+   "field": "demographic"
+  },
+  {
+   "slug": "fanfaration",
+   "field": "demographic"
+  },
+  {
+   "slug": "fanfaration",
+   "field": "genres"
+  },
+  {
+   "slug": "femme-fatale-to-akutagawa",
+   "field": "demographic"
+  },
+  {
+   "slug": "festa-nanase-aoi-20-shunen-anniversary-collection",
+   "field": "genres"
+  },
+  {
+   "slug": "first-blood-kiss",
+   "field": "demographic"
+  },
+  {
+   "slug": "fps-game-no-coach-o-hikiuketara-irainushi-ga-ninki-vtuber-no-bishoujo-datta",
+   "field": "demographic"
+  },
+  {
+   "slug": "fu-honidesu-ga-naruse-ni-to-saremashita",
+   "field": "demographic"
+  },
+  {
+   "slug": "fudanshi-kun-no-precious-days",
+   "field": "demographic"
+  },
+  {
+   "slug": "fuguushoku-tamer-na-sei-de-party-o-tsuihou-sareta-node",
+   "field": "demographic"
+  },
+  {
+   "slug": "fuhai-no-zakoshougun",
+   "field": "demographic"
+  },
+  {
+   "slug": "fuhai-no-zakoshougun",
+   "field": "genres"
+  },
+  {
+   "slug": "fuji-san-daifunka",
+   "field": "genres"
+  },
+  {
+   "slug": "fujiko-efu-fujio-no-sekai",
+   "field": "genres"
+  },
+  {
+   "slug": "fujimino-phoenix-roujinkai",
+   "field": "demographic"
+  },
+  {
+   "slug": "fujisakikun-wa-kyoumishinshin",
+   "field": "demographic"
+  },
+  {
+   "slug": "furinsaretsumafukushuushimasuwatashitoimoutodotchigayokatta",
+   "field": "genres"
+  },
+  {
+   "slug": "furushiro-hotel-no-seireishi",
+   "field": "demographic"
+  },
+  {
+   "slug": "fushi-no-dungeon-master",
+   "field": "demographic"
+  },
+  {
+   "slug": "futari-bocchi-no-shitsurakuen",
+   "field": "demographic"
+  },
+  {
+   "slug": "futari-hitokumi-ni-natte-kudasai",
+   "field": "demographic"
+  },
+  {
+   "slug": "futari-machi-aruki",
+   "field": "demographic"
+  },
+  {
+   "slug": "futaridakenohanakotoba",
+   "field": "genres"
+  },
+  {
+   "slug": "futei-no-orinpia",
+   "field": "genres"
+  },
+  {
+   "slug": "fuufu-ga-ryou-omoi-ni-naru-houhou",
+   "field": "demographic"
+  },
+  {
+   "slug": "gacha-yuusha-no-story-quest",
+   "field": "demographic"
+  },
+  {
+   "slug": "gachi-koi-sase-te-yo-sefuresama",
+   "field": "demographic"
+  },
+  {
+   "slug": "gaikotsu-kishisama-tadaima-i-sekai-e-o-dekakechuu-yorimichihen",
+   "field": "demographic"
+  },
+  {
+   "slug": "gaishou-no-shigoto-ni-koi-wa-fukumaremasu-ka",
+   "field": "demographic"
+  },
+  {
+   "slug": "gakeppuchi-reijou-wa-rasu-bosu-to-kettaku-suru",
+   "field": "demographic"
+  },
+  {
+   "slug": "gakuen-ouji-wa-ore-no-tonari-de-seishun-shitai",
+   "field": "demographic"
+  },
+  {
+   "slug": "gakuen-ouji-wa-ore-no-tonari-de-seishun-shitai",
+   "field": "genres"
+  },
+  {
+   "slug": "gakumon-no-susume",
+   "field": "demographic"
+  },
+  {
+   "slug": "gakushuu-comic-sengoku-no-bushou",
+   "field": "demographic"
+  },
+  {
+   "slug": "galaxy-puchan",
+   "field": "demographic"
+  },
+  {
+   "slug": "gaman-shinai-de-furete-mina-yo",
+   "field": "demographic"
+  },
+  {
+   "slug": "game-center-no-kokoro",
+   "field": "genres"
+  },
+  {
+   "slug": "game-sekai-no-mobu-akuyaku-ni-tensei-shitanode-rasu-bosu-o-mezashitemi",
+   "field": "genres"
+  },
+  {
+   "slug": "gan-bare-jinsei-isshuume-reijouchan",
+   "field": "demographic"
+  },
+  {
+   "slug": "ganseki-otome-to-koishi-chan",
+   "field": "demographic"
+  },
+  {
+   "slug": "gap-no-aru-joshi-futari-ga-yuri-na-hanashi",
+   "field": "demographic"
+  },
+  {
+   "slug": "gap-no-aru-joshi-futari-ga-yuri-na-hanashi",
+   "field": "genres"
+  },
+  {
+   "slug": "gaps-cosset",
+   "field": "demographic"
+  },
+  {
+   "slug": "garanonogarajou",
+   "field": "demographic"
+  },
+  {
+   "slug": "garanonogarajou",
+   "field": "genres"
+  },
+  {
+   "slug": "garden-in-the-closet",
+   "field": "demographic"
+  },
+  {
+   "slug": "garfield",
+   "field": "demographic"
+  },
+  {
+   "slug": "gate-season2",
+   "field": "demographic"
+  },
+  {
+   "slug": "gemis-gemisuu",
+   "field": "demographic"
+  },
+  {
+   "slug": "gemis-gemisuu",
+   "field": "genres"
+  },
+  {
+   "slug": "genga-otomo-katsuhiro-original-pictures",
+   "field": "genres"
+  },
+  {
+   "slug": "genshou-x",
+   "field": "demographic"
+  },
+  {
+   "slug": "getter-robo-zensho",
+   "field": "genres"
+  },
+  {
+   "slug": "gevaudan-toiu-kemono",
+   "field": "demographic"
+  },
+  {
+   "slug": "ghost-kyacchaazu",
+   "field": "genres"
+  },
+  {
+   "slug": "gigant-mineo2026",
+   "field": "demographic"
+  },
+  {
+   "slug": "gikei-vampire-wa-doku-no-otome-o-kakoikomu",
+   "field": "demographic"
+  },
+  {
+   "slug": "ginba",
+   "field": "genres"
+  },
+  {
+   "slug": "girls-error-kodamanaoko-tan-henshuu",
+   "field": "genres"
+  },
+  {
+   "slug": "gisouke-no-ichizoku",
+   "field": "demographic"
+  },
+  {
+   "slug": "gitei-o-shiitagete-korosareru-unmei-no-akuyaku-reijou-wa-nazeka-kare",
+   "field": "demographic"
+  },
+  {
+   "slug": "glass-no-chikyuu-o-sukue",
+   "field": "genres"
+  },
+  {
+   "slug": "go-houbi-wa-koi-to-choukyou-no-hajimaridesu",
+   "field": "demographic"
+  },
+  {
+   "slug": "godzilla-manga-collection-1954-58",
+   "field": "genres"
+  },
+  {
+   "slug": "gofun-no-ace",
+   "field": "demographic"
+  },
+  {
+   "slug": "gofun-no-ace",
+   "field": "genres"
+  },
+  {
+   "slug": "gohan-zame",
+   "field": "demographic"
+  },
+  {
+   "slug": "goji",
+   "field": "demographic"
+  },
+  {
+   "slug": "gokeiyakunisakidachimashite",
+   "field": "genres"
+  },
+  {
+   "slug": "goku-mahou-shoujo",
+   "field": "demographic"
+  },
+  {
+   "slug": "gokuaku-reijou-no-kanchigai-kyuukokuki",
+   "field": "demographic"
+  },
+  {
+   "slug": "gokudou-reijou-neko-o-hirou",
+   "field": "genres"
+  },
+  {
+   "slug": "gokujoukishidanchounosekkusutoreeningu-sonokyodaisugiruaisubeteuke",
+   "field": "genres"
+  },
+  {
+   "slug": "gokuto-jihen-shuui-hanashi-akujiki",
+   "field": "demographic"
+  },
+  {
+   "slug": "gomibakogurashi-no-seijosama",
+   "field": "demographic"
+  },
+  {
+   "slug": "gorilla",
+   "field": "genres"
+  },
+  {
+   "slug": "gotousenseitoinishienotsuno",
+   "field": "genres"
+  },
+  {
+   "slug": "gourmet-keibu-no-bishoku-sousa",
+   "field": "demographic"
+  },
+  {
+   "slug": "gozen-5-ji-no-rekoodo",
+   "field": "demographic"
+  },
+  {
+   "slug": "gozenreiji-no-kitchen-kaa",
+   "field": "demographic"
+  },
+  {
+   "slug": "gozenreiji-no-kitchen-kaa",
+   "field": "genres"
+  },
+  {
+   "slug": "green-boy-tashiroyumiya2026",
+   "field": "demographic"
+  },
+  {
+   "slug": "guild-no-uketsukejou-wa-teiji-agari-no-yume-o-miru",
+   "field": "demographic"
+  },
+  {
+   "slug": "guree-zoon-no-mahoushoujo",
+   "field": "demographic"
+  },
+  {
+   "slug": "guuzen-tasuketa-bishoujo-ga-naze-ka-ore-ni-natsuiteshimatta-ken-nitsuite",
+   "field": "demographic"
+  },
+  {
+   "slug": "guyabano-holiday",
+   "field": "demographic"
+  },
+  {
+   "slug": "gyakkou-shita-moto-akuyaku-reijou-seikaku-no-warusa-wa-naosazu-shokei-end-kaihi-",
+   "field": "demographic"
+  },
+  {
+   "slug": "gyakkouakujohayarukotogaoosugiru",
+   "field": "genres"
+  },
+  {
+   "slug": "gyakuten-reijou-sheriaane",
+   "field": "demographic"
+  },
+  {
+   "slug": "gyara-nomi-joshi-to-ramen-ojisan",
+   "field": "demographic"
+  },
+  {
+   "slug": "gyara-nomi-joshi-to-ramen-ojisan",
+   "field": "genres"
+  },
+  {
+   "slug": "gyaru-shinkan-wa-rizare-ga-darui",
+   "field": "demographic"
+  },
+  {
+   "slug": "gyaru-yome-no-himitsu",
+   "field": "demographic"
+  },
+  {
+   "slug": "gyoutokueki-gesha",
+   "field": "genres"
+  },
+  {
+   "slug": "habsburg-ka-no-kareinaru-junan",
+   "field": "demographic"
+  },
+  {
+   "slug": "hachibyou-de-tobe",
+   "field": "demographic"
+  },
+  {
+   "slug": "hachibyou-de-tobe",
+   "field": "genres"
+  },
+  {
+   "slug": "hachimitsu-ni-ama-ga-mi",
+   "field": "demographic"
+  },
+  {
+   "slug": "hachimitsu-reijou-no-keiyaku-kekkon-yatoware-tsuma-ni-amai-koi-wa-fuyoudesu-volu",
+   "field": "demographic"
+  },
+  {
+   "slug": "hachimitsu-to-clover-irasutoreeshonzu",
+   "field": "genres"
+  },
+  {
+   "slug": "haiiro-to-aka",
+   "field": "demographic"
+  },
+  {
+   "slug": "haikaburi-oji-san-to-nekoouji",
+   "field": "genres"
+  },
+  {
+   "slug": "haikei-catalog-mangaka-animeetaa-hikkei-no-shashin-shiryoushuu",
+   "field": "demographic"
+  },
+  {
+   "slug": "hajirau-hodo-nishitagatte",
+   "field": "demographic"
+  },
+  {
+   "slug": "hajirau-hodo-nishitagatte",
+   "field": "genres"
+  },
+  {
+   "slug": "hakidame-to-isha",
+   "field": "demographic"
+  },
+  {
+   "slug": "haku-mizuho-miya-no-o-ryouriban",
+   "field": "demographic"
+  },
+  {
+   "slug": "haku-mizuho-miya-no-o-ryouriban",
+   "field": "genres"
+  },
+  {
+   "slug": "hakugin-shiro-no-shitsukekata",
+   "field": "genres"
+  },
+  {
+   "slug": "hakusen-niten-ten",
+   "field": "demographic"
+  },
+  {
+   "slug": "hakushaku-ni-kawareta-hanayome",
+   "field": "demographic"
+  },
+  {
+   "slug": "hakushaku-to-kioku-o-nakushita-musume",
+   "field": "demographic"
+  },
+  {
+   "slug": "hal-formula",
+   "field": "genres"
+  },
+  {
+   "slug": "hamburger-taizen",
+   "field": "demographic"
+  },
+  {
+   "slug": "hametsu-o-hikaeta-akuyaku-reijou-ga-muri-shite-heroine-o-enjita-kekka",
+   "field": "demographic"
+  },
+  {
+   "slug": "hana-mo-sakari-no-o-toshigoro",
+   "field": "demographic"
+  },
+  {
+   "slug": "hana-taba",
+   "field": "demographic"
+  },
+  {
+   "slug": "hana-to-kurage-to-refrain",
+   "field": "demographic"
+  },
+  {
+   "slug": "hana-to-kurage-to-refrain",
+   "field": "genres"
+  },
+  {
+   "slug": "hanamaru-hamster-hoobukuro-selection",
+   "field": "genres"
+  },
+  {
+   "slug": "hanayome-wa-ibara-no-mori-de-madoromu",
+   "field": "demographic"
+  },
+  {
+   "slug": "hanayome-wa-nise-no-chikai-ni-namidasuru",
+   "field": "demographic"
+  },
+  {
+   "slug": "hanayome-wa-shiroi-himitsu-o-yadosu",
+   "field": "demographic"
+  },
+  {
+   "slug": "hangyakusha-toshite-oukoku-de-shokei-sareta-kakure-saikyou-kishi",
+   "field": "demographic"
+  },
+  {
+   "slug": "hankyuu-ensen-kaidan",
+   "field": "demographic"
+  },
+  {
+   "slug": "hannya-shingyou",
+   "field": "demographic"
+  },
+  {
+   "slug": "haou-no-koukyuu",
+   "field": "demographic"
+  },
+  {
+   "slug": "haretahi-no-dress-koodo",
+   "field": "genres"
+  },
+  {
+   "slug": "haribote-seijo-wa-youjo-ni-nari-ai-no-omoi-kamisama-to-tsuihou-life",
+   "field": "demographic"
+  },
+  {
+   "slug": "hariko-no-hanayome",
+   "field": "demographic"
+  },
+  {
+   "slug": "harinezumi-to-contrast",
+   "field": "demographic"
+  },
+  {
+   "slug": "haru-koi-reset",
+   "field": "genres"
+  },
+  {
+   "slug": "haru-o-daite-ita-daily",
+   "field": "demographic"
+  },
+  {
+   "slug": "haru-o-daite-ita-daily",
+   "field": "genres"
+  },
+  {
+   "slug": "haru-to-tarare-ba",
+   "field": "demographic"
+  },
+  {
+   "slug": "haru-to-tarare-ba",
+   "field": "genres"
+  },
+  {
+   "slug": "haru-wa-kumo-noue",
+   "field": "genres"
+  },
+  {
+   "slug": "haruno-san-no-koto-nante-zenzen-suki",
+   "field": "genres"
+  },
+  {
+   "slug": "hasegawa-machiko-omoide-kinenkan",
+   "field": "genres"
+  },
+  {
+   "slug": "hashire-merosu-2010",
+   "field": "demographic"
+  },
+  {
+   "slug": "hashire-merosu-fugaku-hyakkei",
+   "field": "demographic"
+  },
+  {
+   "slug": "hata-sensei-to-kaji-sensei",
+   "field": "demographic"
+  },
+  {
+   "slug": "hatsu-nagi-himeriumu",
+   "field": "genres"
+  },
+  {
+   "slug": "hatsuki-kyou-art-works",
+   "field": "genres"
+  },
+  {
+   "slug": "hatsukoi-aite-no-oujo-no-shinpai-bakari-shi-teiru-konyakusha-to-sukkiri-sayonara",
+   "field": "demographic"
+  },
+  {
+   "slug": "hatsukoi-aite-no-oujo-no-shinpai-bakari-shi-teiru-konyakusha-to-sukkiri-sayonara",
+   "field": "genres"
+  },
+  {
+   "slug": "hatsukoi-ni-kuran-de",
+   "field": "demographic"
+  },
+  {
+   "slug": "hatsukoi-ni-kuran-de",
+   "field": "genres"
+  },
+  {
+   "slug": "hatsukoi-no-shuuen",
+   "field": "demographic"
+  },
+  {
+   "slug": "hatsukoi-no-shuuen",
+   "field": "genres"
+  },
+  {
+   "slug": "hatsukoi-reprise",
+   "field": "demographic"
+  },
+  {
+   "slug": "hatsukoi-reprise",
+   "field": "genres"
+  },
+  {
+   "slug": "hayakawa-ke-no-souzoku-anken",
+   "field": "demographic"
+  },
+  {
+   "slug": "hayakawa-ke-no-souzoku-anken",
+   "field": "genres"
+  },
+  {
+   "slug": "hayashida-yukke-karikoruka",
+   "field": "genres"
+  },
+  {
+   "slug": "hazure-skill-mochi-no-tensai-renkinjutsushi",
+   "field": "demographic"
+  },
+  {
+   "slug": "hazure-skill-omoidasu-de-kioku-o-torimodoshita-daikenja",
+   "field": "demographic"
+  },
+  {
+   "slug": "hazure-skill-renkin-koubou-de-hajimeru-dakkan-seikatsu",
+   "field": "demographic"
+  },
+  {
+   "slug": "hazure-skill-renkin-koubou-de-hajimeru-dakkan-seikatsu",
+   "field": "genres"
+  },
+  {
+   "slug": "hazure-yome-wa-saikyou-no-tensai-koushakusama-to-saikon-shimashita",
+   "field": "demographic"
+  },
+  {
+   "slug": "he-no-youna-jinsei",
+   "field": "genres"
+  },
+  {
+   "slug": "heisha-no-futari-wa-mada-misui-rashii",
+   "field": "demographic"
+  },
+  {
+   "slug": "hekiun-monogatari-onna-no-ore-ga-rei-houkai-no-danshikou-ni-haittara",
+   "field": "demographic"
+  },
+  {
+   "slug": "henai-end-stage",
+   "field": "demographic"
+  },
+  {
+   "slug": "henai-shijou-shugi",
+   "field": "genres"
+  },
+  {
+   "slug": "henkyou-keibi-zenshi-gin-no-iryuujio",
+   "field": "demographic"
+  },
+  {
+   "slug": "henkyou-kishidan-no-oryouri-gakari",
+   "field": "demographic"
+  },
+  {
+   "slug": "henkyou-ni-tsuihou-sarete-50-nen-no-daikenja",
+   "field": "demographic"
+  },
+  {
+   "slug": "henkyou-no-mura-no-eiyuu-42-sai-ni-shi-te-hajimete-mura-o-deru",
+   "field": "demographic"
+  },
+  {
+   "slug": "henkyou-no-tomodachi",
+   "field": "demographic"
+  },
+  {
+   "slug": "henkyou-ryoushu-no-ore-wa-akuyaku-reijou-toshite-tsuihou-sareta-yome-notame-taik",
+   "field": "demographic"
+  },
+  {
+   "slug": "heroine-ni-konyakusha-o-torarerumitainanode-akuyaku-reisoku",
+   "field": "demographic"
+  },
+  {
+   "slug": "hi-ga-nobori-nanohana-wa-saku",
+   "field": "genres"
+  },
+  {
+   "slug": "hi-no-nagori",
+   "field": "demographic"
+  },
+  {
+   "slug": "hi-no-uchidokoro-no-nai-reisoku-kara-konyaku-no-dashin",
+   "field": "demographic"
+  },
+  {
+   "slug": "hibi-neko-nikki",
+   "field": "genres"
+  },
+  {
+   "slug": "hida-mari-no-joufutachi",
+   "field": "demographic"
+  },
+  {
+   "slug": "hida-mari-no-joufutachi",
+   "field": "genres"
+  },
+  {
+   "slug": "hidarikiki-no-eren-hype",
+   "field": "demographic"
+  },
+  {
+   "slug": "hide-and-seek",
+   "field": "demographic"
+  },
+  {
+   "slug": "higashi-no-majo-no-ato-shi-matsu-7-nengo-no-unmei",
+   "field": "demographic"
+  },
+  {
+   "slug": "hihou-komyuryoku-0-otaku-shoujo",
+   "field": "demographic"
+  },
+  {
+   "slug": "hikagemono-de-mo-yarinaoshiteiidesuka",
+   "field": "demographic"
+  },
+  {
+   "slug": "hikari-meguri-matataite",
+   "field": "demographic"
+  },
+  {
+   "slug": "hikari-no-niwa-yomitaro2026",
+   "field": "demographic"
+  },
+  {
+   "slug": "hikikomori-mahoutsukai-to-saiai-no-deshi",
+   "field": "demographic"
+  },
+  {
+   "slug": "hikikomori-reijouna-noni-koori-no-henkyou-haku-no-hanayome-ni-erabareteshimatta",
+   "field": "demographic"
+  },
+  {
+   "slug": "himegoto-kakushigoto",
+   "field": "genres"
+  },
+  {
+   "slug": "himeochi-kaatenkooru",
+   "field": "demographic"
+  },
+  {
+   "slug": "himeyakana-koi-no-otozure",
+   "field": "demographic"
+  },
+  {
+   "slug": "himeyuritachi-no-okinawasen",
+   "field": "demographic"
+  },
+  {
+   "slug": "himitsu-de-aka-chan-o-undara-gouin-shachou-ga-dekiai-papa-ni-narimashita",
+   "field": "genres"
+  },
+  {
+   "slug": "hina-ni-wa-marena-erii",
+   "field": "demographic"
+  },
+  {
+   "slug": "hinachangaikiterunara",
+   "field": "genres"
+  },
+  {
+   "slug": "hinekure-koushaku-wa-noroware-otome-ni-kudokareru",
+   "field": "demographic"
+  },
+  {
+   "slug": "hinekure-koushaku-wa-noroware-otome-ni-kudokareru",
+   "field": "genres"
+  },
+  {
+   "slug": "hinikuya-majin-to-shinita-gari-no-shoujo",
+   "field": "demographic"
+  },
+  {
+   "slug": "hinkon-ryokou-ki",
+   "field": "genres"
+  },
+  {
+   "slug": "hino-matsuri-irasutoreeshonzu",
+   "field": "genres"
+  },
+  {
+   "slug": "hirahira-hira",
+   "field": "demographic"
+  },
+  {
+   "slug": "hirokaneryuu-kouhansei-wa-jinsei-tanoshindamon-gachi",
+   "field": "genres"
+  },
+  {
+   "slug": "hirotta-doreitachi-ga-tabidatte-haya-juunen-naze-ka-ore-ga-densetsu",
+   "field": "demographic"
+  },
+  {
+   "slug": "hirotta-koi-ga-nakita-gatteru",
+   "field": "demographic"
+  },
+  {
+   "slug": "hirotta-koinu-ga-cerberus-deshita",
+   "field": "demographic"
+  },
+  {
+   "slug": "hisabisa-ni-kenkou-shindan-o-uketara-saikyou-status-ni-natte-ita",
+   "field": "demographic"
+  },
+  {
+   "slug": "hitamuki-shojo-wa-shiritagari-torihikisaki-to-e-chi-na-kyoudou-kaihatsu",
+   "field": "demographic"
+  },
+  {
+   "slug": "hitamuki-shojo-wa-shiritagari-torihikisaki-to-e-chi-na-kyoudou-kaihatsu",
+   "field": "genres"
+  },
+  {
+   "slug": "hito-ka-kera-no-koi",
+   "field": "demographic"
+  },
+  {
+   "slug": "hito-ookami-to-elf",
+   "field": "demographic"
+  },
+  {
+   "slug": "hito-yonde-ikemen-reijou",
+   "field": "demographic"
+  },
+  {
+   "slug": "hitobito-o-kagenagara-sukutteiru-eiyuu-jitsu-wa-koushakuke-no-kuzu",
+   "field": "demographic"
+  },
+  {
+   "slug": "hitomi-big-love",
+   "field": "demographic"
+  },
+  {
+   "slug": "hitomi-gokuu-ron",
+   "field": "genres"
+  },
+  {
+   "slug": "hitomishiri-otome-to-oni-no-konyakusha",
+   "field": "demographic"
+  },
+  {
+   "slug": "hitori-ja-dekinai-omajinai",
+   "field": "demographic"
+  },
+  {
+   "slug": "hitori-ja-dekinai-omajinai",
+   "field": "genres"
+  },
+  {
+   "slug": "hitori-midesu",
+   "field": "demographic"
+  },
+  {
+   "slug": "hitsuihousha-tachi-niyoru-shinkou-seiryoku-hanpa-nee",
+   "field": "genres"
+  },
+  {
+   "slug": "hiyokotachi-no-koushin",
+   "field": "genres"
+  },
+  {
+   "slug": "hizamazukase-te-my-dog",
+   "field": "demographic"
+  },
+  {
+   "slug": "hodokenu-ito-no-musubikata",
+   "field": "demographic"
+  },
+  {
+   "slug": "hokenshitsu-to-futari",
+   "field": "demographic"
+  },
+  {
+   "slug": "hokenshitsu-to-futari",
+   "field": "genres"
+  },
+  {
+   "slug": "hokou-danshi",
+   "field": "demographic"
+  },
+  {
+   "slug": "hole-up-gamers",
+   "field": "genres"
+  },
+  {
+   "slug": "home-te-nade-te-ii-ko-tte",
+   "field": "demographic"
+  },
+  {
+   "slug": "home-te-nade-te-ii-ko-tte",
+   "field": "genres"
+  },
+  {
+   "slug": "hongiki-no-spica",
+   "field": "demographic"
+  },
+  {
+   "slug": "hongoukun-wa-chimeiteki-ni-shumi-ga-warui",
+   "field": "demographic"
+  },
+  {
+   "slug": "honjitsu-anata-o-aisuruno-o-yamemasu",
+   "field": "demographic"
+  },
+  {
+   "slug": "honsuki-no-gekokujou-hanneroore-no-kizokuin-gonensei-koi-shitemitai",
+   "field": "demographic"
+  },
+  {
+   "slug": "honto-wa-watashi-ga-iindesho",
+   "field": "demographic"
+  },
+  {
+   "slug": "honto-wa-watashi-ga-iindesho",
+   "field": "genres"
+  },
+  {
+   "slug": "hontouha-sefure-ni-wa-mukanai",
+   "field": "demographic"
+  },
+  {
+   "slug": "honzuki-no-gekokujou-ferdinand-no-yakata-nite",
+   "field": "demographic"
+  },
+  {
+   "slug": "honzuki-no-gekokujou-ferdinand-no-yakata-nite",
+   "field": "genres"
+  },
+  {
+   "slug": "hop-suteppushou-selection",
+   "field": "genres"
+  },
+  {
+   "slug": "hoshi-no-kyoushitsu",
+   "field": "demographic"
+  },
+  {
+   "slug": "hoshi-no-kyoushitsu",
+   "field": "genres"
+  },
+  {
+   "slug": "hoshigari-jouzu-no-love-call",
+   "field": "demographic"
+  },
+  {
+   "slug": "hotaru-no-yomeiri-gaiden",
+   "field": "demographic"
+  },
+  {
+   "slug": "hotaruna-you",
+   "field": "genres"
+  },
+  {
+   "slug": "hotokenokun-wa-hajimete-nokuse-ni",
+   "field": "demographic"
+  },
+  {
+   "slug": "houjou-tsukasa-20-gaka-20shuunen-kinen-irasutoreeshonzu",
+   "field": "genres"
+  },
+  {
+   "slug": "houkago-chrono-switch",
+   "field": "demographic"
+  },
+  {
+   "slug": "houkago-sex-guidance",
+   "field": "demographic"
+  },
+  {
+   "slug": "housekibako-ni-ai-o-tsumeyou",
+   "field": "demographic"
+  },
+  {
+   "slug": "hundred-note-coffin-robin",
+   "field": "demographic"
+  },
+  {
+   "slug": "hundred-note-coffin-robin",
+   "field": "genres"
+  },
+  {
+   "slug": "hundred-note-ugly-duck",
+   "field": "demographic"
+  },
+  {
+   "slug": "hunter-guild-no-ura-quest",
+   "field": "genres"
+  },
+  {
+   "slug": "hyakkiyakyou",
+   "field": "demographic"
+  },
+  {
+   "slug": "hyakkiyakyou",
+   "field": "genres"
+  },
+  {
+   "slug": "hyakumanbun-no-ichi-rukusu",
+   "field": "demographic"
+  },
+  {
+   "slug": "hyakumanbun-no-ichi-rukusu",
+   "field": "genres"
+  },
+  {
+   "slug": "hyouketsu-reijousama-o-follow-shitara-mechamecha-dekiai-sareteshimatta",
+   "field": "demographic"
+  },
+  {
+   "slug": "i-sekai-de-inmashi-harem",
+   "field": "demographic"
+  },
+  {
+   "slug": "i-sekai-de-oni-no-dorei-toshite-kawaigarareru-seikatsu",
+   "field": "demographic"
+  },
+  {
+   "slug": "i-sekai-de-otto-no-ai-wa-omoi-kedo-kawaii-kodomo-o-honobono-tanoshiku-sodatetai",
+   "field": "demographic"
+  },
+  {
+   "slug": "i-sekai-elf-mura-no-omawarisan",
+   "field": "demographic"
+  },
+  {
+   "slug": "i-sekai-fukushuu",
+   "field": "genres"
+  },
+  {
+   "slug": "i-sekai-guide-map",
+   "field": "genres"
+  },
+  {
+   "slug": "i-sekai-kaa-chan",
+   "field": "demographic"
+  },
+  {
+   "slug": "i-sekai-meikyuu-no-ooparts",
+   "field": "demographic"
+  },
+  {
+   "slug": "i-sekai-tensei-shita-moto-kyoushi-toshite-houkai-shita-majutsu-gakuen-o-sukuu",
+   "field": "demographic"
+  },
+  {
+   "slug": "i-sekai-tensei-shitara-aiken-besu-nohou-ga-tsuyokattanda-ga",
+   "field": "demographic"
+  },
+  {
+   "slug": "i-sekai-tensei-shitara-oshi-no-tekiyaku-no-maid-ni-narimashita",
+   "field": "demographic"
+  },
+  {
+   "slug": "i-sekaigaeri-no-saikyou-tamer-tsukai-ma-wa-osananajimi",
+   "field": "demographic"
+  },
+  {
+   "slug": "ibitsu-2020",
+   "field": "genres"
+  },
+  {
+   "slug": "ichi-kakeru",
+   "field": "demographic"
+  },
+  {
+   "slug": "ichi-kakeru",
+   "field": "genres"
+  },
+  {
+   "slug": "ichigun-danshi-wa-koishiteru",
+   "field": "demographic"
+  },
+  {
+   "slug": "ichijiku-to-otoshi-hanashi",
+   "field": "demographic"
+  },
+  {
+   "slug": "ichirinjiiko",
+   "field": "genres"
+  },
+  {
+   "slug": "ichizu-dekiai-sengen",
+   "field": "genres"
+  },
+  {
+   "slug": "idol-master-cinderella-girls-after-20",
+   "field": "demographic"
+  },
+  {
+   "slug": "idol-master-cinderella-girls-u-149",
+   "field": "demographic"
+  },
+  {
+   "slug": "iekatsu",
+   "field": "demographic"
+  },
+  {
+   "slug": "igaku-no-himitsu",
+   "field": "genres"
+  },
+  {
+   "slug": "igyou-no-ai-wa-hodokenai",
+   "field": "demographic"
+  },
+  {
+   "slug": "igyou-no-ai-wa-hodokenai",
+   "field": "genres"
+  },
+  {
+   "slug": "ihin-kaku-katariki",
+   "field": "demographic"
+  },
+  {
+   "slug": "ii-kara-damatte-unaji-dase",
+   "field": "demographic"
+  },
+  {
+   "slug": "ii-ko-ni-suru-kara-ore-ni-idakare-te",
+   "field": "demographic"
+  },
+  {
+   "slug": "ii-ko-ni-suru-kara-ore-ni-idakare-te",
+   "field": "genres"
+  },
+  {
+   "slug": "ijime-to-kaeru-to-mama-to-fukushuu",
+   "field": "demographic"
+  },
+  {
+   "slug": "ijime-to-kaeru-to-mama-to-fukushuu",
+   "field": "genres"
+  },
+  {
+   "slug": "ike-nai-otonarisan-wa-watashi-ni-shika-tatanai",
+   "field": "demographic"
+  },
+  {
+   "slug": "ike-nai-otonarisan-wa-watashi-ni-shika-tatanai",
+   "field": "genres"
+  },
+  {
+   "slug": "ikemen-joshi-demo-kawaii-heroine-ni-naremasuka",
+   "field": "demographic"
+  },
+  {
+   "slug": "ikemen-saikyou-boukensha-o-shitagae-te",
+   "field": "demographic"
+  },
+  {
+   "slug": "ikemen-sugimasu-natsumesan",
+   "field": "genres"
+  },
+  {
+   "slug": "ikinari-gyaru-tsuma-to-shoyadesu",
+   "field": "demographic"
+  },
+  {
+   "slug": "ikinari-singapore-kazoku-de-watashiboshi-shimashita",
+   "field": "demographic"
+  },
+  {
+   "slug": "ikinobiru-mahou",
+   "field": "genres"
+  },
+  {
+   "slug": "ikinokotta-oujo-no-egao-no-ura-ni-wa",
+   "field": "demographic"
+  },
+  {
+   "slug": "ikki-tousen-master-works",
+   "field": "genres"
+  },
+  {
+   "slug": "ikoku-no-kunshu-to-hana-uri-musume-ryakudatsuou-to-kokui-no-hanayome",
+   "field": "demographic"
+  },
+  {
+   "slug": "ikoku-no-kunshu-to-hana-uri-musume-ryakudatsuou-to-kokui-no-hanayome",
+   "field": "genres"
+  },
+  {
+   "slug": "illust-garage",
+   "field": "genres"
+  },
+  {
+   "slug": "im-watching-yuu",
+   "field": "demographic"
+  },
+  {
+   "slug": "ima-kara-koi-o-shiyou",
+   "field": "demographic"
+  },
+  {
+   "slug": "imagine-2020",
+   "field": "genres"
+  },
+  {
+   "slug": "imari-san-wa-tabi-jougo",
+   "field": "demographic"
+  },
+  {
+   "slug": "imasara-suki-toka-waraehen",
+   "field": "demographic"
+  },
+  {
+   "slug": "imashiro-takashi-kessaku-tanpenshuu",
+   "field": "genres"
+  },
+  {
+   "slug": "imigami-to-ikenie",
+   "field": "demographic"
+  },
+  {
+   "slug": "imigami-to-ikenie",
+   "field": "genres"
+  },
+  {
+   "slug": "imiou-no-hanayome",
+   "field": "demographic"
+  },
+  {
+   "slug": "imouto-chan-no-iutoori-ni-shite-itara-haou-ni-nacchatta-kedo-doushiyou",
+   "field": "demographic"
+  },
+  {
+   "slug": "imouto-chan-no-iutoori-ni-shite-itara-haou-ni-nacchatta-kedo-doushiyou",
+   "field": "genres"
+  },
+  {
+   "slug": "imouto-ni-kekkon-o-oshitsukerareta-techigai-no-tsumadesu-ga-itsunomanika-henkyou",
+   "field": "demographic"
+  },
+  {
+   "slug": "imouto-ni-nanimokamo-ubawaretara-shinyuu-ga-dekimashita",
+   "field": "demographic"
+  },
+  {
+   "slug": "imouto-no-haishin-ni-hairikondara-vtuber-atsukai-sareta-ken",
+   "field": "demographic"
+  },
+  {
+   "slug": "inaka-no-motenashi",
+   "field": "genres"
+  },
+  {
+   "slug": "initiate",
+   "field": "demographic"
+  },
+  {
+   "slug": "inochi-no-himitsu",
+   "field": "genres"
+  },
+  {
+   "slug": "inosensu-mesozzu-oshii-mamoru-enshutsu-note",
+   "field": "genres"
+  },
+  {
+   "slug": "inosensu-sousaku-note",
+   "field": "genres"
+  },
+  {
+   "slug": "inoue-santa",
+   "field": "genres"
+  },
+  {
+   "slug": "intai-no-yurutto-tairiku-oudan-ryokou",
+   "field": "demographic"
+  },
+  {
+   "slug": "inugamike-no-ichizoku-ikeuchi1984",
+   "field": "demographic"
+  },
+  {
+   "slug": "inugamike-no-ichizoku-ikeuchi1984",
+   "field": "genres"
+  },
+  {
+   "slug": "inugamike-no-ichizoku-jet1999",
+   "field": "demographic"
+  },
+  {
+   "slug": "irasuto-album-georgie",
+   "field": "genres"
+  },
+  {
+   "slug": "isekai-ajito",
+   "field": "demographic"
+  },
+  {
+   "slug": "isekai-de-wa-saioshi-ni-naritai",
+   "field": "demographic"
+  },
+  {
+   "slug": "isekai-esute",
+   "field": "demographic"
+  },
+  {
+   "slug": "isekai-esute",
+   "field": "genres"
+  },
+  {
+   "slug": "isekai-gaeri-no-kyoushitsu-de-maou-ga-koishite-gomennasai",
+   "field": "demographic"
+  },
+  {
+   "slug": "isekai-kara-tobasarete-kita-kantei-musume-wa-uranai-de-seikei-o-tateru",
+   "field": "demographic"
+  },
+  {
+   "slug": "isekai-kara-tobasarete-kita-kantei-musume-wa-uranai-de-seikei-o-tateru",
+   "field": "genres"
+  },
+  {
+   "slug": "isekai-ni-houchigee-riron-o-mochikondara-sekai-saikyou-ni-nareru-setsu",
+   "field": "demographic"
+  },
+  {
+   "slug": "isekai-no-ochibi-chan-wa-kyou-mo-nanika-o-tsukuridasu",
+   "field": "demographic"
+  },
+  {
+   "slug": "isekai-sushi-zanmai-maguro-daiou-kimura-shachoushoku-otsuujite-isekai",
+   "field": "demographic"
+  },
+  {
+   "slug": "isekaimeikyuu-no-my-gochanichi",
+   "field": "demographic"
+  },
+  {
+   "slug": "ishinomori-mangakan",
+   "field": "genres"
+  },
+  {
+   "slug": "ishinomori-shoutarou-no-monogatari",
+   "field": "genres"
+  },
+  {
+   "slug": "ishinomori-shoutarou-super-girls-comic-deluxe",
+   "field": "genres"
+  },
+  {
+   "slug": "isshou-doutei-no-mama-de-iitte-omotteta",
+   "field": "demographic"
+  },
+  {
+   "slug": "issunsaki-wa-ai-aru-dameo",
+   "field": "demographic"
+  },
+  {
+   "slug": "itaike-na-kimi-no-pale-blue",
+   "field": "demographic"
+  },
+  {
+   "slug": "itaike-na-muku-ni-yokoshima",
+   "field": "demographic"
+  },
+  {
+   "slug": "itaino-itai-no-koko-ni-ite",
+   "field": "demographic"
+  },
+  {
+   "slug": "itan-no-dark-healer-makoku-kanbu-toshite-jinrui-o-suitai-ni-michibiku-youdesu",
+   "field": "demographic"
+  },
+  {
+   "slug": "ito-to-yoroi",
+   "field": "genres"
+  },
+  {
+   "slug": "itomesan-wa-kyun-shitatoki-dake-kaigan-suru",
+   "field": "demographic"
+  },
+  {
+   "slug": "itoshi-koishiki-natsu-no-hana",
+   "field": "demographic"
+  },
+  {
+   "slug": "itoshi-tenante-meirei-ja-ie-nai",
+   "field": "demographic"
+  },
+  {
+   "slug": "itoshii-kimi-de-ippai-ni-shite",
+   "field": "demographic"
+  },
+  {
+   "slug": "itoshiikataki-o-o-to-suma-de",
+   "field": "demographic"
+  },
+  {
+   "slug": "itoshisa-to-kizu-o-dakishime-te",
+   "field": "demographic"
+  },
+  {
+   "slug": "itsuka-otogibanashi-ni-narumade",
+   "field": "genres"
+  },
+  {
+   "slug": "itsuwari-seijo-wa-nemuranai-kaizoku-no-idakimakurani-narimashita",
+   "field": "demographic"
+  },
+  {
+   "slug": "iwadate-mariko-irasutoreeshonzu",
+   "field": "genres"
+  },
+  {
+   "slug": "izure-keikoku-akujo-to-yobareru-kyuujo-wa-reitei-no-itoshihi",
+   "field": "demographic"
+  },
+  {
+   "slug": "ja-naihou-no-seijo-to-yuusha",
+   "field": "genres"
+  },
+  {
+   "slug": "jadou-season",
+   "field": "demographic"
+  },
+  {
+   "slug": "jadou-season",
+   "field": "genres"
+  },
+  {
+   "slug": "jakudan-boku-to-mora-zuma",
+   "field": "demographic"
+  },
+  {
+   "slug": "jakyou-taisen",
+   "field": "demographic"
+  },
+  {
+   "slug": "janku-shuuto",
+   "field": "genres"
+  },
+  {
+   "slug": "janomesan-wa-hohoemitai",
+   "field": "demographic"
+  },
+  {
+   "slug": "japanimeeshon-wa-naze-yabureru-ka",
+   "field": "genres"
+  },
+  {
+   "slug": "japon",
+   "field": "genres"
+  },
+  {
+   "slug": "jashin-ni-hirowareta-seijo-ga-mouichido-hatsukoi-o-torimodosumade",
+   "field": "demographic"
+  },
+  {
+   "slug": "jashin-no-chi-ga-nagareteiru-to-iware-shinsei-kyoukai-o-tsuihou-sareta-shinpu",
+   "field": "demographic"
+  },
+  {
+   "slug": "jashin-no-chi-ga-nagareteiru-to-iware-shinsei-kyoukai-o-tsuihou-sareta-shinpu",
+   "field": "genres"
+  },
+  {
+   "slug": "jesus-christ-1986",
+   "field": "demographic"
+  },
+  {
+   "slug": "ji-go-kumoyou",
+   "field": "demographic"
+  },
+  {
+   "slug": "ji-go-kumoyou",
+   "field": "genres"
+  },
+  {
+   "slug": "jibun-no-koto-o-shujinkou-da-to-shinjite-yamanai-fumidai",
+   "field": "demographic"
+  },
+  {
+   "slug": "jibun-o-ikasu-ikikata-korosu-ikikata",
+   "field": "genres"
+  },
+  {
+   "slug": "jibun-o-oshiuri-shitekita-doreichan-ga-dragon-o-wan-pan-shiteta-gigaba",
+   "field": "demographic"
+  },
+  {
+   "slug": "jigoku-ichichoume-ichibanchi-keiji-shikkaku",
+   "field": "genres"
+  },
+  {
+   "slug": "jimi-kusushi-reijou-wa-mou-keiyaku-koushinitashimasen",
+   "field": "demographic"
+  },
+  {
+   "slug": "jingai-karute-1",
+   "field": "demographic"
+  },
+  {
+   "slug": "jingai-to-jingai-to-otsukiai-shitai-ningen-no-hanashi",
+   "field": "demographic"
+  },
+  {
+   "slug": "jinkon-engi",
+   "field": "demographic"
+  },
+  {
+   "slug": "jinsei-mierukahyou-de-jikan-no-muda-ga-nakunarimashita",
+   "field": "demographic"
+  },
+  {
+   "slug": "jinsei-mierukahyou-de-jikan-no-muda-ga-nakunarimashita",
+   "field": "genres"
+  },
+  {
+   "slug": "jintai-no-fushigi",
+   "field": "genres"
+  },
+  {
+   "slug": "jishin-no-himitsu",
+   "field": "genres"
+  },
+  {
+   "slug": "jishou-hogosha-no-kishi-sama-ga-kouhou-udegumi-kareshizura-de-watashi-seijo-no-omiai-o-jama-shite-kimasu",
+   "field": "genres"
+  },
+  {
+   "slug": "jitaku-apaato-ittou-to-tomo-ni-isekai-e",
+   "field": "genres"
+  },
+  {
+   "slug": "jitsuroku-kaidanshuu-torihada-kouhi",
+   "field": "demographic"
+  },
+  {
+   "slug": "jizeru-odetto-no-ryuugi-wazawai-no-reijou-to-13-banme-no-ouji",
+   "field": "demographic"
+  },
+  {
+   "slug": "jizeru-odetto-no-ryuugi-wazawai-no-reijou-to-13-banme-no-ouji",
+   "field": "genres"
+  },
+  {
+   "slug": "jk-to-v",
+   "field": "demographic"
+  },
+  {
+   "slug": "jk-to-v",
+   "field": "genres"
+  },
+  {
+   "slug": "joou-heika-no-kawaii-kinshi-suzume",
+   "field": "demographic"
+  },
+  {
+   "slug": "joou-heika-no-kawaii-kinshi-suzume",
+   "field": "genres"
+  },
+  {
+   "slug": "joshi-no-koi-bana-ga-zettai-okashii-ken",
+   "field": "genres"
+  },
+  {
+   "slug": "joshikousei-ga-koroshiya-to",
+   "field": "demographic"
+  },
+  {
+   "slug": "josou-otoko-to-dansou-onna",
+   "field": "genres"
+  },
+  {
+   "slug": "joubutsu-suruni-wa-kimi-ga-tarinai",
+   "field": "genres"
+  },
+  {
+   "slug": "joushi-no-ie-ni-korogarikomimashite",
+   "field": "demographic"
+  },
+  {
+   "slug": "jukebox",
+   "field": "demographic"
+  },
+  {
+   "slug": "jukusei-sareta-kare-no-ai-wa-amaku-te-omoi",
+   "field": "demographic"
+  },
+  {
+   "slug": "jukusei-sareta-kare-no-ai-wa-amaku-te-omoi",
+   "field": "genres"
+  },
+  {
+   "slug": "jungle-gym-no-nagame-yokoyama-riku-watashi-manga-sakuhinshuu",
+   "field": "demographic"
+  },
+  {
+   "slug": "jungle-gym-no-nagame-yokoyama-riku-watashi-manga-sakuhinshuu",
+   "field": "genres"
+  },
+  {
+   "slug": "junsuisugite-yabai-narumi-kun",
+   "field": "demographic"
+  },
+  {
+   "slug": "junsuisugite-yabai-narumi-kun",
+   "field": "genres"
+  },
+  {
+   "slug": "juri-to-erena-no-mori-no-soudansho",
+   "field": "demographic"
+  },
+  {
+   "slug": "juu-gonen-no-ishika-kara-mezameta-moto-oujo-wa-otto-to-musume-kara-dekiai-sareru",
+   "field": "demographic"
+  },
+  {
+   "slug": "juu-hachisai-no-shiroki-kekkon",
+   "field": "demographic"
+  },
+  {
+   "slug": "juu-yume-kikoujutsu-senki",
+   "field": "demographic"
+  },
+  {
+   "slug": "juubanme-no-yunasu",
+   "field": "demographic"
+  },
+  {
+   "slug": "ka-no-viyando",
+   "field": "demographic"
+  },
+  {
+   "slug": "kaba",
+   "field": "genres"
+  },
+  {
+   "slug": "kaeru-no-ouji-wa-kaeranai",
+   "field": "demographic"
+  },
+  {
+   "slug": "kaette-kita-merchant-man",
+   "field": "demographic"
+  },
+  {
+   "slug": "kaette-kita-merchant-man",
+   "field": "genres"
+  },
+  {
+   "slug": "kagaku-no-sekai",
+   "field": "genres"
+  },
+  {
+   "slug": "kagami-no-tokushu-shounen-kousei-shisetsu-the-escape-begins",
+   "field": "demographic"
+  },
+  {
+   "slug": "kagamitatari",
+   "field": "demographic"
+  },
+  {
+   "slug": "kagamitatari",
+   "field": "genres"
+  },
+  {
+   "slug": "kagi-no-kakaru-tengoku",
+   "field": "genres"
+  },
+  {
+   "slug": "kagochuu-no-kami-wa-koi-negau",
+   "field": "demographic"
+  },
+  {
+   "slug": "kaguya-omikawanamari2026",
+   "field": "demographic"
+  },
+  {
+   "slug": "kaidanshi-m-no-o-zouiri",
+   "field": "demographic"
+  },
+  {
+   "slug": "kaifuku-mahou-o-kiwametara-bu-koware-seinou-ni-natta-sobame-no-ko",
+   "field": "demographic"
+  },
+  {
+   "slug": "kaiga-shuufukushi-amano-youko",
+   "field": "demographic"
+  },
+  {
+   "slug": "kaigo-robot-ga-jinrui-o-sakugen-shite-iru",
+   "field": "demographic"
+  },
+  {
+   "slug": "kaiinosoujijin-sonezakishinjinojikenfairu",
+   "field": "genres"
+  },
+  {
+   "slug": "kaijoshi-kanna-no-memoir",
+   "field": "demographic"
+  },
+  {
+   "slug": "kaijuu-romantics",
+   "field": "demographic"
+  },
+  {
+   "slug": "kaijuu-romantics",
+   "field": "genres"
+  },
+  {
+   "slug": "kaiouki-joden-ki",
+   "field": "demographic"
+  },
+  {
+   "slug": "kaiouki-joden-ki",
+   "field": "genres"
+  },
+  {
+   "slug": "kaitai",
+   "field": "demographic"
+  },
+  {
+   "slug": "kaiteiban-minamikun-wa-koibito",
+   "field": "demographic"
+  },
+  {
+   "slug": "kaiunou-to-karisomeno-niizuma",
+   "field": "demographic"
+  },
+  {
+   "slug": "kaizou-ningen",
+   "field": "genres"
+  },
+  {
+   "slug": "kakato-otoshi-reijou-wa-cheat-na-kakato-de-musou-suru",
+   "field": "demographic"
+  },
+  {
+   "slug": "kakato-otoshi-reijou-wa-cheat-na-kakato-de-musou-suru",
+   "field": "genres"
+  },
+  {
+   "slug": "kake-kara-hajimaru-saigo-no-hatsukoi",
+   "field": "demographic"
+  },
+  {
+   "slug": "kaku-iu-bokura-wa",
+   "field": "demographic"
+  },
+  {
+   "slug": "kaku-iu-bokura-wa",
+   "field": "genres"
+  },
+  {
+   "slug": "kakuugun-no-joukan-to-buka",
+   "field": "demographic"
+  },
+  {
+   "slug": "kame-no-ashi-de-pop-step",
+   "field": "demographic"
+  },
+  {
+   "slug": "kamenraidaa-black-kamenraidaa-zo",
+   "field": "demographic"
+  },
+  {
+   "slug": "kametoarukebakoiniataru",
+   "field": "genres"
+  },
+  {
+   "slug": "kami-chan-ga-ireba-maru",
+   "field": "demographic"
+  },
+  {
+   "slug": "kami-me-no-merura",
+   "field": "demographic"
+  },
+  {
+   "slug": "kami-to-yumemiru-yome-no-ore",
+   "field": "demographic"
+  },
+  {
+   "slug": "kami-yomi-no-maijin",
+   "field": "demographic"
+  },
+  {
+   "slug": "kamisama-nanka-shinjitenaikedo-habu-n-mawasu-shinkou-no-chikara-kore",
+   "field": "demographic"
+  },
+  {
+   "slug": "kamitsukanaidenenarumikun",
+   "field": "genres"
+  },
+  {
+   "slug": "kan-fuu-kanfuru",
+   "field": "demographic"
+  },
+  {
+   "slug": "kanan-no-shiro",
+   "field": "demographic"
+  },
+  {
+   "slug": "kanan-no-shiro",
+   "field": "genres"
+  },
+  {
+   "slug": "kanchigaida-yo-ne-senookun",
+   "field": "demographic"
+  },
+  {
+   "slug": "kanchigaida-yo-ne-senookun",
+   "field": "genres"
+  },
+  {
+   "slug": "kani-ni-sasowarete",
+   "field": "demographic"
+  },
+  {
+   "slug": "kanji",
+   "field": "genres"
+  },
+  {
+   "slug": "kanojo-ga-harem-o-susume-tekuru",
+   "field": "genres"
+  },
+  {
+   "slug": "kanojo-wa-ore-ga-kirai-rashii",
+   "field": "demographic"
+  },
+  {
+   "slug": "kanojo-wa-ore-ga-kirai-rashii",
+   "field": "genres"
+  },
+  {
+   "slug": "kanon-master",
+   "field": "genres"
+  },
+  {
+   "slug": "kanpeki-joushi-no-warui-kuse",
+   "field": "demographic"
+  },
+  {
+   "slug": "kanpeki-osananajimi-no-risei-ga-puttsun-shimashite",
+   "field": "demographic"
+  },
+  {
+   "slug": "kanpeki-ouji-ga-zenryoku-de-kudoitekimasu",
+   "field": "demographic"
+  },
+  {
+   "slug": "kanpekina-koushaku-no-fukaku-no-koi",
+   "field": "demographic"
+  },
+  {
+   "slug": "kanpekina-koushaku-no-fukaku-no-koi",
+   "field": "genres"
+  },
+  {
+   "slug": "kanteishi-roi-no-kojiraseai-wa-kyou-mo-karei-ni-sora-mawaru",
+   "field": "demographic"
+  },
+  {
+   "slug": "kanteishi-roi-no-kojiraseai-wa-kyou-mo-karei-ni-sora-mawaru",
+   "field": "genres"
+  },
+  {
+   "slug": "kara-pichi-town-e-go",
+   "field": "genres"
+  },
+  {
+   "slug": "karada-no-himitsu",
+   "field": "genres"
+  },
+  {
+   "slug": "karamitsuku-ai-de-tojikomete",
+   "field": "demographic"
+  },
+  {
+   "slug": "karamitsuku-ai-de-tojikomete",
+   "field": "genres"
+  },
+  {
+   "slug": "kare-no-na-wa-max",
+   "field": "genres"
+  },
+  {
+   "slug": "kareshi-no-onnatomodachi-ga-guigui-kuru-watashi-ni",
+   "field": "genres"
+  },
+  {
+   "slug": "karubi-momareru",
+   "field": "demographic"
+  },
+  {
+   "slug": "karubi-momareru",
+   "field": "genres"
+  },
+  {
+   "slug": "kaseifu-ga-yumemita-kyuukagetsu",
+   "field": "demographic"
+  },
+  {
+   "slug": "kashi-kometa-kama-ga-hara-shougakkou",
+   "field": "demographic"
+  },
+  {
+   "slug": "katabutsu-gunjin-no-ryouen",
+   "field": "demographic"
+  },
+  {
+   "slug": "kataomoi-twinkle-star",
+   "field": "demographic"
+  },
+  {
+   "slug": "katsura-zuroku-ekusutendiddo-vaajon",
+   "field": "genres"
+  },
+  {
+   "slug": "katsute-no-ansatsusha-wa-raise-de-chigau-ikikata-o-suru",
+   "field": "demographic"
+  },
+  {
+   "slug": "katsute-wa-akuyaku-reijoudeshita-ga-ima-de-wa-rippana-ojisandesu",
+   "field": "demographic"
+  },
+  {
+   "slug": "katsute-wa-akuyaku-reijoudeshita-ga-ima-de-wa-rippana-ojisandesu",
+   "field": "genres"
+  },
+  {
+   "slug": "kawabe-no-eva-to-ijintachi",
+   "field": "demographic"
+  },
+  {
+   "slug": "kawaguchi-kaiji-no-sekai",
+   "field": "genres"
+  },
+  {
+   "slug": "kawaii-hakase",
+   "field": "demographic"
+  },
+  {
+   "slug": "kawaii-hakase",
+   "field": "genres"
+  },
+  {
+   "slug": "kawaii-houmonsha",
+   "field": "demographic"
+  },
+  {
+   "slug": "kawaii-kimi-to-kyou-mo-deki-nai",
+   "field": "demographic"
+  },
+  {
+   "slug": "kawaii-koi-wa-kikazaranai",
+   "field": "demographic"
+  },
+  {
+   "slug": "kawaii-shitsuji-no-tsukurikata",
+   "field": "demographic"
+  },
+  {
+   "slug": "kawaiku-naitene-onoderasan",
+   "field": "demographic"
+  },
+  {
+   "slug": "kaze-to-kumo",
+   "field": "genres"
+  },
+  {
+   "slug": "kazoku-de-tanoshimu-manga-hakken",
+   "field": "genres"
+  },
+  {
+   "slug": "kazoku-ni-aisarenakatta-watashi-ga-henkyou-no-chi-de",
+   "field": "demographic"
+  },
+  {
+   "slug": "kazoku-ni-aisarenakatta-watashi-ga-henkyou-no-chi-de",
+   "field": "genres"
+  },
+  {
+   "slug": "kedamono-ouji-to-yokujou-no-yoru-toraware-no-utahime-wa-tori-kago-nonaka-de-amak",
+   "field": "demographic"
+  },
+  {
+   "slug": "kedamono-ouji-to-yokujou-no-yoru-toraware-no-utahime-wa-tori-kago-nonaka-de-amak",
+   "field": "genres"
+  },
+  {
+   "slug": "kedamonooobaakamingu",
+   "field": "genres"
+  },
+  {
+   "slug": "keiken-o-skill-ni-suru-bannou-na-nouryoku-o-te-ni-irete",
+   "field": "demographic"
+  },
+  {
+   "slug": "keikoku-no-sokushitsu-wa-heiwa-ni-kurashitai",
+   "field": "demographic"
+  },
+  {
+   "slug": "keikoku-no-sokushitsu-wa-heiwa-ni-kurashitai",
+   "field": "genres"
+  },
+  {
+   "slug": "keimukan-ga-akasu-shikei-shikkou-no-genba",
+   "field": "genres"
+  },
+  {
+   "slug": "keiyaku-kikan-wa-haramumade-binbou-stealth-reijou-ga-mashou",
+   "field": "demographic"
+  },
+  {
+   "slug": "kekkon-o-akirameta-cheat-majutsushi-dekiai-suru-manamusume-ga-dekita-node",
+   "field": "demographic"
+  },
+  {
+   "slug": "kemonotachi-no-peregurinatio",
+   "field": "demographic"
+  },
+  {
+   "slug": "ken-ni-kogu",
+   "field": "demographic"
+  },
+  {
+   "slug": "ken-no-ken-nitsuite",
+   "field": "demographic"
+  },
+  {
+   "slug": "ken-oni-tensei-kiwameshi-ken-wa-majutsu-o-kiri-saku",
+   "field": "demographic"
+  },
+  {
+   "slug": "ken-oni-tensei-kiwameshi-ken-wa-majutsu-o-kiri-saku",
+   "field": "genres"
+  },
+  {
+   "slug": "kenshi-wa-jidaiokure-to-sasen-sareta-jinrui-saikyou-no-ossan",
+   "field": "demographic"
+  },
+  {
+   "slug": "kesa-mo-ano-ko-no-yume-o-mita",
+   "field": "demographic"
+  },
+  {
+   "slug": "ketsueki-no-nagare",
+   "field": "genres"
+  },
+  {
+   "slug": "ketteiban",
+   "field": "genres"
+  },
+  {
+   "slug": "ki-mochi-iinara-tameshitai",
+   "field": "demographic"
+  },
+  {
+   "slug": "kibando",
+   "field": "demographic"
+  },
+  {
+   "slug": "kibando",
+   "field": "genres"
+  },
+  {
+   "slug": "kichijitsu-goyomi",
+   "field": "demographic"
+  },
+  {
+   "slug": "kietai-boku-wa-kimi-ni-150-ji-no-ai-o-ageru",
+   "field": "demographic"
+  },
+  {
+   "slug": "kikaider-02-special-graphics-edition",
+   "field": "genres"
+  },
+  {
+   "slug": "kikakugai-no-dungeon-kouryakusha-jitsuwa-isekaigaeri-no-moto-yuusha",
+   "field": "demographic"
+  },
+  {
+   "slug": "kikan-gentei-kazoku",
+   "field": "demographic"
+  },
+  {
+   "slug": "kikan-gentei-kazoku",
+   "field": "genres"
+  },
+  {
+   "slug": "kikikiru",
+   "field": "genres"
+  },
+  {
+   "slug": "killer-sitter",
+   "field": "genres"
+  },
+  {
+   "slug": "kimi-de-torokeru-boku-o-minai-de",
+   "field": "demographic"
+  },
+  {
+   "slug": "kimi-ga-ittousei-ni-hikaru-made",
+   "field": "genres"
+  },
+  {
+   "slug": "kimi-ga-kureta-spotlight",
+   "field": "demographic"
+  },
+  {
+   "slug": "kimi-ga-utau-yakurenka",
+   "field": "demographic"
+  },
+  {
+   "slug": "kimi-no-hatsukoi-o-boku-ni-kudasai",
+   "field": "genres"
+  },
+  {
+   "slug": "kimi-no-kami-ga-ki-ni-narun-da",
+   "field": "genres"
+  },
+  {
+   "slug": "kimi-no-manimani-suzuki-kun",
+   "field": "genres"
+  },
+  {
+   "slug": "kimi-no-miren-ga-nakunaru-made",
+   "field": "demographic"
+  },
+  {
+   "slug": "kimi-no-obentou-ni-naritai",
+   "field": "demographic"
+  },
+  {
+   "slug": "kimi-o-aisuru-koto-wa-dekinai-to-iwareta-node-neko-o-mederu-kotoni-shimashita",
+   "field": "genres"
+  },
+  {
+   "slug": "kimi-to-hanabi-to-yakusoku-to",
+   "field": "demographic"
+  },
+  {
+   "slug": "kimi-to-honori-hatatose-no-aida-de",
+   "field": "demographic"
+  },
+  {
+   "slug": "kimi-to-kazokumitaina-soreijou",
+   "field": "demographic"
+  },
+  {
+   "slug": "kimi-to-mata-meguri-aetara",
+   "field": "demographic"
+  },
+  {
+   "slug": "kimi-to-mata-meguri-aetara",
+   "field": "genres"
+  },
+  {
+   "slug": "kimi-to-sakaseru-wedding",
+   "field": "demographic"
+  },
+  {
+   "slug": "kimi-to-sakaseru-wedding",
+   "field": "genres"
+  },
+  {
+   "slug": "kimi-wa-amai-ude-no-naka",
+   "field": "demographic"
+  },
+  {
+   "slug": "kiminokokoronisawaritai",
+   "field": "genres"
+  },
+  {
+   "slug": "kiminoseinandakara-sekinintotteyone",
+   "field": "genres"
+  },
+  {
+   "slug": "kimitachiai-ga-omosugiru",
+   "field": "demographic"
+  },
+  {
+   "slug": "kimiwaitsushikadokuninaru",
+   "field": "genres"
+  },
+  {
+   "slug": "kin-su-gihotarude-mi-o-kogasu",
+   "field": "demographic"
+  },
+  {
+   "slug": "kin-su-gihotarude-mi-o-kogasu",
+   "field": "genres"
+  },
+  {
+   "slug": "kinds-of-blue",
+   "field": "demographic"
+  },
+  {
+   "slug": "kinki-kai-noroi-no-saikyou-soubizukai",
+   "field": "demographic"
+  },
+  {
+   "slug": "kioku-soushitsu-no-yakushi",
+   "field": "demographic"
+  },
+  {
+   "slug": "kirai-na-aitsu-wa-numarase-dom-de",
+   "field": "demographic"
+  },
+  {
+   "slug": "kirai-na-aitsu-wa-numarase-dom-de",
+   "field": "genres"
+  },
+  {
+   "slug": "kirameke-idol-academy",
+   "field": "demographic"
+  },
+  {
+   "slug": "kirei-na-ji-ga-kakeru",
+   "field": "genres"
+  },
+  {
+   "slug": "kireina-kimi-ni-korosaretai",
+   "field": "demographic"
+  },
+  {
+   "slug": "kireina-kimi-ni-korosaretai",
+   "field": "genres"
+  },
+  {
+   "slug": "kiriko-no-ikimono-tanbou",
+   "field": "demographic"
+  },
+  {
+   "slug": "kisei-shoujo-yuuchan",
+   "field": "demographic"
+  },
+  {
+   "slug": "kishi-danchou-wa-isekai-bar-de-koi-ni-ochiru",
+   "field": "demographic"
+  },
+  {
+   "slug": "kishi-yuuko-no-sekai",
+   "field": "genres"
+  },
+  {
+   "slug": "kiss-no-ato-made-oshie-teageru",
+   "field": "demographic"
+  },
+  {
+   "slug": "kiss-no-ato-made-oshie-teageru",
+   "field": "genres"
+  },
+  {
+   "slug": "kiss-wa-yuki-doke-no-ato-ni-shi-te",
+   "field": "demographic"
+  },
+  {
+   "slug": "kiss-wa-yuki-doke-no-ato-ni-shi-te",
+   "field": "genres"
+  },
+  {
+   "slug": "kisugakoininarumade",
+   "field": "genres"
+  },
+  {
+   "slug": "kiwamete-kenzenna-bishoujo-level-up",
+   "field": "demographic"
+  },
+  {
+   "slug": "kiyoshi-ken-to-bikini-armor",
+   "field": "demographic"
+  },
+  {
+   "slug": "kiyouriyuu-daishiyuugou",
+   "field": "genres"
+  },
+  {
+   "slug": "kizu-mono-no-hanayome-shou-sasshi-matome-hon",
+   "field": "demographic"
+  },
+  {
+   "slug": "kizu-mono-no-hanayome-shou-sasshi-matome-hon",
+   "field": "genres"
+  },
+  {
+   "slug": "kizuitaramusougeemunoakuyakushougundattaken-hametsuruutowabukkowasu",
+   "field": "genres"
+  },
+  {
+   "slug": "ko-ai-apartment-no-neko",
+   "field": "genres"
+  },
+  {
+   "slug": "ko-no-isekai-ni-idol-to-iugainen-o-ni",
+   "field": "demographic"
+  },
+  {
+   "slug": "kobayashi-ikka-to-kyou-wa-odekake",
+   "field": "demographic"
+  },
+  {
+   "slug": "kochira-isekai-support-center-no-suzuki-ga-uketamawarimasu",
+   "field": "demographic"
+  },
+  {
+   "slug": "kodai-no-nippon",
+   "field": "demographic"
+  },
+  {
+   "slug": "kodaka-kazuma-illustrations",
+   "field": "genres"
+  },
+  {
+   "slug": "kodoku-na-joushu-to-toraware-no-musume",
+   "field": "demographic"
+  },
+  {
+   "slug": "kodoku-na-joushu-to-toraware-no-musume",
+   "field": "genres"
+  },
+  {
+   "slug": "kodomo-kagaku-gijutsu-hakusho",
+   "field": "genres"
+  },
+  {
+   "slug": "kodomo-no-jikan-2010",
+   "field": "genres"
+  },
+  {
+   "slug": "kohakukoku-sumi-yoruden-koukyuu-no-yoi-ni-tsuki-hana-wa-kagayaku",
+   "field": "demographic"
+  },
+  {
+   "slug": "koi-nante-wasureteta",
+   "field": "demographic"
+  },
+  {
+   "slug": "koi-ni-ochiru-recipe",
+   "field": "genres"
+  },
+  {
+   "slug": "koi-ni-ochitara-oshiete-kudasai",
+   "field": "demographic"
+  },
+  {
+   "slug": "koi-no-kasu-to-ai-no-kuzu",
+   "field": "demographic"
+  },
+  {
+   "slug": "koi-notonarinio-bentou",
+   "field": "demographic"
+  },
+  {
+   "slug": "koi-o-shitate-te-nuiage-te",
+   "field": "demographic"
+  },
+  {
+   "slug": "koi-to-summer-blend",
+   "field": "demographic"
+  },
+  {
+   "slug": "koi-to-uso-ni-wa-risoku-ga-tsukimono",
+   "field": "demographic"
+  },
+  {
+   "slug": "koi-wa-sugu-soba-ni",
+   "field": "demographic"
+  },
+  {
+   "slug": "koi-wa-yomise-nonaka-de",
+   "field": "demographic"
+  },
+  {
+   "slug": "koiiku-keiyaku",
+   "field": "genres"
+  },
+  {
+   "slug": "koisuru-elf-wa-shigeki-ga-hoshii",
+   "field": "demographic"
+  },
+  {
+   "slug": "koisurunara-yu-bisakimade",
+   "field": "demographic"
+  },
+  {
+   "slug": "koko-joubutsu-yattemasu",
+   "field": "demographic"
+  },
+  {
+   "slug": "koko-suki-channel-touroku-onegai-shimasu",
+   "field": "genres"
+  },
+  {
+   "slug": "koko-wa-yes-to-ittekure-encore",
+   "field": "demographic"
+  },
+  {
+   "slug": "kokoro-make-cosmetica",
+   "field": "demographic"
+  },
+  {
+   "slug": "kokoro-ni-wa-kekkon-shinai-riyuu-ga-aru",
+   "field": "demographic"
+  },
+  {
+   "slug": "kokotottotto-tottotto",
+   "field": "demographic"
+  },
+  {
+   "slug": "kokou-no-ou-no-ayamachi-shakunetsu-no-ou-to-utsukushiki-toubousha",
+   "field": "demographic"
+  },
+  {
+   "slug": "kokou-no-ou-no-ayamachi-shakunetsu-no-ou-to-utsukushiki-toubousha",
+   "field": "genres"
+  },
+  {
+   "slug": "kokouna-kanojo-to-kanojo-no-heya-de-shi-terukoto",
+   "field": "demographic"
+  },
+  {
+   "slug": "kokui-no-imouto-wa-watashi-o-yurusanai",
+   "field": "demographic"
+  },
+  {
+   "slug": "kokuou-heika-anata-o-kyouikuitashimasu",
+   "field": "demographic"
+  },
+  {
+   "slug": "kokuoutachi-no-kekkon",
+   "field": "demographic"
+  },
+  {
+   "slug": "kokuoutachi-no-kekkon",
+   "field": "genres"
+  },
+  {
+   "slug": "komikkuochamekurabu",
+   "field": "genres"
+  },
+  {
+   "slug": "komochi-host-no-kawaii-rinjin",
+   "field": "demographic"
+  },
+  {
+   "slug": "kon-s-tone",
+   "field": "genres"
+  },
+  {
+   "slug": "kon-yo-de-saigo-no-koi-o-shiyou",
+   "field": "demographic"
+  },
+  {
+   "slug": "konbini-de-hajimaru-koi-no-hanashi",
+   "field": "demographic"
+  },
+  {
+   "slug": "konchuu-no-himitsu",
+   "field": "genres"
+  },
+  {
+   "slug": "kono-hoshi-furu-tengoku-de",
+   "field": "demographic"
+  },
+  {
+   "slug": "kono-hoshi-furu-tengoku-de",
+   "field": "genres"
+  },
+  {
+   "slug": "kono-kekkon-ni-igi-ari",
+   "field": "demographic"
+  },
+  {
+   "slug": "kono-kekkon-ni-igi-ari",
+   "field": "genres"
+  },
+  {
+   "slug": "kono-kiss-o-tomeruna",
+   "field": "demographic"
+  },
+  {
+   "slug": "kono-koi-ittan-mochikaerasete-itadakimasu",
+   "field": "genres"
+  },
+  {
+   "slug": "kono-koi-no-hisaku-wa-shippaidesu",
+   "field": "genres"
+  },
+  {
+   "slug": "kono-koi-wa-goshippu-desu",
+   "field": "genres"
+  },
+  {
+   "slug": "kono-koi-wa-kamisama-datte-shiranai",
+   "field": "demographic"
+  },
+  {
+   "slug": "kono-koi-wa-ofureko-de",
+   "field": "demographic"
+  },
+  {
+   "slug": "kono-koi-wa-owarasenai",
+   "field": "demographic"
+  },
+  {
+   "slug": "kono-kyun-wa-nan-na-no-ka",
+   "field": "demographic"
+  },
+  {
+   "slug": "kono-otoko-yuuryou-bukken-nitsuki",
+   "field": "demographic"
+  },
+  {
+   "slug": "kono-sekai-no-ganmen-hensachi-ga-takasugi-te-me-ga-itai",
+   "field": "demographic"
+  },
+  {
+   "slug": "kono-tabi-ga-owarukoro",
+   "field": "demographic"
+  },
+  {
+   "slug": "kono-tabi-ga-owarukoro",
+   "field": "genres"
+  },
+  {
+   "slug": "konya-coin-laundry-de-aimashou",
+   "field": "demographic"
+  },
+  {
+   "slug": "konya-isshou-mono-ni-shiro",
+   "field": "demographic"
+  },
+  {
+   "slug": "konyaku-haki-kara-no-dekiai-seikatsu-ryuujin-koutaishi-no-ban-ni-eraba",
+   "field": "demographic"
+  },
+  {
+   "slug": "konyaku-haki-kara-no-dekiai-seikatsu-ryuujin-koutaishi-no-ban-ni-eraba",
+   "field": "genres"
+  },
+  {
+   "slug": "konyaku-haki-no-tame-reikoku-kishi-ni-kettou-o-idonde-mimashita",
+   "field": "demographic"
+  },
+  {
+   "slug": "konyaku-haki-sareta-akuratsu-omega-wa-gikei-koushaku-ni-shuuchaku-sare",
+   "field": "demographic"
+  },
+  {
+   "slug": "konyaku-haki-sareta-akuratsu-omega-wa-gikei-koushaku-ni-shuuchaku-sare",
+   "field": "genres"
+  },
+  {
+   "slug": "konyaku-haki-sareta-ga-somosomo-konyaku-shita-oboe-wa-nai",
+   "field": "genres"
+  },
+  {
+   "slug": "konyaku-haki-sareta-muhyoujou-reijou-ga-shiawase-ni-narumade-kinmusaki",
+   "field": "demographic"
+  },
+  {
+   "slug": "konyaku-haki-sareta-seijo-wa-nonbiri-hatarakitai",
+   "field": "demographic"
+  },
+  {
+   "slug": "konyaku-haki-sareta-watashi-mezametara-tonari-ni-konyaku-haki-sareta",
+   "field": "demographic"
+  },
+  {
+   "slug": "konyaku-haki-sareta-watashi-mezametara-tonari-ni-konyaku-haki-sareta",
+   "field": "genres"
+  },
+  {
+   "slug": "konyaku-haki-saretainode-sugao-o-kakushite-zannen-reijou-ni-narimasu-e",
+   "field": "demographic"
+  },
+  {
+   "slug": "konyaku-haki-sarete-shoukan-ni-urareru-yotei-nanode",
+   "field": "demographic"
+  },
+  {
+   "slug": "konyaku-hakidesu-ka-hai-yorokon-de-datte-boku-wa-ane-no-kawaridesu-kara",
+   "field": "demographic"
+  },
+  {
+   "slug": "konyaku-hakidesu-ka-hai-yorokon-de-datte-boku-wa-ane-no-kawaridesu-kara",
+   "field": "genres"
+  },
+  {
+   "slug": "konyakusha-ni-daredakke-to-iwareta-node-konomama-shiranai-furi",
+   "field": "demographic"
+  },
+  {
+   "slug": "konyakusha-ni-wasurerareta-watashi-ringoku-no-koutaishi-denka-to-gisou-konyaku",
+   "field": "demographic"
+  },
+  {
+   "slug": "konyakusha-o-sutetara-tanoshii-mahou-gakkou-no-seikatsu",
+   "field": "genres"
+  },
+  {
+   "slug": "konyakusha-wa-gimai-no-hou-ga-taisetsu-nanode",
+   "field": "demographic"
+  },
+  {
+   "slug": "konyakushasama-oujosama-o-yuusen-surunara-o-suki-ni-douzo",
+   "field": "demographic"
+  },
+  {
+   "slug": "konyakushasama-oujosama-o-yuusen-surunara-o-suki-ni-douzo",
+   "field": "genres"
+  },
+  {
+   "slug": "koori-ouji-wa-sabaku-no-hime-ni-nerawareru",
+   "field": "genres"
+  },
+  {
+   "slug": "kore-ga-boku-no-kaitou-de-aru",
+   "field": "genres"
+  },
+  {
+   "slug": "kore-wa-fansa-ja-arimasen",
+   "field": "demographic"
+  },
+  {
+   "slug": "kore-wa-koi-de-wa-naku",
+   "field": "demographic"
+  },
+  {
+   "slug": "kore-wa-nidome-de-saigo-no-hatsukoi",
+   "field": "demographic"
+  },
+  {
+   "slug": "korette-renshuu-desuka",
+   "field": "demographic"
+  },
+  {
+   "slug": "koroshiya-no-eigyoujutsu",
+   "field": "demographic"
+  },
+  {
+   "slug": "koroshiya-no-eigyoujutsu",
+   "field": "genres"
+  },
+  {
+   "slug": "kotoba-no-anata-manga-no-watashi",
+   "field": "genres"
+  },
+  {
+   "slug": "kotowazaehon",
+   "field": "genres"
+  },
+  {
+   "slug": "kou-minoruchan-wa-kao-ga-wakaranai",
+   "field": "genres"
+  },
+  {
+   "slug": "koubutsu-wa-daiji-ni-sodatete-hara-no-naka",
+   "field": "genres"
+  },
+  {
+   "slug": "koufuku-no-oishii-michisugara",
+   "field": "demographic"
+  },
+  {
+   "slug": "kouketsu-sugiru-kishidanchou-desu-niizuma-eno-dokusenyoku-o-gaman-dekinai",
+   "field": "genres"
+  },
+  {
+   "slug": "koukyuu-kagekidan",
+   "field": "demographic"
+  },
+  {
+   "slug": "koukyuu-no-kakure-kusushi-wa-yamiyo-o-terasu",
+   "field": "demographic"
+  },
+  {
+   "slug": "koukyuu-no-kamiyuishi-wa-tsuki-ni-sou",
+   "field": "demographic"
+  },
+  {
+   "slug": "koukyuu-no-o-toiawase-madoguchi",
+   "field": "genres"
+  },
+  {
+   "slug": "koukyuu-omega",
+   "field": "demographic"
+  },
+  {
+   "slug": "koumuin-de-antai-nohazu-ga-jiko-bukken-tantou-ni-idou-shimasu",
+   "field": "demographic"
+  },
+  {
+   "slug": "kounin-madara-kaizokubon",
+   "field": "genres"
+  },
+  {
+   "slug": "kouryaku-fukanou-na-kusogee-no-hiroin-ni-tensei-shiteita",
+   "field": "demographic"
+  },
+  {
+   "slug": "kouryaku-fukanou-na-kusogee-no-hiroin-ni-tensei-shiteita",
+   "field": "genres"
+  },
+  {
+   "slug": "kouryaku-nanido-hard-mode-no-chikyuusan-dungeon",
+   "field": "demographic"
+  },
+  {
+   "slug": "kouryaku-nanido-hard-mode-no-chikyuusan-dungeon",
+   "field": "genres"
+  },
+  {
+   "slug": "koushaku-fujin-ni-fusawashikunai-to-rien-sareta-watashi-no-hanashi",
+   "field": "demographic"
+  },
+  {
+   "slug": "koushaku-no-himitsu-no-yotsugi",
+   "field": "demographic"
+  },
+  {
+   "slug": "koushaku-reijou-aguri-cartia-wa-sazukatta-cheat-skill",
+   "field": "demographic"
+  },
+  {
+   "slug": "koushaku-reijou-aguri-cartia-wa-sazukatta-cheat-skill",
+   "field": "genres"
+  },
+  {
+   "slug": "koushaku-shisoku-no-shuuchaku-kara-nigeraresou-ni-nai-node",
+   "field": "demographic"
+  },
+  {
+   "slug": "koushakuke-no-choujo-deshita",
+   "field": "demographic"
+  },
+  {
+   "slug": "koushakuke-no-jijo-wa-sugata-o-kakusu",
+   "field": "demographic"
+  },
+  {
+   "slug": "koushakuke-no-jijo-wa-sugata-o-kakusu",
+   "field": "genres"
+  },
+  {
+   "slug": "koutei-heika-no-atatamegakari",
+   "field": "demographic"
+  },
+  {
+   "slug": "koutei-no-kakushigo-no-reijou-wa-abaren-bou-koushaku-reisoku-no-tazuna-o-nigiru",
+   "field": "demographic"
+  },
+  {
+   "slug": "kouteike-no-shichinan-ga-ken-yori-sukoppu-ga-tokuide-komatteiru",
+   "field": "demographic"
+  },
+  {
+   "slug": "kouto-onmyou-gakkou",
+   "field": "genres"
+  },
+  {
+   "slug": "kowamote-o-niisan-to-ubu-gyaru-kun",
+   "field": "demographic"
+  },
+  {
+   "slug": "kowamote-o-niisan-to-ubu-gyaru-kun",
+   "field": "genres"
+  },
+  {
+   "slug": "kowashite-ii-yo-suika-chan",
+   "field": "demographic"
+  },
+  {
+   "slug": "kowashite-ii-yo-suika-chan",
+   "field": "genres"
+  },
+  {
+   "slug": "kubiki-no-niko",
+   "field": "demographic"
+  },
+  {
+   "slug": "kuchi-ni-dashichau-se-usagiguchi-senpai",
+   "field": "demographic"
+  },
+  {
+   "slug": "kuchi-nikansuru-ankeeto",
+   "field": "genres"
+  },
+  {
+   "slug": "kuchiyakusoku-wa-hatasareta",
+   "field": "demographic"
+  },
+  {
+   "slug": "kuchiyakusoku-wa-hatasareta",
+   "field": "genres"
+  },
+  {
+   "slug": "kuga-keiichi-to-takane-no-otto",
+   "field": "demographic"
+  },
+  {
+   "slug": "kuramochi-fusako-irasutoreeshonzu",
+   "field": "genres"
+  },
+  {
+   "slug": "kuramochibon",
+   "field": "genres"
+  },
+  {
+   "slug": "kuro-hyou-kakka-no-konyakusha",
+   "field": "demographic"
+  },
+  {
+   "slug": "kuro-no-sekai-wa-hakuboku-ni-somaru",
+   "field": "genres"
+  },
+  {
+   "slug": "kuro-usagi-hakushaku-no-dekiai-kyuukon",
+   "field": "demographic"
+  },
+  {
+   "slug": "kuro-usagi-hakushaku-no-dekiai-kyuukon",
+   "field": "genres"
+  },
+  {
+   "slug": "kurohyou-denka-pheromone-ga-dadamore-desu",
+   "field": "demographic"
+  },
+  {
+   "slug": "kurohyou-denka-pheromone-ga-dadamore-desu",
+   "field": "genres"
+  },
+  {
+   "slug": "kurokami-seiso-no-reikoku-bishoujo-o-tasuketara",
+   "field": "demographic"
+  },
+  {
+   "slug": "kuromaku-reijou-anastasia-wa-mou-akiramenai",
+   "field": "demographic"
+  },
+  {
+   "slug": "kurushiino-wa-anata-nosei",
+   "field": "demographic"
+  },
+  {
+   "slug": "kusa-danshi-mo-aruke-ba-koi-ni-numaru",
+   "field": "demographic"
+  },
+  {
+   "slug": "kusogee-akuyaku-reijou",
+   "field": "demographic"
+  },
+  {
+   "slug": "kusunda-gin-no-eiyuu-tan",
+   "field": "demographic"
+  },
+  {
+   "slug": "kusunda-gin-no-eiyuu-tan",
+   "field": "genres"
+  },
+  {
+   "slug": "kuttsukitagari-no-uzukikun",
+   "field": "demographic"
+  },
+  {
+   "slug": "kuttsukitagari-no-uzukikun",
+   "field": "genres"
+  },
+  {
+   "slug": "kuunara-hone-made",
+   "field": "demographic"
+  },
+  {
+   "slug": "kuzu-kishisama-no-ai-wa-geki-omo-nitsuki",
+   "field": "demographic"
+  },
+  {
+   "slug": "kuzu-kishisama-no-ai-wa-geki-omo-nitsuki",
+   "field": "genres"
+  },
+  {
+   "slug": "kuzu-na-kare-to-no-oshi-keiyaku",
+   "field": "demographic"
+  },
+  {
+   "slug": "kuzu-no-kessei",
+   "field": "demographic"
+  },
+  {
+   "slug": "kuzu-otoko-no-poemu-ue",
+   "field": "demographic"
+  },
+  {
+   "slug": "kuzu-otoko-no-poemu-ue",
+   "field": "genres"
+  },
+  {
+   "slug": "kyantobakku",
+   "field": "genres"
+  },
+  {
+   "slug": "kyorikan-bagu-na-futago-ni-semararete-tomadotte-masu",
+   "field": "demographic"
+  },
+  {
+   "slug": "kyou-mo-age-teko-gyaru-sena-chan",
+   "field": "demographic"
+  },
+  {
+   "slug": "kyou-mo-age-teko-gyaru-sena-chan",
+   "field": "genres"
+  },
+  {
+   "slug": "kyou-mo-gojiai-o-hitosaji",
+   "field": "genres"
+  },
+  {
+   "slug": "kyou-mo-yome-ga-mitsukaranai",
+   "field": "demographic"
+  },
+  {
+   "slug": "kyou-wa-nani-shiyou",
+   "field": "demographic"
+  },
+  {
+   "slug": "kyou-wa-nani-shiyou",
+   "field": "genres"
+  },
+  {
+   "slug": "kyouryuu-sekai-no-himitsu",
+   "field": "genres"
+  },
+  {
+   "slug": "kyousei-jo-reishi-toki-aura-no-numa",
+   "field": "genres"
+  },
+  {
+   "slug": "kyuuai-kon",
+   "field": "demographic"
+  },
+  {
+   "slug": "kyuukei-hairimasu",
+   "field": "genres"
+  },
+  {
+   "slug": "kyuuketsuki-to-chocolatier",
+   "field": "demographic"
+  },
+  {
+   "slug": "kyuusei-no-aruru",
+   "field": "demographic"
+  },
+  {
+   "slug": "kyuusei-no-shuumatsu-tokei",
+   "field": "genres"
+  },
+  {
+   "slug": "kyuuyaku-seisho-manga-genesis",
+   "field": "demographic"
+  },
+  {
+   "slug": "kyuuyuu-to-furin-shitemita",
+   "field": "demographic"
+  },
+  {
+   "slug": "legal-dock-iryou-bengoshi-arata-no-shoumei",
+   "field": "demographic"
+  },
+  {
+   "slug": "limited-boyfriend",
+   "field": "genres"
+  },
+  {
+   "slug": "lolly-sweet-lolly",
+   "field": "demographic"
+  },
+  {
+   "slug": "lost-end",
+   "field": "demographic"
+  },
+  {
+   "slug": "lost-summer-journey",
+   "field": "demographic"
+  },
+  {
+   "slug": "love-song-eda2026",
+   "field": "demographic"
+  },
+  {
+   "slug": "love-song-eda2026",
+   "field": "genres"
+  },
+  {
+   "slug": "lovesick-tantei-jimusho",
+   "field": "demographic"
+  },
+  {
+   "slug": "m-and-mirumiru",
+   "field": "demographic"
+  },
+  {
+   "slug": "ma-kengouga-geki-miyamoto-musashi",
+   "field": "demographic"
+  },
+  {
+   "slug": "ma-mikachan-ga-kuru",
+   "field": "demographic"
+  },
+  {
+   "slug": "maajan-combo-riron-hou-juuritsu-no-mitsumori-to-oshibiki-senjutsu",
+   "field": "genres"
+  },
+  {
+   "slug": "mada-boku-o-yurusanai-de",
+   "field": "demographic"
+  },
+  {
+   "slug": "madame-omoteura-no-renai-salon",
+   "field": "demographic"
+  },
+  {
+   "slug": "made-in-yamato",
+   "field": "genres"
+  },
+  {
+   "slug": "magic-no-himitsu",
+   "field": "genres"
+  },
+  {
+   "slug": "magic-panic",
+   "field": "genres"
+  },
+  {
+   "slug": "magical-agent",
+   "field": "genres"
+  },
+  {
+   "slug": "magical-mero-kyun-gimimikku",
+   "field": "demographic"
+  },
+  {
+   "slug": "mahou-ga-tsukaitakute-niku-ga-kuitakute-doryoku-shitemitara-saikyou-ni",
+   "field": "demographic"
+  },
+  {
+   "slug": "mahou-shoujo-ni-yasashii-gyaru",
+   "field": "demographic"
+  },
+  {
+   "slug": "mahou-shoujo-no-majo-saiban",
+   "field": "demographic"
+  },
+  {
+   "slug": "mahou-wa-isekai-ni-oitekimashita",
+   "field": "demographic"
+  },
+  {
+   "slug": "mai-buraito-ruumumeito",
+   "field": "genres"
+  },
+  {
+   "slug": "mai-friend-doubutsu-byouin-nisshi-dekamori",
+   "field": "genres"
+  },
+  {
+   "slug": "maid-ga-yumemita-9-kagetsu",
+   "field": "demographic"
+  },
+  {
+   "slug": "maid-ga-yumemita-9-kagetsu",
+   "field": "genres"
+  },
+  {
+   "slug": "maison-death-heights",
+   "field": "demographic"
+  },
+  {
+   "slug": "maison-do-yumenonaka-no-mahou-no-o-heya",
+   "field": "demographic"
+  },
+  {
+   "slug": "maison-do-yumenonaka-no-mahou-no-o-heya",
+   "field": "genres"
+  },
+  {
+   "slug": "majime-na-akuyaku-reijou-wa-kokugai-tsuihou-o-kibou-shimasu",
+   "field": "demographic"
+  },
+  {
+   "slug": "majime-na-koi-no-hodokikata",
+   "field": "demographic"
+  },
+  {
+   "slug": "majo-gyaru-no-suki-pi",
+   "field": "demographic"
+  },
+  {
+   "slug": "majo-hime-kurea-wa-ningyou-to-odoru",
+   "field": "demographic"
+  },
+  {
+   "slug": "majo-hime-kurea-wa-ningyou-to-odoru",
+   "field": "genres"
+  },
+  {
+   "slug": "majo-no-danna-no-tsukurikata",
+   "field": "genres"
+  },
+  {
+   "slug": "majo-to-mashou-to-ma-takara-no-rakuen",
+   "field": "demographic"
+  },
+  {
+   "slug": "majutsushi-wa-shinde-ita",
+   "field": "demographic"
+  },
+  {
+   "slug": "makeinu-no-i-love-you",
+   "field": "demographic"
+  },
+  {
+   "slug": "makeinu-no-i-love-you",
+   "field": "genres"
+  },
+  {
+   "slug": "makiba-no-karte",
+   "field": "demographic"
+  },
+  {
+   "slug": "maku-to-kimi-no-aida",
+   "field": "demographic"
+  },
+  {
+   "slug": "maku-to-kimi-no-aida",
+   "field": "genres"
+  },
+  {
+   "slug": "makurauo",
+   "field": "demographic"
+  },
+  {
+   "slug": "mama-tte-sabasaba-shiteru-kara",
+   "field": "genres"
+  },
+  {
+   "slug": "mametabi-style",
+   "field": "genres"
+  },
+  {
+   "slug": "mamono-no-hanayome",
+   "field": "demographic"
+  },
+  {
+   "slug": "mamono-no-hanayome",
+   "field": "genres"
+  },
+  {
+   "slug": "manben",
+   "field": "genres"
+  },
+  {
+   "slug": "manga-atom-hakase-no-soutaisei-riron",
+   "field": "genres"
+  },
+  {
+   "slug": "manga-choudendou-nyuumon",
+   "field": "genres"
+  },
+  {
+   "slug": "manga-de-opera",
+   "field": "demographic"
+  },
+  {
+   "slug": "manga-de-sekai-ga-mietekuru",
+   "field": "demographic"
+  },
+  {
+   "slug": "manga-de-wakaru-doukouhou",
+   "field": "demographic"
+  },
+  {
+   "slug": "manga-de-wakaru-doukouhou",
+   "field": "genres"
+  },
+  {
+   "slug": "manga-de-wakaru-hajimete-no-ninchishou-kea-to-assessment",
+   "field": "demographic"
+  },
+  {
+   "slug": "manga-de-wakaru-hajimete-no-ninchishou-kea-to-assessment",
+   "field": "genres"
+  },
+  {
+   "slug": "manga-de-wakaru-kyouryuu-no-sekai",
+   "field": "genres"
+  },
+  {
+   "slug": "manga-de-wakaru-quiz-de-tanoshimu-shougakusei-notame-no-ichiban-yasashii-eibunho",
+   "field": "demographic"
+  },
+  {
+   "slug": "manga-de-wakaru-quiz-de-tanoshimu-shougakusei-notame-no-ichiban-yasashii-eibunho",
+   "field": "genres"
+  },
+  {
+   "slug": "manga-de-wakaru-shibou-pinchi-kara-no-seikan-zukan",
+   "field": "genres"
+  },
+  {
+   "slug": "manga-igaku-no-rekishi",
+   "field": "demographic"
+  },
+  {
+   "slug": "manga-katou-hiroshi-no-keizaigaku-kyoushitsu",
+   "field": "genres"
+  },
+  {
+   "slug": "manga-koushi-no-shisou",
+   "field": "demographic"
+  },
+  {
+   "slug": "manga-nippon-no-rekishi-quiz",
+   "field": "demographic"
+  },
+  {
+   "slug": "manga-no-anata-esuefu-no-watashi",
+   "field": "genres"
+  },
+  {
+   "slug": "manga-no-diienuee",
+   "field": "genres"
+  },
+  {
+   "slug": "manga-no-kokoro",
+   "field": "genres"
+  },
+  {
+   "slug": "manga-no-kouzou",
+   "field": "genres"
+  },
+  {
+   "slug": "manga-nougyou-business-rendetsu",
+   "field": "genres"
+  },
+  {
+   "slug": "manga-o-egaku-ni-wa-neko-ga-hitsuyou",
+   "field": "genres"
+  },
+  {
+   "slug": "manga-rongo-to-koushi",
+   "field": "demographic"
+  },
+  {
+   "slug": "manga-rousou-no-shisou",
+   "field": "demographic"
+  },
+  {
+   "slug": "manga-seisho-monogatari",
+   "field": "demographic"
+  },
+  {
+   "slug": "manga-sonshi-kanpishi-no-shisou",
+   "field": "demographic"
+  },
+  {
+   "slug": "manga-tengoku-doujou",
+   "field": "demographic"
+  },
+  {
+   "slug": "manga-tengoku-doujou",
+   "field": "genres"
+  },
+  {
+   "slug": "manga-tenkanshifuku-nihongo-honyakuban",
+   "field": "demographic"
+  },
+  {
+   "slug": "manga-ugetsu-monogatari",
+   "field": "demographic"
+  },
+  {
+   "slug": "mangaatomuhakasenokagakutanken",
+   "field": "genres"
+  },
+  {
+   "slug": "mangaban-bright-prison-gakuen-no-kegareta-junjou",
+   "field": "demographic"
+  },
+  {
+   "slug": "mangaban-bright-prison-gakuen-no-kegareta-junjou",
+   "field": "genres"
+  },
+  {
+   "slug": "mangadetokiakasukannonkyou",
+   "field": "demographic"
+  },
+  {
+   "slug": "mangetsu-koohiiten-no-hoshi-yomi",
+   "field": "demographic"
+  },
+  {
+   "slug": "mannen-o-ikiru-heiwa-shugi-vampire-itsunomanika-sekai-saikyou-ni",
+   "field": "genres"
+  },
+  {
+   "slug": "maogui-to-baiyuu",
+   "field": "genres"
+  },
+  {
+   "slug": "maou-no-musume-wa-ikigitanai",
+   "field": "demographic"
+  },
+  {
+   "slug": "maou-no-musume-wa-yuusha-to-seiryaku-kekkonshitai",
+   "field": "genres"
+  },
+  {
+   "slug": "maou-sama-dekiai-shisugidesu",
+   "field": "demographic"
+  },
+  {
+   "slug": "maou-sama-kara-wa-nigerarenai",
+   "field": "demographic"
+  },
+  {
+   "slug": "maou-sama-kara-wa-nigerarenai",
+   "field": "genres"
+  },
+  {
+   "slug": "maou-to-hajimeru-rpg",
+   "field": "demographic"
+  },
+  {
+   "slug": "maou-to-hajimeru-rpg",
+   "field": "genres"
+  },
+  {
+   "slug": "maoujou-hotel-no-akuyaku-reijou",
+   "field": "demographic"
+  },
+  {
+   "slug": "maousama-no-ezuke-ni-seikou-shimashita",
+   "field": "demographic"
+  },
+  {
+   "slug": "maousama-oishii-gohan-o-meshiagare-1-tsuihou-saretasue-oujo-wa-mazoku-no-kuni-de",
+   "field": "demographic"
+  },
+  {
+   "slug": "maousama-wa-kaifuku-majutsu-o-kiwametai",
+   "field": "demographic"
+  },
+  {
+   "slug": "mariana-densetsu-deep",
+   "field": "genres"
+  },
+  {
+   "slug": "marugotozenbuni-koishi-teyo",
+   "field": "demographic"
+  },
+  {
+   "slug": "marusessensu",
+   "field": "demographic"
+  },
+  {
+   "slug": "marusessensu",
+   "field": "genres"
+  },
+  {
+   "slug": "maryoku-zero-no-dekisokonai-kizoku-yon-dai-seireiou-ni-dekiai-sareru",
+   "field": "demographic"
+  },
+  {
+   "slug": "maryoku-zero-no-saikyou-kenja-mahou-riron-o-kiwametara-sekai-saikyou",
+   "field": "genres"
+  },
+  {
+   "slug": "maryokuryou-rekidai-saikyouna-tensei-seijo-sama-no-gakuen-seikatsu",
+   "field": "genres"
+  },
+  {
+   "slug": "mashou-no-arufa-to-namaiki-omega-beminesider",
+   "field": "demographic"
+  },
+  {
+   "slug": "masshiro-na-ao",
+   "field": "genres"
+  },
+  {
+   "slug": "masshirokun-wa-tora-senyou",
+   "field": "demographic"
+  },
+  {
+   "slug": "mata-ne-kamisama-restart",
+   "field": "demographic"
+  },
+  {
+   "slug": "mate-ga-dekinai-watarukun",
+   "field": "demographic"
+  },
+  {
+   "slug": "mate-ga-dekinai-watarukun",
+   "field": "genres"
+  },
+  {
+   "slug": "matsumoto-takaharu-sakuhinshuu",
+   "field": "genres"
+  },
+  {
+   "slug": "may-i-help-you",
+   "field": "demographic"
+  },
+  {
+   "slug": "mayonnaise-ou-wa-binbou-ni-naritai-danjohi-1-tai-100-sekai-de-iku-kanchigai",
+   "field": "demographic"
+  },
+  {
+   "slug": "mazinger-z-visual-works",
+   "field": "genres"
+  },
+  {
+   "slug": "mazoku-no-oujisama-wa-watashi-notame-ni-supadari-o-mezasu-soudesu",
+   "field": "demographic"
+  },
+  {
+   "slug": "mechakucha-tsuihou-sareru-hanashi",
+   "field": "demographic"
+  },
+  {
+   "slug": "mechakucha-tsuihou-sareru-hanashi",
+   "field": "genres"
+  },
+  {
+   "slug": "medjed-sama-to-anubis-kun",
+   "field": "demographic"
+  },
+  {
+   "slug": "medjed-sama-to-anubis-kun",
+   "field": "genres"
+  },
+  {
+   "slug": "megami-kara-ataerareta-yomei-ichinen-de-yamiochi-yotei-no-konyakusha-o-sukuimasu",
+   "field": "demographic"
+  },
+  {
+   "slug": "megan-to-lord-d",
+   "field": "demographic"
+  },
+  {
+   "slug": "meifu-no-hanayome-jigoku-no-sata-mo-yome-shidai",
+   "field": "demographic"
+  },
+  {
+   "slug": "meikyuu-toshi-no-renkin-kusushi",
+   "field": "demographic"
+  },
+  {
+   "slug": "meji-to-yamo",
+   "field": "demographic"
+  },
+  {
+   "slug": "men-makun-no-koi-ni-furetai",
+   "field": "demographic"
+  },
+  {
+   "slug": "men-makun-no-koi-ni-furetai",
+   "field": "genres"
+  },
+  {
+   "slug": "meroholic",
+   "field": "demographic"
+  },
+  {
+   "slug": "meshi-bafu-shokudou-seikyounari",
+   "field": "demographic"
+  },
+  {
+   "slug": "meshi-tero-kei-guradoru-wa-gaman-dekinai",
+   "field": "demographic"
+  },
+  {
+   "slug": "metsubou-tenshi-horobu-chan",
+   "field": "demographic"
+  },
+  {
+   "slug": "miboujin-eren-no-shiawase-na-jinsei",
+   "field": "demographic"
+  },
+  {
+   "slug": "miboujin-eren-no-shiawase-na-jinsei",
+   "field": "genres"
+  },
+  {
+   "slug": "michibata-ha-no-iru-sekai",
+   "field": "demographic"
+  },
+  {
+   "slug": "michibata-ha-no-iru-sekai",
+   "field": "genres"
+  },
+  {
+   "slug": "midara-ni-ochiru-wa-dare-notame",
+   "field": "demographic"
+  },
+  {
+   "slug": "mieru-mienai-no-himitsu",
+   "field": "genres"
+  },
+  {
+   "slug": "migawari-byou-bare-reijou-no-keiyaku-kekkonna-noni-kishi-koushaku",
+   "field": "demographic"
+  },
+  {
+   "slug": "migawari-date",
+   "field": "demographic"
+  },
+  {
+   "slug": "migawari-date",
+   "field": "genres"
+  },
+  {
+   "slug": "mihara-sofia-wa-kowa-girl",
+   "field": "demographic"
+  },
+  {
+   "slug": "mijukuna-hanayome",
+   "field": "demographic"
+  },
+  {
+   "slug": "miko-to-yasha-yome",
+   "field": "demographic"
+  },
+  {
+   "slug": "mikon-sagi-watashi-no-shiranai-kare-no-kao",
+   "field": "demographic"
+  },
+  {
+   "slug": "mimi-ga-dechauno-wa-kimi-no-sei",
+   "field": "demographic"
+  },
+  {
+   "slug": "mimi-ga-dechauno-wa-kimi-no-sei",
+   "field": "genres"
+  },
+  {
+   "slug": "mimi-ga-kikoenai-watashi-ga-sukirusu-igan-ni-natta",
+   "field": "genres"
+  },
+  {
+   "slug": "minamino-mashiro-irasuto-collection",
+   "field": "genres"
+  },
+  {
+   "slug": "minikui-ai-de-gomen",
+   "field": "genres"
+  },
+  {
+   "slug": "minna-hotaru-o-koroshitakatta",
+   "field": "demographic"
+  },
+  {
+   "slug": "miripuro",
+   "field": "demographic"
+  },
+  {
+   "slug": "misakikun-kara-nigerarenai",
+   "field": "demographic"
+  },
+  {
+   "slug": "misuterareta-oujo-wa-reikoku-ouji-ni-hirowaremashita",
+   "field": "demographic"
+  },
+  {
+   "slug": "misuterareta-oujo-wa-reikoku-ouji-ni-hirowaremashita",
+   "field": "genres"
+  },
+  {
+   "slug": "miteru-dake-de-yokatta-noni",
+   "field": "demographic"
+  },
+  {
+   "slug": "mitsu-yorusan-wa-succubus-rashii",
+   "field": "demographic"
+  },
+  {
+   "slug": "mitsu-yorusan-wa-succubus-rashii",
+   "field": "genres"
+  },
+  {
+   "slug": "mitsuhashi-otsuya-tokuhon",
+   "field": "genres"
+  },
+  {
+   "slug": "mitsuko-san-chino-second-recipe",
+   "field": "demographic"
+  },
+  {
+   "slug": "miwaku-no-koibito-o-enjite",
+   "field": "demographic"
+  },
+  {
+   "slug": "miwaku-no-ouji-to-miryou-no-kikanai-hakushaku-reijou-no-keiyaku-kekkon",
+   "field": "demographic"
+  },
+  {
+   "slug": "mizu-no-jougi-yuugure-uchuusen-tanpenshuu",
+   "field": "demographic"
+  },
+  {
+   "slug": "mizu-no-kai-suiiki-kaii-ki-tan-imayou",
+   "field": "genres"
+  },
+  {
+   "slug": "mizube-no-yoru",
+   "field": "demographic"
+  },
+  {
+   "slug": "mizuki-san-no-neko",
+   "field": "genres"
+  },
+  {
+   "slug": "mizuki-shigeru-kashihon-kessaku-taizen",
+   "field": "genres"
+  },
+  {
+   "slug": "mizuki-shigeru-no-chuugoku-youkai-jiten",
+   "field": "genres"
+  },
+  {
+   "slug": "mizuki-shigeru-no-karan-koron",
+   "field": "genres"
+  },
+  {
+   "slug": "mizuki-shigeru-no-nippon-koufuku-aika",
+   "field": "genres"
+  },
+  {
+   "slug": "mizuki-shigeru-no-sekai-youkai-jiten",
+   "field": "genres"
+  },
+  {
+   "slug": "mizuki-shigeru-no-youkai-jiten",
+   "field": "genres"
+  },
+  {
+   "slug": "mizuki-shigeru-no-zoku-sekai-youkai-jiten",
+   "field": "genres"
+  },
+  {
+   "slug": "mizuki-tama",
+   "field": "genres"
+  },
+  {
+   "slug": "mizukishigeru-chou-1000peeji",
+   "field": "genres"
+  },
+  {
+   "slug": "mobu-katei-kyoushi-no-watakushi-oshino-dai-san-ouji-ni-dekiai-saremashita",
+   "field": "demographic"
+  },
+  {
+   "slug": "mobu-na-noni-oshikara-aisare-route-ni-hairimashita",
+   "field": "demographic"
+  },
+  {
+   "slug": "mobu-ojisan-no-tenseisha-taisho-manual",
+   "field": "demographic"
+  },
+  {
+   "slug": "mobu-shisai-dakedo-kono-sekai-ga-otome-game-da-to-kizuitanode",
+   "field": "demographic"
+  },
+  {
+   "slug": "moe-no-chi",
+   "field": "demographic"
+  },
+  {
+   "slug": "momo-to-tsuno",
+   "field": "genres"
+  },
+  {
+   "slug": "momoiro-campanella",
+   "field": "genres"
+  },
+  {
+   "slug": "monogatari-konomu-hime-honmono-no-mikado-kara-masaka-no-chouai",
+   "field": "demographic"
+  },
+  {
+   "slug": "monogatari-shoumetsu-ron",
+   "field": "genres"
+  },
+  {
+   "slug": "monozukuri-no-shigoto",
+   "field": "genres"
+  },
+  {
+   "slug": "moppu-musou",
+   "field": "demographic"
+  },
+  {
+   "slug": "moratta-mittsu-no-hazure-skill-awasetara-saikyou-deshita",
+   "field": "demographic"
+  },
+  {
+   "slug": "morizono-miruku-no-kikikaikai",
+   "field": "demographic"
+  },
+  {
+   "slug": "moshimo-no-machiko",
+   "field": "demographic"
+  },
+  {
+   "slug": "moshune-project",
+   "field": "genres"
+  },
+  {
+   "slug": "mother-nobemasami2026",
+   "field": "genres"
+  },
+  {
+   "slug": "moto-deshi-ga-maou-ni-nattaseide-yuusha-ni-renkou-saremashita",
+   "field": "demographic"
+  },
+  {
+   "slug": "moto-eiyuu-party-no-nimotsu-mochi-ossan-tensei-shite-gensei-dungeon",
+   "field": "demographic"
+  },
+  {
+   "slug": "moto-eiyuu-party-no-nimotsu-mochi-ossan-tensei-shite-gensei-dungeon",
+   "field": "genres"
+  },
+  {
+   "slug": "moto-eiyuu-wa-daitokai-saikyou-no-benriya-san",
+   "field": "demographic"
+  },
+  {
+   "slug": "moto-kano-cafe",
+   "field": "demographic"
+  },
+  {
+   "slug": "moto-kano-cafe",
+   "field": "genres"
+  },
+  {
+   "slug": "moto-koushaku-reijou-no-henkyou-shiyounin-life",
+   "field": "demographic"
+  },
+  {
+   "slug": "moto-oshiego-no-ninose-san",
+   "field": "demographic"
+  },
+  {
+   "slug": "moto-oshiego-no-ninose-san",
+   "field": "genres"
+  },
+  {
+   "slug": "motto-naiteyo-hanaokasan",
+   "field": "demographic"
+  },
+  {
+   "slug": "motto-tenmaku-no-jaaduugaru",
+   "field": "demographic"
+  },
+  {
+   "slug": "motto-tenmaku-no-jaaduugaru",
+   "field": "genres"
+  },
+  {
+   "slug": "mou-koi-wa-kekkou-desu",
+   "field": "genres"
+  },
+  {
+   "slug": "mou-sukitte-itte-ii",
+   "field": "demographic"
+  },
+  {
+   "slug": "mou-sukitte-itte-ii",
+   "field": "genres"
+  },
+  {
+   "slug": "mouichido-kimi-no-koe-ga-kiketanara",
+   "field": "demographic"
+  },
+  {
+   "slug": "mousugu-shinu-akujo-ni-tensei-shite-shimatta",
+   "field": "demographic"
+  },
+  {
+   "slug": "mousukoshi-dake-soba-ni-ite-a-little-journey",
+   "field": "demographic"
+  },
+  {
+   "slug": "mousukoshi-dake-soba-ni-ite-a-little-journey",
+   "field": "genres"
+  },
+  {
+   "slug": "mugen-maryoku-no-isekai-kikansha",
+   "field": "demographic"
+  },
+  {
+   "slug": "mugen-no-noeru",
+   "field": "demographic"
+  },
+  {
+   "slug": "muhannou-na-osananajimi-o-aegasetai",
+   "field": "demographic"
+  },
+  {
+   "slug": "mujina-no-shiro",
+   "field": "demographic"
+  },
+  {
+   "slug": "mujouna-koutei-no-hisoyakana-to-ai",
+   "field": "demographic"
+  },
+  {
+   "slug": "mujouna-koutei-no-hisoyakana-to-ai",
+   "field": "genres"
+  },
+  {
+   "slug": "mukashi-totta-kinezuka-de-to-iinagara-musou-suru-teishokuya-no-ossan-jitsuha-den",
+   "field": "demographic"
+  },
+  {
+   "slug": "mukatsuku-omae-ga-amasugiru",
+   "field": "demographic"
+  },
+  {
+   "slug": "mukuchikun-to-minamichan",
+   "field": "demographic"
+  },
+  {
+   "slug": "mukuchikun-to-minamichan",
+   "field": "genres"
+  },
+  {
+   "slug": "mukuna-bara-no-mezame",
+   "field": "demographic"
+  },
+  {
+   "slug": "mumei-no-sanryuu-tamer-wa-outo-no-hazure-de-nonbiri-kurasu",
+   "field": "demographic"
+  },
+  {
+   "slug": "mumei-no-sanryuu-tamer-wa-outo-no-hazure-de-nonbiri-kurasu",
+   "field": "genres"
+  },
+  {
+   "slug": "munou-to-tsuihou-sareta-saijaku-mahou-kenshi",
+   "field": "demographic"
+  },
+  {
+   "slug": "murasaki-no-yoru-ni-boku-o-saratte",
+   "field": "demographic"
+  },
+  {
+   "slug": "murasaki-no-yoru-ni-boku-o-saratte",
+   "field": "genres"
+  },
+  {
+   "slug": "mushagakuen",
+   "field": "demographic"
+  },
+  {
+   "slug": "musume-ni-danzai-sareru-akuyaku-koushaku-ni-tensei-shitemashita",
+   "field": "demographic"
+  },
+  {
+   "slug": "musume-ni-danzai-sareru-akuyaku-koushaku-ni-tensei-shitemashita",
+   "field": "genres"
+  },
+  {
+   "slug": "musume-ni-seikei-shitai-to-iwaretara",
+   "field": "genres"
+  },
+  {
+   "slug": "musunde-hotsurete-karamatte",
+   "field": "demographic"
+  },
+  {
+   "slug": "musunde-hotsurete-karamatte",
+   "field": "genres"
+  },
+  {
+   "slug": "muteki-no-ansatsu-madoushi-rasubosu-musume-to-tabi-o-suru",
+   "field": "demographic"
+  },
+  {
+   "slug": "my-journey-to-japan",
+   "field": "genres"
+  },
+  {
+   "slug": "n-blendx",
+   "field": "demographic"
+  },
+  {
+   "slug": "n-blendx",
+   "field": "genres"
+  },
+  {
+   "slug": "naan-mo-umaku-ikan",
+   "field": "genres"
+  },
+  {
+   "slug": "nagahama-monogatari-taishou-collection",
+   "field": "demographic"
+  },
+  {
+   "slug": "nagai-gou-maboroshi-no-shousetsu-sashieshuu",
+   "field": "genres"
+  },
+  {
+   "slug": "nagai-gou-world",
+   "field": "genres"
+  },
+  {
+   "slug": "nagareboshi-ga-ochiru-soko-de-mattete",
+   "field": "demographic"
+  },
+  {
+   "slug": "nagasare-ojisan-no-hajimete-itadakimasu",
+   "field": "demographic"
+  },
+  {
+   "slug": "nagatachou-great-secretary",
+   "field": "demographic"
+  },
+  {
+   "slug": "naito-museum",
+   "field": "genres"
+  },
+  {
+   "slug": "nakama-o-tsuyoku-suru-tame-shien-ni-tesshiteita-chuunen-boukensha",
+   "field": "genres"
+  },
+  {
+   "slug": "nakasetagari-no-hasugaya-kun",
+   "field": "demographic"
+  },
+  {
+   "slug": "naku-neko-naku-ningen",
+   "field": "demographic"
+  },
+  {
+   "slug": "nan-no-torie-mo-nai-heibon-na-ore-ga-bijin-futago-shimai-o-inochigake",
+   "field": "demographic"
+  },
+  {
+   "slug": "nan-no-torie-mo-nai-heibon-na-ore-ga-bijin-futago-shimai-o-inochigake",
+   "field": "genres"
+  },
+  {
+   "slug": "nananichikan-no-yotogi-inshuumura-de-kiraina-aitsu-to",
+   "field": "demographic"
+  },
+  {
+   "slug": "nanbo-no-shokutaku",
+   "field": "demographic"
+  },
+  {
+   "slug": "nanbo-no-shokutaku",
+   "field": "genres"
+  },
+  {
+   "slug": "nani-ka-ga-okashii-kowai-kotowaza",
+   "field": "demographic"
+  },
+  {
+   "slug": "nanitozogojiaikudasai",
+   "field": "genres"
+  },
+  {
+   "slug": "nanji-gendai-dungeon-ni-kibou-o-motsubekarazu",
+   "field": "genres"
+  },
+  {
+   "slug": "nanpa-mobu-ga-oshigoto-desu",
+   "field": "demographic"
+  },
+  {
+   "slug": "naraba-akujo-ni-narimashou",
+   "field": "demographic"
+  },
+  {
+   "slug": "nariagari-eiyuu-no-mujintou-ki-tan",
+   "field": "demographic"
+  },
+  {
+   "slug": "narikawari-reijou-no-loop-line",
+   "field": "demographic"
+  },
+  {
+   "slug": "narikin-shouka-monogatari",
+   "field": "demographic"
+  },
+  {
+   "slug": "narisokonai-seijo-wa-mujikaku-yandere-o-niisama-ni-dekiaisareru",
+   "field": "demographic"
+  },
+  {
+   "slug": "naruhodo-karada-tankentai",
+   "field": "genres"
+  },
+  {
+   "slug": "narusandaa",
+   "field": "demographic"
+  },
+  {
+   "slug": "natsu-to-mushikago",
+   "field": "genres"
+  },
+  {
+   "slug": "natsume-souseki-fantasia",
+   "field": "demographic"
+  },
+  {
+   "slug": "natsume-to-natsume-more-perfume",
+   "field": "demographic"
+  },
+  {
+   "slug": "necktie-hodo-iteiidesuka",
+   "field": "demographic"
+  },
+  {
+   "slug": "nejirase-onzoushi-wa-idakanai",
+   "field": "genres"
+  },
+  {
+   "slug": "nejirase-reisoku-wa-kuzunuma-kara-nukedasenai",
+   "field": "genres"
+  },
+  {
+   "slug": "neko-kyaba",
+   "field": "demographic"
+  },
+  {
+   "slug": "neko-ni-hakuchou-hotaru-ni-koban",
+   "field": "demographic"
+  },
+  {
+   "slug": "neko-ni-mamirete-sanzenri",
+   "field": "genres"
+  },
+  {
+   "slug": "neko-no-niya",
+   "field": "demographic"
+  },
+  {
+   "slug": "neko-punch-deka-mori",
+   "field": "genres"
+  },
+  {
+   "slug": "neko-to-shimobe",
+   "field": "demographic"
+  },
+  {
+   "slug": "nekokaburi-hime-to-tenjou-no-ongaku",
+   "field": "demographic"
+  },
+  {
+   "slug": "nekotakun-to-himitsu-no-shea-house",
+   "field": "demographic"
+  },
+  {
+   "slug": "nemureru-kemono-wa-ai-o-sakebu",
+   "field": "demographic"
+  },
+  {
+   "slug": "nemureru-kemono-wa-ai-o-sakebu",
+   "field": "genres"
+  },
+  {
+   "slug": "nichigetsu-jutsu-tan",
+   "field": "genres"
+  },
+  {
+   "slug": "nidome-no-jinsei-de-wa-okazari-ouhi-ni-narimasen",
+   "field": "demographic"
+  },
+  {
+   "slug": "nidome-wa-ta-no-tsuku-jiyuugyou",
+   "field": "demographic"
+  },
+  {
+   "slug": "nie-miko-to-suzaku-no-to-ai-kon",
+   "field": "demographic"
+  },
+  {
+   "slug": "nie-miko-to-suzaku-no-to-ai-kon",
+   "field": "genres"
+  },
+  {
+   "slug": "nigiyaka-bunko-3",
+   "field": "genres"
+  },
+  {
+   "slug": "nihikime-no-kingyo",
+   "field": "demographic"
+  },
+  {
+   "slug": "niihao-oishii-toukyou-hiyori",
+   "field": "demographic"
+  },
+  {
+   "slug": "niihao-oishii-toukyou-hiyori",
+   "field": "genres"
+  },
+  {
+   "slug": "niji-no-hashi-kara-tsutaetaikoto",
+   "field": "demographic"
+  },
+  {
+   "slug": "niji-no-hashi-kara-tsutaetaikoto",
+   "field": "genres"
+  },
+  {
+   "slug": "ningenfushinnosuterareseijowakoisurukokoroominaifuri",
+   "field": "genres"
+  },
+  {
+   "slug": "ninki-haishinshatachi-no-manager-ni-nattara-zenin-motokano-datta",
+   "field": "demographic"
+  },
+  {
+   "slug": "nioi-ga-uso-o-tsukanai-sekai-de",
+   "field": "genres"
+  },
+  {
+   "slug": "nippon-no-keizai",
+   "field": "genres"
+  },
+  {
+   "slug": "nise-kyouyou-oneesan",
+   "field": "demographic"
+  },
+  {
+   "slug": "nisekoi-omega-unmei-no-alpha-ni-kataomoi",
+   "field": "demographic"
+  },
+  {
+   "slug": "nisemono-no-kami-no-itoshigo-e",
+   "field": "demographic"
+  },
+  {
+   "slug": "nitou-to-tatsuka-no-nichijou-re",
+   "field": "demographic"
+  },
+  {
+   "slug": "nmoo-na-nichijou-jonsuke-to",
+   "field": "genres"
+  },
+  {
+   "slug": "no-cat-no-life",
+   "field": "demographic"
+  },
+  {
+   "slug": "no-cat-no-life",
+   "field": "genres"
+  },
+  {
+   "slug": "nogiku-no-haka-chinen2010",
+   "field": "demographic"
+  },
+  {
+   "slug": "nogiku-no-haka-chinen2010",
+   "field": "genres"
+  },
+  {
+   "slug": "noizu-ringu",
+   "field": "genres"
+  },
+  {
+   "slug": "nomikui-douraku-nippon-touitsu",
+   "field": "genres"
+  },
+  {
+   "slug": "nonstop-love-matching",
+   "field": "demographic"
+  },
+  {
+   "slug": "nonstop-love-matching",
+   "field": "genres"
+  },
+  {
+   "slug": "nora-no-inochi",
+   "field": "demographic"
+  },
+  {
+   "slug": "norowareta-akujo-wa-shishi-no-to-ai-ni-torawareru",
+   "field": "demographic"
+  },
+  {
+   "slug": "nou-no-nazo-fushigi",
+   "field": "genres"
+  },
+  {
+   "slug": "noudai-joshi-wa-okuman-chouja-no-yume-o-miru",
+   "field": "genres"
+  },
+  {
+   "slug": "nui-no-shikijitsu",
+   "field": "genres"
+  },
+  {
+   "slug": "nukumori-ni-mitsumeku-amai-doku",
+   "field": "demographic"
+  },
+  {
+   "slug": "nyantaru-life-da",
+   "field": "genres"
+  },
+  {
+   "slug": "o-ishougakari-no-oshigoto-rouman",
+   "field": "demographic"
+  },
+  {
+   "slug": "o-neechan-zu-ga-kiwadosugiru",
+   "field": "demographic"
+  },
+  {
+   "slug": "o-tasuke-kyara-mo-raku-ja-nai",
+   "field": "demographic"
+  },
+  {
+   "slug": "o-uchi-de-koi-ga-matteru",
+   "field": "demographic"
+  },
+  {
+   "slug": "o-uchi-de-koi-ga-matteru",
+   "field": "genres"
+  },
+  {
+   "slug": "obake-neko-to-boku",
+   "field": "demographic"
+  },
+  {
+   "slug": "obake-no-nigaoe",
+   "field": "genres"
+  },
+  {
+   "slug": "oboegaki",
+   "field": "genres"
+  },
+  {
+   "slug": "oboroyo-night-raid",
+   "field": "demographic"
+  },
+  {
+   "slug": "ochi-yoshihiko-aatowaakusu-daikaiten",
+   "field": "genres"
+  },
+  {
+   "slug": "ochikobore-guild-shokuin-jitsu-wa-s-rank-shoukanshi-datta",
+   "field": "genres"
+  },
+  {
+   "slug": "ochikobore-yuusha-party-no-kitsuenjo",
+   "field": "demographic"
+  },
+  {
+   "slug": "ochikobore-yuusha-party-no-kitsuenjo",
+   "field": "genres"
+  },
+  {
+   "slug": "okaasan-boukensha-login-bonus-de-skill-shufu-ni-mezamemashita",
+   "field": "demographic"
+  },
+  {
+   "slug": "okaeri-watashi-o-kegasu-arufa",
+   "field": "demographic"
+  },
+  {
+   "slug": "okaeri-watashi-o-kegasu-arufa",
+   "field": "genres"
+  },
+  {
+   "slug": "okobore-time-stop",
+   "field": "demographic"
+  },
+  {
+   "slug": "okotoba-ni-amaete-suki-ni-sasete-itadakimasu",
+   "field": "demographic"
+  },
+  {
+   "slug": "oku-man-chouja-no-chiisana-tenshi",
+   "field": "demographic"
+  },
+  {
+   "slug": "oku-man-chouja-no-negaigoto",
+   "field": "demographic"
+  },
+  {
+   "slug": "oku-man-chouja-to-kegarenaki-hanayome",
+   "field": "demographic"
+  },
+  {
+   "slug": "okubyou-kurage-to-koishirazu",
+   "field": "demographic"
+  },
+  {
+   "slug": "okusama-ni-suterareta-hakushaku-sama",
+   "field": "demographic"
+  },
+  {
+   "slug": "okusama-ni-suterareta-hakushaku-sama",
+   "field": "genres"
+  },
+  {
+   "slug": "omae-no-sub-ni-sasero-yo",
+   "field": "demographic"
+  },
+  {
+   "slug": "omae-to-itaitte-ietanara",
+   "field": "demographic"
+  },
+  {
+   "slug": "omoiagarimo-hodohodo-ni-jimi-reijou-ame-ria-no-shiawasena-konyaku",
+   "field": "demographic"
+  },
+  {
+   "slug": "omoiagarimo-hodohodo-ni-jimi-reijou-ame-ria-no-shiawasena-konyaku",
+   "field": "genres"
+  },
+  {
+   "slug": "omotteta-kanji-ni-naranakatta-otokonoko",
+   "field": "genres"
+  },
+  {
+   "slug": "once-upon-a-destiny",
+   "field": "demographic"
+  },
+  {
+   "slug": "one-side-vanilla-sugar",
+   "field": "demographic"
+  },
+  {
+   "slug": "oni-buchou-ga-imouto-ni-nattara-gap-arisugi-amaenbou",
+   "field": "demographic"
+  },
+  {
+   "slug": "oni-hime-wa-uchi-nonaka",
+   "field": "demographic"
+  },
+  {
+   "slug": "oni-no-gunjin-to-mare-chi-no-hanayome",
+   "field": "demographic"
+  },
+  {
+   "slug": "onigari-jinja-no-mamorihime",
+   "field": "demographic"
+  },
+  {
+   "slug": "onna-hakushaku-amber-niwa-shousai-ga-aru",
+   "field": "demographic"
+  },
+  {
+   "slug": "onna-ni-wa-sorezore-ura-ga-aru",
+   "field": "genres"
+  },
+  {
+   "slug": "onna-to-otoko-no-shikou-kairo",
+   "field": "genres"
+  },
+  {
+   "slug": "onna-urahikyaku-azusa",
+   "field": "genres"
+  },
+  {
+   "slug": "ononoke-kuwaidanbu",
+   "field": "demographic"
+  },
+  {
+   "slug": "ooatari-reijou-wa-nidome-no-jinsei-o-ouka-suru",
+   "field": "demographic"
+  },
+  {
+   "slug": "ooi-sukunai-kazoete-miyou",
+   "field": "genres"
+  },
+  {
+   "slug": "ookami-deka-to-mezame-no-kenja",
+   "field": "genres"
+  },
+  {
+   "slug": "ookami-kun-wa-osowaretai-mata-ne",
+   "field": "demographic"
+  },
+  {
+   "slug": "ookami-papa-to-ouchi-gohan-de-kosodatechuu",
+   "field": "demographic"
+  },
+  {
+   "slug": "ookamitaikouwanisemonohanayomeonigasanai",
+   "field": "genres"
+  },
+  {
+   "slug": "ooshima-yumiko-selection",
+   "field": "genres"
+  },
+  {
+   "slug": "operaza-no-kaijin-jet1995",
+   "field": "demographic"
+  },
+  {
+   "slug": "operaza-no-kaijin-jet1995",
+   "field": "genres"
+  },
+  {
+   "slug": "ore-akuyaku-kishi-danchou-ni-tensei-suru",
+   "field": "demographic"
+  },
+  {
+   "slug": "ore-boukensha",
+   "field": "demographic"
+  },
+  {
+   "slug": "ore-dake-akumu-o-shitagaeru",
+   "field": "demographic"
+  },
+  {
+   "slug": "ore-dake-akumu-o-shitagaeru",
+   "field": "genres"
+  },
+  {
+   "slug": "ore-dake-daily-mission-ga-aru-dungeon-seikatsu",
+   "field": "demographic"
+  },
+  {
+   "slug": "ore-dake-level-up-na-ken-gaiden",
+   "field": "demographic"
+  },
+  {
+   "slug": "ore-ga-sodateta-saikyou-kyara-ni-tensei-shita-node",
+   "field": "demographic"
+  },
+  {
+   "slug": "ore-no-ai-o-yome",
+   "field": "demographic"
+  },
+  {
+   "slug": "ore-no-ai-o-yome",
+   "field": "genres"
+  },
+  {
+   "slug": "ore-no-itto-o-jama-suru-aitsu",
+   "field": "demographic"
+  },
+  {
+   "slug": "ore-no-itto-o-jama-suru-aitsu",
+   "field": "genres"
+  },
+  {
+   "slug": "ore-no-kasu-mitaina-jinsei-wa-zenbu-tanuki-nosei",
+   "field": "demographic"
+  },
+  {
+   "slug": "ore-no-ojisan-wa-totemo-kawaii",
+   "field": "demographic"
+  },
+  {
+   "slug": "ore-no-ojisan-wa-totemo-kawaii",
+   "field": "genres"
+  },
+  {
+   "slug": "ore-no-tantou-wa-kaibutsu",
+   "field": "genres"
+  },
+  {
+   "slug": "ore-nohou-ga-saki-ni-sukidatta-node",
+   "field": "demographic"
+  },
+  {
+   "slug": "ore-nojurini-furenaide",
+   "field": "demographic"
+  },
+  {
+   "slug": "ore-wa-azukiyama",
+   "field": "demographic"
+  },
+  {
+   "slug": "ore-wa-azukiyama",
+   "field": "genres"
+  },
+  {
+   "slug": "ore-wa-gakuen-zunou-battle-no-enshutsuka",
+   "field": "demographic"
+  },
+  {
+   "slug": "ore-wa-gimai-ni-uso-o-tsuku",
+   "field": "genres"
+  },
+  {
+   "slug": "ore-wa-heroine-ni-naremasen-yabu",
+   "field": "demographic"
+  },
+  {
+   "slug": "ore-wa-host-ni-ria-koi-shinai",
+   "field": "demographic"
+  },
+  {
+   "slug": "ore-wa-host-ni-ria-koi-shinai",
+   "field": "genres"
+  },
+  {
+   "slug": "orebushi-remaster-ban",
+   "field": "demographic"
+  },
+  {
+   "slug": "oregainaitosuguchomeruhakanagikasumi",
+   "field": "genres"
+  },
+  {
+   "slug": "oregamottohometeageru",
+   "field": "genres"
+  },
+  {
+   "slug": "oretachi-wa-kuso-unmei-o-hitei-suru",
+   "field": "demographic"
+  },
+  {
+   "slug": "origami-shokunin-mimosa-nohi-kichou",
+   "field": "demographic"
+  },
+  {
+   "slug": "osananajimi-de-akumana-kishi-wa-watashi-nokoto-ga-daikirai",
+   "field": "demographic"
+  },
+  {
+   "slug": "osananajimi-ga-hoshii-to-tsubuyaitara-yoku-issho-ni-asobu-onna-tomodachi",
+   "field": "demographic"
+  },
+  {
+   "slug": "osananajimi-ni-kage-de-tsugou-no-yoi-otoko-yobawari-sareta-ore-wa-koui-o-reset-s",
+   "field": "genres"
+  },
+  {
+   "slug": "osananajimi-o-miru-me-ga-kawatte-shimatta",
+   "field": "demographic"
+  },
+  {
+   "slug": "osananajimi-wa-kyou-de-oshimai",
+   "field": "demographic"
+  },
+  {
+   "slug": "oshi-couple-ni-shuuchaku-sarehajimemashita",
+   "field": "demographic"
+  },
+  {
+   "slug": "oshi-kapu-no-oki-ni-mesumama",
+   "field": "demographic"
+  },
+  {
+   "slug": "oshi-o-mikata-ni-tsuketara-saikyou-datte-shittemashitaka",
+   "field": "demographic"
+  },
+  {
+   "slug": "oshikake-assassin-chan-wa-outo-saikyou-no-kanban-musume",
+   "field": "demographic"
+  },
+  {
+   "slug": "oshikoi-capriccio",
+   "field": "demographic"
+  },
+  {
+   "slug": "oshino-ai-ni-kizukanai",
+   "field": "demographic"
+  },
+  {
+   "slug": "oshino-teki-ni-nattanode",
+   "field": "demographic"
+  },
+  {
+   "slug": "oshino-teki-ni-nattanode",
+   "field": "genres"
+  },
+  {
+   "slug": "oshiri-dandy-za-young-nakimushi-na-santa-claus",
+   "field": "demographic"
+  },
+  {
+   "slug": "ossan-wa-nimotsu-demo-motteroyo",
+   "field": "demographic"
+  },
+  {
+   "slug": "othello-to-archimedes-no-bouken",
+   "field": "demographic"
+  },
+  {
+   "slug": "otoko-no-ko-mo-maid-fuku-de-kawaiku-natte-ii-desu-ka",
+   "field": "genres"
+  },
+  {
+   "slug": "otokomae-wa-sheets-de-oboreru",
+   "field": "demographic"
+  },
+  {
+   "slug": "otome-game-heroine-no-hikitateyaku-no-imouto-ni-tensei-shita",
+   "field": "demographic"
+  },
+  {
+   "slug": "otona-no-natsuyasumi-moto-yan-doukyuusei-to-musekaeru-atsui-sannichikan",
+   "field": "demographic"
+  },
+  {
+   "slug": "otonari-san-no-gyaru-ga-boku-o-horesasetaku-te-zenryoku-sugiru",
+   "field": "demographic"
+  },
+  {
+   "slug": "otonatachi-ni-wa-zutto-naisho-da-ze",
+   "field": "demographic"
+  },
+  {
+   "slug": "otsukare-arasaa-wa-i-sekai-de-mofumofu-dragon-to-kishi-no-sewa-o-shiteimasu",
+   "field": "demographic"
+  },
+  {
+   "slug": "ouji-ga-kuuki-yomanasugiru",
+   "field": "demographic"
+  },
+  {
+   "slug": "ouji-wa-muku-na-shinkan-o-koyonaku-aisu",
+   "field": "demographic"
+  },
+  {
+   "slug": "ouke-no-monshou-rensai-50-shuunen-anniversary-book",
+   "field": "demographic"
+  },
+  {
+   "slug": "ouke-no-monshou-rensai-50-shuunen-anniversary-book",
+   "field": "genres"
+  },
+  {
+   "slug": "oukoku-no-kagi-hane2026",
+   "field": "genres"
+  },
+  {
+   "slug": "oukyuu-jijo-anna-no-nichijou",
+   "field": "demographic"
+  },
+  {
+   "slug": "our-afterglow",
+   "field": "demographic"
+  },
+  {
+   "slug": "our-afterglow",
+   "field": "genres"
+  },
+  {
+   "slug": "outei-denka-wa-tenseisha-o-dekiai-suru",
+   "field": "demographic"
+  },
+  {
+   "slug": "outfit",
+   "field": "genres"
+  },
+  {
+   "slug": "over-heal-healer-ka-to-omottara-kyousenshi-datta-ken",
+   "field": "demographic"
+  },
+  {
+   "slug": "oyasumi-hilda",
+   "field": "demographic"
+  },
+  {
+   "slug": "pan-ga-daisuki",
+   "field": "genres"
+  },
+  {
+   "slug": "panjaken",
+   "field": "genres"
+  },
+  {
+   "slug": "paradise-sauna",
+   "field": "demographic"
+  },
+  {
+   "slug": "paradise-shift",
+   "field": "demographic"
+  },
+  {
+   "slug": "party-tsuihou-kara-hajimaru-shuunou-musou",
+   "field": "demographic"
+  },
+  {
+   "slug": "party-tsuihou-kara-hajimaru-shuunou-musou",
+   "field": "genres"
+  },
+  {
+   "slug": "pen-no-yume-ni-aka-o-sasu",
+   "field": "demographic"
+  },
+  {
+   "slug": "pet-gijinka-circle",
+   "field": "genres"
+  },
+  {
+   "slug": "pheromone-triangle",
+   "field": "demographic"
+  },
+  {
+   "slug": "pingu-fun-book",
+   "field": "demographic"
+  },
+  {
+   "slug": "pingu-fun-book",
+   "field": "genres"
+  },
+  {
+   "slug": "pinky-comic",
+   "field": "genres"
+  },
+  {
+   "slug": "piron-no-himitsu",
+   "field": "demographic"
+  },
+  {
+   "slug": "pixel-works",
+   "field": "genres"
+  },
+  {
+   "slug": "plastic-yuu",
+   "field": "demographic"
+  },
+  {
+   "slug": "plastic-yuu",
+   "field": "genres"
+  },
+  {
+   "slug": "playmate-ish",
+   "field": "demographic"
+  },
+  {
+   "slug": "please-save-me-shinpusama",
+   "field": "demographic"
+  },
+  {
+   "slug": "please-save-me-shinpusama",
+   "field": "genres"
+  },
+  {
+   "slug": "pleiades-ni-mukatte-tobe",
+   "field": "demographic"
+  },
+  {
+   "slug": "pleiades-ni-mukatte-tobe",
+   "field": "genres"
+  },
+  {
+   "slug": "poland-kara-yatte-kita-madame-neko-no-kominkagurashi",
+   "field": "genres"
+  },
+  {
+   "slug": "ponkotsu-skill-shika-tsukaenai-akuyaku-majo",
+   "field": "demographic"
+  },
+  {
+   "slug": "poo-san",
+   "field": "demographic"
+  },
+  {
+   "slug": "pose-catalog",
+   "field": "demographic"
+  },
+  {
+   "slug": "pose-file",
+   "field": "demographic"
+  },
+  {
+   "slug": "premier-remarriage",
+   "field": "genres"
+  },
+  {
+   "slug": "prince-of-ghost",
+   "field": "demographic"
+  },
+  {
+   "slug": "project-papo-resonance",
+   "field": "genres"
+  },
+  {
+   "slug": "prologue-wa-shuumatsu-de",
+   "field": "demographic"
+  },
+  {
+   "slug": "prologue-wa-shuumatsu-de",
+   "field": "genres"
+  },
+  {
+   "slug": "propose-wa-daitan-ni",
+   "field": "demographic"
+  },
+  {
+   "slug": "psychopath-gari",
+   "field": "demographic"
+  },
+  {
+   "slug": "puchi-hontouni-atta-yukaina-hanashi-saikyou-shinrei-hiken-sp",
+   "field": "genres"
+  },
+  {
+   "slug": "puchi-hontouni-atta-yukaina-hanashi-yabasa-bakuhatsu-shokuba-houkai-sp",
+   "field": "genres"
+  },
+  {
+   "slug": "punpun-lesser-ninkyouden",
+   "field": "genres"
+  },
+  {
+   "slug": "puraga-esu-puraga",
+   "field": "genres"
+  },
+  {
+   "slug": "puro-no-migawari",
+   "field": "demographic"
+  },
+  {
+   "slug": "q-chi-hakusho",
+   "field": "demographic"
+  },
+  {
+   "slug": "q-chi-hakusho",
+   "field": "genres"
+  },
+  {
+   "slug": "quiz-no-megami-sama",
+   "field": "demographic"
+  },
+  {
+   "slug": "rabi-to-kyaro",
+   "field": "genres"
+  },
+  {
+   "slug": "rabu-buitsu",
+   "field": "genres"
+  },
+  {
+   "slug": "rain-apartment",
+   "field": "demographic"
+  },
+  {
+   "slug": "rainennokotooie-oregawarau",
+   "field": "demographic"
+  },
+  {
+   "slug": "rajikon-kyoushitsu",
+   "field": "genres"
+  },
+  {
+   "slug": "re-i-sekai-de-saikyou-no-skill-o-umidaseta-node",
+   "field": "demographic"
+  },
+  {
+   "slug": "reboot-2010",
+   "field": "genres"
+  },
+  {
+   "slug": "reborn-colore",
+   "field": "genres"
+  },
+  {
+   "slug": "reighborhood",
+   "field": "genres"
+  },
+  {
+   "slug": "reiguu-sareta-dai-nana-ouji-wa-izure-gyafun-to-iwasetai",
+   "field": "demographic"
+  },
+  {
+   "slug": "reijou-vtuber-wa-maid-no-yashoku-ni-juurin-sareru",
+   "field": "demographic"
+  },
+  {
+   "slug": "reijou-vtuber-wa-maid-no-yashoku-ni-juurin-sareru",
+   "field": "genres"
+  },
+  {
+   "slug": "reitetsushiiiioohainakanomegaminikoiwosuru",
+   "field": "genres"
+  },
+  {
+   "slug": "reiwa-no-omocha-uu-pin",
+   "field": "demographic"
+  },
+  {
+   "slug": "reizouko-ni-negi-ga-atta-kamo-kamo",
+   "field": "demographic"
+  },
+  {
+   "slug": "renchi-to-kudamono",
+   "field": "demographic"
+  },
+  {
+   "slug": "renchi-to-kudamono",
+   "field": "genres"
+  },
+  {
+   "slug": "renkinjutsushi-no-yuru-fuwa-ritou-kaitakuki",
+   "field": "demographic"
+  },
+  {
+   "slug": "restore",
+   "field": "demographic"
+  },
+  {
+   "slug": "restore",
+   "field": "genres"
+  },
+  {
+   "slug": "revenge-act",
+   "field": "genres"
+  },
+  {
+   "slug": "riakoshou",
+   "field": "demographic"
+  },
+  {
+   "slug": "riarutaa",
+   "field": "genres"
+  },
+  {
+   "slug": "rika-chan-papa-to-yukito-sensei-wa-kao-ga-ii",
+   "field": "demographic"
+  },
+  {
+   "slug": "rika-chan-papa-to-yukito-sensei-wa-kao-ga-ii",
+   "field": "genres"
+  },
+  {
+   "slug": "rikon-suruhazu-ga-reikoku-kishi-no-dannasama-ni-dekiai-sare-teitayoudesu",
+   "field": "demographic"
+  },
+  {
+   "slug": "rikon-suruhazu-ga-reikoku-kishi-no-dannasama-ni-dekiai-sare-teitayoudesu",
+   "field": "genres"
+  },
+  {
+   "slug": "rikon-zenya",
+   "field": "demographic"
+  },
+  {
+   "slug": "rikon-zenya",
+   "field": "genres"
+  },
+  {
+   "slug": "riminaru-memoria",
+   "field": "demographic"
+  },
+  {
+   "slug": "riminaru-memoria",
+   "field": "genres"
+  },
+  {
+   "slug": "ringo-no-kuni-no-jona",
+   "field": "demographic"
+  },
+  {
+   "slug": "rinjin-no-onii-san",
+   "field": "genres"
+  },
+  {
+   "slug": "rinjin-san-wa-okubyoumono",
+   "field": "genres"
+  },
+  {
+   "slug": "rinkou-craft-weivu",
+   "field": "demographic"
+  },
+  {
+   "slug": "rirei-sama-no-monban",
+   "field": "genres"
+  },
+  {
+   "slug": "riri-mu-holic",
+   "field": "genres"
+  },
+  {
+   "slug": "risemara-death-gamer",
+   "field": "demographic"
+  },
+  {
+   "slug": "risemara-death-gamer",
+   "field": "genres"
+  },
+  {
+   "slug": "rival-araibaru",
+   "field": "genres"
+  },
+  {
+   "slug": "rival-douki-no-onzoushi-wa-otsukaregimi-na-watashi-o-torotoro-ni-amayakashitai",
+   "field": "genres"
+  },
+  {
+   "slug": "robot-carnival",
+   "field": "genres"
+  },
+  {
+   "slug": "rokudenashi-hero",
+   "field": "demographic"
+  },
+  {
+   "slug": "roma-no-yogore-naki-hanayome",
+   "field": "demographic"
+  },
+  {
+   "slug": "romanticist-wa-bucchouzura-shite-yatte-kuru",
+   "field": "demographic"
+  },
+  {
+   "slug": "rongo-manga",
+   "field": "demographic"
+  },
+  {
+   "slug": "rongo",
+   "field": "demographic"
+  },
+  {
+   "slug": "roots",
+   "field": "genres"
+  },
+  {
+   "slug": "rouren-no-jikuu-kenshi-wakagaeru",
+   "field": "demographic"
+  },
+  {
+   "slug": "roushi",
+   "field": "demographic"
+  },
+  {
+   "slug": "rudolf-to-ippaiattena",
+   "field": "genres"
+  },
+  {
+   "slug": "runapurena-no-namida",
+   "field": "demographic"
+  },
+  {
+   "slug": "runoriita",
+   "field": "genres"
+  },
+  {
+   "slug": "ryakudatsu-sareta-ougon-no-hanayome",
+   "field": "demographic"
+  },
+  {
+   "slug": "ryakudatsu-sareta-ougon-no-hanayome",
+   "field": "genres"
+  },
+  {
+   "slug": "ryuu-kari-no-nato-dragon-hunt-tribe",
+   "field": "demographic"
+  },
+  {
+   "slug": "ryuu-karu-oji-ni-hatsukoi",
+   "field": "genres"
+  },
+  {
+   "slug": "ryuu-no-ishidan",
+   "field": "demographic"
+  },
+  {
+   "slug": "ryuujin-koutei-to-himitsu-no-tsugai-no-chouhi-fukaai-o-sosogare-yotsug",
+   "field": "demographic"
+  },
+  {
+   "slug": "ryuujin-koutei-to-himitsu-no-tsugai-no-chouhi-fukaai-o-sosogare-yotsug",
+   "field": "genres"
+  },
+  {
+   "slug": "ryuuto-ama-ga-mi",
+   "field": "demographic"
+  },
+  {
+   "slug": "ryuuzaki-takashionsan-nitsuite",
+   "field": "demographic"
+  },
+  {
+   "slug": "ryuuzakisan-ga-ore-no-mae-dake-de-dereru-riyuu",
+   "field": "demographic"
+  },
+  {
+   "slug": "sabaku-ni-ochita-ruby",
+   "field": "demographic"
+  },
+  {
+   "slug": "sadistic-mellow-lover",
+   "field": "demographic"
+  },
+  {
+   "slug": "sadistic-mellow-lover",
+   "field": "genres"
+  },
+  {
+   "slug": "saenai-ossan-jitsuha-saikyou",
+   "field": "demographic"
+  },
+  {
+   "slug": "sai-2002",
+   "field": "genres"
+  },
+  {
+   "slug": "sai-kitaryou-no-kaibutsu",
+   "field": "demographic"
+  },
+  {
+   "slug": "sai-mi-no-yoake-made",
+   "field": "demographic"
+  },
+  {
+   "slug": "sai-mi-no-yoake-made",
+   "field": "genres"
+  },
+  {
+   "slug": "saien",
+   "field": "genres"
+  },
+  {
+   "slug": "saigasan-wa-koikun-o-medetai",
+   "field": "demographic"
+  },
+  {
+   "slug": "saigo-no-inyoushi-to-sono-tsuma",
+   "field": "demographic"
+  },
+  {
+   "slug": "saikyou-jump-ryuu-e-no-egakikata-kouza-edou",
+   "field": "genres"
+  },
+  {
+   "slug": "saikyou-kizoku-wa-shibou-furagu-o-kutsugaesu",
+   "field": "demographic"
+  },
+  {
+   "slug": "saikyou-mahou-kyoushi-emiria-kurein-wa-hohoemu",
+   "field": "genres"
+  },
+  {
+   "slug": "saikyou-majutsushi-no-dekiai-saijo-moto-partner-to-fukuen-shitara-nido",
+   "field": "demographic"
+  },
+  {
+   "slug": "saikyou-majutsushi-no-dekiai-saijo-moto-partner-to-fukuen-shitara-nido",
+   "field": "genres"
+  },
+  {
+   "slug": "saikyou-no-madousho-wa-kurorekishi-note",
+   "field": "demographic"
+  },
+  {
+   "slug": "saikyou-no-madousho-wa-kurorekishi-note",
+   "field": "genres"
+  },
+  {
+   "slug": "saikyou-no-seibishi",
+   "field": "demographic"
+  },
+  {
+   "slug": "saikyou-no-seibishi",
+   "field": "genres"
+  },
+  {
+   "slug": "saikyou-no-sokushitsu",
+   "field": "demographic"
+  },
+  {
+   "slug": "saimu-mahou-shoujo-kurekariboka",
+   "field": "demographic"
+  },
+  {
+   "slug": "saioshi-kouryaku-taishou-ga-irunoni-chuutoriaru-de-shinitaku-arimasen",
+   "field": "demographic"
+  },
+  {
+   "slug": "saioshi-no-mama-ni-natta-ken",
+   "field": "demographic"
+  },
+  {
+   "slug": "saioshi-no-mama-ni-natta-ken",
+   "field": "genres"
+  },
+  {
+   "slug": "saitou-takawo-gekiga-no-sekai",
+   "field": "genres"
+  },
+  {
+   "slug": "saiyakukyuu-skill-boushoku-maoumochi-no-akuyaku-kizoku-ni-tensei-shimashita-ga-s",
+   "field": "demographic"
+  },
+  {
+   "slug": "saka-no-aru-machi",
+   "field": "demographic"
+  },
+  {
+   "slug": "sakai-no-kuni-no-ouji-to-juusha",
+   "field": "demographic"
+  },
+  {
+   "slug": "saki-no-kousetsu-hyakumonogatari",
+   "field": "demographic"
+  },
+  {
+   "slug": "sakigake-josei-jieikan-hajimete-monogatari",
+   "field": "genres"
+  },
+  {
+   "slug": "sakisaka-io-irasutoreeshonzu",
+   "field": "genres"
+  },
+  {
+   "slug": "sakka-keiji-busujima",
+   "field": "demographic"
+  },
+  {
+   "slug": "sakka-sensei-no-o-yomesa-n",
+   "field": "demographic"
+  },
+  {
+   "slug": "sakura-gahou-taizen",
+   "field": "genres"
+  },
+  {
+   "slug": "sakura-no-en",
+   "field": "demographic"
+  },
+  {
+   "slug": "sakura-no-en",
+   "field": "genres"
+  },
+  {
+   "slug": "sakura-no-yomeiri",
+   "field": "demographic"
+  },
+  {
+   "slug": "sakura-no-yomeiri",
+   "field": "genres"
+  },
+  {
+   "slug": "sakurairo-dialogue",
+   "field": "demographic"
+  },
+  {
+   "slug": "sakurairo-dialogue",
+   "field": "genres"
+  },
+  {
+   "slug": "sakushina-ou-taishi-no-dekiai-houimou",
+   "field": "demographic"
+  },
+  {
+   "slug": "sakushina-ou-taishi-no-dekiai-houimou",
+   "field": "genres"
+  },
+  {
+   "slug": "salaryman-isekai-de-meshi-o-taberu",
+   "field": "demographic"
+  },
+  {
+   "slug": "salaryman-isekai-de-meshi-o-taberu",
+   "field": "genres"
+  },
+  {
+   "slug": "sarubia-no-kaioku",
+   "field": "genres"
+  },
+  {
+   "slug": "sasaki-ao-ga-megane-o-hazushitara",
+   "field": "demographic"
+  },
+  {
+   "slug": "sasaki-ao-ga-megane-o-hazushitara",
+   "field": "genres"
+  },
+  {
+   "slug": "sasamorikun-no-skirt",
+   "field": "genres"
+  },
+  {
+   "slug": "sasoriza-no-shinzou",
+   "field": "demographic"
+  },
+  {
+   "slug": "satonaka-machiko-sakuhinshuu",
+   "field": "genres"
+  },
+  {
+   "slug": "savuma",
+   "field": "demographic"
+  },
+  {
+   "slug": "savuma",
+   "field": "genres"
+  },
+  {
+   "slug": "scp-tte-nanidesu-ka",
+   "field": "demographic"
+  },
+  {
+   "slug": "scramble-recipe",
+   "field": "genres"
+  },
+  {
+   "slug": "seaside-call",
+   "field": "demographic"
+  },
+  {
+   "slug": "second-kiss-kara-hajimaru-koi",
+   "field": "demographic"
+  },
+  {
+   "slug": "second-treasure",
+   "field": "genres"
+  },
+  {
+   "slug": "secret-after-twilight",
+   "field": "demographic"
+  },
+  {
+   "slug": "seederuhorumu-no-majo-no-ie",
+   "field": "demographic"
+  },
+  {
+   "slug": "sei-heroine-ni-tensei-shimashita-ga-unmei-no-haguruma-wa-butsuri-de",
+   "field": "demographic"
+  },
+  {
+   "slug": "sei-zokusei-healer-wa-onna-kishidan-no-suketto-kaifukujutsushi",
+   "field": "demographic"
+  },
+  {
+   "slug": "seijo-no-chikara-de-konyakusha-o-ubawaretakedo",
+   "field": "demographic"
+  },
+  {
+   "slug": "seijo-no-kago-o-futago-no-imouto-ni-ubawareta-node-tabi-ni-demasu",
+   "field": "demographic"
+  },
+  {
+   "slug": "seijo-no-watashi-ga-korosareta",
+   "field": "demographic"
+  },
+  {
+   "slug": "seijoda-kedo-yami-ochi-shitara-hiyoko-ni-narimashita-comic",
+   "field": "demographic"
+  },
+  {
+   "slug": "seimei-40-okunen-haruka-na-tabi",
+   "field": "demographic"
+  },
+  {
+   "slug": "seimei-40-okunen-haruka-na-tabi",
+   "field": "genres"
+  },
+  {
+   "slug": "seimei-sama-no-ossharu-koto-ni-wa",
+   "field": "demographic"
+  },
+  {
+   "slug": "seimei-sama-no-ossharu-koto-ni-wa",
+   "field": "genres"
+  },
+  {
+   "slug": "seinarunamakemononoboukensashieshuu",
+   "field": "genres"
+  },
+  {
+   "slug": "seiou-geika-wa-munou-oujo-ni-korosaretai",
+   "field": "demographic"
+  },
+  {
+   "slug": "seirei-ni-aisaresugita-harapeko-seijo",
+   "field": "demographic"
+  },
+  {
+   "slug": "seiryaku-kekkon-no-otto-ni-aisanakute-kekkoudesu-to-sengen-shitara",
+   "field": "demographic"
+  },
+  {
+   "slug": "seiryaku-yori-ai-o-eranda-kekkon",
+   "field": "demographic"
+  },
+  {
+   "slug": "seiryaku-yori-ai-o-eranda-kekkon",
+   "field": "genres"
+  },
+  {
+   "slug": "seiryoku-ga-maryoku-ni-henkan-sareru-sekai-ni-tenshou-shimashita",
+   "field": "demographic"
+  },
+  {
+   "slug": "seishun-tetsudou-2027-nendoban",
+   "field": "demographic"
+  },
+  {
+   "slug": "seishun-tetsudou-2027-nendoban",
+   "field": "genres"
+  },
+  {
+   "slug": "seiza-to-hoshi-uranai-no-himitsu",
+   "field": "genres"
+  },
+  {
+   "slug": "sekai-de-yuiitsu-dungeon-sai-kasou-ni-toutatsu-shita-otoko-bishoujo-haishinsha",
+   "field": "demographic"
+  },
+  {
+   "slug": "sekai-ikeoji-ikeoba-kikou-europe-asia-hen",
+   "field": "demographic"
+  },
+  {
+   "slug": "sekai-ikeoji-ikeoba-kikou-europe-asia-hen",
+   "field": "genres"
+  },
+  {
+   "slug": "sekai-keizai-nyuumon",
+   "field": "genres"
+  },
+  {
+   "slug": "sekai-mangajuku",
+   "field": "genres"
+  },
+  {
+   "slug": "sekai-ni-q-no-hitotsumami",
+   "field": "demographic"
+  },
+  {
+   "slug": "sekai-ni-q-no-hitotsumami",
+   "field": "genres"
+  },
+  {
+   "slug": "sekai-no-meisaku-opera",
+   "field": "demographic"
+  },
+  {
+   "slug": "sekai-o-tabi-shite-o-uchi-de-tsukutte",
+   "field": "demographic"
+  },
+  {
+   "slug": "sekai-saikyou-no-maryokumochi-wa-heion-ni-kurashitai-nazeka-ou-taishi",
+   "field": "demographic"
+  },
+  {
+   "slug": "sekigan-sanbou-no-inbina-dekiai",
+   "field": "genres"
+  },
+  {
+   "slug": "sekirei-endearment",
+   "field": "genres"
+  },
+  {
+   "slug": "sekkyaku-shugyou-bosatsuchan",
+   "field": "genres"
+  },
+  {
+   "slug": "sekokan",
+   "field": "demographic"
+  },
+  {
+   "slug": "sekokan",
+   "field": "genres"
+  },
+  {
+   "slug": "sengoku-nehan-ibun",
+   "field": "demographic"
+  },
+  {
+   "slug": "senjitsu-yuusha-kara-tasukete-itadaita-seiken-desu",
+   "field": "genres"
+  },
+  {
+   "slug": "senkounoboukensha",
+   "field": "demographic"
+  },
+  {
+   "slug": "sennou-skill-de-i-sekai-musou",
+   "field": "demographic"
+  },
+  {
+   "slug": "senpai-sono-o-shiri-wa-fu-majimedesu",
+   "field": "demographic"
+  },
+  {
+   "slug": "senpai-to-kouhai-dai-abare-no-hibi",
+   "field": "genres"
+  },
+  {
+   "slug": "senpai-tsukiatte-kudasai",
+   "field": "demographic"
+  },
+  {
+   "slug": "senrihin-reijou-sheriru-wa-jibun-o-korosu-otto-o-kago-shitai",
+   "field": "demographic"
+  },
+  {
+   "slug": "sensei-nishie2026",
+   "field": "demographic"
+  },
+  {
+   "slug": "sensei-nishie2026",
+   "field": "genres"
+  },
+  {
+   "slug": "sensei-to-boku-no-o-miai-kekkon",
+   "field": "demographic"
+  },
+  {
+   "slug": "sensei-wa-sore-ni-kizukanai",
+   "field": "genres"
+  },
+  {
+   "slug": "sensei-watashi-o-koroshite",
+   "field": "demographic"
+  },
+  {
+   "slug": "senya-o-kago-mu",
+   "field": "demographic"
+  },
+  {
+   "slug": "senya-o-kago-mu",
+   "field": "genres"
+  },
+  {
+   "slug": "serafikku-feather-irasutoreeshonzu",
+   "field": "genres"
+  },
+  {
+   "slug": "serena",
+   "field": "demographic"
+  },
+  {
+   "slug": "shachi-san-to-rakko-kun",
+   "field": "demographic"
+  },
+  {
+   "slug": "shachi-san-to-rakko-kun",
+   "field": "genres"
+  },
+  {
+   "slug": "shachiku-chan-to-seikatsu-kaizenkei-shota-akuma",
+   "field": "demographic"
+  },
+  {
+   "slug": "shachiku-na-mogura-wa-isekai-de-toragami-sama-to-koi-o-suru",
+   "field": "demographic"
+  },
+  {
+   "slug": "shachiku-na-mogura-wa-isekai-de-toragami-sama-to-koi-o-suru",
+   "field": "genres"
+  },
+  {
+   "slug": "shakunetsu-no-koi",
+   "field": "demographic"
+  },
+  {
+   "slug": "shakunetsu-no-koi",
+   "field": "genres"
+  },
+  {
+   "slug": "sharigawa-no-himitsu-kichi",
+   "field": "demographic"
+  },
+  {
+   "slug": "shi-hime-to-yobareta-mahoutsukai-to-henkyou-no-saikyou-kenshi",
+   "field": "demographic"
+  },
+  {
+   "slug": "shi-nikake-shoujo-to-kumo-ouji",
+   "field": "demographic"
+  },
+  {
+   "slug": "shi-nikake-shoujo-to-kumo-ouji",
+   "field": "genres"
+  },
+  {
+   "slug": "shiawase-o-enjite",
+   "field": "demographic"
+  },
+  {
+   "slug": "shiawase-o-enjite",
+   "field": "genres"
+  },
+  {
+   "slug": "shiawase-o-yobu-butsuzou-meguri",
+   "field": "demographic"
+  },
+  {
+   "slug": "shiba-reiji-no-hentai",
+   "field": "demographic"
+  },
+  {
+   "slug": "shibazakisan-no-kemono-michi",
+   "field": "demographic"
+  },
+  {
+   "slug": "shibukaseshi-kaseifu-san",
+   "field": "genres"
+  },
+  {
+   "slug": "shichijouke-no-itotsukai",
+   "field": "demographic"
+  },
+  {
+   "slug": "shichijouke-no-itotsukai",
+   "field": "genres"
+  },
+  {
+   "slug": "shihonron",
+   "field": "demographic"
+  },
+  {
+   "slug": "shii-chan-no-sorekara",
+   "field": "genres"
+  },
+  {
+   "slug": "shii-chan-no-tamatebako",
+   "field": "genres"
+  },
+  {
+   "slug": "shiitagerare-seijo-to-itto-koushaku-kari-hajime-kon-nohazu-ga-dekiai-s",
+   "field": "demographic"
+  },
+  {
+   "slug": "shiitagerareta-juusha-tekichi-no-tenshi-na-ojousama-ni-hirowareru",
+   "field": "demographic"
+  },
+  {
+   "slug": "shiitagerareta-shuusai-reijou-to-ringoku-no-haraguro-kenkyuusha-sama",
+   "field": "demographic"
+  },
+  {
+   "slug": "shijou-saikou-no-ryouchi-sekkeishi",
+   "field": "demographic"
+  },
+  {
+   "slug": "shijou-sekai-manga-manyuu",
+   "field": "genres"
+  },
+  {
+   "slug": "shijuu-houchiden",
+   "field": "demographic"
+  },
+  {
+   "slug": "shikabanchouruizufu",
+   "field": "genres"
+  },
+  {
+   "slug": "shikiyoku-hadou",
+   "field": "demographic"
+  },
+  {
+   "slug": "shimazu-kyouko-za-best",
+   "field": "genres"
+  },
+  {
+   "slug": "shimizu-kun-nomi-zu-tamari",
+   "field": "demographic"
+  },
+  {
+   "slug": "shimura-takako-irasuto-works",
+   "field": "genres"
+  },
+  {
+   "slug": "shin-kamen-rider-spirits-lonely-kamen-rider-hen",
+   "field": "demographic"
+  },
+  {
+   "slug": "shin-no-jitsuryoku-o-kakushiteiru-to-omowareteru-seireishi",
+   "field": "demographic"
+  },
+  {
+   "slug": "shin-shimarisu-club",
+   "field": "genres"
+  },
+  {
+   "slug": "shinda-kimura-o-jouen",
+   "field": "demographic"
+  },
+  {
+   "slug": "shinen-no-jikenbo",
+   "field": "genres"
+  },
+  {
+   "slug": "shinigami-kishi-wa-unmei-no-konyakusha-o-hanasanai",
+   "field": "demographic"
+  },
+  {
+   "slug": "shinigami-no-hanshin",
+   "field": "demographic"
+  },
+  {
+   "slug": "shinigami-shoujo-wa-kage-kara-oshi-o-nagametai",
+   "field": "demographic"
+  },
+  {
+   "slug": "shinigami-shoujo-wa-kage-kara-oshi-o-nagametai",
+   "field": "genres"
+  },
+  {
+   "slug": "shinigami-to-reijou-1-kan",
+   "field": "demographic"
+  },
+  {
+   "slug": "shinigami-to-reijou-1-kan",
+   "field": "genres"
+  },
+  {
+   "slug": "shinimodori-koujo-wa-kurikaesu-sekai-o-owarasetai",
+   "field": "demographic"
+  },
+  {
+   "slug": "shinimodori-no-akuyaku-reijou-wa-nidome-no-jinsei",
+   "field": "demographic"
+  },
+  {
+   "slug": "shinimodori-no-barahime-wa-tekikoku-no-koushaku-ni-dekiai-sareru",
+   "field": "demographic"
+  },
+  {
+   "slug": "shinimodori-no-hanayome",
+   "field": "demographic"
+  },
+  {
+   "slug": "shinitai-anata-ni-danshi-daigakusei-ga-oniku-o-gochisou-shitekureru",
+   "field": "demographic"
+  },
+  {
+   "slug": "shiniyaku-wa-gomenna-node-suki-ni-sase-temoraimasu",
+   "field": "demographic"
+  },
+  {
+   "slug": "shinjin-henshuu-kun-ga-kawaisugite-muri",
+   "field": "demographic"
+  },
+  {
+   "slug": "shinjin-henshuu-kun-ga-kawaisugite-muri",
+   "field": "genres"
+  },
+  {
+   "slug": "shinjuku-kaishouroku-tenchou-miichan-to-yamada-san-gaiden",
+   "field": "demographic"
+  },
+  {
+   "slug": "shinkuro-mellow-guide",
+   "field": "demographic"
+  },
+  {
+   "slug": "shinmai-majo-no-i-sekai-o-kiraku-tabi",
+   "field": "demographic"
+  },
+  {
+   "slug": "shinobedo-mo",
+   "field": "genres"
+  },
+  {
+   "slug": "shinpen-o-kiyometekara-denaoshitekudasaimase",
+   "field": "demographic"
+  },
+  {
+   "slug": "shinpen-o-kiyometekara-denaoshitekudasaimase",
+   "field": "genres"
+  },
+  {
+   "slug": "shinrei-shashin-mitsubai-manual",
+   "field": "demographic"
+  },
+  {
+   "slug": "shinshi-ga-hanayome-o-sagasutoki",
+   "field": "demographic"
+  },
+  {
+   "slug": "shinshi-ga-hanayome-o-sagasutoki",
+   "field": "genres"
+  },
+  {
+   "slug": "shinyaku-seisho",
+   "field": "demographic"
+  },
+  {
+   "slug": "shinzou-no-yuuten",
+   "field": "demographic"
+  },
+  {
+   "slug": "shiratori-kazuko-wa-31-kaku",
+   "field": "demographic"
+  },
+  {
+   "slug": "shirayukihime-no-ichizuna-koi",
+   "field": "demographic"
+  },
+  {
+   "slug": "shirayukihimetonananinnokoibitotoiujuuhachikin-otomegeehiroinnitensei",
+   "field": "genres"
+  },
+  {
+   "slug": "shiro-bara-wa-junketsu-no-shirushi",
+   "field": "demographic"
+  },
+  {
+   "slug": "shiro-buta-ouji-o-produce",
+   "field": "demographic"
+  },
+  {
+   "slug": "shiro-buta-ouji-o-produce",
+   "field": "genres"
+  },
+  {
+   "slug": "shiroikekkonnodannasamatotsumugusaigonoikkagetsu",
+   "field": "genres"
+  },
+  {
+   "slug": "shironagasu-tou-e-no-kikan",
+   "field": "demographic"
+  },
+  {
+   "slug": "shirouto-yori-mo-kuzu-nande",
+   "field": "demographic"
+  },
+  {
+   "slug": "shishuuoroshi",
+   "field": "genres"
+  },
+  {
+   "slug": "shita-kanda-toki-to-daitai-issho",
+   "field": "demographic"
+  },
+  {
+   "slug": "shitai-wa-kataru",
+   "field": "demographic"
+  },
+  {
+   "slug": "shitasaki-ni-moudoku",
+   "field": "demographic"
+  },
+  {
+   "slug": "shitsudo-takame-na-ryou-kataomoi",
+   "field": "demographic"
+  },
+  {
+   "slug": "shitsudo-takame-na-ryou-kataomoi",
+   "field": "genres"
+  },
+  {
+   "slug": "shitsujidesu-ga-nani-ka",
+   "field": "demographic"
+  },
+  {
+   "slug": "shitte-irukana-kisetsu-no-kotoba-to-gyouji",
+   "field": "genres"
+  },
+  {
+   "slug": "shizen-to-kakawaru-shigoto",
+   "field": "genres"
+  },
+  {
+   "slug": "shizuka-ni-ohirune",
+   "field": "genres"
+  },
+  {
+   "slug": "sho-to-manga-no-duo",
+   "field": "genres"
+  },
+  {
+   "slug": "shokei-flag-no-akuyaku-kizoku-ni-tensei-shita-ga-shinitakunai",
+   "field": "genres"
+  },
+  {
+   "slug": "shokei-sareta-akuyaku-reijou-wa-toki-o-sakanobori-fukushuu-suru",
+   "field": "demographic"
+  },
+  {
+   "slug": "shokigai-kara-tabidatanai-yuusha-no-harem-life-yuushasama-konpura-teki-ni-out",
+   "field": "demographic"
+  },
+  {
+   "slug": "shokigai-kara-tabidatanai-yuusha-no-harem-life-yuushasama-konpura-teki-ni-out",
+   "field": "genres"
+  },
+  {
+   "slug": "shokubutsu-dai-tanken",
+   "field": "genres"
+  },
+  {
+   "slug": "shokugyou-eivui-kantoku",
+   "field": "genres"
+  },
+  {
+   "slug": "shokugyou-ouhidesu-node-ou-no-dekiai-wa-go-enryo-negaimasu",
+   "field": "demographic"
+  },
+  {
+   "slug": "short-cake-to-kase-san",
+   "field": "genres"
+  },
+  {
+   "slug": "shoudousei-heroic",
+   "field": "genres"
+  },
+  {
+   "slug": "shoujo-manga-ja-oshietekurenai",
+   "field": "demographic"
+  },
+  {
+   "slug": "shoujo-seikan-hyouryuuki",
+   "field": "demographic"
+  },
+  {
+   "slug": "shoujo-zasshiron",
+   "field": "genres"
+  },
+  {
+   "slug": "shoukan-sareta-migawari-no-nie-hime-wa-i-sekai-sabaku-no-zetsurin-kout",
+   "field": "demographic"
+  },
+  {
+   "slug": "shousou-antitragus",
+   "field": "demographic"
+  },
+  {
+   "slug": "shousou-antitragus",
+   "field": "genres"
+  },
+  {
+   "slug": "shouwa-mama-to-reiwa-kids",
+   "field": "demographic"
+  },
+  {
+   "slug": "shouwa-mama-to-reiwa-kids",
+   "field": "genres"
+  },
+  {
+   "slug": "shouwana-kimi-to-reiwana-boku",
+   "field": "demographic"
+  },
+  {
+   "slug": "shoya-ni-shippai-shita-yuunou-ou-wa-ubuna-niizuma-o-dekiai-shitai",
+   "field": "demographic"
+  },
+  {
+   "slug": "shufu-no-seikatsu",
+   "field": "genres"
+  },
+  {
+   "slug": "shukusai-no-rinbu",
+   "field": "genres"
+  },
+  {
+   "slug": "shukuteki-no-ie-no-toushu-o-tsuma-ni-moraimashita",
+   "field": "demographic"
+  },
+  {
+   "slug": "shungiku",
+   "field": "genres"
+  },
+  {
+   "slug": "shuuden-sugitara-mechakucha-yaritai",
+   "field": "demographic"
+  },
+  {
+   "slug": "shuudouin-sodachi-no-hanayome",
+   "field": "demographic"
+  },
+  {
+   "slug": "shuudouin-sodachi-no-hanayome",
+   "field": "genres"
+  },
+  {
+   "slug": "shuugen-no-kago",
+   "field": "demographic"
+  },
+  {
+   "slug": "shuukan-shounen-magazine-meisaku-selection-climax-o-mou-ichido",
+   "field": "genres"
+  },
+  {
+   "slug": "shuumatsu-neko-shounin",
+   "field": "genres"
+  },
+  {
+   "slug": "sister-dont-cry",
+   "field": "genres"
+  },
+  {
+   "slug": "slime-master-chan-no-vrmmo",
+   "field": "demographic"
+  },
+  {
+   "slug": "soda-masahito-sakuhinshuu",
+   "field": "genres"
+  },
+  {
+   "slug": "sodachisugita-tama-2",
+   "field": "demographic"
+  },
+  {
+   "slug": "sofubo-o-tazune-te-iede-kyoudai-ninin-tabi",
+   "field": "demographic"
+  },
+  {
+   "slug": "sofubo-o-tazune-te-iede-kyoudai-ninin-tabi",
+   "field": "genres"
+  },
+  {
+   "slug": "soiree-no-maku-ga-agarumade",
+   "field": "demographic"
+  },
+  {
+   "slug": "sokuhi-no-oshigoto-wa-shuuryou-desu",
+   "field": "demographic"
+  },
+  {
+   "slug": "soloist-tachi-wa-seishun-fukahi",
+   "field": "demographic"
+  },
+  {
+   "slug": "sono-te-de-hi-o-tsukete",
+   "field": "demographic"
+  },
+  {
+   "slug": "sonomama-rensai-dai1kai-matsumoto-1-ji",
+   "field": "genres"
+  },
+  {
+   "slug": "sonshi-1993",
+   "field": "demographic"
+  },
+  {
+   "slug": "sora-chan-no-boushi",
+   "field": "genres"
+  },
+  {
+   "slug": "sora-ga-haretara",
+   "field": "genres"
+  },
+  {
+   "slug": "sore-ike-heianbu",
+   "field": "genres"
+  },
+  {
+   "slug": "soreigai-no-hoshitachi",
+   "field": "demographic"
+  },
+  {
+   "slug": "soshite-setsuna-wa-kurikaesu",
+   "field": "demographic"
+  },
+  {
+   "slug": "souchousama-dekiaichuu-ni-tsuki",
+   "field": "genres"
+  },
+  {
+   "slug": "souiu-hoshi-no-hito",
+   "field": "demographic"
+  },
+  {
+   "slug": "souiu-hoshi-no-hito",
+   "field": "genres"
+  },
+  {
+   "slug": "soumuka-no-hatagami-kun-no-obentou",
+   "field": "demographic"
+  },
+  {
+   "slug": "soushi",
+   "field": "demographic"
+  },
+  {
+   "slug": "souten-no-kyojoukoku",
+   "field": "demographic"
+  },
+  {
+   "slug": "speace-ship-ee",
+   "field": "genres"
+  },
+  {
+   "slug": "sphericon",
+   "field": "genres"
+  },
+  {
+   "slug": "spring-seeru",
+   "field": "genres"
+  },
+  {
+   "slug": "sssspecial",
+   "field": "genres"
+  },
+  {
+   "slug": "star-collector",
+   "field": "genres"
+  },
+  {
+   "slug": "star-to-oobaa",
+   "field": "genres"
+  },
+  {
+   "slug": "star-train-natsuoka2026",
+   "field": "demographic"
+  },
+  {
+   "slug": "stealth-reijou-no-renai-jijou",
+   "field": "demographic"
+  },
+  {
+   "slug": "stealth-reijou-no-renai-jijou",
+   "field": "genres"
+  },
+  {
+   "slug": "steam-dream",
+   "field": "genres"
+  },
+  {
+   "slug": "stray",
+   "field": "genres"
+  },
+  {
+   "slug": "studio-jiburi-sakuhin-kanren-shiryoushuu",
+   "field": "demographic"
+  },
+  {
+   "slug": "subete-no-negative-o-plus-ni-kaeru-otto-hige-taihennatoki-koso-ookiku-hen-wareru",
+   "field": "demographic"
+  },
+  {
+   "slug": "subete-no-negative-o-plus-ni-kaeru-otto-hige-taihennatoki-koso-ookiku-hen-wareru",
+   "field": "genres"
+  },
+  {
+   "slug": "succubus-no-wakaresaseya-san",
+   "field": "demographic"
+  },
+  {
+   "slug": "sudamadoro",
+   "field": "demographic"
+  },
+  {
+   "slug": "sudamadoro",
+   "field": "genres"
+  },
+  {
+   "slug": "sudate-hina-garasu",
+   "field": "demographic"
+  },
+  {
+   "slug": "sugar-appeal",
+   "field": "demographic"
+  },
+  {
+   "slug": "sugar-sugar-strawberry",
+   "field": "demographic"
+  },
+  {
+   "slug": "sugata-o-itsuwatteita-reijou-wa-onnagiraina-koushakusama-no-osewagakari",
+   "field": "demographic"
+  },
+  {
+   "slug": "sugiura-shigeru-no-chotto-tarinai-meisaku-gekijou",
+   "field": "genres"
+  },
+  {
+   "slug": "sugiura-shigeru-no-omoshiro-sekai",
+   "field": "genres"
+  },
+  {
+   "slug": "sugiyama-genshou-irasuto-sakuhinshuu",
+   "field": "genres"
+  },
+  {
+   "slug": "suguri-no-kisetsu",
+   "field": "genres"
+  },
+  {
+   "slug": "sui-gattsuo",
+   "field": "genres"
+  },
+  {
+   "slug": "suika-no-ice",
+   "field": "genres"
+  },
+  {
+   "slug": "suiso",
+   "field": "genres"
+  },
+  {
+   "slug": "suki-dake-choudai",
+   "field": "demographic"
+  },
+  {
+   "slug": "sukida-to-itteyo-chuukenkun",
+   "field": "demographic"
+  },
+  {
+   "slug": "sukida-yo-mint-chan",
+   "field": "demographic"
+  },
+  {
+   "slug": "sukida-yo-mint-chan",
+   "field": "genres"
+  },
+  {
+   "slug": "sukina-ko-ni-kokuttara-futago-no-imouto-ga-omake-de-tsuitekita",
+   "field": "demographic"
+  },
+  {
+   "slug": "sukina-ko-ni-kokuttara-futago-no-imouto-ga-omake-de-tsuitekita",
+   "field": "genres"
+  },
+  {
+   "slug": "sukina-yatsu-ga-tomodachi-ni-naritai-toka-iundesu-kedo",
+   "field": "demographic"
+  },
+  {
+   "slug": "sukina-yatsu-ga-tomodachi-ni-naritai-toka-iundesu-kedo",
+   "field": "genres"
+  },
+  {
+   "slug": "sukoshi-nagame-no-isshun",
+   "field": "demographic"
+  },
+  {
+   "slug": "sukosuko-file",
+   "field": "genres"
+  },
+  {
+   "slug": "sukuiagete-kamisama",
+   "field": "demographic"
+  },
+  {
+   "slug": "sultan-to-tsuki-no-sabaku-de",
+   "field": "demographic"
+  },
+  {
+   "slug": "sumiharu-hammer",
+   "field": "demographic"
+  },
+  {
+   "slug": "sunrise-hill",
+   "field": "demographic"
+  },
+  {
+   "slug": "sunrise-hill",
+   "field": "genres"
+  },
+  {
+   "slug": "supadari-dom-sama-no-kaikan-komando-kono-kekkon-gyoumugai",
+   "field": "demographic"
+  },
+  {
+   "slug": "supadari-osananajimi-wa-dekiai-nikushoku-danshi",
+   "field": "demographic"
+  },
+  {
+   "slug": "supadarimiman-kareshiijou",
+   "field": "demographic"
+  },
+  {
+   "slug": "super-robot-comic-getter-robo-hen",
+   "field": "genres"
+  },
+  {
+   "slug": "super-robot-comic-majingaazetto-hen",
+   "field": "genres"
+  },
+  {
+   "slug": "super-sentai-gahou",
+   "field": "genres"
+  },
+  {
+   "slug": "sutairingu-smile",
+   "field": "genres"
+  },
+  {
+   "slug": "suterare-maou-no-gyakuten-harem-onna-yuusha-to-moto-yome-kakeru-4",
+   "field": "demographic"
+  },
+  {
+   "slug": "suterare-seijo-wa-hatarakana-i",
+   "field": "demographic"
+  },
+  {
+   "slug": "suterare-seijo-wa-hatarakana-i",
+   "field": "genres"
+  },
+  {
+   "slug": "suterareru-hazu-no-akusai-nanoni-reitetsu-koushaku-sama",
+   "field": "demographic"
+  },
+  {
+   "slug": "suterareta-moto-seijo-ga-shiawase-ni-narumade",
+   "field": "demographic"
+  },
+  {
+   "slug": "suterareta-moto-seijo-ga-shiawase-ni-narumade",
+   "field": "genres"
+  },
+  {
+   "slug": "suterareta-oujo-no-himitsu-no-shinshitsu",
+   "field": "demographic"
+  },
+  {
+   "slug": "suterareta-oujo-no-himitsu-no-shinshitsu",
+   "field": "genres"
+  },
+  {
+   "slug": "suto-manga",
+   "field": "genres"
+  },
+  {
+   "slug": "suupu-no-mori",
+   "field": "demographic"
+  },
+  {
+   "slug": "suzuki-ritsu-dai-ni-tan-henshuu-suichoku-uchuu-mugen",
+   "field": "demographic"
+  },
+  {
+   "slug": "suzume-kun-wa-kawaiitte-iwaretakunai",
+   "field": "demographic"
+  },
+  {
+   "slug": "symmetrical-paradox",
+   "field": "genres"
+  },
+  {
+   "slug": "synesthesia",
+   "field": "demographic"
+  },
+  {
+   "slug": "system-to-gishiki",
+   "field": "genres"
+  },
+  {
+   "slug": "tabemono-no-shouka",
+   "field": "genres"
+  },
+  {
+   "slug": "tabibon-toukyou-urouro-sanpo-hen",
+   "field": "demographic"
+  },
+  {
+   "slug": "tactics-illustration-works",
+   "field": "genres"
+  },
+  {
+   "slug": "tada-hitori-no-hito",
+   "field": "demographic"
+  },
+  {
+   "slug": "tada-ima-taikichuu-nitsuki",
+   "field": "demographic"
+  },
+  {
+   "slug": "tada-kaoru-the-best",
+   "field": "genres"
+  },
+  {
+   "slug": "tada-no-kaerutachi",
+   "field": "genres"
+  },
+  {
+   "slug": "tada-no-ossan-maou-no-musume-no-henkyou-wonderful-life",
+   "field": "genres"
+  },
+  {
+   "slug": "tadaima-haikou-o-hakubutsukan-shuuzouko-toshite-katsuyouchuu",
+   "field": "demographic"
+  },
+  {
+   "slug": "tadaima-haikou-o-hakubutsukan-shuuzouko-toshite-katsuyouchuu",
+   "field": "genres"
+  },
+  {
+   "slug": "tadashii-onara-no-tsukaikata",
+   "field": "demographic"
+  },
+  {
+   "slug": "tadashii-onara-no-tsukaikata",
+   "field": "genres"
+  },
+  {
+   "slug": "tadashiku-tsukaou-kotobazukai",
+   "field": "genres"
+  },
+  {
+   "slug": "tai-isuwari-nikki",
+   "field": "genres"
+  },
+  {
+   "slug": "taida-no-majo-supiishii",
+   "field": "demographic"
+  },
+  {
+   "slug": "taidana-akuyaku-kizoku-no-ore-ni-konyaku-haki-sareta-akuyaku-reijou-ga-totsuidar",
+   "field": "demographic"
+  },
+  {
+   "slug": "taieki-mahou-kishi-wa-henkyou-de-yadoya-o-eigyouchuu",
+   "field": "demographic"
+  },
+  {
+   "slug": "taikikun-no-hajimete",
+   "field": "demographic"
+  },
+  {
+   "slug": "taikou-no-goumansugiru-kyuukon",
+   "field": "demographic"
+  },
+  {
+   "slug": "tairan-oosaka-no-jin",
+   "field": "demographic"
+  },
+  {
+   "slug": "taishou-ayakashi-keiyaku-kon",
+   "field": "demographic"
+  },
+  {
+   "slug": "taitei-no-koto-wa-mendokusai",
+   "field": "demographic"
+  },
+  {
+   "slug": "taiyou-no-oukoku",
+   "field": "genres"
+  },
+  {
+   "slug": "takada-kouin-magokoro-seppou",
+   "field": "genres"
+  },
+  {
+   "slug": "takaga-nyokan-no-watashi-ga-sukina-no",
+   "field": "demographic"
+  },
+  {
+   "slug": "takaga-nyokan-no-watashi-ga-sukina-no",
+   "field": "genres"
+  },
+  {
+   "slug": "takako-to-daijoubu-gohan",
+   "field": "demographic"
+  },
+  {
+   "slug": "takako-to-daijoubu-gohan",
+   "field": "genres"
+  },
+  {
+   "slug": "tama-hanata",
+   "field": "genres"
+  },
+  {
+   "slug": "tama-new-oru-do-city",
+   "field": "demographic"
+  },
+  {
+   "slug": "tame-ni-naranai-renai-seppou",
+   "field": "demographic"
+  },
+  {
+   "slug": "tame-ni-naranai-renai-seppou",
+   "field": "genres"
+  },
+  {
+   "slug": "tane-seisan",
+   "field": "demographic"
+  },
+  {
+   "slug": "tanemura-arina-collection",
+   "field": "genres"
+  },
+  {
+   "slug": "tange-sazen-ozawa2011",
+   "field": "demographic"
+  },
+  {
+   "slug": "tange-sazen-tezuka1981",
+   "field": "demographic"
+  },
+  {
+   "slug": "tange-sazen-yokoyama2009",
+   "field": "demographic"
+  },
+  {
+   "slug": "tanimura-hitoshi-no-bakuretsu-cr-umi-monogatari-kouryaku-2002",
+   "field": "genres"
+  },
+  {
+   "slug": "tanimura-hitoshi-no-bakuretsu-tabiuchi-special",
+   "field": "genres"
+  },
+  {
+   "slug": "tanimura-hitoshi-no-osuichi-daikouryaku",
+   "field": "genres"
+  },
+  {
+   "slug": "tanimura-hitoshi-no-pachinko-occult-bakushou-juku",
+   "field": "genres"
+  },
+  {
+   "slug": "tanimura-hitoshi-to-katsu",
+   "field": "genres"
+  },
+  {
+   "slug": "tanin-gurashi",
+   "field": "genres"
+  },
+  {
+   "slug": "tanoshiku-nakayoku-yasashikune",
+   "field": "genres"
+  },
+  {
+   "slug": "tanoshisou-dayori",
+   "field": "genres"
+  },
+  {
+   "slug": "tanpenshuu-nananan-2003",
+   "field": "genres"
+  },
+  {
+   "slug": "tantei-reijou-julia-moriarty",
+   "field": "demographic"
+  },
+  {
+   "slug": "taro-no-ichinchi",
+   "field": "genres"
+  },
+  {
+   "slug": "tasogareryuuseigunmasutaapiisu-aiseikou",
+   "field": "genres"
+  },
+  {
+   "slug": "tataki-the-side-hustle",
+   "field": "demographic"
+  },
+  {
+   "slug": "tatara-no-uta-hime-ouka-otomechou",
+   "field": "demographic"
+  },
+  {
+   "slug": "tate-yoko-naname-prism-80",
+   "field": "genres"
+  },
+  {
+   "slug": "tateyama-kyoudai-no-jijou",
+   "field": "demographic"
+  },
+  {
+   "slug": "techno-g-men",
+   "field": "genres"
+  },
+  {
+   "slug": "techno-panic-universe",
+   "field": "demographic"
+  },
+  {
+   "slug": "tegirekin-o-morattanode-tabi-ni-derukotoni-shita",
+   "field": "demographic"
+  },
+  {
+   "slug": "teihon-hyouryuu-kyoushitsu",
+   "field": "demographic"
+  },
+  {
+   "slug": "teihon-nani-o-kiru",
+   "field": "genres"
+  },
+  {
+   "slug": "teikoku-kishin-vorukamion",
+   "field": "demographic"
+  },
+  {
+   "slug": "teinengo-wa-isekai-de-taneuma-seikatsu",
+   "field": "demographic"
+  },
+  {
+   "slug": "teisou-gyakuten-sekai-de-nariagari-o-mezashite-otoko-kishi-ni-natta-boku",
+   "field": "demographic"
+  },
+  {
+   "slug": "teisou-gyakuten-sekai-de-yuiitsu-no-otoko-kishi-no-ore",
+   "field": "demographic"
+  },
+  {
+   "slug": "teito-monogatari-takahashi2008",
+   "field": "demographic"
+  },
+  {
+   "slug": "teito-monogatari-takahashi2008",
+   "field": "genres"
+  },
+  {
+   "slug": "tekuteku-kesen-sanjuu-san-kannon-mairi",
+   "field": "genres"
+  },
+  {
+   "slug": "telekinesis",
+   "field": "genres"
+  },
+  {
+   "slug": "temuparu",
+   "field": "demographic"
+  },
+  {
+   "slug": "tender-trace",
+   "field": "demographic"
+  },
+  {
+   "slug": "tengoku-2-0",
+   "field": "demographic"
+  },
+  {
+   "slug": "tenkabitoninattasaru-isetsutaikoukisengokunosaru-yori",
+   "field": "genres"
+  },
+  {
+   "slug": "tenki-100-no-himitsu",
+   "field": "genres"
+  },
+  {
+   "slug": "tennen-kokekkoo-no-sanpomichi",
+   "field": "genres"
+  },
+  {
+   "slug": "tensei-chuushi-no-saishokuki",
+   "field": "demographic"
+  },
+  {
+   "slug": "tensei-kishi-danchou-wa-haraguro-saishou-no-shuuchakuai-o-zenryoku-kaihi-shitai",
+   "field": "demographic"
+  },
+  {
+   "slug": "tensei-majo-no-kimamana-gourmet-tabi",
+   "field": "demographic"
+  },
+  {
+   "slug": "tensei-majo-no-kimamana-gourmet-tabi",
+   "field": "genres"
+  },
+  {
+   "slug": "tensei-monogusa-oujo-yo-kuccha-ne-life-o-mezase",
+   "field": "demographic"
+  },
+  {
+   "slug": "tensei-monogusa-oujo-yo-kuccha-ne-life-o-mezase",
+   "field": "genres"
+  },
+  {
+   "slug": "tensei-reijou-to-suukina-jinsei-o",
+   "field": "demographic"
+  },
+  {
+   "slug": "tensei-reijou-to-suukina-jinsei-o",
+   "field": "genres"
+  },
+  {
+   "slug": "tensei-ryoushu-no-meiwakuseiwaza-erosu-no-gainen-ga-nai-sekai",
+   "field": "demographic"
+  },
+  {
+   "slug": "tensei-saki-wa-korosareru-hazu-no-mobu-reijou-deshita",
+   "field": "demographic"
+  },
+  {
+   "slug": "tensei-seijo-wa-hikikomori-slow-life-o-mezashitai",
+   "field": "demographic"
+  },
+  {
+   "slug": "tensei-shimashita-sarana-kinje-desu-gokigenyou",
+   "field": "demographic"
+  },
+  {
+   "slug": "tensei-shita-saki-wa-jigokudeshita-san-hyakunen-tsuzuku-henkyou-hakuka-no-bouei-",
+   "field": "demographic"
+  },
+  {
+   "slug": "tensei-shita-wakiyaku-heibonna-boku-wa-bikei-dai-ni-ouji-o-yandere-ni-shiteshima",
+   "field": "demographic"
+  },
+  {
+   "slug": "tensei-shitara-rasubosu-kei-akujo-datta",
+   "field": "demographic"
+  },
+  {
+   "slug": "tensei-shitara-winning-eleven-datta-ken",
+   "field": "genres"
+  },
+  {
+   "slug": "tensei-shite-inaka-demo-fumo-futo-slow-life-o-okuritai",
+   "field": "demographic"
+  },
+  {
+   "slug": "tenshi-keibi-hoshou-ame-nochi-hare",
+   "field": "demographic"
+  },
+  {
+   "slug": "tenshi-sama-wa-hizamazukanai",
+   "field": "demographic"
+  },
+  {
+   "slug": "tentekomaimai-yuru-kojiki",
+   "field": "demographic"
+  },
+  {
+   "slug": "teppen-made-aishi-teageru",
+   "field": "demographic"
+  },
+  {
+   "slug": "terada-katsuya-koko-10-nen",
+   "field": "genres"
+  },
+  {
+   "slug": "terada-katsuya-rakugakingu",
+   "field": "genres"
+  },
+  {
+   "slug": "terada-katsuya-zenbu",
+   "field": "genres"
+  },
+  {
+   "slug": "terada-katsuyashiki-gasorin-seikatsu",
+   "field": "genres"
+  },
+  {
+   "slug": "territory-love",
+   "field": "demographic"
+  },
+  {
+   "slug": "tetsukondou",
+   "field": "genres"
+  },
+  {
+   "slug": "tetsuwan-atom-daizukan",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-bunkashou-sakka-ga-erabu-best-obu-tezukazu-waaku",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-chronicle",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-color-hizou-sakuhinshuu",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-debut-sakuhinshuu",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-disukabarii-collection",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-essay-shuu",
+   "field": "demographic"
+  },
+  {
+   "slug": "tezuka-osamu-essay-shuu",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-iryou-tanpenshuu",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-kiwametsuki-1000peeji",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-kono-tanpen-ga-sugoi",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-kouenshuu",
+   "field": "demographic"
+  },
+  {
+   "slug": "tezuka-osamu-kouenshuu",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-manga-bungakukan",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-manga-engekikan",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-manga-no-ougi",
+   "field": "demographic"
+  },
+  {
+   "slug": "tezuka-osamu-manga-no-ougi",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-no-chousen",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-no-dizunii-manga",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-no-doubutsu-oukoku",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-no-doubutsu",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-no-konchuu-hakurankai",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-no-manga-no-egakikata",
+   "field": "demographic"
+  },
+  {
+   "slug": "tezuka-osamu-no-manga-no-egakikata",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-no-manga-senka",
+   "field": "demographic"
+  },
+  {
+   "slug": "tezuka-osamu-no-manga-senka",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-no-mori",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-no-rika-kyoushitsu",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-no-subete",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-no-umi",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-no-yama",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-rea-collection-toukoudou-sakuhinshuu",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-scenario-shuu",
+   "field": "demographic"
+  },
+  {
+   "slug": "tezuka-osamu-scenario-shuu",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-shinarioshuu",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-shousetsushuu",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-sousaku-note-to-shoki-sakuhinhen-shin-hakken-hen",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-taidanshuu",
+   "field": "demographic"
+  },
+  {
+   "slug": "tezuka-osamu-taidanshuu",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-tanpenshuu",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-yokokuhen-manga-taizenshuu",
+   "field": "genres"
+  },
+  {
+   "slug": "tezuka-osamu-zen-hyakka",
+   "field": "genres"
+  },
+  {
+   "slug": "thailand-ijuu-ni-idomu-around-forty-gakeppuchi-joshi-no-kunan",
+   "field": "demographic"
+  },
+  {
+   "slug": "the-complete-reprinted-issue-of-kiss-xxxx",
+   "field": "genres"
+  },
+  {
+   "slug": "the-dogfather-dog-father",
+   "field": "demographic"
+  },
+  {
+   "slug": "the-kanou-seisaku",
+   "field": "genres"
+  },
+  {
+   "slug": "thunder-boy",
+   "field": "genres"
+  },
+  {
+   "slug": "tkb-kun-no-o-shigoto",
+   "field": "demographic"
+  },
+  {
+   "slug": "to-love-ru-tora-buru-tanpenshuu-parade",
+   "field": "genres"
+  },
+  {
+   "slug": "toaru-machi-de-okita-hyaku-no-kaii-nitsuite",
+   "field": "demographic"
+  },
+  {
+   "slug": "toaru-machi-de-okita-hyaku-no-kaii-nitsuite",
+   "field": "genres"
+  },
+  {
+   "slug": "toaru-riiman-mofumofu-tanuki-to-fushigina-inaka-gurashi-o-hajimeru",
+   "field": "demographic"
+  },
+  {
+   "slug": "toki-chan-no-pachisuro-manmai-club",
+   "field": "genres"
+  },
+  {
+   "slug": "toki-no-hazama-no-kimi-to",
+   "field": "demographic"
+  },
+  {
+   "slug": "toki-o-suberu",
+   "field": "genres"
+  },
+  {
+   "slug": "tokiwa-no-mori-to-tsuginohito",
+   "field": "demographic"
+  },
+  {
+   "slug": "tokiwa-no-mori-to-tsuginohito",
+   "field": "genres"
+  },
+  {
+   "slug": "tokkyo-ya-buri-no-joou-benrishi-dai-ootori-mirai",
+   "field": "genres"
+  },
+  {
+   "slug": "toku-hontou-ni-atta-nama-koko-dake-no-hanashi",
+   "field": "genres"
+  },
+  {
+   "slug": "tokubetsu-janaihi-toki-o-musubu-hon",
+   "field": "demographic"
+  },
+  {
+   "slug": "tokubetsu-janaihi-toki-o-musubu-hon",
+   "field": "genres"
+  },
+  {
+   "slug": "tokumori-hontou-ni-atta-nama-ninshin-shutsu-san-sukuupu-esupii",
+   "field": "genres"
+  },
+  {
+   "slug": "tokumori-hontou-ni-atta-nama-ninshin-shutsu-san-taiken-esupii",
+   "field": "genres"
+  },
+  {
+   "slug": "tokyo-senya-ichiya",
+   "field": "genres"
+  },
+  {
+   "slug": "tomato-hiyori",
+   "field": "genres"
+  },
+  {
+   "slug": "tomi-to-chieri",
+   "field": "genres"
+  },
+  {
+   "slug": "tomodachi-n-chino-neechan-ga-kowaku-te-ii-hito",
+   "field": "genres"
+  },
+  {
+   "slug": "tomodachiijou-koibitomiman-no-mahoutsukaitachi",
+   "field": "demographic"
+  },
+  {
+   "slug": "tonari-no-daidai",
+   "field": "demographic"
+  },
+  {
+   "slug": "tonari-no-daidai",
+   "field": "genres"
+  },
+  {
+   "slug": "tonari-no-gyaru-wa-kuchi-sabishii-chan",
+   "field": "demographic"
+  },
+  {
+   "slug": "tonari-no-gyaru-wa-kuchi-sabishii-chan",
+   "field": "genres"
+  },
+  {
+   "slug": "tonari-no-hibikun",
+   "field": "demographic"
+  },
+  {
+   "slug": "tonari-no-hibikun",
+   "field": "genres"
+  },
+  {
+   "slug": "tonari-no-otoko-wa-zuruku-te-amai",
+   "field": "demographic"
+  },
+  {
+   "slug": "tonariai-tesoro",
+   "field": "demographic"
+  },
+  {
+   "slug": "tonosama-bugeichou-ichi",
+   "field": "genres"
+  },
+  {
+   "slug": "toofu-no-awako",
+   "field": "demographic"
+  },
+  {
+   "slug": "tooi-hoshi-kara-kita-alice",
+   "field": "genres"
+  },
+  {
+   "slug": "tooka-kagiri-no-hatsukoi",
+   "field": "demographic"
+  },
+  {
+   "slug": "tooka-kagiri-no-hatsukoi",
+   "field": "genres"
+  },
+  {
+   "slug": "tookyoo-seoul-ravu",
+   "field": "demographic"
+  },
+  {
+   "slug": "toorima",
+   "field": "genres"
+  },
+  {
+   "slug": "tora-mimi-onna-ni-nattatote",
+   "field": "demographic"
+  },
+  {
+   "slug": "tora-mimi-onna-ni-nattatote",
+   "field": "genres"
+  },
+  {
+   "slug": "toranimegane",
+   "field": "demographic"
+  },
+  {
+   "slug": "toraware-no-otome-no-inori",
+   "field": "demographic"
+  },
+  {
+   "slug": "toraware-no-otome-no-inori",
+   "field": "genres"
+  },
+  {
+   "slug": "toraya",
+   "field": "genres"
+  },
+  {
+   "slug": "torikago-no-kaguyahime",
+   "field": "demographic"
+  },
+  {
+   "slug": "toriko-no-tameiki",
+   "field": "demographic"
+  },
+  {
+   "slug": "toriko-no-tameiki",
+   "field": "genres"
+  },
+  {
+   "slug": "toripuru-happy-wedding",
+   "field": "genres"
+  },
+  {
+   "slug": "torokeru-yume-o-meshiagare-nejirase-doujin-sakka-to-ochikobore-muma-no-outotsu-l",
+   "field": "genres"
+  },
+  {
+   "slug": "toshi-densetsu-seisouin",
+   "field": "demographic"
+  },
+  {
+   "slug": "toshishita-no-josei-kyoukan-ni-kyou-mo-shikatte-itadaketa",
+   "field": "demographic"
+  },
+  {
+   "slug": "toshishita-osananajimi-ni-dekiai-sare-temasu",
+   "field": "demographic"
+  },
+  {
+   "slug": "toshiue-heika-no-bukiyouna-chouai",
+   "field": "demographic"
+  },
+  {
+   "slug": "totsugasareta-saki-wa-shirobuta-koushaku-no-hazu-desu-ga",
+   "field": "demographic"
+  },
+  {
+   "slug": "totte-kuwanaide-tokiwa-kun",
+   "field": "demographic"
+  },
+  {
+   "slug": "tottegorannasai",
+   "field": "genres"
+  },
+  {
+   "slug": "touchoutou-to-chousa-no-3-wa-kaiidearu",
+   "field": "demographic"
+  },
+  {
+   "slug": "touchoutou-to-chousa-no-3-wa-kaiidearu",
+   "field": "genres"
+  },
+  {
+   "slug": "toudousan-to-jinaichan",
+   "field": "genres"
+  },
+  {
+   "slug": "toushoukasha",
+   "field": "genres"
+  },
+  {
+   "slug": "touzai-youkai-zue",
+   "field": "genres"
+  },
+  {
+   "slug": "treasure",
+   "field": "genres"
+  },
+  {
+   "slug": "try-and-error-and",
+   "field": "demographic"
+  },
+  {
+   "slug": "tsubaki-anna-emaki",
+   "field": "genres"
+  },
+  {
+   "slug": "tsubaki-anna-factory",
+   "field": "genres"
+  },
+  {
+   "slug": "tsugaishikkaku",
+   "field": "demographic"
+  },
+  {
+   "slug": "tsugaishikkaku",
+   "field": "genres"
+  },
+  {
+   "slug": "tsugaware-no-renkinjutsushi",
+   "field": "genres"
+  },
+  {
+   "slug": "tsuge-yoshiharu-no-onsen",
+   "field": "genres"
+  },
+  {
+   "slug": "tsuge-yoshiharu-tabi-nikki",
+   "field": "genres"
+  },
+  {
+   "slug": "tsuihou-reijou-craft-shi-nagara-camping-car-de-i-sekai-o-tabi-shimasu",
+   "field": "demographic"
+  },
+  {
+   "slug": "tsuihou-sareta-boukenshatachi-wa-batsubatsubatsu-na-dungeon",
+   "field": "demographic"
+  },
+  {
+   "slug": "tsuihou-sareta-danshaku-shisoku-no-kareinaru-ryouchi-kaikaku-kuzu-oyaji-ni-munou",
+   "field": "demographic"
+  },
+  {
+   "slug": "tsuihou-sareta-dragon-suki-reijou-wa-hoppou-henkyou-haku-no-ai-ni-kizukanai",
+   "field": "demographic"
+  },
+  {
+   "slug": "tsuihou-sareta-moto-ouji-sama-o-hirottara",
+   "field": "demographic"
+  },
+  {
+   "slug": "tsuihou-sareta-saikyou-reijou-wa-arata-na-jinsei-o-jiyuu-ni-ikiru",
+   "field": "demographic"
+  },
+  {
+   "slug": "tsuihou-yotei-kibou-no-akuyaku-reijou-ni-tensei-shita",
+   "field": "demographic"
+  },
+  {
+   "slug": "tsuihou-yotei-kibou-no-akuyaku-reijou-ni-tensei-shita",
+   "field": "genres"
+  },
+  {
+   "slug": "tsuihou-youjo-no-ryouchi-kaitakuki",
+   "field": "demographic"
+  },
+  {
+   "slug": "tsuioku-no-oku-sama-gekijou",
+   "field": "genres"
+  },
+  {
+   "slug": "tsukame-daman-family",
+   "field": "demographic"
+  },
+  {
+   "slug": "tsukame-daman-family",
+   "field": "genres"
+  },
+  {
+   "slug": "tsuki-wa-tapioka-mitai-ni",
+   "field": "demographic"
+  },
+  {
+   "slug": "tsukisekai-tsuushin",
+   "field": "genres"
+  },
+  {
+   "slug": "tsukishiichi",
+   "field": "demographic"
+  },
+  {
+   "slug": "tsuma-no-kakushigo",
+   "field": "demographic"
+  },
+  {
+   "slug": "tsumesaki-melt-mellow",
+   "field": "demographic"
+  },
+  {
+   "slug": "tsumetasa-to-jounetsu-to",
+   "field": "demographic"
+  },
+  {
+   "slug": "tsumetasa-to-jounetsu-to",
+   "field": "genres"
+  },
+  {
+   "slug": "tsumugi-taku-pikuchaa-book",
+   "field": "genres"
+  },
+  {
+   "slug": "tsumugi-taku-the-best-yomikiri-sakuhinshuu",
+   "field": "genres"
+  },
+  {
+   "slug": "tsumugu-wa-hito-hira-no-hikari",
+   "field": "demographic"
+  },
+  {
+   "slug": "tsumugu-wa-hito-hira-no-hikari",
+   "field": "genres"
+  },
+  {
+   "slug": "tsunnyantoratetsukunnoyuuutsu",
+   "field": "genres"
+  },
+  {
+   "slug": "tsunokakushi",
+   "field": "genres"
+  },
+  {
+   "slug": "tsupera-parapara",
+   "field": "genres"
+  },
+  {
+   "slug": "tsurezure-children-color-ban",
+   "field": "demographic"
+  },
+  {
+   "slug": "tsurezure-no-shiki",
+   "field": "genres"
+  },
+  {
+   "slug": "tsurugi-yasuyuki-irasuto-sakuhinshuu",
+   "field": "genres"
+  },
+  {
+   "slug": "tsuruko-wa-mada-45-dakara",
+   "field": "demographic"
+  },
+  {
+   "slug": "tsuzu-i-san-no-go-jiaikudasai",
+   "field": "demographic"
+  },
+  {
+   "slug": "tsuzu-i-san-no-go-jiaikudasai",
+   "field": "genres"
+  },
+  {
+   "slug": "tsuzuku-seikatsu-to-sukina-gohan-no-koto",
+   "field": "demographic"
+  },
+  {
+   "slug": "tsuzura-senpai-wa-moto-kano-da-kara",
+   "field": "genres"
+  },
+  {
+   "slug": "two-decades",
+   "field": "genres"
+  },
+  {
+   "slug": "u-collection",
+   "field": "genres"
+  },
+  {
+   "slug": "uaruna-collection",
+   "field": "genres"
+  },
+  {
+   "slug": "uchi-no-bunchou-san-kansatsu-houkoku",
+   "field": "demographic"
+  },
+  {
+   "slug": "uchi-no-inkotachi-wa-kyou-mo-oshaberi",
+   "field": "genres"
+  },
+  {
+   "slug": "uchi-no-ko-nante-itteru",
+   "field": "demographic"
+  },
+  {
+   "slug": "uchi-no-ko-nante-itteru",
+   "field": "genres"
+  },
+  {
+   "slug": "uchi-no-maid-ga-class-no-sukina-ko-ni-ni-teiru",
+   "field": "demographic"
+  },
+  {
+   "slug": "uchuu-hikoushi-ni-naritai",
+   "field": "genres"
+  },
+  {
+   "slug": "uchuu-kara-kita-neko",
+   "field": "demographic"
+  },
+  {
+   "slug": "uchuujin-purumaa",
+   "field": "genres"
+  },
+  {
+   "slug": "uchuujin-to-deau-mae-ni-yomu-hon",
+   "field": "demographic"
+  },
+  {
+   "slug": "uke-sen-boy-wa-kami-teku-danshi-to-sefure-ni-naritai-more",
+   "field": "demographic"
+  },
+  {
+   "slug": "uke-sen-boy-wa-kami-teku-danshi-to-sefure-ni-naritai-more",
+   "field": "genres"
+  },
+  {
+   "slug": "ultrajump-megamix",
+   "field": "genres"
+  },
+  {
+   "slug": "unaji-ni-koi-no-ato",
+   "field": "demographic"
+  },
+  {
+   "slug": "unaji-ni-koi-no-ato",
+   "field": "genres"
+  },
+  {
+   "slug": "undead-san-no-bukiyouna-seishun",
+   "field": "demographic"
+  },
+  {
+   "slug": "undead-san-no-bukiyouna-seishun",
+   "field": "genres"
+  },
+  {
+   "slug": "undei-no-futari",
+   "field": "demographic"
+  },
+  {
+   "slug": "undei-no-futari",
+   "field": "genres"
+  },
+  {
+   "slug": "undercover-love-dog",
+   "field": "demographic"
+  },
+  {
+   "slug": "unmei-no-hito-zettai-ni-kotatsu-no-futonmitaina-outer-kitenai",
+   "field": "genres"
+  },
+  {
+   "slug": "uragirareta-ore-to-ma-mon-slave-no-i-sekai-bouken-tan",
+   "field": "demographic"
+  },
+  {
+   "slug": "uragirareta-ore-to-ma-mon-slave-no-i-sekai-bouken-tan",
+   "field": "genres"
+  },
+  {
+   "slug": "uraniwa-no-door-i-sekai-ni-tsunagaru",
+   "field": "demographic"
+  },
+  {
+   "slug": "uregoro-majo-no-rozeriasan",
+   "field": "demographic"
+  },
+  {
+   "slug": "uruse-damare-suki-toka-iuna",
+   "field": "demographic"
+  },
+  {
+   "slug": "uruwashi-babaa-wa-mago-ga-hoshii",
+   "field": "genres"
+  },
+  {
+   "slug": "usagi-no-tsumori-no-katatsumuri",
+   "field": "demographic"
+  },
+  {
+   "slug": "usagi-to-kame-no-yuru-yama-fu",
+   "field": "genres"
+  },
+  {
+   "slug": "usotsuki-dom-wa-go-houbi-fusoku",
+   "field": "demographic"
+  },
+  {
+   "slug": "usotsuki-dom-wa-go-houbi-fusoku",
+   "field": "genres"
+  },
+  {
+   "slug": "usotsuki-idol-sama-to-seijitsu-anti",
+   "field": "demographic"
+  },
+  {
+   "slug": "usotsuki-sweet-marriage",
+   "field": "demographic"
+  },
+  {
+   "slug": "usotsukina-russian-blue",
+   "field": "demographic"
+  },
+  {
+   "slug": "usotsukina-russian-blue",
+   "field": "genres"
+  },
+  {
+   "slug": "usu-kawaichimai-mukou-ga-wa",
+   "field": "demographic"
+  },
+  {
+   "slug": "usu-kawaichimai-mukou-ga-wa",
+   "field": "genres"
+  },
+  {
+   "slug": "utahime-dream-koushiki-4-koma-utahime-cafe-e-youkoso",
+   "field": "demographic"
+  },
+  {
+   "slug": "utahime-dream",
+   "field": "demographic"
+  },
+  {
+   "slug": "utawasero-omae-o",
+   "field": "demographic"
+  },
+  {
+   "slug": "utawasero-omae-o",
+   "field": "genres"
+  },
+  {
+   "slug": "utomare-kyuujo-wa-ryuuou-ni-aisareru",
+   "field": "demographic"
+  },
+  {
+   "slug": "utomare-kyuujo-wa-ryuuou-ni-aisareru",
+   "field": "genres"
+  },
+  {
+   "slug": "utomare-seijo-yarinaoshi-jinsei",
+   "field": "demographic"
+  },
+  {
+   "slug": "utsusemi-ni-tomoshibi",
+   "field": "demographic"
+  },
+  {
+   "slug": "uzumaki-naruto",
+   "field": "genres"
+  },
+  {
+   "slug": "venetsuia-hiyowa-kikou",
+   "field": "genres"
+  },
+  {
+   "slug": "visu-i",
+   "field": "demographic"
+  },
+  {
+   "slug": "visu-i",
+   "field": "genres"
+  },
+  {
+   "slug": "vividgarden",
+   "field": "genres"
+  },
+  {
+   "slug": "vividmemorial",
+   "field": "genres"
+  },
+  {
+   "slug": "vividstyle",
+   "field": "genres"
+  },
+  {
+   "slug": "wada-radio-no-koko-ni-imasu-heavy-kyuu",
+   "field": "genres"
+  },
+  {
+   "slug": "waga-omo-wa-aishuu-ni-odoru",
+   "field": "demographic"
+  },
+  {
+   "slug": "wagamama-na-futago-no-imouto-ni-subete-o-ubawareta-ane",
+   "field": "genres"
+  },
+  {
+   "slug": "wakarerutame-no-ichiya",
+   "field": "demographic"
+  },
+  {
+   "slug": "wakiyaku-kensei-no-sokosoko-heionna-nichijou",
+   "field": "demographic"
+  },
+  {
+   "slug": "wan-touch",
+   "field": "genres"
+  },
+  {
+   "slug": "wana-ni-kakatta-villain-kun",
+   "field": "genres"
+  },
+  {
+   "slug": "wandering",
+   "field": "demographic"
+  },
+  {
+   "slug": "wasurerare-hime",
+   "field": "demographic"
+  },
+  {
+   "slug": "wasurerare-reijou-wa-kimama-ni-kurashitai",
+   "field": "demographic"
+  },
+  {
+   "slug": "wasurerareta-kisaki-desu-node",
+   "field": "demographic"
+  },
+  {
+   "slug": "wata-shi-no-himitsu-o-konyakusha-ni-miraretatoki-no-taishohou-o",
+   "field": "demographic"
+  },
+  {
+   "slug": "wata-shi-no-himitsu-o-konyakusha-ni-miraretatoki-no-taishohou-o",
+   "field": "genres"
+  },
+  {
+   "slug": "watakushi-makemasen-node-seiryaku-kekkon-wa-reijou-no-tashinami",
+   "field": "demographic"
+  },
+  {
+   "slug": "watami",
+   "field": "demographic"
+  },
+  {
+   "slug": "watami",
+   "field": "genres"
+  },
+  {
+   "slug": "watanabe-futoshi-ga-michibiku-shin-jidai-no-mahjong-logic-saitekikai",
+   "field": "genres"
+  },
+  {
+   "slug": "watashi-ga-aishita-yomei-tantei",
+   "field": "demographic"
+  },
+  {
+   "slug": "watashi-ga-seijo-sama-o-koroshimashita",
+   "field": "demographic"
+  },
+  {
+   "slug": "watashi-ga-yogen-no-ko-o-umu-made",
+   "field": "demographic"
+  },
+  {
+   "slug": "watashi-ga-yogen-no-ko-o-umu-made",
+   "field": "genres"
+  },
+  {
+   "slug": "watashi-no-juusha-wa-nejirase-teiru",
+   "field": "genres"
+  },
+  {
+   "slug": "watashi-no-kaidanshi-wa-ponkotsu-kawaii",
+   "field": "genres"
+  },
+  {
+   "slug": "watashi-no-konoe-kishi-ga-oneena-riyuu",
+   "field": "demographic"
+  },
+  {
+   "slug": "watashi-no-konoe-kishi-ga-oneena-riyuu",
+   "field": "genres"
+  },
+  {
+   "slug": "watashi-no-otto-to-kekkon-shite",
+   "field": "demographic"
+  },
+  {
+   "slug": "watashi-no-otto-to-kekkon-shite",
+   "field": "genres"
+  },
+  {
+   "slug": "watashi-no-shujin-wa-ookina-inukei-kishisama",
+   "field": "demographic"
+  },
+  {
+   "slug": "watashi-nokoto-suki-janakattano-ka-yo",
+   "field": "genres"
+  },
+  {
+   "slug": "watashi-o-anata-de-amaku-shite",
+   "field": "demographic"
+  },
+  {
+   "slug": "watashitachi-rikon-shimasu-node",
+   "field": "demographic"
+  },
+  {
+   "slug": "watashitachi-wa-dekitemasen",
+   "field": "demographic"
+  },
+  {
+   "slug": "watashitachi-wa-rikon-suru-fukaku-amaku-tsunagatte",
+   "field": "demographic"
+  },
+  {
+   "slug": "watashitachi-wa-rikon-suru-fukaku-amaku-tsunagatte",
+   "field": "genres"
+  },
+  {
+   "slug": "wavers",
+   "field": "demographic"
+  },
+  {
+   "slug": "wazawai-kari",
+   "field": "demographic"
+  },
+  {
+   "slug": "wedding-blues",
+   "field": "demographic"
+  },
+  {
+   "slug": "wedding-blues",
+   "field": "genres"
+  },
+  {
+   "slug": "what-s-politics",
+   "field": "demographic"
+  },
+  {
+   "slug": "what-s-politics",
+   "field": "genres"
+  },
+  {
+   "slug": "wicked-spot",
+   "field": "demographic"
+  },
+  {
+   "slug": "with-you-hazumi2026",
+   "field": "demographic"
+  },
+  {
+   "slug": "with-you-hazumi2026",
+   "field": "genres"
+  },
+  {
+   "slug": "wotaku-no-seishinshi",
+   "field": "genres"
+  },
+  {
+   "slug": "ya-sagure-shitsuji-vtuber-to-negative-ponkotsu-reijou-vtuber-no-kyojitsu-konzain",
+   "field": "demographic"
+  },
+  {
+   "slug": "ya-sagure-shitsuji-vtuber-to-negative-ponkotsu-reijou-vtuber-no-kyojitsu-konzain",
+   "field": "genres"
+  },
+  {
+   "slug": "yabure-kabure",
+   "field": "genres"
+  },
+  {
+   "slug": "yakuza-to-renge",
+   "field": "demographic"
+  },
+  {
+   "slug": "yakuza-wa-sauna-ni-hairemasuka",
+   "field": "demographic"
+  },
+  {
+   "slug": "yakuzashiki-koushoujutsu",
+   "field": "genres"
+  },
+  {
+   "slug": "yama-geki",
+   "field": "genres"
+  },
+  {
+   "slug": "yama-nami",
+   "field": "demographic"
+  },
+  {
+   "slug": "yama-nami",
+   "field": "genres"
+  },
+  {
+   "slug": "yamagishi-ryouko-tribute",
+   "field": "demographic"
+  },
+  {
+   "slug": "yamagishi-ryouko-tribute",
+   "field": "genres"
+  },
+  {
+   "slug": "yamamatsu-very-best-of-early-years",
+   "field": "genres"
+  },
+  {
+   "slug": "yamamoto-sumika-sakuhinshuu",
+   "field": "genres"
+  },
+  {
+   "slug": "yami-kakusei-shite-shujinkou-ni-boko-sarerukamase-inu-ni-hyoui",
+   "field": "demographic"
+  },
+  {
+   "slug": "yami-no-akuyaku-reijou-wa-aisaresugiru",
+   "field": "demographic"
+  },
+  {
+   "slug": "yami-no-honoo-ni-dakarete-shinda-to-omottara-musume-ga-dekiteimashita",
+   "field": "demographic"
+  },
+  {
+   "slug": "yami-no-ouji-dizunii",
+   "field": "demographic"
+  },
+  {
+   "slug": "yami-ochi-shujinkou-no-mama-ni-narimashita",
+   "field": "demographic"
+  },
+  {
+   "slug": "yamiochi-last-boss-reijou-no-osananajimi-ni-tensei-shita",
+   "field": "demographic"
+  },
+  {
+   "slug": "yandere-kaineko-chan-tachi-ga-hanashite-kurenai",
+   "field": "demographic"
+  },
+  {
+   "slug": "yandere-kishidan-no-hikari-no-seijodesu-ga-karera-no-kokoro-no-yami",
+   "field": "demographic"
+  },
+  {
+   "slug": "yandere-kishidan-no-hikari-no-seijodesu-ga-karera-no-kokoro-no-yami",
+   "field": "genres"
+  },
+  {
+   "slug": "yankii-to-kyaramerize-second-bake",
+   "field": "demographic"
+  },
+  {
+   "slug": "yarashikute-kawaii-ore-no-rin-chan",
+   "field": "demographic"
+  },
+  {
+   "slug": "yarashikute-kawaii-ore-no-rin-chan",
+   "field": "genres"
+  },
+  {
+   "slug": "yarinaoshita-karera-dake-ga-koukai-shimasu",
+   "field": "demographic"
+  },
+  {
+   "slug": "yaruki-nanka-arimasen",
+   "field": "genres"
+  },
+  {
+   "slug": "yasashiku-suru-kara-daijoubu",
+   "field": "demographic"
+  },
+  {
+   "slug": "yasashiku-suru-kara-daijoubu",
+   "field": "genres"
+  },
+  {
+   "slug": "yata-miran-to-seishun-ni-joutou",
+   "field": "genres"
+  },
+  {
+   "slug": "yatoware-akuyaku-reijou-wa-kokugai-tsuihou-o-go-shomoudesu",
+   "field": "demographic"
+  },
+  {
+   "slug": "yatoware-akuyaku-reijou-wa-kokugai-tsuihou-o-go-shomoudesu",
+   "field": "genres"
+  },
+  {
+   "slug": "yayakoshisan-wa-yayakoshii",
+   "field": "genres"
+  },
+  {
+   "slug": "yeti-toaru-hibi",
+   "field": "demographic"
+  },
+  {
+   "slug": "yo-koso-horror-gakka-e",
+   "field": "genres"
+  },
+  {
+   "slug": "yo-watare-takatora",
+   "field": "demographic"
+  },
+  {
+   "slug": "yoake-no-kitchen",
+   "field": "demographic"
+  },
+  {
+   "slug": "yoake-no-kitchen",
+   "field": "genres"
+  },
+  {
+   "slug": "yoi-o-matsu-tsukinomonogo",
+   "field": "demographic"
+  },
+  {
+   "slug": "yojigen-tokei",
+   "field": "genres"
+  },
+  {
+   "slug": "yokohama-buddy-paradox",
+   "field": "demographic"
+  },
+  {
+   "slug": "yokoyama-mitsuteru-chouzetsu-rea-collection",
+   "field": "genres"
+  },
+  {
+   "slug": "yokoyama-mitsuteru-mangashuu",
+   "field": "genres"
+  },
+  {
+   "slug": "yokoyama-mitsuteru-rea-collection",
+   "field": "genres"
+  },
+  {
+   "slug": "yoku-dekimashita-boku-no-sub-sama",
+   "field": "demographic"
+  },
+  {
+   "slug": "yomei-ichinen-no-akuyaku-reijou-after-life-wa-gyaku-harem-o-mankitsu",
+   "field": "demographic"
+  },
+  {
+   "slug": "yomei-senkoku-o-uketa-node-watashi-o-kaeriminai-kazoku-to-konyakusha",
+   "field": "demographic"
+  },
+  {
+   "slug": "yomo-tsuke-da-mono",
+   "field": "demographic"
+  },
+  {
+   "slug": "yomo-tsuke-da-mono",
+   "field": "genres"
+  },
+  {
+   "slug": "yondome-no-otto",
+   "field": "demographic"
+  },
+  {
+   "slug": "yorimichi-drop",
+   "field": "genres"
+  },
+  {
+   "slug": "yorinuki-kikuni-san",
+   "field": "genres"
+  },
+  {
+   "slug": "yoru-dake-dereru-oniyome-chan",
+   "field": "demographic"
+  },
+  {
+   "slug": "yoru-nokata-sumi-de-kimi-to-ice-o",
+   "field": "demographic"
+  },
+  {
+   "slug": "yoru-nokata-sumi-de-kimi-to-ice-o",
+   "field": "genres"
+  },
+  {
+   "slug": "yoru-yami-no-konin-zensei-no-shukuen-to-itsuwari-no-konyakusha",
+   "field": "demographic"
+  },
+  {
+   "slug": "yoshida-mayumi-the-best",
+   "field": "genres"
+  },
+  {
+   "slug": "yoshino-sakumi-wa-hon-ga-daisuki",
+   "field": "genres"
+  },
+  {
+   "slug": "yosoji-fukuda-no-ore-gohan",
+   "field": "genres"
+  },
+  {
+   "slug": "yosougai-no-dekiai-ni-tomadotteimasu",
+   "field": "genres"
+  },
+  {
+   "slug": "yotta-hana-ni-wa-ura-ga-aru",
+   "field": "genres"
+  },
+  {
+   "slug": "yotte-kiss-shite-suit-o-nuide",
+   "field": "demographic"
+  },
+  {
+   "slug": "yotte-kiss-shite-suit-o-nuide",
+   "field": "genres"
+  },
+  {
+   "slug": "you-chuui-kanojo-yumemichan",
+   "field": "demographic"
+  },
+  {
+   "slug": "you-tsuma-wa-otona-na-heika-ni-torotoro-ni-amayakasaremakuri-ore",
+   "field": "demographic"
+  },
+  {
+   "slug": "youkoso-konkatsu-ryou-e",
+   "field": "demographic"
+  },
+  {
+   "slug": "youkoso-konkatsu-ryou-e",
+   "field": "genres"
+  },
+  {
+   "slug": "youkoso-ryuuguu-jimusho-e",
+   "field": "demographic"
+  },
+  {
+   "slug": "youkoso-shuudouin-e-koko-wa-tsuihou-sareta-onna-tachi-no-rakuen-yo",
+   "field": "demographic"
+  },
+  {
+   "slug": "youkoso-shuudouin-e-koko-wa-tsuihou-sareta-onna-tachi-no-rakuen-yo",
+   "field": "genres"
+  },
+  {
+   "slug": "yowai-tokoro-mo-marugoto-zenbu",
+   "field": "demographic"
+  },
+  {
+   "slug": "yowaku-te-kawaii-kimi-ga-suki",
+   "field": "demographic"
+  },
+  {
+   "slug": "yugami-no-toriko",
+   "field": "demographic"
+  },
+  {
+   "slug": "yuki-ga-toketara",
+   "field": "genres"
+  },
+  {
+   "slug": "yume-collection",
+   "field": "genres"
+  },
+  {
+   "slug": "yume-ni-miru-sairai",
+   "field": "demographic"
+  },
+  {
+   "slug": "yume-no-ichiya-ga-kureta-tenshi",
+   "field": "demographic"
+  },
+  {
+   "slug": "yumemi-no-koushaku-reijou-wa-konyaku-haki-o-goshomou-desu",
+   "field": "demographic"
+  },
+  {
+   "slug": "yumemiru-machi-de-aimashou",
+   "field": "demographic"
+  },
+  {
+   "slug": "yumemiru-machi-de-aimashou",
+   "field": "genres"
+  },
+  {
+   "slug": "yumemiru-seijo-wa-oujisama-no-soine-gakari-ni-erabaremashita",
+   "field": "demographic"
+  },
+  {
+   "slug": "yuri-to-soleil",
+   "field": "demographic"
+  },
+  {
+   "slug": "yusabure-junjou",
+   "field": "demographic"
+  },
+  {
+   "slug": "yuu-gatta-shungiku",
+   "field": "genres"
+  },
+  {
+   "slug": "yuugatou-ni-kogareru",
+   "field": "demographic"
+  },
+  {
+   "slug": "yuuki-yuu-no-manga-love-shinrijutsu",
+   "field": "genres"
+  },
+  {
+   "slug": "yuusha-kara-wa-nigerarenai",
+   "field": "demographic"
+  },
+  {
+   "slug": "yuusha-level-1",
+   "field": "demographic"
+  },
+  {
+   "slug": "yuusha-level-1",
+   "field": "genres"
+  },
+  {
+   "slug": "yuusha-no-unmei",
+   "field": "demographic"
+  },
+  {
+   "slug": "yuusha-party-o-kubi-ni-natta-node-kokyou-ni-kaettara",
+   "field": "demographic"
+  },
+  {
+   "slug": "yuusha-wa-maou-ga-suki-rashii",
+   "field": "demographic"
+  },
+  {
+   "slug": "yuutousei-no-himitsu",
+   "field": "demographic"
+  },
+  {
+   "slug": "yuuyami-tokata-ware",
+   "field": "demographic"
+  },
+  {
+   "slug": "yuzu-to-mama",
+   "field": "genres"
+  },
+  {
+   "slug": "yuzu",
+   "field": "genres"
+  },
+  {
+   "slug": "z-end",
+   "field": "genres"
+  },
+  {
+   "slug": "z-wide-sp",
+   "field": "genres"
+  },
+  {
+   "slug": "zako-no-mina-san-odaijini",
+   "field": "genres"
+  },
+  {
+   "slug": "zangai-shoujo-kirakira-na-sekai-no-soko",
+   "field": "genres"
+  },
+  {
+   "slug": "zangou-no-houkiboshi",
+   "field": "demographic"
+  },
+  {
+   "slug": "zankou-saisatsu",
+   "field": "demographic"
+  },
+  {
+   "slug": "zeimu-shokuin-no-bishu",
+   "field": "demographic"
+  },
+  {
+   "slug": "zenbu-zenbu-kimi-no-sei",
+   "field": "demographic"
+  },
+  {
+   "slug": "zenin-ikemen-ni-shiteyaru",
+   "field": "demographic"
+  },
+  {
+   "slug": "zenmetsu-end-o-shini-monogurui-de-kaihi-shita-party-ga-yanda",
+   "field": "demographic"
+  },
+  {
+   "slug": "zense-de-kazoku-ni-megumarenakatta-ore",
+   "field": "demographic"
+  },
+  {
+   "slug": "zensei-wa-reikoku-koutei-konse-wa-youjo",
+   "field": "demographic"
+  },
+  {
+   "slug": "zenze-no-kioku-o-torimodoshita-node-saiai-no-otto-to-rien-shimasu",
+   "field": "demographic"
+  },
+  {
+   "slug": "zetsumetsu-sunzen-no-doubutsu-hacchinpamosu",
+   "field": "demographic"
+  },
+  {
+   "slug": "zetsurin-ojisama-shinshi-ni-dakitsukusareru-keiyaku-kekkon",
+   "field": "demographic"
+  },
+  {
+   "slug": "zettai-hatsukoi-propose",
+   "field": "demographic"
+  },
+  {
+   "slug": "zettai-ni-kekkon-shitakunai-reijou-henkyou-no-kedamono-to-yobareru-sho",
+   "field": "demographic"
+  },
+  {
+   "slug": "zoku-sono-keisatsukan-tokidoki-yajuu",
+   "field": "demographic"
+  },
+  {
+   "slug": "zombie-no-afureta-sekai-de-ore-dake-ga-osowarenai-tokiko-if-story-vol",
+   "field": "demographic"
+  },
+  {
+   "slug": "zombie-no-afureta-sekai-de-ore-dake-ga-osowarenai-tokiko-if-story-vol",
+   "field": "genres"
+  },
+  {
+   "slug": "zon-bitch",
+   "field": "demographic"
+  },
+  {
+   "slug": "zon-bitch",
+   "field": "genres"
+  },
+  {
+   "slug": "zoom-in-age-25",
+   "field": "genres"
+  },
+  {
+   "slug": "zoro-san-romantic-cruise",
+   "field": "genres"
+  },
+  {
+   "slug": "zoro-san-romantic-ocean",
+   "field": "genres"
+  },
+  {
+   "slug": "zubora-demo-dekita-chiisana-midori-de-kokoro-ga-uruou-oheyazukuri-koke-terrarium-hajimemashita",
+   "field": "genres"
+  },
+  {
+   "slug": "zunou-to-i-nou-ni-kinniku-de-shouri-suru-death-game",
+   "field": "demographic"
+  },
+  {
+   "slug": "zure-koi-biyori",
+   "field": "demographic"
+  },
+  {
+   "slug": "zureta-kaishaku-no-bokura",
+   "field": "genres"
+  },
+  {
+   "slug": "zutto-mae-kara-aideshita",
+   "field": "demographic"
+  },
+  {
+   "slug": "zutto-mae-kara-aideshita",
+   "field": "genres"
+  }
+ ]
 }
