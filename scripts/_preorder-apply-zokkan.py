@@ -100,6 +100,14 @@ def keys_for_slug(slug):
 PP_LOG = os.path.join(ROOT, "data", "seeds", "preorder-page-zokkan-changelog.jsonl")
 
 
+def is_preorder_produced(stem):
+    """頁が予約頁 seed から作られるか = preorder-pages/<stem>.yml が在り、本流の元頁(data/manga・source-pages)が無い。
+    promote の予約合流は「本流が同じ stem を書いた時」だけ seed を退く(自己retire)ので、元頁が無ければ seed が頁の正。"""
+    return (os.path.exists(f"{ROOT}/data/seeds/preorder-pages/{stem}.yml")
+            and not os.path.exists(f"{ROOT}/data/manga/{stem}.yml")
+            and not os.path.exists(f"{ROOT}/data/seeds/source-pages/{stem}.yml"))
+
+
 def release_date_of(r):
     rd = r.get("ym")
     if rd and r.get("day"):
@@ -119,13 +127,13 @@ def append_to_preorder_page(stem, r, vol):
         return f"予約頁の通常版が{len(std)}個(足し先を決められない)"
     vols = eds[std[0]].get("volumes") or []
     if any(str(v.get("isbn13")) == str(r["isbn"]) for e in eds for v in e.get("volumes") or []):
-        return "同ISBN既在(予約頁)"
+        return "既在"   # 既に seed に在る=何もしない(呼び側は簿に書かない)
     nums = [v.get("number") for v in vols if isinstance(v.get("number"), int)]
     if int(vol) in nums:
         return f"同巻番号{vol}既在(予約頁)"
     mx = max(nums or [0])
-    if not (mx < int(vol) <= mx + 3):
-        return f"巻が連続しない(予約頁max{mx}→{vol}=全巻回収側)"
+    if int(vol) > mx + 3:   # 途中の欠けを埋める巻は通す(同じ回に3巻・4巻が逆順で来る型)。遠い飛び番だけ止める
+        return f"巻が飛びすぎ(予約頁max{mx}→{vol}=全巻回収側)"
     cov = r.get("cover") if r.get("cover") and "noimage" not in str(r.get("cover")) else None
     newv = {"number": int(vol), "asin": None, "isbn13": str(r["isbn"]), "cover_url": cov,
             "release_date": release_date_of(r)}
@@ -176,10 +184,11 @@ replaced = 0
 touched = set()
 wl = []
 key_cache = {}
-for r in cls["zokkan"]:
+for r in sorted(cls["zokkan"], key=lambda x: (str(x.get("_slug") or ""), x.get("_vol") if isinstance(x.get("_vol"), int) else 10**6)):
     isbn, slug, vol = r["isbn"], r.get("_slug"), r.get("_vol")
-    if isbn in have:
-        continue
+    _st0 = resolve_stem(slug) if slug else None
+    if isbn in have and not (_st0 and is_preorder_produced(_st0)):
+        continue   # ★予約頁で作られる頁は種4に在っても頁に出ない=seed側の有無で判断する(下の直接追記へ)
     if not slug:
         wl.append((isbn, r["title"], "slug無")); continue
     if SPECIAL_ED.search(str(r.get("title") or "")):
@@ -189,18 +198,20 @@ for r in cls["zokkan"]:
     stem = resolve_stem(slug)   # ★公開slug→SRC stem(改名頁の罠)
     if not stem:
         wl.append((isbn, r["title"], f"頁ファイル不在(公開slug→stem逆引き不能) slug={slug}")); continue
+    if is_preorder_produced(stem):
+        # ★予約頁の seed で作られる頁は、作品が後から種2に入って series_key が引けても種4を読まない
+        #   (promote の予約合流は「同名の元頁が本流で書かれた時」だけ種2側に譲る)。2026-10-06 に種4へ入れた97冊が
+        #   頁に出なかった実害 → series_key の有無に関わらず seed へ直接差し込む。
+        why = append_to_preorder_page(stem, r, vol)
+        if why is None:
+            have.add(isbn); touched.add(stem); added_pp += 1
+        elif why != "既在":
+            wl.append((isbn, r["title"], f"予約頁への直接追記を保留: {why} slug={slug}"))
+        continue
     if stem not in key_cache:
         key_cache[stem] = keys_for_slug(stem)
     ks = key_cache[stem]
     if not ks:
-        if os.path.exists(f"{ROOT}/data/seeds/preorder-pages/{stem}.yml"):
-            # ★予約頁=種4が効かない → seed の巻の並びへ直接差し込む(2026-10-06)
-            why = append_to_preorder_page(stem, r, vol)
-            if why is None:
-                have.add(isbn); touched.add(stem); added_pp += 1
-            else:
-                wl.append((isbn, r["title"], f"予約頁への直接追記を保留: {why} slug={slug}"))
-            continue
         wl.append((isbn, r["title"], f"series_key逆引き不可 slug={slug}" + (f" stem={stem}" if stem != slug else ""))); continue
     # ★同巻番号ゲート(2026-09-02): 頁standard版 or 種4-auto(同series_keys)に同じ巻番号が既在
     dup_auto = [v for v in doc["volumes"] if int(v.get("number") or -1) == int(vol)

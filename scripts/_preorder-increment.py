@@ -16,7 +16,8 @@ harvest(_rakuten-preorder-harvest.py)の直後・classify(_preorder-classify.py)
 ★再投入(2026-10-06): fresh=latest−prev だけだと、初見で頁に入らなかった巻は prev に入って二度と分類されない
   (保留・分類漏れ・予約頁の続巻・月次の種4全消しで消えた巻。実例=カクリキ2/猩猩姫3/呪具師15/4軍くん14)。
   → prev 在でも「まだどこにも載っていない」ISBN は毎回 fresh に戻す(材料が揃った日・頁ができた日に自然に通る)。
-  載っている = 本番頁(ISBN索引) / 種2 / 種4(auto・手動・offset) / 予約頁seed / ドラフト(全世代) / ISBN除外簿。
+  載っている = 本番頁(ISBN索引) / 種2 / 予約頁seed / ドラフト(全世代) / ISBN除外簿。
+  ★種4は数えない(予約頁で作られる頁は種4を読まない=種4に在っても頁に無いことがある)。
   特装版・限定版は戻さない(続巻でも非掲載=毎日同じ保留を積むだけ)。
   再投入行には _requeue を付け、分類器は「既存頁の続巻(zokkan)」と判定された時だけ適用に回す。
   新作・途中巻に落ちた行は requeue_hold(簿のみ)= 過去に見送った新作を毎回ドラフト化して水増ししない。
@@ -98,8 +99,10 @@ def resolved_isbns():
         con = sqlite3.connect(f"file:{db}?mode=ro", uri=True)
         out |= {r[0] for r in con.execute("SELECT isbn13 FROM volumes WHERE isbn13 IS NOT NULL")}
     seeds = os.path.join(ROOT, "data", "seeds")
-    files = [os.path.join(seeds, f) for f in ("volumes-supplement-auto.yml", "volumes-supplement.yml",
-                                              "volumes-supplement-offset.yml", *ISBN_EXCLUDE_FILES)]
+    # ★種4(volumes-supplement*)は「載っている」に数えない: 予約頁で作られる頁は種4を読まないので、
+    #   種4に在っても頁に出ていないことがある(2026-10-06 97冊)。頁に出ていなければ再投入し、
+    #   apply-zokkan が予約頁なら seed へ差し込む/本流の頁なら種4在で黙って飛ばす。
+    files = [os.path.join(seeds, f) for f in ISBN_EXCLUDE_FILES]
     files += glob.glob(os.path.join(seeds, "preorder-pages", "*.yml"))
     files += glob.glob(os.path.join(PRE, "drafts*", "*.yml"))
     for p in files:
