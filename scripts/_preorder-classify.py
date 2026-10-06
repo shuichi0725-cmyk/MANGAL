@@ -35,7 +35,11 @@ def norm(t):
 
 
 def norm_author(a):
-    """著者名の正規化: norm + 末尾の性別/装飾記号(たかし♂ 型)を剥ぐ(2026-09-02)。"""
+    """著者名の正規化: norm + 末尾の性別/装飾記号(たかし♂ 型)を剥ぐ(2026-09-02)。
+    ★括弧書き(スタジオ/レーベル注記)も剥ぐ(2026-10-06): 楽天は「孟倫（SDwing）」「Stonehead(AKEO STUDIO)」
+      「希羅月(Comicloft)」と書き、頁は「孟倫」「Stonehead」= 著者が合わず既存頁の続巻が途中巻(ex_mid)に落ちていた
+      (僕のカノジョ先生18・末っ子皇女殿下10 等10冊)。"""
+    a = re.sub(r"[（(][^）)]*[）)]", "", str(a or ""))
     return re.sub(r"[♂♀☆★]+$", "", norm(a))
 
 
@@ -86,7 +90,7 @@ def auth_is_publisher(r):
     """★楽天の author が出版社名になっている(=著者未登録のplaceholder)か。2026-09-04 廻天のアルバス型。
     これを著者集合として扱うと①の著者一致ゲートが必ず外れ、続巻が④(途中巻)へ落ちて頁が更新されない。
     判定は「著者名が全部 publisher と同じ」に限定(=だろう運転をしない)。"""
-    auths = [x.strip() for x in re.split(r"[/,、;；]", str(r.get("author") or "")) if x.strip()]
+    auths = [x.strip() for x in re.split(r"[/／,、;；]", str(r.get("author") or "")) if x.strip()]
     pub = norm(r.get("publisher"))
     return bool(auths) and bool(pub) and all(norm(a) == pub for a in auths)
 
@@ -128,7 +132,7 @@ for r in idx["d"]:
         known_authors.add(norm_author(au_name(a)))
 
 def author_names(s):
-    return [x for x in re.split(r"[/,、;；]", str(s or "")) if x.strip()]
+    return [x for x in re.split(r"[/／,、;；]", str(s or "")) if x.strip()]
 
 rows = [json.loads(l) for l in open(f"{ROOT}/.cache/preorders/preorders-latest.jsonl", encoding="utf-8")]
 out = {"skip": [], "zokkan": [], "new1a": [], "new1b": [], "ex_mid": []}
