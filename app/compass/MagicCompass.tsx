@@ -63,7 +63,10 @@ const PREVIEW = process.env.NEXT_PUBLIC_PREVIEW_FEATURES === "1";
 if (PREVIEW && typeof window !== "undefined") setIndexBase("/prod-idx");
 // ★案C「掛け合わせて広げる」(2026-10-05): 要素・ジャンルをいくつでも選んで広げる引き出し。 いまはテスト環境だけ。
 //   ★今の形(帯に要素の多い順4つ)に戻す = ここを false にするだけ。 本番にも出す = true にする。
-const MIX = PREVIEW;
+// ★2026-10-06 ユーザ裁定「次の週次で出す」= 本番でも入(MIX/SPLIT/KOMA/THREADS)。 本番に出るのはテスト環境で見えている形だけ:
+//   糸の入口の輪(THREADS)・似た要素・コマ割り(KOMA)・組み替え(「ほか」から)・さらに絞る・よく似たジャンルの黄。
+//   帯から開いていた途中の形(要素の星雲・掛け合わせの引き出し)は THREADS の時は描かない(下の !THREADS)。
+const MIX = true;
 // ★「よく似たジャンル」の糸は「ジャンル ▾」(橙)と別物に見せる = 羅針盤マーク・同ジャンル検索と同じ黄(2026-10-05 ユーザ指示)。
 //   帯の札・広げた本・糸・札の色だけ。 周りの本(ジャンル枠)と上のジャンルの札は橙のまま。 MIX と一緒に戻る。
 const SIM_COLOR = "#d9f843";
@@ -72,11 +75,11 @@ const SIM_COLOR = "#d9f843";
 const SPLIT = MIX;
 // ★案6(2026-10-06): 何も選んでいない時に真ん中の本を押すと、その本の書誌が漫画の1ページ(コマ割り)になって重なる。
 //   いまはテスト環境だけ。 出さない = false。
-const KOMA = PREVIEW;
+const KOMA = true;
 // ★案B(2026-10-06): 下の帯を無くし、周りの輪を「糸の入口」(書影付き)にする。 作者・雑誌・年・よく似たジャンル=押すと広がる /
 //   要素・ジャンル=押して選ぶ(いくつでも重ねる)→ 真ん中の下の「広げる」。 入りきらない要素・ジャンルは「ほか ▸」の2段目。
 //   ★今の形(周りの本+下の帯)に戻す = false。
-const THREADS = PREVIEW;
+const THREADS = true;
 /** 入口の大きさ(書影)と、帯が無い分の引き出しの位置 */
 const EW = 54;
 const EH = 76;
@@ -1443,7 +1446,7 @@ export default function MagicCompass({
           </div>
         )}
         {/* 案2+3: 要素の星雲 = 周りの本が退き、要素ごとの本の束(島)が中心を囲む。 島を押して重ね、下の札で広げる */}
-        {SPLIT && nebOpen && islands && mixInfo && !pan && (
+        {!THREADS && SPLIT && nebOpen && islands && mixInfo && !pan && (
           <div className="cp-neb">
             {(() => {
               const page = islands[Math.min(nebPage, islands.length - 1)] ?? [];
@@ -1584,7 +1587,7 @@ export default function MagicCompass({
       )}
 
       {/* 4b. 掛け合わせの引き出し(案C・テスト環境だけ) */}
-      {MIX && mixOpen && mixInfo && (
+      {!THREADS && MIX && mixOpen && mixInfo && (
         <div className="cp-mix" style={{ bottom: Math.max(SHEET + 2, sheetH + 2) + BAND_H }} role="dialog" aria-label="掛け合わせて広げる">
           <div className="cp-mix-h">
             <span>掛け合わせる ・ いくつでも選べる</span>
