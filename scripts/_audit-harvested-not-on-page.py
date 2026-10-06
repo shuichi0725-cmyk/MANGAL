@@ -14,6 +14,8 @@ A. 種4の履歴: volumes-supplement(-auto/手動/-offset).yml の git 全版に
 B. 予約の窓: 楽天予約harvest(latest-full ∪ prev)のうち、題が本番頁と一致+著者が重なるのに頁に無いもの
 
 C. 予約頁 seed(preorder-pages)に在るのに頁に出ていない巻
+D. 日次の保留簿(docs/production-diagnostics/preorder-triage.tsv)の git 全版に一度でも出た巻のうち、題・著者が本番頁と一致するのに頁に無いもの
+   (= 発売済みで予約の窓から外れた後も残る取りこぼし。4軍くん(仮)14 は 7/20 に途中巻判定のまま 9/17 発売・どこにも入っていなかった)
 
 「頁に無い」= 本番頁(ISBN索引)に無く、種2 / ドラフト / ISBN除外簿・退役簿 / 確認済み簿 のどれにも無い。
 ★今の種4は「載っている」に数えない: 予約頁で作られる頁は種4を読まない(promote の予約合流は本流が同じ stem を
@@ -234,7 +236,11 @@ def main():
     for r in li["d"]:
         by_title[norm(r[it_])].append((r[is_], {norm_person(str(a).split("\t")[0]) for a in (r[ia_] or [])}))
     seen = {r["isbn13"] for r in rows}
-    for fn in ("preorders-latest-full.jsonl", "preorders-prev.jsonl"):
+    # ★予約の全スナップショット+累積履歴(harvest-history.jsonl = _preorder-increment.py が初見を追記)。
+    #   full/prev だけだと発売日を過ぎて窓から外れた巻が見えない(9/17発売の続巻3冊で実踏)
+    snaps = ["preorders-latest-full.jsonl", "preorders-prev.jsonl", "preorders-prev.jsonl.bak", "harvest-history.jsonl"]
+    snaps += sorted(os.path.basename(x) for x in glob.glob(os.path.join(PRE, "preorders-latest-full.bak-*.jsonl")))
+    for fn in snaps:
         p = os.path.join(PRE, fn)
         if not os.path.exists(p):
             continue
@@ -260,10 +266,64 @@ def main():
                 continue
             stem = resolve_stem(hit[0]) or hit[0]
             seen.add(ib)
-            rows.append({"class": "HARVEST", "isbn13": ib, "number": vol or "", "stem": stem,
+            cls, why = "HARVEST", ("予約頁=seed直接追記" if frozen(stem) == "preorder-pages" else "")
+            if vol:   # 同じ巻番号が別ISBNで頁に在る(特装版・新しい版の再刊)は情報扱い(みいちゃんと山田さん7=同日2ISBN)
+                c2, w2 = classify(stem, vol, "standard")
+                if c2 == "NUM_PRESENT" or (c2 == "FROZEN" and w2 != "preorder-pages"):
+                    cls, why = c2, w2
+            rows.append({"class": cls, "isbn13": ib, "number": vol or "", "stem": stem,
                          "page_title": (page(stem) or {}).get("title", ""), "title": h.get("title") or "",
-                         "date": h.get("salesDate") or "", "part": f"B:{fn}",
-                         "why": ("予約頁=seed直接追記" if frozen(stem) == "preorder-pages" else ""), "ack": ack.get(ib, "")})
+                         "date": h.get("salesDate") or "", "part": f"B:{fn}", "why": why, "ack": ack.get(ib, "")})
+
+    # D. 日次の保留簿(triage)の git 全版 = 予約の窓から外れた後の取りこぼし(B と同じ題・著者照合)
+    cache = json.load(open(REVCACHE, encoding="utf-8")) if os.path.exists(REVCACHE) else {}
+    tpath = "docs/production-diagnostics/preorder-triage.tsv"
+    revs = subprocess.run(["git", "log", "--format=%H", "--", tpath], cwd=ROOT, capture_output=True, text=True).stdout.split()
+    trows = {}
+    for rev in revs:
+        key = f"{rev}:{tpath}"
+        if key not in cache:
+            r = subprocess.run(["git", "show", key], cwd=ROOT, capture_output=True)
+            got = {}
+            for ln in (r.stdout.decode("utf-8", errors="ignore").splitlines() if r.returncode == 0 else []):
+                c = ln.split("\t")
+                if len(c) >= 5 and ISBN_RE.fullmatch(c[1].strip()):
+                    got[c[1].strip()] = [c[0], c[3], c[4]]
+            cache[key] = got
+        for ib, v in cache[key].items():
+            trows.setdefault(ib, v + [rev[:9]])
+    json.dump(cache, open(REVCACHE, "w", encoding="utf-8"), ensure_ascii=False)
+    for ib, (k, title, author, rev) in trows.items():
+        if ib in resolved or ib in seen or SPECIAL_ED.search(title or ""):
+            continue
+        base, vol = title, None
+        if split_title:
+            try:
+                st = split_title(title)
+                base, vol = st.get("base") or title, st.get("vol")
+            except Exception:
+                pass
+        hk = {norm_person(x) for x in re.split(r"[/／、,]", author or "") if norm_person(x)}
+        cands = by_title.get(norm(base)) or []
+        hit = [s for s, au in cands if hk & au]
+        if not hk and len(cands) == 1 and vol:
+            # ★保留行は著者列が空のことがある(列ずれ・4軍くん(仮)14)= 題が1頁だけに一致し巻が頁max+1..+3 の時だけ拾う
+            nums = [v.get("number") for e in (page(resolve_stem(cands[0][0]) or cands[0][0]) or {}).get("editions") or []
+                    for v in e.get("volumes") or [] if isinstance(v.get("number"), int)]
+            if nums and max(nums) < int(vol) <= max(nums) + 3:
+                hit = [cands[0][0]]
+        if len(hit) != 1:
+            continue
+        stem = resolve_stem(hit[0]) or hit[0]
+        seen.add(ib)
+        cls, why = ("HARVEST", f"保留簿の過去版({k})にだけ痕跡") if vol else ("NO_PAGE", f"保留簿の過去版({k})・巻番号なし")
+        if vol:
+            c2, w2 = classify(stem, vol, "standard")
+            if c2 in ("NUM_PRESENT", "FROZEN"):
+                cls, why = c2, f"{w2}(保留簿の過去版)"
+        rows.append({"class": cls, "isbn13": ib, "number": vol or "", "stem": stem,
+                     "page_title": (page(stem) or {}).get("title", ""), "title": title, "date": "",
+                     "part": f"D:triage@{rev}", "why": why, "ack": ack.get(ib, "")})
 
     order = {"LOST": 0, "NO_PAGE": 1, "HARVEST": 2, "FROZEN": 3, "NUM_PRESENT": 4}
     rows.sort(key=lambda r: (order[r["class"]], bool(r["ack"]), r["stem"], str(r["number"])))

@@ -111,6 +111,30 @@ def resolved_isbns():
     return out
 
 
+HISTORY = os.path.join(PRE, "harvest-history.jsonl")
+
+
+def append_history(rows):
+    """★取得した予約の累積履歴(2026-10-06)。full/prev は毎回上書きなので、発売日を過ぎて予約の窓から外れた巻は
+    手元に何も残らない(9/17発売の続巻3冊=一度も分類されないまま消えていた)。初見の ISBN だけ1行追記=
+    月次サニティ#36 が「拾ったのに頁に無い」を発売後も引ける。ローカル(.cache)で十分(運転機だけが使う)。"""
+    have = set()
+    if os.path.exists(HISTORY):
+        for l in open(HISTORY, encoding="utf-8"):
+            try:
+                have.add(json.loads(l).get("isbn"))
+            except Exception:
+                pass
+    import datetime
+    today = datetime.date.today().isoformat()
+    with open(HISTORY, "a", encoding="utf-8") as f:
+        for r in rows:
+            if r.get("isbn") and r["isbn"] not in have:
+                have.add(r["isbn"])
+                f.write(json.dumps({k: r.get(k) for k in ("isbn", "title", "author", "publisher", "salesDate")} | {"first_seen": today},
+                                   ensure_ascii=False) + "\n")
+
+
 def live_titles():
     """本番一覧索引に在る作品題(base正規化)。ここに在る題は分類器が続巻に回せる=過去draft除外から外す。"""
     p = os.path.join(ROOT, "data", "manga-list-index.json")
@@ -147,6 +171,7 @@ def main():
         except Exception:
             pass
     latest = [json.loads(l) for l in open(LATEST, encoding="utf-8") if l.strip()]
+    append_history(latest)
 
     # 1. fresh = latest - prev (ISBN)
     if os.path.exists(PREV):
