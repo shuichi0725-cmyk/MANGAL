@@ -214,9 +214,13 @@ export default function MagicCompass({
   useEffect(() => {
     const html = document.documentElement;
     const prev = html.style.overflow;
+    const prevOb = html.style.overscrollBehavior;
     html.style.overflow = "hidden";
+    // 引っ張って再読み込み等は頁全体で止める(旧 = 全画面の箱に付けていた = 拡大画面の移動まで止めていた疑い)
+    html.style.overscrollBehavior = "none";
     return () => {
       html.style.overflow = prev;
+      html.style.overscrollBehavior = prevOb;
     };
   }, []);
 

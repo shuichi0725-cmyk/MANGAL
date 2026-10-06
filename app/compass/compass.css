@@ -6,7 +6,10 @@
   position: fixed;
   inset: 0;
   z-index: 1000;
+  /* ★clip = はみ出しは切るが「中身を動かせる箱」にしない(2026-10-06 ユーザ「スマホで拡大した時に動かせない」)。
+     hidden だと箱がスクロール容器になり、overscroll-behavior と合わせて指の動きがここで止まり、拡大画面の移動に渡らない */
   overflow: hidden;
+  overflow: clip;
   background: #07090d;
   color: #e6ecf0;
   font-size: 12px;
@@ -15,7 +18,6 @@
   -webkit-user-select: none;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
-  overscroll-behavior: none;
 }
 .cp-root button {
   font: inherit;
