@@ -1227,6 +1227,7 @@ export function threadEntrances(
   const ringG = genres.slice(0, nG).map(gAt);
   const ringE = elems.slice(0, nE).map(eAt);
   const more = [...elems.slice(nE).map(eAt), ...genres.slice(nG).map(gAt)];
-  // 輪の並び(上から時計回り): 作者 → よく似たジャンル → ジャンル → 雑誌 → 年 → 要素
-  return { ring: [...authors, ...sims, ...ringG, ...mags, ...years, ...ringE], more };
+  // 輪の並び(上から時計回り): 作者 → 雑誌 → ジャンル → よく似たジャンル →(ほか ▸)→ 要素 → 年
+  //   ★2026-10-06 ユーザ指示: 雑誌と似たジャンルを入れ替え・「ほか」と年を入れ替え(年=左上・ほか=下)。 「ほか」は画面側で要素の前に差す
+  return { ring: [...authors, ...mags, ...ringG, ...sims, ...ringE, ...years], more };
 }

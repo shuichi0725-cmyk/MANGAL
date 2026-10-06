@@ -1311,10 +1311,12 @@ export default function MagicCompass({
         {THREADS && entrances && mixInfo && !unit && !pan && (
           <div className="cp-ents">
             {(() => {
-              const all: (Entrance | "more")[] = [
-                ...entrances.ring.filter((e) => !off.has(e.kind === "sim" ? "genre" : e.kind)),
-                ...(entrances.more.length ? (["more"] as const) : []),
-              ];
+              const shown = entrances.ring.filter((e) => !off.has(e.kind === "sim" ? "genre" : e.kind));
+              // 「ほか ▸」は要素の前(要素が無ければ年の前)= 輪の下側
+              let at = shown.findIndex((e) => e.kind === "elem");
+              if (at < 0) at = shown.findIndex((e) => e.kind === "year");
+              if (at < 0) at = shown.length;
+              const all: (Entrance | "more")[] = entrances.more.length ? [...shown.slice(0, at), "more", ...shown.slice(at)] : shown;
               const n = all.length;
               const any = mixSize(mix) > 0;
               const pts = all.map((_, k) => {
