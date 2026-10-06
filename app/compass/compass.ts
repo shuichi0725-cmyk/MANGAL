@@ -1208,9 +1208,11 @@ export function threadEntrances(
   const simels: Entrance[] = simel
     ? [{ key: `u:${simel.key}`, kind: "simel", label: "似た要素", count: simel.items.length, cover: coverOf(simel.items.map((i) => i.slug)), unitKey: simel.key }]
     : [];
-  const fixed = [...authors, ...sims, ...mags, ...years, ...simels];
+  // ★枠の配分は似た要素を数えずに決め、似た要素の1枠は要素の枠から譲る(2026-10-06 ユーザ指摘:
+  //   似た要素込みで6:4に割ったらジャンルが1枠減り、ホラーが「ほか」に押し出された。 似た要素は要素の仲間)
+  const fixed = [...authors, ...sims, ...mags, ...years];
   let room = Math.max(0, max - fixed.length);
-  const total = elems.length + genres.length;
+  const total = elems.length + genres.length + simels.length;
   let nE = elems.length;
   let nG = genres.length;
   if (total > room) {
@@ -1218,6 +1220,10 @@ export function threadEntrances(
     nE = Math.min(elems.length, Math.ceil((room * 3) / 5));
     nG = Math.min(genres.length, room - nE);
     nE = Math.min(elems.length, room - nG);
+    if (simels.length) {
+      if (nE > 0) nE--;
+      else if (nG > 0) nG--;
+    }
   }
   // 輪に出す入口から先に代表の書影を決める(輪の書影が重ならないことを優先)
   const eAt = (x: { t: string; list: string[] }): Entrance => ({ key: `e:${x.t}`, kind: "elem", label: `要素 ${x.t}`, value: x.t, count: x.list.length, cover: coverOf(x.list) });

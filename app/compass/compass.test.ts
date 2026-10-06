@@ -750,6 +750,18 @@ describe("糸の入口の輪(案B)", () => {
     expect(new Set(covers).size).toBe(covers.length);
   });
 
+  it("★似た要素の1枠は要素の枠から譲る(ジャンルの枠は減らない)・並びは ほかの次=似た要素", () => {
+    const base = threadEntrances(g, center, nb.units, (k) => k);
+    const simel = { key: "simel", kind: "elem" as const, label: "似た要素", items: [{ slug: "t5", shared: 6, year: 1990, score: 1 }] };
+    const e = threadEntrances(g, center, nb.units, (k) => k, 10, simel);
+    const n = (x: typeof e, k: string) => x.ring.filter((r) => r.kind === k).length;
+    expect(n(e, "genre")).toBe(n(base, "genre"));
+    expect(n(e, "elem")).toBe(n(base, "elem") - 1);
+    expect(n(e, "simel")).toBe(1);
+    const kinds = e.ring.map((r) => r.kind);
+    expect(kinds.indexOf("simel")).toBe(kinds.indexOf("elem") - 1);
+  });
+
   it("入口が10枠に収まる本は「ほか」を作らない", () => {
     const small = book("s", { themes: ["悲劇"], genres: ["action"], magazine: "m", year_started: 1990, authors: [{ name: "作者A" }] });
     const g2 = buildGraph([small, ...list.slice(1)]);
