@@ -4,64 +4,41 @@ canonical_publisher: 中央公論社
 canonical_imprint: 中公コミックスーリ
 suppress_types:
 - bunkobon
-source: 'ギャラ型round4 2026-08-17: 中公コミックスーリ(1992-93 1巻上中下+2-12巻=14冊、楽天完備)を刊行順採番でmainに(v1枠を中公愛蔵1989が、v6/13/14枠を初版1974-76の行が占有)。愛蔵版v1-3/初版run全14冊(種2)をタブへ。文庫は中公文庫(1998 v1-8)と双葉文庫(1995 v9-10断片)に分離。編名単巻期(2000-08)は未収載 / ★2026-09-07 巻抜け充填: ローカル楽天種とNDLで欠番巻を確認し 8 巻を追加(題完全一致+版元+ISBN連番+発売日+著者の5ゲート)'
+source: 'ギャラ型round4 2026-08-17: 中公コミックスーリ(1992-93 1巻上中下+2-12巻=14冊、楽天完備)を刊行順採番でmainに(v1枠を中公愛蔵1989が、v6/13/14枠を初版1974-76の行が占有)。愛蔵版v1-3/初版run全14冊(種2)をタブへ。文庫は中公文庫(1998 v1-8)と双葉文庫(1995 v9-10断片)に分離。編名単巻期(2000-08)は未収載 / ★2026-09-07 巻抜け充填: ローカル楽天種とNDLで欠番巻を確認し 8 巻を追加(題完全一致+版元+ISBN連番+発売日+著者の5ゲート) / ★2026-10-07 訂正(ユーザ「おねがい」=ルパン三世の巻番号検算): 旧main先頭の『1巻・上/中/下』(9784124103908/3915/3922)は NDL『ルパン三世：アニメ版. 1(カリオストロの城 上/中/下)』中公コミック・スーリ アニメ版 1992.6-8 =劇場アニメのフィルムコミック=掲載対象外 → main から外し volume-exclude へ。スーリ版は1巻=アニメ版・2〜12巻=原作の通し番号なので、原作11冊は number=2〜12(楽天題「ルパン三世（N）」・NDL vol と一致)に戻し volume_label を外した。1巻は対象外のため先頭が2巻'
 volumes:
-- number: 1
-  isbn13: '9784124103908'
-  release_date: '1992-06-05'
-  volume_label: 1巻・上
 - number: 2
-  isbn13: '9784124103915'
-  release_date: '1992-07-04'
-  volume_label: 1巻・中
-- number: 3
-  isbn13: '9784124103922'
-  release_date: '1992-08-05'
-  volume_label: 1巻・下
-- number: 4
   isbn13: '9784124104080'
   release_date: '1992-11-05'
-  volume_label: 2巻
-- number: 5
+- number: 3
   isbn13: '9784124104097'
   release_date: '1992-12-05'
-  volume_label: 3巻
-- number: 6
+- number: 4
   isbn13: '9784124104103'
   release_date: '1993-01-07'
-  volume_label: 4巻
-- number: 7
+- number: 5
   isbn13: '9784124104110'
   release_date: '1993-02-05'
-  volume_label: 5巻
-- number: 8
+- number: 6
   isbn13: '9784124104127'
   release_date: '1993-03-05'
-  volume_label: 6巻
-- number: 9
+- number: 7
   isbn13: '9784124104134'
   release_date: '1993-04-05'
-  volume_label: 7巻
-- number: 10
+- number: 8
   isbn13: '9784124104141'
   release_date: '1993-05-20'
-  volume_label: 8巻
-- number: 11
+- number: 9
   isbn13: '9784124104158'
   release_date: '1993-06-07'
-  volume_label: 9巻
-- number: 12
+- number: 10
   isbn13: '9784124104165'
   release_date: '1993-07-05'
-  volume_label: 10巻
-- number: 13
+- number: 11
   isbn13: '9784124104172'
   release_date: '1993-08-05'
-  volume_label: 11巻
-- number: 14
+- number: 12
   isbn13: '9784124104189'
   release_date: '1993-09-04'
-  volume_label: 12巻
 extra_editions:
 - type: aizoban
   label: 中公愛蔵版(1989)
