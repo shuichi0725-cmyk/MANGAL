@@ -40,6 +40,7 @@ import {
   komaTitleSize,
   komaVolumes,
   threadEntrances,
+  nearMix,
 } from "./compass";
 
 function book(slug: string, o: Partial<MangaListItem> = {}): MangaListItem {
@@ -753,5 +754,29 @@ describe("糸の入口の輪(案B)", () => {
     const g2 = buildGraph([small, ...list.slice(1)]);
     const e = threadEntrances(g2, small, neighborhood(g2, small, (k) => k).units, (k) => k);
     expect(e.more).toEqual([]);
+  });
+});
+
+describe("近い本の段(nearMix)", () => {
+  it("★候補が24冊を超える時は、中心のほかの要素・ジャンルに多く当てはまる順に段を下げて24冊で止める", () => {
+    const center = book("c", { themes: ["魔法", "片思い", "修行"], genres: ["action", "fantasy"] });
+    // 魔法を持つ本: 近い本(片思い+修行+action+fantasy)10冊 / やや近い本(片思い+action)20冊 / 遠い本(魔法だけ)40冊
+    const near = Array.from({ length: 10 }, (_, i) => book(`n${i}`, { themes: ["魔法", "片思い", "修行"], genres: ["action", "fantasy"] }));
+    const mid = Array.from({ length: 20 }, (_, i) => book(`m${i}`, { themes: ["魔法", "片思い"], genres: ["action"] }));
+    const far = Array.from({ length: 40 }, (_, i) => book(`f${i}`, { themes: ["魔法"], genres: [] }));
+    const g = buildGraph([center, ...near, ...mid, ...far]);
+    const r = nearMix(g, center, { themes: ["魔法"], genres: [] });
+    // 段4(10冊)では24冊に届かない → 段2(20冊)まで下げて30冊で止める。 遠い本(段0)は入らない
+    expect(r.items.length).toBe(30);
+    expect(r.min).toBe(2);
+    expect(r.of).toBe(4);
+    expect(r.items.some((i) => g.items[i].slug.startsWith("f"))).toBe(false);
+  });
+
+  it("候補が24冊以下なら全部(段で切らない)", () => {
+    const center = book("c", { themes: ["魔法"], genres: ["action"] });
+    const xs = Array.from({ length: 5 }, (_, i) => book(`x${i}`, { themes: ["魔法"], genres: [] }));
+    const g = buildGraph([center, ...xs]);
+    expect(nearMix(g, center, { themes: ["魔法"], genres: [] }).items.length).toBe(5);
   });
 });

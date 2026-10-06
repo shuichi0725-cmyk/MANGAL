@@ -1375,7 +1375,8 @@ export default function MagicCompass({
                     const pick = e.kind === "elem" || e.kind === "genre";
                     const part = e.kind === "elem" ? "themes" : "genres";
                     const on = pick && mix[part].includes(e.value);
-                    const cnt = pick && any ? (mixInfo.c[part].get(e.value) ?? 0) : e.count;
+                    // 要素・ジャンルの冊数 = 近い本の段の数(何も選んでいない時もその札だけの近い本の数)。 全体の冊数は出さない
+                    const cnt = pick ? (mixInfo.c[part].get(e.value) ?? 0) : e.count;
                     return (
                       <button
                         key={e.key}
@@ -1814,7 +1815,7 @@ export default function MagicCompass({
                       if (e.kind !== "elem" && e.kind !== "genre") return null;
                       const part = e.kind === "elem" ? "themes" : "genres";
                       const on = mix[part].includes(e.value);
-                      const cnt = any ? (mixInfo.c[part].get(e.value) ?? 0) : e.count;
+                      const cnt = mixInfo.c[part].get(e.value) ?? 0;
                       return (
                         <button
                           key={e.key}

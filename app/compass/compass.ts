@@ -352,7 +352,51 @@ export function mixCands(g: Graph, center: Pick<MangaListItem, "slug">, m: Mix):
 }
 
 /**
- * 引き出しの札に出す冊数。 total = いまの組の冊数(何も選んでいなければ 0)。
+ * ★選んだ要素・ジャンルを持つ本の「近い順の段」(2026-10-06 ユーザ指摘: 全体数から選べるだけで近い本になっていない・数が多すぎる)。
+ *   旧 = 選んだ要素・ジャンルを全部持つ本の全部(ファンタジー9,656冊)。 くじは近い本ほど当たりやすいが、何千冊もあると遠い本が数で勝つ。
+ *   新 = その中で、中心の本の「ほかの要素・ジャンル」(選んでいない分)に多く当てはまる順に段を下げ、24冊以上になった段で止める
+ *        (組み替えと同じ考え方)。 of = ほかの要素・ジャンルの数 / min = 止めた段(いくつ以上一致)。
+ */
+export function nearMix(
+  g: Graph,
+  center: Pick<MangaListItem, "slug" | "themes" | "genres">,
+  m: Mix,
+): { items: number[]; min: number; of: number } {
+  const cands = mixCands(g, center, m);
+  const othersT = uniq(center.themes ?? []).filter((t) => !m.themes.includes(t));
+  const othersG = uniq(center.genres ?? []).filter((k) => !m.genres.includes(k));
+  const of = othersT.length + othersG.length;
+  if (cands.length <= UNIT_MAX || !of) return { items: cands, min: 0, of };
+  const oT = new Set(othersT);
+  const oG = new Set(othersG);
+  const byLv = new Map<number, number[]>();
+  for (const i of cands) {
+    const it = g.items[i];
+    let lv = 0;
+    for (const t of uniq(it.themes ?? [])) if (oT.has(t)) lv++;
+    for (const k of uniq(it.genres ?? [])) if (oG.has(k)) lv++;
+    const a = byLv.get(lv);
+    if (a) a.push(i);
+    else byLv.set(lv, [i]);
+  }
+  const items: number[] = [];
+  let min = 0;
+  for (const lv of [...byLv.keys()].sort((a, b) => b - a)) {
+    items.push(...(byLv.get(lv) as number[]));
+    min = lv;
+    if (items.length >= UNIT_MAX) break;
+  }
+  return { items, min, of };
+}
+
+/** nearMix の緩め具合の一言(「ほかの要素・ジャンル15のうち5つ以上一致」) */
+export function nearNote(n: { min: number; of: number }, total: number): string | undefined {
+  if (!n.of || total <= UNIT_MAX) return undefined;
+  return n.min >= n.of ? `ほかの要素・ジャンル${n.of}つ全部に一致` : `ほかの要素・ジャンル${n.of}のうち${n.min}つ以上一致`;
+}
+
+/**
+ * 引き出し・入口の札に出す冊数 = nearMix の冊数(近い本の段)。 total = いまの組の冊数(何も選んでいなければ 0)。
  * themes/genres = 選んでいない札ごとの「足したら何冊か」(何も選んでいなければ その札だけの冊数)。
  */
 export function mixCounts(
@@ -364,26 +408,14 @@ export function mixCounts(
   const cG = uniq(center.genres ?? []);
   const themes = new Map<string, number>();
   const genres = new Map<string, number>();
-  const notSelf = (i: number) => g.items[i].slug !== center.slug;
-  if (!mixSize(m)) {
-    for (const t of cT) themes.set(t, (g.byTheme.get(t) ?? []).filter(notSelf).length);
-    for (const k of cG) genres.set(k, (g.byGenre.get(k) ?? []).filter(notSelf).length);
-    return { total: 0, themes, genres };
-  }
-  const cands = mixCands(g, center, m);
-  for (const t of cT) if (!m.themes.includes(t)) themes.set(t, 0);
-  for (const k of cG) if (!m.genres.includes(k)) genres.set(k, 0);
-  for (const i of cands) {
-    const it = g.items[i];
-    for (const t of uniq(it.themes ?? [])) if (themes.has(t)) themes.set(t, (themes.get(t) as number) + 1);
-    for (const k of uniq(it.genres ?? [])) if (genres.has(k)) genres.set(k, (genres.get(k) as number) + 1);
-  }
-  return { total: cands.length, themes, genres };
+  for (const t of cT) if (!m.themes.includes(t)) themes.set(t, nearMix(g, center, { themes: [...m.themes, t], genres: m.genres }).items.length);
+  for (const k of cG) if (!m.genres.includes(k)) genres.set(k, nearMix(g, center, { themes: m.themes, genres: [...m.genres, k] }).items.length);
+  return { total: mixSize(m) ? nearMix(g, center, m).items.length : 0, themes, genres };
 }
 
 /**
- * 掛け合わせの広げる単位。 色 = 要素を1つでも選べば要素(青)・ジャンルだけならジャンル(橙)。
- * くじの近さ = 中央との共通の要素の数 + 4×ジャンルの重なり(残りの要素・ジャンルも近い本ほど当たりやすい)。
+ * 掛け合わせの広げる単位 = nearMix の本(近い本の段)。 色 = 要素を1つでも選べば要素(青)・ジャンルだけならジャンル(橙)。
+ * くじの近さ = 中央との共通の要素の数 + 4×ジャンルの重なり。
  */
 export function mixUnit(
   g: Graph,
@@ -394,7 +426,8 @@ export function mixUnit(
   if (!mixSize(m)) return null;
   const cT = new Set(center.themes ?? []);
   const cG = new Set(center.genres ?? []);
-  const items = mixCands(g, center, m)
+  const near = nearMix(g, center, m);
+  const items = near.items
     .map((i) => {
       const it = g.items[i];
       const ts = uniq(it.themes ?? []);
@@ -413,6 +446,7 @@ export function mixUnit(
     kind: m.themes.length ? "elem" : "genre",
     label: [...m.themes, ...m.genres.map(genreName)].join("×"),
     items,
+    note: nearNote(near, mixCands(g, center, m).length),
   };
 }
 
