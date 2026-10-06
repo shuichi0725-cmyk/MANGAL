@@ -4006,3 +4006,8 @@ dedup:
   title: ブッキラによろしく!
   isbns: 3
   note: "2026-10-01 復活: SRC stem kibando はブッキラ種2の重複stub。09-25に「drop slugが別作品(牙人)へ付け替え済み」として退役したが、このdropは種2stubだけを落とし予約頁(牙人・秋田文庫9784253174770)は残す=退役で牙人頁にブッキラ3冊が流入しISBN消失。再登録"
+- drop: esu-rank-party-kara-kaikosareta-jugushi
+  canonical: esurankupaateikarakaikosaretajugushi-noroinoaitemushikatsukuremasengaso
+  title: Sランクパーティから解雇された〈呪具師〉
+  isbns: 14
+  note: "2026-10-06 再dedup: 同じ14 ISBNの頁が2枚。旧dropキー esu-rank-party-kara-kaikosareta-sareta-jugushi が「された」二重の slug 是正で SRC stem 改名され外れて復活(slug改名で slugキーseedが死ぬ型)。前回裁定どおり s-rank 側を残す"

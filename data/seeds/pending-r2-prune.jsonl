@@ -1,3 +1,4 @@
 # R2 prune 待ちの公開slug。週次蒸留の preflight が必ず表示する。
 # r2-sync --prune 実行後、.cache/r2-pruned-<日時>.txt に載った行をここから消し込む。
 # 2026-08-10 週次: 台帳15件すべて .cache/r2-pruned-20260810-020427.txt に載ったのを確認し消し込み。
+{"slug": "esu-rank-party-kara-kaikosareta-jugushi", "reason": "反映: 抜け巻の個別追加(マンガ法律の抜け穴4/9/10/11・学研まんが世界の歴史9・ねぇ、ぴよちゃん11・ホイホ・ホイホイホ3・ざこ検4[canonical]・完全版 飛ぶ教室3[canonical])+呪具師の重複頁を解消(15巻追加・301)", "at": "2026-10-06", "source": "reflect-targeted --drop"}
