@@ -762,6 +762,15 @@ describe("糸の入口の輪(案B)", () => {
     expect(kinds.indexOf("simel")).toBe(kinds.indexOf("elem") - 1);
   });
 
+  it("★「ほか」は輪の真下(半分の位置)= 掲載誌が無い本はジャンルを1つ増やして要素を1つ減らす", () => {
+    const noMag = book("nm", { themes: T6, genres: ["action", "horror", "drama"], year_started: 1990, authors: [{ name: "作者A" }] });
+    const g2 = buildGraph([noMag, ...list.slice(1)]);
+    const e = threadEntrances(g2, noMag, neighborhood(g2, noMag, (k) => k).units, (k) => k);
+    const len = e.ring.length + 1;
+    const before = e.ring.filter((r) => ["author", "mag", "genre", "sim"].includes(r.kind)).length;
+    expect(before).toBe(Math.floor(len / 2));
+  });
+
   it("入口が10枠に収まる本は「ほか」を作らない", () => {
     const small = book("s", { themes: ["悲劇"], genres: ["action"], magazine: "m", year_started: 1990, authors: [{ name: "作者A" }] });
     const g2 = buildGraph([small, ...list.slice(1)]);

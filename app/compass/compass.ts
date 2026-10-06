@@ -1224,6 +1224,20 @@ export function threadEntrances(
       if (nE > 0) nE--;
       else if (nG > 0) nG--;
     }
+    // ★「ほか ▸」をいつも輪の真下に置く(2026-10-06 ユーザ指摘: 怪獣8号=掲載誌が無く前が1つ少ない→似た要素が真下に来た)。
+    //   ほかより前(作者・雑誌・ジャンル・似たジャンル)の数が輪の半分になるよう、ジャンルと要素の枠を融通する
+    const len = authors.length + mags.length + sims.length + years.length + simels.length + nE + nG + 1;
+    let delta = Math.floor(len / 2) - (authors.length + mags.length + sims.length + nG);
+    while (delta > 0 && nE > 0 && nG < genres.length) {
+      nG++;
+      nE--;
+      delta--;
+    }
+    while (delta < 0 && nG > 0 && nE < elems.length) {
+      nG--;
+      nE++;
+      delta++;
+    }
   }
   // 輪に出す入口から先に代表の書影を決める(輪の書影が重ならないことを優先)
   const eAt = (x: { t: string; list: string[] }): Entrance => ({ key: `e:${x.t}`, kind: "elem", label: `要素 ${x.t}`, value: x.t, count: x.list.length, cover: coverOf(x.list) });
