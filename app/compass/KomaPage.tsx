@@ -36,8 +36,8 @@ export default function KomaPage({
   const authors = [...new Set((item.authors ?? []).map((a) => a.name).filter(Boolean))];
   const originals = [...new Set((item.original_authors ?? []).map((a) => a.name).filter(Boolean))];
   const vols = komaVolumes(item);
+  // ★ジャンル・要素は全部出す(2026-10-06 ユーザ指示「全部表示・足りなければ枠を縦に伸ばす」)。 書誌のコマは中身の高さで伸びる
   const themes = [...new Set(item.themes ?? [])];
-  const THEME_MAX = 6;
   const meta = [item.magazine ? magName(item.magazine) : null, pub, item.demographic ? demoName(item.demographic) : null].filter(Boolean);
   const d = (i: number) => ({ "--d": `${120 + i * 140}ms` }) as CSSProperties;
 
@@ -94,12 +94,11 @@ export default function KomaPage({
                   {genreName(k)}
                 </span>
               ))}
-              {themes.slice(0, THEME_MAX).map((t) => (
+              {themes.map((t) => (
                 <span key={`t:${t}`} className="ck-tag">
                   {t}
                 </span>
               ))}
-              {themes.length > THEME_MAX && <span className="ck-tag more">ほか{themes.length - THEME_MAX}</span>}
             </div>
           )}
           <div className="ck-btns">
