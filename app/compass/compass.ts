@@ -1151,7 +1151,7 @@ export function komaNarration(
 //   残りの枠に 要素(冊数の多い順)とジャンル(冊数の少ない順=特徴的な順)を入れる。 入りきらない分は「ほか ▸」(2段目)。
 
 export type Entrance =
-  | { key: string; kind: "author" | "mag" | "year" | "sim"; label: string; count: number; cover: string | null; unitKey: string }
+  | { key: string; kind: "author" | "mag" | "year" | "sim" | "simel"; label: string; count: number; cover: string | null; unitKey: string }
   | { key: string; kind: "elem" | "genre"; label: string; value: string; count: number; cover: string | null };
 export type EntranceSet = { ring: Entrance[]; more: Entrance[] };
 
@@ -1161,6 +1161,8 @@ export function threadEntrances(
   units: readonly Unit[],
   genreName: (key: string) => string = (k) => k,
   max = 10,
+  /** 似た要素の単位(simThemeUnit)。 null = 出さない */
+  simel: Unit | null = null,
 ): EntranceSet {
   const used = new Set<string>();
   const coverOf = (slugs: readonly string[]): string | null => {
@@ -1203,7 +1205,10 @@ export function threadEntrances(
     .filter((x) => x.list.length)
     .sort((a, b) => a.list.length - b.list.length);
 
-  const fixed = [...authors, ...sims, ...mags, ...years];
+  const simels: Entrance[] = simel
+    ? [{ key: `u:${simel.key}`, kind: "simel", label: "似た要素", count: simel.items.length, cover: coverOf(simel.items.map((i) => i.slug)), unitKey: simel.key }]
+    : [];
+  const fixed = [...authors, ...sims, ...mags, ...years, ...simels];
   let room = Math.max(0, max - fixed.length);
   const total = elems.length + genres.length;
   let nE = elems.length;
@@ -1229,5 +1234,46 @@ export function threadEntrances(
   const more = [...elems.slice(nE).map(eAt), ...genres.slice(nG).map(gAt)];
   // 輪の並び(上から時計回り): 作者 → 雑誌 → ジャンル → よく似たジャンル →(ほか ▸)→ 要素 → 年
   //   ★2026-10-06 ユーザ指示: 雑誌と似たジャンルを入れ替え・「ほか」と年を入れ替え(年=左上・ほか=下)。 「ほか」は画面側で要素の前に差す
-  return { ring: [...authors, ...mags, ...ringG, ...sims, ...ringE, ...years], more };
+  //   似た要素は「ほか ▸」の左隣 = 要素の前(2026-10-06 ユーザ指示)
+  return { ring: [...authors, ...mags, ...ringG, ...sims, ...simels, ...ringE, ...years], more };
+}
+
+// ───────────────────────── 似た要素(2026-10-06) ─────────────────────────
+// 「よく似たジャンル」の要素版 = 要素の組の重なり(共通 ÷ どちらかにある)が大きい本。
+// 実測: 要素の多い本では良い顔ぶれ(ベルセルク→ヴィンランド・サガ/バガボンド/無限の住人)・よく似たジャンルとはほぼ重ならない。
+// ただし要素が少ない本では偶然寄りになる(要素の数の中央値は1)= ★中心の要素が5つ以上の時だけ出す・候補は要素3つ以上の本だけ
+//   (要素の少ない本は少し一致するだけで重なり率が高くなる癖を抑える)。
+export const SIMEL_MIN_CENTER = 5;
+export const SIMEL_MIN_CAND = 3;
+export const SIMEL_TIERS: readonly number[] = [0.5, 0.4, 0.3, 0.25];
+
+export function simThemeUnit(g: Graph, center: Pick<MangaListItem, "slug" | "themes" | "genres">): Unit | null {
+  const cT = uniq(center.themes ?? []);
+  if (cT.length < SIMEL_MIN_CENTER) return null;
+  const cnt = new Map<number, number>();
+  for (const t of cT) for (const i of g.byTheme.get(t) ?? []) cnt.set(i, (cnt.get(i) ?? 0) + 1);
+  const jac = (i: number) => {
+    const n = cnt.get(i) ?? 0;
+    return n / (cT.length + uniq(g.items[i].themes ?? []).length - n);
+  };
+  const pool = [...cnt.keys()].filter((i) => g.items[i].slug !== center.slug && uniq(g.items[i].themes ?? []).length >= SIMEL_MIN_CAND);
+  let chosen: number[] = [];
+  let tier = SIMEL_TIERS[0];
+  for (const t of SIMEL_TIERS) {
+    chosen = pool.filter((i) => jac(i) >= t - 1e-9);
+    tier = t;
+    if (chosen.length >= UNIT_MAX) break;
+  }
+  if (!chosen.length) return null;
+  const cG = new Set(center.genres ?? []);
+  const items = chosen
+    .map((i) => {
+      const it = g.items[i];
+      const gn = uniq(it.genres ?? []).filter((k) => cG.has(k)).length;
+      const u: UnitItem = { slug: it.slug, shared: cnt.get(i) ?? 0, year: it.year_started || null, score: 4 * jac(i) + gn * 0.25 };
+      return { u, pop: it.popularity ?? 0 };
+    })
+    .sort((a, b) => b.u.score - a.u.score || b.pop - a.pop || (a.u.slug < b.u.slug ? -1 : a.u.slug > b.u.slug ? 1 : 0))
+    .map((x) => x.u);
+  return { key: "simel", kind: "elem", label: "似た要素", items, note: `要素の重なり${Math.round(tier * 100)}%以上` };
 }

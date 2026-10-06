@@ -41,6 +41,7 @@ import {
   komaVolumes,
   threadEntrances,
   nearMix,
+  simThemeUnit,
 } from "./compass";
 
 function book(slug: string, o: Partial<MangaListItem> = {}): MangaListItem {
@@ -778,5 +779,26 @@ describe("近い本の段(nearMix)", () => {
     const xs = Array.from({ length: 5 }, (_, i) => book(`x${i}`, { themes: ["魔法"], genres: [] }));
     const g = buildGraph([center, ...xs]);
     expect(nearMix(g, center, { themes: ["魔法"], genres: [] }).items.length).toBe(5);
+  });
+});
+
+describe("似た要素(simThemeUnit)", () => {
+  const T = ["悲劇", "復讐", "旅", "剣劇", "神話"];
+  it("中心の要素が5つ未満なら出さない", () => {
+    const c = book("c", { themes: T.slice(0, 4) });
+    const g = buildGraph([c, book("a", { themes: T.slice(0, 4) })]);
+    expect(simThemeUnit(g, c)).toBeNull();
+  });
+  it("★要素2つ以下の本は候補にしない(少し一致するだけで重なり率が高くなる癖)・重なりの大きい順", () => {
+    const c = book("c", { themes: T });
+    const g = buildGraph([
+      c,
+      book("big", { themes: ["悲劇", "復讐", "旅", "剣劇"] }),
+      book("mid", { themes: ["悲劇", "復讐", "旅", "料理"] }),
+      book("tiny", { themes: ["悲劇", "復讐"] }),
+    ]);
+    const u = simThemeUnit(g, c);
+    expect(u?.items.map((i) => i.slug)).toEqual(["big", "mid"]);
+    expect(u?.key).toBe("simel");
   });
 });

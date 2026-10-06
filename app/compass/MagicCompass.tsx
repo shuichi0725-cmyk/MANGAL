@@ -48,6 +48,7 @@ import {
   narrowUnit,
   threadEntrances,
   type Entrance,
+  simThemeUnit,
 } from "./compass";
 import { Halftone } from "./halftone";
 import { CompassShelveButton, CompassShelvePanel } from "./CompassShelve";
@@ -83,7 +84,10 @@ const BAND_H = THREADS ? 0 : 30;
 /** 島の大きさ(書影3冊の束+名札) */
 const IW = 66;
 const IH = 86;
-const unitColor = (u: { key: string; kind: UnitKind }) => (MIX && u.key === "genre" ? SIM_COLOR : KIND_COLOR[u.kind]);
+// ★似た要素(2026-10-06)= 要素(青)と区別する薄い水色
+const SIMEL_COLOR = "#a8e4ff";
+const unitColor = (u: { key: string; kind: UnitKind }) =>
+  MIX && u.key === "genre" ? SIM_COLOR : u.key === "simel" ? SIMEL_COLOR : KIND_COLOR[u.kind];
 
 const TOP = 100; // 糸の色チップ列 44 + 旅路 56
 const SHEET = 96;
@@ -394,6 +398,8 @@ export default function MagicCompass({
     () => (SPLIT && graph && curItem && reApplied ? regenreUnit(graph, curItem, reApplied, genreName) : null),
     [graph, curItem, reApplied, genreName],
   );
+  // 似た要素(糸の入口の輪だけ・中心の要素が5つ以上の時だけ)
+  const simelFull = useMemo(() => (THREADS && graph && curItem ? simThemeUnit(graph, curItem) : null), [graph, curItem]);
   const baseFull = useMemo(
     () =>
       exp && nb
@@ -401,9 +407,11 @@ export default function MagicCompass({
           ? mixFull
           : reFull?.key === exp
             ? reFull
-            : (nb.units.find((u) => u.key === exp) ?? null)
+            : simelFull?.key === exp
+              ? simelFull
+              : (nb.units.find((u) => u.key === exp) ?? null)
         : null,
-    [exp, nb, mixFull, reFull],
+    [exp, nb, mixFull, reFull, simelFull],
   );
   // 「さらに絞る」を掛けた後の単位(何も絞っていなければ元のまま)
   const unitFull = useMemo(
@@ -418,8 +426,8 @@ export default function MagicCompass({
   const islands = useMemo(() => (SPLIT && graph && curItem ? islandPages(themeIslands(graph, curItem)) : null), [graph, curItem]);
   // 糸の入口(案B): 輪に出す入口と「ほか」に回す入口
   const entrances = useMemo(
-    () => (THREADS && graph && curItem && nb ? threadEntrances(graph, curItem, nb.units, genreName) : null),
-    [graph, curItem, nb, genreName],
+    () => (THREADS && graph && curItem && nb ? threadEntrances(graph, curItem, nb.units, genreName, 10, simelFull) : null),
+    [graph, curItem, nb, genreName, simelFull],
   );
   const reDraft = useMemo(
     () => (SPLIT && reOpen && graph && curItem ? regenreUnit(graph, curItem, re, genreName) : null),
@@ -1311,9 +1319,9 @@ export default function MagicCompass({
         {THREADS && entrances && mixInfo && !unit && !pan && (
           <div className="cp-ents">
             {(() => {
-              const shown = entrances.ring.filter((e) => !off.has(e.kind === "sim" ? "genre" : e.kind));
-              // 「ほか ▸」は要素の前(要素が無ければ年の前)= 輪の下側
-              let at = shown.findIndex((e) => e.kind === "elem");
+              const shown = entrances.ring.filter((e) => !off.has(e.kind === "sim" ? "genre" : e.kind === "simel" ? "elem" : e.kind));
+              // 「ほか ▸」は似た要素・要素の前(無ければ年の前)= 輪の下側。 似た要素は「ほか」の左隣
+              let at = shown.findIndex((e) => e.kind === "simel" || e.kind === "elem");
               if (at < 0) at = shown.findIndex((e) => e.kind === "year");
               if (at < 0) at = shown.length;
               const all: (Entrance | "more")[] = entrances.more.length ? [...shown.slice(0, at), "more", ...shown.slice(at)] : shown;
@@ -1333,7 +1341,7 @@ export default function MagicCompass({
                 return { x1: x1 + dx * a, y1: y1 + dy * a, x2: x1 + dx * Math.max(a, b), y2: y1 + dy * Math.max(a, b) };
               };
               const colorOf = (e: Entrance | "more") =>
-                e === "more" ? "#8a96a0" : e.kind === "sim" ? SIM_COLOR : KIND_COLOR[e.kind as UnitKind];
+                e === "more" ? "#8a96a0" : e.kind === "sim" ? SIM_COLOR : e.kind === "simel" ? SIMEL_COLOR : KIND_COLOR[e.kind as UnitKind];
               return (
                 <>
                   <svg className="cp-ent-ln" width={geom.W} height={geom.H} aria-hidden="true">
