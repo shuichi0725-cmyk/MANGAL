@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: cfda7af4-88ad-4470-82ac-6238868c9f0c
-  modified: 2026-10-06T14:47:04.551Z
+  modified: 2026-10-06T15:25:18.968Z
 ---
 
 2026-08-21の月次蒸留1.2.19が `data/seeds/volumes-supplement-auto.yml`(日次蒸留の続巻台帳)を**全消し**(916巻)。うち**種2未収録の883巻が本番から黙って消失**(異種族レビュアーズ12巻等806頁)。2026-08-26に週次前preflightの**ISBN消失監視**(`_audit-isbn-loss.py`)が検知→git履歴(8d02dbf88~1)から914巻を復元し806頁再生成で解消。
@@ -41,5 +41,6 @@ mangaseek の発売日一覧との突き合わせ([[competitor_mangaseek_teardow
   ★検問を締めた実例: ねこぱんち頁に「お江戸/おとなのねこぱんち」(別シリーズ)7冊=題を「含む」判定ですり抜けた / 傷モノの花嫁12・アイマス5 = 古い記録に題が無く特装版検問をすり抜けた /
   アンゴルモア博多編13 = 頁が元寇合戦記1-10+博多編11-12の版混在(**頁の分離が未着手**)。
   個別: マンガ法律の抜け穴4/9/10/11・学研まんが世界の歴史9(楽天分類が漫画外でも同じ頁の他巻は掲載済み)・ねぇ、ぴよちゃん11(ねえ/ねぇ)・canonical本体へ ざこ検4/完全版 飛ぶ教室3。
-  **残(人の裁定)**: 男一匹ガキ大将の本宮ひろ志漫画大全集1-8(11/19刊・新しい版=canonicalに版を足すか)/ sandman頁=アメコミ翻訳(THE SANDMAN新訳)の疑い・頁ごと / bolt-and-nut 10(canonicalは別ISBN …1866 で確定済み)。
+  ★2026-10-07 ユーザ裁定で処理済み: 本宮ひろ志漫画大全集1-8=男一匹ガキ大将に kanzenban タブ / sandman=アメコミで drop / アンゴルモア=博多編を別頁に分離([[angolmois_hakata_split]])。
+  **残**: bolt-and-nut 10(canonicalは別ISBN …1866 で確定済み=要調査なら per-case)。
   以後の監視 = 月次サニティ#36 `_audit-harvested-not-on-page.py`(確認済み簿 data/seeds/harvested-not-on-page-ack.jsonl)。
