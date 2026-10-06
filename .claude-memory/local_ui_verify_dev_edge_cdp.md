@@ -31,3 +31,11 @@ metadata:
 - ヘッドレスの `--window-size=420` は実際の表示幅が広く、右端が切れた画像になる(CDPの setDeviceMetricsOverride なら正確)。
 
 関連: [[verify_build_preview_subset]](metadata/SSRは実ビルドで見る) [[feedback_design_mockups_html_sendfile]] [[bash_tool_heredoc_quote_pitfall]]
+
+## 追記 2026-10-06(2つの罠)
+- ★**テスト用の設定は MANGAL_DATA_DIR=.preview-data で自動的に入る**(next.config.ts が NEXT_PUBLIC_PREVIEW_FEATURES を決める)。
+  本番の見え方を確かめる = MANGAL_DATA_DIR を付けずに dev(data/)。 ただし本番の索引(head/cols)は public/ に無いので、
+  data/ から public/manga-list-head.json・manga-list-cols.v1.json を一時配置し、public/manga-catch-index.json(git追跡・テスト用の抜粋)は退避→差替→**必ず戻す**。
+- ★**拡大した画面の指の移動はヘッドレスでは擬似ジェスチャで動かない**: Input.synthesizePinchGesture は拡大しない・synthesizeScrollGesture は動かさない。
+  拡大 = Emulation.setPageScaleFactor、なぞる = Input.dispatchTouchEvent(touchStart→touchMove×10→touchEnd)、確認 = visualViewport.offsetLeft/Top。
+  なぞる向きに注意(左上端から右へなぞっても0のまま=誤読しかけた)。 ★実機Chromeの症状はヘッドレスで再現しないことがある。
