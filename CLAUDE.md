@@ -154,7 +154,7 @@
 | **「後退蒸留して <年>」** | `_distill_backward.py <年> --discover(NDL live)→--plan(仕分け/ゲート)→AI worksheet記入→--emit(preview生成)`。掲載ゲート=必須メタ完備+楽天書影v1。不足=欠落表。被覆台帳=distill-coverage.json | 年次第 |
 | 作品名+リンク(Wiki/NDL) | per-case版再構築(イアラ式)→即「反映して」相当まで実施 | 1作数分 |
 
-- ★流れは**一方向**: seed修正 → 本番manga.v2 → テスト(.preview-data=subset同期) → push → 確認。**例外=新規マンガだけテスト先行**(preview生成→確認→本番化)。双方向に流さない(ズレの元)。
+- ★流れは**一方向**: seed修正 → 本番manga.v2 → テスト(.preview-data=subset同期) → push → 確認。**例外=新規マンガだけテスト先行**(preview生成→確認→本番化)。双方向に流さない(ズレの元)。★ただし**日次蒸留の予約新作は2026-10-08 ユーザ裁定で「ドラフト廃止」**=出荷前レビューと検査を通したらその日に本番データへ(確認待ちにしない。skill daily-distill)。日次蒸留は**途中経過を報告しない・最終報告は「結果」から**。
 - ★Claudeは反映時に**変更slugを自分で列挙**する(ユーザに聞かない)。preview反映はpush後15-20分・追いpush禁止([[preview_deploy_pitfalls]])。
 
 ### ★新規登録 protocol (= NDL過去発見型。 2026-07-02 ユーザ裁定 = 順番を固定)

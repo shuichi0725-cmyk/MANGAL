@@ -30,3 +30,4 @@ metadata:
 - [日次の再投入+予約頁seed直接追記+番人#36](daily_distill_hold_not_requeued.md)
 - [予約頁は本流を通らない型](preorder_page_bypasses_mainline_class.md)
 - [dedup退役→予約頁にstub](dedup_retire_srcstub_vs_preorder.md)
+- [★日次=ドラフト廃止・途中報告なし・結果から](feedback_daily_distill_no_drafts_quiet.md)

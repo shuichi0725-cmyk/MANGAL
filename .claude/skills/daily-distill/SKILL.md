@@ -7,7 +7,9 @@ description: 日次蒸留 — 2本立て: A=楽天予約ハーベスト(未来�
 
 **2本立て**: A=楽天予約ハーベスト(未来〜当月の新刊。カレンダー/新刊棚の唯一の未来供給源) /
 B=NDL新着回収(納本済み過去分)。毎日でなくてよい(間隔が空いても窓が自動で広がり取りこぼさない)。
-理想運用: 日次蒸留して→(previewで)確認→週次蒸留して=週1本番更新。
+理想運用: 日次蒸留して(新作もその日に本番データへ=確認待ちのドラフトは作らない)→週次蒸留して=週1本番公開。
+★**2026-10-08 ユーザ裁定**: ①**ドラフト廃止**(新作②③④は出荷前レビューと生成後チェックを通したらその日のうちに本番化。確認待ちにしない)
+②**途中経過の報告をしない**(作業中に状況を書かない。終わったら結果だけ) ③**最終報告は「結果」から書く**(「終わりました/pushしました/テスト環境に反映されるまで…/本番公開は週次で」等の前置きを書かない)。
 
 ## NEVER(禁止) ★2026-07-09 ハードニング: 下記4つは今日全部踏んだ実害。飛ばすな
 
@@ -18,7 +20,9 @@ B=NDL新着回収(納本済み過去分)。毎日でなくてよい(間隔が空
 - **連続429=即中断**(NDL・楽天とも1.1〜1.3s/req厳守。リトライ連打禁止)。★**単発429は規制ではない**: 3→10→30→90秒待って再試行で吸収し、4回続けて429の時だけ中断する(2026-09-24 実測= 1件目429→後で5件通る→また429、の「通る/弾かれるが混ざる」状態がある。`_verify-kana-pending.py` / `_ndl-discovery.py` はこの形。`_distill_daily.py` は子の終了コード2で判定=出力中の「429」文字列では止めない)。
 - **捏造禁止**: ヨミ/著者/genreを推測で埋めない。ヨミ=楽天仮確定+NDL照合キュー(下記)が正規ルート。
 - **単巻先行登録禁止**: 途中巻でページ無し(④)は全巻回収が成立した作品だけドラフト化。
-- **②③④は必ずpreview先行**(B裁定)。ユーザ確認GOなしに本番化しない。**previewは"今回のみ"**(増加分−過去draft−捏造kana)に絞る。ユーザは「前回見た」に敏感で正確=水増しを即見抜く。
+- ~~②③④は必ずpreview先行(B裁定)~~ → ★**2026-10-08 ユーザ裁定「ドラフト廃止」**: 確認待ちのドラフトは作らない。②③④は**出荷前レビュー(ゲート)と生成後チェックリストを
+  通したらその日のうちに本番化**(手順10.9 `_preorder-productionize.py --keep-preview`)。品質の守りは「人の確認」でなく**ゲートと検査**が担う=
+  ゲートを飛ばして本番化しない。previewは当日分の**閲覧用**(確認待ちではない)。**previewは"今回のみ"**(増加分−過去draft−捏造kana)に絞る。
   ★2026-08-11 機械化: 手順4.5の `_preorder-preview-swap.py` が**previewの現掲示物を黙って退場**させる(=追加でなく入れ替え。ユーザ裁定「何も言わないでも入れ替えを行ってほしい」)。飛ばすと前回分が混ざる。
   ★2026-08-15 是正(ユーザ指摘「入れ替えるようにskillしたはずだけどなってない?」): 旧実装は退場条件を
   「日次ドラフトである AND data/manga.v2 に居ない」にしていたため**手作業でpreviewに入れた確認用コピーが1頁も退場せず**、
@@ -71,7 +75,8 @@ B=NDL新着回収(納本済み過去分)。毎日でなくてよい(間隔が空
 | 10.5 | ★**出荷前レビュー(ゲート)** | `python scripts/_preorder-review.py` ← **exit 0 まで push禁止**。下記で各行裁定 |
 | 10.6 | ★**発売日ドリフト**(2026-09-04新設・すてごろブッチ型) | `python scripts/_audit-preorder-date-drift.py` → `python scripts/_apply-preorder-date-drift.py`(dry-run で保留理由を読む) → `--apply` → `_reflect-targeted.py --only $(cat .cache/preorder-date-drift-stems.txt \| tr '\n' ',') --commit-only`。★**予約巻は後から発売日が動く**(延期/前倒し)。この日のharvestが最新スナップショットなので**ここで突合するのが一番安い**(live不要)。適用は**楽天とNDLが一致した行**+★**NDLが現在値のまま3日以上ずれた行は楽天を採る**(2026-10-08 ユーザ裁定「楽天を信じる」=延期を楽天が先に掴む型)。±2日の「奥付日 vs 店頭日」は保留に落ちる(変更しないのが正解)。日付が動いた月は `_build-calendar.py data/manga.v2 data/calendar <当月>` も回す(★2026-09-14〜: 暦は**配信しない内部中間物**= /shinkan データ生成の入力。ホームのカレンダーUIは撤去済) |
 | 10.7 | ★**保留頁の自動再訪**(2026-08-24新設③) | `python scripts/_preorder-refresh-held.py --limit 30` ← demographic/caption待ちで索引保留の予約由来頁を楽天再照会で埋める(捏造なし=返った時だけ)。touchedが出たら `_reflect-targeted.py --only <touched> --commit-only`。★2026-09-24 是正: 旧版は booksGenreId を先頭6桁(`001001`=漫画全体)で引き、付いた demographic が**全部 shounen**だった(29頁を null に戻した)。今は9桁で引き、楽天が「その他」(001001012)なら付かない=正常。巡回は最後に照会した日が古い順(`.cache/preorders/refresh-held-state.json`)。「更新 demographic=…」行は**題とレーベルに合っているか1行ずつ目で見る** |
-| 10.8 | ★**レビューシート生成→ユーザへ**(2026-08-24新設①) | `python scripts/_gen-review-sheet.py` → `.cache/review-sheet.html` をユーザに送付(SendUserFile render)。書影/出版社/slug/ジャンル/再録疑いを一覧色付け=1頁ずつ開かせない |
+| 10.8 | レビューシート生成(★2026-10-08〜 **送らない**=ドラフト廃止で確認依頼が無くなった。生成は任意・自分の検査用)(2026-08-24新設①) | `python scripts/_gen-review-sheet.py` → `.cache/review-sheet.html` をユーザに送付(SendUserFile render)。書影/出版社/slug/ジャンル/再録疑いを一覧色付け=1頁ずつ開かせない |
+| 10.9 | ★**本番化**(2026-10-08 ユーザ裁定「ドラフト廃止」) | `python scripts/_preorder-productionize.py --keep-preview` → `python scripts/_exists.py --build`(ISBN索引)。★10.5のレビューが exit 0・手順9のチェックリストが全部通った後だけ。preorder-pages(恒久)+manga.v2+本番索引へ。previewは当日分の閲覧用に残す(次の日次の4.5で退場)。B(手順12)で作った新作も同じく本番化する |
 | 11 | 索引+暦(**commit止め**) | `python scripts/_build-list-index.py .preview-data/manga .preview-data` ; `git add .preview-data && git commit`(★**pushしない**)。★2026-09-14: preview暦(public/calendar)の再生成は**廃止**(ホームのカレンダー/タイムマシン撤去で読み手が消えた) |
 | 12 | B NDL新着(任意) | `python scripts/_distill_daily.py --discover`→`--plan`→`--emit` ★**push前に済ませる**(Bもpreviewドラフトを作る=最後の1pushに同梱) |
 | 13 | ★**最後に1回だけpush** | `git push` ← 全工程(①〜B)完了後にここで**初めてpush**。Pagesビルドは1回だけ発火=追いpush回避([[reflect_protocol_fast]] NEVER)。中間で絶対pushしない |
@@ -321,8 +326,9 @@ python scripts/_preorder-increment.py   # ①latest-prev差分(新ISBN) ②過�
 4. python scripts/_preorder-gen-preview.py new1a      # ②ドラフト生成(→.preview-data)
    python scripts/_preorder-gen-preview.py new1b      # ③(著者マスタ新規はヨミ=楽天仮)
    python scripts/_preorder-gen-midfill.py            # ④(キャッシュ全巻回収成立分のみ)
-   → preview索引再構築 → ★**commit止め(pushしない)** → 全工程完了後に**1回だけpush** → ★ユーザ確認
-5. 確認GO後: python scripts/_preorder-promote-drafts.py --class new1a 等
+   → 出荷前レビュー(exit 0)+チェックリスト → ★**その日のうちに本番化**(2026-10-08 ドラフト廃止): python scripts/_preorder-productionize.py --keep-preview
+   → preview索引再構築 → ★**commit止め(pushしない)** → 全工程完了後に**1回だけpush**
+5. (旧: 確認GO後に本番化) 本番化の中身: python scripts/_preorder-promote-drafts.py 相当
    → data/seeds/preorder-pages/(git恒久保管庫=promote合流結線済・フルpromoteで消えない)
    → data/manga.v2(即公開) → reflect --only <last-promoted> --push
    ※種2への正式INSERTは月次蒸留時。それまでpreorder-pagesが恒久化を担う。
@@ -389,7 +395,10 @@ python scripts/_build-calendar.py data/manga.v2 data/calendar <当月YYYY-MM>   
 
 ## 報告形式
 
-A: 収穫N件(月分布)/①種4追加/②③④ドラフト数+保留 ・ B: 新着N/欠落M ・ C: 確定/不一致/残pending ・ D: カレンダー月別巻数。
+★2026-10-08 ユーザ裁定: **前置きを書かない**(「日次蒸留が終わりました」「push は最後に1回」「テスト環境に反映されるまで15〜20分」「本番公開は週次」等は不要)。
+**「結果」から書き始める**。作業中の途中経過も書かない。判断が要る点だけ最後に短く並べる。
+
+A: 収穫N件(月分布)/①続巻追加/②③④本番化した新作数+保留 ・ B: 新着N/欠落M ・ C: 確定/不一致/残pending ・ D: カレンダー月別巻数。
 
 ## 旧手順の詳細(B系の worksheet 記入規律)
 
