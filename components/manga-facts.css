@@ -1,0 +1,266 @@
+/* 作品頁の基本情報欄 = 見本その2「D3 コマ割り」(2026-10-07 ユーザ裁定。 部品 = components/MangaFacts.tsx)。
+ * 3段のコマ: 出版年 / 著者 | 連載誌(無ければ出版社) の斜めの2コマ / ジャンル・要素。
+ * 各コマの左上の写植箱 = 羅針盤の糸の色(作者=金・同じ雑誌=緑・同じ年=紫・要素=青・ジャンル=橙)。
+ * ★糸の色は app/compass/compass.ts の KIND_COLOR と同じ値にする(lib/mangaFacts.test.ts が突合する)。
+ * ★Tailwind の新しいクラスを書かずにここへ置く(tone-band.css と同じ方針 = 全頁の共通CSSを変えない)。
+ * ★見た目だけ: 文字・リンク先・並び(題名→基本情報→あらすじ→巻)は変えない(SEO の約束)。 */
+.mf {
+  --mf-au: #f2c14e;
+  --mf-mg: #4fc28e;
+  --mf-yr: #c792ff;
+  --mf-el: #6ea8ff;
+  --mf-gn: #ff9f5a;
+  /* 紙と線 = 既定は明るいテーマ用(羅針盤のコマと同じ白い紙に黒い線)。 サイトは theme-d3 = 下の黒い紙 */
+  --mf-line: #111111;
+  --mf-bg: #ffffff;
+  --mf-ink: #111111;
+  --mf-sub: #333333;
+  --mf-mute: #666666;
+  --mf-dot: rgba(0, 0, 0, 0.08);
+  margin-top: 24px;
+  display: grid;
+  gap: 7px;
+}
+.theme-d3 .mf {
+  /* 白い紙は眩しい(2026-10-07 ユーザ指摘)= 黒い紙に生成りの線 */
+  --mf-line: #e9e5d8;
+  --mf-bg: #121211;
+  --mf-ink: #f7f5ee;
+  --mf-sub: #cfcbbf;
+  --mf-mute: #a9a597;
+  --mf-dot: rgba(233, 229, 216, 0.09);
+}
+.mf dl,
+.mf dd {
+  margin: 0;
+}
+.mf-c-au { --c: var(--mf-au); }
+.mf-c-mg { --c: var(--mf-mg); }
+.mf-c-yr { --c: var(--mf-yr); }
+.mf-c-el { --c: var(--mf-el); }
+.mf-c-gn { --c: var(--mf-gn); }
+/* 糸の無い項目(出版社が主役のコマ)= 写植箱は線の色 */
+.mf-c-nt { --c: var(--mf-line); }
+
+/* 四角いコマ(1段目・3段目) */
+.mf-p {
+  position: relative;
+  border: 2.5px solid var(--mf-line);
+  background-color: var(--mf-bg);
+  padding: 27px 11px 11px;
+}
+/* 出版年のコマだけスクリーントーン(羅針盤のコマの題名と同じ網点) */
+.mf-tone {
+  background-image: radial-gradient(circle, var(--mf-dot) 1.1px, transparent 1.6px);
+  background-size: 5px 5px;
+}
+.mf-p.mf-tg {
+  padding-top: 11px;
+}
+
+/* 写植箱(コマの左上) */
+.mf-cap {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: var(--c);
+  color: #0b0e14;
+  font-size: 10.5px;
+  font-weight: 800;
+  line-height: 1.5;
+  padding: 1px 8px 2px 7px;
+  border-right: 2.5px solid var(--mf-line);
+  border-bottom: 2.5px solid var(--mf-line);
+}
+.mf-big {
+  font-size: 16.5px;
+  font-weight: 900;
+  line-height: 1.4;
+  color: var(--mf-ink);
+  overflow-wrap: anywhere;
+}
+/* 名前が多い(アンソロジー)= 大きい字をやめる */
+.mf-big.mf-many {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.65;
+}
+.mf a {
+  color: inherit;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.mf-big a {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+  text-decoration-color: color-mix(in srgb, var(--c) 55%, transparent);
+}
+/* 小さい行(原作・その他・出版社・分野)= 見出し + 値 */
+.mf-kv {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 5px;
+  margin-top: 5px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--mf-sub);
+}
+.mf-kv dt {
+  font-size: 10.5px;
+  color: var(--mf-mute);
+}
+.mf-kv a {
+  /* 行の高さは変えずに押せる範囲だけ広げる */
+  padding: 4px 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--mf-ink) 35%, transparent);
+}
+.mf a:hover {
+  text-decoration-color: var(--c);
+}
+.mf-big a:active,
+.mf-kv a:active {
+  background: color-mix(in srgb, var(--c) 30%, transparent);
+}
+/* 押している間、そのコマが糸の色に染まる(見本の「押した瞬間」) */
+.mf-p:has(a:active),
+.mf-in:has(a:active) {
+  background-color: color-mix(in srgb, var(--c) 18%, var(--mf-bg));
+}
+.mf a:focus-visible {
+  outline: 2px solid var(--color-accent, currentColor);
+  outline-offset: 2px;
+}
+
+/* 2段目 = 斜めの枠の2コマ(線の色の地 + 内側を同じ形で切り抜く) */
+.mf-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+}
+.mf-sl,
+.mf-sr {
+  display: flex;
+  background: var(--mf-line);
+  padding: 2.5px;
+}
+.mf-sl {
+  clip-path: polygon(0 0, 100% 0, calc(100% - 14px) 100%, 0 100%);
+}
+.mf-sr {
+  margin-left: -6px;
+  clip-path: polygon(14px 0, 100% 0, 100% 100%, 0 100%);
+}
+.mf-in {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  background-color: var(--mf-bg);
+  padding: 27px 20px 11px 9px;
+  /* 大きい字の行の下に、小さい行(出版社・分野 など)を詰めて並べる */
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  column-gap: 12px;
+}
+.mf-in > .mf-main {
+  flex-basis: 100%;
+  min-width: 0;
+}
+.mf-sl > .mf-in {
+  clip-path: polygon(0 0, 100% 0, calc(100% - 14px) 100%, 0 100%);
+}
+.mf-sr > .mf-in {
+  clip-path: polygon(14px 0, 100% 0, 100% 100%, 0 100%);
+  padding: 27px 9px 11px 20px;
+}
+.mf-sr .mf-cap {
+  left: 13px;
+  border-left: 2.5px solid var(--mf-line);
+}
+/* 縦に積む(著者が多い・長い時)= 斜めをやめて横幅いっぱいの四角いコマ2つ */
+.mf-stack {
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 7px;
+}
+.mf-stack .mf-sl,
+.mf-stack .mf-sr,
+.mf-stack .mf-in {
+  clip-path: none;
+}
+.mf-stack .mf-sr {
+  margin-left: 0;
+}
+.mf-stack .mf-sl > .mf-in,
+.mf-stack .mf-sr > .mf-in {
+  padding: 27px 11px 11px;
+}
+.mf-stack .mf-sr .mf-cap {
+  left: 0;
+  border-left: 0;
+}
+
+/* 3段目 = ジャンル(塗り)・要素(枠)。 羅針盤のコマと同じ区別 */
+.mf-tl {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+.mf-tl + .mf-tl {
+  margin-top: 8px;
+}
+.mf-tl dt {
+  flex: none;
+  padding-top: 4px;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--c);
+}
+.mf-tl dd {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.mf-chip {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11.5px;
+  font-weight: 700;
+  line-height: 1.45;
+  border: 1.5px solid var(--c);
+  border-radius: 12px;
+  padding: 3px 9px;
+  color: var(--mf-ink);
+  transition: transform 0.12s ease;
+}
+.mf-c-gn .mf-chip {
+  background: var(--c);
+  color: #111111;
+}
+/* マスタ外のジャンル(押せない)= 塗らずに点線 */
+.mf-c-gn .mf-chip.mf-off {
+  background: transparent;
+  color: var(--mf-sub);
+  border-style: dashed;
+}
+a.mf-chip:active {
+  transform: scale(0.94);
+}
+.mf-c-el a.mf-chip:active {
+  background: color-mix(in srgb, var(--c) 30%, transparent);
+}
+
+/* 同ジャンル検索・羅針盤マーク(中身は従来どおり) */
+.mf-btns {
+  margin-top: 5px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mf-chip {
+    transition: none;
+  }
+}

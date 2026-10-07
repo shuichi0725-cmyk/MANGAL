@@ -10,7 +10,7 @@ import VolumeRow, { displayBlocks } from "@/components/VolumeRow";
 // import ColorEditionNote from "@/components/ColorEditionNote"; // 帯=表示停止中(2026-08-02裁定。下のマウント跡を参照)
 import ArtBookCard from "@/components/ArtBookCard";
 import Badge from "@/components/ui/Badge";
-import { ChipLink } from "@/components/ui/Chip";
+import MangaFacts from "@/components/MangaFacts";
 import { yearStatusLabel } from "@/lib/format";
 import { buildOnlyMangaSlugs, loadAllManga, loadTagI18n, loadWameiTags } from "@/lib/loadData";
 import { coverUrl } from "@/lib/schema";
@@ -225,16 +225,65 @@ export default async function MangaDetailPage({
   // 関連作品 = シリーズ(題名前方一致) + 同作者。 説明と版リストの間(2026-06-12 ユーザ指定位置)
   const related = computeRelated(manga, data.manga);
 
-  // 各メタ項目をクリックすると、フィルタ済みトップページへ飛ぶ。
-  // 押せる値は「アウトライン枠タグ」(= ジャンルの淡塗りチップとは別系統、 hoverでaccent)。
-  const FilterLink = ({ href, children }: { href: string; children: React.ReactNode }) => (
-    <Link
-      href={href}
-      className="inline-flex items-center rounded-[var(--radius-tag)] border border-[var(--color-line)] bg-[var(--color-surface)] px-2.5 py-1 text-[13px] font-medium text-ink/85 transition duration-100 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] active:scale-[0.94] active:bg-[var(--color-surface-2)] active:border-[var(--color-accent)]"
-    >
-      {children}
-    </Link>
-  );
+  // ★基本情報欄(components/MangaFacts.tsx = 見本その2「D3 コマ割り」・2026-10-07 ユーザ裁定)の材料。
+  //   各値を押すと、その値の頁(著者頁・年/出版社/雑誌のハブ・ジャンル面)か絞り込み検索へ飛ぶ。
+  //   ★リンク先は旧 <dl>(灰色の枠)のときと同じ。 見た目だけ変えた(SEO の内部リンクは不変)。
+  // ★ジャンル(= masterジャンル + Wiki/AniList/AI 由来。 filter link 付き)と
+  //   要素(= AniListタグの和訳。 filter 無しの素チップ)を分離。
+  //   ・ジャンル欄 = master genres ∪ genres_anilist(jaGenre)
+  //   ・要素欄    = tags の和訳。 除外= ①Demographic(分野欄に既出) ②スポーツ競技
+  //                (野球/サッカー以外は不採用) ③ジャンル名と完全一致(畳む) ④ノイズtag
+  const genreNames = new Set<string>();
+  const genreItems: Array<{ name: string; key?: string }> = [];
+  for (const g of manga.genres) {
+    const name = data.genres.find((x) => x.key === g)?.name ?? g;
+    if (genreNames.has(name)) continue;
+    genreNames.add(name);
+    genreItems.push({ name, key: g });
+  }
+  for (const g of manga.genres_anilist ?? []) {
+    const ja = jaGenre(g);
+    if (genreNames.has(ja)) continue;
+    const masterKey = data.genres.find((x) => x.name === ja)?.key;
+    genreNames.add(ja);
+    genreItems.push({ name: ja, key: masterKey });
+  }
+  const NOISE_TAGS = new Set([
+    "Heterosexual",
+    "Male Protagonist",
+    "Female Protagonist",
+    "Primarily Adult Cast",
+    "Primarily Child Cast",
+    "Primarily Teen Cast",
+  ]);
+  const elemNames = new Set<string>();
+  const elemItems: string[] = [];
+  for (const t of manga.tags ?? []) {
+    if (t.category === "Demographic") continue; // 分野欄に既出
+    if (t.category.startsWith("Theme-Game-Sport")) continue; // スポーツ競技は不採用
+    if (NOISE_TAGS.has(t.name)) continue;
+    // 和訳がある tag のみ採用(英語のまま出さない)。 tag-i18n.yml 優先、 旧辞書 fallback。
+    const fromYml = tagI18n[t.name]?.ja;
+    const fromDict = jaTag(t.name);
+    let ja = fromYml ?? (fromDict !== t.name ? fromDict : undefined);
+    if (!ja) {
+      // 和名タグ(楽天あらすじAI付与)= wamei-tags.yml のゲートで通す(2026-08-11)
+      if (wamei.exclude.has(t.name)) continue;
+      if (wamei.alias[t.name]) ja = wamei.alias[t.name];
+      else if (wamei.allow.has(t.name)) ja = t.name;
+      else continue;
+    }
+    if (genreNames.has(ja)) continue; // ジャンル名と完全一致 → 畳む
+    if (elemNames.has(ja)) continue;
+    elemNames.add(ja);
+    elemItems.push(ja);
+  }
+  const genreKeys = [...new Set(genreItems.map((it) => it.key).filter((k): k is string => !!k))];
+  // ★著者静的ページへ(2026-08-10 SEO⑤)。romaji無し著者のみ従来のクエリ絞込へ
+  const personLink = (name: string, param: "author" | "originalAuthor") => {
+    const ak = authorKeyFor(name);
+    return { name, href: ak ? `/author/${ak}` : `/browse?${param}=${encodeURIComponent(name)}` };
+  };
 
   // ★構造化データ(JSON-LD): ComicSeries — 検索リッチ化(2026-07-04 SEO)
   const seoTest = SEO_TEST(manga.slug);
@@ -369,226 +418,68 @@ export default async function MangaDetailPage({
               );
             })()}
 
-          <dl className="mt-6 grid grid-cols-[5.5em_1fr] gap-y-2.5 items-start text-sm">
-            <dt className="font-semibold text-ink/65 pt-1">出版年</dt>
-            <dd className="flex flex-wrap gap-1.5">
-              {/* ★SEO(2026-09-04): 年別/出版社別/連載誌別ハブ(/year /publisher /magazine)が在る時はそこへ。
-                  無い時(閾値未満)は従来の /browse? フィルタへフォールバック。 */}
-              <FilterLink
-                href={
-                  hubHrefIfExists("year", manga.year_started) ??
-                  `/browse?yearMin=${manga.year_started}&yearMax=${manga.year_started}`
-                }
-              >
-                {yearStatusLabel(manga)}
-              </FilterLink>
-            </dd>
-            <dt className="font-semibold text-ink/65 pt-1">著者</dt>
-            <dd className="flex flex-wrap gap-1.5">
-              {manga.authors.map((a) => {
-                {/* ★著者静的ページへ(2026-08-10 SEO⑤)。romaji無し著者のみ従来のクエリ絞込へ */}
-                const ak = authorKeyFor(a.name);
-                return (
-                  <span key={a.name}>
-                    <FilterLink href={ak ? `/author/${ak}` : `/browse?author=${encodeURIComponent(a.name)}`}>
-                      {a.name}
-                    </FilterLink>
-                  </span>
-                );
-              })}
-            </dd>
-            {manga.original_authors.length > 0 && (
-              <>
-                <dt className="font-semibold text-ink/65 pt-1">原作</dt>
-                <dd className="flex flex-wrap gap-1.5">
-                  {manga.original_authors.map((a) => {
-                    const ak = authorKeyFor(a.name);
-                    return (
-                    <span key={a.name}>
-                          <FilterLink
-                        href={ak ? `/author/${ak}` : `/browse?originalAuthor=${encodeURIComponent(a.name)}`}
-                      >
-                        {a.name}
-                      </FilterLink>
-                    </span>
-                    );
-                  })}
-                </dd>
-              </>
-            )}
-            {manga.credits.length > 0 && (
-              <>
-                <dt className="font-semibold text-ink/65 pt-1">その他</dt>
-                <dd className="flex flex-wrap gap-x-3 gap-y-1 text-sm text-ink/70">
-                  {Object.entries(
-                    manga.credits.reduce<Record<string, string[]>>((acc, c) => {
-                      (acc[c.role] = acc[c.role] || []).push(c.name);
-                      return acc;
-                    }, {}),
-                  ).map(([role, names]) => (
-                    <span key={role}>
-                      <span className="text-ink/50">{role}: </span>
-                      {names.join(" / ")}
-                    </span>
-                  ))}
-                </dd>
-              </>
-            )}
-            <dt className="font-semibold text-ink/65 pt-1">出版社</dt>
-            <dd className="flex flex-wrap gap-1.5">
-              <FilterLink
-                href={hubHrefIfExists("publisher", manga.publisher) ?? `/browse?publisher=${encodeURIComponent(manga.publisher)}`}
-              >
-                {publisher?.name ?? manga.publisher}
-              </FilterLink>
-            </dd>
-            {magazine && (
-              <>
-                <dt className="font-semibold text-ink/65 pt-1">連載誌</dt>
-                <dd className="flex flex-wrap gap-1.5">
-                  <FilterLink
-                    href={hubHrefIfExists("magazine", magazine.key) ?? `/browse?magazine=${encodeURIComponent(magazine.key)}`}
-                  >
-                    {magazine.name}
-                  </FilterLink>
-                </dd>
-              </>
-            )}
-            {manga.demographic && (
-              <>
-                <dt className="font-semibold text-ink/65 pt-1">分野</dt>
-                <dd className="flex flex-wrap gap-1.5">
-                  <FilterLink href={`/browse?demographic=${encodeURIComponent(manga.demographic)}`}>
-                    {demographic?.name ?? manga.demographic}
-                  </FilterLink>
-                </dd>
-              </>
-            )}
-            {(() => {
-              // ★ジャンル(= masterジャンル + Wiki/AniList/AI 由来。 filter link 付き)と
-              //   要素(= AniListタグの和訳。 filter 無しの素チップ)を分離。
-              //   ・ジャンル欄 = master genres ∪ genres_anilist(jaGenre)
-              //   ・要素欄    = tags の和訳。 除外= ①Demographic(分野欄に既出) ②スポーツ競技
-              //                (野球/サッカー以外は不採用) ③ジャンル名と完全一致(畳む) ④ノイズtag
-              const genreNames = new Set<string>();
-              const genreItems: Array<{ name: string; key?: string }> = [];
-              for (const g of manga.genres) {
-                const name = data.genres.find((x) => x.key === g)?.name ?? g;
-                if (genreNames.has(name)) continue;
-                genreNames.add(name);
-                genreItems.push({ name, key: g });
-              }
-              for (const g of manga.genres_anilist ?? []) {
-                const ja = jaGenre(g);
-                if (genreNames.has(ja)) continue;
-                const masterKey = data.genres.find((x) => x.name === ja)?.key;
-                genreNames.add(ja);
-                genreItems.push({ name: ja, key: masterKey });
-              }
-
-              const NOISE_TAGS = new Set([
-                "Heterosexual",
-                "Male Protagonist",
-                "Female Protagonist",
-                "Primarily Adult Cast",
-                "Primarily Child Cast",
-                "Primarily Teen Cast",
-              ]);
-              const elemNames = new Set<string>();
-              const elemItems: string[] = [];
-              for (const t of manga.tags ?? []) {
-                if (t.category === "Demographic") continue; // 分野欄に既出
-                if (t.category.startsWith("Theme-Game-Sport")) continue; // スポーツ競技は不採用
-                if (NOISE_TAGS.has(t.name)) continue;
-                // 和訳がある tag のみ採用(英語のまま出さない)。 tag-i18n.yml 優先、 旧辞書 fallback。
-                const fromYml = tagI18n[t.name]?.ja;
-                const fromDict = jaTag(t.name);
-                let ja = fromYml ?? (fromDict !== t.name ? fromDict : undefined);
-                if (!ja) {
-                  // 和名タグ(楽天あらすじAI付与)= wamei-tags.yml のゲートで通す(2026-08-11)
-                  if (wamei.exclude.has(t.name)) continue;
-                  if (wamei.alias[t.name]) ja = wamei.alias[t.name];
-                  else if (wamei.allow.has(t.name)) ja = t.name;
-                  else continue;
-                }
-                if (genreNames.has(ja)) continue; // ジャンル名と完全一致 → 畳む
-                if (elemNames.has(ja)) continue;
-                elemNames.add(ja);
-                elemItems.push(ja);
-              }
-
-              return (
+          {/* ★基本情報欄 = 見本その2「D3 コマ割り」(2026-10-07 ユーザ裁定。 部品 = components/MangaFacts.tsx)。
+              旧 = 見出し列+灰色の枠の <dl>(9段)。 文字・リンク先は同じで、見た目だけ羅針盤の糸の色に揃えた。 */}
+          <MangaFacts
+            year={{
+              name: yearStatusLabel(manga),
+              // ★SEO(2026-09-04): 年別/出版社別/連載誌別ハブ(/year /publisher /magazine)が在る時はそこへ。
+              //   無い時(閾値未満)は従来の /browse? フィルタへフォールバック。
+              href:
+                hubHrefIfExists("year", manga.year_started) ??
+                `/browse?yearMin=${manga.year_started}&yearMax=${manga.year_started}`,
+            }}
+            authors={manga.authors.map((a) => personLink(a.name, "author"))}
+            originals={manga.original_authors.map((a) => personLink(a.name, "originalAuthor"))}
+            credits={Object.entries(
+              manga.credits.reduce<Record<string, string[]>>((acc, c) => {
+                (acc[c.role] = acc[c.role] || []).push(c.name);
+                return acc;
+              }, {}),
+            ).map(([role, names]) => ({ role, names }))}
+            publisher={{
+              name: publisher?.name ?? manga.publisher,
+              href: hubHrefIfExists("publisher", manga.publisher) ?? `/browse?publisher=${encodeURIComponent(manga.publisher)}`,
+            }}
+            magazine={
+              magazine
+                ? {
+                    name: magazine.name,
+                    href: hubHrefIfExists("magazine", magazine.key) ?? `/browse?magazine=${encodeURIComponent(magazine.key)}`,
+                  }
+                : null
+            }
+            demographic={
+              manga.demographic
+                ? {
+                    name: demographic?.name ?? manga.demographic,
+                    href: `/browse?demographic=${encodeURIComponent(manga.demographic)}`,
+                  }
+                : null
+            }
+            // ★SEO(2026-09-04): /browse?genre= はクライアント描画の行き止まり。 実在する
+            //   ジャンル面 /genre/[key] へ向け、 66k頁→32ハブの内部リンクにする(元は可視0本)。
+            genres={genreItems.map((it) => ({ name: it.name, href: it.key ? `/genre/${encodeURIComponent(it.key)}` : null }))}
+            elems={elemItems.map((name) => ({ name, href: `/browse?theme=${encodeURIComponent(name)}` }))}
+            // ★同じジャンル条件で検索(2026-09-23 ユーザ要望): 作品のジャンルを全部押した状態(既定AND)で /browse を開く。
+            //   チップ自体は SEO の内部リンクとして /genre/<key> のまま。 /browse?… は robots で Disallow 済。
+            tail={
+              genreKeys.length > 0 ? (
                 <>
-                  <dt className="font-semibold text-ink/65 pt-1">ジャンル</dt>
-                  <dd className="flex flex-wrap gap-1.5">
-                    {genreItems.map((it) =>
-                      it.key ? (
-                        // ★SEO(2026-09-04): /browse?genre= はクライアント描画の行き止まり。 実在する
-                        //   ジャンル面 /genre/[key] へ向け、 66k頁→32ハブの内部リンクにする(元は可視0本)。
-                        <ChipLink key={it.name} href={`/genre/${encodeURIComponent(it.key)}`}>
-                          {it.name}
-                        </ChipLink>
-                      ) : (
-                        <span
-                          key={it.name}
-                          className="inline-flex items-center rounded-[var(--radius-tag)] px-3 py-1.5 text-xs font-medium bg-[var(--color-surface-2)] border border-[var(--color-line)] text-ink/55"
-                        >
-                          {it.name}
-                        </span>
-                      ),
-                    )}
-                  </dd>
-                  {elemItems.length > 0 && (
-                    <>
-                      <dt className="font-semibold text-ink/65 pt-1">要素</dt>
-                      <dd className="flex flex-wrap gap-1.5">
-                        {elemItems.map((name) => (
-                          <ChipLink
-                            key={name}
-                            href={`/browse?theme=${encodeURIComponent(name)}`}
-                          >
-                            {name}
-                          </ChipLink>
-                        ))}
-                      </dd>
-                    </>
-                  )}
-                  {/* ★同じジャンル条件で検索(2026-09-23 ユーザ要望): 作品のジャンルを全部押した状態(既定AND)で /browse を開く。
-                      チップ自体は SEO の内部リンクとして /genre/<key> のまま。 /browse?… は robots で Disallow 済。 */}
-                  {(() => {
-                    const keys = [...new Set(genreItems.map((it) => it.key).filter((k): k is string => !!k))];
-                    if (keys.length === 0) return null;
-                    return (
-                      <>
-                        <dt aria-hidden="true" />
-                        <dd>
-                          {(() => {
-                            // ★2026-09-30 ユーザ指示: 文言「同じジャンルの漫画を探す →」→「同ジャンル検索 →」
-                            const genreLink = (
-                              <Link
-                                href={`/browse?genre=${keys.map(encodeURIComponent).join(",")}`}
-                                rel="nofollow"
-                                className="spring-press inline-flex items-center rounded-[var(--radius-tag)] px-3 py-1.5 text-[12px] font-bold bg-[var(--color-accent)] text-white"
-                              >
-                                同ジャンル検索 →
-                              </Link>
-                            );
-                            // ★右に羅針盤マーク(この作品から羅針盤を開く)。 2026-10-03 ユーザ裁定で本番にも出す(旧=テスト環境のみ)
-                            return (
-                              <>
-                                {genreLink}
-                                <CompassLink slug={manga.slug} title={manga.title} />
-                              </>
-                            );
-                          })()}
-                        </dd>
-                      </>
-                    );
-                  })()}
+                  {/* ★2026-09-30 ユーザ指示: 文言「同じジャンルの漫画を探す →」→「同ジャンル検索 →」 */}
+                  <Link
+                    href={`/browse?genre=${genreKeys.map(encodeURIComponent).join(",")}`}
+                    rel="nofollow"
+                    className="spring-press inline-flex items-center rounded-[var(--radius-tag)] px-3 py-1.5 text-[12px] font-bold bg-[var(--color-accent)] text-white"
+                  >
+                    同ジャンル検索 →
+                  </Link>
+                  {/* ★右に羅針盤マーク(この作品から羅針盤を開く)。 2026-10-03 ユーザ裁定で本番にも出す(旧=テスト環境のみ) */}
+                  <CompassLink slug={manga.slug} title={manga.title} />
                 </>
-              );
-            })()}
-          </dl>
+              ) : null
+            }
+          />
 
           {manga.synopsis && (
             <p className="mt-6 text-sm leading-relaxed text-ink/80">{manga.synopsis}</p>

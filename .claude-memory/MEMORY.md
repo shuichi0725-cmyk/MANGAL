@@ -131,6 +131,6 @@
 - [成人判定・5件](memory_index_adult.md)
 - [外部ソース(AniList・楽天・試し読み・JPRO・マンバ)・17件](memory_index_external.md)
 - [公開・配信・検索・SEO(R2/Worker・preview・GSC/Bing)・46件](memory_index_deploy_seo.md)
-- [作品別の経緯・コーナー(全集/愛蔵版/特集/羅針盤)・14件](memory_index_works_corners.md)
+- [作品別の経緯・コーナー(全集/愛蔵版/特集/羅針盤)・16件](memory_index_works_corners.md)
 - [道具の罠・運用の型(promote/reflect/lookup/シェル)・18件](memory_index_tools_ops.md)
 - [作業環境(PC・ドライブ・起動bat・クラウド)・6件](memory_index_environment.md)

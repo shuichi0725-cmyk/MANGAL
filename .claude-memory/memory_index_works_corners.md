@@ -2,7 +2,10 @@
 name: memory-index-works-corners
 description: 記憶の分野別索引 = 作品別の経緯・コーナー(全集/愛蔵版/特集/羅針盤)。MEMORY.md の容量対策(2026-10-06)で全件をここに置く
 metadata:
+  node_type: memory
   type: reference
+  originSessionId: 910a9fc6-e6a7-4c75-b2c9-64b715cbc5ed
+  modified: 2026-10-07T11:48:07.544Z
 ---
 
 # 作品別の経緯・コーナー(全集/愛蔵版/特集/羅針盤)
@@ -21,4 +24,5 @@ metadata:
 - [ワイルド7=6作品×多版](wild7_franchise_state.md)
 - [ひぐらし=編ごと頁](higurashi_franchise_state.md)
 - [仮想書店=羅針盤](magic_shelf_virtual_bookstore.md)
+- [作品頁の基本情報=D3コマ割り](manga_page_facts_d3.md)
 - [アンゴルモア=続編の博多編が同じ版に同番号で同居→分離](angolmois_hakata_split.md)
