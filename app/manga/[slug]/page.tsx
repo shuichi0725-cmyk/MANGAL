@@ -10,7 +10,7 @@ import VolumeRow, { displayBlocks } from "@/components/VolumeRow";
 // import ColorEditionNote from "@/components/ColorEditionNote"; // 帯=表示停止中(2026-08-02裁定。下のマウント跡を参照)
 import ArtBookCard from "@/components/ArtBookCard";
 import Badge from "@/components/ui/Badge";
-import MangaFacts from "@/components/MangaFacts";
+import MangaFacts, { MangaSynopsis } from "@/components/MangaFacts";
 import { yearStatusLabel } from "@/lib/format";
 import { buildOnlyMangaSlugs, loadAllManga, loadTagI18n, loadWameiTags } from "@/lib/loadData";
 import { coverUrl } from "@/lib/schema";
@@ -481,9 +481,10 @@ export default async function MangaDetailPage({
             }
           />
 
-          {manga.synopsis && (
-            <p className="mt-6 text-sm leading-relaxed text-ink/80">{manga.synopsis}</p>
-          )}
+          {/* ★説明文 = 見本「B あらすじのコマ」(2026-10-08 ユーザ裁定。 部品 = components/MangaFacts.tsx の MangaSynopsis)。
+              基本情報欄の続きのコマ。 説明文が主役で、説明文が無い頁(キャッチだけ=1巻もの等 8,613頁・12%)は
+              キャッチを「作品紹介」として出す(旧 = 素の段落で説明文だけ・キャッチだけの頁は何も出なかった)。 */}
+          <MangaSynopsis synopsis={manga.synopsis} catchCopy={manga.catch} />
 
           {manga.awards && manga.awards.length > 0 && (
             <div className="mt-6">

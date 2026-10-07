@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Fragment, type ReactNode } from "react";
-import { manyPeople, stackPeople } from "@/lib/mangaFacts";
+import { manyPeople, pickDescription, stackPeople } from "@/lib/mangaFacts";
 // ★見た目は専用CSSへ(Tailwind の新しいクラスを書くと全頁の共通CSSが変わる)。
 import "./manga-facts.css";
 
@@ -155,5 +155,22 @@ export default function MangaFacts({
 
       {tail && <div className="mf-btns">{tail}</div>}
     </div>
+  );
+}
+
+/**
+ * 説明文のコマ = 見本「B あらすじのコマ」(2026-10-08 ユーザ裁定)。 基本情報欄の続きのコマで、
+ * 左上の写植箱は生成り(羅針盤に糸の無い項目と同じ)。 見出しは h2(頁の見出し = h1 題名 → h2 あらすじ → h2 通常版)。
+ * 何を出すかは lib/mangaFacts.ts の pickDescription(説明文が主役・無い時だけキャッチ)。
+ * ★説明文は全文を最初から見せる(畳まない)= SEO の約束。
+ */
+export function MangaSynopsis({ synopsis, catchCopy }: { synopsis?: string | null; catchCopy?: string | null }) {
+  const d = pickDescription(synopsis, catchCopy);
+  if (!d) return null;
+  return (
+    <section className="mf-syn">
+      <h2>{d.label}</h2>
+      <p>{d.text}</p>
+    </section>
   );
 }

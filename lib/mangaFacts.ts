@@ -31,3 +31,21 @@ export function stackPeople(
 export function manyPeople(authors: string[]): boolean {
   return authors.length >= 4;
 }
+
+/**
+ * 説明文のコマ(見本「B あらすじのコマ」・2026-10-08 ユーザ裁定)に何を出すか。
+ * 説明文(synopsis)が主役。 説明文が無い頁だけキャッチを「作品紹介」として出す
+ * (キャッチだけの頁 = 1巻もの等 8,613頁・12%。 旧 = 何も出なかった)。
+ * 両方ある頁はキャッチを出さない: キャッチの言い回しの2割以上が説明文と重なる頁が49%あり、
+ * 並べると同じ話を2回読ませる(2026-10-07 実測・本番39,049作)。
+ */
+export function pickDescription(
+  synopsis: string | null | undefined,
+  catchCopy: string | null | undefined,
+): { label: "あらすじ" | "作品紹介"; text: string } | null {
+  const s = synopsis?.trim();
+  if (s) return { label: "あらすじ", text: s };
+  const c = catchCopy?.trim();
+  if (c) return { label: "作品紹介", text: c };
+  return null;
+}

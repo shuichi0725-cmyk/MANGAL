@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { KIND_COLOR } from "../app/compass/compass";
-import { manyPeople, stackPeople } from "./mangaFacts";
+import { manyPeople, pickDescription, stackPeople } from "./mangaFacts";
 
 describe("作品頁の基本情報欄(D3 コマ割り)", () => {
   it("写植箱の色 = 羅針盤の糸の色(components/manga-facts.css と KIND_COLOR が食い違わない)", () => {
@@ -32,5 +32,19 @@ describe("作品頁の基本情報欄(D3 コマ割り)", () => {
   it("4人以上は大きい字をやめる(アンソロジー)", () => {
     expect(manyPeople(["A", "B", "C"])).toBe(false);
     expect(manyPeople(["A", "B", "C", "D"])).toBe(true);
+  });
+});
+
+describe("説明文のコマ(B あらすじのコマ)", () => {
+  it("説明文があれば説明文だけ(キャッチは出さない=同じ話を2回読ませない)", () => {
+    expect(pickDescription("高藤祈、自称ぐうたら人間。", "延々と呼ばれ続ける男")).toEqual({ label: "あらすじ", text: "高藤祈、自称ぐうたら人間。" });
+  });
+  it("説明文が無ければキャッチを「作品紹介」として出す(旧 = 何も出なかった)", () => {
+    expect(pickDescription("", "好きなものは、世の中にいっこでいい。")).toEqual({ label: "作品紹介", text: "好きなものは、世の中にいっこでいい。" });
+    expect(pickDescription(undefined, " キャッチ ")).toEqual({ label: "作品紹介", text: "キャッチ" });
+  });
+  it("どちらも無ければ出さない", () => {
+    expect(pickDescription("", undefined)).toBeNull();
+    expect(pickDescription("  ", "")).toBeNull();
   });
 });

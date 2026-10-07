@@ -4,7 +4,9 @@
  * ★糸の色は app/compass/compass.ts の KIND_COLOR と同じ値にする(lib/mangaFacts.test.ts が突合する)。
  * ★Tailwind の新しいクラスを書かずにここへ置く(tone-band.css と同じ方針 = 全頁の共通CSSを変えない)。
  * ★見た目だけ: 文字・リンク先・並び(題名→基本情報→あらすじ→巻)は変えない(SEO の約束)。 */
-.mf {
+/* 色と紙(基本情報欄 .mf と 説明文のコマ .mf-syn で共通) */
+.mf,
+.mf-syn {
   --mf-au: #f2c14e;
   --mf-mg: #4fc28e;
   --mf-yr: #c792ff;
@@ -12,23 +14,31 @@
   --mf-gn: #ff9f5a;
   /* 紙と線 = 既定は明るいテーマ用(羅針盤のコマと同じ白い紙に黒い線)。 サイトは theme-d3 = 下の黒い紙 */
   --mf-line: #111111;
+  /* 線の色の上に置く文字(糸の無い写植箱 = 出版社・あらすじ) */
+  --mf-on-line: #ffffff;
   --mf-bg: #ffffff;
   --mf-ink: #111111;
+  --mf-text: #222222;
   --mf-sub: #333333;
   --mf-mute: #666666;
   --mf-dot: rgba(0, 0, 0, 0.08);
-  margin-top: 24px;
-  display: grid;
-  gap: 7px;
 }
-.theme-d3 .mf {
+.theme-d3 .mf,
+.theme-d3 .mf-syn {
   /* 白い紙は眩しい(2026-10-07 ユーザ指摘)= 黒い紙に生成りの線 */
   --mf-line: #e9e5d8;
+  --mf-on-line: #0b0e14;
   --mf-bg: #121211;
   --mf-ink: #f7f5ee;
+  --mf-text: #f2efe6;
   --mf-sub: #cfcbbf;
   --mf-mute: #a9a597;
   --mf-dot: rgba(233, 229, 216, 0.09);
+}
+.mf {
+  margin-top: 24px;
+  display: grid;
+  gap: 7px;
 }
 .mf dl,
 .mf dd {
@@ -41,6 +51,7 @@
 .mf-c-gn { --c: var(--mf-gn); }
 /* 糸の無い項目(出版社が主役のコマ)= 写植箱は線の色 */
 .mf-c-nt { --c: var(--mf-line); }
+.mf-c-nt .mf-cap { color: var(--mf-on-line); }
 
 /* 四角いコマ(1段目・3段目) */
 .mf-p {
@@ -258,6 +269,36 @@ a.mf-chip:active {
 /* 同ジャンル検索・羅針盤マーク(中身は従来どおり) */
 .mf-btns {
   margin-top: 5px;
+}
+
+/* 説明文のコマ = 見本「B あらすじのコマ」(2026-10-08 ユーザ裁定。 部品 = MangaSynopsis)。
+ * 基本情報欄の続きのコマ。 写植箱(h2「あらすじ」/ 説明文が無くキャッチを出す頁は「作品紹介」)は線の色=糸の無い項目。
+ * ★全文を最初から見せる(畳まない)。 字は 14→14.5px・行間を広く(旧 = 素の段落 text-sm leading-relaxed)。 */
+.mf-syn {
+  position: relative;
+  margin-top: 22px;
+  border: 2.5px solid var(--mf-line);
+  background-color: var(--mf-bg);
+  padding: 30px 13px 13px;
+}
+.mf-syn > h2 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0;
+  background: var(--mf-line);
+  color: var(--mf-on-line);
+  font-size: 10.5px;
+  font-weight: 800;
+  line-height: 1.5;
+  padding: 1px 8px 2px 7px;
+}
+.mf-syn > p {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.9;
+  color: var(--mf-text);
+  overflow-wrap: anywhere;
 }
 @media (prefers-reduced-motion: reduce) {
   .mf-chip {

@@ -24,5 +24,5 @@ metadata:
 - [ワイルド7=6作品×多版](wild7_franchise_state.md)
 - [ひぐらし=編ごと頁](higurashi_franchise_state.md)
 - [仮想書店=羅針盤](magic_shelf_virtual_bookstore.md)
-- [作品頁の基本情報=D3コマ割り](manga_page_facts_d3.md)
+- [作品頁の基本情報+あらすじ=コマ割り](manga_page_facts_d3.md)
 - [アンゴルモア=続編の博多編が同じ版に同番号で同居→分離](angolmois_hakata_split.md)
