@@ -15,6 +15,9 @@ volumes: &id001
 - number: 4
   isbn13: '9784868540137'
   release_date: '2026-07-22'
+- number: 5
+  isbn13: '9784868542209'
+  release_date: '2026-12-15'
 versions:
 - label: コロナ・コミックス(2019-21)
   volumes:
