@@ -48,6 +48,7 @@
 - [番号は一覧全体で読む](feedback_numbered_items_whole_list.md)
 - [Sonnet書き/Opus点検](feedback_sonnet_writes_opus_audits.md)
 - [見た目相談=HTML見本](feedback_design_mockups_html_sendfile.md)
+- [待ち文言は普通に](feedback_plain_status_text.md)
 - [羅針盤の網羅=データの質](feedback_compass_reach_via_data_quality.md)
 ## 全体構造・台帳
 - [seeds pyramid=全体構造](project_architecture_seeds.md)

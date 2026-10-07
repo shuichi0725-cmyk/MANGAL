@@ -39,3 +39,11 @@ metadata:
 - ★**拡大した画面の指の移動はヘッドレスでは擬似ジェスチャで動かない**: Input.synthesizePinchGesture は拡大しない・synthesizeScrollGesture は動かさない。
   拡大 = Emulation.setPageScaleFactor、なぞる = Input.dispatchTouchEvent(touchStart→touchMove×10→touchEnd)、確認 = visualViewport.offsetLeft/Top。
   なぞる向きに注意(左上端から右へなぞっても0のまま=誤読しかけた)。 ★実機Chromeの症状はヘッドレスで再現しないことがある。
+
+## 追記 2026-10-08(作品頁 D3 / あらすじのコマ / 羅針盤の準備中アニメの確認で実踏)
+- ★**CDP を使わずにスマホ幅で撮る** = 幅360/412の `<iframe src="http://localhost:3456/manga/<slug>">` を置いた小さなHTMLを撮る
+  (`--window-size=600,2300` で撮って左の幅ぶんを切り出す)。 窓幅そのものは約500px未満にならず右端が切れる(上の注意と同根)。
+- ★`--virtual-time-budget` は**通信待ちの間は時間が進まない** = 「読み込み途中の画面」(羅針盤の準備中など)は撮れず、読み終わった画面になる。
+  途中の見た目は、部品を種類固定で並べた**手元だけの確認頁**(app/zz-*/page.tsx・コミットしない)で撮る。
+- ★確認頁を消した後の `npx tsc --noEmit` が `.next/types/app/zz-*/page.ts` の TS2307 で落ちる = dev が作った型の残骸。 `rm -rf .next/types`(.next は git 管理外・次の dev/build で作り直される)。
+- 実頁の撮影は `MANGAL_DATA_DIR=.preview-data npx next dev -p 3456`(テスト環境と同じ作品だけ)。 羅針盤は手元だと /prod-idx が無く「索引が読めませんでした」になる(=正常)。
