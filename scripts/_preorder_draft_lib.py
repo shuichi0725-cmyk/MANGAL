@@ -141,6 +141,39 @@ def scope_out_rec(rec):
     m = _ANIME_COMIC_CAPTION.search(str(rec.get("caption") or rec.get("itemCaption") or ""))
     if m:
         return f"アニメコミック(caption『{m.group()}』)=掲載scope外の疑い→人裁定"
+    # ★画集(2026-10-08 千歳くんはラムネ瓶のなか raemz ARTWORKS = 「初画集」・レーベル欄「原画集・イラストブック」)。
+    #   題に「画集」が無いので scope_out を素通りしていた。レーベル欄と題の英語表記で拾う。
+    m = re.search(r"原画集|画集|イラストブック|イラスト集|アートブック|ビジュアルブック", str(rec.get("seriesName") or ""))
+    if m:
+        return f"画集レーベル(seriesName『{m.group()}』)=漫画でない→人裁定"
+    m = re.search(r"ART\s?WORKS|アートワークス|ビジュアルアートブック", t, re.I)
+    if m:
+        return f"画集(題『{m.group()}』)=漫画でない→人裁定"
+    return None
+
+
+_SERIES_NTH = re.compile(r"(?:シリーズ)?第\s*([2-9２-９]|[1-9１-９][0-9０-９]|[二三四五六七八九十]+)\s*弾")
+
+
+def new_work_hold_reason(rec):
+    """★新作1巻(gen-preview)だけに効かせる保留理由(2026-10-08)。無ければ None。捨てない= 人が裁く。
+    ・著者欄が「…ほか」で切れている + 題に巻数が無い + 紹介文が無い = アンソロジーの疑い
+      (FLOW GLOW -MAKE IT GLOW- / スペリオールμ BIBLE。巻数の付いた ホロビート（1）=原作者クレジットの「ほか」は通す)
+    ・紹介文が自分を「シリーズ第N弾」(N>=2)と名乗る = 頁の無いシリーズの途中の本(心霊浄化師 神楽京 魂の狩人 = 第9弾)。
+      巻番号が題に無いので分類器は新作1巻と見る= 単巻先行登録の禁止に当たる → 全巻回収が先。"""
+    cap = str(rec.get("caption") or rec.get("itemCaption") or "")
+    if re.search(r"(?:ほか|他)\s*$", str(rec.get("author") or "")) and not cap.strip():
+        try:
+            from _preorder_title_lib import split_title
+            st = split_title(rec.get("title"))
+            novol = st.get("vol") is None and not st.get("vol_suspect") and not st.get("part")
+        except Exception:
+            novol = False
+        if novol:
+            return "アンソロジー疑い(著者欄が『…ほか』+題に巻数なし+紹介文なし)→人裁定"
+    m = _SERIES_NTH.search(cap)
+    if m:
+        return f"紹介文が『{m.group()}』=頁の無いシリーズの途中の本(単巻先行登録禁止)→全巻回収して人裁定"
     return None
 
 

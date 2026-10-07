@@ -91,7 +91,23 @@ def norm_loose(t):
     t = unicodedata.normalize("NFKC", str(t or ""))
     t = re.sub(r"[（(][ぁ-んァ-ヶー]{1,12}[)）]", "", t)      # ルビ注記(数字の巻表記は落ちない)
     t = re.sub(r"[〈〉《》\[\]<>【】]", "", t)                 # 角括弧の揺れ
+    t = re.sub(r"(?:@\s*COMIC|THE\s+COMIC)\s*$", "", t.strip(), flags=re.I)   # ★@COMIC尾(2026-10-08 最弱テイマー…＠COMIC 第9巻 型)
     return norm(t).replace("ー", "")
+
+
+def author_similar(a, b):
+    """★著者名の表記ゆれ(2026-10-08): 常盤ギヨ⇔常盤魚 / saku⇔saku漫画家 / 和田フミ江⇔和田フミエ。
+    楽天とMADBで同じ人の書き方が違う。一致・前方一致・共通の先頭2字以上(短い方の長さ-2以上)を「似ている」とする。
+    ★これ単独では使わない= 題の候補1件+巻連続ゲート(⑤次マッチ)と必ず組む(同姓の別人を拾いうる緩さなので)。"""
+    if not a or not b:
+        return False
+    if a == b:
+        return True
+    s, l = sorted((a, b), key=len)
+    if len(s) >= 2 and l.startswith(s):
+        return True
+    cp = len(os.path.commonprefix([a, b]))
+    return cp >= 2 and cp >= len(s) - 2
 
 
 def auth_is_publisher(r):
@@ -109,7 +125,8 @@ SCOPE_BAN = _re.compile(r"特装版|限定版|初回限定|豪華版|特別版|�
 
 VOLP = re.compile(r"[（(]\s*(\d{1,3})\s*[)）]\s*$|\s+(\d{1,3})\s*$|第\s*(\d{1,3})\s*巻\s*$")
 # ★版違いの語(2026-10-08): 途中巻ゲートと新作の SCOPE_BAN の両方で使う。Perfect Edition=完全版の英語表記(エロイカ型)。
-EDITION_VARIANT = _re.compile(r"新装版|愛蔵版|完全版|復刻版|Perfect\s*Edition|パーフェクト[・\s]?エディション", _re.I)
+EDITION_VARIANT = _re.compile(r"新装版|愛蔵版|完全版|復刻版|オリジナル版|Perfect\s*Edition|パーフェクト[・\s]?エディション", _re.I)
+# ★オリジナル版(2026-10-08 手塚治虫 ミッシング・ピーシズ 地球を呑む[オリジナル版] = 既存頁『地球を呑む』の別版)
 
 from _preorder_title_lib import split_title as _split_title
 
@@ -217,6 +234,31 @@ for r in rows:
                             else "著者欄が「ほか」で切れている=免除" if (_tr and not (r_auth & p_auth)) else "題の表記揺れ")
                     r["reason"] = f"④緩和一致({_why}, 頁max{mx}→巻{vol})"
                     out["zokkan"].append(r); continue
+    # ★⑤次マッチ(2026-10-08): 著者名の表記ゆれで①〜④が外れた続巻(織田ちゃんと明智くん9=常盤ギヨ⇔常盤魚 /
+    #   キミに恋する三姉妹10=saku⇔saku漫画家 / 婚活とミシン4=和田フミ江⇔和田フミエ)。題(全体 or 先頭セグメント)が
+    #   緩和キーで頁と一致し、著者が「似ている」候補が★ちょうど1件 かつ ★巻連続(頁max+1..+3) の時だけ。
+    if mvi is not None and vol is not None and vol >= 2 and r_auth:
+        _b0 = _split_title(r["title"])["base"]
+        _cands = {}
+        for _k in [norm_loose(_b0)] + [norm_loose(p) for p in head_prefixes(_b0)]:
+            for c in page_by_loose.get(_k, []):
+                _cands[c[si]] = c
+        _hits = []
+        for c in _cands.values():
+            p_auth = {norm_author(au_name(a)) for a in (c[ai] or [])}
+            if not any(author_similar(x, y) for x in r_auth for y in p_auth):
+                continue
+            try:
+                mx = max(int(c[mvi] or 0), int(c[tvi] or 0) if tvi is not None else 0)
+            except Exception:
+                mx = 0
+            if mx >= 1 and mx + 1 <= vol <= mx + 3:
+                _hits.append((c, mx))
+        if len(_hits) == 1:
+            c, mx = _hits[0]
+            r["_slug"] = c[si]
+            r["reason"] = f"⑤著者表記ゆれ一致(頁著者={'/'.join(au_name(a) for a in (c[ai] or []))}, 頁max{mx}→巻{vol})"
+            out["zokkan"].append(r); continue
     if vol is not None and vol >= 2:
         # ★版違いの途中巻(2026-10-08 佐武と市捕物控〈完全版〉（3）/ エロイカより愛をこめて Perfect Edition 2..8 型):
         #   既存頁の別版(タブ)の可能性が高い。途中巻回収(gen-midfill)に回すと「〈完全版〉」付きの別頁を新しく作ってしまう

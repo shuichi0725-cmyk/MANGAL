@@ -156,6 +156,7 @@ def _old_strip_vol_disp(t):
 # ★2026-07-09 全面作り直し: 整形は _preorder_draft_lib に一本化(副題分離/kana=楽天のみ捏造hold/pykakasi slug/@COMIC/英語保持)
 from _preorder_draft_lib import strip_kana_known_vol as _strip_kana_known_vol
 from _preorder_draft_lib import clean_title as _clean_title, clean_kana as _clean_kana, make_slug as _make_slug, scope_out as _scope_out, looks_like_criticism as _criticism, looks_like_many_credits as _manycredits, author_is_anthology as _anthology, scope_out_rec as _scope_rec
+from _preorder_draft_lib import new_work_hold_reason as _new_hold
 # ★上下巻ペアの1頁統合(2026-09-04 ひみつー佐世保事件型)。skill A2-2 の規定だが実装が無く、
 #   同日発売の上下巻が new1b(上=1巻の新作) と ex_mid(下=全巻回収不成立) に割れて散っていた。
 #   兄弟は増加分の**全class**から集める(下は ex_mid/skip 側に落ちているため)。
@@ -273,6 +274,8 @@ for klass, r in targets:
         holds.append((klass, isbn, raw_title, "書籍疑い(コミックレーベル無し+著者5人以上=小説の挿絵陣/アンソロジー/翻訳コミック)→人裁定")); continue
     if _scope_rec(r):                                             # ★題以外に出るscope外(2026-10-03 GN/ムック/アニメコミック型)
         holds.append((klass, isbn, raw_title, _scope_rec(r))); continue
+    if _new_hold(r):                                              # ★アンソロジー疑い/シリーズ第N弾(2026-10-08)
+        holds.append((klass, isbn, raw_title, _new_hold(r))); continue
     base, subtitle, prov = _clean_title(raw_title)
     if prov:                                                      # (仮)=題未確定
         holds.append((klass, isbn, raw_title, "(仮)題未確定")); continue

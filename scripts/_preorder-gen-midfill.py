@@ -229,7 +229,8 @@ for r in [x for x in cls["ex_mid"] if ONLY_ISBN is None or str(x.get("isbn")) in
            "title_kana": kana.replace(" ", "").replace("　", ""),
            "title_romaji": romaji.replace("-", " "),
            "authors": authors, "publisher": (_pk if (_pk:=_pubkey(r.get("publisher"))) in _pubs else None), "publishers": ([_pk] if _pk in _pubs else []), "year_ended": None, "year_started": (min([int(str(_v["release_date"])[:4]) for _v in volumes if _v.get("release_date")] or [int(ym[:4])])), "status": "ongoing",  # ★巻1年=最古巻年(ひよこcomic型: 予約巻の年を拾う誤り是正 2026-07-21)
-           "demographic": DEMO.get(r.get("subgenre")),  # ★不明はNone(旧"other"廃止2026-07-13。schemaはnullable化済み) "genres": [],
+           "demographic": DEMO.get(r.get("subgenre")),  # ★不明はNone(旧"other"廃止2026-07-13。schemaはnullable化済み)
+           "genres": [],   # ★2026-10-08: 旧はこのキーが上の行のコメントの中に入っていて出力されていなかった(schemaの既定[]で実害は無し)
            "editions": [{"type": "standard", "label": "通常版", "publisher": (_pubkey(r.get("publisher")) or r.get("publisher")),
                           "imprint": r.get("seriesName") or "", "volumes": volumes}],
            "_preorder_draft": {"class": "ex_mid", "added_at": TODAY, "source": "rakuten-preorder",
