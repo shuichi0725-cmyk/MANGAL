@@ -248,8 +248,10 @@ def main():
                 if _gap is not None and abs(_gap) <= 2:
                     why = "奥付日vs店頭日(NDL=現在値%s / 楽天=%s)= 既知の仕様差・変更しない" % (ours, theirs)
                 else:
-                    why = "★NDL未更新の疑い(NDL=現在値%s / 楽天=%s / 差%s日)= 人が裁定" % (
-                        ours, theirs, ("%+d" % _gap) if _gap is not None else "?")
+                    # ★2026-10-08 ユーザ裁定「楽天を信じる」: 3日以上の差は楽天が先に延期/前倒しを掴み、NDL の
+                    #   出版予定日が古いまま、の型(龍狩のナト4 +31日 / 優等生の秘密。1 +30日 / 鎧真伝サムライトルーパー正伝1 +49日 /
+                    #   トロワ・フルールは嘘をつく1 +60日)。人の裁定に回さず楽天の値を採る。台帳に印を残す(src)。
+                    r.append("rakuten-over-stale-ndl")
             elif not any(h.get("issued") == theirs for h in hits):
                 why = "NDL(%s)と楽天(%s)が食い違う(どちらも現在値と別)" % (
                     "/".join(sorted({h.get("issued", "") for h in hits})), theirs)
@@ -279,7 +281,7 @@ def main():
             "isbn13": isbn, "date": theirs, "slug": stem,
             "vol": int(r[I["vol"]]) if r[I["vol"]].isdigit() else None,
             "reason": "preorder-date-drift", "was": r[I["ours"]],
-            "src": ("rakuten-only" if len(r) > len(hdr) else "rakuten+ndl"),
+            "src": (r[len(hdr)] if len(r) > len(hdr) else "rakuten+ndl"),   # rakuten-only / rakuten-over-stale-ndl
             "at": stamp}, ensure_ascii=False))
         stems.add(stem)
         if layer == "PREORDER":
