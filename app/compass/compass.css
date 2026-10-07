@@ -424,6 +424,200 @@
   pointer-events: none;
 }
 
+/* 準備中の場面1(索引を読み込み中・真ん中の本もまだ無い)のアニメ = app/compass/CompassLoading.tsx。
+ * 2026-10-08 ユーザ「全部とても良い・ランダムで全部出せる?」= 5種(針/糸/枠/点/網点)から開くたびに1つ。 */
+.cp-wait-text.cp-ld-pill span {
+  background: #07090de6;
+  padding: 2px 8px;
+  border-radius: 9px;
+}
+/* 1 針がゆれる(羅針盤マークと同じ形の針が北を探す) */
+.cp-ld-needle {
+  position: absolute;
+  stroke: #e6ecf0;
+  fill: none;
+  stroke-width: 1.4;
+}
+.cp-ld-needle path {
+  fill: #d9f84333;
+  stroke: #d9f843;
+}
+.cp-ld-nd {
+  transform-origin: 12px 12px;
+  animation: cp-ld-swing 2.6s ease-in-out infinite;
+}
+@keyframes cp-ld-swing {
+  0% {
+    transform: rotate(-70deg);
+  }
+  25% {
+    transform: rotate(40deg);
+  }
+  45% {
+    transform: rotate(-22deg);
+  }
+  62% {
+    transform: rotate(12deg);
+  }
+  78% {
+    transform: rotate(-5deg);
+  }
+  90%,
+  100% {
+    transform: rotate(0deg);
+  }
+}
+/* 2 糸がのびる(真ん中から本の出る位置へ・糸の色) */
+.cp-ld-thr {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.cp-ld-thr line {
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 240;
+  stroke-dashoffset: 240;
+  opacity: 0.9;
+  animation: cp-ld-draw 2.4s ease-in-out infinite;
+}
+@keyframes cp-ld-draw {
+  0% {
+    stroke-dashoffset: 240;
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.9;
+  }
+  55% {
+    stroke-dashoffset: 0;
+    opacity: 0.9;
+  }
+  85%,
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+.cp-ld-hub {
+  fill: #e6ecf0;
+  animation: cp-ld-hub 1.2s ease-in-out infinite alternate;
+}
+@keyframes cp-ld-hub {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* 3 枠が順に点滅(場面2と同じ枠・同じ位置。 点滅が輪を回る) */
+.cp-ph.cp-ld-seq {
+  animation: cp-ld-seq 1.2s ease-in-out infinite;
+}
+.cp-ph.cp-ld-big {
+  width: 92px;
+  height: 128px;
+  animation-delay: -0.6s;
+}
+@keyframes cp-ld-seq {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.95;
+  }
+}
+/* 4 点がはねる */
+.cp-ld-dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  pointer-events: none;
+}
+.cp-ld-dots i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #e6ecf0;
+  animation: cp-ld-bounce 1s ease-in-out infinite;
+}
+.cp-ld-dots i:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.cp-ld-dots i:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes cp-ld-bounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  30% {
+    transform: translateY(-9px);
+    opacity: 1;
+  }
+}
+/* 5 網点の波(背景の網点と同じ点が真ん中から広がる) */
+@property --cp-ld-r {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+.cp-ld-ripple {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, #e6ecf0 1.3px, transparent 1.8px) 0 0 / 6px 6px;
+  -webkit-mask-image: radial-gradient(
+    circle at var(--cp-ld-cx) var(--cp-ld-cy),
+    transparent 0,
+    transparent var(--cp-ld-r),
+    #000 calc(var(--cp-ld-r) + 26px),
+    transparent calc(var(--cp-ld-r) + 52px)
+  );
+  mask-image: radial-gradient(
+    circle at var(--cp-ld-cx) var(--cp-ld-cy),
+    transparent 0,
+    transparent var(--cp-ld-r),
+    #000 calc(var(--cp-ld-r) + 26px),
+    transparent calc(var(--cp-ld-r) + 52px)
+  );
+  opacity: 0.55;
+  animation: cp-ld-rip 2.2s linear infinite;
+}
+@keyframes cp-ld-rip {
+  from {
+    --cp-ld-r: 0px;
+    opacity: 0.7;
+  }
+  to {
+    --cp-ld-r: 360px;
+    opacity: 0.15;
+  }
+}
+/* 動きを減らす設定 = 止めた絵(糸は伸びきった形・網点は真ん中の輪) */
+.cp-root[data-reduce] :is(.cp-ld-nd, .cp-ld-thr line, .cp-ld-hub, .cp-ph.cp-ld-seq, .cp-ld-dots i, .cp-ld-ripple) {
+  animation: none;
+}
+.cp-root[data-reduce] .cp-ld-thr line {
+  stroke-dashoffset: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  :is(.cp-ld-nd, .cp-ld-thr line, .cp-ld-hub, .cp-ph.cp-ld-seq, .cp-ld-dots i, .cp-ld-ripple) {
+    animation: none;
+  }
+  .cp-ld-thr line {
+    stroke-dashoffset: 0;
+  }
+}
+
 /* 広げ方の切替(広げた画面の左上) */
 .cp-spreads {
   position: absolute;

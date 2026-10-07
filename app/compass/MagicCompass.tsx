@@ -53,6 +53,7 @@ import {
 import { Halftone } from "./halftone";
 import { CompassShelveButton, CompassShelvePanel } from "./CompassShelve";
 import KomaPage from "./KomaPage";
+import CompassLoading from "./CompassLoading";
 
 // ★テスト環境か(next.config.ts がビルド時の定数で埋める)。 本番は false = 下のテスト専用分岐ごと刈り取られる。
 const PREVIEW = process.env.NEXT_PUBLIC_PREVIEW_FEATURES === "1";
@@ -1167,11 +1168,15 @@ export default function MagicCompass({
             </p>
           </div>
         )}
-        {!curItem && (
-          <p className="cp-wait-text" style={{ top: geom.CY - 8 }}>
-            {failed ? "索引が読めませんでした" : "準備中…"}
-          </p>
-        )}
+        {!curItem &&
+          (failed ? (
+            <p className="cp-wait-text" style={{ top: geom.CY - 8 }}>
+              索引が読めませんでした
+            </p>
+          ) : (
+            // ★準備中の場面1 = 5種のアニメから開くたびにランダム(2026-10-08 ユーザ「全部とても良い・ランダムで全部出せる?」)
+            <CompassLoading geom={geom} angles={PLACEHOLDER_ANGLES} nw={NW} nh={NH} cw={CW} ch={CH} />
+          ))}
         <div className="cp-world" style={worldStyle}>
           <svg className="cp-lines" width="1" height="1" aria-hidden="true">
             {drawnLines.map(({ l, s }) => {
