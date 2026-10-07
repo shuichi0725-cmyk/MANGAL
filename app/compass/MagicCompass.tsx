@@ -961,9 +961,9 @@ export default function MagicCompass({
   let why = "";
   let goLabel: string | null = null;
   if (!curItem) {
-    why = failed ? "索引が読めませんでした" : "星図を描いています…";
+    why = failed ? "索引が読めませんでした" : "準備中…";
   } else if (!nb) {
-    why = failed ? "索引が読めませんでした" : "いまの中心 ・ 星図を描いています…";
+    why = failed ? "索引が読めませんでした" : "いまの中心 ・ 準備中…";
   } else if (unit) {
     sheetKind = unit.kind;
     if (sel) {
@@ -1163,13 +1163,13 @@ export default function MagicCompass({
                 );
               })}
             <p className="cp-wait-text" style={{ top: geom.CY + CH / 2 + 14 }}>
-              {failed ? "索引が読めませんでした" : "星図を描いています…"}
+              {failed ? "索引が読めませんでした" : "準備中…"}
             </p>
           </div>
         )}
         {!curItem && (
           <p className="cp-wait-text" style={{ top: geom.CY - 8 }}>
-            {failed ? "索引が読めませんでした" : "星図を描いています…"}
+            {failed ? "索引が読めませんでした" : "準備中…"}
           </p>
         )}
         <div className="cp-world" style={worldStyle}>
