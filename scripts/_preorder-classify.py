@@ -237,6 +237,20 @@ for r in rows:
     else:
         out["new1b"].append(r)
 
+# ★続巻経路の非漫画ゲート(2026-10-08 ドラミちゃん かわいいポスターコレクション2 型): scope外の語(ポスター本/画集/ガイド等)は
+#   新作経路(生成器)でしか見ておらず、③先頭セグメント一致で頁『ドラミちゃん』(1巻)の2巻として種4へ入るところだった。
+#   ★語が**頁題にも在る**時は題の一部なので止めない(ハンドレッドノート型=「ノート」が作品名)。harvest題だけに在る時だけ skip。
+from _preorder_draft_lib import scope_out as _scope_out
+_title_by_slug = {r[si]: r[ti] for r in idx["d"]}
+_keep_z = []
+for r in out["zokkan"]:
+    if _scope_out(r.get("title")) and not _scope_out(_title_by_slug.get(r.get("_slug"), "")):
+        r["reason"] = f"scope外(非漫画=頁題に無い語)の続巻疑い slug={r.get('_slug')}"
+        out["skip"].append(r)
+    else:
+        _keep_z.append(r)
+out["zokkan"] = _keep_z
+
 # ★再投入行(2026-10-06 _preorder-increment.py が付ける _requeue)は「既存頁の続巻」と判定された時だけ適用に回す。
 #   新作(new1a/new1b)・途中巻(ex_mid)に落ちた行は過去に見送った分 = ここでドラフト生成に渡すと backlog を毎回「新規」に
 #   水増しする(previewは今回分のみの規則)。 → requeue_hold に退避して簿にだけ出す(生成器は読まない)。

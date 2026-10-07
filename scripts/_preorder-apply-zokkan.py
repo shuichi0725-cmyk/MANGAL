@@ -16,12 +16,19 @@ classified.json の zokkan を volumes-supplement-auto.yml へ純粋追加。
   → 通常版が1つ・同ISBN/同巻番号なし・巻が連続(予約頁max+1..+3)の時だけ、その seed の巻の並びに1冊差し込む
   ([[preorder_page_zokkan_direct_append]])。全体を書き直すと長文(rakuten_caption)の折り返しが変わるので行を差し込み、
   読み直して「その1冊が増えただけ」を検算してから書く。記帳=data/seeds/preorder-page-zokkan-changelog.jsonl / 退避=.cache/preorder-page-zokkan-bak-<日付>/
+★2026-10-08 固定頁の続巻=巻の並びへ直接追記: edition-overrides に editions を持つ頁は promote が editions を丸ごと置き換えるので
+  種4に入れても頁に出ない(無敗のふたり6・Kiss me crying 6・聖女に嘘は通じない7・チンチンデビル6・罪と罰のスピカ8・最強出戻り中年冒険者3
+  = 9/14〜10/3 に種4へ入ったまま出ていなかった。月次#36 FROZEN)。→ 通常版1つ・同ISBN/同巻番号なし・巻連続(max+1..+3)・
+  出版社一致・発売日が既刊より前でない時だけ、override の巻の並びへ1冊足す(記帳=edition-fix-changelog.jsonl op=override_zokkan_append /
+  退避=.cache/edition-overrides-zokkan-bak-<日付>/)。種4に既に在る巻も、固定頁なら毎回ここを通る(再投入で拾い直す)。
+  edition-canonical(キー=SRC stem)の頁は canonical が override より後に editions を組み直すので、override 併用 or open_tail 無しなら
+  黙って種4に入れず保留簿へ(本体へ手で追記= CLAUDE.md 厳守6。ゴルゴ13 223 型)。open_tail 在り かつ override 無しは種4→末尾追随で出る。
 出力: 追加件数 + touched slugリスト(.cache/preorders/zokkan-touched.json) + 不備worklist追記
 """
 import sys as _sys_h
 if any(_a in ("-h", "--help") for _a in _sys_h.argv[1:]):   # ★--help で本体を走らせない(2026-10-03 apply-zokkan を誤実行し touched を空で上書き)
     print(__doc__ or "(no doc)"); _sys_h.exit(0)
-import json, os, sys, sqlite3, datetime, re
+import json, os, sys, sqlite3, datetime, re, unicodedata
 sys.stdout.reconfigure(encoding="utf-8")
 import yaml
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -178,8 +185,97 @@ def append_to_preorder_page(stem, r, vol):
     return None
 
 
+OVR_P = os.path.join(ROOT, "data", "seeds", "edition-overrides.json")
+OVR_RAW = open(OVR_P, encoding="utf-8").read() if os.path.exists(OVR_P) else "{}"
+OVR = json.loads(OVR_RAW)
+OVR_ADDS = []   # (key, newv) = このrunで巻の並びに足した巻(最後に1回だけ書いて読み直し検算)
+OVR_LOG = os.path.join(ROOT, "data", "seeds", "edition-fix-changelog.jsonl")
+CANON_DIR = os.path.join(ROOT, "data", "seeds", "edition-canonical")
+_pubs = yaml.safe_load(open(os.path.join(ROOT, "data", "publishers.yml"), encoding="utf-8")) or {}
+_PUBN = {}
+for _k, _v in _pubs.items():
+    _PUBN[_k] = _k
+    if isinstance(_v, dict):
+        for _n in [_v.get("name")] + list(_v.get("aliases") or []):
+            if _n:
+                _PUBN[re.sub(r"\s+", "", unicodedata.normalize("NFKC", _n))] = _k
+
+
+def _pub_key(name):
+    """出版社名/キー → publishers.yml のキー(引けなければ正規化した生名)。"""
+    n = re.sub(r"\s+", "", unicodedata.normalize("NFKC", str(name or "")))
+    return _PUBN.get(n, n)
+
+
+def override_key(slug, stem):
+    """★固定頁(edition-overrides の editions 指定)のキー。promote と同じく公開slug→SRC stem の順に引く。無ければ None。"""
+    for k in (slug, stem):
+        if k and (OVR.get(k) or {}).get("editions"):
+            return k
+    return None
+
+
+_CANON = None
+
+
+def canonical_frozen(stem, has_override):
+    """★edition-canonical(キー=seed内の slug = SRC stem)で通常版を固定している頁か。canonical は override より**後**に
+    editions を組み直すので、canonical を持つ頁は override に足しても効かない。
+    種4が効くのは「open_tail 在り かつ override 無し」だけ(open_tail の末尾追随は override が無い時の種2+種4の通常版を見る。
+    override が在ると override の通常版を見る= ゴルゴ13 は override 1-220 で止まり、221・222 は本体へ手で追記してきた)。"""
+    global _CANON
+    if _CANON is None:
+        _CANON = {}
+        import glob as _glob
+        for p in _glob.glob(os.path.join(CANON_DIR, "*.yml")):
+            try:
+                s = yaml.safe_load(open(p, encoding="utf-8")) or {}
+            except Exception:
+                continue
+            if s.get("slug"):
+                _CANON[s["slug"]] = s
+    s = _CANON.get(stem)
+    if s is None:
+        return False
+    return has_override or not s.get("open_tail")
+
+
+def append_to_override(key, r, vol):
+    """★固定頁の通常版の巻の並びに1冊足す(2026-10-08)。成功=None / 失敗=保留理由。
+    edition-overrides は promote で editions を丸ごと置き換えるので、種4に入れても頁に出ない
+    (無敗のふたり6・Kiss me crying 6・聖女に嘘は通じない7 等6冊が 9/14〜10/3 に種4へ入ったまま出ていなかった=#36 FROZEN)。
+    手作業の前例(聖女に嘘は通じない6 = 2026-09-03 override追記)を機械化。ゲートは予約頁の直接追記と同じ考え方:
+    通常版が1つ / 同ISBN・同巻番号が無い / 巻が連続(max+1..+3) / 出版社が同じ(移籍・別版を混ぜない) / 発売日が既刊より前でない。"""
+    eds = OVR[key]["editions"]
+    std = [i for i, e in enumerate(eds) if (e.get("type") or "standard") == "standard"]
+    if len(std) != 1:
+        return f"固定頁の通常版が{len(std)}個(足し先を決められない)"
+    if any(str(v.get("isbn13")) == str(r["isbn"]) for e in eds for v in e.get("volumes") or []):
+        return "既在"
+    vols = eds[std[0]].get("volumes") or []
+    nums = [v.get("number") for v in vols if isinstance(v.get("number"), int)]
+    if int(vol) in nums:
+        return f"同巻番号{vol}既在(固定頁)"
+    mx = max(nums or [0])
+    if not (mx >= 1 and mx + 1 <= int(vol) <= mx + 3):
+        return f"巻が連続しない(固定頁max{mx}→{vol})"
+    ep, rp = eds[std[0]].get("publisher"), r.get("publisher")
+    if ep and rp and _pub_key(ep) != _pub_key(rp):
+        return f"出版社が違う(固定頁={ep} / 楽天={rp}=移籍・別版の疑い)"
+    rd = release_date_of(r)
+    dates = [str(v.get("release_date")) for v in vols if v.get("release_date")]
+    if rd and dates and str(rd) < max(dates)[:len(str(rd))]:
+        return f"発売日{rd}が既刊の最終日{max(dates)}より前"
+    newv = {"asin": None, "cover_url": None, "isbn13": str(r["isbn"]), "number": int(vol), "release_date": rd}
+    vols.append(newv)   # 書影は promote 最終pass が covers seed(下で harvest 書影を追記)から充填する
+    eds[std[0]]["volumes"] = vols
+    OVR_ADDS.append((key, std[0], newv, r.get("title")))
+    return None
+
+
 added = 0
 added_pp = 0
+added_ov = 0
 replaced = 0
 touched = set()
 wl = []
@@ -187,8 +283,8 @@ key_cache = {}
 for r in sorted(cls["zokkan"], key=lambda x: (str(x.get("_slug") or ""), x.get("_vol") if isinstance(x.get("_vol"), int) else 10**6)):
     isbn, slug, vol = r["isbn"], r.get("_slug"), r.get("_vol")
     _st0 = resolve_stem(slug) if slug else None
-    if isbn in have and not (_st0 and is_preorder_produced(_st0)):
-        continue   # ★予約頁で作られる頁は種4に在っても頁に出ない=seed側の有無で判断する(下の直接追記へ)
+    if isbn in have and not (_st0 and (is_preorder_produced(_st0) or override_key(slug, _st0))):
+        continue   # ★予約頁/固定頁は種4に在っても頁に出ない=seed側の有無で判断する(下の直接追記へ)
     if not slug:
         wl.append((isbn, r["title"], "slug無")); continue
     if SPECIAL_ED.search(str(r.get("title") or "")):
@@ -207,6 +303,20 @@ for r in sorted(cls["zokkan"], key=lambda x: (str(x.get("_slug") or ""), x.get("
             have.add(isbn); touched.add(stem); added_pp += 1
         elif why != "既在":
             wl.append((isbn, r["title"], f"予約頁への直接追記を保留: {why} slug={slug}"))
+        continue
+    _ok = override_key(slug, stem)
+    if canonical_frozen(stem, bool(_ok)):
+        # ★canonical 固定頁も種4を読まない(override 併用 or open_tail 無し)。本体への追記は人が確かめて行う(CLAUDE.md 厳守6)
+        if int(vol) not in page_numbers(stem):
+            wl.append((isbn, r["title"], f"canonical固定頁(override併用/open_tail無し)=種4が効かない→canonical本体へ手で追記 slug={slug} stem={stem}"))
+        continue
+    if _ok:
+        # ★固定頁(edition-overrides)は種4を読まない= 巻の並びへ直接足す(2026-10-08)
+        why = append_to_override(_ok, r, vol)
+        if why is None:
+            have.add(isbn); touched.add(stem); added_ov += 1
+        elif why != "既在":
+            wl.append((isbn, r["title"], f"固定頁(edition-overrides)への直接追記を保留: {why} slug={slug}"))
         continue
     if stem not in key_cache:
         key_cache[stem] = keys_for_slug(stem)
@@ -241,6 +351,30 @@ for r in sorted(cls["zokkan"], key=lambda x: (str(x.get("_slug") or ""), x.get("
     added += 1
 
 yaml.dump(doc, open(AUTO, "w", encoding="utf-8"), allow_unicode=True, sort_keys=False, width=200)
+if OVR_ADDS:
+    # ★固定頁への追記は最後に1回だけ書く。書式は既存と同じ(indent=1・非ASCIIそのまま・末尾改行)。
+    #   読み直して「元の内容 + 足した巻だけ」と一致することを検算してから台帳に記帳する。
+    import copy, shutil
+    want = json.loads(OVR_RAW)
+    for key, ei, newv, _t in OVR_ADDS:
+        want[key]["editions"][ei].setdefault("volumes", []).append(copy.deepcopy(newv))
+    if want != OVR:
+        sys.exit("[abort] 固定頁追記の検算NG(メモリ上の内容が「元+追記」と一致しない)。edition-overrides.json は未変更。")
+    bak_dir = os.path.join(ROOT, ".cache", f"edition-overrides-zokkan-bak-{TODAY}")
+    os.makedirs(bak_dir, exist_ok=True)
+    bak = os.path.join(bak_dir, "edition-overrides.json")
+    if not os.path.exists(bak):
+        open(bak, "w", encoding="utf-8").write(OVR_RAW)
+    open(OVR_P, "w", encoding="utf-8").write(json.dumps(OVR, ensure_ascii=False, indent=1) + "\n")
+    if json.load(open(OVR_P, encoding="utf-8")) != want:
+        shutil.copy(bak, OVR_P)
+        sys.exit("[abort] 固定頁追記の読み直し検算NG → edition-overrides.json を退避から戻した。")
+    with open(OVR_LOG, "a", encoding="utf-8") as f:
+        for key, ei, newv, t in OVR_ADDS:
+            f.write(json.dumps({"op": "override_zokkan_append", "slug": key, "isbn13": newv["isbn13"], "number": newv["number"],
+                                "before": None, "after": newv, "at": TODAY, "reversible": True,
+                                "backup": os.path.relpath(bak, ROOT), "source": "rakuten-preorder", "title": t},
+                               ensure_ascii=False) + "\n")
 json.dump(sorted(touched), open(f"{ROOT}/.cache/preorders/zokkan-touched.json", "w"))
 with open(f"{ROOT}/docs/production-diagnostics/preorder-triage.tsv", "a", encoding="utf-8") as f:
     for isbn, title, why in wl:
@@ -264,4 +398,6 @@ with _gz.open(_cp, "at", encoding="utf-8") as _f:
             _f.write(json.dumps({"isbn13": _r["isbn"], "cover_url": _c}, ensure_ascii=False) + "\n")
             _have.add(_r["isbn"]); _added_cov += 1
 print(f"covers seed追記: {_added_cov}件(新刊書影)")
-print(f"種4追加 {added} / 予約頁へ直接追記 {added_pp} / 対象頁 {len(touched)} / 保留 {len(wl)} (worklist追記) / 特装版→通常版置換 {replaced}")
+print(f"種4追加 {added} / 予約頁へ直接追記 {added_pp} / 固定頁へ直接追記 {added_ov} / 対象頁 {len(touched)} / 保留 {len(wl)} (worklist追記) / 特装版→通常版置換 {replaced}")
+for key, ei, newv, t in OVR_ADDS:
+    print(f"  固定頁追記: {key} 巻{newv['number']} {newv['isbn13']} {newv['release_date']}  ({t})")
