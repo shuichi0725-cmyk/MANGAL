@@ -122,6 +122,18 @@ def release_date_of(r):
     return rd
 
 
+from _preorder_title_lib import split_title as _split_title
+
+
+def part_label(r, labels):
+    """★上下巻の巻ラベル(2026-10-08 ＃介護ロボットが人類を削減している（下巻）型)。題が上/中/下なら
+    頁の既存ラベルの書き方(「上」か「上巻」)に合わせて返す。上下でなければ None。"""
+    part = _split_title(r.get("title"))["part"]
+    if part not in ("上", "中", "下"):
+        return None
+    return part + ("巻" if any(str(x).endswith("巻") for x in labels if x) else "")
+
+
 def append_to_preorder_page(stem, r, vol):
     """予約頁 seed の通常版の巻の並びに1冊差し込む。成功=None / 失敗=保留理由。"""
     import copy, shutil
@@ -144,6 +156,11 @@ def append_to_preorder_page(stem, r, vol):
     cov = r.get("cover") if r.get("cover") and "noimage" not in str(r.get("cover")) else None
     newv = {"number": int(vol), "asin": None, "isbn13": str(r["isbn"]), "cover_url": cov,
             "release_date": release_date_of(r)}
+    lab = part_label(r, [v.get("volume_label") for v in vols])
+    # ★上巻だけ先に頁化された頁(巻1・ラベル無し)へ下巻/中巻が来たら、巻1にも「上」を付けて揃える
+    label_first = bool(lab and lab[0] in "中下" and nums == [1] and not vols[0].get("volume_label"))
+    if lab:
+        newv["volume_label"] = lab
     # 通常版の volumes ブロックの末尾を探す(editions は col0 の「- 」、版のキーは2字下げ、巻は「  - 」+4字下げ)
     lines = txt.split("\n")
     try:
@@ -167,9 +184,20 @@ def append_to_preorder_page(stem, r, vol):
         while k < span_end and (lines[k].startswith("  - ") or lines[k].startswith("    ")):
             k += 1
         lines[k:k] = snippet
+        if label_first:
+            # 巻1の項目(「  - number: 1」から次の「  - 」の手前まで)の末尾に1行足す
+            s1 = next((x for x in range(vi + 1, k) if lines[x] == "  - number: 1"), None)
+            if s1 is None:
+                return "上巻ラベルの差し込み先(巻1)が見つからない"
+            e1 = s1 + 1
+            while e1 < k and lines[e1].startswith("    "):
+                e1 += 1
+            lines[e1:e1] = ["    volume_label: " + lab.replace(lab[0], "上", 1)]
     new_txt = "\n".join(lines)
     want = copy.deepcopy(d0)
     want["editions"][std[0]].setdefault("volumes", []).append(newv)
+    if label_first:
+        want["editions"][std[0]]["volumes"][0]["volume_label"] = lab.replace(lab[0], "上", 1)
     if yaml.safe_load(new_txt) != want:
         return "差し込み検算NG(読み直した内容が1冊追加と一致しない)"
     bak_dir = os.path.join(ROOT, ".cache", f"preorder-page-zokkan-bak-{TODAY}")
@@ -267,6 +295,9 @@ def append_to_override(key, r, vol):
     if rd and dates and str(rd) < max(dates)[:len(str(rd))]:
         return f"発売日{rd}が既刊の最終日{max(dates)}より前"
     newv = {"asin": None, "cover_url": None, "isbn13": str(r["isbn"]), "number": int(vol), "release_date": rd}
+    _lab = part_label(r, [v.get("volume_label") for v in vols])
+    if _lab:
+        newv["volume_label"] = _lab
     vols.append(newv)   # 書影は promote 最終pass が covers seed(下で harvest 書影を追記)から充填する
     eds[std[0]]["volumes"] = vols
     OVR_ADDS.append((key, std[0], newv, r.get("title")))
@@ -346,6 +377,9 @@ for r in sorted(cls["zokkan"], key=lambda x: (str(x.get("_slug") or ""), x.get("
                            "edition_type": "standard", "title_display": r.get("title"),
                            "source": "rakuten-preorder", "added_at": TODAY,
                            "note": f"楽天予約ハーベスト① slug={slug}" + (f" stem={stem}" if stem != slug else "")})
+    _lab = part_label(r, [])   # ★上下巻の巻ラベル(promote が種4の volume_label を搬送する)
+    if _lab:
+        doc["volumes"][-1]["volume_label"] = _lab
     have.add(isbn)
     touched.add(stem)   # ★reflect --only はファイル名(SRC stem)
     added += 1

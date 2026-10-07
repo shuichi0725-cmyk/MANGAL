@@ -74,7 +74,11 @@ def split_title(raw):
     matched = None
 
     # D. 上下巻(末尾)
-    m = re.search(r"^(.*?)[\s　]*[（(]?([上中下])[)）]?(?:巻)?[\s　]*(?:[（(]完[)）])?$", t)
+    # ★「（下巻）」= 巻が括弧の内側の形を追加(2026-10-08 ＃介護ロボットが人類を削減している（下巻）が vol=None の
+    #   新作1巻に分類されていた。上巻は既に頁がある=続巻なのに単巻先行登録の事故になる形。楽天ローカル種で614題)。
+    m = re.search(r"^(.*?)[\s　]*[（(]?([上中下])(?:巻)?[)）]?(?:巻)?[\s　]*(?:[（(]完[)）])?$", t)
+    # ※副題の括弧の中の上巻(包丁人味平（ラーメン編　上巻）)は題が「…(ラーメン編」と半端に切れるが、従来から(上)の形で
+    #   97題が同じ切れ方をしている。読まないと下巻が新作1巻に落ちる(悪化)ので、上下の判定を優先して切れ方は許す。
     if m and m.group(1).strip() and len(m.group(1)) >= 3 and re.search(r"[\s　（(]$", t[:m.end(1) + 1] + " "):
         # 「〜屋上」等の誤爆防止: 上下の直前が空白/括弧のときだけ
         pre = t[: len(m.group(1))]
@@ -91,6 +95,13 @@ def split_title(raw):
         clean = (base + ("　" + sub if sub else "")).strip()
         return {"base": base, "vol": vol, "part": None, "subtitle": sub, "clean": clean,
                 "matched": "paren_kan", "vol_suspect": None, "zen": bool(m.group(2))}
+    # B0c. ★「N（コミックス）」= 原作小説と区別する印の前の巻数(2026-10-08 酔っ払い令嬢が英雄と知らず求婚した結果 3（コミックス）型。
+    #   PASH!コミックス等。どの規則にも当たらず vol=None → 3巻の本が新作1巻に分類されていた。楽天ローカル種で3題・全部巻数)。
+    m = re.search(r"^(.*?)[\s　]*(\d{1,3})\s*[（(]コミックス[)）][\s　]*$", t)
+    if m and m.group(1).strip() and 1 <= int(m.group(2)) <= 999:
+        base = m.group(1).strip()
+        return {"base": base, "vol": int(m.group(2)), "part": None, "subtitle": "", "clean": base,
+                "matched": "comics_marker", "vol_suspect": None}
     # B0k. ★漢数字の巻表示(2026-09-04 寿司銀捕物帖（三巻）型): 題(一巻)/(第三巻)/第三巻/(全五巻)。
     #   B0 は算用数字しか見ておらず、C' は空白区切りの裸漢数字だけだったので、この形は
     #   どの規則にも当たらず vol=None → **3巻の本が新作1巻として登録されかける**事故になった。

@@ -40,7 +40,15 @@ def norm_author(a):
       「希羅月(Comicloft)」と書き、頁は「孟倫」「Stonehead」= 著者が合わず既存頁の続巻が途中巻(ex_mid)に落ちていた
       (僕のカノジョ先生18・末っ子皇女殿下10 等10冊)。"""
     a = re.sub(r"[（(][^）)]*[）)]", "", str(a or ""))
+    a = re.sub(r"(?:ほか|他)\s*$", "", a)   # ★「三条陸ほか」型(2026-10-08 風都探偵21): 末尾の「ほか」は名前ではない
     return re.sub(r"[♂♀☆★]+$", "", norm(a))
+
+
+def auth_truncated(r):
+    """★楽天の著者欄が「…ほか」で切れている(=載っていない著者がいる)か。2026-10-08 風都探偵（21）型:
+    楽天「石ノ森章太郎/三条陸ほか」・頁は作画の「佐藤まさき」だけ= 重なりが無いのは別作品の証拠にならない。
+    ④次マッチ(候補1件+巻連続ゲート付き)でだけ著者一致を免除する。"""
+    return bool(re.search(r"(?:ほか|他)\s*$", str(r.get("author") or "")))
 
 
 # ★特装版/限定版(2026-09-02): 続巻でも種4に入れない。通常版と同巻番号で二重化する(特装版混入11件の型)。
@@ -100,6 +108,8 @@ import re as _re
 SCOPE_BAN = _re.compile(r"特装版|限定版|初回限定|豪華版|特別版|特典付|小冊子付|ドラマCD|CD付き?|DVD付|Blu-?ray|OAD|アンソロジ|総集編|選集|傑作|名作選|セレクション|新装版|愛蔵版|完全版|画集|イラスト集|ファンブック|設定資料|ガイドブック|公式ガイド|コミックガイド|データブック|ビジュアルブック|原画|ぬりえ|ムック|フィギュア付|BOXセット|ボックス|スターターセット|スペシャルプライス|語辞典|第?\s*[2-9２-９][0-9０-９]*\s*巻|第[二三四五六七八九十]+[集部]|(?:II|Ⅱ|III|Ⅲ|IV|Ⅳ|V|Ⅴ|VI|Ⅵ|VII|Ⅶ)\s*$|シーズン\s*[2-9]|[2-9]nd\s|3rd\s|第\d+号|別冊|【楽天ブックス限定特典】", _re.I)
 
 VOLP = re.compile(r"[（(]\s*(\d{1,3})\s*[)）]\s*$|\s+(\d{1,3})\s*$|第\s*(\d{1,3})\s*巻\s*$")
+# ★版違いの語(2026-10-08): 途中巻ゲートと新作の SCOPE_BAN の両方で使う。Perfect Edition=完全版の英語表記(エロイカ型)。
+EDITION_VARIANT = _re.compile(r"新装版|愛蔵版|完全版|復刻版|Perfect\s*Edition|パーフェクト[・\s]?エディション", _re.I)
 
 from _preorder_title_lib import split_title as _split_title
 
@@ -191,21 +201,29 @@ for r in rows:
     #   著者は overlap があるか、楽天placeholder(著者=出版社名)のときだけ免除する。
     if mvi is not None and vol is not None and vol >= 2:
         _pl = auth_is_publisher(r)
+        _tr = auth_truncated(r)
         _lc = page_by_loose.get(norm_loose(_split_title(r["title"])["base"]), [])
         if len(_lc) == 1:
             c = _lc[0]
             p_auth = {norm_author(au_name(a)) for a in (c[ai] or [])}
-            if (r_auth & p_auth) or _pl or not r_auth:
+            if (r_auth & p_auth) or _pl or _tr or not r_auth:
                 try:
                     mx = max(int(c[mvi] or 0), int(c[tvi] or 0) if tvi is not None else 0)
                 except Exception:
                     mx = 0
                 if mx >= 1 and mx + 1 <= vol <= mx + 3:
                     r["_slug"] = c[si]
-                    _why = "著者=出版社placeholder免除" if (_pl and not (r_auth & p_auth)) else "題の表記揺れ"
+                    _why = ("著者=出版社placeholder免除" if (_pl and not (r_auth & p_auth))
+                            else "著者欄が「ほか」で切れている=免除" if (_tr and not (r_auth & p_auth)) else "題の表記揺れ")
                     r["reason"] = f"④緩和一致({_why}, 頁max{mx}→巻{vol})"
                     out["zokkan"].append(r); continue
     if vol is not None and vol >= 2:
+        # ★版違いの途中巻(2026-10-08 佐武と市捕物控〈完全版〉（3）/ エロイカより愛をこめて Perfect Edition 2..8 型):
+        #   既存頁の別版(タブ)の可能性が高い。途中巻回収(gen-midfill)に回すと「〈完全版〉」付きの別頁を新しく作ってしまう
+        #   (版は同じ頁のタブ= CLAUDE.md 表示sort仕様)。続巻判定(①〜④)で頁が見つからなかった版違いだけ保留簿へ。
+        if EDITION_VARIANT.search(str(r.get("title") or "")):
+            r["reason"] = "版違い(完全版/新装版/愛蔵版/Perfect Edition等)の途中巻=既存頁の版タブ候補→人裁定(別頁を作らない)"
+            out["skip"].append(r); continue
         out["ex_mid"].append(r); continue
     # ★裸数字N>=2末尾=続巻(2026-07-06 VOLSTRIP事故クラス): 題の一部数字(レベル99/U149=直前が英数字)は除く
     _bm = _re.search(r"[^A-Za-z0-9]\s*([2-9]|[1-9][0-9]{1,2})\s*$", str(r.get("title") or ""))  # 3桁対応(鬼平128漏れ 2026-07-06)
@@ -228,8 +246,8 @@ for r in rows:
         r["reason"] = "コンビニ本レーベル"
         out["skip"].append(r); continue
     # ★scope外(特装版/アンソロ/セット/ガイド/N巻誤検出)は新作1巻にしない(2026-07-06)
-    if SCOPE_BAN.search(str(r.get("title") or "")):
-        r["reason"] = "scope外(特装/アンソロ/セット/再編/巻表記)"
+    if SCOPE_BAN.search(str(r.get("title") or "")) or EDITION_VARIANT.search(str(r.get("title") or "")):
+        r["reason"] = "scope外(特装/アンソロ/セット/再編/版違い/巻表記)"
         out["skip"].append(r); continue
     # 新作1巻(vol=1 or 単巻)
     if r_auth & known_authors:
