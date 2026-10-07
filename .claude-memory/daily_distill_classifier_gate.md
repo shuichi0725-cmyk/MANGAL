@@ -21,3 +21,8 @@ metadata:
 - 対処(今回): `.cache/preorders/drafts*`(過去ドラフト2250件)の**題(base正規化)と突合して除去** → 真に今回のみ30頁。
 - ★恒久策: (1)確認済みドラフトを`preorder-pages`にpromote(=durable skip・skill既定フロー) or (2)gen-preview/classifyが過去draft題を除外ゲートに追加。**未promoteドラフトが溜まると毎回再カウントされる**。
 - ★教訓: 「増加分」報告の前に「過去ドラフト済みを除いたか」も自問(ISBN freshだけでは前回作が混じる)。ユーザは"前回見た"に敏感で正確。
+
+## ★2026-10-08 ユーザ裁定「名前から察するに別版だね」
+題に Perfect Edition /〈完全版〉/[オリジナル版] 等が付く本は、既存頁があれば**その頁の別版(版タブ)**。別頁にしない。
+入れ口= `data/seeds/extra-editions.yml`(canonical頁でも後段で足される)。タブ名は「名前(年)」(地球を呑む の全集タブの書き方)。
+分類器は版違いの途中巻・新作を保留簿へ出す(EDITION_VARIANT)= 毎回そこから人が足す(自動化は未実装)。

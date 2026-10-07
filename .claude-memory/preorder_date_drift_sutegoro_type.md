@@ -71,3 +71,8 @@ metadata:
 
 関連: [[release_date_change_side_effects]] [[wikipedia_release_date_is_authoritative]]
 [[orphan_series_promote_is_srcpage_driven]] [[feedback_cover_oddity_signal]] [[feedback_one_bug_means_a_class]]
+
+## ★2026-10-08 ユーザ裁定「楽天を信じる」
+NDL が現在値のままで楽天だけ3日以上ずれた行(=「★NDL未更新の疑い」)は、人の裁定に回さず楽天の値を採る。
+初回= 龍狩のナト4(+31日)/優等生の秘密。1(+30)/鎧真伝サムライトルーパー正伝1(+49)/トロワ・フルールは嘘をつく1(+60)。
+`_apply-preorder-date-drift.py` に焼いた(台帳 release-date-override.jsonl の src=rakuten-over-stale-ndl で区別できる)。±2日は従来どおり変えない。

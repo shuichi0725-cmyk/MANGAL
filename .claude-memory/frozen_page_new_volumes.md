@@ -22,5 +22,7 @@ metadata:
   発売日順のゲート)。初回=9/14〜10/3 に種4へ入ったまま出ていなかった6冊(無敗のふたり6・Kiss me crying 6・聖女に嘘は通じない7 等)。
 - canonical 頁は override より後に editions を組み直す= override 併用 or open_tail 無しなら保留簿へ出し、
   `scripts/_canonical-append-volume.py <stem> <巻> <isbn> <日付> --why …` で本体へ足す(ゴルゴ13 223・チキン49・新しいゲーム始めました5)。
-- ★ゴルゴ13は override(通常版1-220)が残っていて **open_tail が効かない**(末尾追随は override の通常版を見る)= 毎巻 canonical 本体へ手で追記。
-  override の通常版を外せば open_tail が効くが、外した時に何が変わるかは未検証(触っていない)。
+- ★ゴルゴ13: override(通常版1-220/コンパクト177/文庫40)が残っていて open_tail が効かなかった → 2026-10-08 ユーザ裁定
+  「外して抜けないように」で override の editions を削除し、文庫版40冊を canonical の extra_editions(+suppress_types: bunkobon)で固定。
+  外す前後で頁の版・巻・ISBN・日付は完全一致(試し生成と反映後の両方で検算)。以後の新刊は種4→open_tail で自動。
+  ★推測(ユーザ): override は週次/月次で巻が抜ける対策だった = 外すなら同じ守りを canonical 側に移す、が型。

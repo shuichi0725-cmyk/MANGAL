@@ -69,7 +69,7 @@ B=NDL新着回収(納本済み過去分)。毎日でなくてよい(間隔が空
 | 9 | **検査**(下記チェックリスト) | 欠け>0なら原因調査 |
 | 10 | ★**prev確定**(処理完了の宣言) | `python scripts/_preorder-increment.py --commit-prev` ← full→prev昇格。**これ以外の方法でprevを触るな**。飛ばすと次回差分が壊れる |
 | 10.5 | ★**出荷前レビュー(ゲート)** | `python scripts/_preorder-review.py` ← **exit 0 まで push禁止**。下記で各行裁定 |
-| 10.6 | ★**発売日ドリフト**(2026-09-04新設・すてごろブッチ型) | `python scripts/_audit-preorder-date-drift.py` → `python scripts/_apply-preorder-date-drift.py`(dry-run で保留理由を読む) → `--apply` → `_reflect-targeted.py --only $(cat .cache/preorder-date-drift-stems.txt \| tr '\n' ',') --commit-only`。★**予約巻は後から発売日が動く**(延期/前倒し)。この日のharvestが最新スナップショットなので**ここで突合するのが一番安い**(live不要)。適用は**楽天とNDLが一致した行だけ**=±1日の「奥付日 vs 店頭日」は保留に落ちる(変更しないのが正解)。日付が動いた月は `_build-calendar.py data/manga.v2 data/calendar <当月>` も回す(★2026-09-14〜: 暦は**配信しない内部中間物**= /shinkan データ生成の入力。ホームのカレンダーUIは撤去済) |
+| 10.6 | ★**発売日ドリフト**(2026-09-04新設・すてごろブッチ型) | `python scripts/_audit-preorder-date-drift.py` → `python scripts/_apply-preorder-date-drift.py`(dry-run で保留理由を読む) → `--apply` → `_reflect-targeted.py --only $(cat .cache/preorder-date-drift-stems.txt \| tr '\n' ',') --commit-only`。★**予約巻は後から発売日が動く**(延期/前倒し)。この日のharvestが最新スナップショットなので**ここで突合するのが一番安い**(live不要)。適用は**楽天とNDLが一致した行**+★**NDLが現在値のまま3日以上ずれた行は楽天を採る**(2026-10-08 ユーザ裁定「楽天を信じる」=延期を楽天が先に掴む型)。±2日の「奥付日 vs 店頭日」は保留に落ちる(変更しないのが正解)。日付が動いた月は `_build-calendar.py data/manga.v2 data/calendar <当月>` も回す(★2026-09-14〜: 暦は**配信しない内部中間物**= /shinkan データ生成の入力。ホームのカレンダーUIは撤去済) |
 | 10.7 | ★**保留頁の自動再訪**(2026-08-24新設③) | `python scripts/_preorder-refresh-held.py --limit 30` ← demographic/caption待ちで索引保留の予約由来頁を楽天再照会で埋める(捏造なし=返った時だけ)。touchedが出たら `_reflect-targeted.py --only <touched> --commit-only`。★2026-09-24 是正: 旧版は booksGenreId を先頭6桁(`001001`=漫画全体)で引き、付いた demographic が**全部 shounen**だった(29頁を null に戻した)。今は9桁で引き、楽天が「その他」(001001012)なら付かない=正常。巡回は最後に照会した日が古い順(`.cache/preorders/refresh-held-state.json`)。「更新 demographic=…」行は**題とレーベルに合っているか1行ずつ目で見る** |
 | 10.8 | ★**レビューシート生成→ユーザへ**(2026-08-24新設①) | `python scripts/_gen-review-sheet.py` → `.cache/review-sheet.html` をユーザに送付(SendUserFile render)。書影/出版社/slug/ジャンル/再録疑いを一覧色付け=1頁ずつ開かせない |
 | 11 | 索引+暦(**commit止め**) | `python scripts/_build-list-index.py .preview-data/manga .preview-data` ; `git add .preview-data && git commit`(★**pushしない**)。★2026-09-14: preview暦(public/calendar)の再生成は**廃止**(ホームのカレンダー/タイムマシン撤去で読み手が消えた) |
@@ -268,7 +268,8 @@ addict 4件/adikuto 1件・robot 47/robotto 2・deep 28/diipu 0・abyss 13/abisu
 2. ★**canonical頁は override より後に editions を組み直す**= override 併用 or open_tail 無しの頁は種4でも override でも出ない。
    apply-zokkan は黙って種4に入れず**保留簿「canonical本体へ手で追記」**に出す → `python scripts/_canonical-append-volume.py
    <stem> <巻> <isbn13> <日付> --why "根拠"`(新設。連番・ISBN未使用・日付順ゲート/3行差し込み+読み直し検算/記帳)。
-   ★ゴルゴ13は override(通常版1-220)が残っているので open_tail が効かない(末尾追随は override の通常版を見る)= 毎巻本体へ追記。
+   ★ゴルゴ13は override(通常版1-220)が残っていて open_tail が効かず毎巻手で足していた → 2026-10-08 ユーザ裁定で override を外し
+   文庫版を canonical の extra_editions+suppress_types で固定(外す前後で頁は完全一致)= 以後の新刊は種4→末尾追随で自動。
 3. **続巻経路にも非漫画ゲート**(頁題に無い語だけ= ハンドレッドノートの「ノート」は止めない): ドラミちゃん かわいいポスターコレクション2 が
    頁『ドラミちゃん』の2巻として続巻判定された。除外語に `ポスター(コレクション|ブック|BOOK|BOX|大全)`。
 4. ★**分離器の穴2型**: 「（下巻）」(巻が括弧の内側=＃介護ロボット…（下巻）が新作1巻に)/「N（コミックス）」(酔っ払い令嬢…3（コミックス）が新作1巻に)。
@@ -286,6 +287,9 @@ addict 4件/adikuto 1件・robot 47/robotto 2・deep 28/diipu 0・abyss 13/abisu
 8. **上下巻ラベル**: 上巻だけ先に頁化された予約頁(巻1・ラベル無し)へ下巻が来たら、巻1にも「上」を付けて揃える(頁の既存の書き方に合わせる)。
 9. ★**`_promote-bulk-v2.py --dry-run --only …` は予約頁2,318頁を `data/manga.dryrun/`(git追跡ディレクトリ)へ書き出す**
    (予約合流は --only を見ない)。試し生成をしたら未追跡の新規ファイルを消し、追跡ファイルは `git checkout` で戻す。
+10. ★**ユーザ裁定(2026-10-08)**: ①発売日ドリフトの「NDL未更新の疑い」は楽天を採る(`_apply-preorder-date-drift.py` に焼いた・台帳 src=rakuten-over-stale-ndl)
+    ②題に Perfect Edition /〈完全版〉/[オリジナル版] が付く本は**既存頁の別版**= 別頁を作らず `data/seeds/extra-editions.yml` で版タブを足す
+    (エロイカより愛をこめて Perfect Edition 1-8 / 佐武と市捕物控〈完全版〉1-3 / 地球を呑む[オリジナル版])。分類器は版違いを保留簿へ出す=そこから手で足す。
 - slug裁定の型(今日20件rename・辞書12語): **バイバイ=baibai**(本番8頁の慣行=英語化しない)/ 死に戻り=shinimodori(多数派)/
   ★**ファンクは辞書に入れない**(「ファンクラブ」を funk-love に割る)= 頁1件だけ直す / 衝突suffixは姓だけ(melodrama-onohama2026)/
   読みが違えば衝突でない(B.B=ビービー vs B＆B=ビーアンドビー → b-and-b)。
