@@ -16,3 +16,11 @@ metadata:
 - 要確認3作 = 全部適用済(2026-10-05): サーキットの狼 JC 27巻(cbaaefd5d)/ エスパー魔美 = 原版を通常版に組み直し(a78b6a941)/
   昭和極道史 34巻 = ユーザ提示のNDL TSV+Wikipedia で確定して追加(d5a3130b0)。 詳細は [[old_work_reprint_date_class]]。
 関連 [[edition_canonical_mechanism]] [[edition_overrides_key_is_public_slug]] [[ebook_only_volumes_mechanism]]
+
+## 2026-10-08 日次蒸留に組み込み(手作業→道具)
+- 予約の続巻が固定頁に来た時は `_preorder-apply-zokkan.py` が **override の巻の並びへ直接追記**する(通常版1つ・巻連続・出版社一致・
+  発売日順のゲート)。初回=9/14〜10/3 に種4へ入ったまま出ていなかった6冊(無敗のふたり6・Kiss me crying 6・聖女に嘘は通じない7 等)。
+- canonical 頁は override より後に editions を組み直す= override 併用 or open_tail 無しなら保留簿へ出し、
+  `scripts/_canonical-append-volume.py <stem> <巻> <isbn> <日付> --why …` で本体へ足す(ゴルゴ13 223・チキン49・新しいゲーム始めました5)。
+- ★ゴルゴ13は override(通常版1-220)が残っていて **open_tail が効かない**(末尾追随は override の通常版を見る)= 毎巻 canonical 本体へ手で追記。
+  override の通常版を外せば open_tail が効くが、外した時に何が変わるかは未検証(触っていない)。

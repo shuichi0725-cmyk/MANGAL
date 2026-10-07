@@ -43,3 +43,6 @@ metadata:
   次の `git add -A` で6.9万ファイル削除がコミットに混ざる(fe06786df で実踏 → 6caec3b9f で復元・ツリーハッシュ一致確認)。
 - **消さない**。検算後は `git checkout -- data/manga.dryrun`(+`git clean -fd data/manga.dryrun`)で戻す。
   コミットは `git add -A` を避け、触ったパスを名指しで add する。commit 後に `git show --stat HEAD | tail -1` で件数を見る。
+- ★(10-08) `_promote-bulk-v2.py --dry-run --only <slug>` は**予約頁(preorder-pages)2,318頁を全部** `data/manga.dryrun/` に書き出す
+  (予約合流は --only を見ない)。`data/manga.dryrun/` は **git追跡ディレクトリ**(69k)= 試し生成の後は未追跡の新規を消し、
+  変わった追跡ファイルは `git checkout` で戻す(放置すると次の `git add data` で巻き込む)。
