@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 60837ea9-16b4-4ef2-9200-391e3397c8aa
-  modified: 2026-10-08T13:18:58.656Z
+  modified: 2026-10-08T14:12:06.103Z
 ---
 
 2026-10-08、ユーザ発案: 「Haiku 5.5(安い)で Web から材料を集め、Sonnet がジャンル・要素を付ける。俺ガイルで納得が出たら広げる」。
@@ -44,6 +44,6 @@ metadata:
 3. Cast/Setting フィルタの修正(Go待ち)。直す時は 学園クラブ→部活 の対訳変更、Hikikomori の和訳、人物系の和訳点検を同時に。
 4. シスコン等の語彙追加の門(和名タグの allow と AI語彙159のずれも)。
 5. 広げる前に、型の違う既知作品を数作で同じ確認(1作で合わせ込むと俺ガイル専用になる)。
-6. 別件: `haiku.bat` のモデル名 `claude-haiku-5-5-20251001` は存在せず起動に失敗(実測)→ `claude-haiku-5-5` に直した。bat は git 追跡外のまま。
+6. 別件: `haiku.bat` はユーザ依頼で作り直した(英数字のみ・CRLF・実起動確認済み・git 追跡に入れた)。経緯と他の bat の未修正は [[bat-ascii-crlf-cp932-rem-misparse]]。
 
 関連: [[genre-quality-improvement]] [[tagless_coverage_next]] [[feedback-sonnet-writes-opus-audits]] [[external_enrich_state]] [[ai_genre_closed_vocabulary]]
