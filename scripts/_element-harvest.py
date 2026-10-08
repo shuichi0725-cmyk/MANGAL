@@ -32,7 +32,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 import _rate_gate, _site_gate  # noqa: E402
 
-VERSION = "v0.1"
+VERSION = "v0.2"  # v0.2(2026-10-09): 折り返し行をつなぐ/タグ一覧を機械で採る/取得時に全文を見せる/読んでから指す/公式の検索語を頁の題+レーベルに
 ME = "python scripts/_element-harvest.py"
 TEST_ROOT = os.environ.get("EH_ROOT")  # 試験用: 置き場と台帳を丸ごと別フォルダへ逃がす
 BASE = TEST_ROOT or os.path.join(ROOT, ".cache", "element-harvest")
@@ -54,8 +54,12 @@ NOT_MATERIAL = {
 }
 
 
+# robots.txt で断られると分かっているサイト(検索結果に印を付けるためだけの表。 可否の正本は _site_gate の実判定)
+KNOWN_ROBOTS_DENY = ("dic.pixiv.net", "manba.co.jp", "ebookjapan.yahoo.co.jp")
+
+
 def not_material(host):
-    if host == "ja.wikipedia.org":
+    if host in ("ja.wikipedia.org", "dic.pixiv.net"):  # 百科(dic.pixiv.net)は種類でなく robots で断られる = 門に任せる
         return None
     for why, ds in NOT_MATERIAL.items():
         if any(host == d or host.endswith("." + d) for d in ds):
@@ -71,7 +75,9 @@ CAP = {
 }
 QUERIES = {
     "wiki": ["{t} アニヲタWiki", "{t} 登場人物 キャラクター紹介"],  # ピクシブ百科=robots拒否 / ニコニコ大百科=403(実踏)
-    "公式": ["{t} {pub} 公式 作品紹介", "{t} {a} 1巻 あらすじ"],
+    # ★1本目は頁の題そのもの(副題つき)+レーベル。 原作小説と版元が同じ漫画化(俺ガイル@comic)で、
+    #   「題+版元」だと小説側の頁ばかり出た(2026-10-08 試走)
+    "公式": ["{full} {imprint} 公式", "{t} {a} 1巻 あらすじ"],
     "考察": ["{t} 考察 テーマ", "{t} 魅力 解説 レビュー"],
     "ネタバレ": ["{t} ネタバレ あらすじ 全巻", "{t} 最終回 ネタバレ 感想"],
 }
@@ -131,30 +137,95 @@ def clean_md(s):
     return re.sub(r"\s+", " ", s).strip()
 
 
-def to_paras(text):
-    """本文 → 段落の列。 h>0 は見出し(採れない)。 ナビ・リンク集・短い行・重複は落とす。"""
-    out, seen = [], set()
+TAG_MARK = re.compile(r"^[▽▼■◆●○・\s]*(?:タグ一覧|関連タグ)[\s:：]*$")  # アニヲタWiki 等の「▽タグ一覧」
+PROSE = re.compile(r"[。、！？!?…─]")
+
+
+def _join(lines):
+    """折り返された行をつなぐ。 日本語はそのまま、英数字どうしの継ぎ目だけ空白を入れる。"""
+    out = ""
+    for x in lines:
+        x = x.strip()
+        if out and x and out[-1].isascii() and out[-1].isalnum() and x[0].isascii() and x[0].isalnum():
+            out += " "
+        out += x
+    return out
+
+
+def to_paras(text, per_line=False):
+    """本文 → 段落の列。 h>0 = 見出し(採れない)。 tag=True = 直前が「タグ一覧」の印だった段落。
+    per_line=True(Wikipedia)は1行=1段落。 それ以外(魚のMarkdown)は空行で区切った塊を1段落にし、
+    塊の中の改行はつなぐ(★v0.1 は行ごとに切って20字未満を捨てたため、1文を14行に折り返した公式の紹介文が
+    3行だけ残り「薄い」と判断された=2026-10-08 試走)。 ナビ・権利表記・数字だけ違う同型の行は落とす。"""
+    # 1) 行 → 塊(空行で区切る)。 塊ごとに「直前の空き行数」を覚える(水平線は大きな切れ目)
+    blocks, cur, gap, cur_gap = [], [], 9, 9
     for ln in text.replace("\r", "").split("\n"):
         s = ln.strip()
-        if not s:
+        hr = bool(re.fullmatch(r"[-*_=]{3,}", s))
+        alone = bool(s) and not hr and (per_line or bool(re.match(r"^(#{1,6}\s|=+\s*.+?\s*=+$|[-+*・]\s|\d+[.)]\s|\|)", s)))
+        if not s or hr or alone:
+            if cur:
+                blocks.append((cur, cur_gap, False))
+                cur, gap = [], 0
+            if alone:
+                blocks.append(([s], gap, True))
+                gap = 0
+            else:
+                gap += 9 if hr else 1
             continue
-        m = re.match(r"^(=+)\s*(.+?)\s*=+$", s) or re.match(r"^(#{1,6})\s+(.+)$", s)
-        if m:
-            h = clean_md(m.group(2))
-            if h:
-                out.append({"h": len(m.group(1)), "t": h})
+        if not cur:
+            cur_gap = gap
+        cur.append(s)
+    if cur:
+        blocks.append((cur, cur_gap, False))
+    # 2) 文の途中で割れた塊をつなぐ。 アニヲタWiki は文中のリンクが独立した塊になる:
+    #    「…通り「」「ぼっち」「」「残念な青春」が話の主軸…」。 空き1行で、前が文末(。！？」等)で終わっていない時だけつなぐ
+    END = "。．！？!?」』）)…─"
+    units, tag_next = [], False
+    for lines, g, alone in blocks:
+        prev = units[-1] if units else None
+        if prev and prev["glue"] and not alone and not tag_next and g == 1 and prev["n"] < 8 and len(prev["t"]) < 600:
+            prev["t"] = _join([prev["t"]] + lines)
+            prev["raw"] += lines
+            prev["n"] += 1
+            u = prev
+        else:
+            u = {"t": _join(lines), "raw": list(lines), "n": 1, "alone": alone, "tag": tag_next}
+            units.append(u)
+            tag_next = False
+        c = clean_md(u["t"])
+        mark = bool(TAG_MARK.match(c))
+        u["glue"] = not alone and not u["tag"] and not mark and not per_line and bool(c) and c[-1] not in END
+        if mark:
+            tag_next = True
+    # 3) 見出し・タグ一覧の印・ナビ・権利表記を仕分ける
+    out, seen, tag_next = [], set(), False
+    for u in units:
+        b = u["raw"]
+        if u["alone"] and u["n"] == 1:
+            m = re.match(r"^(=+)\s*(.+?)\s*=+$", b[0]) or re.match(r"^(#{1,6})\s+(.+)$", b[0])
+            if m:
+                h = clean_md(m.group(2))
+                if h:
+                    out.append({"h": len(m.group(1)), "t": h})
+                tag_next = bool(TAG_MARK.match(h))
+                continue
+        linked = sum(len(x) for ln in b for x in re.findall(r"\[([^\]]*)\]\([^)]*\)", ln))
+        body = clean_md(u["t"])
+        if TAG_MARK.match(body):  # 印そのものは段落にしない。 次の段落がタグ一覧
+            tag_next = True
             continue
-        linked = sum(len(x) for x in re.findall(r"\[([^\]]*)\]\([^)]*\)", s))
-        body = clean_md(s)
-        if len(body) < 20 or (linked >= len(body) * 0.8 and len(body) < 120):
-            continue
-        if re.match(r"^(©|\(c\)|copyright)", body, re.I) or "all rights reserved" in body.lower():
-            continue  # 権利表記
+        is_tag, tag_next = tag_next or u["tag"], False
+        if not is_tag:
+            if len(body) < 20 or (not PROSE.search(body) and linked >= len(body) * 0.6):
+                continue  # 短すぎる行 / 文になっていないリンクの塊(ナビ)
+            if re.match(r"^(©|\(c\)|copyright)", body, re.I) or "all rights reserved" in body.lower():
+                continue  # 権利表記
         key = re.sub(r"\d+", "#", body)  # 数字だけ違う同型の行(巻一覧・日付つきのお知らせ)は最初の1行だけ残す
-        if key in seen:
+        if key in seen or len(body) < 4:
             continue
         seen.add(key)
-        out.append({"h": 0, "t": body})
+        out.append({"h": 0, "t": body, "tag": True} if is_tag else {"h": 0, "t": body})
     return out
 
 
@@ -180,6 +251,9 @@ def pick_enum(val, choices, alias=None, what=""):
         return choices[int(v) - 1]
     if v in choices:
         return v
+    part = [c for c in choices if str(v) and str(v) in c]  # 「書誌」→「書誌や商品情報だけ」のように一意に決まれば通す
+    if len(part) == 1:
+        return part[0]
     die(f"{what}は次のどれか(番号でも可): " + " / ".join(f"{i}={c}" for i, c in enumerate(choices, 1)))
 
 
@@ -227,9 +301,18 @@ def n_fetch(st, kind=None):
                and (kind is None or s["kind"] == kind))
 
 
+def human_chars(st, sid):
+    """運転者が指して採った字数(道具が機械で採ったタグ一覧は数えない = 頁を「判断済み」にしない)。"""
+    return sum(p["chars"] for p in st["picks"] if p["src"] == sid and not p.get("mech"))
+
+
 def adopted(st, kind):
-    ids = {p["src"] for p in st["picks"]}
-    return [s["id"] for s in st["sources"] if s["id"] in ids and s["kind"] == kind and s["origin"] != "auto"]
+    return [s["id"] for s in st["sources"] if s["kind"] == kind and s["origin"] != "auto" and human_chars(st, s["id"])]
+
+
+def pending(st):
+    return [s for s in st["sources"] if s["origin"] != "auto" and s["status"] == "fetched" and not s["skip"]
+            and not human_chars(st, s["id"])]
 
 
 def chars_src(st, sid):
@@ -432,7 +515,7 @@ def register_text(st, kind, origin, url, title, text, final_url=None, ref=None):
         os.makedirs(os.path.join(d, sub), exist_ok=True)
     with open(os.path.join(d, "raw", f"{sid}.txt"), "w", encoding="utf-8") as f:
         f.write(text)
-    paras = to_paras(text)
+    paras = to_paras(text, per_line=_site_gate.host_of(final_url or url) == "ja.wikipedia.org")
     with open(os.path.join(d, "paras", f"{sid}.json"), "w", encoding="utf-8") as f:
         json.dump(paras, f, ensure_ascii=False)
     s = {"id": sid, "kind": kind, "origin": origin, "url": url, "final_url": final_url or url, "title": title,
@@ -454,20 +537,33 @@ def cap_src(s):
     return CAP["chars_wikipedia"] if s["domain"] == "ja.wikipedia.org" else CAP["chars_source"]
 
 
-def add_pick(st, s, paras, idxs, as_, auto=False, cap=None, label=""):
+def add_pick(st, s, paras, idxs, as_, auto=False, cap=None, label="", mech=False):
     room = min(cap_src(s) - chars_src(st, s["id"]), CAP["chars_work"] - chars_all(st), cap or 10 ** 9)
     if room < 40:
         return None
     text, trunc = clip("\n".join(paras[i - 1]["t"] for i in idxs), room)
-    if len(text) < 20:
+    if len(text) < (4 if mech else 20):
         return None
-    p = {"id": len(st["picks"]) + 1, "src": s["id"], "paras": idxs, "as": as_, "text": text, "chars": len(text),
-         "truncated": trunc, "spoiler": as_ == "展開" or s["kind"] == "ネタバレ", "auto": auto, "label": label, "at": now()}
+    p = {"id": max([x["id"] for x in st["picks"]] + [0]) + 1, "src": s["id"], "paras": idxs, "as": as_, "text": text,
+         "chars": len(text), "truncated": trunc, "spoiler": as_ == "展開" or s["kind"] == "ネタバレ", "auto": auto,
+         "mech": mech, "label": label, "at": now()}
     st["picks"].append(p)
     return p
 
 
-def outline(paras, start=1, limit=45):
+def autopick_tags(st, s, paras):
+    """「タグ一覧」の印の直後の段落を、役割=タグ で道具が採る(同定が通っている頁だけ呼ぶ)。
+    ★v0.1 では印の行(6字)が短い行として落ち、運転者にはタグ一覧だと分からず採られなかった(2026-10-08 試走)。"""
+    used = {i for p in st["picks"] if p["src"] == s["id"] for i in p["paras"]}
+    got = []
+    for i, p in enumerate(paras, 1):
+        if p.get("tag") and i not in used and add_pick(st, s, paras, [i], "タグ", cap=600, label="タグ一覧", mech=True):
+            got.append(i)
+    return got
+
+
+def outline(paras, start=1, limit=45, full=0, seen=None):
+    """段落の一覧。 full(字数)が残っている間は全文、使い切ったら頭62字だけ。 全文を見せた段落番号は seen に入れる。"""
     shown = 0
     for i, p in enumerate(paras, 1):
         if i < start:
@@ -475,10 +571,16 @@ def outline(paras, start=1, limit=45):
         if shown >= limit:
             print(f"   … 続きは --from {i}(全{len(paras)}段落)")
             break
+        tag = "[タグ一覧] " if p.get("tag") else ""
         if p["h"]:
             print(f"      {'#' * min(p['h'], 4)} {p['t'][:50]}")
+        elif full > 0 or len(p["t"]) <= 62:
+            print(f"  p{i:<4}({len(p['t'])}字) {tag}{p['t']}")
+            full -= len(p["t"])
+            if seen is not None:
+                seen.add(i)
         else:
-            print(f"  p{i:<4}({len(p['t'])}字) {p['t'][:62]}{'…' if len(p['t']) > 62 else ''}")
+            print(f"  p{i:<4}({len(p['t'])}字) {tag}{p['t'][:62]}… [頭だけ]")
         shown += 1
 
 
@@ -547,7 +649,15 @@ def do_fetch(st, kind, url, origin, ref=None):
     print(f"  同定 = {idn['verdict']}" + (f"(著者名 {'・'.join(idn['authors_hit'])} あり)" if idn["authors_hit"] else "")
           + {"OK": "", "要確認": " → 採る時は --same \"頁とこちらの両方に在る語句\" が要る",
              "別作品の疑い": " → 題が頁に出てこない。 採れない(skip --why 別作品)"}[idn["verdict"]])
-    outline(paras)
+    tags = [i for i, p in enumerate(paras, 1) if p.get("tag")]
+    if tags and idn["verdict"] == "OK":
+        got = autopick_tags(st, s, paras)
+        print(f"  ★タグ一覧 p{','.join(map(str, got))} は道具が採った(役割=タグ)。 本文の段落は別に判断する")
+    elif tags and idn["verdict"] == "要確認":
+        print(f"  ★タグ一覧 = p{','.join(map(str, tags))}。 この頁で --same が通った時に道具が自動で採る")
+    seen = set()
+    outline(paras, full=2500, seen=seen)  # 先頭2,500字ぶんは全文で見せる(読むための往復を減らす)
+    s["seen"] = sorted(seen)
 
 
 # ───────── コマンド ─────────
@@ -571,7 +681,8 @@ def show_status(st):
               f"採用 {len(adopted(st, k))}/{CAP['adopt'][k]} ({kc}字){extra}")
     for s in st["sources"]:
         v = (s["identity"] or {}).get("verdict", "-")
-        tail = f"採用{chars_src(st, s['id'])}字" if chars_src(st, s["id"]) else (f"不採用={s['skip']}" if s["skip"] else s["why"] or "未判断")
+        tail = (f"採用{chars_src(st, s['id'])}字" if human_chars(st, s["id"]) or s["origin"] == "auto" else f"不採用={s['skip']}" if s["skip"]
+                else "タグ一覧だけ採った・本文は未判断" if chars_src(st, s["id"]) else s["why"] or "未判断")
         print(f"   出所{s['id']:<2} {s['kind']:<5} {s['status']:<8} {v:<6} {s['domain'][:26]:<26} {tail}")
 
 
@@ -581,7 +692,7 @@ def hint(st):
     if st.get("done_at"):
         print("  済。 やり直すなら open --fresh")
         return
-    pend = [s for s in st["sources"] if s["origin"] != "auto" and s["status"] == "fetched" and not s["skip"] and not chars_src(st, s["id"])]
+    pend = pending(st)
     if pend:  # 取った頁は、次へ進む前に必ず判断する
         s = pend[0]
         print(f"  [{s['kind']}] 出所{s['id']} が未判断 → {ME} show {stem} {s['id']} --range <段落> で読み、pick か skip"
@@ -661,7 +772,8 @@ def cmd_search(a):
         if qi not in (1, 2):
             die("--q は 1 か 2")
         au = (c["authors"] or c["original_authors"] or [""])[0]
-        q = QUERIES[k][qi - 1].format(t=c["base_title"], a=au, pub=c.get("publisher") or "")
+        q = QUERIES[k][qi - 1].format(t=c["base_title"], full=c["title"], a=au, pub=c.get("publisher") or "",
+                                      imprint=c.get("imprint") or c.get("publisher") or "")
         q = re.sub(r"\s+", " ", q).strip()
     _rate_gate.wait("tinyfish", 1.5)
     import _tinyfish
@@ -682,7 +794,8 @@ def cmd_search(a):
     for r in rows:
         host = _site_gate.host_of(r["url"])
         deny = any(host == d or host.endswith("." + d) for d in _site_gate.DENY)
-        mark = "✖止め札 " if deny else "✖対象外 " if not_material(host) else ""
+        mark = ("✖止め札 " if deny else "✖対象外 " if not_material(host)
+                else "✖robots " if any(host == d or host.endswith("." + d) for d in KNOWN_ROBOTS_DENY) else "")
         print(f"  {r['n']:>2}. {mark}[{host}] {r['title'][:46]}\n      {r['snippet'][:96]}")
     print(f"\n開く頁を番号で指す: {ME} fetch {a.stem} {sid} <番号,番号>   (この種別の取得残り {CAP['fetch'][k] - n_fetch(st, k)}頁)")
 
@@ -716,17 +829,21 @@ def cmd_show(a):
         die(f"出所{s['id']} は本文が無い({s['status']}: {s['why']})")
     paras = paras_of(st, s["id"])
     print(f"出所{s['id']} [{s['kind']}] {s['domain']} 「{(s['title'] or '')[:40]}」 同定={s['identity']['verdict']} {s['url']}")
+    seen = set(s.get("seen") or [])
     if not a.range:
-        outline(paras, start=int(a.frm or 1))
-        return
-    used, total = {i for p in st["picks"] if p["src"] == s["id"] for i in p["paras"]}, 0
-    for i in parse_ranges(a.range, len(paras)):
-        p = paras[i - 1]
-        total += len(p["t"])
-        if total > 5000:
-            print(f"   … 一度に見せるのは5,000字まで。 続きは --range {i}-")
-            break
-        print(f"\n{'## ' if p['h'] else ''}p{i}{' [採用済]' if i in used else ''} {p['t']}")
+        outline(paras, start=int(a.frm or 1), seen=seen)
+    else:
+        used, total = {i for p in st["picks"] if p["src"] == s["id"] for i in p["paras"]}, 0
+        for i in parse_ranges(a.range, len(paras)):
+            p = paras[i - 1]
+            total += len(p["t"])
+            if total > 5000:
+                print(f"   … 一度に見せるのは5,000字まで。 続きは --range {i}-")
+                break
+            seen.add(i)
+            print(f"\n{'## ' if p['h'] else ''}p{i}{' [採用済]' if i in used else ''}{' [タグ一覧]' if p.get('tag') else ''} {p['t']}")
+    s["seen"] = sorted(seen)
+    save(st)
 
 
 def cmd_pick(a):
@@ -750,6 +867,10 @@ def cmd_pick(a):
         if ph not in own_text(st["card"]):
             die("--same の語句がこちらのデータに無い → 別の語句で(無ければこの頁は採らない)")
         s["same"] = a.same
+        got = autopick_tags(st, s, paras_of(st, s["id"]))  # 同定が通ったので、タグ一覧は道具が採る
+        if got:
+            print(f"  ★タグ一覧 p{','.join(map(str, got))} は道具が採った(役割=タグ)")
+        save(st)
     k = s["kind"]
     if s["origin"] != "auto" and s["id"] not in adopted(st, k) and len(adopted(st, k)) >= CAP["adopt"][k]:
         die(f"{k} の採用は {CAP['adopt'][k]}頁まで(既に 出所{','.join(map(str, adopted(st, k)))})")
@@ -757,11 +878,15 @@ def cmd_pick(a):
     used = {i for p in st["picks"] if p["src"] == s["id"] for i in p["paras"]}
     idxs = [i for i in parse_ranges(a.paras, len(paras)) if i not in used]
     if not idxs:
-        die("指した段落は全部採用済み")
+        die("指した段落は全部採用済み(タグ一覧は道具が採っている)")
     if any(paras[i - 1]["h"] for i in idxs):
         die("見出しは採れない(本文の段落番号だけを指す)")
     if len(idxs) > 12:  # 頁を丸ごと指させない(読んで、材料になる所だけ)
         die("一度に指せるのは12段落まで。 show --range で読んで、材料になる段落だけを指す")
+    blind = [i for i in idxs if i not in set(s.get("seen") or [])]
+    if blind:  # ★頭62字だけ見て指させない(v0.1 の試走で、全文を読まずに指した採用が断片になった)
+        die(f"まだ全文を見ていない段落がある: p{','.join(map(str, blind))}\n"
+            f"  → {ME} show {a.stem} {s['id']} --range {min(blind)}-{max(blind)} で読んでから指す")
     p = add_pick(st, s, paras, idxs, as_)
     if not p:
         die(f"字数の上限(1頁 {cap_src(s)}字・全体 {CAP['chars_work']}字)に達している")
@@ -778,8 +903,8 @@ def cmd_unpick(a):
     p = next((x for x in st["picks"] if x["id"] == int(a.pick)), None)
     if not p:
         die(f"採用#{a.pick} は無い")
-    if p["auto"]:
-        die("機械が採った分(Wikipedia の節)は取り消さない")
+    if p["auto"] or p.get("mech"):
+        die("道具が採った分(Wikipedia の節・タグ一覧)は取り消さない。 頁ごと外すなら skip")
     st["picks"].remove(p)
     st["done_at"] = None
     save(st)
@@ -790,9 +915,13 @@ def cmd_unpick(a):
 def cmd_skip(a):
     st = load(a.stem)
     s = src(st, a.src)
-    if chars_src(st, s["id"]):
-        die("この出所は採用済み(skip できない)")
-    s["skip"] = pick_enum(a.why, SKIP_WHY, None, "理由(--why)")
+    if s["origin"] == "auto":
+        die("道具が自動で取った Wikipedia は skip しない")
+    if human_chars(st, s["id"]):
+        die("この出所は採用済み(skip できない。外すなら先に unpick)")
+    why = pick_enum(a.why, SKIP_WHY, None, "理由(--why)")
+    st["picks"] = [p for p in st["picks"] if p["src"] != s["id"]]  # 頁を外すなら、道具が採ったタグ一覧も一緒に外す
+    s["skip"] = why
     save(st)
     print(f"出所{s['id']} 不採用 = {s['skip']}")
     hint(st)
@@ -813,6 +942,11 @@ def cmd_none(a):
     tried = sum(1 for s in st["sources"] if s["kind"] == k and s["origin"] != "auto")
     if tried < min(2, len(usable)):
         die(f"{k} は開ける結果が {len(usable)}件あるのに {tried}頁しか試していない → 少なくとも {min(2, len(usable))}頁は開いて判断してから none")
+    room = n_fetch(st, k) < CAP["fetch"][k] and n_fetch(st) < CAP["fetch_work"]
+    if len(qs) < 2 and room:  # ★1回の検索であきらめさせない(v0.1 の試走で 公式 が検索1回のまま none になった)
+        die(f"{k} は検索が1回だけ。 別の検索語でもう1回試してから none → {ME} search {a.stem} {k} --q 2")
+    if pending(st):
+        die("未判断の出所がある → 先に pick か skip")
     st["none"][k] = pick_enum(a.why, NONE_WHY, None, "理由(--why)")
     save(st)
     print(f"{k} = 材料なし({st['none'][k]})")
@@ -825,7 +959,7 @@ def cmd_done(a):
             and not (k == "wiki" and any(p["auto"] for p in st["picks"]))]
     if lack:
         die(f"まだ決まっていない種別: {'・'.join(lack)} → 採用するか、 none <種別> --why で理由を残す")
-    pend = [s["id"] for s in st["sources"] if s["origin"] != "auto" and s["status"] == "fetched" and not s["skip"] and not chars_src(st, s["id"])]
+    pend = [s["id"] for s in pending(st)]
     if pend:
         die(f"未判断の出所がある: {pend} → pick か skip")
     st["done_at"] = now()
