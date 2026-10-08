@@ -25,3 +25,4 @@ metadata:
 - [デタッチジョブ道連れ死](detached_job_dies_on_session_teardown.md)
 - [ls -l列ずれ誤読](file_size_misread_ls_column.md)
 - [道具の罠2026-09](tool_traps_2026_09_24.md)
+- [土台なしでモデルを呼ぶ(7万→700トークン)](lean_headless_claude_call.md)
