@@ -1,0 +1,11 @@
+# 作品ごとのユーザ裁定(要素付与 = scripts/_element-assign.py が付与案より優先して読む)。
+# show = 表に出す語 / hide = 出さない語。 語は付与案に出る語(和名)で書く。 quote はユーザの発話そのまま。
+# ★ここに書けるのはユーザが言ったことだけ(Claude の判断で足さない)。 同じ原作の頁は stems に並べる。
+rulings:
+  - stems:
+      - yahari-ore-no-seishun-love-wa-machigatte-iru-comic
+      - yahari-ore-no-seishun-rabukome-wa-machigatteiru
+    show: ["三角関係"]
+    at: "2026-10-09"
+    quote: "どちらかというと三角関係はたしてほしい。"
+    note: "AniList のネタバレ印は @comic のエントリ1件にだけ付いている(原作小説・アニメの各期には無い)。 直前の裁定「ネタバレ印の4語はいらない」の例外"

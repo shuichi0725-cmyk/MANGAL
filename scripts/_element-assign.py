@@ -22,7 +22,7 @@ import argparse, ast, datetime, json, os, re, shutil, subprocess, sys, time, uni
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "v0.5"  # v0.5: apply(表に出す案を seed へ書く口。ユーザの Go 発話の引用が必須)  # v0.4(2026-10-09 ユーザ裁定): ネタバレ印の語は表に出さない(控えへ)/ 控えはサイトに出さず記録だけ  # v0.2: 指示文から試金石の語の例を外す / タグ一覧の語を候補に / ありふれた名詞を候補から外す
+VERSION = "v0.6"  # v0.6: 作品ごとのユーザ裁定(rulings.yml)を付与案より優先 / apply のジャンル追記を二重にしない  # v0.5: apply(表に出す案を seed へ書く口。ユーザの Go 発話の引用が必須)  # v0.4(2026-10-09 ユーザ裁定): ネタバレ印の語は表に出さない(控えへ)/ 控えはサイトに出さず記録だけ  # v0.2: 指示文から試金石の語の例を外す / タグ一覧の語を候補に / ありふれた名詞を候補から外す
 ME = "python scripts/_element-assign.py"
 TEST_ROOT = os.environ.get("EH_ROOT")
 BASE = TEST_ROOT or os.path.join(ROOT, ".cache", "element-harvest")
@@ -363,6 +363,26 @@ def verify(m, V, cands, ans):
     return ok, bad, missing
 
 
+def load_rulings(stem):
+    """作品ごとのユーザ裁定(data/element-harvest/rulings.yml)。 付与案の仕分けより優先する。
+    → ({表に出す語: 引用}, {出さない語: 引用})"""
+    import yaml
+    p = os.path.join(ROOT, "data", "element-harvest", "rulings.yml")
+    show, hide = {}, {}
+    if os.path.exists(p):
+        with open(p, encoding="utf-8") as f:
+            doc = yaml.safe_load(f) or {}
+        for r in doc.get("rulings") or []:
+            if stem in (r.get("stems") or []):
+                for w in r.get("show") or []:
+                    show[w] = r.get("quote") or ""
+                    hide.pop(w, None)
+                for w in r.get("hide") or []:
+                    hide[w] = r.get("quote") or ""
+                    show.pop(w, None)
+    return show, hide
+
+
 def make_proposal(stem, m, V, cands, ans, use):
     ani, gkeys, ani_skip = anilist_part(m, V)
     ok, bad, missing = verify(m, V, cands, ans)
@@ -384,6 +404,16 @@ def make_proposal(stem, m, V, cands, ans, use):
     for e in merged.values():  # 根拠が終盤の展開だけの語も、表には出さない
         if e["spoiler"] and e["tier"] == "芯" and SPOILER_TO_SUB:
             e["tier"] = "在る"
+    show, hide = load_rulings(stem)  # ★ユーザ裁定が最優先(票の線・ネタバレ印より上)
+    unruled = []
+    for w, q in show.items():
+        if w in merged:
+            merged[w]["tier"], merged[w]["ruled"] = "芯", f"ユーザ裁定で表に出す「{q}」"
+        else:
+            unruled.append(w)  # 根拠(AniList の票も材料も)が無い語は、裁定があっても付与案に載せられない
+    for w, q in hide.items():
+        if w in merged:
+            merged[w]["tier"], merged[w]["ruled"] = "在る", f"ユーザ裁定で出さない「{q}」"
     rows = sorted(merged.values(), key=lambda e: (e["tier"] != "芯", -(e["ani"]["votes"] if e["ani"] else 0), -len(e["mat"]), e["word"]))
     gnow = [V["genres"].get(g, g) for g in c["genres"]]
     gadd = [(V["genres"][k], sorted(v)) for k, v in sorted(gkeys.items()) if k not in c["genres"]]
@@ -411,7 +441,8 @@ def make_proposal(stem, m, V, cands, ans, use):
         for e in [x for x in rows if pick(x) and x["kind"] == "要素"]:
             n += 1
             mark = "" if e["vocab"] == "語彙内" else f"〔{e['vocab']}〕"
-            out.append(f"{n}. **{e['word']}**{mark}{'(ネタバレ印)' if e['spoiler'] else ''} — {ev(e)}")
+            out.append(f"{n}. **{e['word']}**{mark}{'(ネタバレ印)' if e['spoiler'] else ''} — {ev(e)}"
+                       + (f" 〔{e['ruled']}〕" if e.get("ruled") else ""))
     out += ["", "## 付けない(語は材料に在るが、根拠にならないとモデルが判定)"]
     for r in [x for x in ok if x["tier"] == "違う" and x["word"] not in merged]:
         out.append(f"- {r['word']}: {r['why']}")
@@ -421,6 +452,8 @@ def make_proposal(stem, m, V, cands, ans, use):
             out.append(f"- {r['word']}({r.get('tier')}): {r['reject']} / 「{r['quote'][:40]}」")
     if missing:
         out += ["", "## 判定が返らなかった候補", "- " + "、".join(missing)]
+    if unruled:
+        out += ["", "## ユーザ裁定で「表に出す」とされたが、根拠が無くて載せられなかった語", "- " + "、".join(unruled)]
     out += ["", f"(AniList で対象外にしたタグ: {'、'.join(ani_skip) or 'なし'} / 表に出す線: 主題60・人物70・舞台70 / 控えの線: {ANI_KEEP})"]
     d = adir(stem)
     with open(os.path.join(d, "assign-proposal.md"), "w", encoding="utf-8") as f:
@@ -539,12 +572,18 @@ def cmd_apply(a):
     if json.dumps(tags, ensure_ascii=False, separators=(",", ":")) != raw:
         die("tags-enrich-2425.json の書式が想定と違う(書き戻すと全体が変わる)→ 何も書かずに止める")
     before = list(tags.get(a.stem) or [])
-    after = before + [n for n in names if n not in before]
+    after = names + [n for n in before if n not in names]  # 並びは付与案の順(票の高い順)。 前から在った語は後ろに残す
+    # ジャンル: genre-append.yml(足すだけ・出所つき。 同じ slug に同じジャンルを二重に足さない)
+    import yaml
+    with open(os.path.join(ROOT, "data", "seeds", "genre-append.yml"), encoding="utf-8") as f:
+        done = {g for e in (yaml.safe_load(f) or {}).get("additions") or [] if e.get("slug") == a.stem for g in e.get("add") or []}
+    gadd = [g for g in prop.get("genres_add") or [] if g in V["genres"] and g not in (prop.get("genres_now") or []) and g not in done]
+    if after == before and not gadd:
+        print(f"{a.stem}: seed は既に付与案どおり(何も書かない・記録も足さない)")
+        return
     tags[a.stem] = after
     with open(tp, "w", encoding="utf-8", newline="") as f:
         f.write(json.dumps(tags, ensure_ascii=False, separators=(",", ":")))
-    # ジャンル: genre-append.yml(足すだけ・出所つき)
-    gadd = [g for g in prop.get("genres_add") or [] if g in V["genres"] and g not in (prop.get("genres_now") or [])]
     if gadd:
         _rw_same_newline(os.path.join(ROOT, "data", "seeds", "genre-append.yml"),
                          f"  - slug: {a.stem}\n    add: [{', '.join(gadd)}]\n    source: \"element-assign:{prop['version']} anilist-family\"\n")
