@@ -33,7 +33,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 import _rate_gate, _site_gate  # noqa: E402
 
-VERSION = "v0.4"  # v0.2: 折り返し行をつなぐ/タグ一覧を機械で採る/全文を見せて読んでから指す/公式の検索語
+VERSION = "v0.5"  # v0.5: 関連作の票は「本筋」のエントリだけ引き継ぐ(登録者の少ないエントリ・おまけ映像は使わない)/ rebundle  # v0.2: 折り返し行をつなぐ/タグ一覧を機械で採る/全文を見せて読んでから指す/公式の検索語
 # v0.3(2026-10-09): 出所を英字(A,B,C…)に=検索結果の番号との取り違え防止 / 取れなかった頁は取得数に数えない / 壊れた検索URLを直す
 # v0.4(2026-10-09): 自動運転(auto)= 道具が Haiku を土台なしで1回ずつ呼ぶ / AniList のネタバレ印を「何件中何件」で持つ
 ME = "python scripts/_element-harvest.py"
@@ -474,20 +474,49 @@ def anilist_family(card):
     return {"entries": entries, "skipped": [v for k, v in skipped.items() if k not in seen], "note": ""}
 
 
+# ★関連作(小説・アニメ)の票を引き継ぐのは「本筋」のエントリだけ。
+#   2026-10-09 30作の試行で実害: 登録者468人の小説1件の票で うみねこ に「ギャンブル・麻薬・美男子日常」が、
+#   おまけ映像(SPECIAL)1件の票で 君に届け に「演劇」が表に出た。 AniList の票は賛成の「割合」で、登録者が少ないエントリでは
+#   1人が付けたタグがそのまま 79 になる(投票の人数は API に無い)。 人数の代わりに登録者数(popularity)で線を引く。
+ANI_MIN_POP = 1000                       # 小説・アニメ: 登録者がこの人数に満たないエントリからは引き継がない
+ANI_SIDE_RATIO = 0.1                     # アニメ: 登録者がいちばん多いアニメの1割に満たないもの(おまけ・脇の映像)からは引き継がない
+ANI_SIDE_FORMATS = {"SPECIAL", "MUSIC"}  # おまけ映像・ミュージックビデオ
+
+
+def ani_main(ani):
+    """→ 票を使う「本筋」のエントリの id。 自分は常に本筋(今の取り込みと同じ扱い)。 他の漫画(アンソロジー等)は元から付与に使わない。"""
+    ents = (ani or {}).get("entries") or []
+    top = max([e.get("popularity") or 0 for e in ents if e["group"] == "アニメ"] or [0])
+    main = set()
+    for e in ents:
+        pop = e.get("popularity") or 0
+        if e["group"] == "自分" or (e["group"] == "小説" and pop >= ANI_MIN_POP):
+            main.add(e["id"])
+        elif e["group"] == "アニメ" and pop >= ANI_MIN_POP and pop >= ANI_SIDE_RATIO * top and e.get("format") not in ANI_SIDE_FORMATS:
+            main.add(e["id"])
+    return main
+
+
 def anilist_merged(ani):
-    """タグごとに 自分/小説/アニメ/他の漫画 の最高票を並べる(付与はしない。材料として渡すだけ)。"""
+    """タグごとに 自分/小説/アニメ/他の漫画 の最高票を並べる(付与はしない。材料として渡すだけ)。
+    小説・アニメは本筋のエントリ(ani_main)の票だけ。 本筋でないエントリの票は weak に残す(使わない。 見えるようにするだけ)。"""
     rows = {}
+    main = ani_main(ani)
     for e in (ani or {}).get("entries") or []:
         col = {"自分": "self", "小説": "novel", "アニメ": "anime", "漫画": "other"}[e["group"]]
+        if col != "other" and e["id"] not in main:
+            col = "weak"
         for t in e["tags"]:
             r = rows.setdefault(t["name"], {"name": t["name"], "category": t["category"], "self": 0, "novel": 0,
-                                           "anime": 0, "other": 0, "spoiler": False, "adult": False, "n": 0, "ns": 0})
+                                           "anime": 0, "other": 0, "weak": 0, "spoiler": False, "adult": False, "n": 0, "ns": 0})
             r[col] = max(r[col], t["rank"])
+            r["adult"] |= t["adult"]
+            if col == "weak":
+                continue
             r["spoiler"] |= t["spoiler"]
-            if col != "other":  # 印の粗さを見るため: 自分・小説・アニメのうち、この語を持つ件数と印つきの件数
+            if col != "other":  # 印の粗さを見るため: 自分・小説・アニメ(本筋)のうち、この語を持つ件数と印つきの件数
                 r["n"] += 1
                 r["ns"] += 1 if t["spoiler"] else 0
-            r["adult"] |= t["adult"]
     return sorted(rows.values(), key=lambda r: -max(r["self"], r["novel"], r["anime"], r["other"]))
 
 
@@ -799,8 +828,10 @@ def cmd_open(a):
     for e in ani["entries"]:
         grp[e["group"]] = grp.get(e["group"], 0) + 1
     top = [f"{r['name']}{max(r['self'], r['novel'], r['anime'], r['other'])}" for r in anilist_merged(ani)[:14]]
+    nweak = sum(1 for e in ani["entries"] if e["group"] != "漫画" and e["id"] not in ani_main(ani))
     print(f"\n[機械] AniList: " + (ani["note"] or f"関連 {len(ani['entries'])}件({'・'.join(f'{k}{v}' for k, v in grp.items())}) "
-                                   f"タグ {len(anilist_merged(ani))}種: {', '.join(top)}"))
+                                   f"タグ {len(anilist_merged(ani))}種: {', '.join(top)}"
+                                   + (f" / 票を使わないエントリ {nweak}件(登録者が少ない・おまけ映像)" if nweak else "")))
     w = st["wiki"]
     if w["source"]:
         auto = [f"{p['label']}→{p['as']} {p['chars']}字" for p in st["picks"] if p["auto"]]
@@ -1030,24 +1061,16 @@ def cmd_none(a):
     hint(st)
 
 
-def cmd_done(a):
-    st = load(a.stem)
-    lack = [k for k in KINDS if k not in st["none"] and not adopted(st, k)
-            and not (k == "wiki" and any(p["auto"] for p in st["picks"]))]
-    if lack:
-        die(f"まだ決まっていない種別: {'・'.join(lack)} → 採用するか、 none <種別> --why で理由を残す")
-    pend = [s["id"] for s in pending(st)]
-    if pend:
-        die(f"未判断の出所がある: {','.join(L(i) for i in pend)} → pick か skip")
-    st["done_at"] = now()
-    save(st)
+def write_bundle(st):
+    """材料の束(material.json / material.md)を state から書き出す。 → 束"""
     c, d = st["card"], wdir(st["stem"])
     used = {p["src"] for p in st["picks"]}
     bundle = {
-        "stem": st["stem"], "version": st["version"], "model": st["model"], "made_at": st["done_at"],
+        "stem": st["stem"], "version": st["version"], "bundle_version": VERSION, "model": st["model"], "made_at": st["done_at"],
         "card": {k: c[k] for k in ("slug", "title", "authors", "original_authors", "publisher", "imprint", "magazine",
                                    "year_started", "year_ended", "volumes", "demographic", "genres", "anime_adapted", "synopsis", "catch")},
-        "anilist": {"entries": [{k: e[k] for k in ("id", "group", "format", "year", "popularity", "title", "genres")} for e in st["anilist"]["entries"]],
+        "anilist": {"entries": [{k: e[k] for k in ("id", "group", "format", "year", "popularity", "title", "genres")} | {"main": e["id"] in ani_main(st["anilist"])}
+                                for e in st["anilist"]["entries"]],
                     "tags": anilist_merged(st["anilist"]), "skipped": st["anilist"]["skipped"]},
         "wikipedia": {"title": st["wiki"]["title"], "categories": st["wiki"]["categories"]},
         "sources": [{k: s[k] for k in ("id", "kind", "origin", "domain", "url", "title")} | {"identity": s["identity"]["verdict"], "same": s.get("same")}
@@ -1060,10 +1083,11 @@ def cmd_done(a):
         json.dump(bundle, f, ensure_ascii=False, indent=1)
     md = [f"# 材料: {c['title']} ({st['stem']})", f"道具 {st['version']} / 運転 {st['model']} / {st['done_at']}", "",
           f"著者 {'・'.join(c['authors'])} / 原作 {'・'.join(c['original_authors']) or '-'} / {c.get('publisher')} / {c.get('year_started')}〜 / 全{c['volumes']}巻",
-          f"今のジャンル: {', '.join(c['genres'])}", "", "## AniList のタグ(機械。自分/小説/アニメ/他の漫画 の最高票)"]
+          f"今のジャンル: {', '.join(c['genres'])}", "", "## AniList のタグ(機械。自分/小説/アニメ/他の漫画 の最高票。 小説・アニメは本筋のエントリだけ)"]
     for r in bundle["anilist"]["tags"]:
         md.append(f"- {r['name']} [{r['category']}] {r['self']}/{r['novel']}/{r['anime']}/{r['other']}"
-                  + (" ネタバレ印" if r["spoiler"] else "") + (" 成人" if r["adult"] else ""))
+                  + (" ネタバレ印" if r["spoiler"] else "") + (" 成人" if r["adult"] else "")
+                  + (f" 〔本筋でないエントリの票 {r['weak']} は使わない〕" if r.get("weak", 0) > max(r["self"], r["novel"], r["anime"]) else ""))
     md += ["", "## Wikipedia のカテゴリ(機械)"] + [f"- {x}" for x in st["wiki"]["categories"]] + ["", "## 採用した文面"]
     for p in st["picks"]:
         s = src(st, p["src"])
@@ -1071,6 +1095,33 @@ def cmd_done(a):
                p["text"], ""]
     with open(os.path.join(d, "material.md"), "w", encoding="utf-8") as f:
         f.write("\n".join(md))
+    return bundle
+
+
+def cmd_rebundle(a):
+    """束だけ作り直す(票のまとめ方を直した時など)。 取り直さない・台帳に書かない・done の時刻も変えない。"""
+    st = load(a.stem)
+    if not st.get("done_at"):
+        die("まだ done していない(束が無い)")
+    b = write_bundle(st)
+    weak = [e for e in b["anilist"]["entries"] if not e["main"] and e["group"] != "漫画"]
+    print(f"束を作り直した: {st['card']['title']} / AniList タグ {len(b['anilist']['tags'])}種"
+          + (" / 票を使わないエントリ: " + "、".join(f"{e['group']}{e.get('format') or ''}(登録者{e.get('popularity')})" for e in weak) if weak else ""))
+
+
+def cmd_done(a):
+    st = load(a.stem)
+    lack = [k for k in KINDS if k not in st["none"] and not adopted(st, k)
+            and not (k == "wiki" and any(p["auto"] for p in st["picks"]))]
+    if lack:
+        die(f"まだ決まっていない種別: {'・'.join(lack)} → 採用するか、 none <種別> --why で理由を残す")
+    pend = [s["id"] for s in pending(st)]
+    if pend:
+        die(f"未判断の出所がある: {','.join(L(i) for i in pend)} → pick か skip")
+    st["done_at"] = now()
+    save(st)
+    c, d = st["card"], wdir(st["stem"])
+    bundle = write_bundle(st)
     by = {}
     for k in KINDS:
         ss = [s for s in st["sources"] if s["kind"] == k and s["origin"] != "auto"]
@@ -1325,6 +1376,7 @@ def main():
     p = sp.add_parser("skip"); p.add_argument("stem"); p.add_argument("src"); p.add_argument("--why", required=True); p.set_defaults(f=cmd_skip)
     p = sp.add_parser("none"); p.add_argument("stem"); p.add_argument("kind"); p.add_argument("--why", required=True); p.set_defaults(f=cmd_none)
     p = sp.add_parser("done"); p.add_argument("stem"); p.set_defaults(f=cmd_done)
+    p = sp.add_parser("rebundle"); p.add_argument("stem"); p.set_defaults(f=cmd_rebundle)
     p = sp.add_parser("status"); p.add_argument("stem", nargs="?"); p.set_defaults(f=cmd_status)
     p = sp.add_parser("probe"); p.add_argument("stem"); p.add_argument("words"); p.set_defaults(f=cmd_probe)
     p = sp.add_parser("auto"); p.add_argument("stem"); p.add_argument("--fresh", action="store_true")

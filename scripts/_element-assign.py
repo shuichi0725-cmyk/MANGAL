@@ -22,7 +22,7 @@ import argparse, ast, datetime, json, os, re, shutil, subprocess, sys, time, uni
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "v0.7"  # v0.7: ネタバレ印は「その語を持つエントリの半分以上に付いている時だけ」有効 / 呼び出しは共通部品(_lean_claude)  # v0.6: 作品ごとのユーザ裁定(rulings.yml)を付与案より優先 / apply のジャンル追記を二重にしない  # v0.5: apply(表に出す案を seed へ書く口。ユーザの Go 発話の引用が必須)  # v0.4(2026-10-09 ユーザ裁定): ネタバレ印の語は表に出さない(控えへ)/ 控えはサイトに出さず記録だけ  # v0.2: 指示文から試金石の語の例を外す / タグ一覧の語を候補に / ありふれた名詞を候補から外す
+VERSION = "v0.9"  # v0.9: 関連作から引き継ぐのは本筋のエントリだけ(票は収集の道具 v0.5 が絞る。 ジャンルもそろえる)/ 使わなかったタグを付与案に見せる  # v0.8: 表に出すのは強い順に最大10語・語彙と訳が在る語だけ / AniList と材料が一致した語を先に / 隠して持つ語を欄に分ける  # v0.7: ネタバレ印は「その語を持つエントリの半分以上に付いている時だけ」有効 / 呼び出しは共通部品(_lean_claude)  # v0.6: 作品ごとのユーザ裁定(rulings.yml)を付与案より優先 / apply のジャンル追記を二重にしない  # v0.5: apply(表に出す案を seed へ書く口。ユーザの Go 発話の引用が必須)  # v0.4(2026-10-09 ユーザ裁定): ネタバレ印の語は表に出さない(控えへ)/ 控えはサイトに出さず記録だけ  # v0.2: 指示文から試金石の語の例を外す / タグ一覧の語を候補に / ありふれた名詞を候補から外す
 ME = "python scripts/_element-assign.py"
 TEST_ROOT = os.environ.get("EH_ROOT")
 BASE = TEST_ROOT or os.path.join(ROOT, ".cache", "element-harvest")
@@ -35,6 +35,8 @@ ANI_KEEP = 40                                         # この線以上 = 控え
 SPOILER_TO_SUB = True                                # ★ユーザ裁定 2026-10-09「いらない」= ネタバレ印の語は表に出さず控えへ
 # ★ただし AniList の印は粗い(三角関係の印は関連7件中1件だけだった)。 その語を持つエントリの「半分以上」に印が在る時だけ有効にする
 #   (俺ガイルの4語へのユーザの反応と全部合う: 三角関係1/7=出す・更生1/2=控え・片思い2/3=控え・悲劇1/1=控え)
+MAX_SHOW = 10                                        # 1頁に出す要素の上限(強い順)。 あふれた語は「隠して持つ」へ
+HIDE_ALWAYS = {"Nudity"}                             # 票が高くても表には出さない AniList タグ(性的な描写の有無。 お色気はジャンルで足りる)
 GENERIC = {"drama", "comedy", "romance", "slice-of-life", "action"}  # 汎用ジャンル = 信頼源(AniList)が言う時だけ。モデルには判定させない
 A2M = {"Romance": "romance", "Comedy": "comedy", "Drama": "drama", "Action": "action", "Fantasy": "fantasy",
        "Slice of Life": "slice-of-life", "Adventure": "adventure", "Sci-Fi": "sci-fi", "Mystery": "mystery",
@@ -166,16 +168,18 @@ def load_material(stem):
 
 # ───────── 1) AniList を票で仕分ける(機械) ─────────
 def anilist_part(m, V):
-    items, skipped = [], []
+    items, skipped, weak = [], [], []
     for r in m["anilist"]["tags"]:
-        best = max(r["self"], r["novel"], r["anime"])  # 自分・原作小説・アニメ から引き継ぐ(他の漫画=アンソロジー等は使わない)
+        best = max(r["self"], r["novel"], r["anime"])  # 自分・原作小説・アニメ(本筋のエントリ)から引き継ぐ(他の漫画=アンソロジー等は使わない)
         spoiler = (r["ns"] * 2 >= r["n"]) if r.get("n") else r["spoiler"]  # n/ns が無い古い束は従来どおり
         name, cat = r["name"], r["category"]
         base = cat.split("-")[0]
-        if name in V["noise"] or cat == "Demographic" or r["adult"] or base in ("Sexual Content", "Technical") or cat.startswith("Theme-Game-Sport"):
+        if name in V["noise"] or name.startswith("Primarily ") or cat == "Demographic" or r["adult"] or base in ("Sexual Content", "Technical") or cat.startswith("Theme-Game-Sport"):
             skipped.append(name)
             continue
         if best < ANI_KEEP:
+            if r.get("weak", 0) >= ANI_KEEP:  # 登録者の少ない関連作・おまけ映像にしか無い票 = 使わない(見えるようにだけする)
+                weak.append(f"{JA_OVERRIDE.get(name) or V['tag_ja'].get(name) or name}{r['weak']}")
             continue
         ja = JA_OVERRIDE.get(name) or V["tag_ja"].get(name)
         draft = not ja and name in JA_DRAFT
@@ -188,14 +192,14 @@ def anilist_part(m, V):
             tier = "在る"
         items.append({"word": ja or name, "en": name, "tier": tier, "votes": best, "by": {"自分": r["self"], "小説": r["novel"], "アニメ": r["anime"]},
                       "spoiler": spoiler, "no_ja": not ja, "draft": draft, "reread": name in JA_OVERRIDE, "category": cat})
-    fam = [e for e in m["anilist"]["entries"] if e["group"] in ("自分", "小説") or (e["group"] == "アニメ" and e.get("format") == "TV")]
+    fam = [e for e in m["anilist"]["entries"] if e.get("main", True) and (e["group"] in ("自分", "小説") or (e["group"] == "アニメ" and e.get("format") == "TV"))]
     gkeys = {}
     for e in fam:
         for g in e.get("genres") or []:
             k = A2M.get(g)
             if k:
                 gkeys.setdefault(k, set()).add(e["group"])
-    return items, gkeys, skipped
+    return items, gkeys, skipped, weak
 
 
 # ───────── 2) 語彙の語を材料から機械で拾う ─────────
@@ -312,6 +316,8 @@ def verify(m, V, cands, ans):
             return bad.append({**row, "reject": "汎用ジャンルはモデルに判定させない(信頼源で決める)"})
         if group == "judged" and w not in cmap:
             return bad.append({**row, "reject": "候補に無い語を judged に書いた"})
+        if w in specific and specific[w] in m["card"]["genres"]:
+            return  # もう付いているジャンル(判定は要らない)
         row["kind"] = "ジャンル" if w in specific else "要素"
         row["vocab"] = "ジャンル" if w in specific else word_status(w, V)
         if group == "added" and row["vocab"] == "新しい語":
@@ -365,7 +371,7 @@ def load_rulings(stem):
 
 
 def make_proposal(stem, m, V, cands, ans, use):
-    ani, gkeys, ani_skip = anilist_part(m, V)
+    ani, gkeys, ani_skip, ani_weak = anilist_part(m, V)
     ok, bad, missing = verify(m, V, cands, ans)
     c = m["card"]
     merged = {}  # 語 → 1行(AniList と材料の根拠をまとめる)
@@ -395,14 +401,35 @@ def make_proposal(stem, m, V, cands, ans, use):
     for w, q in hide.items():
         if w in merged:
             merged[w]["tier"], merged[w]["ruled"] = "在る", f"ユーザ裁定で出さない「{q}」"
-    rows = sorted(merged.values(), key=lambda e: (e["tier"] != "芯", -(e["ani"]["votes"] if e["ani"] else 0), -len(e["mat"]), e["word"]))
+    def strength(e):
+        """強さ: ユーザ裁定 > AniList と材料が一致(票順) > AniList だけ(票順) > 材料だけ(根拠の数)"""
+        v = e["ani"]["votes"] if e["ani"] else 0
+        return (0 if e.get("ruled") else 1, 0 if (e["ani"] and e["mat"]) else 1 if e["ani"] else 2, -v, -len(e["mat"]), e["word"])
+
+    n_show = 0
+    for e in sorted(merged.values(), key=strength):
+        if e["kind"] != "要素":
+            continue
+        a = e["ani"] or {}
+        if e["tier"] != "芯":
+            e["cls"], e["hid"] = "隠し", "ネタバレ印" if e["spoiler"] and a.get("votes", 0) >= ANI_SHOW.get(a.get("category", "").split("-")[0], 999) else "在る"
+        elif a.get("en") in HIDE_ALWAYS and not e.get("ruled"):
+            e["cls"], e["hid"] = "隠し", "出さない語"
+        elif e["vocab"] not in ("語彙内", "表示できる語") or a.get("no_ja") or a.get("draft"):
+            e["cls"], e["hid"] = "隠し", "語彙か訳が無い"  # 強い語なのに出せない = 語ごとの裁定の候補
+        elif n_show >= MAX_SHOW and not e.get("ruled"):
+            e["cls"], e["hid"] = "隠し", "上限"
+        else:
+            e["cls"], e["hid"] = "表", ""
+            n_show += 1
+    rows = sorted(merged.values(), key=lambda e: (e.get("cls") != "表", strength(e)))
     gnow = [V["genres"].get(g, g) for g in c["genres"]]
     gadd = [(V["genres"][k], sorted(v)) for k, v in sorted(gkeys.items()) if k not in c["genres"]]
     out = [f"# 付与案: {c['title']} ({stem})", f"道具 {VERSION} / 判定 {use.get('model')} / {now()} / 読み込み {use.get('in')}・出力 {use.get('out')} トークン / {use.get('sec')}秒", "",
            "★これは案。 データには何も書いていない。", "", "## ジャンル", f"- 今: {'・'.join(gnow)}"]
     out.append("- 足す案(信頼源): " + ("、".join(f"{n}(AniList の{'・'.join(v)})" for n, v in gadd) or "なし"))
     gm = [e for e in rows if e["kind"] == "ジャンル"]
-    out.append("- 材料から: " + ("、".join(f"{e['word']}({e['tier']})" for e in gm) or "なし"))
+    out.append("- 材料から(具体的なジャンル): " + ("、".join(f"{e['word']}({'主軸' if e['tier'] == '芯' else '在る'})" for e in gm) or "なし"))
 
     def ev(e):
         parts = []
@@ -415,9 +442,13 @@ def make_proposal(stem, m, V, cands, ans, use):
 
     n = 0
     isnew = lambda e: e["vocab"] == "新しい語"  # noqa: E731
-    for title, pick in (("表に出す案(芯)= サイトに出すのはここだけ", lambda e: e["tier"] == "芯"),
-                        ("控え(在る・今の語彙に在る語)= サイトには出さず記録だけ", lambda e: e["tier"] == "在る" and not isnew(e)),
-                        ("新しい語の候補(在る・付けずに貯めて、何作にも出た語だけ採否を決める)", lambda e: e["tier"] == "在る" and isnew(e))):
+    hid = lambda e, *why: e.get("cls") == "隠し" and e.get("hid") in why  # noqa: E731
+    for title, pick in ((f"表に出す案(強い順に最大{MAX_SHOW}語)= サイトに出すのはここだけ", lambda e: e.get("cls") == "表"),
+                        ("隠して持つ: 強いが上限であふれた語", lambda e: hid(e, "上限")),
+                        ("隠して持つ: 強いが語彙か訳が無くて出せない語(語ごとの裁定の候補)", lambda e: hid(e, "語彙か訳が無い")),
+                        ("隠して持つ: ネタバレ印・出さない決まりの語", lambda e: hid(e, "ネタバレ印", "出さない語")),
+                        ("隠して持つ: 作中に在るが中心でない語", lambda e: hid(e, "在る") and not isnew(e)),
+                        ("新しい語の候補(在る・付けずに貯めて、何作にも出た語だけ採否を決める)", lambda e: hid(e, "在る") and isnew(e))):
         out += ["", f"## {title}"]
         for e in [x for x in rows if pick(x) and x["kind"] == "要素"]:
             n += 1
@@ -435,13 +466,15 @@ def make_proposal(stem, m, V, cands, ans, use):
         out += ["", "## 判定が返らなかった候補", "- " + "、".join(missing)]
     if unruled:
         out += ["", "## ユーザ裁定で「表に出す」とされたが、根拠が無くて載せられなかった語", "- " + "、".join(unruled)]
+    if ani_weak:
+        out += ["", "## 使わなかった AniList の票(登録者の少ない関連作・おまけ映像にしか無い)", "- " + "、".join(ani_weak)]
     out += ["", f"(AniList で対象外にしたタグ: {'、'.join(ani_skip) or 'なし'} / 表に出す線: 主題60・人物70・舞台70 / 控えの線: {ANI_KEEP})"]
     d = adir(stem)
     with open(os.path.join(d, "assign-proposal.md"), "w", encoding="utf-8") as f:
         f.write("\n".join(out) + "\n")
     with open(os.path.join(d, "assign-proposal.json"), "w", encoding="utf-8") as f:
         json.dump({"stem": stem, "version": VERSION, "use": use, "genres_now": c["genres"], "genres_add": sorted(k for k in gkeys if k not in c["genres"]),
-                   "rows": rows, "rejected": bad, "not": [x for x in ok if x["tier"] == "違う"], "missing": missing}, f, ensure_ascii=False, indent=1)
+                   "rows": rows, "rejected": bad, "not": [x for x in ok if x["tier"] == "違う"], "missing": missing, "ani_weak": ani_weak}, f, ensure_ascii=False, indent=1)
     return out, rows, ok, bad, missing
 
 
@@ -462,11 +495,11 @@ def cmd_prepare(a):
 
 def finish(a, V, m, cands, ans, use, record=True):
     out, rows, ok, bad, missing = make_proposal(a.stem, m, V, cands, ans, use)
-    core = [e["word"] for e in rows if e["tier"] == "芯" and e["kind"] == "要素"]
-    sub = [e["word"] for e in rows if e["tier"] == "在る" and e["kind"] == "要素"]
+    core = [e["word"] for e in rows if e.get("cls") == "表"]
+    sub = [e["word"] for e in rows if e.get("cls") == "隠し"]
     new = [e["word"] for e in rows if e["vocab"] == "新しい語"]
     print(f"== 要素付与の案 ({VERSION} / {use.get('model')}) ==\n作品: {m['card']['title']} ({a.stem})")
-    print(f"表に出す案 {len(core)}: {'・'.join(core)}\n控え {len(sub)}: {'・'.join(sub)}\n新しい語 {len(new)}: {'・'.join(new) or 'なし'}")
+    print(f"表に出す案 {len(core)}: {'・'.join(core)}\n隠して持つ {len(sub)}: {'・'.join(sub)}\n新しい語 {len(new)}: {'・'.join(new) or 'なし'}")
     print(f"付けない {sum(1 for x in ok if x['tier'] == '違う')} / 道具が弾いた {len(bad)} / 判定なし {len(missing)}"
           f" / 読み込み {use.get('in')}・出力 {use.get('out')} トークン・{use.get('sec')}秒")
     print(f"付与案 → {os.path.relpath(os.path.join(adir(a.stem), 'assign-proposal.md'), ROOT)}")
@@ -524,7 +557,7 @@ def cmd_apply(a):
         die('--go "<ユーザのGo発話の引用>" が要る(案を本番の seed に書くのはユーザの承認があった時だけ)')
     with open(pj, encoding="utf-8") as f:
         prop = json.load(f)
-    core = [e for e in prop["rows"] if e["tier"] == "芯" and e["kind"] == "要素"]
+    core = [e for e in prop["rows"] if (e.get("cls") == "表" if any("cls" in x for x in prop["rows"]) else e["tier"] == "芯" and e["kind"] == "要素")]
     names, blocked = [], []
     for e in core:
         ani = e.get("ani") or {}

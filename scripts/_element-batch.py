@@ -161,9 +161,12 @@ def load_result(stem):
         "year": st["card"].get("year_started"), "vols": st["card"]["volumes"], "genres_now": prop.get("genres_now") or [],
         "genres_add": prop.get("genres_add") or [],
         "genres_mat": [e["word"] for e in prop["rows"] if e["kind"] == "ジャンル" and e["tier"] in ("芯", "在る")],
-        "core": [(e["word"], "AniList" if e.get("ani") and not e.get("mat") else "両方" if e.get("ani") else "材料", e["vocab"]) for e in rows if e["tier"] == "芯"],
-        "sub": [e["word"] for e in rows if e["tier"] == "在る" and e["vocab"] != "新しい語"],
-        "new": [e["word"] for e in rows if e["tier"] == "在る" and e["vocab"] == "新しい語"],
+        "core": [(e["word"], "AniList" if e.get("ani") and not e.get("mat") else "両方" if e.get("ani") else "材料", e["vocab"]) for e in rows if e.get("cls") == "表"],
+        "sub": [e["word"] for e in rows if e.get("cls") == "隠し" and e.get("hid") in ("上限", "在る", "ネタバレ印", "出さない語") and e["vocab"] != "新しい語"],
+        "wait": [e["word"] for e in rows if e.get("cls") == "隠し" and e.get("hid") == "語彙か訳が無い"],  # 強いのに語彙か訳が無くて出せない語
+        "wait_src": {e["word"]: (f"AniList {e['ani']['en']}" + ("(仮の訳)" if e["ani"].get("draft") else "(訳なし)") if e.get("ani") else "材料(語彙に無い)")
+                     for e in rows if e.get("cls") == "隠し" and e.get("hid") == "語彙か訳が無い"},
+        "new": [e["word"] for e in rows if e.get("cls") == "隠し" and e.get("hid") == "在る" and e["vocab"] == "新しい語"],
         "ani_entries": len((st.get("anilist") or {}).get("entries") or []), "wiki": (st.get("wiki") or {}).get("title"),
         "wiki_id": (st.get("wiki") or {}).get("identity"), "chars": sum(p["chars"] for p in st["picks"]), "kinds": kinds,
         "none": st.get("none") or {}, "tok_h": (st.get("auto_use") or {}).get("in", 0) + (st.get("auto_use") or {}).get("out", 0),
@@ -203,8 +206,9 @@ h1{{font-size:19px;margin:0 0 4px}}h2{{font-size:16px;margin:26px 0 6px;border-b
 .c{{background:var(--corebg);color:var(--core)}}.s{{background:var(--subbg);color:var(--sub)}}.n{{background:var(--newbg);color:var(--new)}}
 .z{{color:var(--mut)}}sup{{font-size:10px;opacity:.75;margin-left:1px}}
 </style><h1>要素付与の試し({len(done)}作・裁定なしの全自動)</h1>
-<p class="m">表に出す = AniList の票が線以上、または材料で「主軸」と判定された語。隠して持つ = 作中に在るが中心でない語(サイトには出さない)。新しい語 = 今の語彙に無い候補(付けない)。<br>
-語の右肩: A=AniList の票 / 材=日本語の材料 / 両=両方。データには何も書いていません。</p>
+<p class="m">表に出す = AniList の票が線以上、または材料で「主軸」と判定された語(強い順に最大10)。隠して持つ = 上限であふれた語・作中に在るが中心でない語・ネタバレ印の語(サイトには出さない)。裁定待ち = 強いのに、語彙か日本語の訳が無くて出せない語。新しい語 = 今の語彙に無い候補(付けない)。<br>
+語の右肩: A=AniList の票 / 材=日本語の材料 / 両=両方。データには何も書いていません。<br>
+AniList の票は、その漫画自身と、関連作(原作小説・アニメ)のうち登録者1,000人以上の本筋のものだけを使う(おまけ映像や登録者の少ないものは使わない)。語ごとの集計は末尾。</p>
 <p class="m">平均: 表に出す {avg([len(r['core']) for r in done]):.1f}語・隠して持つ {avg([len(r['sub']) for r in done]):.1f}語・新しい語 {avg([len(r['new']) for r in done]):.1f}語 /
 表に出す語が0の作品 {sum(1 for r in done if not r['core'])}作 / 1作あたり 約{avg([r['tok_h'] + r['tok_a'] for r in done]) / 1000:.0f}千トークン</p>"""]
     for t in TIER:
@@ -215,14 +219,31 @@ h1{{font-size:19px;margin:0 0 4px}}h2{{font-size:16px;margin:26px 0 6px;border-b
             core = "".join(f'<span class="c">{e(w)}<sup>{mark[sv]}{"・新" if vc == "新しい語" else ""}</sup></span>' for w, sv, vc in r["core"]) or '<span class="z">なし</span>'
             sub = "".join(f'<span class="s">{e(w)}</span>' for w in r["sub"]) or '<span class="z">なし</span>'
             new = "".join(f'<span class="n">{e(w)}</span>' for w in r["new"]) or '<span class="z">なし</span>'
+            wait = "".join(f'<span class="n">{e(w)}</span>' for w in r["wait"])
             gadd = "".join(f'<span class="c">+{e(gname.get(g, g))}</span>' for g in r["genres_add"]) + "".join(f'<span class="n">材:{e(g)}</span>' for g in r["genres_mat"])
             src = f"AniList関連{r['ani_entries']}件" + (f"・Wikipedia" if r["wiki"] else "・Wikipediaなし") + f"・材料{r['chars']}字"
             none = ("・材料なし=" + "/".join(r["none"])) if r["none"] else ""
             parts.append(f"""<div class="w"><div class="t">{e(r['title'])}</div>
 <div class="m">{e(r['authors'])} / {r['year'] or '?'}年 / 全{r['vols']}巻 / {r['how']} / 今の要素 {r['elements_now']}個<br>{src}{e(none)}</div>
 <div class="r"><span class="k">表に出す</span>{core}</div><div class="r"><span class="k">隠して持つ</span>{sub}</div>
+{f'<div class="r"><span class="k">裁定待ち</span>{wait}</div>' if wait else ''}
 <div class="r"><span class="k">新しい語</span>{new}</div>
 <div class="r"><span class="k">ジャンル</span>{e('・'.join(gname.get(g, g) for g in r['genres_now']))} {gadd}</div></div>""")
+    # 語ごとの集計(作品ごとでなく、語ごとに決めれば全作品に効くもの)
+    cnt = lambda pairs: sorted(((w, [t for w2, t in pairs if w2 == w]) for w in dict.fromkeys(w for w, _ in pairs)), key=lambda x: (-len(x[1]), x[0]))  # noqa: E731
+    short = lambda t: t[:10] + ("…" if len(t) > 10 else "")  # noqa: E731
+    wsrc = {}
+    for r in done:
+        wsrc.update(r["wait_src"])
+    waits = cnt([(w, r["title"]) for r in done for w in r["wait"]])
+    shown = [x for x in cnt([(w, r["title"]) for r in done for w, _, _ in r["core"]]) if len(x[1]) >= 2]
+    news = cnt([(w, r["title"]) for r in done for w in r["new"]])
+    parts.append(f"<h2>語ごとの集計(語ごとに決めれば全作品に効く)</h2><p class='m'>強いのに出せなかった語 {len(waits)}種(訳か語彙を足せば表に出る)</p>")
+    parts.append("<div class='w'>" + "".join(f"<div><span class='n'>{e(w)}</span><span class='m'>{e(wsrc.get(w, ''))} / {len(ts)}作: {e('・'.join(short(t) for t in ts[:4]))}</span></div>" for w, ts in waits) + "</div>")
+    parts.append("<p class='m'>2作以上で表に出た語(ありふれた語が混じっていないかを見る)</p><div class='w'>"
+                 + "".join(f"<span class='c'>{e(w)}<sup>×{len(ts)}</sup></span>" for w, ts in shown) + "</div>")
+    parts.append(f"<p class='m'>新しい語の候補 {len(news)}種(付けていない。 何作にも出た語だけ採否を決める)</p><div class='w'>"
+                 + "".join(f"<span class='n'>{e(w)}{f'<sup>×{len(ts)}</sup>' if len(ts) > 1 else ''}</span>" for w, ts in news) + "</div>")
     miss = [r for r in res if not r["done"]]
     if miss:
         parts.append("<h2>終わらなかった作品</h2><p class='m'>" + "、".join(e(r["title"]) for r in miss) + "</p>")
