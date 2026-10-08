@@ -2,6 +2,7 @@
 # 旧 slug → 新 slug の 301(漫画頁は /manga/ 配下=この形状以外は届かない)
 # ★Cloudflare Pages は静的redirect上限2,000行(preview=部分カバー)。本番全件は KV REDIRECTS 側。
 
+/manga/horobiito /manga/horobeat 301
 /manga/0-1996 /manga/zero-1996 301
 /manga/0-2009 /manga/zero-2009 301
 /manga/0-hour /manga/zero-hour 301
@@ -5436,6 +5437,7 @@
 /manga/esu-kyuu-party-kara-tsuihousareta-sareta-kariudo-jitsu-wa-sekai-saikyou /manga/s-kyuu-party-kara-tsuihou-sareta-kariudo-jitsu-wa-sekai-saikyou 301
 /manga/esu-no-yuwaku /manga/esu-no-yuuwaku 301
 /manga/esu-no-yuwaku-emu-no-dokidoki /manga/esu-no-yuuwaku-emu-no-dokidoki 301
+/manga/esu-rank-party-kara-kaikosareta-jugushi /manga/s-rank-party-kara-kaiko-sareta-jugushi 301
 /manga/esu-rank-party-kara-kaikosareta-sareta-jugushi /manga/s-rank-party-kara-kaiko-sareta-jugushi 301
 /manga/esu-rank-party-o-munou-da-to-tsuihousareta-saretakedo-kantei-to-chiyu-mahou-de-nariagari-musou /manga/esu-rank-party-o-munou-da-to-tsuihousareta-kedo-kantei-to-chiyu-mahou-de-nariagari-musou 301
 /manga/esu-ranku-paatei-kara-kaiko-sareta-jugushi /manga/s-rank-party-kara-kaiko-sareta-jugushi 301
@@ -31573,5 +31575,3 @@
 /manga/zuzushii /manga/zuuzuushii 301
 /manga/zx /manga/z-x 301
 /manga/zyword /manga/gaioodo 301
-/manga/esu-rank-party-kara-kaikosareta-jugushi /manga/s-rank-party-kara-kaiko-sareta-jugushi 301
-/manga/horobiito /manga/horobeat 301
