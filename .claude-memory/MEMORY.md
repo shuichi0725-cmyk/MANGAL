@@ -123,6 +123,7 @@
 - [★promote空--only全消し](promote_empty_only_wipe_accident.md)
 - [★診断簿は掃除して読む](diag_log_prune_before_reading.md)
 - [★Driveはcodeのみ](gdrive_code_folder_only.md)
+- [★外部サイトは門を通す](site_gate_robots_claude_denied.md)
 ## 分野別索引(全件)
 - [蒸留・取込(月次/週次/日次・MADB・予約harvest・種4)・23件](memory_index_distill.md)
 - [掲載範囲(非漫画・コンビニ版・画集・アンソロ・分冊)・17件](memory_index_scope.md)

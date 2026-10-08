@@ -2,7 +2,10 @@
 name: memory-index-catch-genre
 description: 記憶の分野別索引 = キャッチ・あらすじ・ジャンル・要素・巻説明。MEMORY.md の容量対策(2026-10-06)で全件をここに置く
 metadata:
+  node_type: memory
   type: reference
+  originSessionId: 60837ea9-16b4-4ef2-9200-391e3397c8aa
+  modified: 2026-10-08T13:19:19.122Z
 ---
 
 # キャッチ・あらすじ・ジャンル・要素・巻説明
@@ -23,3 +26,4 @@ metadata:
 - [新しい順の鉱脈は枯れた](enrich_newest_seam_exhausted.md)
 - [Gemini API運用](gemini_api_ops.md)
 - [genre-append=union](genre_append_seed_mechanism.md)
+- [⏳要素収集の柱(Haiku材料集め・試金石=俺ガイル)](element_harvest_pillar_state.md)

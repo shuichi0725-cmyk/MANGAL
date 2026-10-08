@@ -2,7 +2,10 @@
 name: memory-index-external
 description: 記憶の分野別索引 = 外部ソース(AniList・楽天・試し読み・JPRO・マンバ)。MEMORY.md の容量対策(2026-10-06)で全件をここに置く
 metadata:
+  node_type: memory
   type: reference
+  originSessionId: 60837ea9-16b4-4ef2-9200-391e3397c8aa
+  modified: 2026-10-08T13:19:20.915Z
 ---
 
 # 外部ソース(AniList・楽天・試し読み・JPRO・マンバ)
@@ -24,3 +27,4 @@ metadata:
 - [アニメ化フラグ更新](anime_flag_freshness.md)
 - [アニメイトタイムズ季節](animatetimes_season_source.md)
 - [マンバ蒸留=title_id採取](manba_booklive_titleid_route.md)
+- [★外部サイトは門を通す(Claude拒否サイト実測)](site_gate_robots_claude_denied.md)
