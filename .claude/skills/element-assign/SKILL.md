@@ -48,9 +48,26 @@ python scripts/_element-assign.py show <stem>           # 付与案を読む
 
 印: 〔表示できる語〕= 表示はできるが今まで AI が選べなかった語 / 〔新しい語〕/(ネタバレ印)= AniList の印、または展開の材料だけが根拠 / 読み替え案・仮の訳 = 訳がユーザ裁定待ち。
 
+## 本番へ書く (= Opus の仕事。ユーザの Go が要る)
+
+付与案の「表に出す案」と「足すジャンル」だけを seed へ書き、targeted 反映でテスト環境に出す。運転者(Haiku/Sonnet)はここをやらない。
+
+```
+python scripts/_element-assign.py apply <stem> --go "<ユーザのGo発話の引用>"   # seed に足す(頁はまだ変わらない)
+python scripts/_reflect-targeted.py --only <stem,...> --commit-only -m "…"     # 頁と索引へ反映(skill reflect-targeted)
+cp data/manga.v2/<stem>.yml .preview-data/manga/                                # テスト環境の対象に入れる(未投入の頁)
+python scripts/_build-list-index.py .preview-data/manga .preview-data --update <stem,...>
+git add … && git commit && git push                                             # ★push は最後に1回だけ(追いpush禁止)
+```
+
+- `apply` が書く先: 要素 = `data/seeds/tags-enrich-2425.json`(対訳表で表示できる AniList タグは**英名**、それ以外は**和名**)/ ジャンル = `data/seeds/genre-append.yml`(source=`element-assign:<版>`)/ 記録 = `data/seeds/element-assign-changelog.jsonl`(Go の引用・前後・退避先つき)。
+- ★**新しい語は `apply` が断る**。語彙(`data/seeds/wamei-tags.yml` の `allow`)に足すのはユーザ裁定で、足した語だけが付く。
+- ★`apply` は**足すだけ**。前から頁に付いている要素(AniList 由来など)は消せない(消す口は未実装)。裁定と食い違う既存の語が残る時は、黙って済ませず報告する(俺ガイル@comic の「三角関係」で実踏)。
+- 取り消し: 足した行を seed から消して反映し直す(記録の `revert` を見る)。
+
 ## NEVER
 
-- 付与案を本番データや seed に書き写さない。反映・デプロイをしない。
+- (運転者は)付与案を本番データや seed に書き写さない。`apply`・反映・デプロイをしない。
 - 付与案に自分の判断で語を足さない・消さない(直すのは道具か指示文。それは Opus の仕事)。
 - 「■ 中断」が出たら止めて報告する。繰り返し叩かない。
 

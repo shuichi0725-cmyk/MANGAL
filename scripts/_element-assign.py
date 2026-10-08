@@ -16,12 +16,13 @@ usage:
   python scripts/_element-assign.py prepare <stem>                          モデルに渡す文面だけ作る(呼ばない)
   python scripts/_element-assign.py check <stem> [--answer <json>]          保存済みの答えを検査し直して付与案を作る
   python scripts/_element-assign.py show <stem>                             付与案を表示
+  python scripts/_element-assign.py apply <stem> --go "<ユーザのGo発話>"     「表に出す案」と足すジャンルを seed へ書く(反映は別)
 """
 import argparse, ast, datetime, json, os, re, shutil, subprocess, sys, time, unicodedata
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "v0.4"  # v0.4(2026-10-09 ユーザ裁定): ネタバレ印の語は表に出さない(控えへ)/ 控えはサイトに出さず記録だけ  # v0.2: 指示文から試金石の語の例を外す / タグ一覧の語を候補に / ありふれた名詞を候補から外す
+VERSION = "v0.5"  # v0.5: apply(表に出す案を seed へ書く口。ユーザの Go 発話の引用が必須)  # v0.4(2026-10-09 ユーザ裁定): ネタバレ印の語は表に出さない(控えへ)/ 控えはサイトに出さず記録だけ  # v0.2: 指示文から試金石の語の例を外す / タグ一覧の語を候補に / ありふれた名詞を候補から外す
 ME = "python scripts/_element-assign.py"
 TEST_ROOT = os.environ.get("EH_ROOT")
 BASE = TEST_ROOT or os.path.join(ROOT, ".cache", "element-harvest")
@@ -139,7 +140,7 @@ def load_vocab():
         if was and was != ja:
             alias[was] = ja
             display.discard(was)
-    return {"genres": genres, "ai": ai, "display": display, "alias": alias, "tag_ja": tag_ja, "noise": set(noise)}
+    return {"genres": genres, "ai": ai, "display": display, "alias": alias, "tag_ja": tag_ja, "noise": set(noise), "allow": allow}
 
 
 def word_status(word, V):
@@ -489,6 +490,77 @@ def cmd_check(a):
     finish(a, V, m, cands, d.get("answer", d), d.get("use") or {"model": "(保存済みの答え)"}, record=False)
 
 
+# ───────── 5) 付与案を seed へ書く(★ユーザの Go が要る。 ここは seed に足すだけで、頁への反映は _reflect-targeted.py) ─────────
+def _rw_same_newline(path, add_text):
+    """既存ファイルの改行(CRLF/LF)に合わせて末尾へ追記する。"""
+    with open(path, "rb") as f:
+        raw = f.read()
+    nl = b"\r\n" if b"\r\n" in raw else b"\n"
+    body = add_text.replace("\r\n", "\n").encode("utf-8").replace(b"\n", nl)
+    with open(path, "ab") as f:
+        f.write((b"" if raw.endswith(nl) or not raw else nl) + body)
+
+
+def cmd_apply(a):
+    V = load_vocab()
+    pj = os.path.join(adir(a.stem), "assign-proposal.json")
+    if not os.path.exists(pj):
+        die(f"付与案がまだ無い → {ME} run {a.stem}")
+    if len((a.go or "").strip()) < 2:
+        die('--go "<ユーザのGo発話の引用>" が要る(案を本番の seed に書くのはユーザの承認があった時だけ)')
+    with open(pj, encoding="utf-8") as f:
+        prop = json.load(f)
+    core = [e for e in prop["rows"] if e["tier"] == "芯" and e["kind"] == "要素"]
+    names, blocked = [], []
+    for e in core:
+        ani = e.get("ani") or {}
+        # 対訳表で表示できる AniList タグは英名で書く。 読み替え・仮の訳・材料由来の語は和名で書く(和名タグの allow に在る語だけ)
+        if ani and not ani.get("reread") and not ani.get("no_ja") and not ani.get("draft") and V["tag_ja"].get(ani["en"]):
+            names.append(ani["en"])
+        elif e["word"] in V["allow"]:
+            names.append(e["word"])
+        else:
+            blocked.append(e["word"])
+    if blocked:
+        die("表に出す案のうち、まだ語彙(data/seeds/wamei-tags.yml の allow)に無い語がある: " + "・".join(blocked)
+            + "\n  語彙に足すのはユーザ裁定。 足してから apply し直す(足さない語は付けない)")
+    page = os.path.join(ROOT, "data", "manga.v2", a.stem + ".yml")
+    if not os.path.exists(page):
+        die(f"頁が無い: {page}")
+    ts = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+    bak = os.path.join(ROOT, ".cache", f"element-assign-bak-{ts}")
+    os.makedirs(bak, exist_ok=True)
+    shutil.copyfile(page, os.path.join(bak, a.stem + ".yml"))
+    # 要素: tags-enrich-2425.json(slug → タグ名の配列。 promote が union する。 書式=1行・区切りに空白なし)
+    tp = os.path.join(ROOT, "data", "seeds", "tags-enrich-2425.json")
+    with open(tp, encoding="utf-8") as f:
+        raw = f.read()
+    tags = json.loads(raw)
+    if json.dumps(tags, ensure_ascii=False, separators=(",", ":")) != raw:
+        die("tags-enrich-2425.json の書式が想定と違う(書き戻すと全体が変わる)→ 何も書かずに止める")
+    before = list(tags.get(a.stem) or [])
+    after = before + [n for n in names if n not in before]
+    tags[a.stem] = after
+    with open(tp, "w", encoding="utf-8", newline="") as f:
+        f.write(json.dumps(tags, ensure_ascii=False, separators=(",", ":")))
+    # ジャンル: genre-append.yml(足すだけ・出所つき)
+    gadd = [g for g in prop.get("genres_add") or [] if g in V["genres"] and g not in (prop.get("genres_now") or [])]
+    if gadd:
+        _rw_same_newline(os.path.join(ROOT, "data", "seeds", "genre-append.yml"),
+                         f"  - slug: {a.stem}\n    add: [{', '.join(gadd)}]\n    source: \"element-assign:{prop['version']} anilist-family\"\n")
+    line = {"slug": a.stem, "op": "element-assign apply", "at": now(), "version": VERSION, "proposal_version": prop["version"],
+            "judge_model": (prop.get("use") or {}).get("model"), "go": a.go.strip(),
+            "before": {"tags_enrich": before, "genres": prop.get("genres_now")},
+            "after": {"tags_enrich": after, "genre_append": gadd},
+            "shown_words": [e["word"] for e in core], "backup": os.path.relpath(os.path.join(bak, a.stem + ".yml"), ROOT).replace("\\", "/"),
+            "revert": "tags-enrich-2425.json からこの slug の追加分を消し、genre-append.yml の source=element-assign の行を消して反映し直す"}
+    with open(os.path.join(ROOT, "data", "seeds", "element-assign-changelog.jsonl"), "a", encoding="utf-8") as f:
+        f.write(json.dumps(line, ensure_ascii=False) + "\n")
+    print(f"seed に書いた: {a.stem}\n  要素 +{len(after) - len(before)}: {'・'.join(n for n in after if n not in before)}"
+          f"\n  ジャンル +{len(gadd)}: {'・'.join(V['genres'][g] for g in gadd) or 'なし'}\n  退避: {line['backup']}")
+    print(f"次: python scripts/_reflect-targeted.py --only {a.stem} --commit-only -m \"…\"(頁への反映。 テスト環境へは .preview-data へのコピーが要る)")
+
+
 def cmd_show(a):
     p = os.path.join(adir(a.stem), "assign-proposal.md")
     if not os.path.exists(p):
@@ -505,6 +577,7 @@ def main():
     p = sp.add_parser("prepare"); p.add_argument("stem"); p.set_defaults(f=cmd_prepare)
     p = sp.add_parser("check"); p.add_argument("stem"); p.add_argument("--answer"); p.set_defaults(f=cmd_check)
     p = sp.add_parser("show"); p.add_argument("stem"); p.set_defaults(f=cmd_show)
+    p = sp.add_parser("apply"); p.add_argument("stem"); p.add_argument("--go", default=""); p.set_defaults(f=cmd_apply)
     a = ap.parse_args()
     a.f(a)
 
