@@ -32,7 +32,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 import _rate_gate, _site_gate  # noqa: E402
 
-VERSION = "v0.2"  # v0.2(2026-10-09): 折り返し行をつなぐ/タグ一覧を機械で採る/取得時に全文を見せる/読んでから指す/公式の検索語を頁の題+レーベルに
+VERSION = "v0.3"  # v0.2: 折り返し行をつなぐ/タグ一覧を機械で採る/全文を見せて読んでから指す/公式の検索語
+# v0.3(2026-10-09): 出所を英字(A,B,C…)に=検索結果の番号との取り違え防止 / 取れなかった頁は取得数に数えない / 壊れた検索URLを直す
 ME = "python scripts/_element-harvest.py"
 TEST_ROOT = os.environ.get("EH_ROOT")  # 試験用: 置き場と台帳を丸ごと別フォルダへ逃がす
 BASE = TEST_ROOT or os.path.join(ROOT, ".cache", "element-harvest")
@@ -54,6 +55,16 @@ NOT_MATERIAL = {
 }
 
 
+def fix_url(u):
+    """「/url?…&q=https://…」(検索の中継URL)から本当のURLを取り出す。"""
+    if u.startswith("/url?") or re.match(r"^https?://(www\.)?google\.[a-z.]+/url\?", u):
+        q = urllib.parse.parse_qs(urllib.parse.urlsplit(u).query)
+        for k in ("q", "url"):
+            if q.get(k) and q[k][0].startswith("http"):
+                return q[k][0]
+    return u
+
+
 # robots.txt で断られると分かっているサイト(検索結果に印を付けるためだけの表。 可否の正本は _site_gate の実判定)
 KNOWN_ROBOTS_DENY = ("dic.pixiv.net", "manba.co.jp", "ebookjapan.yahoo.co.jp")
 
@@ -71,7 +82,7 @@ CAP = {
     "search": {"wiki": 3, "公式": 3, "考察": 3, "ネタバレ": 3},   # 定型2 + 自由文1
     "fetch": {"wiki": 5, "公式": 4, "考察": 4, "ネタバレ": 3},
     "adopt": {"wiki": 3, "公式": 2, "考察": 2, "ネタバレ": 2},     # wiki の3 = 作品記事 + 主要人物の記事
-    "chars_source": 2500, "chars_wikipedia": 5000, "chars_work": 16000, "fetch_work": 16,
+    "chars_source": 2500, "chars_wikipedia": 5000, "chars_work": 16000, "fetch_work": 20,
 }
 QUERIES = {
     "wiki": ["{t} アニヲタWiki", "{t} 登場人物 キャラクター紹介"],  # ピクシブ百科=robots拒否 / ニコニコ大百科=403(実踏)
@@ -195,7 +206,10 @@ def to_paras(text, per_line=False):
             tag_next = False
         c = clean_md(u["t"])
         mark = bool(TAG_MARK.match(c))
-        u["glue"] = not alone and not u["tag"] and not mark and not per_line and bool(c) and c[-1] not in END
+        # つなぎ始めの塊が20字未満の時は、開きかっこ・助詞で終わる時だけ続きを待つ(署名や日付の行を次の段落に
+        # 吸い込ませない)。 いったんつなぎ始めたら、文末が来るまで待つ(「…通り「」+「ぼっち」+「」「残念な青春」が…」)
+        u["glue"] = (not alone and not u["tag"] and not mark and not per_line and bool(c) and c[-1] not in END
+                     and (u["n"] >= 2 or len(c) >= 20 or c[-1] in "「『(（はがをにのとでもへや、・"))
         if mark:
             tag_next = True
     # 3) 見出し・タグ一覧の印・ナビ・権利表記を仕分ける
@@ -279,11 +293,28 @@ def save(st):
     os.replace(tmp, os.path.join(d, "state.json"))
 
 
+def L(n):
+    """出所の番号 → 英字(1=A, 2=B, … 27=AA)。 ★検索結果の番号(1〜10)・段落番号と取り違えないため、出所だけ英字で呼ぶ。
+    v0.2 の試走で運転者が「検索結果の5番」と「出所5」を取り違え、公式のあらすじが載った頁を不採用にした。"""
+    out = ""
+    while n > 0:
+        n, r = divmod(n - 1, 26)
+        out = chr(65 + r) + out
+    return out
+
+
 def src(st, sid):
+    if not isinstance(sid, int):
+        x = str(sid).strip().upper()
+        if not x.isalpha():
+            die(f"出所は英字で指す(例: C)。 数字は検索結果の番号と段落の番号だけ → {ME} status {st['stem']}")
+        sid = 0
+        for ch in x:
+            sid = sid * 26 + (ord(ch) - 64)
     for s in st["sources"]:
-        if s["id"] == int(sid):
+        if s["id"] == sid:
             return s
-    die(f"出所 {sid} は無い({ME} status {st['stem']})")
+    die(f"出所 {L(sid)} は無い({ME} status {st['stem']})")
 
 
 def paras_of(st, sid):
@@ -297,8 +328,14 @@ def raw_of(st, sid):
 
 
 def n_fetch(st, kind=None):
-    return sum(1 for s in st["sources"] if s["origin"] != "auto" and s["status"] != "refused"
+    """本文が取れた頁の数(★v0.2 の試走で、本文が空だった小学館の頁2つが 公式 の取得枠4の半分を食った)。"""
+    return sum(1 for s in st["sources"] if s["origin"] != "auto" and s["status"] == "fetched"
                and (kind is None or s["kind"] == kind))
+
+
+def n_tried(st):
+    """外へ取りに行った回数(空・失敗・頁なしも数える。 断られた分は数えない)。"""
+    return sum(1 for s in st["sources"] if s["origin"] != "auto" and s["status"] != "refused")
 
 
 def human_chars(st, sid):
@@ -545,7 +582,7 @@ def add_pick(st, s, paras, idxs, as_, auto=False, cap=None, label="", mech=False
     if len(text) < (4 if mech else 20):
         return None
     p = {"id": max([x["id"] for x in st["picks"]] + [0]) + 1, "src": s["id"], "paras": idxs, "as": as_, "text": text,
-         "chars": len(text), "truncated": trunc, "spoiler": as_ == "展開" or s["kind"] == "ネタバレ", "auto": auto,
+         "chars": len(text), "truncated": trunc, "spoiler": as_ == "展開", "auto": auto,
          "mech": mech, "label": label, "at": now()}
     st["picks"].append(p)
     return p
@@ -588,8 +625,8 @@ def do_fetch(st, kind, url, origin, ref=None):
     if any(url in (s["url"], s["final_url"]) for s in st["sources"]):
         print(f"  既に扱った頁: {url}")
         return
-    if n_fetch(st, kind) >= CAP["fetch"][kind] or n_fetch(st) >= CAP["fetch_work"]:
-        print(f"  ✖ 取得の上限に達した({kind} {n_fetch(st, kind)}/{CAP['fetch'][kind]}・全体 {n_fetch(st)}/{CAP['fetch_work']})")
+    if n_fetch(st, kind) >= CAP["fetch"][kind] or n_tried(st) >= CAP["fetch_work"]:
+        print(f"  ✖ 取得の上限に達した({kind} 取れた頁 {n_fetch(st, kind)}/{CAP['fetch'][kind]}・試した総数 {n_tried(st)}/{CAP['fetch_work']})")
         return
     host = _site_gate.host_of(url)
     m = re.match(r"^https?://ja\.(?:m\.)?wikipedia\.org/wiki/([^?#]+)", url)
@@ -603,6 +640,9 @@ def do_fetch(st, kind, url, origin, ref=None):
     else:
         if sum(1 for s in st["sources"] if s["domain"] == host and s["status"] == "error") >= 2:
             print(f"  ✖ {host} は今回2回失敗している → もう取らない")
+            return
+        if any(s["domain"] == host and s["status"] == "empty" for s in st["sources"]):
+            print(f"  ✖ {host} は今回すでに本文が取れなかった(画面を組み立てる型の頁)→ 取らない。 他の結果へ")
             return
         nm = not_material(host)
         if nm:
@@ -645,10 +685,13 @@ def do_fetch(st, kind, url, origin, ref=None):
             return
         s, paras = register_text(st, kind, origin, url, r.get("title") or "", text, final_url=r.get("final_url") or url, ref=ref)
     idn = s["identity"]
-    print(f"\n出所{s['id']} [{kind}] {s['domain']} 「{(s['title'] or '')[:40]}」 {s['chars']}字・{s['paras']}段落")
+    print(f"\n出所{L(s['id'])} [{kind}] {s['domain']} 「{(s['title'] or '')[:40]}」 {s['chars']}字・{s['paras']}段落")
     print(f"  同定 = {idn['verdict']}" + (f"(著者名 {'・'.join(idn['authors_hit'])} あり)" if idn["authors_hit"] else "")
-          + {"OK": "", "要確認": " → 採る時は --same \"頁とこちらの両方に在る語句\" が要る",
+          + {"OK": "", "要確認": " → 採る時は pick に --same を付ける(例: pick <stem> <出所> <段落> --as 人物 --same \"主人公の氏名\")",
              "別作品の疑い": " → 題が頁に出てこない。 採れない(skip --why 別作品)"}[idn["verdict"]])
+    c = st["card"]
+    if norm(c["title"]) != norm(c["base_title"]) and norm(c["title"]) in norm((s["title"] or "") + text if not m else w["text"]):
+        print(f"  ★副題つきの題「{c['title']}」が在る = この漫画そのものの頁。 あらすじ・紹介の段落を必ず読んで採る")
     tags = [i for i, p in enumerate(paras, 1) if p.get("tag")]
     if tags and idn["verdict"] == "OK":
         got = autopick_tags(st, s, paras)
@@ -672,7 +715,7 @@ def show_card(c):
 
 
 def show_status(st):
-    print(f"  材料 {chars_all(st)}/{CAP['chars_work']}字 ・ 取得 {n_fetch(st)}/{CAP['fetch_work']}頁")
+    print(f"  材料 {chars_all(st)}/{CAP['chars_work']}字 ・ 取りに行った回数 {n_tried(st)}/{CAP['fetch_work']}")
     for k in KINDS:
         ns = sum(1 for q in st["searches"] if q["kind"] == k)
         kc = sum(p["chars"] for p in st["picks"] if src(st, p["src"])["kind"] == k)
@@ -683,7 +726,7 @@ def show_status(st):
         v = (s["identity"] or {}).get("verdict", "-")
         tail = (f"採用{chars_src(st, s['id'])}字" if human_chars(st, s["id"]) or s["origin"] == "auto" else f"不採用={s['skip']}" if s["skip"]
                 else "タグ一覧だけ採った・本文は未判断" if chars_src(st, s["id"]) else s["why"] or "未判断")
-        print(f"   出所{s['id']:<2} {s['kind']:<5} {s['status']:<8} {v:<6} {s['domain'][:26]:<26} {tail}")
+        print(f"   出所{L(s['id']):<2} {s['kind']:<5} {s['status']:<8} {v:<6} {s['domain'][:26]:<26} {tail}")
 
 
 def hint(st):
@@ -695,16 +738,19 @@ def hint(st):
     pend = pending(st)
     if pend:  # 取った頁は、次へ進む前に必ず判断する
         s = pend[0]
-        print(f"  [{s['kind']}] 出所{s['id']} が未判断 → {ME} show {stem} {s['id']} --range <段落> で読み、pick か skip"
+        print(f"  [{s['kind']}] 出所{L(s['id'])}({s['domain']})が未判断 → {ME} show {stem} {L(s['id'])} --range <段落> で読み、pick か skip"
               + (f"(ほかに未判断 {len(pend) - 1}頁)" if len(pend) > 1 else ""))
         return
     for k in KINDS:
         if k in st["none"]:
             continue
-        if adopted(st, k) or (k == "wiki" and any(p["auto"] for p in st["picks"]) and n_fetch(st, k) >= 2):
+        want = {"wiki": 2, "考察": 2}.get(k, 1)  # 目安の頁数(wiki=作品記事+主人公 / 考察=主題は1頁だと偏る)
+        if len(adopted(st, k)) >= want or (k == "wiki" and any(p["auto"] for p in st["picks"]) and n_fetch(st, k) >= 2):
+            continue
+        if adopted(st, k) and (n_fetch(st, k) >= CAP["fetch"][k] or sum(1 for q in st["searches"] if q["kind"] == k) >= CAP["search"][k]):
             continue
         ns = sum(1 for q in st["searches"] if q["kind"] == k)
-        room = n_fetch(st, k) < CAP["fetch"][k] and n_fetch(st) < CAP["fetch_work"]
+        room = n_fetch(st, k) < CAP["fetch"][k] and n_tried(st) < CAP["fetch_work"]
         last = next((q for q in reversed(st["searches"]) if q["kind"] == k), None)
         used = {s["ref"] for s in st["sources"] if s.get("ref")}
         fresh = [r["n"] for r in (last or {}).get("results", []) if f"{last['id']}:{r['n']}" not in used] if last else []
@@ -750,7 +796,7 @@ def cmd_open(a):
     w = st["wiki"]
     if w["source"]:
         auto = [f"{p['label']}→{p['as']} {p['chars']}字" for p in st["picks"] if p["auto"]]
-        print(f"[機械] Wikipedia「{w['title']}」= 出所{w['source']}・同定 {w['identity']}・カテゴリ {len(w['categories'])}件"
+        print(f"[機械] Wikipedia「{w['title']}」= 出所{L(w['source'])}・同定 {w['identity']}・カテゴリ {len(w['categories'])}件"
               f"\n        自動で採った節: {' / '.join(auto) or 'なし(同定が OK でないため。 pick --same で採れる)'}")
     else:
         print("[機械] Wikipedia: 記事が見つからない(題のまま・副題なし・(漫画) で試した)")
@@ -786,7 +832,7 @@ def cmd_search(a):
         stop(f"魚に届かない({type(e).__name__})")
     rows = []
     for i, r in enumerate((res.get("results") or [])[:10], 1):
-        rows.append({"n": i, "title": r.get("title") or "", "url": r.get("url") or "", "snippet": (r.get("snippet") or "")[:200]})
+        rows.append({"n": i, "title": r.get("title") or "", "url": fix_url(r.get("url") or ""), "snippet": (r.get("snippet") or "")[:200]})
     sid = f"s{len(st['searches']) + 1}"
     st["searches"].append({"id": sid, "kind": k, "q": q, "free": bool(a.query), "at": now(), "results": rows})
     save(st)
@@ -795,7 +841,8 @@ def cmd_search(a):
         host = _site_gate.host_of(r["url"])
         deny = any(host == d or host.endswith("." + d) for d in _site_gate.DENY)
         mark = ("✖止め札 " if deny else "✖対象外 " if not_material(host)
-                else "✖robots " if any(host == d or host.endswith("." + d) for d in KNOWN_ROBOTS_DENY) else "")
+                else "✖robots " if any(host == d or host.endswith("." + d) for d in KNOWN_ROBOTS_DENY)
+                else "✖今回は空 " if any(x["domain"] == host and x["status"] == "empty" for x in st["sources"]) else "")
         print(f"  {r['n']:>2}. {mark}[{host}] {r['title'][:46]}\n      {r['snippet'][:96]}")
     print(f"\n開く頁を番号で指す: {ME} fetch {a.stem} {sid} <番号,番号>   (この種別の取得残り {CAP['fetch'][k] - n_fetch(st, k)}頁)")
 
@@ -826,9 +873,9 @@ def cmd_show(a):
     st = load(a.stem)
     s = src(st, a.src)
     if s["status"] != "fetched":
-        die(f"出所{s['id']} は本文が無い({s['status']}: {s['why']})")
+        die(f"出所{L(s['id'])} は本文が無い({s['status']}: {s['why']})")
     paras = paras_of(st, s["id"])
-    print(f"出所{s['id']} [{s['kind']}] {s['domain']} 「{(s['title'] or '')[:40]}」 同定={s['identity']['verdict']} {s['url']}")
+    print(f"出所{L(s['id'])} [{s['kind']}] {s['domain']} 「{(s['title'] or '')[:40]}」 同定={s['identity']['verdict']} {s['url']}")
     seen = set(s.get("seen") or [])
     if not a.range:
         outline(paras, start=int(a.frm or 1), seen=seen)
@@ -851,7 +898,7 @@ def cmd_pick(a):
     s = src(st, a.src)
     as_ = pick_enum(a.as_, AS, AS_ALIAS, "役割(--as)")
     if s["status"] != "fetched":
-        die(f"出所{s['id']} は本文が無い")
+        die(f"出所{L(s['id'])} は本文が無い")
     v = s["identity"]["verdict"]
     if v == "別作品の疑い":
         die("同定 = 別作品の疑い(題が頁に出てこない)。 この頁からは採れない → skip --why 別作品")
@@ -873,7 +920,7 @@ def cmd_pick(a):
         save(st)
     k = s["kind"]
     if s["origin"] != "auto" and s["id"] not in adopted(st, k) and len(adopted(st, k)) >= CAP["adopt"][k]:
-        die(f"{k} の採用は {CAP['adopt'][k]}頁まで(既に 出所{','.join(map(str, adopted(st, k)))})")
+        die(f"{k} の採用は {CAP['adopt'][k]}頁まで(既に 出所{','.join(L(i) for i in adopted(st, k))})")
     paras = paras_of(st, s["id"])
     used = {i for p in st["picks"] if p["src"] == s["id"] for i in p["paras"]}
     idxs = [i for i in parse_ranges(a.paras, len(paras)) if i not in used]
@@ -886,7 +933,7 @@ def cmd_pick(a):
     blind = [i for i in idxs if i not in set(s.get("seen") or [])]
     if blind:  # ★頭62字だけ見て指させない(v0.1 の試走で、全文を読まずに指した採用が断片になった)
         die(f"まだ全文を見ていない段落がある: p{','.join(map(str, blind))}\n"
-            f"  → {ME} show {a.stem} {s['id']} --range {min(blind)}-{max(blind)} で読んでから指す")
+            f"  → {ME} show {a.stem} {L(s['id'])} --range {min(blind)}-{max(blind)} で読んでから指す")
     p = add_pick(st, s, paras, idxs, as_)
     if not p:
         die(f"字数の上限(1頁 {cap_src(s)}字・全体 {CAP['chars_work']}字)に達している")
@@ -908,7 +955,7 @@ def cmd_unpick(a):
     st["picks"].remove(p)
     st["done_at"] = None
     save(st)
-    print(f"採用#{p['id']} を取り消した(出所{p['src']} p{','.join(map(str, p['paras']))})")
+    print(f"採用#{p['id']} を取り消した(出所{L(p['src'])} p{','.join(map(str, p['paras']))})")
     hint(st)
 
 
@@ -917,13 +964,17 @@ def cmd_skip(a):
     s = src(st, a.src)
     if s["origin"] == "auto":
         die("道具が自動で取った Wikipedia は skip しない")
+    if s["status"] != "fetched":
+        print(f"出所{L(s['id'])} は本文が無い({s['status']})ので判断は要らない。 何もしていない")
+        hint(st)
+        return
     if human_chars(st, s["id"]):
         die("この出所は採用済み(skip できない。外すなら先に unpick)")
     why = pick_enum(a.why, SKIP_WHY, None, "理由(--why)")
     st["picks"] = [p for p in st["picks"] if p["src"] != s["id"]]  # 頁を外すなら、道具が採ったタグ一覧も一緒に外す
     s["skip"] = why
     save(st)
-    print(f"出所{s['id']} 不採用 = {s['skip']}")
+    print(f"出所{L(s['id'])} {s['domain']}「{(s['title'] or '')[:30]}」を不採用 = {s['skip']}")
     hint(st)
 
 
@@ -942,7 +993,7 @@ def cmd_none(a):
     tried = sum(1 for s in st["sources"] if s["kind"] == k and s["origin"] != "auto")
     if tried < min(2, len(usable)):
         die(f"{k} は開ける結果が {len(usable)}件あるのに {tried}頁しか試していない → 少なくとも {min(2, len(usable))}頁は開いて判断してから none")
-    room = n_fetch(st, k) < CAP["fetch"][k] and n_fetch(st) < CAP["fetch_work"]
+    room = n_fetch(st, k) < CAP["fetch"][k] and n_tried(st) < CAP["fetch_work"]
     if len(qs) < 2 and room:  # ★1回の検索であきらめさせない(v0.1 の試走で 公式 が検索1回のまま none になった)
         die(f"{k} は検索が1回だけ。 別の検索語でもう1回試してから none → {ME} search {a.stem} {k} --q 2")
     if pending(st):
@@ -961,7 +1012,7 @@ def cmd_done(a):
         die(f"まだ決まっていない種別: {'・'.join(lack)} → 採用するか、 none <種別> --why で理由を残す")
     pend = [s["id"] for s in pending(st)]
     if pend:
-        die(f"未判断の出所がある: {pend} → pick か skip")
+        die(f"未判断の出所がある: {','.join(L(i) for i in pend)} → pick か skip")
     st["done_at"] = now()
     save(st)
     c, d = st["card"], wdir(st["stem"])
@@ -990,7 +1041,7 @@ def cmd_done(a):
     md += ["", "## Wikipedia のカテゴリ(機械)"] + [f"- {x}" for x in st["wiki"]["categories"]] + ["", "## 採用した文面"]
     for p in st["picks"]:
         s = src(st, p["src"])
-        md += [f"### [{p['id']}] {s['kind']} / {p['as']}{' / ネタバレ印' if p['spoiler'] else ''}{' / 自動' if p['auto'] else ''} / 出所{s['id']} {s['domain']}",
+        md += [f"### [{p['id']}] {s['kind']} / {p['as']}{' / ネタバレ印' if p['spoiler'] else ''}{' / 自動' if p['auto'] else ''} / 出所{L(s['id'])} {s['domain']}",
                p["text"], ""]
     with open(os.path.join(d, "material.md"), "w", encoding="utf-8") as f:
         f.write("\n".join(md))
@@ -1056,7 +1107,7 @@ def cmd_probe(a):
             for i, p in enumerate(paras, 1):
                 n = p["t"].count(w)
                 if n and not where:
-                    where = f"初出=出所{s['id']} p{i}"
+                    where = f"初出=出所{L(s['id'])} p{i}"
                 raw += n
         print(f"  {w:<10} 採用 {cnt['計']:>2} ({' '.join(f'{k}{cnt[k]}' for k in KINDS)}) / 全文 {raw:>3} {where}")
 
