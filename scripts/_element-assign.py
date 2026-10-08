@@ -21,7 +21,7 @@ import argparse, ast, datetime, json, os, re, shutil, subprocess, sys, time, uni
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "v0.3"  # v0.2: 指示文から試金石の語の例を外す / タグ一覧の語を候補に / ありふれた名詞を候補から外す
+VERSION = "v0.4"  # v0.4(2026-10-09 ユーザ裁定): ネタバレ印の語は表に出さない(控えへ)/ 控えはサイトに出さず記録だけ  # v0.2: 指示文から試金石の語の例を外す / タグ一覧の語を候補に / ありふれた名詞を候補から外す
 ME = "python scripts/_element-assign.py"
 TEST_ROOT = os.environ.get("EH_ROOT")
 BASE = TEST_ROOT or os.path.join(ROOT, ".cache", "element-harvest")
@@ -31,6 +31,7 @@ MODEL = "claude-sonnet-5-5"
 # ── 方針(★ユーザ裁定待ちの物は案。 変える時はここだけ直す) ──
 ANI_SHOW = {"Theme": 60, "Cast": 70, "Setting": 70}  # AniList の票がこの線以上 = 表に出す案(今の取り込みの足切りと同じ)
 ANI_KEEP = 40                                         # この線以上 = 控えに残す
+SPOILER_TO_SUB = True                                # ★ユーザ裁定 2026-10-09「いらない」= ネタバレ印の語は表に出さず控えへ
 GENERIC = {"drama", "comedy", "romance", "slice-of-life", "action"}  # 汎用ジャンル = 信頼源(AniList)が言う時だけ。モデルには判定させない
 A2M = {"Romance": "romance", "Comedy": "comedy", "Drama": "drama", "Action": "action", "Fantasy": "fantasy",
        "Slice of Life": "slice-of-life", "Adventure": "adventure", "Sci-Fi": "sci-fi", "Mystery": "mystery",
@@ -179,6 +180,8 @@ def anilist_part(m, V):
             skipped.append(name)
             continue
         tier = "芯" if best >= ANI_SHOW.get(base, 999) else "在る"
+        if tier == "芯" and r["spoiler"] and SPOILER_TO_SUB:
+            tier = "在る"
         items.append({"word": ja or name, "en": name, "tier": tier, "votes": best, "by": {"自分": r["self"], "小説": r["novel"], "アニメ": r["anime"]},
                       "spoiler": r["spoiler"], "no_ja": not ja, "draft": draft, "reread": name in JA_OVERRIDE, "category": cat})
     fam = [e for e in m["anilist"]["entries"] if e["group"] in ("自分", "小説") or (e["group"] == "アニメ" and e.get("format") == "TV")]
@@ -377,6 +380,9 @@ def make_proposal(stem, m, V, cands, ans, use):
             e["tier"] = "芯"
         if not e["ani"]:
             e["spoiler"] = all(x["spoiler"] for x in e["mat"])
+    for e in merged.values():  # 根拠が終盤の展開だけの語も、表には出さない
+        if e["spoiler"] and e["tier"] == "芯" and SPOILER_TO_SUB:
+            e["tier"] = "在る"
     rows = sorted(merged.values(), key=lambda e: (e["tier"] != "芯", -(e["ani"]["votes"] if e["ani"] else 0), -len(e["mat"]), e["word"]))
     gnow = [V["genres"].get(g, g) for g in c["genres"]]
     gadd = [(V["genres"][k], sorted(v)) for k, v in sorted(gkeys.items()) if k not in c["genres"]]
@@ -397,8 +403,8 @@ def make_proposal(stem, m, V, cands, ans, use):
 
     n = 0
     isnew = lambda e: e["vocab"] == "新しい語"  # noqa: E731
-    for title, pick in (("表に出す案(芯)", lambda e: e["tier"] == "芯"),
-                        ("控えに置く案(在る・今の語彙に在る語)", lambda e: e["tier"] == "在る" and not isnew(e)),
+    for title, pick in (("表に出す案(芯)= サイトに出すのはここだけ", lambda e: e["tier"] == "芯"),
+                        ("控え(在る・今の語彙に在る語)= サイトには出さず記録だけ", lambda e: e["tier"] == "在る" and not isnew(e)),
                         ("新しい語の候補(在る・付けずに貯めて、何作にも出た語だけ採否を決める)", lambda e: e["tier"] == "在る" and isnew(e))):
         out += ["", f"## {title}"]
         for e in [x for x in rows if pick(x) and x["kind"] == "要素"]:
