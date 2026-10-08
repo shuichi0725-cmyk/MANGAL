@@ -21,6 +21,7 @@ usage:
   done <stem>                                    束(material.md/json)を作って報告
   status [<stem>]                                進み具合
   probe <stem> 語,語,…                           点検用: 集めた材料に語が在るか
+  auto <stem> [--fresh] [--model claude-haiku-5-5]  ★自動運転: 開く頁・採る段落を道具が Haiku に1回ずつ聞いて done まで進める
 種別 = wiki / 公式(official) / 考察(analysis) / ネタバレ(spoiler)
 役割 = 物語(story) / 作風(style) / 人物(people) / 主題(theme) / 展開(plot = ネタバレ印) / タグ(tags = 他サイトのタグ一覧)
 """
@@ -32,9 +33,11 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 import _rate_gate, _site_gate  # noqa: E402
 
-VERSION = "v0.3"  # v0.2: 折り返し行をつなぐ/タグ一覧を機械で採る/全文を見せて読んでから指す/公式の検索語
+VERSION = "v0.4"  # v0.2: 折り返し行をつなぐ/タグ一覧を機械で採る/全文を見せて読んでから指す/公式の検索語
 # v0.3(2026-10-09): 出所を英字(A,B,C…)に=検索結果の番号との取り違え防止 / 取れなかった頁は取得数に数えない / 壊れた検索URLを直す
+# v0.4(2026-10-09): 自動運転(auto)= 道具が Haiku を土台なしで1回ずつ呼ぶ / AniList のネタバレ印を「何件中何件」で持つ
 ME = "python scripts/_element-harvest.py"
+QUIET = False  # True = 取得時に段落の一覧を出さない(自動運転)
 TEST_ROOT = os.environ.get("EH_ROOT")  # 試験用: 置き場と台帳を丸ごと別フォルダへ逃がす
 BASE = TEST_ROOT or os.path.join(ROOT, ".cache", "element-harvest")
 LEDGER = os.path.join(TEST_ROOT or os.path.join(ROOT, "data", "element-harvest"), "ledger.jsonl")
@@ -478,9 +481,12 @@ def anilist_merged(ani):
         col = {"自分": "self", "小説": "novel", "アニメ": "anime", "漫画": "other"}[e["group"]]
         for t in e["tags"]:
             r = rows.setdefault(t["name"], {"name": t["name"], "category": t["category"], "self": 0, "novel": 0,
-                                           "anime": 0, "other": 0, "spoiler": False, "adult": False})
+                                           "anime": 0, "other": 0, "spoiler": False, "adult": False, "n": 0, "ns": 0})
             r[col] = max(r[col], t["rank"])
             r["spoiler"] |= t["spoiler"]
+            if col != "other":  # 印の粗さを見るため: 自分・小説・アニメのうち、この語を持つ件数と印つきの件数
+                r["n"] += 1
+                r["ns"] += 1 if t["spoiler"] else 0
             r["adult"] |= t["adult"]
     return sorted(rows.values(), key=lambda r: -max(r["self"], r["novel"], r["anime"], r["other"]))
 
@@ -698,6 +704,8 @@ def do_fetch(st, kind, url, origin, ref=None):
         print(f"  ★タグ一覧 p{','.join(map(str, got))} は道具が採った(役割=タグ)。 本文の段落は別に判断する")
     elif tags and idn["verdict"] == "要確認":
         print(f"  ★タグ一覧 = p{','.join(map(str, tags))}。 この頁で --same が通った時に道具が自動で採る")
+    if QUIET:  # 自動運転: 段落は judge_page がモデルに渡す
+        return
     seen = set()
     outline(paras, full=2500, seen=seen)  # 先頭2,500字ぶんは全文で見せる(読むための往復を減らす)
     s["seen"] = sorted(seen)
@@ -804,19 +812,27 @@ def cmd_open(a):
     hint(st)
 
 
-def cmd_search(a):
-    st = load(a.stem)
-    k = pick_enum(a.kind, KINDS, KIND_ALIAS, "種別")
-    ns = sum(1 for q in st["searches"] if q["kind"] == k)
-    if ns >= CAP["search"][k]:
-        die(f"{k} の検索は上限({CAP['search'][k]}回)に達した")
+def unusable(st, url):
+    """この検索結果を開けない理由(開けるなら空文字)。 可否の正本は取得時の _site_gate。 ここは一覧に印を付けるための早見。"""
+    host = _site_gate.host_of(url)
+    if any(host == d or host.endswith("." + d) for d in _site_gate.DENY):
+        return "止め札"
+    if not_material(host):
+        return "対象外"
+    if any(host == d or host.endswith("." + d) for d in KNOWN_ROBOTS_DENY):
+        return "robots"
+    if any(x["domain"] == host and x["status"] == "empty" for x in st["sources"]):
+        return "今回は空"
+    return ""
+
+
+def run_search(st, k, query=None, qi=None):
+    """魚で検索して記録する(定型クエリ qi=1|2、または自由文)。 → 検索の記録"""
     c = st["card"]
-    if a.query:
-        q = a.query.strip()
+    if query:
+        q = query.strip()
     else:
-        qi = int(a.q) if a.q else min(sum(1 for x in st["searches"] if x["kind"] == k and not x.get("free")) + 1, 2)
-        if qi not in (1, 2):
-            die("--q は 1 か 2")
+        qi = qi or min(sum(1 for x in st["searches"] if x["kind"] == k and not x.get("free")) + 1, 2)
         au = (c["authors"] or c["original_authors"] or [""])[0]
         q = QUERIES[k][qi - 1].format(t=c["base_title"], full=c["title"], a=au, pub=c.get("publisher") or "",
                                       imprint=c.get("imprint") or c.get("publisher") or "")
@@ -833,17 +849,27 @@ def cmd_search(a):
     rows = []
     for i, r in enumerate((res.get("results") or [])[:10], 1):
         rows.append({"n": i, "title": r.get("title") or "", "url": fix_url(r.get("url") or ""), "snippet": (r.get("snippet") or "")[:200]})
-    sid = f"s{len(st['searches']) + 1}"
-    st["searches"].append({"id": sid, "kind": k, "q": q, "free": bool(a.query), "at": now(), "results": rows})
+    rec = {"id": f"s{len(st['searches']) + 1}", "kind": k, "q": q, "free": bool(query), "at": now(), "results": rows}
+    st["searches"].append(rec)
     save(st)
+    return rec
+
+
+def cmd_search(a):
+    st = load(a.stem)
+    k = pick_enum(a.kind, KINDS, KIND_ALIAS, "種別")
+    ns = sum(1 for q in st["searches"] if q["kind"] == k)
+    if ns >= CAP["search"][k]:
+        die(f"{k} の検索は上限({CAP['search'][k]}回)に達した")
+    if a.q and int(a.q) not in (1, 2):
+        die("--q は 1 か 2")
+    rec = run_search(st, k, query=a.query, qi=int(a.q) if a.q else None)
+    sid, q, rows = rec["id"], rec["q"], rec["results"]
     print(f"検索 {sid} [{k}] 「{q}」 → {len(rows)}件")
     for r in rows:
         host = _site_gate.host_of(r["url"])
-        deny = any(host == d or host.endswith("." + d) for d in _site_gate.DENY)
-        mark = ("✖止め札 " if deny else "✖対象外 " if not_material(host)
-                else "✖robots " if any(host == d or host.endswith("." + d) for d in KNOWN_ROBOTS_DENY)
-                else "✖今回は空 " if any(x["domain"] == host and x["status"] == "empty" for x in st["sources"]) else "")
-        print(f"  {r['n']:>2}. {mark}[{host}] {r['title'][:46]}\n      {r['snippet'][:96]}")
+        mark = unusable(st, r["url"])
+        print(f"  {r['n']:>2}. {('✖' + mark + ' ') if mark else ''}[{host}] {r['title'][:46]}\n      {r['snippet'][:96]}")
     print(f"\n開く頁を番号で指す: {ME} fetch {a.stem} {sid} <番号,番号>   (この種別の取得残り {CAP['fetch'][k] - n_fetch(st, k)}頁)")
 
 
@@ -1073,6 +1099,180 @@ def cmd_done(a):
     print(f"台帳 1行追記 → {os.path.relpath(LEDGER, ROOT)}")
 
 
+# ───────── 自動運転(★道具が Haiku を「土台なし」で1回ずつ呼ぶ。 会話として運転させない = 1作 約200万→数万トークン) ─────────
+AUTO_MODEL = "claude-haiku-5-5"
+WANT = {"wiki": 2, "公式": 1, "考察": 2, "ネタバレ": 1}  # 種別ごとの採用の目安(頁数)
+LOOK = {
+    "wiki": "アニヲタWiki などの百科の、この作品の記事と、主人公(主要人物)の記事。 作風・舞台・人物の性格や属性が書かれた頁",
+    "公式": "出版社・掲載誌・アニメ公式サイト・電子書店の、この漫画そのものの紹介文(あらすじ)が載った頁",
+    "考察": "この作品が何を描いているか(主題・魅力・作風)を、作品全体について論じている頁。 1話だけの感想より全体の考察",
+    "ネタバレ": "中盤以降・結末までの展開をまとめた頁(全巻のあらすじ・最終回の解説)",
+}
+TRIAGE_SCHEMA = {"type": "object", "required": ["open"], "properties": {"open": {"type": "array", "items": {"type": "integer"}}}}
+PICK_SCHEMA = {"type": "object", "required": ["skip", "same", "picks"], "properties": {
+    "skip": {"type": "string", "enum": ["", "別作品", "薄い", "書誌や商品情報だけ", "重複"]},
+    "same": {"type": "string"},
+    "picks": {"type": "array", "items": {"type": "object", "required": ["paras", "as"], "properties": {
+        "paras": {"type": "array", "items": {"type": "integer"}},
+        "as": {"type": "string", "enum": ["物語", "作風", "人物", "主題", "展開"]}}}}}}
+
+
+def card_text(c):
+    return (f"題: {c['title']} / 著者: {'・'.join(c['authors']) or '-'} / 原作: {'・'.join(c['original_authors']) or '-'}"
+            f" / 版元: {c.get('publisher') or '-'} {c.get('imprint') or ''} / 掲載誌: {c.get('magazine') or '-'}"
+            f" / {c.get('year_started') or '?'}年〜 / 全{c['volumes']}巻\nあらすじ(こちらのデータ): {c['synopsis'] or c['catch'] or '(なし)'}")
+
+
+def ask_model(st, prompt, schema, model):
+    import _lean_claude
+    try:
+        ans, use = _lean_claude.ask(prompt, schema, model)
+    except _lean_claude.LeanError as e:
+        save(st)
+        stop(f"モデルの呼び出しが失敗: {e}")
+    u = st.setdefault("auto_use", {"calls": 0, "in": 0, "out": 0, "cost_usd": 0.0, "sec": 0.0})
+    u["calls"] += 1
+    u["in"] += use["in"]
+    u["out"] += use["out"]
+    u["sec"] = round(u["sec"] + use["sec"], 1)
+    u["cost_usd"] = round(u["cost_usd"] + (use.get("cost_usd") or 0), 5)
+    return ans
+
+
+def triage(st, k, rec, model):
+    """検索結果から開く頁を選ばせる(番号だけ返させる)。 開けない結果は見せる前に外す。"""
+    used = {x["url"] for x in st["sources"]} | {x["final_url"] for x in st["sources"]}
+    rows = [r for r in rec["results"] if r["url"] and not unusable(st, r["url"]) and r["url"] not in used
+            and _site_gate.host_of(r["url"]) != "ja.wikipedia.org"]
+    if not rows:
+        return []
+    prompt = "\n".join([
+        "次の漫画について、検索結果のうち「開く価値のある頁」を番号で選ぶ。", "", "■ 作品", card_text(st["card"]), "",
+        f"■ 探しているもの: {LOOK[k]}", "",
+        "■ 決まり", "- 同じ題の別作品・続編・スピンオフ・ゲーム版・アニメだけの頁(漫画の話が無い)・グッズ・ニュース・通販の一覧・動画は選ばない",
+        "- 上の作品カード(著者・版元・年・あらすじ)と食い違う頁は選ばない", "- 良い順に最大3件。 該当が無ければ空の配列", "",
+        "■ 検索結果"] + [f"{r['n']}. [{_site_gate.host_of(r['url'])}] {r['title'][:70]} — {r['snippet'][:160]}" for r in rows]
+        + ["", '出力: {"open": [番号, ...]}'])
+    ans = ask_model(st, prompt, TRIAGE_SCHEMA, model)
+    ok = {r["n"] for r in rows}
+    return [n for n in dict.fromkeys(ans.get("open") or []) if n in ok][:3]
+
+
+def judge_page(st, s, model, budget=5000):
+    """取得した頁の段落を見せて、採る段落(番号と役割)を返させる。 道具が検査してから採用する。"""
+    paras = paras_of(st, s["id"])
+    lines, shown, used = [], set(), 0
+    for i, p in enumerate(paras, 1):
+        if p["h"]:
+            lines.append(f"## {p['t'][:60]}")
+        elif p.get("tag"):
+            continue  # タグ一覧は道具が採る
+        elif used < budget:
+            lines.append(f"p{i} {p['t']}")
+            shown.add(i)
+            used += len(p["t"])
+    if not shown:
+        s["skip"] = "本文なし"
+        return
+    v = s["identity"]["verdict"]
+    prompt = "\n".join([
+        "次の漫画の資料として、この頁のどの段落が使えるかを番号で選ぶ。 文面は書かない(番号と役割だけ)。", "", "■ 作品", card_text(st["card"]), "",
+        f"■ この頁: {s['domain']} 「{(s['title'] or '')[:60]}」 / 同定の機械検査 = {v}"
+        + ("(題と著者名が頁に在る)" if v == "OK" else "(題は在るが著者名が無い)"), "",
+        "■ 採る段落と役割", "- どんな話か(設定・主人公の境遇・舞台) → 物語", "- 作風・雰囲気・どんな読み味か → 作風",
+        "- 主要人物の性格・関係・属性 → 人物", "- 何を描いているか(主題) → 主題", "- 中盤以降・結末の展開 → 展開",
+        "■ 採らない段落", "発売日・巻数・価格 / スタッフ・声優・主題歌 / 売上・ランキング・受賞の羅列 / グッズ・イベントの告知 /",
+        "書き手の自己紹介・前置き・近況 / コメント欄 / 別の作品の紹介 / 目次・メニュー。 迷ったら採らない。 全部で最大8段落",
+        "■ skip(この頁を使わない時だけ)", "別作品 = 作品カードと違う作品の頁 / 薄い = 使える段落が無い / 書誌や商品情報だけ / 重複 = 既に採った内容と同じ",
+        "■ same", ("同定が「要確認」なので必須: この頁と、上の作品カードの両方に一字一句で出てくる4字以上の語句(主人公の氏名など)。 無ければ skip=別作品"
+                   if v != "OK" else "空文字でよい"), "",
+        "■ 段落"] + lines + ["", '出力: {"skip": "", "same": "", "picks": [{"paras": [番号...], "as": "役割"}]}'])
+    ans = ask_model(st, prompt, PICK_SCHEMA, model)
+    s["seen"] = sorted(shown)
+    if ans.get("skip"):
+        st["picks"] = [p for p in st["picks"] if p["src"] != s["id"]]
+        s["skip"] = ans["skip"]
+        return
+    if v == "別作品の疑い":
+        s["skip"] = "別作品"
+        return
+    if v == "要確認":
+        ph = norm(ans.get("same") or "")
+        if len(ph) < 4 or ph not in norm(raw_of(st, s["id"])) or ph not in own_text(st["card"]):
+            s["skip"], s["why"] = "その他", "同じ作品だと示す語句を道具が確かめられなかった"
+            return
+        s["same"] = ans["same"]
+    autopick_tags(st, s, paras)
+    k, n = s["kind"], 0
+    if s["id"] not in adopted(st, k) and len(adopted(st, k)) >= CAP["adopt"][k]:
+        s["skip"] = "重複"
+        return
+    got = {i for p in st["picks"] if p["src"] == s["id"] for i in p["paras"]}
+    for pk in ans.get("picks") or []:
+        idxs = [i for i in dict.fromkeys(pk.get("paras") or []) if isinstance(i, int) and i in shown and i not in got][:8 - n]
+        if not idxs or pk.get("as") not in AS:
+            continue
+        if add_pick(st, s, paras, idxs, pk["as"]):
+            got |= set(idxs)
+            n += len(idxs)
+    if not human_chars(st, s["id"]):
+        st["picks"] = [p for p in st["picks"] if p["src"] != s["id"]]
+        s["skip"] = "薄い"
+
+
+def auto_none(st, k):
+    ss = [x for x in st["sources"] if x["kind"] == k and x["origin"] != "auto"]
+    if not any(q["kind"] == k and any(r["url"] and not unusable(st, r["url"]) for r in q["results"]) for q in st["searches"]):
+        return "検索に出ない"
+    if ss and all(x["skip"] == "別作品" for x in ss if x["status"] == "fetched") and any(x["status"] == "fetched" for x in ss):
+        return "出たが別作品"
+    if not any(x["status"] == "fetched" for x in ss):
+        return "取得できない" if ss else "検索に出ない"
+    return "見たが薄い"
+
+
+def cmd_auto(a):
+    global QUIET
+    QUIET = True
+    cmd_open(argparse.Namespace(stem=a.stem, model=a.model.replace("claude-", "") + "(auto)", fresh=a.fresh))
+    st = load(a.stem)
+    if st.get("done_at"):
+        print("済(やり直すなら --fresh)")
+        return
+    for k in KINDS:
+        if k in st["none"]:
+            continue
+        for s in [x for x in pending(st) if x["kind"] == k]:  # 中断からの再開: 取得済みで未判断の頁を先に片づける
+            judge_page(st, s, a.model)
+            save(st)
+        while len(adopted(st, k)) < WANT[k]:
+            ns = sum(1 for q in st["searches"] if q["kind"] == k)
+            if ns >= 2 or n_fetch(st, k) >= CAP["fetch"][k] or n_tried(st) >= CAP["fetch_work"]:
+                break
+            rec = run_search(st, k, qi=ns + 1)
+            nums = triage(st, k, rec, a.model)
+            save(st)
+            print(f"[{k}] 検索{ns + 1}「{rec['q'][:40]}」→ {len(rec['results'])}件 / 開く {nums}")
+            for n in nums:
+                if len(adopted(st, k)) >= WANT[k] or n_fetch(st, k) >= CAP["fetch"][k] or n_tried(st) >= CAP["fetch_work"]:
+                    break
+                r = next(x for x in rec["results"] if x["n"] == n)
+                before = len(st["sources"])
+                do_fetch(st, k, r["url"], "search", ref=f"{rec['id']}:{n}")
+                save(st)
+                if len(st["sources"]) > before and st["sources"][-1]["status"] == "fetched":
+                    s = st["sources"][-1]
+                    judge_page(st, s, a.model)
+                    save(st)
+                    print(f"   出所{L(s['id'])} {s['domain']} → " + (f"採用 {human_chars(st, s['id'])}字" if human_chars(st, s["id"]) else f"不採用={s['skip']}"))
+        if not adopted(st, k) and not (k == "wiki" and any(p["auto"] for p in st["picks"])):
+            st["none"][k] = auto_none(st, k)
+            save(st)
+    u = st.get("auto_use") or {}
+    print(f"モデル呼び出し {u.get('calls', 0)}回 / 読み込み {u.get('in', 0)}・出力 {u.get('out', 0)} トークン / {u.get('sec', 0)}秒")
+    cmd_done(argparse.Namespace(stem=a.stem))
+
+
 def cmd_status(a):
     if a.stem:
         st = load(a.stem)
@@ -1127,6 +1327,8 @@ def main():
     p = sp.add_parser("done"); p.add_argument("stem"); p.set_defaults(f=cmd_done)
     p = sp.add_parser("status"); p.add_argument("stem", nargs="?"); p.set_defaults(f=cmd_status)
     p = sp.add_parser("probe"); p.add_argument("stem"); p.add_argument("words"); p.set_defaults(f=cmd_probe)
+    p = sp.add_parser("auto"); p.add_argument("stem"); p.add_argument("--fresh", action="store_true")
+    p.add_argument("--model", default=AUTO_MODEL); p.set_defaults(f=cmd_auto)
     a = ap.parse_args()
     a.f(a)
 

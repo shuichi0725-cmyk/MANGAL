@@ -22,7 +22,7 @@ import argparse, ast, datetime, json, os, re, shutil, subprocess, sys, time, uni
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "v0.6"  # v0.6: 作品ごとのユーザ裁定(rulings.yml)を付与案より優先 / apply のジャンル追記を二重にしない  # v0.5: apply(表に出す案を seed へ書く口。ユーザの Go 発話の引用が必須)  # v0.4(2026-10-09 ユーザ裁定): ネタバレ印の語は表に出さない(控えへ)/ 控えはサイトに出さず記録だけ  # v0.2: 指示文から試金石の語の例を外す / タグ一覧の語を候補に / ありふれた名詞を候補から外す
+VERSION = "v0.7"  # v0.7: ネタバレ印は「その語を持つエントリの半分以上に付いている時だけ」有効 / 呼び出しは共通部品(_lean_claude)  # v0.6: 作品ごとのユーザ裁定(rulings.yml)を付与案より優先 / apply のジャンル追記を二重にしない  # v0.5: apply(表に出す案を seed へ書く口。ユーザの Go 発話の引用が必須)  # v0.4(2026-10-09 ユーザ裁定): ネタバレ印の語は表に出さない(控えへ)/ 控えはサイトに出さず記録だけ  # v0.2: 指示文から試金石の語の例を外す / タグ一覧の語を候補に / ありふれた名詞を候補から外す
 ME = "python scripts/_element-assign.py"
 TEST_ROOT = os.environ.get("EH_ROOT")
 BASE = TEST_ROOT or os.path.join(ROOT, ".cache", "element-harvest")
@@ -33,6 +33,8 @@ MODEL = "claude-sonnet-5-5"
 ANI_SHOW = {"Theme": 60, "Cast": 70, "Setting": 70}  # AniList の票がこの線以上 = 表に出す案(今の取り込みの足切りと同じ)
 ANI_KEEP = 40                                         # この線以上 = 控えに残す
 SPOILER_TO_SUB = True                                # ★ユーザ裁定 2026-10-09「いらない」= ネタバレ印の語は表に出さず控えへ
+# ★ただし AniList の印は粗い(三角関係の印は関連7件中1件だけだった)。 その語を持つエントリの「半分以上」に印が在る時だけ有効にする
+#   (俺ガイルの4語へのユーザの反応と全部合う: 三角関係1/7=出す・更生1/2=控え・片思い2/3=控え・悲劇1/1=控え)
 GENERIC = {"drama", "comedy", "romance", "slice-of-life", "action"}  # 汎用ジャンル = 信頼源(AniList)が言う時だけ。モデルには判定させない
 A2M = {"Romance": "romance", "Comedy": "comedy", "Drama": "drama", "Action": "action", "Fantasy": "fantasy",
        "Slice of Life": "slice-of-life", "Adventure": "adventure", "Sci-Fi": "sci-fi", "Mystery": "mystery",
@@ -167,6 +169,7 @@ def anilist_part(m, V):
     items, skipped = [], []
     for r in m["anilist"]["tags"]:
         best = max(r["self"], r["novel"], r["anime"])  # 自分・原作小説・アニメ から引き継ぐ(他の漫画=アンソロジー等は使わない)
+        spoiler = (r["ns"] * 2 >= r["n"]) if r.get("n") else r["spoiler"]  # n/ns が無い古い束は従来どおり
         name, cat = r["name"], r["category"]
         base = cat.split("-")[0]
         if name in V["noise"] or cat == "Demographic" or r["adult"] or base in ("Sexual Content", "Technical") or cat.startswith("Theme-Game-Sport"):
@@ -181,10 +184,10 @@ def anilist_part(m, V):
             skipped.append(name)
             continue
         tier = "芯" if best >= ANI_SHOW.get(base, 999) else "在る"
-        if tier == "芯" and r["spoiler"] and SPOILER_TO_SUB:
+        if tier == "芯" and spoiler and SPOILER_TO_SUB:
             tier = "在る"
         items.append({"word": ja or name, "en": name, "tier": tier, "votes": best, "by": {"自分": r["self"], "小説": r["novel"], "アニメ": r["anime"]},
-                      "spoiler": r["spoiler"], "no_ja": not ja, "draft": draft, "reread": name in JA_OVERRIDE, "category": cat})
+                      "spoiler": spoiler, "no_ja": not ja, "draft": draft, "reread": name in JA_OVERRIDE, "category": cat})
     fam = [e for e in m["anilist"]["entries"] if e["group"] in ("自分", "小説") or (e["group"] == "アニメ" and e.get("format") == "TV")]
     gkeys = {}
     for e in fam:
@@ -279,36 +282,14 @@ def build_prompt(m, V, cands):
     return "\n".join(L)
 
 
-def claude_exe():
-    w = shutil.which("claude")
-    if not w:
-        die("claude コマンドが見つからない")
-    exe = os.path.join(os.path.dirname(w), "node_modules", "@anthropic-ai", "claude-code", "bin", "claude.exe")
-    return exe if os.path.exists(exe) else w
-
-
 def call_model(prompt, model):
     """道具なし・短いシステム文で1回だけ呼ぶ(会話の土台を読ませない)。 → (答え, 使用量)"""
-    args = [claude_exe(), "-p", "--model", model, "--no-session-persistence", "--output-format", "json", "--tools", "",
-            "--strict-mcp-config", "--system-prompt", "あなたは漫画データベースの分類の助手。指示された JSON の形だけで答える。",
-            "--json-schema", json.dumps(SCHEMA, ensure_ascii=False)]
-    t = time.time()
+    sys.path.insert(0, os.path.join(ROOT, "scripts"))
+    import _lean_claude
     try:
-        r = subprocess.run(args, input=prompt.encode("utf-8"), capture_output=True, timeout=600, cwd=os.path.expanduser("~"))
-    except subprocess.TimeoutExpired:
-        stop("モデルの応答が10分で返らなかった")
-    out = r.stdout.decode("utf-8", "replace")
-    try:
-        d = json.loads(out)
-    except ValueError:
-        stop(f"モデルの呼び出しが失敗(exit {r.returncode}): {(out or r.stderr.decode('utf-8', 'replace'))[:200]}")
-    if d.get("is_error") or not isinstance(d.get("structured_output"), dict):
-        stop(f"モデルが答えを返さなかった: {str(d.get('result'))[:200]}")
-    u = d.get("usage") or {}
-    use = {"model": model, "sec": round(time.time() - t, 1), "out": u.get("output_tokens", 0),
-           "in": u.get("input_tokens", 0) + u.get("cache_read_input_tokens", 0) + u.get("cache_creation_input_tokens", 0),
-           "cost_usd": d.get("total_cost_usd")}
-    return d["structured_output"], use
+        return _lean_claude.ask(prompt, SCHEMA, model, system="あなたは漫画データベースの分類の助手。指示された JSON の形だけで答える。")
+    except _lean_claude.LeanError as e:
+        stop(str(e))
 
 
 # ───────── 4) 検査して付与案にする ─────────
