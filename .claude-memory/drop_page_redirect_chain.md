@@ -20,3 +20,10 @@ Cloudflare の `_redirects` は連鎖を辿らない。
 4. R2上の実フォルダは残るので、次の週次蒸留で `_r2-sync.py --prune` を付ける([[r2_orphan_pages_prune_missing]])。
 
 関連: [[reflect_protocol_fast]] [[slug_collision_year_rule]] [[wild7_franchise_state]]
+
+## ★2026-10-08 追記: 正本は slug-aliases.yml だけ(public/_redirects は生成物)
+- `public/_redirects` と KV の `redirects.json` は **`_gen-redirects.py` が `data/slug-aliases.yml` から毎回作り直す**。
+  `_redirects` に手で足した行は、週次の `_kv-redirects-sync.py` の再生成で**黙って消え、KV にも入らない**。
+- 実踏: ホロビート改名(horobiito→horobeat・6b4d956ec)は `_redirects` に1行足しただけ → 週次で消えた →
+  `slug-aliases.yml` に `horobiito: horobeat` を足して KV 再投入(31,573件)。旧slugが本番未公開だったので実害なし。
+- slug を改名したら **`slug-aliases.yml` に old: new を書く**(上の手順3)。`_redirects` を直接いじらない。
