@@ -162,7 +162,7 @@ def load_result(stem):
         "genres_add": prop.get("genres_add") or [],
         "genres_mat": [e["word"] for e in prop["rows"] if e["kind"] == "ジャンル" and e["tier"] in ("芯", "在る")],
         "core": [(e["word"], "AniList" if e.get("ani") and not e.get("mat") else "両方" if e.get("ani") else "材料", e["vocab"]) for e in rows if e.get("cls") == "表"],
-        "sub": [e["word"] for e in rows if e.get("cls") == "隠し" and e.get("hid") in ("上限", "在る", "ネタバレ印", "出さない語") and e["vocab"] != "新しい語"],
+        "sub": [e["word"] for e in rows if e.get("cls") == "隠し" and e.get("hid") in ("上限", "在る", "ネタバレ印", "ありふれた語", "出さない語") and e["vocab"] != "新しい語"],
         "wait": [e["word"] for e in rows if e.get("cls") == "隠し" and e.get("hid") == "語彙か訳が無い"],  # 強いのに語彙か訳が無くて出せない語
         "wait_src": {e["word"]: (f"AniList {e['ani']['en']}" + ("(仮の訳)" if e["ani"].get("draft") else "(訳なし)") if e.get("ani") else "材料(語彙に無い)")
                      for e in rows if e.get("cls") == "隠し" and e.get("hid") == "語彙か訳が無い"},

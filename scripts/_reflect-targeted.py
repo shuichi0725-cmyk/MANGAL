@@ -279,6 +279,19 @@ def main():
     pv_changed = []
     if not a.no_preview:
         import shutil
+        # ★表示語彙の seed(訳表・和名タグ表)は、テスト環境では .preview-data/seeds の「写し」を頁の要素欄が読む
+        #   (loadTagI18n / loadWameiTags は DATA_DIR 配下)。 写しは手で同期する決まりしか無く、語彙に語を足しても
+        #   テスト環境の頁にだけ出ない事故が起きた(2026-10-09 俺ガイル: 「ぼっち」を足したのに preview の頁に出ていなかった。
+        #   索引は data/seeds を直に読むので一覧側には出る = 気づきにくい)。 反映のたびに差があれば写す。
+        for _f in ("tag-i18n.yml", "wamei-tags.yml"):
+            _s = os.path.join(ROOT, "data", "seeds", _f)
+            _d = os.path.join(ROOT, ".preview-data", "seeds", _f)
+            if os.path.exists(_s) and os.path.exists(_d):
+                with open(_s, "rb") as _fs, open(_d, "rb") as _fd:
+                    _same = _fs.read() == _fd.read()
+                if not _same:
+                    shutil.copyfile(_s, _d)
+                    print(f"  preview の表示語彙を同期: .preview-data/seeds/{_f}", flush=True)
         for st in only:
             src = os.path.join(MV2, st + ".yml")
             if not os.path.exists(src):

@@ -22,7 +22,7 @@ import argparse, ast, datetime, json, os, re, shutil, subprocess, sys, time, uni
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "v0.9"  # v0.9: 関連作から引き継ぐのは本筋のエントリだけ(票は収集の道具 v0.5 が絞る。 ジャンルもそろえる)/ 使わなかったタグを付与案に見せる  # v0.8: 表に出すのは強い順に最大10語・語彙と訳が在る語だけ / AniList と材料が一致した語を先に / 隠して持つ語を欄に分ける  # v0.7: ネタバレ印は「その語を持つエントリの半分以上に付いている時だけ」有効 / 呼び出しは共通部品(_lean_claude)  # v0.6: 作品ごとのユーザ裁定(rulings.yml)を付与案より優先 / apply のジャンル追記を二重にしない  # v0.5: apply(表に出す案を seed へ書く口。ユーザの Go 発話の引用が必須)  # v0.4(2026-10-09 ユーザ裁定): ネタバレ印の語は表に出さない(控えへ)/ 控えはサイトに出さず記録だけ  # v0.2: 指示文から試金石の語の例を外す / タグ一覧の語を候補に / ありふれた名詞を候補から外す
+VERSION = "v0.10"  # v0.10: ありふれた語(語ごとのユーザ裁定 rulings.yml word_rulings)は表に出さず隠して持つ  # v0.9: 関連作から引き継ぐのは本筋のエントリだけ(票は収集の道具 v0.5 が絞る。 ジャンルもそろえる)/ 使わなかったタグを付与案に見せる  # v0.8: 表に出すのは強い順に最大10語・語彙と訳が在る語だけ / AniList と材料が一致した語を先に / 隠して持つ語を欄に分ける  # v0.7: ネタバレ印は「その語を持つエントリの半分以上に付いている時だけ」有効 / 呼び出しは共通部品(_lean_claude)  # v0.6: 作品ごとのユーザ裁定(rulings.yml)を付与案より優先 / apply のジャンル追記を二重にしない  # v0.5: apply(表に出す案を seed へ書く口。ユーザの Go 発話の引用が必須)  # v0.4(2026-10-09 ユーザ裁定): ネタバレ印の語は表に出さない(控えへ)/ 控えはサイトに出さず記録だけ  # v0.2: 指示文から試金石の語の例を外す / タグ一覧の語を候補に / ありふれた名詞を候補から外す
 ME = "python scripts/_element-assign.py"
 TEST_ROOT = os.environ.get("EH_ROOT")
 BASE = TEST_ROOT or os.path.join(ROOT, ".cache", "element-harvest")
@@ -370,6 +370,22 @@ def load_rulings(stem):
     return show, hide
 
 
+def load_word_rulings():
+    """語ごとのユーザ裁定(rulings.yml の word_rulings)。 全作品に効く。
+    → {ありふれた語: 引用} = 表には出さず隠して持つ語(2026-10-09 ユーザ裁定「見えない適用にする」)"""
+    import yaml
+    p = os.path.join(ROOT, "data", "element-harvest", "rulings.yml")
+    common = {}
+    if os.path.exists(p):
+        with open(p, encoding="utf-8") as f:
+            doc = yaml.safe_load(f) or {}
+        for r in doc.get("word_rulings") or []:
+            if r.get("kind") == "hide_common":
+                for w in r.get("words") or []:
+                    common[w] = r.get("quote") or ""
+    return common
+
+
 def make_proposal(stem, m, V, cands, ans, use):
     ani, gkeys, ani_skip, ani_weak = anilist_part(m, V)
     ok, bad, missing = verify(m, V, cands, ans)
@@ -406,6 +422,7 @@ def make_proposal(stem, m, V, cands, ans, use):
         v = e["ani"]["votes"] if e["ani"] else 0
         return (0 if e.get("ruled") else 1, 0 if (e["ani"] and e["mat"]) else 1 if e["ani"] else 2, -v, -len(e["mat"]), e["word"])
 
+    common = load_word_rulings()  # ありふれた語(語ごとのユーザ裁定)= 表には出さず隠して持つ
     n_show = 0
     for e in sorted(merged.values(), key=strength):
         if e["kind"] != "要素":
@@ -413,6 +430,8 @@ def make_proposal(stem, m, V, cands, ans, use):
         a = e["ani"] or {}
         if e["tier"] != "芯":
             e["cls"], e["hid"] = "隠し", "ネタバレ印" if e["spoiler"] and a.get("votes", 0) >= ANI_SHOW.get(a.get("category", "").split("-")[0], 999) else "在る"
+        elif e["word"] in common and not e.get("ruled"):
+            e["cls"], e["hid"] = "隠し", "ありふれた語"
         elif a.get("en") in HIDE_ALWAYS and not e.get("ruled"):
             e["cls"], e["hid"] = "隠し", "出さない語"
         elif e["vocab"] not in ("語彙内", "表示できる語") or a.get("no_ja") or a.get("draft"):
@@ -446,7 +465,7 @@ def make_proposal(stem, m, V, cands, ans, use):
     for title, pick in ((f"表に出す案(強い順に最大{MAX_SHOW}語)= サイトに出すのはここだけ", lambda e: e.get("cls") == "表"),
                         ("隠して持つ: 強いが上限であふれた語", lambda e: hid(e, "上限")),
                         ("隠して持つ: 強いが語彙か訳が無くて出せない語(語ごとの裁定の候補)", lambda e: hid(e, "語彙か訳が無い")),
-                        ("隠して持つ: ネタバレ印・出さない決まりの語", lambda e: hid(e, "ネタバレ印", "出さない語")),
+                        ("隠して持つ: ネタバレ印・ありふれた語・出さない決まりの語", lambda e: hid(e, "ネタバレ印", "ありふれた語", "出さない語")),
                         ("隠して持つ: 作中に在るが中心でない語", lambda e: hid(e, "在る") and not isnew(e)),
                         ("新しい語の候補(在る・付けずに貯めて、何作にも出た語だけ採否を決める)", lambda e: hid(e, "在る") and isnew(e))):
         out += ["", f"## {title}"]

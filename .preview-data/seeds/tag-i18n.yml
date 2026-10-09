@@ -217,3 +217,20 @@ tags:
   Handball:                     {ja: ハンドボール,     genre: sports}
   Fencing:                      {ja: フェンシング,     genre: sports}
   Bowling:                      {ja: ボウリング,       genre: sports}
+  # ── 2026-10-09 ユーザ裁定で追加(要素付与の柱。「たす今後も足して良い。」)= 人物・舞台系(Cast-*/Setting-*)のタグの訳。
+  #    ★今の取り込み(_build-anilist-enrich-map.py)は Cast/Setting を頁に入れていないので、既存の頁の表示は変わらない。
+  #      効くのは要素付与(_element-assign.py apply)を通した頁と、取り込みの足切りを直した後。
+  "Ensemble Cast":              {ja: 群像劇,           genre: ""}
+  Elf:                          {ja: エルフ,           genre: ""}
+  Witch:                        {ja: 魔女,             genre: ""}
+  Amnesia:                      {ja: 記憶喪失,         genre: ""}
+  Dystopian:                    {ja: ディストピア,     genre: ""}
+  Detective:                    {ja: 探偵,             genre: ""}
+  Gyaru:                        {ja: ギャル,           genre: ""}
+  Teacher:                      {ja: 教師,             genre: ""}
+  Twins:                        {ja: 双子,             genre: ""}
+  Ojou-sama:                    {ja: お嬢様,           genre: ""}
+  Tomboy:                       {ja: ボーイッシュ,     genre: ""}
+  Mermaid:                      {ja: 人魚,             genre: ""}
+  Femboy:                       {ja: 男の娘,           genre: ""}
+  Homeless:                     {ja: ホームレス,       genre: ""}
