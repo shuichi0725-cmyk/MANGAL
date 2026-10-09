@@ -10,8 +10,8 @@ description: 要素付与して <作品>=要素収集(element-harvest)の束か�
 要素収集(skill `element-harvest`)が作った束(`.cache/element-harvest/<stem>/material.json`)から、
 その作品に付けるジャンル・要素の**付与案**を作る。
 
-- **案を作るだけ**。本番データ(`data/manga.v2` / seed / 索引)には一切書かない(試行中。書き込みの口はまだ無い)。
-- 試金石 = 『やはり俺の青春ラブコメはまちがっている。』(2頁)。ここで納得が出るまで広げない。
+- `run` / `check` は**案を作るだけ**。本番データ(`data/manga.v2` / seed / 索引)には書かない。書くのは `apply`(下の「本番へ書く」。ユーザの Go が要る・Opus の仕事)。
+- 試金石 = 『やはり俺の青春ラブコメはまちがっている。』(2頁・反映済み)。出し方の線は 2026-10-09 にユーザ裁定で確定(確かな出どころの語だけ・強い順に最大10・材料が薄い作品は埋めない・作品ごとの裁定は求めない)。30作の全自動の試し(trial30)の結果は `data/element-harvest/trial30-summary.tsv`。
 
 ## やること (1コマンド)
 
@@ -66,6 +66,9 @@ git add … && git commit && git push                                           
 - ★**AniList タグの訳(`data/seeds/tag-i18n.yml`)は足してよい**(2026-10-09 ユーザ裁定「たす今後も足して良い。」= 毎回聞かなくてよい)。迷いのない訳だけ、末尾に日付と裁定の引用を書いて純粋追加(`genre: ""`)。訳し方に幅がある語は急がない。
 - ★語彙(和名タグ表・訳表)を変えたら、**テスト環境の写し `.preview-data/seeds/` も同じにする**(頁の要素欄は写しを読む。`_reflect-targeted.py` が反映のたびに差を写す。2026-10-09 に「ぼっち」がテスト環境の頁にだけ出ない漏れを実踏)。
 - ★**語ごとのユーザ裁定 = `rulings.yml` の `word_rulings`**(`hide_common` = ありふれた語は表に出さず隠して持つ)。語を足す時は、足す語を見せて裁定を受けてから。
+- ★**隠して持つ語は羅針盤の「隠し要素」になる**(画面に出さず、近さの点数にだけ使う。2026-10-09 ユーザ発案)。`apply` が `data/seeds/element-hidden.json`(公開slug → 鍵。AniList のタグは `ani:<英名>`、材料の語は和名。語彙に無い新しい語は入れない)へ同時に書く。
+  もう apply 済みの頁に後から持たせる時 = `python scripts/_element-assign.py hidden <stem> --go "…"`(頁の表示は変えない)。
+  書いたら `python scripts/_build-compass-hidden.py`(約12秒)で配るファイル `public/data/compass-hidden.v1.json` を作り直して一緒に commit。仕組みと数字は memory [[compass_hidden_elements]]。
 - ★`apply` は**足すだけ**。前から頁に付いている要素(AniList 由来など)は消せない(消す口は未実装)。裁定と食い違う既存の語が残る時は、黙って済ませず報告する(俺ガイル@comic の「三角関係」で実踏)。
 - 取り消し: 足した行を seed から消して反映し直す(記録の `revert` を見る)。
 - ★**作品ごとのユーザ裁定 = `data/element-harvest/rulings.yml`**(`show` = 表に出す語 / `hide` = 出さない語。ユーザの発話を `quote` にそのまま書く)。道具は付与案の仕分け(票の線・ネタバレ印)より**これを優先**する。ユーザが「この語は出して/要らない」と言ったら、ここに書いて `check <stem>` → `apply` → 反映。**Claude の判断で書き足さない**。

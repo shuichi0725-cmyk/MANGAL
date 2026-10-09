@@ -29,6 +29,8 @@ export default function CompassPage() {
     preload("/manga-list-cols.v1.json", { as: "fetch", crossOrigin: "anonymous", fetchPriority: "low" });
     preload("/manga-catch-index.json", { as: "fetch", crossOrigin: "anonymous", fetchPriority: "low" });
   }
+  // ★隠し要素(近さにだけ使う・番号だけの小さいファイル)。 本番・テスト環境とも同じ場所(useHidden.ts の HIDDEN_URL と揃える)
+  preload("/data/compass-hidden.v1.json", { as: "fetch", crossOrigin: "anonymous" });
   // 雑誌名(ラベル「週刊少年ジャンプ」用)とジャンル名をこの頁に渡す
   const masters = loadMasters();
   const magazines = Object.fromEntries(masters.magazines.map((m) => [m.key, m.name]));

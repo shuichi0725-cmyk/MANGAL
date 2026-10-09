@@ -21,7 +21,9 @@ OUT = os.path.join(ROOT, "docs", "production-diagnostics", "anilist-id-dup.tsv")
 
 by_aid = {}
 for p in glob.glob(os.path.join(ROOT, "data", "manga.v2", "*.yml")):
-    txt = open(p, encoding="utf-8", errors="replace").read(4000)
+    # ★最後まで読む(2026-10-09): 先頭4000字だけ読んでいたため、anilist_id がそれより後ろに在る頁を見落としていた
+    #   (実測 35,500頁中 2,509頁。 巻の多い頁ほど後ろ = らんま1/2 は227行目)。 直した直後の「増加」は検出器の直しによるもの。
+    txt = open(p, encoding="utf-8", errors="replace").read()
     m = re.search(r"^anilist_id:\s*(\d+)", txt, re.M)
     if not m:
         continue

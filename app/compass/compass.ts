@@ -60,6 +60,18 @@ export const GENRE_TIERS: readonly { min: number; label: string }[] = [
 /** くじの重み = (1 + 近さ)^WEIGHT_POW。 3 = 近い本がかなり出やすい(2026-09-30 ユーザ裁定)。 人気は使わない */
 export const WEIGHT_POW = 3;
 export const ELEM_POP_MIN = 3000;
+/**
+ * ★隠し要素(2026-10-09 ユーザ発案「見えないけどもってる。それによって近い物が見つけやすい」)。
+ *   画面には出さず(入口・ラベル・「共通の要素Nつ」には数えない)、近さの点数にだけ足す。
+ *   重み = 見えている共通の要素1つ = 1 に対して、隠れている共通分1つ = 0.5(確度の低い語を軽く数える)。
+ *   隠し要素のファイル(public/data/compass-hidden.v1.json = scripts/_build-compass-hidden.py)が無い時は
+ *   足す分が 0 = 今までと全く同じ結果になる。
+ */
+export const HIDDEN_W = 0.5;
+/** 相手の鍵がこの数以下なら、隠れている共通分を割り引かない。 超えた分だけ薄める(proxNear) */
+export const HIDDEN_FULL = 8;
+/** 作品(slug)ごとの「近さの鍵」の番号 = 見えている要素 + 隠し要素。 語は載っていない(番号だけ) */
+export type HiddenMap = Readonly<Record<string, readonly number[]>>;
 
 // ───────────────────────── 逆引き表 ─────────────────────────
 
@@ -73,6 +85,8 @@ export type Graph = {
   byYear: Map<number, number[]>;
   byTheme: Map<string, number[]>;
   byGenre: Map<string, number[]>;
+  /** 近さの鍵(隠し要素のファイルがある時だけ)。 of = slug → 鍵の番号(全作品)/ by = 鍵の番号 → 対象の本の番号 */
+  prox: { of: Map<string, readonly number[]>; by: Map<number, number[]> } | null;
 };
 
 function uniq<T>(xs: readonly T[]): T[] {
@@ -96,7 +110,8 @@ export function isEligible(m: MangaListItem): boolean {
   return !!m.cover && !!m.catch;
 }
 
-export function buildGraph(list: readonly MangaListItem[]): Graph {
+export function buildGraph(list: readonly MangaListItem[], hidden?: HiddenMap | null): Graph {
+  const prox: Graph["prox"] = hidden ? { of: new Map(), by: new Map() } : null;
   const g: Graph = {
     items: [],
     all: new Map(),
@@ -105,9 +120,14 @@ export function buildGraph(list: readonly MangaListItem[]): Graph {
     byYear: new Map(),
     byTheme: new Map(),
     byGenre: new Map(),
+    prox,
   };
   for (const m of list) {
     g.all.set(m.slug, m);
+    // 鍵は「自分の持ち物」だけ読む(slug が constructor 等でも配列以外を拾わない)
+    const own = hidden && Object.prototype.hasOwnProperty.call(hidden, m.slug) ? hidden[m.slug] : undefined;
+    const ks = Array.isArray(own) && own.length ? uniq(own as readonly number[]) : null;
+    if (prox && ks) prox.of.set(m.slug, ks);
     if (!isEligible(m)) continue;
     const i = g.items.length;
     g.items.push(m);
@@ -116,8 +136,39 @@ export function buildGraph(list: readonly MangaListItem[]): Graph {
     if (m.year_started) push(g.byYear, m.year_started, i);
     for (const t of uniq(m.themes ?? [])) push(g.byTheme, t, i);
     for (const k of uniq(m.genres ?? [])) push(g.byGenre, k, i);
+    if (prox && ks) for (const k of ks) push(prox.by, k, i);
   }
   return g;
+}
+
+/** 中央(slug)と対象の各本の「共通の鍵の数」(鍵 = 見えている要素 + 隠し要素)。 隠し要素が無ければ空 */
+export function proxCounts(g: Graph, slug: string): Map<number, number> {
+  const out = new Map<number, number>();
+  const ks = g.prox?.of.get(slug);
+  if (!g.prox || !ks) return out;
+  for (const k of ks) for (const i of g.prox.by.get(k) ?? []) out.set(i, (out.get(i) ?? 0) + 1);
+  return out;
+}
+
+/**
+ * 中央(slug)から見た近さを返す関数を作る: near(i, sh) = sh + HIDDEN_W × 隠れている共通分 × 割引。
+ *   sh = 見えている共通の要素の数(呼ぶ側が数える)。
+ *   隠れている共通分 = 鍵の共通数 − sh(鍵は見えている要素も含むので引く。 ファイルが古くて負になる時は 0)。
+ *   ★割引 = 鍵の多い本ほど何にでも当たる(実測: ONE PIECE 71個・チェンソーマン 47個・しゅごキャラ! 34個 = どの本の周りにも出た)
+ *     ので、相手の鍵が HIDDEN_FULL 個を超えたら、超えた分だけ薄める(× HIDDEN_FULL ÷ 相手の鍵の数)。
+ *     見えている共通の要素(sh)は割り引かない。
+ * 隠し要素が無ければ near(i, sh) = sh(今までと同じ)。
+ */
+export function proxNear(g: Graph, slug: string): (i: number, sh: number) => number {
+  const all = proxCounts(g, slug);
+  if (!g.prox || !all.size) return (_i, sh) => sh;
+  const of = g.prox.of;
+  return (i, sh) => {
+    const hid = (all.get(i) ?? 0) - sh;
+    if (hid <= 0) return sh;
+    const nI = of.get(g.items[i].slug)?.length ?? 0;
+    return sh + HIDDEN_W * hid * Math.min(1, HIDDEN_FULL / Math.max(1, nI));
+  };
 }
 
 // ───────────────────────── 中央ごとの計算(周り+広げる単位を1回で) ─────────────────────────
@@ -128,7 +179,10 @@ export type RingEntry = {
   label: string;
   shared: number;
 };
-/** score = くじの近さ(要素・雑誌・年・作者 = 共通の要素の数 / ジャンル = 4×重なり + 共通の要素の数) */
+/**
+ * score = くじの近さ(要素・雑誌・年・作者 = 近さ px / ジャンル = 4×重なり + px)。
+ * px = 見えている共通の要素の数 + 隠れている共通分 × HIDDEN_W。 shared = 見えている共通の要素の数(画面に出す数)
+ */
 export type UnitItem = { slug: string; shared: number; year: number | null; score: number };
 export type Unit = {
   key: string;
@@ -188,10 +242,14 @@ export function neighborhood(
     for (const i of g.byTheme.get(t) ?? [])
       shared.set(i, (shared.get(i) ?? 0) + 1);
   const sh = (i: number) => shared.get(i) ?? 0;
+  // ★近さ px = 見えている共通の要素の数 sh + 隠れている共通分 × HIDDEN_W(隠し要素のファイルが無ければ px = sh)。
+  //   並び・くじの重み・足切りは px で測る。 画面に出す「共通の要素Nつ」とラベルは sh(見えている語)のまま。
+  const near = proxNear(g, self);
+  const px = (i: number) => near(i, sh(i));
   const pop = (i: number) => g.items[i].popularity ?? 0;
-  // 並び順 = 共通の要素の数(多い順)→ popularity(多い順)。 同点は slug で固定(毎回同じ並び)。
+  // 並び順 = 近さ(近い順)→ popularity(多い順)。 同点は slug で固定(毎回同じ並び)。
   const cmp = (a: number, b: number) =>
-    sh(b) - sh(a) ||
+    px(b) - px(a) ||
     pop(b) - pop(a) ||
     (g.items[a].slug < g.items[b].slug
       ? -1
@@ -249,7 +307,7 @@ export function neighborhood(
     for (const i of cands) taken.add(i);
     // ★くじ(2026-09-30): 固定の上位でなく、近いほど当たりやすいくじで選ぶ。 旅で辿った本は外す
     const pickFrom = cands.filter((i) => !visited.has(g.items[i].slug));
-    for (const i of weightedPick(pickFrom, sh, RING_PICK, opts.rand))
+    for (const i of weightedPick(pickFrom, px, RING_PICK, opts.rand))
       ring.push({
         slug: g.items[i].slug,
         kind,
@@ -262,18 +320,19 @@ export function neighborhood(
     return `作者 ${names.find((n) => theirs.has(n)) ?? names[0]}`;
   });
   take(
-    magList.filter((i) => !taken.has(i) && sh(i) >= 2),
+    magList.filter((i) => !taken.has(i) && px(i) >= 2),
     "mag",
     () => magName(center.magazine as string),
   );
   take(
-    yearList.filter((i) => !taken.has(i) && sh(i) >= 2),
+    yearList.filter((i) => !taken.has(i) && px(i) >= 2),
     "year",
     () => `${center.year_started}年に開始`,
   );
+  // 要素の枠は「見えている共通の要素が1つ以上」の本だけ(ラベルに共通の要素を出すため)。 近さの足切りは px
   take(
     [...shared.keys()].filter(
-      (i) => notSelf(i) && !taken.has(i) && sh(i) >= 3 && pop(i) > ELEM_POP_MIN,
+      (i) => notSelf(i) && !taken.has(i) && px(i) >= 3 && pop(i) > ELEM_POP_MIN,
     ),
     "elem",
     (i) => sharedThemes(i).slice(0, 2).join("・"),
@@ -287,7 +346,7 @@ export function neighborhood(
   // ── 広げる単位(各最大24冊・並び順は同じ) ──
   const units: Unit[] = [];
   // ★候補は全部持つ(画面に出す24冊は drawUnit のくじ)。 並びは近い順
-  const unit = (key: string, kind: UnitKind, label: string, cands: number[], score: (i: number) => number = sh) => {
+  const unit = (key: string, kind: UnitKind, label: string, cands: number[], score: (i: number) => number = px) => {
     const items = cands
       .sort((a, b) => score(b) - score(a) || cmp(a, b))
       .map((i) => ({
@@ -305,14 +364,14 @@ export function neighborhood(
       `mag:${center.magazine}`,
       "mag",
       magName(center.magazine),
-      magList.filter((i) => sh(i) >= 1),
+      magList.filter((i) => px(i) >= 1),
     );
   if (center.year_started)
     unit(
       `year:${center.year_started}`,
       "year",
       `${center.year_started}年`,
-      yearList.filter((i) => sh(i) >= 1),
+      yearList.filter((i) => px(i) >= 1),
     );
   const topThemes = [...cThemes]
     .sort(
@@ -323,7 +382,7 @@ export function neighborhood(
   for (const t of topThemes)
     unit(`elem:${t}`, "elem", t, (g.byTheme.get(t) ?? []).filter(notSelf));
 
-  if (genre.chosen.length) unit("genre", "genre", genre.label, genre.chosen, (i) => 4 * genre.jac(i) + sh(i));
+  if (genre.chosen.length) unit("genre", "genre", genre.label, genre.chosen, (i) => 4 * genre.jac(i) + px(i));
 
   return { ring, units };
 }
@@ -427,6 +486,7 @@ export function mixUnit(
   const cT = new Set(center.themes ?? []);
   const cG = new Set(center.genres ?? []);
   const near = nearMix(g, center, m);
+  const px = proxNear(g, center.slug); // 隠し要素も近さに足す(無ければ sh のまま = 今までどおり)
   const items = near.items
     .map((i) => {
       const it = g.items[i];
@@ -435,7 +495,7 @@ export function mixUnit(
       const sh = ts.filter((t) => cT.has(t)).length;
       const n = gs.filter((k) => cG.has(k)).length;
       const jac = n ? n / (cG.size + gs.length - n) : 0;
-      const u: UnitItem = { slug: it.slug, shared: sh, year: it.year_started || null, score: sh + 4 * jac };
+      const u: UnitItem = { slug: it.slug, shared: sh, year: it.year_started || null, score: px(i, sh) + 4 * jac };
       return { u, pop: it.popularity ?? 0 };
     })
     .sort((a, b) => b.u.score - a.u.score || b.pop - a.pop || (a.u.slug < b.u.slug ? -1 : a.u.slug > b.u.slug ? 1 : 0))
@@ -509,11 +569,12 @@ export function regenreUnit(
   if (!chosen.length) return null;
   const cT = new Set(center.themes ?? []);
   const level = (i: number) => kept.filter((k) => (g.items[i].genres ?? []).includes(k)).length;
+  const px = proxNear(g, center.slug); // 隠し要素も近さに足す(無ければ sh のまま = 今までどおり)
   const items = chosen
     .map((i) => {
       const it = g.items[i];
       const sh = uniq(it.themes ?? []).filter((t) => cT.has(t)).length;
-      const u: UnitItem = { slug: it.slug, shared: sh, year: it.year_started || null, score: (4 * level(i)) / Math.max(1, kept.length) + sh };
+      const u: UnitItem = { slug: it.slug, shared: sh, year: it.year_started || null, score: (4 * level(i)) / Math.max(1, kept.length) + px(i, sh) };
       return { u, pop: it.popularity ?? 0 };
     })
     .sort((a, b) => b.u.score - a.u.score || b.pop - a.pop || (a.u.slug < b.u.slug ? -1 : a.u.slug > b.u.slug ? 1 : 0))
@@ -1269,14 +1330,26 @@ export const SIMEL_TIERS: readonly number[] = [0.5, 0.4, 0.3, 0.25];
 
 export function simThemeUnit(g: Graph, center: Pick<MangaListItem, "slug" | "themes" | "genres">): Unit | null {
   const cT = uniq(center.themes ?? []);
-  if (cT.length < SIMEL_MIN_CENTER) return null;
   const cnt = new Map<number, number>();
   for (const t of cT) for (const i of g.byTheme.get(t) ?? []) cnt.set(i, (cnt.get(i) ?? 0) + 1);
-  const jac = (i: number) => {
-    const n = cnt.get(i) ?? 0;
-    return n / (cT.length + uniq(g.items[i].themes ?? []).length - n);
+  // ★見えている要素が5つに満たない本だけ、要素の組を「鍵」(見えている要素 + 隠し要素)で測る(2026-10-09)。
+  //   見えている要素が少ない本(中央値は1)でも、隠し要素を足して5つ以上になれば「似た要素」が出る
+  //   (実測: ガンニバル=見えている要素3・鍵5 → 出ない → 41冊)。
+  //   見えている要素が5つ以上の本は今までどおり(鍵で測ると組が大きくなって重なり率が下がり、らんま1/2 が 12冊 → 3冊に減った)。
+  const cK = g.prox?.of.get(center.slug);
+  const keyed = !!g.prox && !!cK && cT.length < SIMEL_MIN_CENTER && cK.length >= SIMEL_MIN_CENTER;
+  const all = keyed ? proxCounts(g, center.slug) : cnt;
+  const sizeC = keyed ? (cK as readonly number[]).length : cT.length;
+  if (sizeC < SIMEL_MIN_CENTER) return null;
+  const size = (i: number) => {
+    const vis = uniq(g.items[i].themes ?? []).length;
+    return keyed ? Math.max(vis, g.prox?.of.get(g.items[i].slug)?.length ?? 0) : vis;
   };
-  const pool = [...cnt.keys()].filter((i) => g.items[i].slug !== center.slug && uniq(g.items[i].themes ?? []).length >= SIMEL_MIN_CAND);
+  const jac = (i: number) => {
+    const n = Math.max(all.get(i) ?? 0, cnt.get(i) ?? 0);
+    return n / (sizeC + size(i) - n);
+  };
+  const pool = [...new Set([...all.keys(), ...cnt.keys()])].filter((i) => g.items[i].slug !== center.slug && size(i) >= SIMEL_MIN_CAND);
   let chosen: number[] = [];
   let tier = SIMEL_TIERS[0];
   for (const t of SIMEL_TIERS) {

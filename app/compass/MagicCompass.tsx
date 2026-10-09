@@ -54,6 +54,7 @@ import { Halftone } from "./halftone";
 import { CompassShelveButton, CompassShelvePanel } from "./CompassShelve";
 import KomaPage from "./KomaPage";
 import CompassLoading from "./CompassLoading";
+import { useCompassHidden } from "./useHidden";
 
 // ★テスト環境か(next.config.ts がビルド時の定数で埋める)。 本番は false = 下のテスト専用分岐ごと刈り取られる。
 const PREVIEW = process.env.NEXT_PUBLIC_PREVIEW_FEATURES === "1";
@@ -187,8 +188,14 @@ export default function MagicCompass({
   }, []);
   const fullIndex = index && isFullIndexLoaded() ? index : null;
   const catchReady = isCatchLoaded();
+  // ★隠し要素(近さにだけ使う・画面には出さない)。 小さいファイル(約0.45MB)なので索引より先に届く。
+  //   届く・無い・待ち切れない のどれかが決まってから逆引き表を作る(後から足すと周りの本のくじを引き直してしまう)
+  const hidden = useCompassHidden();
   // 逆引き表は索引(+キャッチ)が届いた時に1回だけ
-  const graph = useMemo(() => (fullIndex && catchReady ? buildGraph(fullIndex) : null), [fullIndex, catchReady]);
+  const graph = useMemo(
+    () => (fullIndex && catchReady && hidden.settled ? buildGraph(fullIndex, hidden.map) : null),
+    [fullIndex, catchReady, hidden],
+  );
   const magName = useCallback((k: string) => magazines[k] ?? k, [magazines]);
   const genreName = useCallback((k: string) => genres[k] ?? k, [genres]);
   const demoName = useCallback((k: string) => demographics[k] ?? k, [demographics]);

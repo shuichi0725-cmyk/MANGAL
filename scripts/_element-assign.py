@@ -567,6 +567,72 @@ def _rw_same_newline(path, add_text):
         f.write((b"" if raw.endswith(nl) or not raw else nl) + body)
 
 
+HIDDEN_SEED = os.path.join(ROOT, "data", "seeds", "element-hidden.json")
+
+
+def hidden_keys(prop):
+    """付与案の「隠して持つ」語 → 隠し要素の鍵(羅針盤の近さにだけ使う。 画面には出ない)。
+    AniList のタグは ani:<英名>(訳は scripts/_build-compass-hidden.py が頁と同じ訳表で引く)、材料の語は和名のまま。
+    語彙に無い新しい語(材料だけが根拠)は入れない(言い方が揃っていないので、他の作品と突き合わせる鍵にならない)。"""
+    out = []
+    for e in prop["rows"]:
+        if e.get("kind") != "要素" or e.get("cls") != "隠し":
+            continue
+        ani = e.get("ani") or {}
+        k = ("ani:" + ani["en"]) if ani.get("en") else (e["word"] if e.get("vocab") in ("語彙内", "表示できる語") else None)
+        if k and k not in out:
+            out.append(k)
+    return out
+
+
+def write_hidden(slug, keys, prop):
+    """data/seeds/element-hidden.json(公開slug → 鍵)へ書く。 → 書く前の鍵"""
+    doc = {}
+    if os.path.exists(HIDDEN_SEED):
+        with open(HIDDEN_SEED, encoding="utf-8") as f:
+            doc = json.load(f)
+    before = list((doc.get(slug) or {}).get("keys") or [])
+    if before != keys:
+        doc[slug] = {"keys": keys, "at": now(), "proposal_version": prop["version"]}
+        tmp = HIDDEN_SEED + ".tmp"
+        with open(tmp, "w", encoding="utf-8", newline="\n") as f:
+            json.dump(dict(sorted(doc.items())), f, ensure_ascii=False, indent=1)
+            f.write("\n")
+        os.replace(tmp, HIDDEN_SEED)
+    return before
+
+
+def cmd_hidden(a):
+    """付与案の「隠して持つ」語だけを seed へ書く(頁の表示は変えない)。 もう apply 済みの頁に、後から隠し要素を持たせる時に使う。"""
+    pj = os.path.join(adir(a.stem), "assign-proposal.json")
+    if not os.path.exists(pj):
+        die(f"付与案がまだ無い → {ME} run {a.stem}")
+    if len((a.go or "").strip()) < 2:
+        die('--go "<ユーザのGo発話の引用>" が要る')
+    with open(pj, encoding="utf-8") as f:
+        prop = json.load(f)
+    cl = os.path.join(ROOT, "data", "seeds", "element-assign-changelog.jsonl")
+    applied = False
+    if os.path.exists(cl):
+        with open(cl, encoding="utf-8") as f:
+            applied = any(json.loads(ln).get("slug") == a.stem and json.loads(ln).get("op") == "element-assign apply" for ln in f if ln.strip())
+    if not applied:
+        die("この頁はまだ apply していない(表に出す語を付けていない頁に、隠し要素だけ先に持たせない)→ apply が隠し要素も書く")
+    slug = load_material(a.stem)["card"]["slug"]
+    keys = hidden_keys(prop)
+    before = write_hidden(slug, keys, prop)
+    if before == keys:
+        print(f"{a.stem}: 隠し要素は既に付与案どおり(何も書かない・記録も足さない)")
+        return
+    line = {"slug": a.stem, "op": "element-assign hidden", "at": now(), "version": VERSION, "proposal_version": prop["version"], "go": a.go.strip(),
+            "before": {"hidden": before}, "after": {"hidden": keys},
+            "revert": "data/seeds/element-hidden.json からこの slug の項を消す(または before に戻す)→ python scripts/_build-compass-hidden.py"}
+    with open(cl, "a", encoding="utf-8") as f:
+        f.write(json.dumps(line, ensure_ascii=False) + "\n")
+    print(f"隠し要素を seed に書いた: {slug} {len(before)} → {len(keys)}語\n  {'・'.join(keys)}")
+    print("次: python scripts/_build-compass-hidden.py(羅針盤の隠し要素のファイルを作り直す)")
+
+
 def cmd_apply(a):
     V = load_vocab()
     pj = os.path.join(adir(a.stem), "assign-proposal.json")
@@ -611,9 +677,16 @@ def cmd_apply(a):
     with open(os.path.join(ROOT, "data", "seeds", "genre-append.yml"), encoding="utf-8") as f:
         done = {g for e in (yaml.safe_load(f) or {}).get("additions") or [] if e.get("slug") == a.stem for g in e.get("add") or []}
     gadd = [g for g in prop.get("genres_add") or [] if g in V["genres"] and g not in (prop.get("genres_now") or []) and g not in done]
-    if after == before and not gadd:
+    hk = hidden_keys(prop)  # 隠して持つ語(羅針盤の近さにだけ使う)も同じ時に書く
+    pub = load_material(a.stem)["card"]["slug"]
+    hb = []
+    if os.path.exists(HIDDEN_SEED):
+        with open(HIDDEN_SEED, encoding="utf-8") as f:
+            hb = list((json.load(f).get(pub) or {}).get("keys") or [])
+    if after == before and not gadd and hb == hk:
         print(f"{a.stem}: seed は既に付与案どおり(何も書かない・記録も足さない)")
         return
+    write_hidden(pub, hk, prop)
     tags[a.stem] = after
     with open(tp, "w", encoding="utf-8", newline="") as f:
         f.write(json.dumps(tags, ensure_ascii=False, separators=(",", ":")))
@@ -622,8 +695,8 @@ def cmd_apply(a):
                          f"  - slug: {a.stem}\n    add: [{', '.join(gadd)}]\n    source: \"element-assign:{prop['version']} anilist-family\"\n")
     line = {"slug": a.stem, "op": "element-assign apply", "at": now(), "version": VERSION, "proposal_version": prop["version"],
             "judge_model": (prop.get("use") or {}).get("model"), "go": a.go.strip(),
-            "before": {"tags_enrich": before, "genres": prop.get("genres_now")},
-            "after": {"tags_enrich": after, "genre_append": gadd},
+            "before": {"tags_enrich": before, "genres": prop.get("genres_now"), "hidden": hb},
+            "after": {"tags_enrich": after, "genre_append": gadd, "hidden": hk},
             "shown_words": [e["word"] for e in core], "backup": os.path.relpath(os.path.join(bak, a.stem + ".yml"), ROOT).replace("\\", "/"),
             "revert": "tags-enrich-2425.json からこの slug の追加分を消し、genre-append.yml の source=element-assign の行を消して反映し直す"}
     with open(os.path.join(ROOT, "data", "seeds", "element-assign-changelog.jsonl"), "a", encoding="utf-8") as f:
@@ -650,6 +723,7 @@ def main():
     p = sp.add_parser("check"); p.add_argument("stem"); p.add_argument("--answer"); p.set_defaults(f=cmd_check)
     p = sp.add_parser("show"); p.add_argument("stem"); p.set_defaults(f=cmd_show)
     p = sp.add_parser("apply"); p.add_argument("stem"); p.add_argument("--go", default=""); p.set_defaults(f=cmd_apply)
+    p = sp.add_parser("hidden"); p.add_argument("stem"); p.add_argument("--go", default=""); p.set_defaults(f=cmd_hidden)
     a = ap.parse_args()
     a.f(a)
 

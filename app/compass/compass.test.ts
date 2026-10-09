@@ -42,6 +42,10 @@ import {
   threadEntrances,
   nearMix,
   simThemeUnit,
+  HIDDEN_W,
+  HIDDEN_FULL,
+  proxCounts,
+  proxNear,
 } from "./compass";
 
 function book(slug: string, o: Partial<MangaListItem> = {}): MangaListItem {
@@ -821,5 +825,127 @@ describe("似た要素(simThemeUnit)", () => {
     const u = simThemeUnit(g, c);
     expect(u?.items.map((i) => i.slug)).toEqual(["big", "mid"]);
     expect(u?.key).toBe("simel");
+  });
+});
+
+describe("隠し要素(近さにだけ使う・画面には出さない)", () => {
+  // 鍵の番号(語は載っていない)。 見えている要素にも番号が振ってある: 陰謀=1 政治=2 学園=3 / 隠し=10,11,12,13
+  const N: Record<string, number> = { 陰謀: 1, 政治: 2, 学園: 3 };
+  const keys = (themes: string[], hid: number[] = []) => [...themes.map((t) => N[t]), ...hid];
+
+  it("隠し要素のファイルが無ければ鍵は持たない(= 今までと同じ計算)", () => {
+    const c = book("c", { themes: ["陰謀"] });
+    const g = buildGraph([c, book("a", { themes: ["陰謀"] })]);
+    expect(g.prox).toBeNull();
+    expect(proxCounts(g, "c").size).toBe(0);
+    expect(proxNear(g, "c")(1, 2)).toBe(2);
+  });
+
+  it("近さ = 見えている共通の要素 + 隠れている共通分×0.5(古いファイルで負になる時は足さない)", () => {
+    expect(HIDDEN_W).toBe(0.5);
+    const c = book("c", { themes: ["陰謀", "政治"] });
+    const list = [c, book("a", { themes: ["陰謀", "政治"] }), book("stale", { themes: ["陰謀", "政治"] })];
+    const g = buildGraph(list, { c: keys(["陰謀", "政治"], [10, 11, 12]), a: keys(["陰謀", "政治"], [10, 11, 12]), stale: [1] });
+    const near = proxNear(g, "c");
+    expect(near(1, 2)).toBe(3.5); // a: 鍵の共通5 − 見えている2 = 隠れ3 → 2 + 1.5
+    expect(near(2, 2)).toBe(2); // stale: 鍵の共通が見えている数より少ない(ファイルが古い)→ 足さない
+  });
+
+  it("★鍵の多い本は割り引く: 相手の鍵が8個を超えた分だけ、隠れている共通分を薄める(見えている共通の要素は割り引かない)", () => {
+    expect(HIDDEN_FULL).toBe(8);
+    const c = book("c", { themes: ["陰謀"] });
+    const list = [c, book("small", { themes: ["陰謀"] }), book("hub", { themes: ["陰謀"] })];
+    const many = Array.from({ length: 11 }, (_, k) => 100 + k); // hub だけが持つ鍵 11個(全部で16個)
+    const g = buildGraph(list, {
+      c: keys(["陰謀"], [10, 11, 12, 13]),
+      small: keys(["陰謀"], [10, 11, 12, 13]),
+      hub: [...keys(["陰謀"], [10, 11, 12, 13]), ...many],
+    });
+    const near = proxNear(g, "c");
+    expect(near(1, 1)).toBe(3); // small: 1 + 0.5×4(鍵5個 ≤ 8 → 割り引かない)
+    expect(near(2, 1)).toBe(2); // hub: 1 + 0.5×4×(8/16)(鍵16個 → 半分に薄める)
+    // 中央の鍵が多くても同じ(割引は相手の鍵の数だけで決まる)
+    const big = Array.from({ length: 15 }, (_, k) => 200 + k);
+    const g2 = buildGraph([c, book("peer", { themes: ["陰謀"] })], { c: [...keys(["陰謀"]), ...big], peer: [...keys(["陰謀"]), ...big] });
+    expect(proxNear(g2, "c")(1, 1)).toBe(4.75); // 1 + 0.5×15×(8/16)
+  });
+
+  it("★同じ雑誌の本: 見えている共通の要素が同じなら、隠し要素が重なる本が先。 画面の「共通の要素」は見えている数のまま", () => {
+    const c = book("c", { magazine: "jump", themes: ["陰謀", "政治"] });
+    const list = [
+      c,
+      book("plain", { magazine: "jump", themes: ["陰謀", "政治"], popularity: 99999 }),
+      book("deep", { magazine: "jump", themes: ["陰謀", "政治"], popularity: 10 }),
+    ];
+    const hidden = { c: keys(["陰謀", "政治"], [10, 11]), plain: keys(["陰謀", "政治"]), deep: keys(["陰謀", "政治"], [10, 11]) };
+    expect(neighborhood(buildGraph(list), c).ring.map((r) => r.slug)).toEqual(["plain", "deep"]); // 無ければ人気順
+    const nb = neighborhood(buildGraph(list, hidden), c);
+    expect(nb.ring.map((r) => r.slug)).toEqual(["deep", "plain"]);
+    expect(nb.ring.map((r) => r.shared)).toEqual([2, 2]);
+    const mag = nb.units.find((u) => u.kind === "mag");
+    expect(mag?.items.map((i) => [i.slug, i.shared, i.score])).toEqual([
+      ["deep", 2, 3],
+      ["plain", 2, 2],
+    ]);
+  });
+
+  it("★足切りも近さで測る: 見えている共通が1つでも、隠し要素が2つ重なれば同じ雑誌の周りに出る(1 + 0.5×2 = 2)", () => {
+    const c = book("c", { magazine: "jump", themes: ["陰謀"] });
+    const list = [c, book("m", { magazine: "jump", themes: ["陰謀"] })];
+    expect(neighborhood(buildGraph(list), c).ring).toEqual([]);
+    const hidden = { c: keys(["陰謀"], [10, 11]), m: keys(["陰謀"], [10, 11]) };
+    expect(neighborhood(buildGraph(list, hidden), c).ring.map((r) => [r.kind, r.slug, r.shared])).toEqual([["mag", "m", 1]]);
+  });
+
+  it("★Aでは見えている語が Bでは隠れている時も、同じ鍵として数える", () => {
+    const c = book("c", { magazine: "jump", themes: ["陰謀", "政治"] });
+    const list = [c, book("b", { magazine: "jump", themes: ["陰謀"] })];
+    // b は「政治」を隠し要素として持つ(番号2)。 見えている共通は 陰謀 の1つ
+    const hidden = { c: keys(["陰謀", "政治"]), b: [...keys(["陰謀"]), 2] };
+    const mag = neighborhood(buildGraph(list, hidden), c).units.find((u) => u.kind === "mag");
+    expect(mag?.items.map((i) => [i.slug, i.shared, i.score])).toEqual([["b", 1, 1.5]]);
+  });
+
+  it("要素の枠は、見えている共通の要素が1つ以上の本だけ(隠し要素だけで近い本は要素の枠に入れない)", () => {
+    const c = book("c", { themes: ["陰謀"] });
+    const list = [
+      c,
+      book("seen", { themes: ["陰謀"], popularity: 9000, year_started: 2001 }),
+      book("unseen", { themes: [], popularity: 9000, year_started: 2002 }), // 年も雑誌も作者も違う = 要素の枠しか入り口が無い
+    ];
+    const hidden = { c: keys(["陰謀"], [10, 11, 12, 13]), seen: keys(["陰謀"], [10, 11, 12, 13]), unseen: [10, 11, 12, 13] };
+    const ring = neighborhood(buildGraph(list, hidden), c).ring;
+    expect(ring.map((r) => [r.kind, r.slug, r.label])).toEqual([["elem", "seen", "陰謀"]]);
+  });
+
+  it("★似た要素: 見えている要素が5つ未満でも、鍵が5つ以上あれば出る(見えている要素が5つ以上の本は今までどおり)", () => {
+    const c = book("c", { themes: ["陰謀"] });
+    const list = [c, book("near", { themes: ["陰謀"] }), book("far", { themes: ["陰謀"] })];
+    expect(simThemeUnit(buildGraph(list), c)).toBeNull();
+    const hidden = { c: keys(["陰謀"], [10, 11, 12, 13]), near: keys(["陰謀"], [10, 11, 12]), far: keys(["陰謀"], [20, 21, 22]) };
+    const u = simThemeUnit(buildGraph(list, hidden), c);
+    expect(u?.items.map((i) => [i.slug, i.shared])).toEqual([["near", 1]]); // near = 4/5 = 80% / far = 1/8 = 12.5% → 出ない
+    // 見えている要素が5つ以上の本は、隠し要素があっても顔ぶれが変わらない
+    const T5 = ["悲劇", "復讐", "旅", "剣劇", "神話"];
+    const c5 = book("c5", { themes: T5 });
+    const list5 = [c5, book("big", { themes: T5.slice(0, 4) }), book("mid", { themes: ["悲劇", "復讐", "旅", "料理"] })];
+    const h5 = { c5: [1, 2, 3, 4, 5, 30, 31, 32, 33, 34, 35], big: [1, 2, 3, 4, 40, 41, 42, 43], mid: [1, 2, 3, 9] };
+    expect(simThemeUnit(buildGraph(list5, h5), c5)?.items.map((i) => i.slug)).toEqual(simThemeUnit(buildGraph(list5), c5)?.items.map((i) => i.slug));
+  });
+
+  it("掛け合わせ・組み替えのくじの近さにも足す", () => {
+    const c = book("c", { themes: ["陰謀", "政治"], genres: ["fantasy"] });
+    const list = [c, book("a", { themes: ["陰謀"], genres: ["fantasy"] }), book("b", { themes: ["陰謀"], genres: ["fantasy"] })];
+    const hidden = { c: keys(["陰謀", "政治"], [10, 11]), a: keys(["陰謀"]), b: keys(["陰謀"], [10, 11]) };
+    const g = buildGraph(list, hidden);
+    expect(mixUnit(g, c, { themes: ["陰謀"], genres: [] })?.items.map((i) => i.slug)).toEqual(["b", "a"]);
+    expect(regenreUnit(g, c, { drop: [], add: ["fantasy"] })?.items.map((i) => i.slug)).toEqual(["b", "a"]);
+  });
+
+  it("鍵は自分の持ち物だけ読む(slug が constructor でも壊れない)・重複した番号は1つに数える", () => {
+    const c = book("constructor", { themes: ["陰謀"] });
+    const g = buildGraph([c, book("a", { themes: ["陰謀"] })], { a: [1, 1, 10] });
+    expect(g.prox?.of.get("constructor")).toBeUndefined();
+    expect(g.prox?.of.get("a")).toEqual([1, 10]);
   });
 });
