@@ -284,7 +284,10 @@ export function useMangaIndex(opts?: { withCatch?: boolean; enabled?: boolean })
     if (withCatch) {
       _catchWanted = true;
       if (_cacheIsFull) loadCatch(); // 先に別画面で索引だけ揃っていた場合の取り返し
-      if (_catchLoaded) onCatch();
+      // ★「届いた」(_catchReady)で見る(2026-10-10)。 旧 = 「取得を始めた」(_catchLoaded)で見ていた =
+      //   直前の loadCatch() が旗を立てた直後や取得中に来ると知らせの登録を飛ばし、届いても再描画されなかった
+      //   (羅針盤がヘッダーの<Link>で入ると「準備中…」で止まる。 PC は左レールが索引だけ先読みするので頻発)。
+      if (_catchReady) onCatch();
       else _catchListeners.add(onCatch);
     }
     return () => {

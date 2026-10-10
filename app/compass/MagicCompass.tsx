@@ -103,6 +103,8 @@ const CH = 128;
 const STORE = "mangal.magicShelf.spreads.v1";
 const PLACEHOLDER_ANGLES = [-90, -20, 20, 70, 110, 160, 200];
 const FIRST = "\u0000first";
+/** 準備中のアニメ(場面1・CompassLoading)を最低これだけ見せる(2026-10-10 ユーザ「終わるのが早すぎて見れない・最低1秒」) */
+const LOADING_MIN_MS = 1000;
 
 /** seed = その中央の周りの本のくじの種(戻った時・詳細から戻った時に同じ顔ぶれを出す) */
 type Step = { slug: string; kind: ThreadKind | null; seed?: string };
@@ -330,10 +332,23 @@ export default function MagicCompass({
     }
   }, []);
 
+  // ── 準備中のアニメの最低表示時間 ──
+  // ★アニメは水和の後に出る(CompassLoading の useEffect)ので、ここも水和の後から数える。
+  //   この間は真ん中の本を決めない = 場面1のまま。 「動きを減らす」設定の人は止めた絵なので待たせない。
+  const [loadingHold, setLoadingHold] = useState(true);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setLoadingHold(false);
+      return;
+    }
+    const t = setTimeout(() => setLoadingHold(false), LOADING_MIN_MS);
+    return () => clearTimeout(t);
+  }, []);
+
   // ── 旅の始まり: ?from=<slug> か、先頭100件(人気上位)からランダムに1冊 ──
   const resumeDrawn = useRef<{ key: string; items: UnitItem[] } | null>(null);
   useEffect(() => {
-    if (path.length || !index || !index.length) return;
+    if (path.length || !index || !index.length || loadingHold) return;
     // 詳細(作品頁)から OS の戻るで帰ってきた = 飛ぶ前の旅をそのまま出す(1時間以内・1回だけ使う)
     try {
       const raw = window.sessionStorage.getItem(RESUME_KEY);
@@ -379,7 +394,7 @@ export default function MagicCompass({
     );
     if (!pool.length) return;
     setPath([{ slug: pool[Math.floor(Math.random() * pool.length)].slug, kind: null, seed: newSeed() }]);
-  }, [index, path.length]);
+  }, [index, path.length, loadingHold]);
 
   const curItem = useMemo<MangaListItem | null>(() => {
     if (!cur) return null;
