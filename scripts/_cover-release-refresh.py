@@ -11,9 +11,17 @@
   Kobo補完で入れた実書影や実jpgを .gif へ落としていた(885巻の一巡で書込500件中3件)。
   このscriptは週次蒸留が毎回回すので、放置すると毎週潰れ続ける型だった。格上げは従来どおり通る。
 → 対象頁を promote --only-file で再生成(このscriptはリスト出力まで)。
-週次蒸留のstep1で --days 45 を回す。
+週次蒸留のstep1で --days 45 --ahead-months 1 を回す。
 
-usage: python scripts/_cover-release-refresh.py [--days 45] [--limit 0=無制限]
+★発売前の巻(2026-10-11 ユーザ裁定 B): 旧実装は「45日前〜今日」に発売された巻しか見ず、
+  週次の日より後に出る今月・来月の本は仮書影のまま次の週次まで放置されていた
+  (2026-10-08 週次の実測: 10/1〜8発売=322/322が実書影、10/9以降=仮358+無し81がほぼ手つかず)。
+  楽天は発売のかなり前に実書影へ差し替える(9/28 のアイドル⑩=差替203冊の75%が発売前・41冊は1か月以上前)。
+  --ahead-months N = 今日の翌日〜N か月後の月末に発売予定の巻のうち、**書影が仮(.gif)か無い巻だけ**を足す
+  (実書影の巻は発売後に上の窓で追従するので、ここでは引かない=照会数を絞る)。日付が年月だけの予約巻も含む。
+
+usage: python scripts/_cover-release-refresh.py [--days 45] [--ahead-months 0] [--limit 0=無制限] [--plan]
+       --plan = 対象の数だけ出して終わる(楽天には問い合わせない)
 """
 import argparse
 import datetime
@@ -37,6 +45,28 @@ _LK = importlib.import_module("_lookup")
 RE_PLACEHOLDER = re.compile(r"/\d{13}\.gif")
 
 
+def ahead_end(base: datetime.date, months: int) -> datetime.date:
+    """base の月から months か月後の月末。"""
+    m = base.month - 1 + months
+    y, m = base.year + m // 12, m % 12 + 1
+    nxt = datetime.date(y + (m == 12), m % 12 + 1, 1)
+    return nxt - datetime.timedelta(days=1)
+
+
+def in_ahead(d: str, hi: str, ahead_hi: str) -> bool:
+    """発売日 d が窓の後(hi より後)〜ahead_hi か。予約巻の「年月だけ」の日付も含める。"""
+    if len(d) == 10:
+        return hi < d <= ahead_hi
+    if len(d) == 7 and d[4] == "-":
+        return hi[:7] <= d <= ahead_hi[:7]
+    return False
+
+
+def needs_real_cover(cur: str) -> bool:
+    """書影が仮(`/{ISBN}.gif`)か、無い/noimage の巻だけ発売前に引き直す。"""
+    return (not cur) or bool(RE_PLACEHOLDER.search(cur)) or "noimage" in cur
+
+
 def load_env():
     env = {}
     for name in (".env.local", ".env"):
@@ -55,16 +85,23 @@ def main() -> None:
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--from", dest="lo", default=None, help="期間指定 YYYY-MM-DD(--daysより優先。未来も可=予約書影も動く)")
     ap.add_argument("--to", dest="hi", default=None)
+    ap.add_argument("--ahead-months", type=int, default=0,
+                    help="発売前の巻も見る: 窓の翌日〜Nか月後の月末(0=見ない)。書影が仮/無しの巻だけ")
+    ap.add_argument("--plan", action="store_true", help="対象数だけ出して終わる(楽天に問い合わせない)")
     a = ap.parse_args()
     today = datetime.date.today()
     lo = a.lo or (today - datetime.timedelta(days=a.days)).isoformat()
     hi = a.hi or today.isoformat()
+    ahead_hi = ahead_end(datetime.date.fromisoformat(hi), a.ahead_months).isoformat() if a.ahead_months > 0 else None
+    years = {lo[:4], hi[:4]} | ({ahead_hi[:4]} if ahead_hi else set())
 
-    # 直近発売巻の収集(発売日がlo..hi・ISBN有り)
+    # 直近発売巻の収集(発売日がlo..hi・ISBN有り) + 発売前で書影が仮/無しの巻(hi<日付<=ahead_hi)
     targets = []  # (slug, isbn, cur_cover)
-    for f in glob.glob(os.path.join(ROOT, "data", "manga.v2", "*.yml")):
+    n_ahead = 0
+    seen = set()
+    for f in sorted(glob.glob(os.path.join(ROOT, "data", "manga.v2", "*.yml"))):
         t = io.open(f, encoding="utf-8").read()
-        if lo[:4] not in t and hi[:4] not in t:
+        if not any(yr in t for yr in years):
             continue
         try:
             y = yaml.safe_load(t)
@@ -73,10 +110,26 @@ def main() -> None:
         stem = os.path.basename(f)[:-4]
         for ed in y.get("editions") or []:
             for v in ed.get("volumes") or []:
+                if not v.get("isbn13"):
+                    continue
+                isbn = str(v["isbn13"])
+                cur = str(v.get("cover_url") or "")
                 d = str(v.get("release_date") or "")[:10]
-                if len(d) == 10 and lo <= d <= hi and v.get("isbn13"):
-                    targets.append((stem, str(v["isbn13"]), str(v.get("cover_url") or "")))
-    print(f"対象巻(発売{lo}〜{hi}): {len(targets)}", flush=True)
+                if len(d) == 10 and lo <= d <= hi:
+                    pass
+                elif ahead_hi and in_ahead(d, hi, ahead_hi) and needs_real_cover(cur):
+                    n_ahead += 1
+                else:
+                    continue
+                if (stem, isbn) in seen:
+                    continue
+                seen.add((stem, isbn))
+                targets.append((stem, isbn, cur))
+    print(f"対象巻(発売{lo}〜{hi}): {len(targets) - n_ahead}"
+          + (f" + 発売前(〜{ahead_hi}・書影が仮/無し): {n_ahead}" if ahead_hi else ""), flush=True)
+    if a.plan:
+        print(f"(--plan: 楽天照会 約{len(targets) * 1.3 / 60:.0f}分の見込み・ここで終了)")
+        return
     if a.limit:
         targets = targets[: a.limit]
 

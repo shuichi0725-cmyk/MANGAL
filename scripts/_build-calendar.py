@@ -3,6 +3,10 @@
  ・創刊(launch) = first_volume_date(standard版1巻)。全期間。
  ・発売(release) = 各巻 release_date。★全期間(過去へも戻れる)。
  ・中身は slug 参照のみ(title/cover は索引 join = 重複なし)。
+ ・発売(release)の1冊 = [slug, 巻番号, 題, ISBN13|null]。★ISBN(2026-10-11 ユーザ裁定 C):
+   同じ巻番号が複数の版にある頁(新装版・文庫版・全巻再刊)で、/shinkan が「最初の版」の書影/ISBN/出版社を
+   出していた(熱愛プリンス=カルチュア版1〜25巻 10/13発売に2020年ネクストF版の書影とAmazonリンク)。
+   どの版の本かを ISBN で持ち、_gen-shinkan-data.py が ISBN で引く。読み手は _gen-shinkan-data.py だけ。
  ・日精度を派生判定: 完全日→days[DD] / 年月→unknown(日未定) / 年のみ→除外。
 引数: [1]=src(既定 data/manga.v2) [2]=out(既定 public/calendar) [3]=当月 YYYY-MM(既定 today)。
 """
@@ -82,7 +86,8 @@ for f in glob.glob(os.path.join(SRC, "*.yml")):
             rd = eff_date(v)
             if not rd: continue
             # ★全期間化(2026-07-03 ユーザ要望「月が戻る」): 過去の発売月も出す
-            item = [slug, v.get("number"), title]
+            ib = v.get("isbn13")
+            item = [slug, v.get("number"), title, str(ib) if ib else None]
             if DAY_RE.match(rd): bucket(release, rd[:7], rd[8:10], item)
             elif MON_RE.match(rd): bucket(release, rd[:7], None, item)
 

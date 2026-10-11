@@ -29,10 +29,19 @@ python scripts/_weekly-step1.py        # 生成器14step順次(失敗で即exit 
 ```
 - ★**生成器リストの正本は `scripts/_weekly-step1.py` の STEPS**。新しい生成器はそこへ足す
   (旧=skillの散文リストに人手追記→追記漏れ=恒久stale化、の構造を廃止)。
-- 内容: calendar本番/preview(当月自動・引数なし事故根絶) → cover-release-refresh --days 45
+- 内容: calendar本番/preview(当月自動・引数なし事故根絶) → cover-release-refresh --days 45 --ahead-months 1
   (touched非空→promote自動連鎖) → shinkan → corner-stocks → daily-feature → corner-auto →
   tameshiyomi(harvest/expand/map/LN検査) → anilist-status-map → placeholder --build-queue →
   本番索引(最後)。~1時間(書影refresh ~40分含む)。★2026-09-02実測(リハーサル): 19step 計1h50m(cover-refresh 58分=1,454巻照会・57頁差替)。
+- ★**発売前の巻の書影も引き直す**(2026-10-11 ユーザ裁定 B): cover-refresh は「発売後45日」に加えて
+  **発売前〜来月末で書影が仮(`/{ISBN}.gif`)か無い巻**も楽天に聞く(`--ahead-months 1`。実書影の巻は発売後に追従するので引かない)。
+  旧=今日までに発売した巻だけ=週次の日より後に出る今月の本が仮書影のまま次の週次まで残った
+  (10/8 週次の実測: 10/1〜8発売=322/322が実書影、10/9以降=仮358+無し81)。追加は約1,160巻≒25分(10/8時点の見積り)。
+  重すぎる週は `--ahead-months 0`(=今月末まで・約400巻)に絞れる。対象数だけ見る = `python scripts/_cover-release-refresh.py --days 45 --ahead-months 1 --plan`。
+- ★**新刊一覧は ISBN で巻を引く**(2026-10-11 ユーザ裁定 C): カレンダーの発売1冊 = `[slug, 巻, 題, ISBN]`。
+  `_gen-shinkan-data.py` は ①ISBN → ②発売日が合う版 → ③最初の版 の順で引き、旧規則(巻番号で最初の版)と結果が違った冊数を
+  「版の取り違えを直した: N冊」と出す(0でなくてよい=直した数。内訳 = `--audit`)。旧=新装版・文庫版・全巻再刊の発売日に
+  別の版の書影/ISBN(Amazonリンク・構造化データ)/出版社を出していた(熱愛プリンス 10/13 カルチュア版1〜25巻に2020年ネクストF版)。
 - ai-reviews 等 seed 由来はそのまま(生成不要)。
 - ★**アイドル運転⑩(placeholder-cover-refresh)が seed に足した書影は頁再生成が挟まらない**(2026-09-02リハーサルで実踏: cover-override.jsonl の
   最終行/ISBN の URL が data/manga.v2 に無い頁 = **337頁**、うち当日追記239)。step1の cover-refresh は自分の差替分しか promote しない。

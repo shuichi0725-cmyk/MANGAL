@@ -44,8 +44,10 @@ STEPS = [
     #   preview暦(public/calendar)は読み手が消えたので廃止。
     ("calendar-prod",     ["_build-calendar.py", "data/manga.v2", "data/calendar", YM],
      "本番フルカレンダー(=/shinkan データ生成の入力。配信はしない)"),
-    ("cover-refresh",     ["_cover-release-refresh.py", "--days", "45"],
-     "発売後の書影差し替え追従(~40分。touched非空→promote自動連鎖)"),
+    # ★2026-10-11 ユーザ裁定 B: 発売前の巻(〜来月末)も、書影が仮(.gif)か無い巻だけ引き直す
+    #   (旧=今日までに発売した巻だけ=週次の日より後に出る今月の本は仮書影のまま次の週次まで残った)。
+    ("cover-refresh",     ["_cover-release-refresh.py", "--days", "45", "--ahead-months", "1"],
+     "書影差し替え追従: 発売後45日+発売前〜来月末の仮/無し(~65分=約2,500巻。touched非空→promote自動連鎖)"),
     ("shinkan",           ["_gen-shinkan-data.py"],
      "/shinkan 月別データ(カレンダー・書影refreshの後)"),
     ("corner-stocks",     ["_gen-corner-stocks.py"], "三世代/featured stock"),

@@ -9,12 +9,18 @@ public/shinkan/{ym}.json へ書く(★2025-01固定床〜当月+3。1行リス�
 - ★フィルタしない(全冊)。死リンク防止は頁側が「一覧索引に居る作品のみリンク化」で担保
   (preview=subset索引でも安全、本番=ほぼ全部リンク)。
 - 週次蒸留のstep1(カレンダー再生成の直後)で再実行する。
-usage: python scripts/_gen-shinkan-data.py
+- ★巻の引き方(2026-10-11 ユーザ裁定 C): ①カレンダーの ISBN → ②同じ巻番号のうち発売日が合う版 → ③最初の版。
+  旧=巻番号だけで最初の版を採り、新装版・文庫版・全巻再刊の発売日に**別の版**の書影/ISBN(=Amazonリンク・
+  構造化データ)/出版社/レーベルを出していた(熱愛プリンス 10/13 = カルチュア版1〜25巻に2020年ネクストF版)。
+  旧規則と結果が違った冊数を毎回出す(= 取り違えの全数)。--audit で作品ごとの内訳も出す。
+usage: python scripts/_gen-shinkan-data.py [--audit]
 """
+import collections
 import datetime
 import io
 import json
 import os
+import sys
 
 import yaml
 
@@ -56,10 +62,14 @@ def main() -> None:
     page_cache: dict = {}
     pub2stem = load_pub2stem()
 
-    def page_info(slug: str, num):
-        """→ (cover, isbn13, authors文字列, publisher表示名, imprint)。無い項目はNone/空。"""
+    audit = "--audit" in sys.argv[1:]
+    fixed = []  # (ym, slug, num, 旧規則のISBN, 採ったISBN)
+
+    def page_info(slug: str, num, isbn=None, date: str = ""):
+        """→ (cover, isbn13, authors文字列, publisher表示名, imprint)。無い項目はNone/空。
+        isbn = カレンダーが持つその巻のISBN / date = 発売日(YYYY-MM-DD か YYYY-MM)。"""
         if slug not in page_cache:
-            info = {"vols": {}, "authors": "", "pub_by_ed": {}}
+            info = {"vols": {}, "by_isbn": {}, "authors": "", "pub_by_ed": {}}
             p = os.path.join(ROOT, "data", "manga.v2", slug + ".yml")
             if not os.path.exists(p) and slug in pub2stem:
                 p = os.path.join(ROOT, "data", "manga.v2", pub2stem[slug] + ".yml")
@@ -74,15 +84,28 @@ def main() -> None:
                         imp = ed.get("imprint") or ""
                         for v in ed.get("volumes") or []:
                             n = v.get("number")
-                            if n is not None and n not in info["vols"]:
-                                info["vols"][n] = (v.get("cover_url"), v.get("isbn13"), pub, imp)
+                            rec = (v.get("cover_url"), v.get("isbn13"), pub, imp)
+                            ib = v.get("isbn13")
+                            if ib and str(ib) not in info["by_isbn"]:
+                                info["by_isbn"][str(ib)] = rec
+                            if n is not None:
+                                info["vols"].setdefault(n, []).append((str(v.get("release_date") or ""), rec))
                 except Exception:
                     pass
             page_cache[slug] = info
         info = page_cache[slug]
-        rec = info["vols"].get(num)
+        cands = info["vols"].get(num) or []
+        first = cands[0][1] if cands else None  # 旧規則 = 同じ巻番号の最初の版
+        rec = info["by_isbn"].get(str(isbn)) if isbn else None
+        if not rec and date:
+            rec = next((r for rd, r in cands if rd[:10] == date), None) \
+                or next((r for rd, r in cands if rd[:7] == date[:7]), None)
+        if not rec:
+            rec = first
+        if rec and first and rec[1] != first[1]:
+            fixed.append((date[:7], slug, num, first[1], rec[1]))
         if not rec and info["vols"]:
-            c0 = next(iter(info["vols"].values()))
+            c0 = next(iter(info["vols"].values()))[0][1]
             rec = (None, None, c0[2], c0[3])
         cov, isbn, pub, imp = rec if rec else (None, None, "", "")
         return cov, (str(isbn) if isbn else None), info["authors"], str(pub or ""), str(imp or "")
@@ -99,21 +122,31 @@ def main() -> None:
         out = {"days": {}, "unknown": []}
         n_cov = n_all = 0
 
-        def row(it):
+        def row(it, date):
             nonlocal n_all, n_cov
             slug, num, title = it[0], it[1], it[2]
-            cov, isbn, au, pub, imp = page_info(str(slug), num)
+            ib = it[3] if len(it) > 3 else None  # 旧カレンダー(3要素)でも動く=発売日で引く
+            cov, isbn, au, pub, imp = page_info(str(slug), num, ib, date)
             n_all += 1
             n_cov += 1 if cov else 0
             return [slug, num, title, cov, isbn, au, pub, imp]
 
         for day, items in (d.get("days") or {}).items():
-            out["days"][day] = [row(it) for it in items]
+            out["days"][day] = [row(it, f"{ym}-{day}") for it in items]
         for it in d.get("unknown") or []:
-            out["unknown"].append(row(it))
+            out["unknown"].append(row(it, ym))
         io.open(os.path.join(OUT, ym + ".json"), "w", encoding="utf-8", newline="\n").write(
             json.dumps(out, ensure_ascii=False, separators=(",", ":")))
         print(f"{ym}: {n_all}冊 (書影{n_cov}) → public/shinkan/{ym}.json")
+
+    # ★版の取り違えを直した数(= 旧規則「巻番号で最初の版」と違う巻を採った冊数)
+    by = collections.Counter((ym, s) for ym, s, _n, _o, _w in fixed)
+    print(f"版の取り違えを直した: {len(fixed)}冊 / {len({s for _y, s in by})}作品"
+          + ("" if audit or not fixed else "(内訳 = --audit)"))
+    if audit:
+        for (ym, s), c in sorted(by.items()):
+            ex = next((f for f in fixed if f[0] == ym and f[1] == s), None)
+            print(f"  {ym} {s}: {c}冊 (例 {ex[2]}巻 {ex[3]} → {ex[4]})")
 
 
 if __name__ == "__main__":
