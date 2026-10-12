@@ -19,7 +19,7 @@ import argparse, collections, concurrent.futures, datetime, gzip, importlib.util
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
-VERSION = "r0.2"  # r0.2: 材料からのジャンルは2つ以上の紹介文に出る時だけ / --redo
+VERSION = "r0.3"  # r0.3: --twice(2回判定して一致した語だけ表に出す) # r0.2: 材料からのジャンルは2つ以上の紹介文に出る時だけ / --redo
 BASE = os.path.join(ROOT, ".cache", "element-harvest")
 LEDGER = os.path.join(ROOT, "data", "element-harvest", "review-ledger.jsonl")
 CAPS = os.path.join(BASE, "_local", "captions.jsonl")
@@ -106,6 +106,31 @@ def local_bundle(eh, card, caps, bl, ani):
             "wikipedia": {"title": None, "categories": []}, "sources": sources, "picks": picks, "none": {}}, total
 
 
+def agree(a1, a2, V):
+    """2回の答えを1つに。 2回とも「芯」→ 芯 / 片方だけ「芯」→ 在る / 1回目に無く2回目に在る語 → 在る で足す。 「違う」「在る」は1回目のまま。
+    ★同じ材料でも判定は回ごとに約1割ゆれる(2026-10-12 実測: 193語中21語が片方だけ。 弱い語が中心)。"""
+    canon = lambda w: V["alias"].get(str(w).strip(), str(w).strip())  # noqa: E731
+    out = {}
+    for g in ("judged", "added", "new_words"):
+        t2 = {canon(x.get("word")): x.get("tier") for x in a2.get(g) or [] if isinstance(x, dict)}
+        core2 = {w for gg in ("judged", "added", "new_words") for w in [canon(x.get("word")) for x in a2.get(gg) or [] if isinstance(x, dict) and x.get("tier") == "芯"]}
+        rows, seen = [], set()
+        for x in a1.get(g) or []:
+            if not isinstance(x, dict):
+                continue
+            x = dict(x)
+            seen.add(canon(x.get("word")))
+            if x.get("tier") == "芯" and canon(x.get("word")) not in core2:
+                x["tier"], x["why"] = "在る", "(2回の判定で一致せず)" + str(x.get("why", ""))[:20]
+            rows.append(x)
+        if g != "judged":
+            for x in a2.get(g) or []:
+                if isinstance(x, dict) and canon(x.get("word")) not in seen and x.get("tier") in ("芯", "在る"):
+                    rows.append({**x, "tier": "在る"})
+        out[g] = rows
+    return out
+
+
 def one(stem, ctx, a, batch):
     ea, eh, V = ctx["ea"], ctx["eh"], ctx["V"]
     card = eh.build_card(stem)
@@ -126,7 +151,13 @@ def one(stem, ctx, a, batch):
     if not m["picks"]:
         ans, use = {"judged": [], "added": [], "new_words": []}, {"model": "(材料なし・モデルを呼ばない)", "sec": 0, "in": 0, "out": 0, "cost_usd": 0}
     else:
-        ans, use = ctx["lean"].ask(ea.build_prompt(m, V, cands), ea.SCHEMA, a.model, system="あなたは漫画データベースの分類の助手。指示された JSON の形だけで答える。", effort=a.effort or None)
+        ask = lambda: ctx["lean"].ask(ea.build_prompt(m, V, cands), ea.SCHEMA, a.model, system="あなたは漫画データベースの分類の助手。指示された JSON の形だけで答える。", effort=a.effort or None)  # noqa: E731
+        ans, use = ask()
+        if a.twice:  # 同じ材料でもう1回判定させ、2回とも「芯」の語だけ表に出す(片方だけの語は「在る」= 隠して持つ)
+            ans2, use2 = ask()
+            ans = agree(ans, ans2, V)
+            use = {"model": use["model"] + " x2", "sec": round(use["sec"] + use2["sec"], 1), "in": use["in"] + use2["in"], "out": use["out"] + use2["out"],
+                   "cost_usd": (use.get("cost_usd") or 0) + (use2.get("cost_usd") or 0)}
     with LOCK:  # 付与案づくりは台帳・ファイルに書くので1件ずつ
         with open(os.path.join(ea.adir(stem), "assign-answer.json"), "w", encoding="utf-8") as f:
             json.dump({"use": use, "answer": ans}, f, ensure_ascii=False, indent=1)
@@ -172,7 +203,7 @@ def cmd_run(a):
                                 aids[s] = int(v)
                             break
         ctx["ani"] = anilist_self(aids.values())
-        print(f"== 回 {batch} == {len(stems)}件・並列 {a.parallel}・{a.model}{' effort=' + a.effort if a.effort else ''}", flush=True)
+        print(f"== 回 {batch} == {len(stems)}件・並列 {a.parallel}・{a.model}{' effort=' + a.effort if a.effort else ''}{'・2回判定' if a.twice else ''}", flush=True)
         done = fail = 0
         with concurrent.futures.ThreadPoolExecutor(a.parallel) as ex:
             futs = {ex.submit(one, s, ctx, a, batch): s for s in stems}
@@ -246,7 +277,7 @@ def main():
     sp = ap.add_subparsers(dest="cmd", required=True)
     p = sp.add_parser("run"); p.add_argument("--n", type=int, default=100); p.add_argument("--loops", type=int, default=1)
     p.add_argument("--parallel", type=int, default=3); p.add_argument("--model", default="claude-haiku-5-5"); p.add_argument("--effort", default="low")
-    p.add_argument("--route", default="L"); p.add_argument("--redo", default="", help="この回の頁を判定し直す(道具の決まりを直した後)"); p.set_defaults(f=cmd_run)
+    p.add_argument("--route", default="L"); p.add_argument("--twice", action="store_true", help="2回判定して、2回とも芯の語だけ表に出す"); p.add_argument("--redo", default="", help="この回の頁を判定し直す(道具の決まりを直した後)"); p.set_defaults(f=cmd_run)
     p = sp.add_parser("summary"); p.add_argument("--batch", default=""); p.set_defaults(f=cmd_summary)
     p = sp.add_parser("sample"); p.add_argument("batch"); p.add_argument("--k", type=int, default=50); p.add_argument("--seed", type=int, default=1); p.set_defaults(f=cmd_sample)
     a = ap.parse_args()
