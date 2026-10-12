@@ -28,10 +28,12 @@ def claude_exe():
     return exe if os.path.exists(exe) else w
 
 
-def ask(prompt, schema, model, system=SYSTEM, timeout=600):
+def ask(prompt, schema, model, system=SYSTEM, timeout=600, effort=None):
     """→ (答え dict, 使用量 dict{model, sec, in, out, cost_usd})。 文面は標準入力で渡す(コマンド長の上限を避ける)。"""
     args = [claude_exe(), "-p", "--model", model, "--no-session-persistence", "--output-format", "json", "--tools", "",
             "--strict-mcp-config", "--system-prompt", system, "--json-schema", json.dumps(schema, ensure_ascii=False)]
+    if effort:  # low にすると Haiku の考える量が減る(2026-10-12 実測: 1作 65秒→41秒・出力 1.5万→1万トークン)
+        args += ["--effort", effort]
     t = time.time()
     try:
         r = subprocess.run(args, input=prompt.encode("utf-8"), capture_output=True, timeout=timeout, cwd=os.path.expanduser("~"))
