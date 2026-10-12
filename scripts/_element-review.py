@@ -19,7 +19,7 @@ import argparse, collections, concurrent.futures, datetime, gzip, importlib.util
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
-VERSION = "r0.1"
+VERSION = "r0.2"  # r0.2: 材料からのジャンルは2つ以上の紹介文に出る時だけ / --redo
 BASE = os.path.join(ROOT, ".cache", "element-harvest")
 LEDGER = os.path.join(ROOT, "data", "element-harvest", "review-ledger.jsonl")
 CAPS = os.path.join(BASE, "_local", "captions.jsonl")
@@ -133,10 +133,12 @@ def one(stem, ctx, a, batch):
         out, rows, ok, bad, missing = ea.make_proposal(stem, m, V, cands, ans, use)
         with open(os.path.join(ea.adir(stem), "assign-proposal.json"), encoding="utf-8") as f:
             gadd = json.load(f).get("genres_add") or []
+        gm = [e["word"] for e in rows if e["kind"] == "ジャンル"]
+        nsup = lambda w: sum(w in p["text"] for p in m["picks"])  # noqa: E731  ★材料からのジャンルは、2つ以上の紹介文にその語が出る時だけ案にする(1巻だけの題材を拾わない)
         row.update({**use, "show": [e["word"] for e in rows if e.get("cls") == "表"],
                     "show_src": ["両" if e["ani"] and e["mat"] else "A" if e["ani"] else "材" for e in rows if e.get("cls") == "表"],
                     "hide": [e["word"] for e in rows if e.get("cls") == "隠し"], "new": [e["word"] for e in rows if e["vocab"] == "新しい語"],
-                    "genres_now": card["genres"], "genres_add": gadd, "genres_mat": [e["word"] for e in rows if e["kind"] == "ジャンル"],
+                    "genres_now": card["genres"], "genres_add": gadd, "genres_mat": [w for w in gm if nsup(w) >= 2], "genres_mat_weak": [w for w in gm if nsup(w) < 2],
                     "not": sum(1 for x in ok if x["tier"] == "違う"), "rejected": len(bad), "missing": len(missing), "elements_now": len(card["tags_on_page"])})
         with open(LEDGER, "a", encoding="utf-8", newline="\n") as f:
             f.write(json.dumps(row, ensure_ascii=False) + "\n")
@@ -153,7 +155,7 @@ def cmd_run(a):
         print("✖ 手元の材料の束が無い → python scripts/_gen-element-review-queue.py --material")
         sys.exit(1)
     for loop in range(a.loops):
-        stems = next_stems(a.n, a.route)
+        stems = sorted({r["stem"] for r in jl(LEDGER) if r.get("batch") == a.redo}) if a.redo else next_stems(a.n, a.route)
         if not stems:
             print("表の「未」が無い(この経路は終わり)")
             return
@@ -244,7 +246,7 @@ def main():
     sp = ap.add_subparsers(dest="cmd", required=True)
     p = sp.add_parser("run"); p.add_argument("--n", type=int, default=100); p.add_argument("--loops", type=int, default=1)
     p.add_argument("--parallel", type=int, default=3); p.add_argument("--model", default="claude-haiku-5-5"); p.add_argument("--effort", default="low")
-    p.add_argument("--route", default="L"); p.set_defaults(f=cmd_run)
+    p.add_argument("--route", default="L"); p.add_argument("--redo", default="", help="この回の頁を判定し直す(道具の決まりを直した後)"); p.set_defaults(f=cmd_run)
     p = sp.add_parser("summary"); p.add_argument("--batch", default=""); p.set_defaults(f=cmd_summary)
     p = sp.add_parser("sample"); p.add_argument("batch"); p.add_argument("--k", type=int, default=50); p.add_argument("--seed", type=int, default=1); p.set_defaults(f=cmd_sample)
     a = ap.parse_args()
