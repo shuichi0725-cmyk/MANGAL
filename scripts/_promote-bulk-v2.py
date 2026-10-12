@@ -1719,7 +1719,23 @@ def _apply_book_credit(authors: list[dict], isbns: list, alias: dict) -> list[di
         nm = a.get("name") or ""
         if _norm_pub(nm) in cset:
             out.append(a); continue
-        hit = next((cset[k] for k in (_norm_pub(x) for x in alias.get(nm, ())) if k in cset), None)
+        hits = sorted({cset[k] for k in (_norm_pub(x) for x in alias.get(nm, ())) if k in cset})
+        hit = hits[0] if hits else None
+        if len(hits) > 1:
+            # ★別名が2つ以上クレジットに在る時(DB の同一人物まとめに別人が混ざっている型。 只野さとる=青乃下|ヤッペン)。
+            #   旧実装は set の反復順(実行のたびに変わる)で先に当たった名前を採っていた = 再生成のたびに著者が入れ替わった
+            #   (2026-10-12 実踏: 日本へようこそエルフさん。 青乃下→ヤッペン / サイコパス彼女… HUILAMSI→桜井竜矢)。
+            #   巻書誌の役割つきクレジットで決める: 作画側の人は[作画]に載る名前、原作側は[原作]に載る名前。 それでも決まらなければ載る巻の多い順。
+            from collections import Counter as _C2
+            rc = get_role_credits()
+            want = "o" if a.get("role") in ("original_author", "writer") else "a"
+            tagged, freq = _C2(), _C2(cred)
+            for ib in isbns:
+                e = rc.get(str(ib))
+                if e:
+                    for n in set(e.get(want) or []):
+                        tagged[_norm_pub(n)] += 1
+            hit = sorted(hits, key=lambda h: (-tagged.get(_norm_pub(h), 0), -freq.get(h, 0), h))[0]
         out.append({**a, "name": hit} if hit else a)
     return out
 
