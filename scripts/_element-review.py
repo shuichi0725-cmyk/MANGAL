@@ -291,6 +291,92 @@ def cmd_sample(a):
                 print(f"  {'[ジ]' if e['kind'] == 'ジャンル' else '[表]'} {e['word']}: {ev}")
 
 
+INSP_DIR = os.path.join(ROOT, "data", "element-harvest", "inspections")
+INSP_LEDGER = os.path.join(ROOT, "data", "element-harvest", "inspect-ledger.jsonl")
+INSP_TYPES = ("その巻だけの出来事が、作品の語・ジャンルになっている", "語の意味違い(団体名・人名・題名の一部を語と読んだ)", "宣伝文句の語・どの作品にも当てはまる語が表に出ている",
+              "根拠の文が、その語を支えていない(たとえ話・脇役1人の性質・否定文)", "AniList の票だけが根拠で、作品と明らかに合わない語", "表に1語も出ない頁で、隠しの語のほうが芯に見える")
+
+
+def _proposal(stem):
+    p = os.path.join(BASE, stem, "assign", "assign-proposal.json")
+    if not os.path.exists(p):
+        return {"rows": []}
+    with open(p, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def cmd_inspect(a):
+    """点検の1回ぶんを用意する: まだ点検していない頁から抜き取り、数えられる物は機械で数え、報告の書き込み先(.md)を作る。
+    ★点検の報告を別の窓(直す側)が読めるよう、報告はファイルに残して git に入れる(2026-10-13。 会話にしか残らず、貼り直しが要った)。"""
+    if a.list:
+        for f in sorted(os.listdir(INSP_DIR)) if os.path.isdir(INSP_DIR) else []:
+            with open(os.path.join(INSP_DIR, f), encoding="utf-8") as fh:
+                st = next((line.strip() for line in fh if line.startswith("状態:")), "状態: ?")
+            print(f"{f}\t{st}")
+        return
+    last = {}
+    for r in jl(LEDGER):  # 頁ごとに新しい行が勝つ(作り直した回が古い回を上書きする)
+        last[r["stem"]] = r
+    seen = {(x["stem"], x["at"]) for o in jl(INSP_LEDGER) for x in o["pages"]}
+    pool = [r for r in last.values() if r.get("route") == a.route and str(r["chars"]) != "0" and (a.again or (r["stem"], r["at"]) not in seen)]
+    if not pool:
+        print("まだ点検していない頁が無い(流した分は点検済み)。 もう一度抜き取るなら --again")
+        return
+    iid = f"{a.route}-{datetime.datetime.now():%Y%m%d-%H%M}"
+    rows = sorted(pool, key=lambda r: r["stem"])
+    random.Random(iid).shuffle(rows)
+    pick = rows[:a.k]
+    n = len(pool)
+    show = collections.Counter(w for r in pool for w in r["show"])
+    only_a = collections.Counter(w for r in pool for w, src in zip(r["show"], r["show_src"]) if src == "A")
+    gm = collections.Counter(g for r in pool for g in r["genres_mat"])
+    pairs = collections.Counter()
+    for r in pool:
+        ws = r["show"]
+        for x in ws:
+            for y in ws:
+                if x < y and (x in y or y in x or x[:2] == y[:2]):
+                    pairs[f"{x}+{y}"] += 1
+    L = [f"# 見直しの点検 {iid}", "", "状態: 未記入", "",
+         f"- 対象: 経路{a.route} の、まだ点検していない {n:,}頁(道具の版 {'・'.join(f'{k} {v}頁' for k, v in collections.Counter(r['version'] for r in pool).most_common())})から {len(pick)}頁を抜き取り",
+         "- 書くのは下の「報告」だけ。 「抜き取り」と「機械で数えた分」は道具が書いた(直さない)。 書き終えたら「状態: 未記入」を「状態: 報告済み」に変える", "",
+         "## 機械で数えた分(対象の全頁)", "",
+         f"- 表に出す語 {sum(show.values()):,}(1頁平均 {sum(show.values()) / n:.2f})/ 表が0語の頁 {sum(not r['show'] for r in pool)} / 材料からのジャンル案のある頁 {sum(bool(r['genres_mat']) for r in pool)}",
+         f"- 表に多い語: {'・'.join(f'{k}{v}' for k, v in show.most_common(30))}",
+         f"- AniList の票だけで表に出た語: {'・'.join(f'{k}{v}' for k, v in only_a.most_common(25))}",
+         f"- 材料からのジャンル案: {'・'.join(f'{k}{v}' for k, v in gm.most_common())}",
+         f"- 似た語が同じ頁に並ぶ組: {'・'.join(f'{k} {v}頁' for k, v in pairs.most_common(15)) or 'なし'}", "",
+         f"## 抜き取り({len(pick)}頁)", ""]
+    for i, r in enumerate(pick, 1):
+        L.append(f"### {i}. {r['title']} ({r['stem']})")
+        L.append(f"材料 {r['chars']}字 / 今のジャンル {','.join(r['genres_now']) or '-'} / AniList から足す {','.join(r['genres_add']) or '-'} / 材料からの案 {'・'.join(r['genres_mat']) or '-'}")
+        hid = []
+        for e in _proposal(r["stem"])["rows"]:
+            ev = (f"AniList {e['ani']['en']} 票{e['ani']['votes']} " if e.get("ani") else "") + " ".join(f"「{x['quote'][:70]}」" for x in e.get("mat", [])[:1])
+            if e["kind"] == "ジャンル":
+                L.append(f"- [ジ{'・案' if e['word'] in r['genres_mat'] else '・弱'}] {e['word']}: {ev}")
+            elif e.get("cls") == "表":
+                L.append(f"- [表] {e['word']}: {ev}")
+            elif e.get("cls") == "隠し":
+                hid.append((e, ev))
+        if not r["show"]:  # 表が0語の頁は、隠しの語を根拠つきで見せる(芯が隠れていないかを読むため)
+            L += [f"- [隠・{e.get('hid')}] {e['word']}: {ev}" for e, ev in hid[:8]]
+        elif hid:
+            L.append(f"- 隠し: {'・'.join(e['word'] for e, _ in hid)}")
+        L.append("")
+    L += ["## 報告", "", "抜き取りのうち問題なしの頁数: ", ""]
+    for i, t in enumerate(INSP_TYPES, 1):
+        L += [f"### 型{i}: {t}", "", "件数: ", "", "- (題 / 語 / 根拠の文 を1行ずつ。 無ければ「なし」)", ""]
+    L += ["### 単発の誤り(型に当てはまらない)", "", "- ", "", "### ありふれた語の候補(語ごとのユーザ裁定が要る。 挙げるだけ)", "", "- ", ""]
+    os.makedirs(INSP_DIR, exist_ok=True)
+    out = os.path.join(INSP_DIR, iid + ".md")
+    with open(out, "w", encoding="utf-8", newline="\n") as f:
+        f.write("\n".join(L) + "\n")
+    with open(INSP_LEDGER, "a", encoding="utf-8", newline="\n") as f:
+        f.write(json.dumps({"id": iid, "at": now(), "pool": n, "pages": [{"stem": r["stem"], "at": r["at"]} for r in pool]}, ensure_ascii=False) + "\n")
+    print(f"点検 {iid}: 対象 {n:,}頁から {len(pick)}頁 → {os.path.relpath(out, ROOT)}\nこのファイルを読み、末尾の「報告」を埋める(Edit)。 終わったら 状態 を「報告済み」にして commit+push")
+
+
 def main():
     ap = argparse.ArgumentParser(description="ジャンル・要素の見直しを表の順に流す")
     sp = ap.add_subparsers(dest="cmd", required=True)
@@ -299,6 +385,8 @@ def main():
     p.add_argument("--route", default="L"); p.add_argument("--twice", action="store_true", help="2回判定して合わせる(芯+芯・芯+在る → 表 / 片方だけ → 隠し)"); p.add_argument("--redo", default="", help="この回の頁を判定し直す(道具の決まりを直した後)"); p.add_argument("--stems", default="", help="この頁だけ判定し直す(カンマ区切り。 直しの確かめ用)"); p.set_defaults(f=cmd_run)
     p = sp.add_parser("summary"); p.add_argument("--batch", default=""); p.set_defaults(f=cmd_summary)
     p = sp.add_parser("sample"); p.add_argument("batch"); p.add_argument("--k", type=int, default=50); p.add_argument("--seed", type=int, default=1); p.set_defaults(f=cmd_sample)
+    p = sp.add_parser("inspect"); p.add_argument("--k", type=int, default=30); p.add_argument("--route", default="L"); p.add_argument("--again", action="store_true", help="点検済みの頁からも抜き取る")
+    p.add_argument("--list", action="store_true", help="点検の報告の一覧と状態"); p.set_defaults(f=cmd_inspect)
     a = ap.parse_args()
     a.f(a)
 
