@@ -88,6 +88,7 @@
 - [⏳受賞歴データ未使用](awards_material_unused.md)
 - [⏳キャッチ/説明欠落補完](catch_synopsis_enrich_pending.md)
 - [⏳ジャンル品質改善](genre_quality_improvement.md)
+- [⏳ジャンル・要素の全件見直し](element_review_queue_state.md)
 - [⏳外部エンリッチ(Wiki+魚)](external_enrich_state.md)
 - [⏳エンリッチ7k再開](enrich_7k_resume_state.md)
 - [⏳本文頁の書影を縦横比で](cover_sample_page_aspect_todo.md)
