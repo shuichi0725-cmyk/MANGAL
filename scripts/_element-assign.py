@@ -22,7 +22,7 @@ import argparse, ast, datetime, json, os, re, shutil, subprocess, sys, time, uni
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "v0.10"  # v0.10: ありふれた語(語ごとのユーザ裁定 rulings.yml word_rulings)は表に出さず隠して持つ  # v0.9: 関連作から引き継ぐのは本筋のエントリだけ(票は収集の道具 v0.5 が絞る。 ジャンルもそろえる)/ 使わなかったタグを付与案に見せる  # v0.8: 表に出すのは強い順に最大10語・語彙と訳が在る語だけ / AniList と材料が一致した語を先に / 隠して持つ語を欄に分ける  # v0.7: ネタバレ印は「その語を持つエントリの半分以上に付いている時だけ」有効 / 呼び出しは共通部品(_lean_claude)  # v0.6: 作品ごとのユーザ裁定(rulings.yml)を付与案より優先 / apply のジャンル追記を二重にしない  # v0.5: apply(表に出す案を seed へ書く口。ユーザの Go 発話の引用が必須)  # v0.4(2026-10-09 ユーザ裁定): ネタバレ印の語は表に出さない(控えへ)/ 控えはサイトに出さず記録だけ  # v0.2: 指示文から試金石の語の例を外す / タグ一覧の語を候補に / ありふれた名詞を候補から外す
+VERSION = "v0.11"  # v0.11: 語彙に無い新しい語も、隠し要素として持つ(付与案に載った=根拠の検査を通った語) # v0.10: ありふれた語(語ごとのユーザ裁定 rulings.yml word_rulings)は表に出さず隠して持つ  # v0.9: 関連作から引き継ぐのは本筋のエントリだけ(票は収集の道具 v0.5 が絞る。 ジャンルもそろえる)/ 使わなかったタグを付与案に見せる  # v0.8: 表に出すのは強い順に最大10語・語彙と訳が在る語だけ / AniList と材料が一致した語を先に / 隠して持つ語を欄に分ける  # v0.7: ネタバレ印は「その語を持つエントリの半分以上に付いている時だけ」有効 / 呼び出しは共通部品(_lean_claude)  # v0.6: 作品ごとのユーザ裁定(rulings.yml)を付与案より優先 / apply のジャンル追記を二重にしない  # v0.5: apply(表に出す案を seed へ書く口。ユーザの Go 発話の引用が必須)  # v0.4(2026-10-09 ユーザ裁定): ネタバレ印の語は表に出さない(控えへ)/ 控えはサイトに出さず記録だけ  # v0.2: 指示文から試金石の語の例を外す / タグ一覧の語を候補に / ありふれた名詞を候補から外す
 ME = "python scripts/_element-assign.py"
 TEST_ROOT = os.environ.get("EH_ROOT")
 BASE = TEST_ROOT or os.path.join(ROOT, ".cache", "element-harvest")
@@ -573,13 +573,15 @@ HIDDEN_SEED = os.path.join(ROOT, "data", "seeds", "element-hidden.json")
 def hidden_keys(prop):
     """付与案の「隠して持つ」語 → 隠し要素の鍵(羅針盤の近さにだけ使う。 画面には出ない)。
     AniList のタグは ani:<英名>(訳は scripts/_build-compass-hidden.py が頁と同じ訳表で引く)、材料の語は和名のまま。
-    語彙に無い新しい語(材料だけが根拠)は入れない(言い方が揃っていないので、他の作品と突き合わせる鍵にならない)。"""
+    ★語彙に無い新しい語も入れる(v0.11。 2026-10-12 ユーザ「隠したつもりで実は残らないものが問題」)。 根拠の文が材料に一字一句で在り、
+      検査(2〜12字・題名や著者名の一部でない)を通った語だけが付与案に載っているので、そのまま鍵にする。
+      1作にしか無い語は近さに効かないだけで害は無く、同じ語が別の作品に付いた時につながる。"""
     out = []
     for e in prop["rows"]:
         if e.get("kind") != "要素" or e.get("cls") != "隠し":
             continue
         ani = e.get("ani") or {}
-        k = ("ani:" + ani["en"]) if ani.get("en") else (e["word"] if e.get("vocab") in ("語彙内", "表示できる語") else None)
+        k = ("ani:" + ani["en"]) if ani.get("en") else e["word"]
         if k and k not in out:
             out.append(k)
     return out

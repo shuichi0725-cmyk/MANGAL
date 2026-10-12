@@ -66,7 +66,7 @@ git add … && git commit && git push                                           
 - ★**AniList タグの訳(`data/seeds/tag-i18n.yml`)は足してよい**(2026-10-09 ユーザ裁定「たす今後も足して良い。」= 毎回聞かなくてよい)。迷いのない訳だけ、末尾に日付と裁定の引用を書いて純粋追加(`genre: ""`)。訳し方に幅がある語は急がない。
 - ★語彙(和名タグ表・訳表)を変えたら、**テスト環境の写し `.preview-data/seeds/` も同じにする**(頁の要素欄は写しを読む。`_reflect-targeted.py` が反映のたびに差を写す。2026-10-09 に「ぼっち」がテスト環境の頁にだけ出ない漏れを実踏)。
 - ★**語ごとのユーザ裁定 = `rulings.yml` の `word_rulings`**(`hide_common` = ありふれた語は表に出さず隠して持つ)。語を足す時は、足す語を見せて裁定を受けてから。
-- ★**隠して持つ語は羅針盤の「隠し要素」になる**(画面に出さず、近さの点数にだけ使う。2026-10-09 ユーザ発案)。`apply` が `data/seeds/element-hidden.json`(公開slug → 鍵。AniList のタグは `ani:<英名>`、材料の語は和名。語彙に無い新しい語は入れない)へ同時に書く。
+- ★**隠して持つ語は羅針盤の「隠し要素」になる**(画面に出さず、近さの点数にだけ使う。2026-10-09 ユーザ発案)。`apply` が `data/seeds/element-hidden.json`(公開slug → 鍵。AniList のタグは `ani:<英名>`、材料の語は和名。★語彙に無い新しい語も、根拠の検査を通ったものは入れる = v0.11・2026-10-12 ユーザ「隠したつもりで実は残らないものが問題」)へ同時に書く。
   もう apply 済みの頁に後から持たせる時 = `python scripts/_element-assign.py hidden <stem> --go "…"`(頁の表示は変えない)。
   書いたら `python scripts/_build-compass-hidden.py`(約12秒)で配るファイル `public/data/compass-hidden.v1.json` を作り直して一緒に commit。仕組みと数字は memory [[compass_hidden_elements]]。
 - ★`apply` は**足すだけ**。前から頁に付いている要素(AniList 由来など)は消せない(消す口は未実装)。裁定と食い違う既存の語が残る時は、黙って済ませず報告する(俺ガイル@comic の「三角関係」で実踏)。
