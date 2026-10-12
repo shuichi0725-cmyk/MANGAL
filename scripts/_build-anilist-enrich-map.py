@@ -5,8 +5,7 @@ match-v14(series_key→a_id)+ dump(synonyms/genres/tags)→
 promote が join して本番 yml に出力(本番schema lib/schema.ts の箱を埋める)。
 ★種3は不変(promote-join 方式、 adult_us と同じ。 match更新で常に最新)。
 
-tags filter(案2): category==Demographic(全) OR Theme rank>=60 OR
-  Cast/Setting rank>=70。
+tags filter(案2): category==Demographic(全) OR Theme rank>=60(上位12)+ Cast-*/Setting-* rank>=70 を空きの分だけ(tag_fill)。
 synonyms filter: latin/CJK/hangul のみ(arabic/thai 等の不要スクリプト除外)。
 """
 import csv, gzip, json, re, sys
@@ -83,9 +82,21 @@ def tag_keep(t):
         return True
     if cat.startswith("Theme") and rank >= 60:  # ★v3はTheme-Action等のサブ分類(2026-06-13)
         return True
-    if cat in ("Cast", "Setting") and rank >= 70:
-        return True
     return False
+
+
+def tag_fill(t):
+    """人物・舞台系(v3 の category は Cast-Traits / Setting-Scene 等)で票70以上。
+    ★2026-10-12 修正: 旧実装は `cat in ("Cast", "Setting")` の完全一致で、v3 dump では全作品で0件だった(6/13 に Theme だけ startswith に直した直し漏れ)。
+      ユーザ裁定「1よい / 2その案で」= 今出ている語(tag_keep の上位12)は残し、**空きがある分だけ**票の高い順に足す(何も押し出さない)。
+      ネタバレ印の語・どの作品にも付く語(Primarily ○○ / 主人公の性別)・Nudity は足さない(要素付与の道具と同じ線)。"""
+    cat = t.get("category") or ""
+    name = t.get("name") or ""
+    if t.get("isAdult") or t.get("isMediaSpoiler") or t.get("isGeneralSpoiler"):
+        return False
+    if name.startswith("Primarily ") or name in ("Female Protagonist", "Male Protagonist", "Nudity"):
+        return False
+    return cat.startswith(("Cast", "Setting")) and (t.get("rank") or 0) >= 70
 
 
 def main():
@@ -149,6 +160,9 @@ def main():
             tags = [{"name": t.get("name"), "category": t.get("category"), "rank": t.get("rank") or 0}
                     for t in raw_tags if tag_keep(t)]
             tags = sorted(tags, key=lambda x: -x["rank"])[:12]
+            fill = sorted([{"name": t.get("name"), "category": t.get("category"), "rank": t.get("rank") or 0}
+                           for t in raw_tags if tag_fill(t) and not tag_keep(t)], key=lambda x: -x["rank"])
+            tags += fill[:max(0, 12 - len(tags))]  # ★空きがある分だけ足す(既存の語を押し出さない)
             # ★ジャンル信頼源 = AniList genres(A2M) ∪ 高rank theme tags(T2M)
             gt = {A2M[g] for g in genres if g in A2M}
             for t in raw_tags:
@@ -181,6 +195,9 @@ def main():
     print(f"★enrich map: {n:,} series_key")
     print(f"  synonyms有: {sy:,} / genres_anilist有: {ge:,} / tags有: {tg:,}")
     print(f"wrote {OUT}")
+    # ★作り直すと、_anime-flag-delta.py が後から足した anime:true(dump より新しい delta 由来)が消える。
+    #   2026-10-12 実踏: 作り直し → 6,277頁を反映 → 今朝立てたアニメ化フラグ6頁が false に戻った(索引の前後差で気づいて入れ直した)。
+    print("★この後に必ず: python scripts/_anime-flag-delta.py (delta 由来のアニメ化フラグをマップへ入れ直す)")
 
 
 if __name__ == "__main__":
