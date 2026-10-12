@@ -19,7 +19,7 @@ import argparse, collections, concurrent.futures, datetime, gzip, importlib.util
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
-VERSION = "r0.3"  # r0.3: --twice(2回判定して一致した語だけ表に出す) # r0.2: 材料からのジャンルは2つ以上の紹介文に出る時だけ / --redo
+VERSION = "r0.4"  # r0.4: 2回判定の合わせ方をゆるめる(芯+在る → 表。 表0が材料ありの2割だった)/ 材料からのジャンルは2回とも芯の時だけ / 2回とも芯の語は後ろの巻が根拠でも表に出す / 2回の生の答えを残す # r0.3: --twice(2回判定して一致した語だけ表に出す) # r0.2: 材料からのジャンルは2つ以上の紹介文に出る時だけ / --redo
 BASE = os.path.join(ROOT, ".cache", "element-harvest")
 LEDGER = os.path.join(ROOT, "data", "element-harvest", "review-ledger.jsonl")
 CAPS = os.path.join(BASE, "_local", "captions.jsonl")
@@ -107,28 +107,40 @@ def local_bundle(eh, card, caps, bl, ani):
 
 
 def agree(a1, a2, V):
-    """2回の答えを1つに。 2回とも「芯」→ 芯 / 片方だけ「芯」→ 在る / 1回目に無く2回目に在る語 → 在る で足す。 「違う」「在る」は1回目のまま。
-    ★同じ材料でも判定は回ごとに約1割ゆれる(2026-10-12 実測: 193語中21語が片方だけ。 弱い語が中心)。"""
+    """2回の答えを1つに。 → (答え, 2回とも「芯」の語の集合)
+    2回とも「芯」→ 芯 / 片方「芯」・もう片方「在る」→ 芯 / 片方「芯」・もう片方「違う」か挙げていない → 在る / 2回目だけが挙げた語 → 在る で足す。
+    ★同じ材料でも判定は回ごとに約1割ゆれる(2026-10-12 実測: 193語中21語が片方だけ。 弱い語が中心)。
+    ★r0.3 は「2回とも芯」だけを芯にしていた → 材料あり951頁のうち187頁で表が0語(カイジ=ギャンブルも隠し)。 r0.4 で 芯+在る を芯に。"""
     canon = lambda w: V["alias"].get(str(w).strip(), str(w).strip())  # noqa: E731
+    G = ("judged", "added", "new_words")
+    rank = {"芯": 2, "在る": 1}
+    t1, t2 = {}, {}
+    for t, a in ((t1, a1), (t2, a2)):
+        for g in G:
+            for x in a.get(g) or []:
+                if isinstance(x, dict):
+                    w = canon(x.get("word"))
+                    t[w] = max(t.get(w, 0), rank.get(x.get("tier"), 0))
+    both = {w for w in t1 if t1[w] == 2 and t2.get(w) == 2}
     out = {}
-    for g in ("judged", "added", "new_words"):
-        t2 = {canon(x.get("word")): x.get("tier") for x in a2.get(g) or [] if isinstance(x, dict)}
-        core2 = {w for gg in ("judged", "added", "new_words") for w in [canon(x.get("word")) for x in a2.get(gg) or [] if isinstance(x, dict) and x.get("tier") == "芯"]}
+    for g in G:
         rows, seen = [], set()
         for x in a1.get(g) or []:
             if not isinstance(x, dict):
                 continue
-            x = dict(x)
-            seen.add(canon(x.get("word")))
-            if x.get("tier") == "芯" and canon(x.get("word")) not in core2:
+            x, w = dict(x), canon(x.get("word"))
+            seen.add(w)
+            if x.get("tier") == "芯" and not t2.get(w):
                 x["tier"], x["why"] = "在る", "(2回の判定で一致せず)" + str(x.get("why", ""))[:20]
+            elif x.get("tier") == "在る" and t2.get(w) == 2:
+                x["tier"] = "芯"
             rows.append(x)
         if g != "judged":
             for x in a2.get(g) or []:
                 if isinstance(x, dict) and canon(x.get("word")) not in seen and x.get("tier") in ("芯", "在る"):
                     rows.append({**x, "tier": "在る"})
         out[g] = rows
-    return out
+    return out, both
 
 
 def one(stem, ctx, a, batch):
@@ -148,28 +160,35 @@ def one(stem, ctx, a, batch):
     m = ea.load_material(stem)
     cands = ea.find_candidates(m, V)
     row = {"at": now(), "batch": batch, "stem": stem, "slug": card["slug"], "title": card["title"], "route": a.route, "version": f"{VERSION}/{ea.VERSION}", "chars": chars}
+    raw, both = [], None
     if not m["picks"]:
         ans, use = {"judged": [], "added": [], "new_words": []}, {"model": "(材料なし・モデルを呼ばない)", "sec": 0, "in": 0, "out": 0, "cost_usd": 0}
     else:
         ask = lambda: ctx["lean"].ask(ea.build_prompt(m, V, cands), ea.SCHEMA, a.model, system="あなたは漫画データベースの分類の助手。指示された JSON の形だけで答える。", effort=a.effort or None)  # noqa: E731
         ans, use = ask()
+        raw, both = [ans], None
         if a.twice:  # 同じ材料でもう1回判定させ、2回とも「芯」の語だけ表に出す(片方だけの語は「在る」= 隠して持つ)
             ans2, use2 = ask()
-            ans = agree(ans, ans2, V)
+            raw.append(ans2)
+            ans, both = agree(ans, ans2, V)
             use = {"model": use["model"] + " x2", "sec": round(use["sec"] + use2["sec"], 1), "in": use["in"] + use2["in"], "out": use["out"] + use2["out"],
                    "cost_usd": (use.get("cost_usd") or 0) + (use2.get("cost_usd") or 0)}
     with LOCK:  # 付与案づくりは台帳・ファイルに書くので1件ずつ
         with open(os.path.join(ea.adir(stem), "assign-answer.json"), "w", encoding="utf-8") as f:
-            json.dump({"use": use, "answer": ans}, f, ensure_ascii=False, indent=1)
-        out, rows, ok, bad, missing = ea.make_proposal(stem, m, V, cands, ans, use)
+            json.dump({"use": use, "answer": ans, "raw": raw}, f, ensure_ascii=False, indent=1)
+        # ★後ろの巻の紹介文は「展開」(ネタバレ扱い)だが、2回とも芯 = 2回とも「作品全体を通して言える」と読んだ語は表に出す
+        #   (r0.3 まで: カイジのギャンブル・10万分の1の闘病 が、根拠が4巻目以降というだけで隠れた。 その巻だけの出来事は判定の決まりで「違う」になる)
+        out, rows, ok, bad, missing = ea.make_proposal(stem, m, V, cands, ans, use, not_spoiler=both or ())
         with open(os.path.join(ea.adir(stem), "assign-proposal.json"), encoding="utf-8") as f:
             gadd = json.load(f).get("genres_add") or []
         gm = [e["word"] for e in rows if e["kind"] == "ジャンル"]
+        gcore = lambda w: e_tier.get(w) == "芯" and (both is None or w in both)  # noqa: E731  ★ジャンルは「在る」では案にしない。 2回判定なら2回とも芯の時だけ(戦争・学園が文中の1語から付いた)
+        e_tier = {e["word"]: e["tier"] for e in rows}
         nsup = lambda w: sum(w in p["text"] for p in m["picks"])  # noqa: E731  ★材料からのジャンルは、2つ以上の紹介文にその語が出る時だけ案にする(1巻だけの題材を拾わない)
         row.update({**use, "show": [e["word"] for e in rows if e.get("cls") == "表"],
                     "show_src": ["両" if e["ani"] and e["mat"] else "A" if e["ani"] else "材" for e in rows if e.get("cls") == "表"],
                     "hide": [e["word"] for e in rows if e.get("cls") == "隠し"], "new": [e["word"] for e in rows if e["vocab"] == "新しい語"],
-                    "genres_now": card["genres"], "genres_add": gadd, "genres_mat": [w for w in gm if nsup(w) >= 2], "genres_mat_weak": [w for w in gm if nsup(w) < 2],
+                    "genres_now": card["genres"], "genres_add": gadd, "genres_mat": [w for w in gm if nsup(w) >= 2 and gcore(w)], "genres_mat_weak": [w for w in gm if not (nsup(w) >= 2 and gcore(w))],
                     "not": sum(1 for x in ok if x["tier"] == "違う"), "rejected": len(bad), "missing": len(missing), "elements_now": len(card["tags_on_page"])})
         with open(LEDGER, "a", encoding="utf-8", newline="\n") as f:
             f.write(json.dumps(row, ensure_ascii=False) + "\n")
@@ -186,7 +205,7 @@ def cmd_run(a):
         print("✖ 手元の材料の束が無い → python scripts/_gen-element-review-queue.py --material")
         sys.exit(1)
     for loop in range(a.loops):
-        stems = sorted({r["stem"] for r in jl(LEDGER) if r.get("batch") == a.redo}) if a.redo else next_stems(a.n, a.route)
+        stems = sorted(set(a.stems.split(","))) if a.stems else sorted({r["stem"] for r in jl(LEDGER) if r.get("batch") == a.redo}) if a.redo else next_stems(a.n, a.route)
         if not stems:
             print("表の「未」が無い(この経路は終わり)")
             return
@@ -277,7 +296,7 @@ def main():
     sp = ap.add_subparsers(dest="cmd", required=True)
     p = sp.add_parser("run"); p.add_argument("--n", type=int, default=100); p.add_argument("--loops", type=int, default=1)
     p.add_argument("--parallel", type=int, default=3); p.add_argument("--model", default="claude-haiku-5-5"); p.add_argument("--effort", default="low")
-    p.add_argument("--route", default="L"); p.add_argument("--twice", action="store_true", help="2回判定して、2回とも芯の語だけ表に出す"); p.add_argument("--redo", default="", help="この回の頁を判定し直す(道具の決まりを直した後)"); p.set_defaults(f=cmd_run)
+    p.add_argument("--route", default="L"); p.add_argument("--twice", action="store_true", help="2回判定して合わせる(芯+芯・芯+在る → 表 / 片方だけ → 隠し)"); p.add_argument("--redo", default="", help="この回の頁を判定し直す(道具の決まりを直した後)"); p.add_argument("--stems", default="", help="この頁だけ判定し直す(カンマ区切り。 直しの確かめ用)"); p.set_defaults(f=cmd_run)
     p = sp.add_parser("summary"); p.add_argument("--batch", default=""); p.set_defaults(f=cmd_summary)
     p = sp.add_parser("sample"); p.add_argument("batch"); p.add_argument("--k", type=int, default=50); p.add_argument("--seed", type=int, default=1); p.set_defaults(f=cmd_sample)
     a = ap.parse_args()

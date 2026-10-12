@@ -28,7 +28,7 @@ python scripts/_element-review.py run --n 100 --loops <件数÷100> --twice
 ```
 
 - ★60秒を超える。**background で起動し、途中で覗かない**(100件 約25分・約280万トークン。起きるのは終わりの1回)。skill `long-job-ops`。
-- `--twice` = 同じ頁を2回判定させ、2回とも「芯」の語だけ表に出す(片方だけの語は隠して持つ)。外さない。
+- `--twice` = 同じ頁を2回判定させて合わせる(芯+芯・芯+在る → 表 / 片方しか挙げない語 → 隠して持つ / 材料からのジャンル案は2回とも芯の時だけ)。外さない。
 - 終わったら、各回の「== 回 … の要約 ==」の行をそのまま貼り、台帳を commit+push:
   `python scripts/_gen-element-review-queue.py && git add data/element-harvest && git commit -m "ジャンル・要素の見直し: 経路L <件数>件(案のみ)" && git push`
 - 「■ 中断」(モデルの失敗が3件 = 使用量の上限かもしれない)が出たら、そこで止めて報告する。叩き直さない。
@@ -62,4 +62,5 @@ python scripts/_element-review.py sample <回の名前> --k 30    # 30頁ぶん�
 ## Opus 側(型の報告を受けたら)
 - 判定の決まり = `_element-assign.py` の `RULES`(★その作品の語を例に書かない)/ 機械の条件 = `_element-review.py`(材料の切り方・ジャンルの条件)。直したら `VERSION` を上げる。
 - 直した後の作り直し = `python scripts/_element-review.py run --redo <回の名前> --twice`。
+- 直しの確かめは全件を作り直す前に、指摘された頁だけで = `run --stems <stem,stem,…> --twice`(18頁 約5分・$0.1)。2回の生の答えは各頁の `assign-answer.json` の `raw` に残る。
 - 本番へ書く(`_element-assign.py apply`)はユーザの Go が要る。材料からのジャンル案を書く口は未実装(AniList 由来のジャンルだけ書ける)。

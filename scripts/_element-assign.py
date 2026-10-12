@@ -22,7 +22,7 @@ import argparse, ast, datetime, json, os, re, shutil, subprocess, sys, time, uni
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "v0.12"  # v0.12: その巻だけの出来事・固有名の一部は「違う」(経路L 1回目の点検: ダイマジン=戦争・しずくちゃん=ミステリー・BUNGO=シニア) # v0.11: 語彙に無い新しい語も、隠し要素として持つ(付与案に載った=根拠の検査を通った語) # v0.10: ありふれた語(語ごとのユーザ裁定 rulings.yml word_rulings)は表に出さず隠して持つ  # v0.9: 関連作から引き継ぐのは本筋のエントリだけ(票は収集の道具 v0.5 が絞る。 ジャンルもそろえる)/ 使わなかったタグを付与案に見せる  # v0.8: 表に出すのは強い順に最大10語・語彙と訳が在る語だけ / AniList と材料が一致した語を先に / 隠して持つ語を欄に分ける  # v0.7: ネタバレ印は「その語を持つエントリの半分以上に付いている時だけ」有効 / 呼び出しは共通部品(_lean_claude)  # v0.6: 作品ごとのユーザ裁定(rulings.yml)を付与案より優先 / apply のジャンル追記を二重にしない  # v0.5: apply(表に出す案を seed へ書く口。ユーザの Go 発話の引用が必須)  # v0.4(2026-10-09 ユーザ裁定): ネタバレ印の語は表に出さない(控えへ)/ 控えはサイトに出さず記録だけ  # v0.2: 指示文から試金石の語の例を外す / タグ一覧の語を候補に / ありふれた名詞を候補から外す
+VERSION = "v0.13"  # v0.13: ジャンルは作品全体をそう呼べる時だけ・ふつうの言い回しに1度出るだけの語は「違う」・表の語が別の表の語を含む時は詳しい方だけ出す・序盤の材料にも出る語はネタバレ扱いにしない(経路L 1,000件の点検) # v0.12: その巻だけの出来事・固有名の一部は「違う」(経路L 1回目の点検: ダイマジン=戦争・しずくちゃん=ミステリー・BUNGO=シニア) # v0.11: 語彙に無い新しい語も、隠し要素として持つ(付与案に載った=根拠の検査を通った語) # v0.10: ありふれた語(語ごとのユーザ裁定 rulings.yml word_rulings)は表に出さず隠して持つ  # v0.9: 関連作から引き継ぐのは本筋のエントリだけ(票は収集の道具 v0.5 が絞る。 ジャンルもそろえる)/ 使わなかったタグを付与案に見せる  # v0.8: 表に出すのは強い順に最大10語・語彙と訳が在る語だけ / AniList と材料が一致した語を先に / 隠して持つ語を欄に分ける  # v0.7: ネタバレ印は「その語を持つエントリの半分以上に付いている時だけ」有効 / 呼び出しは共通部品(_lean_claude)  # v0.6: 作品ごとのユーザ裁定(rulings.yml)を付与案より優先 / apply のジャンル追記を二重にしない  # v0.5: apply(表に出す案を seed へ書く口。ユーザの Go 発話の引用が必須)  # v0.4(2026-10-09 ユーザ裁定): ネタバレ印の語は表に出さない(控えへ)/ 控えはサイトに出さず記録だけ  # v0.2: 指示文から試金石の語の例を外す / タグ一覧の語を候補に / ありふれた名詞を候補から外す
 ME = "python scripts/_element-assign.py"
 TEST_ROOT = os.environ.get("EH_ROOT")
 BASE = TEST_ROOT or os.path.join(ROOT, ".cache", "element-harvest")
@@ -74,6 +74,8 @@ RULES = """あなたは漫画データベースの分類の助手。下の「材
     ・書誌・放送・商品の説明の中の語
     ・その巻だけの出来事(巻ごとの紹介文に1度だけ出る事件・行き先・敵・題材)。 作品全体を通して言えることだけを 芯・在る にする
     ・団体名・大会名・店名などの固有名の一部(「○○シニア」のシニア)
+    ・ふつうの言い回しの中に1度出るだけで、作品がそれを描いているとは書いていない(日々の動作・心がまえ・たとえとして出る語)
+    ・宣伝のほめ言葉としてだけ出る語
 
 ■ 決まり
 - 根拠(quote)は材料から一字一句で抜く(15〜70字。 言い換えない・足さない)。 pick には抜いた材料の番号(P3 や T9)を書く
@@ -81,6 +83,8 @@ RULES = """あなたは漫画データベースの分類の助手。下の「材
 - 候補のうち[タグ一覧の語]は、他サイトの利用者がこの作品や主要人物に付けたタグ。 人物の性質・境遇を表す一般的な語なら「在る」、
   人名・あだ名・声優名・作品固有の名(部や学校の名)・その人物だけの言い回しは「違う」。 quote にはその語をそのまま書く
 - ジャンルのうち ドラマ・コメディ・恋愛・日常・アクション は判定しない(別の仕組みで決める)。 それ以外のジャンルは、材料に明記がある時だけ
+- ジャンルを 芯 にするのは、材料が作品全体をそのジャンルと呼んでいるか、全体の舞台・主題がそれだと述べている時だけ。
+  作中にその出来事・場所・人物が出るだけ(登場人物が学校に通う・部に入る、物語の中で争いが起きる、脇役の趣味)は 芯 にしない
 - added = 候補に無いが「使える語の一覧」に在る語で、材料がはっきり支えるもの(言い換えで支えていてもよい。 例: 材料「人として変わっていく姿を描く」→ 成長物語)。 迷う物は挙げない
 - new_words = 「使える語の一覧」に無い語で、材料にその語が一字一句で出ており、他の漫画にも使える一般的な言葉(例: 社畜、毒親、余命)。
   この作品だけの固有名(部の名前・学校名・人名・技名)は挙げない。 quote にはその語を必ず含める
@@ -388,10 +392,14 @@ def load_word_rulings():
     return common
 
 
-def make_proposal(stem, m, V, cands, ans, use):
+def make_proposal(stem, m, V, cands, ans, use, not_spoiler=()):
     ani, gkeys, ani_skip, ani_weak = anilist_part(m, V)
     ok, bad, missing = verify(m, V, cands, ans)
     c = m["card"]
+    early = [p["text"] for p in m["picks"] if not p.get("spoiler")]
+    for r in ok:  # ★根拠の文が後ろの巻・終盤の材料でも、その語が序盤の材料に一字一句で出ていればネタバレではない(v0.13。 2回とも芯のギャンブルが、根拠が6巻目の紹介文というだけで隠れていた)
+        if r.get("spoiler") and r["tier"] != "違う" and (r["word"] in not_spoiler or any(r["word"] in t for t in early)):
+            r["spoiler"] = False
     merged = {}  # 語 → 1行(AniList と材料の根拠をまとめる)
     for a in ani:
         merged[a["word"]] = {"word": a["word"], "kind": "要素", "tier": a["tier"], "vocab": "訳の無いAniListタグ" if a["no_ja"] else word_status(a["word"], V),
@@ -443,6 +451,10 @@ def make_proposal(stem, m, V, cands, ans, use):
         else:
             e["cls"], e["hid"] = "表", ""
             n_show += 1
+    shown = [e for e in merged.values() if e.get("cls") == "表"]
+    for e in shown:  # 同じ意味の語を2つ並べない: 表の語が別の表の語にまるごと含まれる時は、詳しい方だけ出す(成長/成長物語、結婚/契約結婚)
+        if not e.get("ruled") and any(o is not e and o.get("cls") == "表" and e["word"] != o["word"] and e["word"] in o["word"] for o in shown):
+            e["cls"], e["hid"] = "隠し", "重なり"
     rows = sorted(merged.values(), key=lambda e: (e.get("cls") != "表", strength(e)))
     gnow = [V["genres"].get(g, g) for g in c["genres"]]
     gadd = [(V["genres"][k], sorted(v)) for k, v in sorted(gkeys.items()) if k not in c["genres"]]
@@ -465,7 +477,7 @@ def make_proposal(stem, m, V, cands, ans, use):
     isnew = lambda e: e["vocab"] == "新しい語"  # noqa: E731
     hid = lambda e, *why: e.get("cls") == "隠し" and e.get("hid") in why  # noqa: E731
     for title, pick in ((f"表に出す案(強い順に最大{MAX_SHOW}語)= サイトに出すのはここだけ", lambda e: e.get("cls") == "表"),
-                        ("隠して持つ: 強いが上限であふれた語", lambda e: hid(e, "上限")),
+                        ("隠して持つ: 強いが上限であふれた語・別の表の語と重なる語", lambda e: hid(e, "上限", "重なり")),
                         ("隠して持つ: 強いが語彙か訳が無くて出せない語(語ごとの裁定の候補)", lambda e: hid(e, "語彙か訳が無い")),
                         ("隠して持つ: ネタバレ印・ありふれた語・出さない決まりの語", lambda e: hid(e, "ネタバレ印", "ありふれた語", "出さない語")),
                         ("隠して持つ: 作中に在るが中心でない語", lambda e: hid(e, "在る") and not isnew(e)),
