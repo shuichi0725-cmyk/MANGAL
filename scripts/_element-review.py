@@ -19,7 +19,7 @@ import argparse, collections, concurrent.futures, datetime, gzip, importlib.util
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
-VERSION = "r0.5"  # r0.5: 語に付いて返った [要素] の印を外してから2回の答えを合わせる # r0.4: 2回判定の合わせ方をゆるめる(芯+在る → 表。 表0が材料ありの2割だった)/ 材料からのジャンルは2回とも芯の時だけ / 2回とも芯の語は後ろの巻が根拠でも表に出す / 2回の生の答えを残す # r0.3: --twice(2回判定して一致した語だけ表に出す) # r0.2: 材料からのジャンルは2つ以上の紹介文に出る時だけ / --redo
+VERSION = "r0.6"  # r0.6: rebuild(モデルを呼ばずに、残した答えから付与案と台帳を作り直す) # r0.5: 語に付いて返った [要素] の印を外してから2回の答えを合わせる # r0.4: 2回判定の合わせ方をゆるめる(芯+在る → 表。 表0が材料ありの2割だった)/ 材料からのジャンルは2回とも芯の時だけ / 2回とも芯の語は後ろの巻が根拠でも表に出す / 2回の生の答えを残す # r0.3: --twice(2回判定して一致した語だけ表に出す) # r0.2: 材料からのジャンルは2つ以上の紹介文に出る時だけ / --redo
 BASE = os.path.join(ROOT, ".cache", "element-harvest")
 LEDGER = os.path.join(ROOT, "data", "element-harvest", "review-ledger.jsonl")
 CAPS = os.path.join(BASE, "_local", "captions.jsonl")
@@ -177,9 +177,15 @@ def one(stem, ctx, a, batch):
             ans, both = agree(ans, ans2, V)
             use = {"model": use["model"] + " x2", "sec": round(use["sec"] + use2["sec"], 1), "in": use["in"] + use2["in"], "out": use["out"] + use2["out"],
                    "cost_usd": (use.get("cost_usd") or 0) + (use2.get("cost_usd") or 0)}
+    return settle(ea, V, stem, m, cands, card, row, ans, use, raw, both)
+
+
+def settle(ea, V, stem, m, cands, card, row, ans, use, raw, both, save=True):
+    """判定の答え → 付与案 → 台帳の1行。 ★モデルを呼ばない部分(rebuild もここを通る)。"""
     with LOCK:  # 付与案づくりは台帳・ファイルに書くので1件ずつ
-        with open(os.path.join(ea.adir(stem), "assign-answer.json"), "w", encoding="utf-8") as f:
-            json.dump({"use": use, "answer": ans, "raw": raw}, f, ensure_ascii=False, indent=1)
+        if save:
+            with open(os.path.join(ea.adir(stem), "assign-answer.json"), "w", encoding="utf-8") as f:
+                json.dump({"use": use, "answer": ans, "raw": raw}, f, ensure_ascii=False, indent=1)
         # ★後ろの巻の紹介文は「展開」(ネタバレ扱い)だが、2回とも芯 = 2回とも「作品全体を通して言える」と読んだ語は表に出す
         #   (r0.3 まで: カイジのギャンブル・10万分の1の闘病 が、根拠が4巻目以降というだけで隠れた。 その巻だけの出来事は判定の決まりで「違う」になる)
         out, rows, ok, bad, missing = ea.make_proposal(stem, m, V, cands, ans, use, not_spoiler=both or ())
@@ -271,6 +277,48 @@ def write_summary(batch):
           f"\n多い語: {'・'.join(f'{k}{v}' for k, v in w.most_common(20))}\n→ {os.path.relpath(p, ROOT)}", flush=True)
 
 
+def cmd_rebuild(a):
+    """モデルを呼ばずに、残してある2回の生の答えから付与案と台帳を作り直す(数分・0円)。
+    ★機械の決まり(2回の合わせ方・ジャンル案の条件・語彙に足した語・隠す語の裁定・語の重なり)を変えた時はこれで全頁に効く。
+      判定の決まり(_element-assign.RULES = 指示文)を変えた時だけ、判定し直し(run --redo / --stems)が要る。"""
+    ea, eh = mod("_element-assign"), mod("_element-harvest")
+    V = ea.load_vocab()
+    last = {}
+    for r in jl(LEDGER):
+        last[r["stem"]] = r
+    batch = f"{a.route}-{datetime.datetime.now():%Y%m%d-%H%M%S}-rebuild"
+    n = skip = 0
+    before = after = 0
+    for stem, old in sorted(last.items()):
+        if old.get("route") != a.route:
+            continue
+        ap_ = os.path.join(ea.adir(stem), "assign-answer.json")
+        if not os.path.exists(ap_):
+            skip += 1
+            continue
+        with open(ap_, encoding="utf-8") as f:
+            d = json.load(f)
+        raw = d.get("raw")
+        if raw is None:  # r0.3 以前 = 合わせた後の答えしか残っていない
+            skip += 1
+            continue
+        m = ea.load_material(stem)
+        cands = ea.find_candidates(m, V)
+        if len(raw) == 2:
+            ans, both = agree(raw[0], raw[1], V)
+        else:
+            ans, both = (raw[0] if raw else {"judged": [], "added": [], "new_words": []}), None
+        card = eh.build_card(stem)
+        row = {"at": now(), "batch": batch, "stem": stem, "slug": old["slug"], "title": old["title"], "route": a.route, "version": f"{VERSION}/{ea.VERSION}", "chars": old["chars"], "judged_as": old.get("judged_as") or old["version"], "judged_at": old.get("judged_at") or old["at"]}
+        use = {k: old.get(k) for k in ("model", "sec", "in", "out", "cost_usd")}
+        new = settle(ea, V, stem, m, cands, card, row, ans, use, raw, both, save=False)
+        n += 1
+        before += len(old["show"])
+        after += len(new["show"])
+    print(f"== 作り直し(モデルを呼ばない){batch} == {n}頁 / 表に出す語 {before:,} → {after:,} / 生の答えが無くて飛ばした頁 {skip}")
+    write_summary(batch)
+
+
 def cmd_summary(a):
     if a.batch:
         return write_summary(a.batch)
@@ -322,7 +370,7 @@ def cmd_inspect(a):
     for r in jl(LEDGER):  # 頁ごとに新しい行が勝つ(作り直した回が古い回を上書きする)
         last[r["stem"]] = r
     seen = {(x["stem"], x["at"]) for o in jl(INSP_LEDGER) for x in o["pages"]}
-    pool = [r for r in last.values() if r.get("route") == a.route and str(r["chars"]) != "0" and (a.again or (r["stem"], r["at"]) not in seen)]
+    pool = [r for r in last.values() if r.get("route") == a.route and str(r["chars"]) != "0" and (a.again or (r["stem"], r.get("judged_at") or r["at"]) not in seen)]  # 判定した時刻で数える(rebuild で作り直しただけの頁は点検済みのまま)
     if not pool:
         print("まだ点検していない頁が無い(流した分は点検済み)。 もう一度抜き取るなら --again")
         return
@@ -377,7 +425,7 @@ def cmd_inspect(a):
     with open(out, "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(L) + "\n")
     with open(INSP_LEDGER, "a", encoding="utf-8", newline="\n") as f:
-        f.write(json.dumps({"id": iid, "at": now(), "pool": n, "pages": [{"stem": r["stem"], "at": r["at"]} for r in pool]}, ensure_ascii=False) + "\n")
+        f.write(json.dumps({"id": iid, "at": now(), "pool": n, "pages": [{"stem": r["stem"], "at": r.get("judged_at") or r["at"]} for r in pool]}, ensure_ascii=False) + "\n")
     print(f"点検 {iid}: 対象 {n:,}頁から {len(pick)}頁 → {os.path.relpath(out, ROOT)}\nこのファイルを読み、末尾の「報告」を埋める(Edit)。 終わったら 状態 を「報告済み」にして commit+push")
 
 
@@ -387,6 +435,7 @@ def main():
     p = sp.add_parser("run"); p.add_argument("--n", type=int, default=100); p.add_argument("--loops", type=int, default=1)
     p.add_argument("--parallel", type=int, default=3); p.add_argument("--model", default="claude-haiku-5-5"); p.add_argument("--effort", default="low")
     p.add_argument("--route", default="L"); p.add_argument("--twice", action="store_true", help="2回判定して合わせる(芯+芯・芯+在る → 表 / 片方だけ → 隠し)"); p.add_argument("--redo", default="", help="この回の頁を判定し直す(道具の決まりを直した後)"); p.add_argument("--stems", default="", help="この頁だけ判定し直す(カンマ区切り。 直しの確かめ用)"); p.set_defaults(f=cmd_run)
+    p = sp.add_parser("rebuild", help="モデルを呼ばずに、残してある答えから付与案と台帳を作り直す"); p.add_argument("--route", default="L"); p.set_defaults(f=cmd_rebuild)
     p = sp.add_parser("summary"); p.add_argument("--batch", default=""); p.set_defaults(f=cmd_summary)
     p = sp.add_parser("sample"); p.add_argument("batch"); p.add_argument("--k", type=int, default=50); p.add_argument("--seed", type=int, default=1); p.set_defaults(f=cmd_sample)
     p = sp.add_parser("inspect"); p.add_argument("--k", type=int, default=30); p.add_argument("--route", default="L"); p.add_argument("--again", action="store_true", help="点検済みの頁からも抜き取る")

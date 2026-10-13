@@ -51,6 +51,7 @@
 - [待ち文言は普通に](feedback_plain_status_text.md)
 - [羅針盤の網羅=データの質](feedback_compass_reach_via_data_quality.md)
 - [★日次=ドラフト廃止・途中報告なし・結果から](feedback_daily_distill_no_drafts_quiet.md)
+- [★全件ものは流し切ってから見直す](feedback_run_to_end_then_review.md)
 ## 全体構造・台帳
 - [seeds pyramid=全体構造](project_architecture_seeds.md)
 - [★統合台帳](intake_manifest_ledger_live.md)
