@@ -270,6 +270,32 @@ for r in rows:
     # ★裸数字N>=2末尾=続巻(2026-07-06 VOLSTRIP事故クラス): 題の一部数字(レベル99/U149=直前が英数字)は除く
     _bm = _re.search(r"[^A-Za-z0-9]\s*([2-9]|[1-9][0-9]{1,2})\s*$", str(r.get("title") or ""))  # 3桁対応(鬼平128漏れ 2026-07-06)
     if _bm:
+        # ★⑥次マッチ(2026-10-13): 分離器が巻と読まない裸数字(記号直後「…手に入りました！4」/ 数字+空白+数字
+        #   「三重県津市西区平山町3-15-7　2」)。ここへ落ちると理由付き skip のまま誰も適用せず、既存頁の続巻が出ない
+        #   (悪役令嬢に転生したら理想の部屋が手に入りました！4 = 頁は1-3巻・同じ著者)。分離器は触らず(ワイルド7型を壊す)、
+        #   数字を外した題が頁と一致 + 著者overlap + ★巻連続(頁max+1..+3) の候補が★ちょうど1件の時だけ続巻にする。
+        _n6 = int(_bm.group(1))
+        _tb6 = _split_title(str(r["title"])[:_bm.start(1)].rstrip(" 　"))["base"]
+        _c6 = {}
+        for c in ((page_by_title.get(norm(_tb6)) or []) + (page_by_stripped.get(norm_strip(_tb6)) or [])
+                  + (page_by_loose.get(norm_loose(_tb6)) or [])):
+            _c6[c[si]] = c
+        _h6 = []
+        if r_auth and mvi is not None:
+            for c in _c6.values():
+                if not (r_auth & {norm_author(au_name(a)) for a in (c[ai] or [])}):
+                    continue
+                try:
+                    mx = max(int(c[mvi] or 0), int(c[tvi] or 0) if tvi is not None else 0)
+                except Exception:
+                    mx = 0
+                if mx >= 1 and mx + 1 <= _n6 <= mx + 3:
+                    _h6.append((c, mx))
+        if len(_h6) == 1:
+            c, mx = _h6[0]
+            r["_slug"], r["_vol"] = c[si], _n6
+            r["reason"] = f"⑥裸数字末尾一致(頁max{mx}→巻{_n6})"
+            out["zokkan"].append(r); continue
         r["reason"] = f"裸数字末尾{_bm.group(1)}=続巻疑い(新作1巻にしない)"
         out["skip"].append(r); continue
     # ★巻表記が末尾以外に居る続巻の検出(2026-07-06 ユーザ発見=悪役令嬢99その六/アンゴルモア(13)博多編):
