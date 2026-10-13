@@ -205,6 +205,24 @@ def settle(ea, V, stem, m, cands, card, row, ans, use, raw, both, save=True):
     return row
 
 
+def uninspected(route, again=False):
+    """まだ点検していない頁(材料あり)。 頁ごとに新しい行が勝つ。 判定した時刻で数える(rebuild で作り直しただけの頁は点検済みのまま)。"""
+    last = {}
+    for r in jl(LEDGER):
+        last[r["stem"]] = r
+    seen = {(x["stem"], x["at"]) for o in jl(INSP_LEDGER) for x in o["pages"]}
+    return [r for r in last.values() if r.get("route") == route and str(r["chars"]) != "0" and (again or (r["stem"], r.get("judged_at") or r["at"]) not in seen)]
+
+
+def run_total(a, batches, why):
+    """流しの終わり(中断でも)に、今回ぶん全部の合計を1行で出す。
+    ★2026-10-14: 10回ぶんの出力の末尾だけを読んだ運転者が、921件を「21件」・943件を「43件」と報告した。 報告と commit にはこの行の件数を使う。"""
+    rows = [r for r in jl(LEDGER) if r.get("batch") in batches]
+    print(f"\n==== 今回の合計 ==== 流した {len(rows):,}件({len(batches)}回・{why})/ 点検待ち {len(uninspected(a.route)):,}件(材料あり)"
+          f" / 読み込み {sum(r.get('in') or 0 for r in rows):,}・出力 {sum(r.get('out') or 0 for r in rows):,} トークン"
+          "\n★報告と commit の件数はこの行の「流した」を使う(最後の回の件数ではない)", flush=True)
+
+
 def cmd_run(a):
     ea, eh = mod("_element-assign"), mod("_element-harvest")
     import _lean_claude
@@ -214,12 +232,27 @@ def cmd_run(a):
     if not ctx["caps"]:
         print("✖ 手元の材料の束が無い → python scripts/_gen-element-review-queue.py --material")
         sys.exit(1)
-    for loop in range(a.loops):
-        stems = sorted(set(a.stems.split(","))) if a.stems else sorted({r["stem"] for r in jl(LEDGER) if r.get("batch") == a.redo}) if a.redo else next_stems(a.n, a.route)
+    batches = []
+    loop = 0
+    while True:
+        n = a.n
+        if a.until:  # 点検待ちが --until 件に届くまで。 途中で止まって再開しても、足りない分だけ流す(2026-10-14: 再開のたびに新しく1,000件を始めていた)
+            left = a.until - len(uninspected(a.route))
+            if left <= 0:
+                run_total(a, batches, f"点検待ちが {a.until:,}件に届いた → 次は点検")
+                return
+            n = min(n, left)
+        elif loop >= a.loops:
+            run_total(a, batches, "予定の回数を終えた")
+            return
+        loop += 1
+        stems = sorted(set(a.stems.split(","))) if a.stems else sorted({r["stem"] for r in jl(LEDGER) if r.get("batch") == a.redo}) if a.redo else next_stems(n, a.route)
         if not stems:
             print("表の「未」が無い(この経路は終わり)")
+            run_total(a, batches, "表の「未」が尽きた")
             return
         batch = f"{a.route}-{datetime.datetime.now():%Y%m%d-%H%M%S}"
+        batches.append(batch)
         aids = {}
         for s in stems:  # 頁の anilist_id だけ先に引く(dump は1回の走査で済ませる)
             p = os.path.join(ROOT, "data", "manga.v2", s + ".yml")
@@ -256,6 +289,7 @@ def cmd_run(a):
                     print(f"  [{done}/{len(stems)}] {r['title'][:24]}: 表 {len(r['show'])} {'・'.join(r['show'])} / 隠し {len(r['hide'])} / ジャンル+ {','.join(r['genres_add'] + r['genres_mat']) or '-'} / {r.get('sec')}秒", flush=True)
         write_summary(batch)
         if fail >= 3:
+            run_total(a, batches, "■ 中断 = モデルの失敗3件")
             sys.exit(2)
 
 
@@ -366,11 +400,7 @@ def cmd_inspect(a):
                 st = next((line.strip() for line in fh if line.startswith("状態:")), "状態: ?")
             print(f"{f}\t{st}")
         return
-    last = {}
-    for r in jl(LEDGER):  # 頁ごとに新しい行が勝つ(作り直した回が古い回を上書きする)
-        last[r["stem"]] = r
-    seen = {(x["stem"], x["at"]) for o in jl(INSP_LEDGER) for x in o["pages"]}
-    pool = [r for r in last.values() if r.get("route") == a.route and str(r["chars"]) != "0" and (a.again or (r["stem"], r.get("judged_at") or r["at"]) not in seen)]  # 判定した時刻で数える(rebuild で作り直しただけの頁は点検済みのまま)
+    pool = uninspected(a.route, a.again)
     if not pool:
         print("まだ点検していない頁が無い(流した分は点検済み)。 もう一度抜き取るなら --again")
         return
@@ -433,6 +463,7 @@ def main():
     ap = argparse.ArgumentParser(description="ジャンル・要素の見直しを表の順に流す")
     sp = ap.add_subparsers(dest="cmd", required=True)
     p = sp.add_parser("run"); p.add_argument("--n", type=int, default=100); p.add_argument("--loops", type=int, default=1)
+    p.add_argument("--until", type=int, default=0, help="点検待ちの頁(材料あり)がこの件数に届くまで流す。 再開しても足りない分だけ(--loops は見ない)")
     p.add_argument("--parallel", type=int, default=3); p.add_argument("--model", default="claude-haiku-5-5"); p.add_argument("--effort", default="low")
     p.add_argument("--route", default="L"); p.add_argument("--twice", action="store_true", help="2回判定して合わせる(芯+芯・芯+在る → 表 / 片方だけ → 隠し)"); p.add_argument("--redo", default="", help="この回の頁を判定し直す(道具の決まりを直した後)"); p.add_argument("--stems", default="", help="この頁だけ判定し直す(カンマ区切り。 直しの確かめ用)"); p.set_defaults(f=cmd_run)
     p = sp.add_parser("rebuild", help="モデルを呼ばずに、残してある答えから付与案と台帳を作り直す"); p.add_argument("--route", default="L"); p.set_defaults(f=cmd_rebuild)
