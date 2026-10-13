@@ -147,6 +147,23 @@ f = idx["f"]
 si, ti, ai = f.index("slug"), f.index("title"), f.index("authors")
 mvi = f.index("max_edition_volumes") if "max_edition_volumes" in f else None
 tvi = f.index("total_volumes") if "total_volumes" in f else None
+oai = f.index("original_authors") if "original_authors" in f else None
+
+
+def page_auths(c):
+    """頁の著者集合(正規化)。authors だけ(原作者は含めない= 下の orig_auths は別ゲートでだけ使う)。"""
+    return {norm_author(au_name(a)) for a in (c[ai] or [])}
+
+
+def orig_auths(c):
+    """頁の原作者集合(original_authors・正規化)。★2026-10-13: 作画が交代した長期コミカライズ
+    (勇者パーティーを追放されたビーストテイマー13=茂村モト→益田学昭 / 服飾師ルチアはあきらめない7=臼土きね→彩綺いろは)は、
+    楽天の著者欄と頁の authors が1人も重ならず、既存頁の続巻が途中巻(ex_mid)へ落ちて保留に埋もれていた。
+    原作者は交代しないのでここで重なる。★派生シリーズも原作者は同じ(Fate/Grand Order -Epic of Remnant-・
+    Re:ゼロ 第四章 は別頁が正)なので、**題の完全一致+巻連続**のゲート(①'次)でだけ使う= 先頭セグメント一致(③)には使わない。"""
+    return {norm_author(au_name(a)) for a in ((c[oai] or []) if oai is not None else [])}
+
+
 page_by_title = {}
 page_by_stripped = {}   # ★設計台帳準拠の②次索引(特装版/サブ剥がし)
 page_by_loose = {}      # ★④次索引(緩和正規化。巻連続ゲート必須) 2026-09-04
@@ -177,7 +194,7 @@ for r in rows:
     r_auth = {norm_author(a) for a in author_names(r.get("author"))}
     match = None
     for c in cands:
-        p_auth = {norm_author(au_name(a)) for a in (c[ai] or [])}
+        p_auth = page_auths(c)
         if r_auth & p_auth or not r_auth:
             match = c; break
     if match:
@@ -188,10 +205,33 @@ for r in rows:
     if r_auth:
         sb = norm_strip(_split_title(r["title"])["base"])
         for c in page_by_stripped.get(sb, []):
-            if r_auth & {norm_author(au_name(a)) for a in (c[ai] or [])}:
+            if r_auth & page_auths(c):
                 match = c; break
         if match:
             r["_slug"] = match[si]
+            out["zokkan"].append(r); continue
+    # ★①'次マッチ(2026-10-13): 題の完全一致(①②と同じ索引) + ★原作者overlap + ★巻連続(頁max+1..+3) + 候補1件。
+    #   作画交代で authors が重ならない続巻を拾う(orig_auths の注記)。同題の別コミカライズ(佐々木とピーちゃん型)は
+    #   巻連続と候補1件で落とす。
+    if r_auth and vol is not None and vol >= 2 and mvi is not None and oai is not None:
+        _sb1 = norm_strip(_split_title(r["title"])["base"])
+        _c1 = {}
+        for c in (page_by_title.get(base) or []) + (page_by_stripped.get(_sb1) or []):
+            _c1[c[si]] = c
+        _h1 = []
+        for c in _c1.values():
+            if not (r_auth & orig_auths(c)):
+                continue
+            try:
+                mx = max(int(c[mvi] or 0), int(c[tvi] or 0) if tvi is not None else 0)
+            except Exception:
+                mx = 0
+            if mx >= 1 and mx + 1 <= vol <= mx + 3:
+                _h1.append((c, mx))
+        if len(_h1) == 1:
+            c, mx = _h1[0]
+            r["_slug"] = c[si]
+            r["reason"] = f"①'原作者一致(頁max{mx}→巻{vol})"
             out["zokkan"].append(r); continue
     # ★③次マッチ(2026-09-02): 副題付き続巻。頁題が先頭セグメントに一致 + 著者overlap + 巻連続(頁max+1..+3)。
     #   vol>=2 のみ(1巻/単巻の先頭一致は新シリーズ/スピンオフの可能性=新作扱いのまま)。
@@ -199,7 +239,7 @@ for r in rows:
         hit, hit_mx = None, None
         for pre in head_prefixes(_split_title(r["title"])["base"]):
             for c in (page_by_title.get(norm(pre)) or []) + (page_by_stripped.get(norm_strip(pre)) or []):
-                if not (r_auth & {norm_author(au_name(a)) for a in (c[ai] or [])}):
+                if not (r_auth & page_auths(c)):
                     continue
                 try:
                     mx = max(int(c[mvi] or 0), int(c[tvi] or 0) if tvi is not None else 0)
@@ -222,7 +262,7 @@ for r in rows:
         _lc = page_by_loose.get(norm_loose(_split_title(r["title"])["base"]), [])
         if len(_lc) == 1:
             c = _lc[0]
-            p_auth = {norm_author(au_name(a)) for a in (c[ai] or [])}
+            p_auth = page_auths(c)
             if (r_auth & p_auth) or _pl or _tr or not r_auth:
                 try:
                     mx = max(int(c[mvi] or 0), int(c[tvi] or 0) if tvi is not None else 0)
@@ -245,7 +285,7 @@ for r in rows:
                 _cands[c[si]] = c
         _hits = []
         for c in _cands.values():
-            p_auth = {norm_author(au_name(a)) for a in (c[ai] or [])}
+            p_auth = page_auths(c)
             if not any(author_similar(x, y) for x in r_auth for y in p_auth):
                 continue
             try:
@@ -283,7 +323,7 @@ for r in rows:
         _h6 = []
         if r_auth and mvi is not None:
             for c in _c6.values():
-                if not (r_auth & {norm_author(au_name(a)) for a in (c[ai] or [])}):
+                if not (r_auth & page_auths(c)):
                     continue
                 try:
                     mx = max(int(c[mvi] or 0), int(c[tvi] or 0) if tvi is not None else 0)
