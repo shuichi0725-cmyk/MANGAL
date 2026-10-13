@@ -322,6 +322,8 @@ def main():
              "data/slug-aliases.yml", "public/_redirects",
              "data/manga-alt-index.json", "data/manga-list-head.json",
              "data/manga-list-index.json",
+             # ★試し読みの範囲(3c で作り直す生成物)もadd。漏れていて反映のたびに未commitの差分が残っていた(2026-10-13)。
+             "data/tameshiyomi-map.json",
              # ★コーナーstock(3b で増分更新した生成物)も必ずadd。addし忘れると本番/previewに
              #   古いstockが出続ける(2026-09-06 特装版コーナーに削除済みの巻が残っていた)。
              "public/data/anniversaries.json", "public/data/deluxe-stock.json",

@@ -57,6 +57,9 @@ VOLP = re.compile(r"[（(]\s*(\d{1,3})\s*[)）]\s*$|\s+(\d{1,3})\s*$|第\s*(\d{1
                   r"|[\s　]*(\d{1,3})\s*[（(]コミックス[)）]\s*$", re.I)   # ★N（コミックス）(2026-10-08 split_title B0c と対)
 def split_vol(title):
     t = unicodedata.normalize("NFKC", str(title or "")).strip()
+    # ★最終巻の印「(完)」を先に落とす(2026-10-13 宿屋の看板娘、公爵令嬢と入れかわる（2）(完) 型): 残すと VOLP が
+    #   末尾の巻数を読めず、その巻だけ別の基底題になって「全巻回収不成立」で保留に落ちる。
+    t = re.sub(r"[\s　]*[（(]完[)）]\s*$", "", t).strip()
     m = VOLP.search(t)
     if m:
         n = next((g for g in m.groups() if g), None)
@@ -253,5 +256,11 @@ with open(f"{ROOT}/data/seeds/rakuten-kana-pending.jsonl", "a", encoding="utf-8"
 with open(f"{ROOT}/docs/production-diagnostics/preorder-triage.tsv", "a", encoding="utf-8") as f:
     for isbn, title, why in holds:
         f.write(f"ex_mid_hold\t{isbn}\t\t{str(title)[:40]}\t\t\t\t{why}\n")  # ★8列に合わせる(2026-09-24: 理由が slug 列にずれていた)
-json.dump(made, open(f"{ROOT}/.cache/preorders/preview-made-exmid.json", "w"))
+# ★--isbn(保留分だけの再生成)では made 一覧を上書きせず足す(2026-10-13: 上書きすると最初の生成分が一覧から消え、
+#   rename/昇格の道具が当日分を見失う)。
+_made_path = f"{ROOT}/.cache/preorders/preview-made-exmid.json"
+if ONLY_ISBN is not None and os.path.exists(_made_path):
+    _prev_made = json.load(open(_made_path))
+    made = _prev_made + [s for s in made if s not in _prev_made]
+json.dump(made, open(_made_path, "w"))
 print(f"ex_mid: 生成{len(made)} / 保留{len(holds)}(キャッシュで全巻揃わず等)")

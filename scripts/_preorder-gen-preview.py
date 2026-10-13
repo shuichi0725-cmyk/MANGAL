@@ -162,13 +162,16 @@ from _preorder_draft_lib import new_work_hold_reason as _new_hold
 #   兄弟は増加分の**全class**から集める(下は ex_mid/skip 側に落ちているため)。
 _JOGE_ORDER = {"上": 1, "前編": 1, "中": 2, "下": 3, "後編": 2}
 _JOGE_LABEL = {"上": "上巻", "中": "中巻", "下": "下巻", "前編": "前編", "後編": "後編"}
-_JOGE_RE = re.compile(r"(?:[\s　]+|[\s　]*[（(])(上|中|下|前編|後編)(?:巻)?[)）]?\s*$")
+# ★直結の「上巻/中巻/下巻」と最終巻の印「(完)」も読む(2026-10-13 それゆけ!! 魔界学校上巻 / 同 下巻(完) 型。
+#   split_title D2・_VOL_TAIL と対)。読めないと連番兄弟として1頁にはなるが、巻ラベル(上巻/下巻)が付かない。
+_JOGE_RE = re.compile(r"(?:(?:[\s　]+|[\s　]*[（(])(上|中|下|前編|後編)(?:巻)?[)）]?"
+                      r"|(?<=.{3})(?<![+＋&＆・/／])(上|中|下)巻)\s*(?:[（(]完[)）])?\s*$")
 
 
 def _joge_mark(title):
     """題末尾の上/中/下・前後編マーカー(無ければ None)。"""
     m = _JOGE_RE.search(unicodedata.normalize("NFKC", str(title or "")).strip())
-    return m.group(1) if m else None
+    return (m.group(1) or m.group(2)) if m else None
 
 
 def _joge_key(r):
@@ -283,7 +286,15 @@ for klass, r in targets:
     kana = _clean_kana(r.get("titleKana"), subtitle, base)        # 楽天ヨミのみ・捏造(漢字/汚染)はNone=hold。base=長題32字誤hold回避
     # ★巻番号が既知の時だけ末尾巻数読みを剥がす(2026-09-14 聖弁護士…バツ「イチ」型)。題の読み自体が
     #   その尾で終わる場合(ケンイチ型)は触らない。
-    kana = _strip_kana_known_vol(kana, r.get("_vol"), (r.get("_part") or None), base)
+    # ★題から末尾の裸数字を剥がした時は、その数字を巻番号としてヨミ尾も剥がす(2026-10-13 「BRAIN ALIVE　1」→
+    #   ブレインアライブ「イチ」)。ラテン題+空白+1 は分離器が巻と確定しない(_vol=None)ので、題側 _VOL_TAIL が
+    #   剥がした数字をここで拾う。題の読み自体がその尾で終わる時は strip 側のガードで触らない。
+    _volk = r.get("_vol")
+    if _volk is None:
+        _tn = re.search(r"(\d{1,3})\s*[)）]?\s*$", unicodedata.normalize("NFKC", str(raw_title or "")).strip())
+        if _tn and not re.search(r"\d\s*[)）]?\s*$", str(base or "")):
+            _volk = int(_tn.group(1))
+    kana = _strip_kana_known_vol(kana, _volk, (r.get("_part") or None), base)
     if kana is None:
         holds.append((klass, isbn, base, "楽天ヨミ無し/汚染=捏造回避hold(NDL照合キューへ)")); continue
     if not (title and ym and isbn and len(isbn) == 13 and auths):
@@ -360,5 +371,11 @@ with open(TRIAGE, "a", encoding="utf-8") as f:
         # ★列を合わせる(2026-09-24): 見出し8列(class isbn ym title author publisher slug reason)に対し7列しか書かず、
         #   理由が slug 列に入っていた(= reason 列が空で、保留理由を読む側が拾えなかった)
         f.write(f"{klass}_hold\t{isbn}\t\t{str(title)[:40]}\t\t\t\t{why}\n")
-json.dump(made, open(f"{ROOT}/.cache/preorders/preview-made-{WHICH}.json", "w"))
+# ★--isbn(保留分だけの再生成)では made 一覧を上書きせず足す(2026-10-13: 上書きすると最初の生成分が一覧から消え、
+#   rename/昇格の道具が当日分を見失う)。
+_made_path = f"{ROOT}/.cache/preorders/preview-made-{WHICH}.json"
+if ONLY_ISBN is not None and os.path.exists(_made_path):
+    _prev_made = json.load(open(_made_path))
+    made = _prev_made + [s for s in made if s not in _prev_made]
+json.dump(made, open(_made_path, "w"))
 print(f"{WHICH}: 生成{len(made)} / 保留{len(holds)} / NDL照合キュー+{len(pend_lines)}")

@@ -88,6 +88,15 @@ def split_title(raw):
             return {"base": base, "vol": {"上": 1, "中": 2, "下": None}.get(part), "part": part,
                     "subtitle": "", "clean": base, "matched": matched}
 
+    # D2. ★題に直結した「上巻/中巻/下巻」(2026-10-13 それゆけ!! 魔界学校上巻 / 同 下巻(完) 型)。
+    #   上の D は「〜屋上」等の誤爆を避けるため直前が空白/括弧の時だけ読む。「巻」まで付いていれば題の一部ではないので
+    #   直結でも読む(読めないと同日発売の上下巻が「新作1巻」2頁に割れる)。裸の直結「上/下」は従来どおり読まない。
+    m = re.search(r"^(.{3,}?)([上中下])巻[\s　]*(?:[（(]完[)）])?$", t)
+    if m and m.group(1).strip() and not re.search(r"[+＋&＆・/／]$", m.group(1).strip()):   # 「上巻＋下巻」セットは読まない
+        base, part = m.group(1).strip(), m.group(2)
+        return {"base": base, "vol": {"上": 1, "中": 2, "下": None}.get(part), "part": part,
+                "subtitle": "", "clean": base, "matched": "jouge"}
+
     # B0. 括弧+巻語: 題(1巻)/(全1巻) (2026-07-07 ユーザ発見)。全N巻=完結情報(zen=True)
     m = re.search(r"^(.*?)[\s　]*[（(]\s*(全\s*)?(\d{1,3})\s*巻\s*[)）][\s　]*(.*)$", t)
     if m and m.group(1).strip():

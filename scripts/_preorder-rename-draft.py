@@ -110,9 +110,11 @@ def main():
     # kana pending
     if os.path.exists(PEND):
         raw = io.open(PEND, encoding="utf-8", newline="").read()
-        nl = "\r\n" if "\r\n" in raw else "\n"
+        # ★行末が混ざっていても読む(2026-10-13: 生成器がWindowsのテキスト追記でCRLF、別の道具がLFで書き直す=混在。
+        #   「CRLFが1つでも在ればCRLFで割る」だとLFの行が1塊になって json で読めず、slug更新が0件のまま黙って通った)。
+        nl = "\r\n" if raw.count("\r\n") * 2 > raw.count("\n") else "\n"
         out, n_upd = [], 0
-        for l in raw.split(nl):
+        for l in raw.replace("\r\n", "\n").split("\n"):
             if not l.strip():
                 out.append(l); continue
             try:
