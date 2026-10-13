@@ -14,12 +14,12 @@
 
 置き場: 台帳 = data/element-harvest/review-ledger.jsonl(git 追跡)/ 束と付与案 = .cache/element-harvest/<stem>/ / 回の要約 = .cache/element-harvest/_review/
 """
-import argparse, collections, concurrent.futures, datetime, gzip, importlib.util, json, os, random, subprocess, sys, threading
+import argparse, collections, concurrent.futures, datetime, gzip, importlib.util, json, os, random, re, subprocess, sys, threading
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
-VERSION = "r0.4"  # r0.4: 2回判定の合わせ方をゆるめる(芯+在る → 表。 表0が材料ありの2割だった)/ 材料からのジャンルは2回とも芯の時だけ / 2回とも芯の語は後ろの巻が根拠でも表に出す / 2回の生の答えを残す # r0.3: --twice(2回判定して一致した語だけ表に出す) # r0.2: 材料からのジャンルは2つ以上の紹介文に出る時だけ / --redo
+VERSION = "r0.5"  # r0.5: 語に付いて返った [要素] の印を外してから2回の答えを合わせる # r0.4: 2回判定の合わせ方をゆるめる(芯+在る → 表。 表0が材料ありの2割だった)/ 材料からのジャンルは2回とも芯の時だけ / 2回とも芯の語は後ろの巻が根拠でも表に出す / 2回の生の答えを残す # r0.3: --twice(2回判定して一致した語だけ表に出す) # r0.2: 材料からのジャンルは2つ以上の紹介文に出る時だけ / --redo
 BASE = os.path.join(ROOT, ".cache", "element-harvest")
 LEDGER = os.path.join(ROOT, "data", "element-harvest", "review-ledger.jsonl")
 CAPS = os.path.join(BASE, "_local", "captions.jsonl")
@@ -106,12 +106,16 @@ def local_bundle(eh, card, caps, bl, ani):
             "wikipedia": {"title": None, "categories": []}, "sources": sources, "picks": picks, "none": {}}, total
 
 
+def bare(w):  # _element-assign.bare と同じ(語に付いて返った [要素] の印を外す)
+    return re.sub(r"\s*[\[［](要素|ジャンル|タグ一覧の語)[\]］]\s*$", "", str(w or "").strip())
+
+
 def agree(a1, a2, V):
     """2回の答えを1つに。 → (答え, 2回とも「芯」の語の集合)
     2回とも「芯」→ 芯 / 片方「芯」・もう片方「在る」→ 芯 / 片方「芯」・もう片方「違う」か挙げていない → 在る / 2回目だけが挙げた語 → 在る で足す。
     ★同じ材料でも判定は回ごとに約1割ゆれる(2026-10-12 実測: 193語中21語が片方だけ。 弱い語が中心)。
     ★r0.3 は「2回とも芯」だけを芯にしていた → 材料あり951頁のうち187頁で表が0語(カイジ=ギャンブルも隠し)。 r0.4 で 芯+在る を芯に。"""
-    canon = lambda w: V["alias"].get(str(w).strip(), str(w).strip())  # noqa: E731
+    canon = lambda w: V["alias"].get(bare(w), bare(w))  # noqa: E731
     G = ("judged", "added", "new_words")
     rank = {"芯": 2, "在る": 1}
     t1, t2 = {}, {}
