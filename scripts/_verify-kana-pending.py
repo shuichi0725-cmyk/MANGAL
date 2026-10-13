@@ -63,7 +63,7 @@ pending_idx = [i for i, r in enumerate(lines) if r.get("status") == "pending"]
 targets = pending_idx[:LIMIT]
 print(f"キュー総数 {len(lines)} / pending {len(pending_idx)} / 今回照合 {len(targets)}")
 
-confirmed = mismatched = still = 0
+confirmed = mismatched = still = failed = 0
 aborted = False
 mm_rows = []
 for i in targets:
@@ -74,7 +74,10 @@ for i in targets:
         aborted = True   # ★429中断でもこのバッチの確定/不一致は捨てない(下で書き戻してから exit 2)
         break
     except Exception:
-        ndl = None
+        # ★照会失敗(タイムアウト等)は「未収載」と別に数える(2026-10-13: NDLが遅い日に93件中約30件が30秒タイムアウトで
+        #   落ちたが、表示は全部「NDL未収載」になり、本当に無いのか引けなかっただけなのかが読めなかった)。
+        failed += 1
+        continue
     # NDL間隔は ndl_title_kana内の _rate_gate が担保(ここでの追加sleepは二重=削除)
     if not ndl:
         still += 1
@@ -122,6 +125,7 @@ if mm_rows:
                 continue
             _seen.add(_r)
             f.write(_r + "\n")
-print(f"確定 {confirmed} / 不一致 {mismatched}(→kana-mismatch.tsv) / NDL未収載 {still}(pending継続)")
+print(f"確定 {confirmed} / 不一致 {mismatched}(→kana-mismatch.tsv) / NDL未収載 {still}(pending継続)"
+      + (f" / 照会失敗 {failed}(タイムアウト等=pending継続・時間を置いて再照会)" if failed else ""))
 if aborted:
     sys.exit(2)

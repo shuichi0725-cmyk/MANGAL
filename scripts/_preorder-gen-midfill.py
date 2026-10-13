@@ -155,7 +155,11 @@ _DRAFTED_ISBN = set()
 for _dd in (os.path.join(ROOT, ".cache", "preorders", "drafts"), os.path.join(ROOT, ".preview-data", "manga")):
     for _fp in glob.glob(os.path.join(_dd, "*.yml")):
         _DRAFTED_ISBN.update(re.findall(r"isbn13:\s*['\"]?(97[89]\d{10})", open(_fp, encoding="utf-8").read()))
-for r in [x for x in cls["ex_mid"] if ONLY_ISBN is None or str(x.get("isbn")) in ONLY_ISBN]:
+# ★--isbn 指定時は requeue_hold(過去に見送って簿にだけ出している途中巻)からも拾う(2026-10-13: NDL新着で1巻が
+#   見つかった 座頭市物語ノワール(2) を、保留から1件だけ出す道が無かった)。無指定の実行は従来どおり ex_mid だけ
+#   = 過去の見送りを毎回ドラフト化して水増ししない(_preorder-increment.py の再投入の規則)。
+_pool = cls["ex_mid"] + ([x for x in cls.get("requeue_hold", []) if x.get("_vol") is not None] if ONLY_ISBN is not None else [])
+for r in [x for x in _pool if ONLY_ISBN is None or str(x.get("isbn")) in ONLY_ISBN]:
     if str(r.get("isbn")) in _DRAFTED_ISBN:
         holds.append((r.get("isbn"), r.get("title"), "既に他のドラフトの巻として生成済(同時発売の兄弟)")); continue
     if _scope_out(r.get("title")):

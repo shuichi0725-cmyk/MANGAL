@@ -34,6 +34,8 @@ YEAR = next((a for a in sys.argv[1:] if re.fullmatch(r"(19|20)\d{2}", a)), "2026
 DRY = "--dry" in sys.argv
 AUTO = os.path.join(ROOT, "data", "seeds", "volumes-supplement-auto.yml")
 TODAY = datetime.date.today().isoformat()
+# ★分類器/_preorder-apply-zokkan.py と同じ型(特装版は通常版と同巻番号で二重化する=続巻として足さない)
+SPECIAL_ED = re.compile(r"特装版|限定版|初回限定|豪華版|特別版|特典付|小冊子付|ドラマCD|CD付|DVD付|Blu-?ray|OAD|アクリル|しおり付|カードセット付|ポストカード|クリアスタンド|キーホルダー|フィギュア付", re.I)
 
 A = json.load(open(os.path.join(ROOT, ".cache", "backward", YEAR, "existing-vols.json"), encoding="utf-8"))
 doc = yaml.safe_load(open(AUTO, encoding="utf-8")) or {"volumes": []}
@@ -118,15 +120,23 @@ for slug, cands in sorted(by_slug.items()):
         if not any(x.startswith(band) for x in st["isbns"]):
             holds.append(("B_ISBN帯不一致(帯混入/別版疑い)", a)); continue
         rd = norm_date(a.get("date"))
-        # 楽天で実書影+確定日(構築禁止)
-        cov, d2 = (None, None)
+        # 楽天で実書影+確定日(構築禁止)。 ★同じ応答の題で特装版/限定版を弾く(2026-10-13: シャニマス コヒーレントライト(5)
+        #   「CD付き」が素直な続巻として通りかけた。 頁に通常版5巻がまだ無いと「同番号既存(V)」では止まらない)。
+        cov, d2, _it = (None, None, None)
         if _rk_live and _RKENV:
             try:
-                cov, d2 = _rcd(isbn, {}, _rk_live, _RKENV, need_date=True)
+                _items = _rk_live(_RKENV, isbn=isbn) or []
+                _it = _items[0] if _items else None
             except SystemExit:
                 print("★楽天429→中断"); sys.exit(2)
             except Exception:
+                _it = None
+            try:
+                cov, d2 = _rcd(isbn, {}, (lambda _env, isbn=None: [_it] if _it else []), _RKENV, need_date=True)
+            except Exception:
                 pass
+        if SPECIAL_ED.search(str((_it or {}).get("title") or "")) or SPECIAL_ED.search(str(a.get("title") or "")):
+            holds.append(("X_特装版/限定版(楽天題=%s)" % str((_it or {}).get("title") or a.get("title"))[:30], a)); continue
         rd_final = d2 or rd
         if st["last_date"] and rd_final and str(rd_final) < st["last_date"][:len(str(rd_final))] and \
            (int(str(rd_final)[:4]) * 12 + int(str(rd_final)[5:7] or 1)) < (int(st["last_date"][:4]) * 12 + int(st["last_date"][5:7] or 1)) - 2:
@@ -146,7 +156,7 @@ for slug, cands in sorted(by_slug.items()):
         if cov:
             covers_add.append({"isbn13": isbn, "cover_url": cov})
         touched.add(slug)
-        applied.append((slug, a["vol"], isbn, rd_final))
+        applied.append((slug, a["vol"], isbn, rd_final, str((_it or {}).get("title") or "(楽天題なし)")))
         expect = a["vol"] + 1
 
 print(f"適用(S型) {len(applied)}巻 / 対象頁 {len(touched)} / hold {len(holds)}")
@@ -155,8 +165,8 @@ for k, n in Counter(h[0].split('_')[0] for h in holds).most_common():
     print(f"  hold {k}: {n}")
 if DRY:
     print("(--dry: 書込なし)")
-    for s, v, i, d in applied[:20]:
-        print(f"  + {s} 巻{v} {i} {d}")
+    for s, v, i, d, rt in applied:
+        print(f"  + {s} 巻{v} {i} {d} | 楽天題={rt[:40]}")
     sys.exit(0)
 
 yaml.dump(doc, open(AUTO, "w", encoding="utf-8"), allow_unicode=True, sort_keys=False, width=200)

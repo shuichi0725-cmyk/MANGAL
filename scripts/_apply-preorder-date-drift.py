@@ -68,7 +68,9 @@ def ndl_issued(isbn: str):
     ([[feedback_no_negative_record_on_failure]])。"""
     q = urllib.parse.urlencode({"operation": "searchRetrieve", "recordSchema": "dcndl",
                                 "maximumRecords": "5", "query": 'isbn="%s"' % isbn})
-    _rate_gate.wait("ndlsearch.ndl.go.jp", 1.3)
+    # ★鍵は "ndl"(_lookup.ndl_live / _verify-kana-pending と同じ)。 2026-10-13: 別鍵 "ndlsearch.ndl.go.jp" だったため
+    #   ヨミ照合と並走すると間隔が合算されず、NDL から見て倍速になっていた(= 連続429の一因)。
+    _rate_gate.wait("ndl", 1.3)
     req = urllib.request.Request("https://ndlsearch.ndl.go.jp/api/sru?" + q,
                                  headers={"User-Agent": "mangal/1.0"})
     # ★単発429は規制ではない(skill daily-distill NEVER): 3→10→30→90秒待って再試行、4回続けて429なら raise=中断

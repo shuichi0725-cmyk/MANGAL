@@ -299,7 +299,7 @@ addict 4件/adikuto 1件・robot 47/robotto 2・deep 28/diipu 0・abyss 13/abisu
   ★**ファンクは辞書に入れない**(「ファンクラブ」を funk-love に割る)= 頁1件だけ直す / 衝突suffixは姓だけ(melodrama-onohama2026)/
   読みが違えば衝突でない(B.B=ビービー vs B＆B=ビーアンドビー → b-and-b)。
 
-### ★2026-10-13 の恒久修正(実踏8型・全部scriptに焼いた)
+### ★2026-10-13 の恒久修正(実踏13型・全部scriptに焼いた)
 1. ★**題末尾の裸数字で続巻が理由付き skip に埋もれる**(分類器 ⑥次マッチ新設): 記号直後「…手に入りました！4」/
    数字+空白+数字「三重県津市西区平山町3-15-7　2」は分離器が巻と読まない(ワイルド7型を守るため=分離器は触らない)。
    「裸数字末尾=続巻疑い」skip に落ちたまま誰も適用せず、頁が更新されていなかった。数字を外した題が頁と一致+
@@ -333,6 +333,24 @@ addict 4件/adikuto 1件・robot 47/robotto 2・deep 28/diipu 0・abyss 13/abisu
    機械化していない= ここで拾って `_preorder-transfer-continuation.py` で転送する。
 - ★NDLが連続429/タイムアウトの日は、**手順8の残り・10.6の適用・B を見送る**(NDLを使わない工程は全部進める)。
   10.6 の監査(live不要)は回して芯の件数だけ報告し、適用は次回。
+  ★**NDLが戻ってからの続き(「ndl続き試して」)**= 手順8 → 10.6(dry-run→--apply→反映)→ B の順に**1本ずつ**(並走させない)。
+  同日の夜に実施した結果(2026-10-13): ヨミ照合 確定49・偽陽性12・残33 / ドリフト適用1 / B=続巻10冊+新作1頁。
+10. **NDLの間隔鍵が道具ごとに別だった**: `_apply-preorder-date-drift.py` だけ鍵が `ndlsearch.ndl.go.jp`(他は `ndl`)で、
+    ヨミ照合と重なるとNDLから見て倍速になる。`ndl` に統一。NDLを叩く道具を足す時は `_rate_gate.wait("ndl", 1.3)`。
+11. **ヨミ照合の「NDL未収載」にタイムアウトが混ざっていた**: NDLが遅い日は1件30秒で落ちた分も「未収載」と表示された。
+    今は「照会失敗 N」を別に出す。★**照会失敗が出たら同じコマンドをもう1回**(2回目で15件が確定した)。
+12. ★**B の「既存作の巻」(`--plan` の A=既存頁補完候補)は `_backward-apply-existing-vols.py <年>` で足す**。手順書に無く
+    誰も回していなかった= NDLに納本済みなのに頁に無い続巻が溜まっていた(猫ピッチャー20・失格紋の最強賢者36(完)・
+    キャットニップ5 など10冊。楽天題が直結数字/(完)尾/副題+裸数字で予約側の分類器から漏れた型)。
+    `--dry` で適用行の楽天題を目で見る → 実行 → `a-touched.json` を `_reflect-targeted.py --only … --commit-only`。
+    特装版ゲート(楽天題)を追加= シャニマス コヒーレントライト(5)「CD付き」は頁に通常版5巻が無く、同番号既存(V)では止まらなかった。
+    保留は `backward-<年>-a-holds.tsv`(V=同番号既存は特装版/新装版が大半=そのままで正)。
+13. ★**NDL新着(B)の掲載可が、予約側の保留(requeue_hold=過去に見送った途中巻)と同じ作品のことがある**(座頭市物語ノワール:
+    1巻は楽天の手元データが壊れていて[発売日2031年・ヨミ欄が漢字]見送り、2巻は「1巻が手元に無い」で保留のまま)。
+    その時は B の `--emit` でなく**予約側の生成器**で出す: `_preorder-gen-midfill.py --isbn <保留巻のISBN>`
+    (`--isbn` 指定時だけ requeue_hold からも拾うようにした)→ ジャンル → レビュー → `_preorder-productionize.py --slugs <slug> --keep-preview`。
+    ★B の `--emit` は著者を「, 」で繋がった1人として書き、役割も既定で埋める(=予約側の生成器より粗い)。予約記録がある作品には使わない。
+    B の掲載可で caption が空のもの(発売直後)は従来どおり保留。アメコミ翻訳は `preorder-deny.jsonl` へ(次の `--plan` から候補に出ない)。
 - slug裁定の型(今日39件rename・辞書11語): 陽キャ=youkya・陰キャ=inkya / 騎士団長=kishidanchou(本番14対5)/
   メーワク=meewaku(本番2頁の慣行=meiwakuにしない)/ ギャル=gal(本番78)だが辞書には入れない(ギャルソンを割る)/
   スピンオフは本編頁の綴りに揃える(鍋に弾丸…Transit=nabe-ni-dangan-o-ukenagara-transit。ヨミの当て字タマでも本編がdangan)/
@@ -398,7 +416,9 @@ python scripts/_preorder-increment.py   # ①latest-prev差分(新ISBN) ②過�
 ```
 1. python scripts/_distill_daily.py --discover   # 窓=★前回実行月の前月〜当月(動的・取りこぼさない)
 2. python scripts/_distill_daily.py --plan       # 差分レポート+カーソル更新
+2b. python scripts/_backward-apply-existing-vols.py <年> --dry → 実行 → a-touched.json を反映   # ★既存頁に無い続巻(2026-10-13 手順化)
 3. 新規掲載可→ai-todo.jsonl記入→ --emit(preview先行) ※詳細は従来手順(下の旧手順参照)
+   ★予約側に同じ作品の保留があれば --emit でなく _preorder-gen-midfill.py --isbn で出す(上「2026-10-13 の恒久修正」13)
 ```
 - NDLはNDC付与が納本後のため**未来は取れない**(未来=Aの楽天が担当)。
 
