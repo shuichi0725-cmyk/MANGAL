@@ -1802,13 +1802,50 @@
 .cp-root.wide .cp-neb-foot {
   max-width: 220px;
 }
-/* 引き出しは舞台の下端から(右の欄の手前まで)。 札が無い分、高さは舞台の半分まで */
+/* ★引き出し(ほか・組み替え・さらに絞る)= 舞台の下に浮く箱(幅を絞って真ん中)。
+ *  旧 = スマホと同じ「横いっぱい+タイル5列(1fr)」= PC ではタイルが横に伸び、書影の高さは44px固定なので
+ *  細い帯に切り抜かれて何の本か分からなかった(2026-10-15 ユーザ「pcの画面が余りにひどい」写真)。 */
 .cp-root.wide .cp-mix {
-  max-height: 50%;
+  left: 24px;
+  right: calc(var(--pw) + 24px);
+  bottom: 16px;
+  max-width: 920px;
+  margin: 0 auto;
+  max-height: 72%;
+  padding: 12px 14px 14px;
+  border: 1px solid #ffffff26;
+  border-top-width: 2px;
+  border-radius: 8px;
+  box-shadow: 0 12px 40px #000c;
+}
+.cp-root.wide .cp-mix-h {
   font-size: 13px;
 }
+.cp-root.wide .cp-mix-sec {
+  font-size: 12px;
+}
+.cp-root.wide .cp-mix-body {
+  overflow-y: auto;
+}
+/* タイル = 本の縦横比のまま並べる(列の幅は固定・入るだけ並べる) */
 .cp-root.wide .cp-tiles {
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(auto-fill, 78px);
+  gap: 8px;
+}
+.cp-root.wide .cp-tile img,
+.cp-root.wide .cp-tile .cp-noimg {
+  height: auto;
+  aspect-ratio: 5 / 7;
+}
+.cp-root.wide .cp-tile b {
+  font-size: 11.5px;
+  margin-top: 2px;
+}
+.cp-root.wide .cp-tile i {
+  font-size: 10.5px;
+}
+.cp-root.wide .cp-mt {
+  font-size: 12px;
 }
 
 /* 札 → 右の欄: [表紙 | 題名] の下に 詳細の段・状態・紹介文・進む を横いっぱいに */
