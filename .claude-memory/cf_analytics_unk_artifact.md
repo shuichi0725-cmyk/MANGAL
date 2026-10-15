@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: f0744808-d697-4640-bcd9-3f109fc1665e
-  modified: 2026-09-17T09:47:22.934Z
+  modified: 2026-10-15T00:28:03.572Z
 ---
 
 Cloudflare の `httpRequestsAdaptiveGroups`(ゾーン解析)には **`clientRequestHTTPProtocol == "UNK"` の行が大量に混ざる**。
@@ -28,5 +28,14 @@ bingbotが27.4%食っている。これがクロールされない原因だ**」
 
 ★**素の件数は約3倍に膨らむ**ので、過去の記録と食い違ったら「UNK込みで数えていないか」をまず疑う。
 実際、[[seo_index_coverage_state]] の「Googlebot 144/日」もUNK込みの数字で、**実数は58/日**だった。
+
+## ★2つ目の偽エラー: Worker の Cache API(2026-10-15 実踏・UNK除外後にも残る)
+
+UNK を除いても、Googlebot の `paths` に「**504 が28%・204 が28%(同数)**」と出た。
+中身 = 頁ごとに **GET 504(cacheStatus=miss)+ PUT 204(cacheStatus=none)が1本ずつ対**になっている(protocol は HTTP/1.1 で実在値)。
+正体 = `workers/r2-serve.js` の `caches.default` = **`cache.match()` の空振りが GET 504、`cache.put()` が PUT 204** としてゾーンに記録される。
+クローラ本人が受け取ったのは別行の **GET 200(cacheStatus=none)**。 Worker の errors は同期間 **0件**。
+★見分け方 = 504 と PUT 204 が**同数**・504 の cacheStatus が miss/stale。 実リクエスト数は 200(none+hit)+301+404 で数える
+(2026-10-13 の Googlebot 218件 → 実数 約96件)。
 
 関連: [[feedback_sanity_check_tool_warnings]] [[feedback_raw_count_is_not_worklist]] [[bing_search_reality_2026_09]]
