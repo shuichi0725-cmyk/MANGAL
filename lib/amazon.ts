@@ -38,6 +38,30 @@ export function amazonSearchUrl(query: string, tag: string, locale?: string): st
   return url.toString();
 }
 
+/**
+ * 作品(シリーズ)を名前で探す Amazon の検索リンク(紙 / Kindle)。ISBN を使わない。
+ * ★2026-10-15 ユーザ裁定「ブラウザで開くよりエラーを出さない方を優先」: ISBN-10 の /dp/ は Amazon に紙の頁が無い巻
+ *   (絶版・電子のみ等)で犬の404になる。名前の検索なら必ず結果頁に着く(実機試験で目当ての本が上位)。
+ *   Android では検索URLはアプリで開く(Kindle本はアプリで買えない)= 割り切り。
+ *   Creators API が使えるようになったら Kindle版ASIN(B0…)を集めて /dp/ 直行(ブラウザで開く)に戻す。
+ */
+export function amazonNameSearchUrls(
+  title: string,
+  author: string | null | undefined,
+  tag: string,
+  locale?: string,
+): { paper: string; kindle: string } {
+  const q = [title, author].filter(Boolean).join(" ");
+  const make = (i: string) => {
+    const url = new URL(`https://www.${domain(locale)}/s`);
+    url.searchParams.set("k", q);
+    url.searchParams.set("i", i);
+    if (tag) url.searchParams.set("tag", tag);
+    return url.toString();
+  };
+  return { paper: make("stripbooks"), kindle: make("digital-text") };
+}
+
 /** ISBN-13から /dp/ 直リンク(tag付き)。変換不能ならnull(呼び側で検索fallback)。 */
 export function amazonDpUrlFromIsbn13(isbn13: string | number | null | undefined, tag: string, locale?: string): string | null {
   const i10 = isbn13ToIsbn10(isbn13);

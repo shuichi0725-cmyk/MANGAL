@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: f0744808-d697-4640-bcd9-3f109fc1665e
-  modified: 2026-09-17T09:48:04.568Z
+  modified: 2026-10-15T12:19:02.245Z
 ---
 
 `_bwt.py`(Bing Webmaster API)+ `_cf-analytics.py paths` で初めて実数を割った結果。道具 = [[search_console_bing_api_access]]。
@@ -22,6 +22,10 @@ metadata:
 ## Bing の中身(30日: 表示2,730 / クリック244・8月40/日→9月233/日で伸長中。被リンクは**0**)
 
 ★**同じ被リンク0でGoogleは表示97/クリック6**。= 被リンクは「Webで見つからない理由」ではなく**Googleだけの門**。
+
+★**2026-10-15 ユーザ提供の Bing キーワード画面**: 「日本漫画」表示 **1.8K・クリック429**(CTR約24%)/ 漫画 157・22 / manga 151・6 /
+漫画 db 150・30 / 漫画日本 106・29 / 漫画 日本 全彩 55・24 / mangal 48・11 / 日本漫画大全 38・13。 = 9月の「汎用型が6割」がさらに伸びた。
+(同時期の 30日 API 集計 = クリック961・表示10,611。 Google は同じ頃に流入がほぼゼロ = [[seo_index_coverage_state]])
 
 クエリ216語の型別(表示691・クリック151):
 

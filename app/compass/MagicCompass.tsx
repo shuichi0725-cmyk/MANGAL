@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import type { MangaListItem } from "@/lib/schema";
+import { amazonNameSearchUrls } from "@/lib/amazon";
 import {
   ensureFullIndex,
   isCatchLoaded,
@@ -106,6 +107,7 @@ const CH = 128;
 /** ★PC の横長画面(案B・2026-10-15 ユーザ裁定「PCの横長の画面を全く生かし切れていない」):
  *  幅900px以上かつ横長 = 下の札を右の欄(幅340)へ移し、縦を全部 輪に回して本を大きくする。 スマホは今のまま。 */
 const WIDE_MIN_W = 900;
+const AMZ_TAG = process.env.NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG || "";
 const PANEL_W = 340;
 type Sizes = { wide: boolean; k: number; cw: number; ch: number; nw: number; nh: number; ew: number; eh: number; efs: number; pw: number };
 function sizesFor(vp: { w: number; h: number }): Sizes {
@@ -2003,13 +2005,28 @@ export default function MagicCompass({
             )}
           </div>
           {/* ★PC の横長(右の欄)だけ: 表紙の下に「詳細」の段(案1 = 2026-10-15 ユーザ裁定。 表紙の下の詳細は CSS で隠す) */}
-          {S.wide && sheetItem && (
-            <div className="cp-sheet-acts">
-              <a className="cp-acts-detail" href={detailHref(sheetItem.slug)} onClick={saveResume}>
-                詳細 ›
-              </a>
-            </div>
-          )}
+          {S.wide &&
+            sheetItem &&
+            (() => {
+              // Kindle・Amazon = 名前で探す(ISBN を持たない・犬の404を出さない。 lib/amazon の注記)
+              const buy = amazonNameSearchUrls(sheetItem.title, sheetItem.authors?.[0]?.name, AMZ_TAG);
+              return (
+                <>
+                  <div className="cp-sheet-acts">
+                    <a className="cp-acts-detail" href={detailHref(sheetItem.slug)} onClick={saveResume}>
+                      詳細 ›
+                    </a>
+                    <a className="cp-acts-buy k" href={buy.kindle} target="_blank" rel="noopener noreferrer sponsored">
+                      Kindle
+                    </a>
+                    <a className="cp-acts-buy a" href={buy.paper} target="_blank" rel="noopener noreferrer sponsored">
+                      Amazon
+                    </a>
+                  </div>
+                  <div className="cp-acts-pr">[PR] 店舗リンクにはアフィリエイト広告を含みます</div>
+                </>
+              );
+            })()}
           {/* 状態 = 前半を糸の色の小札、「 ・ 」より後ろは灰色の補足(2026-10-03 案B3) */}
           <div className="cp-sheet-w">
             {(() => {

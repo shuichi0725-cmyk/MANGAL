@@ -1,11 +1,11 @@
 ---
 name: kindle-link-browser-not-app
-description: 【✅解決2026-07-29・10-15再試験】Kindleボタン=ブラウザで開く問題の確定解: App Links奪取の決め手は最終URLのパス(/dp=ブラウザ・検索系=全部アプリ)。302/JS遷移は無関係。★10/15に検索6形(/-/ja/s・/gp/aw/s・wwwなし・Chrome名指しintent等)も全部アプリ=Kindleを題名検索でブラウザに出す道は無い。実装=紙/dp直リンク+「Kindle版」誘導
+description: 【★2026-10-15裁定=エラーを出さない>ブラウザで開く(名前検索・API解錠後に/dp直行へ戻す)】【✅解決2026-07-29・10-15再試験】Kindleボタン=ブラウザで開く問題の確定解: App Links奪取の決め手は最終URLのパス(/dp=ブラウザ・検索系=全部アプリ)。302/JS遷移は無関係。★10/15に検索6形(/-/ja/s・/gp/aw/s・wwwなし・Chrome名指しintent等)も全部アプリ=Kindleを題名検索でブラウザに出す道は無い。実装=紙/dp直リンク+「Kindle版」誘導
 metadata: 
   node_type: memory
   type: project
   originSessionId: 8f5c881f-9859-490c-b682-bd1969ec515c
-  modified: 2026-10-15T04:28:45.648Z
+  modified: 2026-10-15T12:19:09.963Z
 ---
 
 ★2026-07-29 実機検証(本番Worker /go-testページ・ユーザAndroid実機)で**確定解決**。積年の仮説を全部塗り替えた:
@@ -32,5 +32,13 @@ metadata:
 - 結論: **Kindleをブラウザで開ける道は /dp だけ**。ISBN(/dp)は捨てられない。Kindle版ASIN(B0…)が無い巻=紙の頁も無い巻は、Kindleボタンで救えない(手でASINを入れるか、Creators API解錠を待つ)。
 - 危ない巻の推定(Amazonは止め札で照会しない。楽天書影の出どころで代用): 紙=楽天ブックス書影 211,215(79%)/ 楽天に登録・画像なし 8,407 / **Kobo電子のみ 15,776** / **どちらも無し 33,314**。下2つを含む頁 18,387・全巻が下2つの頁 14,368(2026-10-15 isbn-page-index 基準)。
 - ★試験頁は2026-10-15 テスト環境に一時設置→結果受領後に削除済み(`public/lab/amazon-link-test.html`)。再試験するなら git 履歴から戻せる。
+
+## ★★2026-10-15 ユーザ裁定: 「ブラウザで開く」より「エラー(犬の404)を出さない」を優先
+ユーザ「ブラウザで開くよりエラーを出ない方を優先させた方が良いのではないか? 安定的に月10件売れるようになって API が使えるようになって
+ブラウザで開けるようになるが正解な気がしている」= **旧方針「Kindleはブラウザで開くを死守」は格下げ**。順番は
+①名前で検索してエラーを出さない(Android は Kindle もアプリで開く=アプリでは Kindle本を買えない、は割り切り)→ ②月10件の売上で Creators API 解錠
+→ ③Kindle版ASIN(B0…)を集めて /dp/ 直行(ブラウザ)に戻す。
+- 実装済み: 羅針盤のボタン(コマ・PCの右の欄)= `lib/amazon.ts` の `amazonNameSearchUrls(題名, 著者)` = 紙 stripbooks / Kindle digital-text。 ISBN を持たない(ユーザ「isbnは持たないで」)。
+- 作品頁(VolumeCoverflow)は 2026-10-15 時点で ISBN の /dp/ のまま = 危ない約2割の巻(楽天に紙が無い)を名前検索へ切り替える案はユーザ裁定待ち。
 
 **★次段=Kindle ASINハーベスト(PA-API解錠後)**: マンバがKindle頁へ一発直行できる種明かし(ユーザ推理2026-07-29で確定的)=**各巻のKindle版ASIN(B0…)をDBに持ち /dp/B0…?tag= の普通の商品URLを作っているだけ**。正規入手路=PA-API(SearchItems×KindleStore、題+巻で照合)。mangal08-22の**180日3成果条件クリアでPA-API解錠**([[openbd-eol-amazon-required]]の書影と同じ解錠条件)→ Kindle ASIN収穫(楽天ハーベストと同型)→ Kindleボタンを電子版/dp直行に進化。現行の「紙/dp→Kindle版選択」はそれまでの暫定解。

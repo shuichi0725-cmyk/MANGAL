@@ -1523,6 +1523,7 @@
 }
 .ck-btns {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   align-items: center;
   margin-top: 9px;
@@ -1544,6 +1545,28 @@
   font-size: 11.5px;
   text-decoration: underline;
   cursor: pointer;
+}
+/* Kindle・Amazon(案1 = 2026-10-15)= 詳細と同じ「線+ずらし影」・店の色 */
+.ck-buy {
+  border: 2.5px solid #111;
+  color: #fff;
+  font-weight: 900;
+  font-size: 12.5px;
+  padding: 3px 12px;
+  text-decoration: none;
+  box-shadow: 3px 3px 0 #111;
+  white-space: nowrap;
+}
+.ck-buy.k {
+  background: #3b82f6;
+}
+.ck-buy.a {
+  background: #e69500;
+}
+.ck-pr {
+  font-size: 9.5px;
+  color: #777;
+  margin-top: 6px;
 }
 
 /* ── 案B(2026-10-06): 糸の入口の輪 = 書影付きの入口が中心を囲む(下の帯は無い) ── */
@@ -1888,6 +1911,7 @@
   flex-direction: column;
 }
 .cp-root.wide .cp-sheet-acts,
+.cp-root.wide .cp-acts-pr,
 .cp-root.wide .cp-sheet-w,
 .cp-root.wide .cp-sheet-c,
 .cp-root.wide .cp-shelve-panel,
@@ -1938,7 +1962,29 @@
   text-decoration: none;
   white-space: nowrap;
 }
-.cp-acts-detail:focus-visible {
+.cp-acts-buy {
+  flex: 1;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 800;
+  color: #fff;
+  padding: 6px 0;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.cp-acts-buy.k {
+  background: #3b82f6;
+}
+.cp-acts-buy.a {
+  background: #e69500;
+}
+.cp-acts-pr {
+  font-size: 10.5px;
+  color: #8a96a0;
+  margin-top: -6px;
+}
+.cp-acts-detail:focus-visible,
+.cp-acts-buy:focus-visible {
   outline: 2px solid #f2f2ec;
   outline-offset: 2px;
 }

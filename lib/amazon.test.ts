@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { amazonDpUrlFromIsbn13, amazonSearchUrl, isbn13ToIsbn10 } from "./amazon";
+import { amazonDpUrlFromIsbn13, amazonNameSearchUrls, amazonSearchUrl, isbn13ToIsbn10 } from "./amazon";
 
 describe("isbn13ToIsbn10 (紙のASIN=ISBN-10。アソシエイト/dp/直リンクの土台 2026-07-29)", () => {
   it("チェックデジット再計算が正しい(HUNTER×HUNTER 1巻)", () => {
@@ -29,5 +29,18 @@ describe("Amazonリンク生成", () => {
   });
   it("tag未設定なら素リンク(開発/preview fallback)", () => {
     expect(amazonDpUrlFromIsbn13("9784088725710", "")).toBe("https://www.amazon.co.jp/dp/4088725719");
+  });
+  it("名前で探す: 題名+著者で紙(stripbooks)と Kindle(digital-text)の検索リンク・tag付き(ISBNを使わない)", () => {
+    const u = amazonNameSearchUrls("さよなら絵梨", "藤本タツキ", "mangal08-22");
+    const p = new URL(u.paper);
+    expect(p.pathname).toBe("/s");
+    expect(p.searchParams.get("k")).toBe("さよなら絵梨 藤本タツキ");
+    expect(p.searchParams.get("i")).toBe("stripbooks");
+    expect(p.searchParams.get("tag")).toBe("mangal08-22");
+    expect(new URL(u.kindle).searchParams.get("i")).toBe("digital-text");
+    // 著者が無ければ題名だけ・tag が空なら付けない
+    const v = amazonNameSearchUrls("タイトル", null, "");
+    expect(new URL(v.paper).searchParams.get("k")).toBe("タイトル");
+    expect(new URL(v.paper).searchParams.has("tag")).toBe(false);
   });
 });

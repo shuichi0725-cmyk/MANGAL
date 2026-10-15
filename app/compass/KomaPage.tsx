@@ -2,6 +2,7 @@
 
 import type { CSSProperties } from "react";
 import type { MangaListItem } from "@/lib/schema";
+import { amazonNameSearchUrls } from "@/lib/amazon";
 import { yearStatusLabel } from "@/lib/format";
 import { useRailMasters } from "@/lib/useRailMasters";
 import { komaCatchSize, komaNarration, komaTitleSize, komaVolumes } from "./compass";
@@ -40,6 +41,8 @@ export default function KomaPage({
   const themes = [...new Set(item.themes ?? [])];
   const meta = [item.magazine ? magName(item.magazine) : null, pub, item.demographic ? demoName(item.demographic) : null].filter(Boolean);
   const d = (i: number) => ({ "--d": `${120 + i * 140}ms` }) as CSSProperties;
+  // ★Kindle・Amazon(案1 = 2026-10-15 ユーザ裁定「詳細の横」)。 名前で探す = ISBN を持たない・犬の404を出さない(lib/amazon の注記)
+  const buy = amazonNameSearchUrls(item.title, authors[0], process.env.NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG || "");
 
   return (
     <div className="cp-koma-wrap" onClick={onClose} role="dialog" aria-label={`${item.title}の紹介`}>
@@ -105,10 +108,18 @@ export default function KomaPage({
             <a className="ck-detail" href={href} onClick={onDetail}>
               詳細 ›
             </a>
+            <a className="ck-buy k" href={buy.kindle} target="_blank" rel="noopener noreferrer sponsored">
+              Kindle
+            </a>
+            <a className="ck-buy a" href={buy.paper} target="_blank" rel="noopener noreferrer sponsored">
+              Amazon
+            </a>
             <button type="button" className="ck-close" onClick={onClose}>
               閉じる
             </button>
           </div>
+          {/* ★[PR]表記 = 景表法ステマ規制対応(作品頁と同じ文言) */}
+          <div className="ck-pr">[PR] 店舗リンクにはアフィリエイト広告を含みます</div>
         </div>
       </div>
     </div>
