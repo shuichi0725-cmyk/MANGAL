@@ -2,7 +2,10 @@
 name: memory-index-tools-ops
 description: 記憶の分野別索引 = 道具の罠・運用の型(promote/reflect/lookup/シェル)。MEMORY.md の容量対策(2026-10-06)で全件をここに置く
 metadata:
+  node_type: memory
   type: reference
+  originSessionId: 8d72c3e2-b03c-4e9f-8f51-5a1edd85d641
+  modified: 2026-10-15T14:55:35.330Z
 ---
 
 # 道具の罠・運用の型(promote/reflect/lookup/シェル)
@@ -26,3 +29,4 @@ metadata:
 - [ls -l列ずれ誤読](file_size_misread_ls_column.md)
 - [道具の罠2026-09](tool_traps_2026_09_24.md)
 - [土台なしでモデルを呼ぶ(7万→700トークン)](lean_headless_claude_call.md)
+- [Edge headless/CDPで撮って確かめる](headless_edge_capture_cdp.md)
