@@ -18,6 +18,9 @@ import {
   rng,
   spreadPositions,
   stageGeom,
+  stageGeomWide,
+  ringPoints,
+  labelBox,
   toneOrder,
   toneQ,
   type Kind,
@@ -947,5 +950,64 @@ describe("隠し要素(近さにだけ使う・画面には出さない)", () =>
     const g = buildGraph([c, book("a", { themes: ["陰謀"] })], { a: [1, 1, 10] });
     expect(g.prox?.of.get("constructor")).toBeUndefined();
     expect(g.prox?.of.get("a")).toEqual([1, 10]);
+  });
+});
+
+describe("PC の横長画面(案B・2026-10-15)", () => {
+  // ノートPCのブラウザ(1280×620)と大きい画面(1920×960)。 右の欄 340・上の段 100 を除いた舞台
+  const cases = [
+    { W: 1280 - 340, H: 620 - 100, k: 1.53 },
+    { W: 1920 - 340, H: 960 - 100, k: 1.7 },
+  ];
+  const sizes = (k: number) => ({ k, ew: Math.round(54 * k), eh: Math.round(76 * k), cw: Math.round(92 * k * 0.92), ch: Math.round(128 * k * 0.92), efs: Math.round(10 * Math.min(k, 1.35) * 10) / 10 });
+  const LABELS = ["作者 荒木飛呂彦", "週刊少年ジャンプ", "ジャンル 歴史", "ジャンル ミステリー", "似たジャンル", "要素 ほか9・ジャンル ほか4 ▸", "似た要素", "要素 悲劇", "要素 超能力", "2004年に開始"];
+  type B = { x: number; y: number; w: number; h: number };
+  const hit = (a: B, b: B) => Math.min(a.x + a.w, b.x + b.w) > Math.max(a.x, b.x) && Math.min(a.y + a.h, b.y + b.h) > Math.max(a.y, b.y);
+
+  it("スマホ(wide 無し)は従来どおり = 真上から角度で等分・名札は下", () => {
+    const g = stageGeom(360, 544);
+    const pts = ringPoints(10, g);
+    expect(pts[0]).toMatchObject({ x: g.CX, up: false });
+    expect(pts[0].y).toBeCloseTo(g.CY - g.ry);
+    expect(pts.every((p) => !p.up)).toBe(true);
+  });
+
+  it("★本・名札・中心の本が重ならず、舞台からはみ出さない(名札は上半分の本では上)", () => {
+    for (const c of cases) {
+      const s = sizes(c.k);
+      const g = stageGeomWide(c.W, c.H, { k: s.k, ew: s.ew, eh: s.eh, lh: s.efs * 2.6 });
+      const labels = LABELS.map((t, i) => labelBox(t, s.efs, 2, i === 5 ? 86 * (s.efs / 10) : undefined));
+      const pts = ringPoints(LABELS.length, g, { ew: s.ew, eh: s.eh, cw: s.cw, ch: s.ch, labels });
+      const boxes: { i: number; b: B }[] = [];
+      pts.forEach((p, i) => {
+        boxes.push({ i, b: { x: p.x - s.ew / 2, y: p.y - s.eh / 2, w: s.ew, h: s.eh } });
+        const lb = labels[i];
+        boxes.push({ i, b: { x: p.x - lb.w / 2, y: p.up ? p.y - s.eh / 2 - lb.h - 2 : p.y + s.eh / 2 + 2, w: lb.w, h: lb.h } });
+        if (p.y < g.CY - 1) expect(p.up).toBe(true);
+      });
+      const cen = { x: g.CX - s.cw / 2, y: g.CY - s.ch / 2, w: s.cw, h: s.ch };
+      for (const a of boxes) {
+        expect(hit(a.b, cen), `${c.W}: 中心と ${LABELS[a.i]}`).toBe(false);
+        expect(a.b.x >= 0 && a.b.y >= 0 && a.b.x + a.b.w <= g.W && a.b.y + a.b.h <= g.H, `${c.W}: はみ出し ${LABELS[a.i]}`).toBe(true);
+        for (const b of boxes) if (a.i < b.i) expect(hit(a.b, b.b), `${c.W}: ${LABELS[a.i]} と ${LABELS[b.i]}`).toBe(false);
+      }
+    }
+  });
+
+  it("輪は横に広い(旧 = 半径142pxで画面の5分の1)・星屑は舞台いっぱいに広がり重ならない", () => {
+    const items = Array.from({ length: 24 }, (_, i) => ({ slug: `b${i}`, year: 1990 + (i % 12) }));
+    for (const c of cases) {
+      const s = sizes(c.k);
+      const g = stageGeomWide(c.W, c.H, { k: s.k, ew: s.ew, eh: s.eh, lh: s.efs * 2.6 });
+      expect(g.rx).toBeGreaterThan(c.W * 0.35);
+      const r = spreadPositions("elem", items, "dust", g, 2000, "elem:魔法");
+      expect(r.P).toHaveLength(24);
+      const xs = r.P.map((p) => p.x);
+      expect(Math.max(...xs) - Math.min(...xs)).toBeGreaterThan(c.W * 0.6);
+      for (const p of [...r.P, r.center]) {
+        expect(p.x - p.w / 2 >= 0 && p.x + p.w / 2 <= g.W && p.y - p.h / 2 >= 0 && p.y + p.h / 2 <= g.H).toBe(true);
+        for (const q of r.P) if (p !== q) expect(hit({ ...p, x: p.x - p.w / 2, y: p.y - p.h / 2 }, { ...q, x: q.x - q.w / 2, y: q.y - q.h / 2 })).toBe(false);
+      }
+    }
   });
 });

@@ -30,6 +30,9 @@ import {
   type UnitItem,
   RING_KINDS,
   rng,
+  ringPoints,
+  labelBox,
+  stageGeomWide,
   EMPTY_MIX,
   mixCounts,
   mixKey,
@@ -100,6 +103,30 @@ const NW = 58;
 const NH = 81;
 const CW = 92;
 const CH = 128;
+/** ★PC の横長画面(案B・2026-10-15 ユーザ裁定「PCの横長の画面を全く生かし切れていない」):
+ *  幅900px以上かつ横長 = 下の札を右の欄(幅340)へ移し、縦を全部 輪に回して本を大きくする。 スマホは今のまま。 */
+const WIDE_MIN_W = 900;
+const PANEL_W = 340;
+type Sizes = { wide: boolean; k: number; cw: number; ch: number; nw: number; nh: number; ew: number; eh: number; efs: number; pw: number };
+function sizesFor(vp: { w: number; h: number }): Sizes {
+  const wide = vp.w >= WIDE_MIN_W && vp.w >= vp.h * 1.15;
+  if (!wide) return { wide, k: 1, cw: CW, ch: CH, nw: NW, nh: NH, ew: EW, eh: EH, efs: 10, pw: 0 };
+  // 倍率 = 舞台の高さに合わせる(ノートPCのブラウザ 約520px で約1.5倍)
+  const k = Math.max(1.15, Math.min(1.7, (vp.h - TOP) / 340));
+  const r = (x: number) => Math.round(x);
+  return {
+    wide,
+    k,
+    cw: r(CW * k * 0.92),
+    ch: r(CH * k * 0.92),
+    nw: r(NW * k),
+    nh: r(NH * k),
+    ew: r(EW * k),
+    eh: r(EH * k),
+    efs: Math.round(10 * Math.min(k, 1.35) * 10) / 10,
+    pw: PANEL_W,
+  };
+}
 const STORE = "mangal.magicShelf.spreads.v1";
 const PLACEHOLDER_ANGLES = [-90, -20, 20, 70, 110, 160, 200];
 const FIRST = "\u0000first";
@@ -218,7 +245,14 @@ export default function MagicCompass({
     ro.observe(el);
     return () => ro.disconnect();
   }, []);
-  const geom = useMemo(() => stageGeom(vp.w, Math.max(240, vp.h - TOP - SHEET)), [vp]);
+  const S = useMemo(() => sizesFor(vp), [vp]);
+  const geom = useMemo(
+    () =>
+      S.wide
+        ? stageGeomWide(vp.w - S.pw, Math.max(240, vp.h - TOP), { k: S.k, ew: S.ew, eh: S.eh, lh: S.efs * 2.6 })
+        : stageGeom(vp.w, Math.max(240, vp.h - TOP - SHEET)),
+    [vp, S],
+  );
 
   // 全画面の間は下の頁を動かさない
   useEffect(() => {
@@ -459,6 +493,23 @@ export default function MagicCompass({
     () => (THREADS && graph && curItem && nb ? threadEntrances(graph, curItem, nb.units, genreName, 10, simelFull) : null),
     [graph, curItem, nb, genreName, simelFull],
   );
+  // 輪に並べる順(「ほか ▸」の位置も含む)と置き場所。 PC の横長は重なりの少ない置き方を探すので、ここで1回だけ計算する
+  const ring = useMemo(() => {
+    if (!THREADS || !entrances) return null;
+    const shown = entrances.ring.filter((e) => !off.has(e.kind === "sim" ? "genre" : e.kind === "simel" ? "elem" : e.kind));
+    // 「ほか ▸」は似た要素・要素の前(無ければ年の前)= 輪の下側。 似た要素は「ほか」の左隣
+    let at = shown.findIndex((e) => e.kind === "simel" || e.kind === "elem");
+    if (at < 0) at = shown.findIndex((e) => e.kind === "year");
+    if (at < 0) at = shown.length;
+    const all: (Entrance | "more")[] = entrances.more.length ? [...shown.slice(0, at), "more", ...shown.slice(at)] : shown;
+    const nE = entrances.more.filter((m) => m.kind === "elem").length;
+    const nG = entrances.more.length - nE;
+    const moreLabel = `${[nE ? `要素 ほか${nE}` : "", nG ? `ジャンル ほか${nG}` : ""].filter(Boolean).join("・")} ▸`;
+    const fk = S.efs / 10;
+    const labels = all.map((e) => (e === "more" ? labelBox(moreLabel, S.efs, 2, 86 * fk) : labelBox(`${e.label}`, S.efs, 2)));
+    const pts = ringPoints(all.length, geom, S.wide ? { ew: S.ew, eh: S.eh, cw: S.cw, ch: S.ch, labels } : undefined);
+    return { all, pts, moreLabel };
+  }, [entrances, off, geom, S]);
   const reDraft = useMemo(
     () => (SPLIT && reOpen && graph && curItem ? regenreUnit(graph, curItem, re, genreName) : null),
     [reOpen, graph, curItem, re, genreName],
@@ -618,10 +669,10 @@ export default function MagicCompass({
       if (busy.current || i >= path.length - 1) return;
       const slug = path[i].slug;
       const o = placed.find((x) => x.slug === slug);
-      const rel = o ? { x: o.dx, y: o.dy, w: NW, h: NH, small: false } : { x: -geom.rx, y: 0, w: NW, h: NH, small: false };
+      const rel = o ? { x: o.dx, y: o.dy, w: S.nw, h: S.nh, small: false } : { x: -geom.rx, y: 0, w: S.nw, h: S.nh, small: false };
       travel(slug, rel, "back", (p) => p.slice(0, i + 1));
     },
-    [path, placed, geom, travel],
+    [path, placed, geom, travel, S],
   );
 
   const go = useCallback(
@@ -644,9 +695,9 @@ export default function MagicCompass({
         return;
       }
       const kind: ThreadKind = o.back ? "back" : o.kind;
-      travel(slug, { x: o.dx, y: o.dy, w: NW, h: NH, small: false }, kind, (ps) => [...ps, { slug, kind, seed: newSeed() }]);
+      travel(slug, { x: o.dx, y: o.dy, w: S.nw, h: S.nh, small: false }, kind, (ps) => [...ps, { slug, kind, seed: newSeed() }]);
     },
-    [unit, spread, placed, path, geom, travel, jumpBack],
+    [unit, spread, placed, path, geom, travel, jumpBack, S],
   );
 
   const tapNode = useCallback(
@@ -800,7 +851,7 @@ export default function MagicCompass({
     const toW = (sx: number, sy: number) => ({ x: cw.x + sx - geom.CX, y: cw.y + sy - geom.CY });
     if (pan) {
       return [
-        { slug: pan.from, x: cw.x, y: cw.y, w: CW, h: CH, center: true, spawn: null },
+        { slug: pan.from, x: cw.x, y: cw.y, w: S.cw, h: S.ch, center: true, spawn: null },
         {
           slug: pan.target,
           x: pan.x,
@@ -819,8 +870,8 @@ export default function MagicCompass({
     out.push({
       slug: cur,
       ...cBox,
-      w: spread ? spread.center.w : CW,
-      h: spread ? spread.center.h : CH,
+      w: spread ? spread.center.w : S.cw,
+      h: spread ? spread.center.h : S.ch,
       center: true,
       spawn: { fx: 0, fy: 0, fs: 0.6, d: 0 },
     });
@@ -832,8 +883,8 @@ export default function MagicCompass({
         slug: o.slug,
         x: cw.x + o.dx,
         y: cw.y + o.dy,
-        w: NW,
-        h: NH,
+        w: S.nw,
+        h: S.nh,
         label: o.back ? "← 来た道" : o.label,
         color,
         back: o.back,
@@ -867,7 +918,7 @@ export default function MagicCompass({
       });
     }
     return out;
-  }, [cur, curItem, cw, geom, pan, spread, unit, placed, off, sel, firstRing, nebOpen]);
+  }, [cur, curItem, cw, geom, pan, spread, unit, placed, off, sel, firstRing, nebOpen, S]);
 
   const lines = useMemo<LineView[]>(() => {
     if (!cur || !curItem) return [];
@@ -1038,12 +1089,13 @@ export default function MagicCompass({
     if (!sel || pan) return null;
     const n = nodes.find((x) => x.slug === sel && !x.center);
     if (!n) return null;
-    const stageH = Math.max(240, vp.h - TOP - SHEET);
-    const tw = Math.min(vp.w * 0.36, 150);
+    const stageH = Math.max(240, vp.h - TOP - (S.wide ? 0 : SHEET));
+    // ★PC の横長は下の札が無い(右の欄)ので、寄った本も大きく・舞台の真ん中へ
+    const tw = S.wide ? 150 * S.k : Math.min(vp.w * 0.36, 150);
     const s = Math.min(tw / n.w, (tw * 1.4) / n.h);
     // 選ぶとシートが伸びて舞台の下を覆うので、狙う高さは舞台の真ん中より少し上
-    return { s, tx: -s * n.x, ty: stageH * 0.44 - geom.CY - s * n.y };
-  }, [sel, pan, nodes, vp, geom.CY]);
+    return { s, tx: -s * n.x, ty: stageH * (S.wide ? 0.5 : 0.44) - geom.CY - s * n.y };
+  }, [sel, pan, nodes, vp, geom.CY, S]);
   const worldStyle: CSSProperties = {
     left: geom.CX,
     top: geom.CY,
@@ -1051,6 +1103,9 @@ export default function MagicCompass({
       ? `translate(${zoom.tx}px, ${zoom.ty}px) scale(${zoom.s})`
       : `translate(${-cam.x}px, ${-cam.y}px) scale(1)`,
   };
+
+  // 引き出し(ほか・組み替え・さらに絞る)の下端 = 札のすぐ上。 ★PC の横長は札が右の欄なので画面の下端
+  const drawerBottom = S.wide ? 0 : Math.max(SHEET + 2, sheetH + 2);
 
   // 掛け合わせの入口: 要素 ▾ / ジャンル ▾(どちらも同じ引き出しを開く)。 広げた組の札は「✕ 閉じる」の隣(押すと引き出しで組み直す)
   const mixShown = exp && mixFull?.key === exp ? mixFull : null;
@@ -1093,13 +1148,22 @@ export default function MagicCompass({
   };
 
   return (
-    <div ref={rootRef} className="cp-root" data-reduce={reduce ? "1" : undefined}>
+    <div
+      ref={rootRef}
+      className={`cp-root${S.wide ? " wide" : ""}`}
+      data-reduce={reduce ? "1" : undefined}
+      style={
+        S.wide
+          ? ({ "--pw": `${S.pw}px`, "--ew": `${S.ew}px`, "--eh": `${S.eh}px`, "--efs": `${S.efs}px`, "--fk": S.efs / 10, "--k": S.k } as CSSProperties)
+          : undefined
+      }
+    >
       <div className="cp-bg" aria-hidden="true">
         <canvas ref={canvasRef} />
         <div className="cp-vig" />
         <div
           className={`cp-flash${flash.on ? " on" : ""}`}
-          style={{ background: `radial-gradient(circle at 50% ${TOP + geom.CY}px, ${flash.color}33, transparent 70%)` }}
+          style={{ background: `radial-gradient(circle at ${geom.CX}px ${TOP + geom.CY}px, ${flash.color}33, transparent 70%)` }}
         />
       </div>
       <div className={`cp-toast${toast?.msg ? " on" : ""}`} role="status">
@@ -1181,11 +1245,15 @@ export default function MagicCompass({
                   <span
                     key={a}
                     className="cp-ph"
-                    style={{ left: geom.CX + geom.rx * Math.cos(t) - NW / 2, top: geom.CY + geom.ry * Math.sin(t) - NH / 2 }}
+                    style={{
+                      left: geom.CX + geom.rx * Math.cos(t) - S.nw / 2,
+                      top: geom.CY + geom.ry * Math.sin(t) - S.nh / 2,
+                      ...(S.wide ? { width: S.nw, height: S.nh } : null),
+                    }}
                   />
                 );
               })}
-            <p className="cp-wait-text" style={{ top: geom.CY + CH / 2 + 14 }}>
+            <p className="cp-wait-text" style={{ top: geom.CY + S.ch / 2 + 14 }}>
               {failed ? "索引が読めませんでした" : "準備中…"}
             </p>
           </div>
@@ -1197,7 +1265,7 @@ export default function MagicCompass({
             </p>
           ) : (
             // ★準備中の場面1 = 5種のアニメから開くたびにランダム(2026-10-08 ユーザ「全部とても良い・ランダムで全部出せる?」)
-            <CompassLoading geom={geom} angles={PLACEHOLDER_ANGLES} nw={NW} nh={NH} cw={CW} ch={CH} />
+            <CompassLoading geom={geom} angles={PLACEHOLDER_ANGLES} nw={S.nw} nh={S.nh} cw={S.cw} ch={S.ch} />
           ))}
         <div className="cp-world" style={worldStyle}>
           <svg className="cp-lines" width="1" height="1" aria-hidden="true">
@@ -1350,28 +1418,18 @@ export default function MagicCompass({
           </div>
         )}
         {/* 案B: 糸の入口の輪(広げていない時) */}
-        {THREADS && entrances && mixInfo && !unit && !pan && (
+        {THREADS && entrances && ring && mixInfo && !unit && !pan && (
           <div className="cp-ents">
             {(() => {
-              const shown = entrances.ring.filter((e) => !off.has(e.kind === "sim" ? "genre" : e.kind === "simel" ? "elem" : e.kind));
-              // 「ほか ▸」は似た要素・要素の前(無ければ年の前)= 輪の下側。 似た要素は「ほか」の左隣
-              let at = shown.findIndex((e) => e.kind === "simel" || e.kind === "elem");
-              if (at < 0) at = shown.findIndex((e) => e.kind === "year");
-              if (at < 0) at = shown.length;
-              const all: (Entrance | "more")[] = entrances.more.length ? [...shown.slice(0, at), "more", ...shown.slice(at)] : shown;
-              const n = all.length;
+              const { all, pts } = ring;
               const any = mixSize(mix) > 0;
-              const pts = all.map((_, k) => {
-                const a = ((-90 + (k * 360) / Math.max(1, n)) * Math.PI) / 180;
-                return { x: geom.CX + geom.rx * Math.cos(a), y: geom.CY + geom.ry * Math.sin(a) };
-              });
               // ★線は書影の縁から縁まで(2026-10-06 ユーザ指摘「線が書影をつきぬけてる」: 入口の線は中心の本より上の層にある)
               const edgeLine = (x1: number, y1: number, x2: number, y2: number) => {
                 const dx = x2 - x1;
                 const dy = y2 - y1;
                 const cut = (hw: number, hh: number) => Math.min(dx ? hw / Math.abs(dx) : Infinity, dy ? hh / Math.abs(dy) : Infinity);
-                const a = cut(CW / 2 + 3, CH / 2 + 3);
-                const b = 1 - cut(EW / 2 + 2, EH / 2 + 2);
+                const a = cut(S.cw / 2 + 3, S.ch / 2 + 3);
+                const b = 1 - cut(S.ew / 2 + 2, S.eh / 2 + 2);
                 return { x1: x1 + dx * a, y1: y1 + dy * a, x2: x1 + dx * Math.max(a, b), y2: y1 + dy * Math.max(a, b) };
               };
               const colorOf = (e: Entrance | "more") =>
@@ -1396,17 +1454,15 @@ export default function MagicCompass({
                     })}
                   </svg>
                   {all.map((e, k) => {
-                    const { x, y } = pts[k];
+                    const { x, y, up } = pts[k];
                     if (e === "more") {
                       const stack = entrances.more.slice(0, 3);
-                      const nE = entrances.more.filter((m) => m.kind === "elem").length;
-                      const nG = entrances.more.length - nE;
                       return (
                         <button
                           key="more"
                           type="button"
-                          className="cp-ent more"
-                          style={{ left: x - EW / 2, top: y - EH / 2 }}
+                          className={`cp-ent more${up ? " up" : ""}`}
+                          style={{ left: x - (S.wide ? S.ew * 1.15 : 62) / 2, top: y - S.eh / 2 }}
                           onClick={() => {
                             if (busy.current) return;
                             setReOpen(false);
@@ -1417,13 +1473,11 @@ export default function MagicCompass({
                             {stack.map((m, i) =>
                               m.cover ? (
                                 // eslint-disable-next-line @next/next/no-img-element -- 外部CDN直リンク(images.unoptimized)
-                                <img key={m.key} src={m.cover} alt="" className="bg-white" draggable={false} style={{ left: i * 8, top: 6 - i * 4 }} />
+                                <img key={m.key} src={m.cover} alt="" className="bg-white" draggable={false} style={{ left: i * 8 * S.k, top: (6 - i * 4) * S.k }} />
                               ) : null,
                             )}
                           </span>
-                          <b>
-                            {[nE ? `要素 ほか${nE}` : "", nG ? `ジャンル ほか${nG}` : ""].filter(Boolean).join("・")} ▸
-                          </b>
+                          <b>{ring.moreLabel}</b>
                         </button>
                       );
                     }
@@ -1437,8 +1491,8 @@ export default function MagicCompass({
                       <button
                         key={e.key}
                         type="button"
-                        className={`cp-ent${on ? " on" : ""}${!pick && any ? " quiet" : ""}`}
-                        style={{ left: x - EW / 2, top: y - EH / 2, "--c": colorOf(e) } as CSSProperties}
+                        className={`cp-ent${on ? " on" : ""}${!pick && any ? " quiet" : ""}${up ? " up" : ""}`}
+                        style={{ left: x - S.ew / 2, top: y - S.eh / 2, "--c": colorOf(e) } as CSSProperties}
                         aria-pressed={pick ? on : undefined}
                         disabled={pick && !on && any && cnt === 0}
                         onClick={() => {
@@ -1464,7 +1518,7 @@ export default function MagicCompass({
                     );
                   })}
                   {any && (
-                    <div className="cp-neb-foot" style={{ top: geom.CY + CH / 2 + 10 }}>
+                    <div className="cp-neb-foot" style={{ left: geom.CX, top: geom.CY + S.ch / 2 + 10 }}>
                       <button type="button" className="cp-neb-go" disabled={!mixInfo.c.total} onClick={applyMix}>
                         <span className="cp-neb-go-t">{[...mix.themes, ...mix.genres.map(genreName)].join(" × ")}</span>
                         <b>{mixInfo.c.total.toLocaleString()}冊</b>を広げる ›
@@ -1543,7 +1597,7 @@ export default function MagicCompass({
 
       {/* 4. 広げる ▸(案Bでは出さない = 糸の入口は周りの輪) */}
       {!THREADS && (
-      <div className="cp-units" style={{ bottom: Math.max(SHEET + 2, sheetH + 2) }}>
+      <div className="cp-units" style={{ bottom: drawerBottom }}>
         {nb && !exp && <span className="cp-ul">広げる ▸</span>}
         {exp && (
           <button type="button" className="cp-uc cp-uc-x" onClick={() => openUnit(null)}>
@@ -1619,7 +1673,7 @@ export default function MagicCompass({
 
       {/* 4b. 掛け合わせの引き出し(案C・テスト環境だけ) */}
       {!THREADS && MIX && mixOpen && mixInfo && (
-        <div className="cp-mix" style={{ bottom: Math.max(SHEET + 2, sheetH + 2) + BAND_H }} role="dialog" aria-label="掛け合わせて広げる">
+        <div className="cp-mix" style={{ bottom: drawerBottom + BAND_H }} role="dialog" aria-label="掛け合わせて広げる">
           <div className="cp-mix-h">
             <span>掛け合わせる ・ いくつでも選べる</span>
             {mixSize(mix) > 0 && (
@@ -1687,7 +1741,7 @@ export default function MagicCompass({
       {SPLIT && reOpen && curItem && (
         <div
           className="cp-mix cp-re"
-          style={{ bottom: Math.max(SHEET + 2, sheetH + 2) + BAND_H }}
+          style={{ bottom: drawerBottom + BAND_H }}
           role="dialog"
           aria-label="ジャンルを組み替える"
         >
@@ -1770,7 +1824,7 @@ export default function MagicCompass({
       {SPLIT && narrowOpen && narrowInfo && baseFull && (
         <div
           className="cp-mix cp-nar"
-          style={{ bottom: Math.max(SHEET + 2, sheetH + 2) + BAND_H }}
+          style={{ bottom: drawerBottom + BAND_H }}
           role="dialog"
           aria-label="さらに絞る"
         >
@@ -1835,7 +1889,7 @@ export default function MagicCompass({
 
       {/* 4f. 案B「ほか ▸」= 輪に入らなかった要素・ジャンル(書影つきのタイル・押して重ねる) */}
       {THREADS && moreOpen && entrances && mixInfo && !unit && (
-        <div className="cp-mix cp-more" style={{ bottom: Math.max(SHEET + 2, sheetH + 2) + BAND_H }} role="dialog" aria-label="残りの糸から重ねる">
+        <div className="cp-mix cp-more" style={{ bottom: drawerBottom + BAND_H }} role="dialog" aria-label="残りの糸から重ねる">
           <div className="cp-mix-h">
             <span>残りの糸から重ねる</span>
             {mixSize(mix) > 0 && (
@@ -1948,6 +2002,14 @@ export default function MagicCompass({
               />
             )}
           </div>
+          {/* ★PC の横長(右の欄)だけ: 表紙の下に「詳細」の段(案1 = 2026-10-15 ユーザ裁定。 表紙の下の詳細は CSS で隠す) */}
+          {S.wide && sheetItem && (
+            <div className="cp-sheet-acts">
+              <a className="cp-acts-detail" href={detailHref(sheetItem.slug)} onClick={saveResume}>
+                詳細 ›
+              </a>
+            </div>
+          )}
           {/* 状態 = 前半を糸の色の小札、「 ・ 」より後ろは灰色の補足(2026-10-03 案B3) */}
           <div className="cp-sheet-w">
             {(() => {

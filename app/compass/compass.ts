@@ -670,6 +670,10 @@ export type Geom = {
   /** 舞台の上端に取る「広げ方」切替の帯 / 下端の「広げる ▸」帯 */
   top: number;
   bottom: number;
+  /** ★PC の横長画面(stageGeomWide)だけ: 本の大きさの倍率 / 星屑の帯を横・縦に伸ばす倍率(スマホは無し = 1) */
+  k?: number;
+  sx?: number;
+  sy?: number;
 };
 
 export function stageGeom(W: number, H: number): Geom {
@@ -687,6 +691,121 @@ export function stageGeom(W: number, H: number): Geom {
     top: 34,
     bottom: 32,
   };
+}
+
+/** ★PC の横長画面の舞台(案B・2026-10-15 ユーザ裁定)。 舞台 = 画面から右の欄(説明)と上の段を除いた所。
+ *  下の札が無いので縦を全部使う。 楕円は横いっぱい(名札の半分+余白を残す)・縦は名札を外側(上半分は本の上)に出す前提。
+ *  旧 = スマホの寸法(楕円の半径 142×185・本 54×76)のまま PC の真ん中に置いていた = 画面の5分の1しか使っていなかった。 */
+export function stageGeomWide(W: number, H: number, s: { k: number; ew: number; eh: number; lh: number }): Geom {
+  const CX = W / 2;
+  const CY = H / 2;
+  return {
+    W,
+    H,
+    CX,
+    CY,
+    rx: Math.max(120, CX - Math.max(s.ew, 150) / 2 - 10),
+    ry: Math.max(90, CY - s.eh / 2 - s.lh - 8),
+    top: 40,
+    bottom: 12,
+    k: s.k,
+    // 星屑の帯(中心から 90〜215・横 0.82/縦 1.12)を舞台いっぱいに伸ばす倍率
+    sx: Math.max(1, (CX - 24 - 40 * s.k) / (215 * 0.82)),
+    sy: Math.max(1, (CY - 40 - 50 * s.k) / (215 * 1.12)),
+  };
+}
+
+/** 名札の大きさの見積もり(幅 = 半角0.58字・全角1字 × 文字の大きさ)。 輪の重なりの判定に使う。 */
+export function labelBox(text: string, fs: number, lines: number, maxW?: number): { w: number; h: number } {
+  let n = 0;
+  for (const ch of text) n += /[\x00-\x7f]/.test(ch) ? 0.58 : 1;
+  const w = n * fs + 6;
+  const rows = maxW && w > maxW ? Math.max(lines, Math.ceil(w / maxW)) : lines;
+  return { w: maxW ? Math.min(w, maxW) : w, h: fs * 1.25 * rows + 2 };
+}
+
+export type RingPoint = { x: number; y: number; up: boolean };
+
+/** 糸の入口の輪の置き場所(舞台の座標)。
+ *  スマホ = 真上から時計回りに角度で等分(従来どおり)。
+ *  ★PC の横長 = 角度で等分すると、横長の楕円では左右の端で本が詰まって重なる(2026-10-15 見本で実測)。
+ *   → 楕円の周の長さで等分する。 名札は上半分の本では本の上・下半分では本の下(中心の本とぶつからない向き)。
+ *   始点のずらしと楕円の大きさは、本・名札・中心の本の重なりと舞台からのはみ出しが最小になるものを選ぶ。 */
+export function ringPoints(
+  n: number,
+  geom: Geom,
+  wide?: { ew: number; eh: number; cw: number; ch: number; labels: { w: number; h: number }[] },
+): RingPoint[] {
+  if (!wide || n === 0) {
+    return Array.from({ length: n }, (_, k) => {
+      const a = ((-90 + (k * 360) / Math.max(1, n)) * Math.PI) / 180;
+      return { x: geom.CX + geom.rx * Math.cos(a), y: geom.CY + geom.ry * Math.sin(a), up: false };
+    });
+  }
+  const { ew, eh, cw, ch, labels } = wide;
+  type Box = { x: number; y: number; w: number; h: number };
+  const inter = (a: Box, b: Box) => {
+    const w = Math.min(a.x + a.w, b.x + b.w) - Math.max(a.x, b.x);
+    const h = Math.min(a.y + a.h, b.y + b.h) - Math.max(a.y, b.y);
+    return w > 0 && h > 0 ? w * h : 0;
+  };
+  const outside = (a: Box) => {
+    const iw = Math.max(0, Math.min(a.x + a.w, geom.W) - Math.max(a.x, 0));
+    const ih = Math.max(0, Math.min(a.y + a.h, geom.H) - Math.max(a.y, 0));
+    return a.w * a.h - iw * ih;
+  };
+  const cen: Box = { x: geom.CX - cw / 2 - 6, y: geom.CY - ch / 2 - 6, w: cw + 12, h: ch + 12 };
+  let best: { score: number; pts: RingPoint[] } | null = null;
+  for (const kr of [1, 0.94, 0.88]) {
+    for (const kx of [1, 0.92, 0.84]) {
+      const rx = geom.rx * kx;
+      const ry = geom.ry * kr;
+      // 楕円の周を細かく刻んで、真上からの道のりを持つ
+      const N = 720;
+      const arc: { x: number; y: number; s: number }[] = [];
+      let acc = 0;
+      for (let i = 0; i <= N; i++) {
+        const t = -Math.PI / 2 + (i / N) * 2 * Math.PI;
+        const p = { x: rx * Math.cos(t), y: ry * Math.sin(t), s: 0 };
+        if (i) acc += Math.hypot(p.x - arc[i - 1].x, p.y - arc[i - 1].y);
+        p.s = acc;
+        arc.push(p);
+      }
+      const at = (s: number) => {
+        const v = ((s % acc) + acc) % acc;
+        let lo = 0;
+        let hi = N;
+        while (hi - lo > 1) {
+          const m = (lo + hi) >> 1;
+          if (arc[m].s < v) lo = m;
+          else hi = m;
+        }
+        return arc[hi];
+      };
+      const step = acc / n;
+      for (let j = 0; j < 24; j++) {
+        const pts = Array.from({ length: n }, (_, i) => {
+          const p = at((step * j) / 24 + i * step);
+          return { x: geom.CX + p.x, y: geom.CY + p.y, up: p.y < -1 };
+        });
+        const boxes: { i: number; b: Box }[] = [];
+        pts.forEach((p, i) => {
+          const lb = labels[i] ?? { w: ew, h: 0 };
+          boxes.push({ i, b: { x: p.x - ew / 2, y: p.y - eh / 2, w: ew, h: eh } });
+          boxes.push({ i, b: { x: p.x - lb.w / 2, y: p.up ? p.y - eh / 2 - lb.h - 2 : p.y + eh / 2 + 2, w: lb.w, h: lb.h } });
+        });
+        let score = 0;
+        for (let a = 0; a < boxes.length; a++) {
+          score += inter(boxes[a].b, cen) * 3 + outside(boxes[a].b) * 3;
+          for (let b = a + 1; b < boxes.length; b++) if (boxes[a].i !== boxes[b].i) score += inter(boxes[a].b, boxes[b].b);
+        }
+        // 同点なら大きい楕円(本どうしの間が広い)
+        score -= kx * 0.2 + kr * 0.1;
+        if (!best || score < best.score) best = { score, pts };
+      }
+    }
+  }
+  return best!.pts;
 }
 
 /** 2つの角度(度)の差 0..180。 */
@@ -886,7 +1005,9 @@ export function spreadPositions(
 ): SpreadResult {
   const { W, H, CX, CY, top, bottom } = geom;
   const P: SpreadResult["P"] = [];
-  const midCenter: Box = { x: CX, y: CY, ...SPREAD_CENTER };
+  // ★PC の横長画面では本を大きく・星屑を舞台いっぱいに(スマホは k=sx=sy=1 = 従来どおり)
+  const K = geom.k ?? 1;
+  const midCenter: Box = { x: CX, y: CY, w: SPREAD_CENTER.w * K, h: SPREAD_CENTER.h * K };
   if (spread === "time" && kind === "year") spread = defaultSpread(kind);
 
   if (spread === "fan" || spread === "ring") {
@@ -961,14 +1082,17 @@ export function spreadPositions(
     ];
     const yMin = top + 4;
     const yMax = H - bottom - 6;
+    const SX = geom.sx ?? 1;
+    const SY = geom.sy ?? 1;
     items.forEach((it, i) => {
       const b = i < 8 ? 0 : i < 16 ? 1 : 2;
-      const [w, h] = SZ[b];
+      const w = SZ[b][0] * K;
+      const h = SZ[b][1] * K;
       for (let tries = 0; tries < 300; tries++) {
         const a = r() * Math.PI * 2;
         const rr = bands[b][0] + r() * (bands[b][1] - bands[b][0]);
-        const px = CX + rr * 0.82 * Math.cos(a);
-        const py = CY + rr * 1.12 * Math.sin(a);
+        const px = CX + rr * 0.82 * SX * Math.cos(a);
+        const py = CY + rr * 1.12 * SY * Math.sin(a);
         if (
           px - w / 2 < 4 ||
           px + w / 2 > W - 4 ||
@@ -986,8 +1110,8 @@ export function spreadPositions(
           continue;
         // 中央の本(60×84)とも重ねない
         if (
-          Math.abs(px - CX) < (SPREAD_CENTER.w + w) / 2 + 4 &&
-          Math.abs(py - CY) < (SPREAD_CENTER.h + h) / 2 + 4
+          Math.abs(px - CX) < (midCenter.w + w) / 2 + 4 &&
+          Math.abs(py - CY) < (midCenter.h + h) / 2 + 4
         )
           continue;
         P.push({ slug: it.slug, x: px, y: py, w, h });
