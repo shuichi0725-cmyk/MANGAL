@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { amazonDpUrlFromIsbn13, amazonNameSearchUrls, amazonSearchUrl, isbn13ToIsbn10 } from "./amazon";
+import { amazonDpUrlFromIsbn13, amazonNameSearchUrls, amazonSearchUrl, hasRakutenPaper, isbn13ToIsbn10 } from "./amazon";
 
 describe("isbn13ToIsbn10 (紙のASIN=ISBN-10。アソシエイト/dp/直リンクの土台 2026-07-29)", () => {
   it("チェックデジット再計算が正しい(HUNTER×HUNTER 1巻)", () => {
@@ -42,5 +42,13 @@ describe("Amazonリンク生成", () => {
     const v = amazonNameSearchUrls("タイトル", null, "");
     expect(new URL(v.paper).searchParams.get("k")).toBe("タイトル");
     expect(new URL(v.paper).searchParams.has("tag")).toBe(false);
+  });
+  it("楽天に紙の本が在る巻だけ /dp/ を使う目安(書影が楽天ブックスの紙の画像・書影なしgifも含む)", () => {
+    expect(hasRakutenPaper("https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0887/08873601.jpg?_ex=300x300")).toBe(true);
+    expect(hasRakutenPaper("https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2664/9784897422664.gif?_ex=300x300")).toBe(true);
+    // こんにちはマイコン = 楽天Koboの電子版書影を借りている = 紙は無い目安
+    expect(hasRakutenPaper("https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/2926/2000014832926.jpg?_ex=300x300")).toBe(false);
+    expect(hasRakutenPaper(null)).toBe(false);
+    expect(hasRakutenPaper("")).toBe(false);
   });
 });

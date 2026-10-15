@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import CoverImage from "./CoverImage";
 import CoverLightbox from "./CoverLightbox";
-import { amazonDpUrlFromIsbn13, amazonSearchUrl } from "@/lib/amazon";
+import { amazonDpUrlFromIsbn13, amazonQuerySearchUrls, hasRakutenPaper } from "@/lib/amazon";
 import { isEbookCover } from "@/lib/coverSlim";
 import type { Volume } from "@/lib/schema";
 
@@ -61,15 +61,16 @@ function rakutenAff(url: string): string {
   const e = encodeURIComponent(url);
   return `https://hb.afl.rakuten.co.jp/hgc/${RAKUTEN_AFF}/?pc=${e}&m=${e}`;
 }
-// ★Amazonアソシエイト(2026-07-29 開設 mangal08-22): ISBNがあれば /dp/ISBN10 直リンク+tag、
-//   無ければ検索+tag。未設定buildでは素リンクにfallback(楽天と同じ設計)。
+// ★Amazonアソシエイト(2026-07-29 開設 mangal08-22)。未設定buildでは素リンクにfallback(楽天と同じ設計)。
+// ★2026-10-15 ユーザ裁定「ブラウザで開くよりエラーを出さない方を優先」:
+//   楽天に紙の本が在る巻(= Amazon に紙の商品頁が在る目安・全巻の約8割)だけ ISBN-10 の /dp/ 直リンク(その巻にまっすぐ着く)。
+//   無い巻(電子版書影を借りている・書影なし・ISBN無し)は「題名 巻 著者」で検索 = 犬の404を出さない(旧 = こんにちはマイコン等で404)。
+//   検索は Android ではアプリで開く(Kindle本はアプリで買えない)= 割り切り。 Creators API 解錠後に Kindle版ASINで /dp 直行へ戻す。
 const AMZ_TAG = process.env.NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG || "";
-function amazonLink(isbnOrQuery: string, isIsbn: boolean): string {
-  if (isIsbn) {
-    const dp = amazonDpUrlFromIsbn13(isbnOrQuery, AMZ_TAG);
-    if (dp) return dp;
-  }
-  return amazonSearchUrl(isbnOrQuery, AMZ_TAG);
+function amazonFor(isbn: string, coverUrl: string | null | undefined, nameQ: string): { paper: string; kindle: string; dp: boolean } {
+  const dp = isbn && hasRakutenPaper(coverUrl) ? amazonDpUrlFromIsbn13(isbn, AMZ_TAG) : null;
+  if (dp) return { paper: dp, kindle: dp, dp: true };
+  return { ...amazonQuerySearchUrls(nameQ, AMZ_TAG), dp: false };
 }
 // ★紙の楽天/Amazonボタンは「アプリで開く」(2026-07-29 ユーザ要望。紙はアプリ内購入OK=規約NGは電子のみ)。
 //   httpsのままだとアプリが拾うかはアプリ側のApp Links設定次第(実機実測: amazon /dp・楽天hb.aflともブラウザ)
@@ -93,13 +94,13 @@ function kindleDpLink(asin: string): string {
   return AMZ_TAG ? `${u}?tag=${encodeURIComponent(AMZ_TAG)}` : u;
 }
 
-function searchLinks(title: string, v: Volume) {
+function searchLinks(title: string, v: Volume, amazon: string) {
   const isbn = v.isbn13 ? String(v.isbn13) : "";
   const q = encodeURIComponent(isbn || `${title} ${v.number}`);
   return {
     rakuten: rakutenAff(`https://books.rakuten.co.jp/search?sitem=${encodeURIComponent(isbn || `${title} ${v.number}`)}`),
     yahoo: `https://shopping.yahoo.co.jp/search?p=${q}`,
-    amazon: amazonLink(isbn || `${title} ${v.number}`, !!isbn),
+    amazon,
   };
 }
 
@@ -122,12 +123,15 @@ const LOOP_MIN = 9; // これ超で無限ループ(それ以下は全部並ぶ�
 
 export default function VolumeCoverflow({
   title,
+  author,
   volumes,
   publisher,
   imprint,
   bl,
 }: {
   title: string;
+  /** 先頭の著者名(Amazon を名前で探す巻の検索語) */
+  author?: string | null;
   volumes: Volume[];
   publisher?: string | null;
   imprint?: string | null;
@@ -262,21 +266,20 @@ export default function VolumeCoverflow({
   useVolCoverSignal(vols[sel]?.cover_url, sel);
   if (n === 0) return null;
   const cur = vols[sel];
-  const links = searchLinks(title, cur);
   // ★電子書籍で買う(2026-07-29 ユーザ要望: 全巻まとめ買いを廃止し置換)。選択中の巻に連動。
-  //   目的: アプリでなく**ブラウザ**で開く(ストアアプリ内では電子書籍を購入できないため)。
-  // ★実機検証確定(2026-07-29 /go-test): Amazonアプリ奪取の決め手は**最終URLのパス**。
-  //   検索(/s・/gp/search・/s/)は全形式アプリに奪われ、商品ページ(/dp/)だけブラウザで開く。
-  //   302中継(/go)の有無は無関係(=旧仮説のJS遷移/302対策はどちらも不要だった)。
-  //   電子版ASINはDBに無いため、Kindle=紙の/dp直リンク(=links.amazonと同じ)に飛ばし、
-  //   ページ内の形式切替「Kindle版」で電子へ(一度ブラウザで開けば以後のタップもブラウザ内)。
-  //   ISBN無し巻のみ検索fallback(アプリに開くが稀)。Kobo=楽天は検索でもブラウザで開くので検索のまま。
+  // ★実機検証確定(2026-07-29 /go-test・10-15 再試験): Amazonアプリ奪取の決め手は**最終URLのパス**。
+  //   検索(/s・/-/ja/s・/gp/aw/s・Chrome名指し等)は全形式アプリに奪われ、商品ページ(/dp/)だけブラウザで開く。
+  //   電子版ASINはDBに無いため、楽天に紙の本が在る巻は Kindle=紙の/dp直リンクに飛ばし、商品頁の「Kindle版」で電子へ。
+  //   ★それ以外の巻は名前で検索(2026-10-15 ユーザ裁定「ブラウザで開くよりエラーを出さない方を優先」= 上の amazonFor)。
+  //   Kobo=楽天は検索でもブラウザで開くので検索のまま。
   const ebookQ = n > 1 ? `${title} ${cur.number}` : title;
+  const amz = amazonFor(cur.isbn13 ? String(cur.isbn13) : "", cur.cover_url, [ebookQ, author].filter(Boolean).join(" "));
+  const links = searchLinks(title, cur, amz.paper);
   // ★電子書籍のみの巻(2026-10-04 ユーザ裁定「案2」): 紙の店のボタンは出さず、Kindle/Kobo はその巻の商品ページへ直接。
   const ebookOnly = !!cur.ebook_only;
   const kindleAsin = cur.kindle_asin ? String(cur.kindle_asin) : "";
   const ebook = {
-    kindle: kindleAsin ? kindleDpLink(kindleAsin) : links.amazon,
+    kindle: kindleAsin ? kindleDpLink(kindleAsin) : amz.kindle,
     kobo: cur.kobo_url
       ? rakutenAff(cur.kobo_url)
       : rakutenAff(`https://books.rakuten.co.jp/search?sitem=${encodeURIComponent(ebookQ)}&g=101`),
@@ -421,7 +424,7 @@ export default function VolumeCoverflow({
               const vl = {
                 rakuten: rakutenAff(`https://books.rakuten.co.jp/search?sitem=${e}`),
                 yahoo: `https://shopping.yahoo.co.jp/search?p=${e}`,
-                amazon: amazonLink(q, !!vr.isbn13),
+                amazon: amazonFor(vr.isbn13 ? String(vr.isbn13) : "", vr.cover_url, [title, cur.number, vr.label].filter(Boolean).join(" ")).paper,
               };
               return (
                 <div key={i} className="rounded-xl border border-[var(--color-line)] p-2.5">
@@ -477,7 +480,7 @@ export default function VolumeCoverflow({
       <div
         role="link"
         tabIndex={0}
-        aria-label={`${n > 1 ? `第${cur.number}巻を` : ""}Kindleで見る(ブラウザで開きます)`}
+        aria-label={`${n > 1 ? `第${cur.number}巻を` : ""}Kindleで見る(${kindleAsin || amz.dp ? "ブラウザで開きます" : "Amazonで探します"})`}
         onClick={() => kindleRef.current?.click()}
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") {
@@ -490,8 +493,9 @@ export default function VolumeCoverflow({
       >{/* 青5(2026-08-06 ユーザ確定。旧=紫グラデ) */}
         <span className="block text-[15px] font-bold">📱 電子書籍で買う</span>
         <span className="block text-[11px] text-white/80">
-          {n > 1 ? `第${cur.number}巻を` : ""}ブラウザで開きます
-          {kindleAsin ? "" : "(Kindleは商品ページで「Kindle版」を選択)"}
+          {n > 1 ? `第${cur.number}巻を` : ""}
+          {kindleAsin || amz.dp ? "ブラウザで開きます" : "Amazonで探します"}
+          {!kindleAsin && amz.dp ? "(Kindleは商品ページで「Kindle版」を選択)" : ""}
         </span>
         <div className="mt-2 grid grid-cols-2 gap-2">
           <a ref={kindleRef} href={ebook.kindle} target="_blank" rel="noopener noreferrer"

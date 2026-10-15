@@ -51,7 +51,11 @@ export function amazonNameSearchUrls(
   tag: string,
   locale?: string,
 ): { paper: string; kindle: string } {
-  const q = [title, author].filter(Boolean).join(" ");
+  return amazonQuerySearchUrls([title, author].filter(Boolean).join(" "), tag, locale);
+}
+
+/** 検索語そのままで紙 / Kindle の検索リンク(作品頁の巻 = 「題名 巻 著者」)。 */
+export function amazonQuerySearchUrls(q: string, tag: string, locale?: string): { paper: string; kindle: string } {
   const make = (i: string) => {
     const url = new URL(`https://www.${domain(locale)}/s`);
     url.searchParams.set("k", q);
@@ -60,6 +64,17 @@ export function amazonNameSearchUrls(
     return url.toString();
   };
   return { paper: make("stripbooks"), kindle: make("digital-text") };
+}
+
+/**
+ * その巻の紙の本が楽天ブックスに在るか(書影が楽天ブックスの紙の商品画像 = 書影なしの gif も含む)。
+ * = Amazon に紙の商品頁(ISBN-10 の /dp/)が在る目安(2026-10-15 実測: 全巻の約8割)。
+ * 無い巻(楽天Koboの電子版書影を借りている・書影なし)は /dp/ が犬の404になりやすい(こんにちはマイコン型)
+ * → 作品頁はそういう巻だけ名前で検索する(ユーザ裁定「エラーを出さない方を優先」)。
+ * ★推定であって Amazon への照会ではない(Amazon は外部サイトの止め札 = 取りに行かない)。
+ */
+export function hasRakutenPaper(coverUrl: string | null | undefined): boolean {
+  return !!coverUrl && coverUrl.includes("thumbnail.image.rakuten.co.jp/@0_mall/book/");
 }
 
 /** ISBN-13から /dp/ 直リンク(tag付き)。変換不能ならnull(呼び側で検索fallback)。 */

@@ -41,11 +41,14 @@ function Grow({ open, children }: { open: boolean; children: React.ReactNode }) 
 //   = 著者の読み/ジャンル/あらすじ等 1頁約1KB × 2 × 6.9万頁 ≈ 130MB。使う物だけを渡す。
 export default function EditionVolumes({
   title,
+  author,
   bl,
   edition,
   defaultCollapsed = false,
 }: {
   title: string;
+  /** 先頭の著者名だけ(Amazon を名前で探す巻の検索語・2026-10-15) */
+  author?: string | null;
   bl?: { id: string; max: number; miss?: number[] } | null;
   edition: Edition;
   defaultCollapsed?: boolean;
@@ -142,6 +145,7 @@ export default function EditionVolumes({
       {/* ★巻リスト = フリースクロール小サムネ + ループ + 選択巻の詳細パネル(案D・試作) */}
       <VolumeCoverflow
         title={title}
+        author={author}
         volumes={vols}
         publisher={edition.publisher}
         imprint={edition.imprint}

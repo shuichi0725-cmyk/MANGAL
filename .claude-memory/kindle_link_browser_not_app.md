@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 8f5c881f-9859-490c-b682-bd1969ec515c
-  modified: 2026-10-15T12:19:09.963Z
+  modified: 2026-10-15T12:55:55.857Z
 ---
 
 ★2026-07-29 実機検証(本番Worker /go-testページ・ユーザAndroid実機)で**確定解決**。積年の仮説を全部塗り替えた:
@@ -39,6 +39,8 @@ metadata:
 ①名前で検索してエラーを出さない(Android は Kindle もアプリで開く=アプリでは Kindle本を買えない、は割り切り)→ ②月10件の売上で Creators API 解錠
 → ③Kindle版ASIN(B0…)を集めて /dp/ 直行(ブラウザ)に戻す。
 - 実装済み: 羅針盤のボタン(コマ・PCの右の欄)= `lib/amazon.ts` の `amazonNameSearchUrls(題名, 著者)` = 紙 stripbooks / Kindle digital-text。 ISBN を持たない(ユーザ「isbnは持たないで」)。
-- 作品頁(VolumeCoverflow)は 2026-10-15 時点で ISBN の /dp/ のまま = 危ない約2割の巻(楽天に紙が無い)を名前検索へ切り替える案はユーザ裁定待ち。
+- 作品頁(VolumeCoverflow)= 2026-10-15 ユーザ GO「この方針で進めて」で実装: `hasRakutenPaper(cover_url)`(書影が楽天ブックスの紙の画像・書影なしgif含む = 約8割)の巻だけ
+  ISBN-10 の /dp/(紙も Kindle も・ブラウザで開く)、それ以外は「題名 巻 著者」で検索(紙 stripbooks / Kindle digital-text)。 Kindle の箱の説明も「Amazonで探します」に切り替わる。
+  特装版の Amazon も同じ規則。 本番に出るのは週次(全頁のコード変更 = CODE週)。
 
 **★次段=Kindle ASINハーベスト(PA-API解錠後)**: マンバがKindle頁へ一発直行できる種明かし(ユーザ推理2026-07-29で確定的)=**各巻のKindle版ASIN(B0…)をDBに持ち /dp/B0…?tag= の普通の商品URLを作っているだけ**。正規入手路=PA-API(SearchItems×KindleStore、題+巻で照合)。mangal08-22の**180日3成果条件クリアでPA-API解錠**([[openbd-eol-amazon-required]]の書影と同じ解錠条件)→ Kindle ASIN収穫(楽天ハーベストと同型)→ Kindleボタンを電子版/dp直行に進化。現行の「紙/dp→Kindle版選択」はそれまでの暫定解。

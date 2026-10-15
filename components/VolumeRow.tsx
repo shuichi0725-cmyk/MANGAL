@@ -129,7 +129,13 @@ export default function VolumeRow({ manga }: Props) {
         >
           {/* 版本体 (= ISBNが重なる刷のみ EditionVolumes 内でタブ切替)。
               ★コーフロー化で省スペースになったので全版を開いて表示。 */}
-          <EditionVolumes title={manga.title} edition={ed} defaultCollapsed={false} bl={blBlocks.has(ed) ? bl : null} />
+          <EditionVolumes
+            title={manga.title}
+            author={manga.authors?.[0]?.name ?? null}
+            edition={ed}
+            defaultCollapsed={false}
+            bl={blBlocks.has(ed) ? bl : null}
+          />
         </section>
       ))}
     </div>
