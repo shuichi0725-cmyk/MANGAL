@@ -724,19 +724,7 @@ export function labelBox(text: string, fs: number, lines: number, maxW?: number)
   return { w: maxW ? Math.min(w, maxW) : w, h: fs * 1.25 * rows + 2 };
 }
 
-/** side = ★PC の横長だけ: 真上・真下(中心の本と縦に並ぶ)の本は、名札を本の上下でなく
- *  「糸の線の右・本と中心の本のすき間」に1行で出す(案2-C・2026-10-16 ユーザ裁定)。 値 = 名札の中心の y(点からの差) */
-export type RingPoint = { x: number; y: number; up: boolean; side?: number };
-
-/** 輪の名札の箱(舞台の座標)。 lb = labelBox(題, fs, 2) の2行の箱。 side の時は1行(題+冊数)にする */
-export function ringLabelRect(p: RingPoint, lb: { w: number; h: number }, ew: number, eh: number): { x: number; y: number; w: number; h: number } {
-  if (p.side !== undefined) {
-    const fs = (lb.h - 2) / 2.5;
-    const h = fs * 1.25 + 2;
-    return { x: p.x + 9, y: p.y + p.side - h / 2, w: lb.w + fs * 2.6, h };
-  }
-  return { x: p.x - lb.w / 2, y: p.up ? p.y - eh / 2 - lb.h - 2 : p.y + eh / 2 + 2, w: lb.w, h: lb.h };
-}
+export type RingPoint = { x: number; y: number; up: boolean };
 
 /** 糸の入口の輪の置き場所(舞台の座標)。
  *  スマホ = 真上から時計回りに角度で等分(従来どおり)。
@@ -746,8 +734,7 @@ export function ringLabelRect(p: RingPoint, lb: { w: number; h: number }, ew: nu
 export function ringPoints(
   n: number,
   geom: Geom,
-  // noSide = 名札を線の右に出さない入口(「ほか ▸」= 折り返す長い名札)
-  wide?: { ew: number; eh: number; cw: number; ch: number; labels: { w: number; h: number; noSide?: boolean }[] },
+  wide?: { ew: number; eh: number; cw: number; ch: number; labels: { w: number; h: number }[] },
 ): RingPoint[] {
   if (!wide || n === 0) {
     return Array.from({ length: n }, (_, k) => {
@@ -769,13 +756,10 @@ export function ringPoints(
   };
   const cen: Box = { x: geom.CX - cw / 2 - 6, y: geom.CY - ch / 2 - 6, w: cw + 12, h: ch + 12 };
   let best: { score: number; pts: RingPoint[] } | null = null;
-  // ★真上・真下の本は名札を線の右に出す(side)ので、名札の分も縦へ出せる = 縦の半径の上限は 舞台の端 − 本の半分
-  const ryMax = Math.max(geom.ry, geom.CY - eh / 2 - 8);
-  const cand = [...new Set([ryMax, ryMax * 0.94, geom.ry, geom.ry * 0.94, geom.ry * 0.88].map((v) => Math.round(v)))];
-  for (const ry of cand) {
-    const kr = ry / ryMax;
+  for (const kr of [1, 0.94, 0.88]) {
     for (const kx of [1, 0.92, 0.84]) {
       const rx = geom.rx * kx;
+      const ry = geom.ry * kr;
       // 楕円の周を細かく刻んで、真上からの道のりを持つ
       const N = 720;
       const arc: { x: number; y: number; s: number }[] = [];
@@ -802,20 +786,13 @@ export function ringPoints(
       for (let j = 0; j < 24; j++) {
         const pts = Array.from({ length: n }, (_, i) => {
           const p = at((step * j) / 24 + i * step);
-          const q: RingPoint = { x: geom.CX + p.x, y: geom.CY + p.y, up: p.y < -1 };
-          // 中心の本と縦に並ぶ本(横の重なりあり)= 名札は線の右・すき間の真ん中
-          if (Math.abs(p.x) < (cw + ew) / 2 && !labels[i]?.noSide) {
-            const a = p.y < 0 ? p.y + eh / 2 : ch / 2;
-            const b = p.y < 0 ? -ch / 2 : p.y - eh / 2;
-            q.side = (a + b) / 2 - p.y;
-          }
-          return q;
+          return { x: geom.CX + p.x, y: geom.CY + p.y, up: p.y < -1 };
         });
         const boxes: { i: number; b: Box }[] = [];
         pts.forEach((p, i) => {
           const lb = labels[i] ?? { w: ew, h: 0 };
           boxes.push({ i, b: { x: p.x - ew / 2, y: p.y - eh / 2, w: ew, h: eh } });
-          boxes.push({ i, b: ringLabelRect(p, lb, ew, eh) });
+          boxes.push({ i, b: { x: p.x - lb.w / 2, y: p.up ? p.y - eh / 2 - lb.h - 2 : p.y + eh / 2 + 2, w: lb.w, h: lb.h } });
         });
         let score = 0;
         for (let a = 0; a < boxes.length; a++) {

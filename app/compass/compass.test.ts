@@ -19,7 +19,6 @@ import {
   spreadPositions,
   stageGeom,
   stageGeomWide,
-  ringLabelRect,
   ringPoints,
   labelBox,
   toneOrder,
@@ -960,7 +959,7 @@ describe("PC の横長画面(案B・2026-10-15)", () => {
     { W: 1280 - 340, H: 620 - 100, k: 1.53 },
     { W: 1920 - 340, H: 960 - 100, k: 1.7 },
   ];
-  const sizes = (k: number) => ({ k, ew: Math.round(54 * k), eh: Math.round(76 * k), cw: Math.round(92 * k * 0.92), ch: Math.round(128 * k * 0.92), efs: Math.round(10 * Math.min(k, 1.35) * 10) / 10 });
+  const sizes = (k: number) => ({ k, ew: Math.round(54 * k * 0.92), eh: Math.round(76 * k * 0.92), cw: Math.round(92 * k * 0.92 * 0.9), ch: Math.round(128 * k * 0.92 * 0.9), efs: Math.round(10 * Math.min(k, 1.35) * 10) / 10 });
   const LABELS = ["作者 荒木飛呂彦", "週刊少年ジャンプ", "ジャンル 歴史", "ジャンル ミステリー", "似たジャンル", "要素 ほか9・ジャンル ほか4 ▸", "似た要素", "要素 悲劇", "要素 超能力", "2004年に開始"];
   type B = { x: number; y: number; w: number; h: number };
   const hit = (a: B, b: B) => Math.min(a.x + a.w, b.x + b.w) > Math.max(a.x, b.x) && Math.min(a.y + a.h, b.y + b.h) > Math.max(a.y, b.y);
@@ -976,17 +975,15 @@ describe("PC の横長画面(案B・2026-10-15)", () => {
   it("★本・名札・中心の本が重ならず、舞台からはみ出さない(名札は上半分の本では上)", () => {
     for (const c of cases) {
       const s = sizes(c.k);
-      const g = stageGeomWide(c.W, c.H, { k: s.k, ew: s.ew, eh: s.eh, lh: s.efs * 2.6 });
-      const labels = LABELS.map((t, i) => ({ ...labelBox(t, s.efs, 2, i === 5 ? 86 * (s.efs / 10) : undefined), noSide: i === 5 }));
+      const g = stageGeomWide(c.W, c.H, { k: s.k, ew: s.ew, eh: s.eh, lh: s.efs * 1.25 + 5 });
+      const labels = LABELS.map((t, i) => (i === 5 ? labelBox(t, s.efs, 2, 86 * (s.efs / 10)) : labelBox(`${t} 000`, s.efs, 1)));
       const pts = ringPoints(LABELS.length, g, { ew: s.ew, eh: s.eh, cw: s.cw, ch: s.ch, labels });
       const boxes: { i: number; b: B }[] = [];
       pts.forEach((p, i) => {
         boxes.push({ i, b: { x: p.x - s.ew / 2, y: p.y - s.eh / 2, w: s.ew, h: s.eh } });
         const lb = labels[i];
-        boxes.push({ i, b: ringLabelRect(p, lb, s.ew, s.eh) });
+        boxes.push({ i, b: { x: p.x - lb.w / 2, y: p.up ? p.y - s.eh / 2 - lb.h - 2 : p.y + s.eh / 2 + 2, w: lb.w, h: lb.h } });
         if (p.y < g.CY - 1) expect(p.up).toBe(true);
-        // 真上・真下(中心の本と縦に並ぶ)の本は名札を線の右に出す
-        if (Math.abs(p.x - g.CX) < (s.cw + s.ew) / 2 && i !== 5) expect(p.side).toBeDefined();
       });
       const cen = { x: g.CX - s.cw / 2, y: g.CY - s.ch / 2, w: s.cw, h: s.ch };
       for (const a of boxes) {
@@ -997,11 +994,24 @@ describe("PC の横長画面(案B・2026-10-15)", () => {
     }
   });
 
+  it("★ノートPCで真上・真下の本と中心の本の間が詰まらない(案Y3・2026-10-16。 旧 = 名札2行で11px)", () => {
+    const c = cases[0];
+    const s = sizes(c.k);
+    const g = stageGeomWide(c.W, c.H, { k: s.k, ew: s.ew, eh: s.eh, lh: s.efs * 1.25 + 5 });
+    const L = LABELS.filter((_, i) => i !== 5).slice(0, 8);
+    const pts = ringPoints(L.length, g, { ew: s.ew, eh: s.eh, cw: s.cw, ch: s.ch, labels: L.map((t) => labelBox(`${t} 000`, s.efs, 1)) });
+    for (const p of pts) {
+      if (Math.abs(p.x - g.CX) >= (s.cw + s.ew) / 2) continue; // 中心の本と縦に並ぶ本だけ
+      const gap = Math.abs(p.y - g.CY) - s.ch / 2 - s.eh / 2;
+      expect(gap).toBeGreaterThan(35);
+    }
+  });
+
   it("輪は横に広い(旧 = 半径142pxで画面の5分の1)・星屑は舞台いっぱいに広がり重ならない", () => {
     const items = Array.from({ length: 24 }, (_, i) => ({ slug: `b${i}`, year: 1990 + (i % 12) }));
     for (const c of cases) {
       const s = sizes(c.k);
-      const g = stageGeomWide(c.W, c.H, { k: s.k, ew: s.ew, eh: s.eh, lh: s.efs * 2.6 });
+      const g = stageGeomWide(c.W, c.H, { k: s.k, ew: s.ew, eh: s.eh, lh: s.efs * 1.25 + 5 });
       expect(g.rx).toBeGreaterThan(c.W * 0.35);
       const r = spreadPositions("elem", items, "dust", g, 2000, "elem:魔法");
       expect(r.P).toHaveLength(24);

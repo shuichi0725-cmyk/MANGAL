@@ -119,12 +119,13 @@ function sizesFor(vp: { w: number; h: number }): Sizes {
   return {
     wide,
     k,
-    cw: r(CW * k * 0.92),
-    ch: r(CH * k * 0.92),
+    // ★輪の名札は1行(本の外)・周りの本 92%・中心の本 90%(案Y3 = 2026-10-16 ユーザ裁定。 ノートPCで真上・真下の本と中心の本の間 11px→約46px)
+    cw: r(CW * k * 0.92 * 0.9),
+    ch: r(CH * k * 0.92 * 0.9),
     nw: r(NW * k),
     nh: r(NH * k),
-    ew: r(EW * k),
-    eh: r(EH * k),
+    ew: r(EW * k * 0.92),
+    eh: r(EH * k * 0.92),
     efs: Math.round(10 * Math.min(k, 1.35) * 10) / 10,
     pw: PANEL_W,
   };
@@ -251,7 +252,7 @@ export default function MagicCompass({
   const geom = useMemo(
     () =>
       S.wide
-        ? stageGeomWide(vp.w - S.pw, Math.max(240, vp.h - TOP), { k: S.k, ew: S.ew, eh: S.eh, lh: S.efs * 2.6 })
+        ? stageGeomWide(vp.w - S.pw, Math.max(240, vp.h - TOP), { k: S.k, ew: S.ew, eh: S.eh, lh: S.efs * 1.25 + 5 })
         : stageGeom(vp.w, Math.max(240, vp.h - TOP - SHEET)),
     [vp, S],
   );
@@ -508,7 +509,7 @@ export default function MagicCompass({
     const nG = entrances.more.length - nE;
     const moreLabel = `${[nE ? `要素 ほか${nE}` : "", nG ? `ジャンル ほか${nG}` : ""].filter(Boolean).join("・")} ▸`;
     const fk = S.efs / 10;
-    const labels = all.map((e) => (e === "more" ? { ...labelBox(moreLabel, S.efs, 2, 86 * fk), noSide: true } : labelBox(`${e.label}`, S.efs, 2)));
+    const labels = all.map((e) => (e === "more" ? labelBox(moreLabel, S.efs, 2, 86 * fk) : labelBox(S.wide ? `${e.label} 000` : `${e.label}`, S.efs, S.wide ? 1 : 2)));
     const pts = ringPoints(all.length, geom, S.wide ? { ew: S.ew, eh: S.eh, cw: S.cw, ch: S.ch, labels } : undefined);
     return { all, pts, moreLabel };
   }, [entrances, off, geom, S]);
@@ -1456,10 +1457,7 @@ export default function MagicCompass({
                     })}
                   </svg>
                   {all.map((e, k) => {
-                    const { x, y, up, side } = pts[k];
-                    // ★真下の本の「線の右」の名札は、掛け合わせ中は出さない(同じすき間に「N冊を広げる」が出る)
-                    const sideCls = side === undefined ? "" : any && side < 0 ? " side hide-l" : " side";
-                    const sideSt = side === undefined ? undefined : { top: S.eh / 2 + side };
+                    const { x, y, up } = pts[k];
                     if (e === "more") {
                       const stack = entrances.more.slice(0, 3);
                       return (
@@ -1496,7 +1494,7 @@ export default function MagicCompass({
                       <button
                         key={e.key}
                         type="button"
-                        className={`cp-ent${on ? " on" : ""}${!pick && any ? " quiet" : ""}${up ? " up" : ""}${sideCls}`}
+                        className={`cp-ent${on ? " on" : ""}${!pick && any ? " quiet" : ""}${up ? " up" : ""}`}
                         style={{ left: x - S.ew / 2, top: y - S.eh / 2, "--c": colorOf(e) } as CSSProperties}
                         aria-pressed={pick ? on : undefined}
                         disabled={pick && !on && any && cnt === 0}
@@ -1515,7 +1513,7 @@ export default function MagicCompass({
                         ) : (
                           <span className="cp-noimg" />
                         )}
-                        <b style={sideSt}>
+                        <b>
                           {e.label}
                           {!on && <i>{pick && any ? `→${cnt.toLocaleString()}` : cnt.toLocaleString()}</i>}
                         </b>
