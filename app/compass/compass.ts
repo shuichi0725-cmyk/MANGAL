@@ -221,11 +221,15 @@ export function drawUnit(
   rand?: () => number,
   visited: ReadonlySet<string> = new Set(),
   prev: ReadonlySet<string> = new Set(),
+  /** ★必ず入れる本(入口の書影の本・広げた最初の1回だけ。 2026-10-16 ユーザ「最初に出ないということはなくして」)。 visited は外す */
+  must: ReadonlySet<string> = new Set(),
 ): UnitItem[] {
   let pool = u.items.filter((i) => !visited.has(i.slug));
   const fresh = pool.filter((i) => !prev.has(i.slug));
   if (prev.size && fresh.length >= Math.min(UNIT_MAX, pool.length)) pool = fresh;
-  return weightedPick(pool, (i) => i.score, UNIT_MAX, rand).sort((a, b) => b.score - a.score);
+  const pinned = pool.filter((i) => must.has(i.slug)).slice(0, UNIT_MAX);
+  const rest = pinned.length ? pool.filter((i) => !must.has(i.slug)) : pool;
+  return [...pinned, ...weightedPick(rest, (i) => i.score, UNIT_MAX - pinned.length, rand)].sort((a, b) => b.score - a.score);
 }
 
 export function neighborhood(
@@ -1336,8 +1340,8 @@ export function komaNarration(
 //   残りの枠に 要素(冊数の多い順)とジャンル(冊数の少ない順=特徴的な順)を入れる。 入りきらない分は「ほか ▸」(2段目)。
 
 export type Entrance =
-  | { key: string; kind: "author" | "mag" | "year" | "sim" | "simel"; label: string; count: number; cover: string | null; unitKey: string }
-  | { key: string; kind: "elem" | "genre"; label: string; value: string; count: number; cover: string | null };
+  | { key: string; kind: "author" | "mag" | "year" | "sim" | "simel"; label: string; count: number; cover: string | null; coverSlug: string | null; unitKey: string }
+  | { key: string; kind: "elem" | "genre"; label: string; value: string; count: number; cover: string | null; coverSlug: string | null };
 export type EntranceSet = { ring: Entrance[]; more: Entrance[] };
 
 export function threadEntrances(
@@ -1350,11 +1354,13 @@ export function threadEntrances(
   simel: Unit | null = null,
 ): EntranceSet {
   const used = new Set<string>();
-  const coverOf = (slugs: readonly string[]): string | null => {
+  // ★coverSlug = 入口の書影の本。 広げた最初の24冊に必ず入れる(drawUnit の must・2026-10-16 ユーザ指摘
+  //   「選んだ先に書影のマンガがない」)。 なので書影は広げた時の候補(その単位の本)からだけ選ぶ
+  const coverOf = (slugs: readonly string[]): { cover: string | null; coverSlug: string | null } => {
     const pick = slugs.find((s) => !used.has(s) && g.all.get(s)?.cover) ?? slugs.find((s) => g.all.get(s)?.cover);
-    if (!pick) return null;
+    if (!pick) return { cover: null, coverSlug: null };
     used.add(pick);
-    return g.all.get(pick)?.cover ?? null;
+    return { cover: g.all.get(pick)?.cover ?? null, coverSlug: pick };
   };
   // 固定の入口(帯にあった順): 作者(名前ごと)・よく似たジャンル・雑誌・年
   const fixedU = (k: UnitKind | "sim") =>
@@ -1364,7 +1370,7 @@ export function threadEntrances(
     kind,
     label: kind === "author" ? `作者 ${u.label}` : kind === "year" ? `${u.label}に開始` : u.label,
     count: u.items.length,
-    cover: coverOf(u.items.map((i) => i.slug)),
+    ...coverOf(u.items.map((i) => i.slug)),
     unitKey: u.key,
   });
   const authors = fixedU("author").map((u) => fx(u, "author"));
@@ -1391,7 +1397,7 @@ export function threadEntrances(
     .sort((a, b) => a.list.length - b.list.length);
 
   const simels: Entrance[] = simel
-    ? [{ key: `u:${simel.key}`, kind: "simel", label: "似た要素", count: simel.items.length, cover: coverOf(simel.items.map((i) => i.slug)), unitKey: simel.key }]
+    ? [{ key: `u:${simel.key}`, kind: "simel", label: "似た要素", count: simel.items.length, ...coverOf(simel.items.map((i) => i.slug)), unitKey: simel.key }]
     : [];
   // ★枠の配分は似た要素を数えずに決め、似た要素の1枠は要素の枠から譲る(2026-10-06 ユーザ指摘:
   //   似た要素込みで6:4に割ったらジャンルが1枠減り、ホラーが「ほか」に押し出された。 似た要素は要素の仲間)
@@ -1425,14 +1431,26 @@ export function threadEntrances(
     }
   }
   // 輪に出す入口から先に代表の書影を決める(輪の書影が重ならないことを優先)
-  const eAt = (x: { t: string; list: string[] }): Entrance => ({ key: `e:${x.t}`, kind: "elem", label: `要素 ${x.t}`, value: x.t, count: x.list.length, cover: coverOf(x.list) });
+  //   要素・ジャンルの書影 = その1つだけを選んで広げた時の候補(nearMix = 近い本の段)から。 段が空なら全体から
+  const nearCover = (m: Mix, list: string[]) => {
+    const near = rank(nearMix(g, center, m).items);
+    return near.length ? coverOf(near) : coverOf(list);
+  };
+  const eAt = (x: { t: string; list: string[] }): Entrance => ({
+    key: `e:${x.t}`,
+    kind: "elem",
+    label: `要素 ${x.t}`,
+    value: x.t,
+    count: x.list.length,
+    ...nearCover({ themes: [x.t], genres: [] }, x.list),
+  });
   const gAt = (x: { k: string; list: string[] }): Entrance => ({
     key: `g:${x.k}`,
     kind: "genre",
     label: `ジャンル ${genreName(x.k)}`,
     value: x.k,
     count: x.list.length,
-    cover: coverOf(x.list),
+    ...nearCover({ themes: [], genres: [x.k] }, x.list),
   });
   const ringG = genres.slice(0, nG).map(gAt);
   const ringE = elems.slice(0, nE).map(eAt);

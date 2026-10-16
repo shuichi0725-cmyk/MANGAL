@@ -330,6 +330,41 @@ describe("広げる単位", () => {
     const s1 = drawUnit(small, rng("3"));
     expect(drawUnit(small, rng("4"), new Set(), new Set(s1.map((i) => i.slug))).length).toBe(24);
   });
+
+  it("★drawUnit: 入口の書影の本(must)は最初の24冊に必ず入る・24冊のまま・旅で辿った本なら入れない(2026-10-16)", () => {
+    const c = book("c", { authors: [{ name: "甲" }] });
+    const list = [c];
+    for (let i = 0; i < 200; i++) list.push(book(`a${i}`, { authors: [{ name: "甲" }] }));
+    const u = neighborhood(buildGraph(list), c).units.find((x) => x.key === "author:甲")!;
+    const last = u.items[u.items.length - 1].slug; // くじで一番当たりにくい本
+    for (const seed of ["1", "2", "3", "4", "5"]) {
+      const d = drawUnit(u, rng(seed), new Set(), new Set(), new Set([last]));
+      expect(d.some((i) => i.slug === last)).toBe(true);
+      expect(d).toHaveLength(24);
+      expect(new Set(d.map((i) => i.slug)).size).toBe(24);
+    }
+    expect(drawUnit(u, rng("6"), new Set([last]), new Set(), new Set([last])).some((i) => i.slug === last)).toBe(false);
+  });
+
+  it("★入口の書影の本は、その入口だけを広げた時の候補に入っている(要素・ジャンルは近い本の段から選ぶ)", () => {
+    const c = book("c", { themes: ["冒険", "友情", "成長"], genres: ["action", "fantasy"] });
+    const list = [c];
+    // 冒険だけ持つ本(遠い)を多く・冒険+ほかの要素を持つ本(近い)を少し
+    for (let i = 0; i < 60; i++) list.push(book(`far${i}`, { themes: ["冒険"], popularity: 1000 - i }));
+    for (let i = 0; i < 30; i++) list.push(book(`near${i}`, { themes: ["冒険", "友情", "成長"], genres: ["action"], popularity: i }));
+    const g = buildGraph(list);
+    const nb = neighborhood(g, c);
+    const ents = threadEntrances(g, c, nb.units);
+    for (const e of [...ents.ring, ...ents.more]) {
+      if (!e.coverSlug) continue;
+      const u =
+        "unitKey" in e
+          ? nb.units.find((x) => x.key === e.unitKey)
+          : mixUnit(g, c, e.kind === "elem" ? { themes: [e.value], genres: [] } : { themes: [], genres: [e.value] });
+      if (!u) continue;
+      expect(u.items.some((i) => i.slug === e.coverSlug), `${e.label} の書影 ${e.coverSlug}`).toBe(true);
+    }
+  });
 });
 
 describe("来た道", () => {

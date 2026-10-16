@@ -384,6 +384,8 @@ export default function MagicCompass({
 
   // ── 旅の始まり: ?from=<slug> か、先頭100件(人気上位)からランダムに1冊 ──
   const resumeDrawn = useRef<{ key: string; items: UnitItem[] } | null>(null);
+  /** 入口から広げた時、その入口の書影の本(最初の24冊に必ず入れる)。 key = 広げる単位 */
+  const pinRef = useRef<{ key: string; slugs: Set<string> } | null>(null);
   useEffect(() => {
     if (path.length || !index || !index.length || loadingHold) return;
     // 詳細(作品頁)から OS の戻るで帰ってきた = 飛ぶ前の旅をそのまま出す(1時間以内・1回だけ使う)
@@ -535,11 +537,14 @@ export default function MagicCompass({
     }
     const r = resumeDrawn.current;
     resumeDrawn.current = null;
+    // 入口の書影の本は最初の1回に必ず入れる(同じ単位を広げた時だけ。 引き直しでは入れない)
+    const pin = pinRef.current;
+    pinRef.current = null;
     if (r && r.key === unitFull.key) {
       setDrawn(r);
       return;
     }
-    setDrawn({ key: unitFull.key, items: drawUnit(unitFull, Math.random, visitedSet()) });
+    setDrawn({ key: unitFull.key, items: drawUnit(unitFull, Math.random, visitedSet(), undefined, pin && pin.key === unitFull.key ? pin.slugs : undefined) });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [unitFull]);
   const unit = useMemo(
@@ -766,10 +771,15 @@ export default function MagicCompass({
     setNebOpen(false);
     setMoreOpen(false);
     clearNarrow();
+    // 選んだ要素・ジャンルの入口の書影の本 = 最初の24冊に必ず入れる(掛け合わせに当てはまる本だけ入る)
+    const slugs = new Set<string>();
+    for (const e of [...(entrances?.ring ?? []), ...(entrances?.more ?? [])])
+      if ((e.kind === "elem" || e.kind === "genre") && e.coverSlug && mix[e.kind === "elem" ? "themes" : "genres"].includes(e.value)) slugs.add(e.coverSlug);
+    pinRef.current = { key: mixKey(mix), slugs };
     setMixApplied({ themes: [...mix.themes], genres: [...mix.genres] });
     setExp(mixKey(mix));
     bumpSheet();
-  }, [mix, bumpSheet, clearNarrow]);
+  }, [mix, bumpSheet, clearNarrow, entrances]);
 
   // 星雲: 開くと周りの本が退いて要素の島が浮かぶ(広げている糸は閉じる)
   const toggleNeb = useCallback(() => {
@@ -1500,7 +1510,10 @@ export default function MagicCompass({
                         disabled={pick && !on && any && cnt === 0}
                         onClick={() => {
                           if (busy.current) return;
-                          if ("unitKey" in ent) openUnit(ent.unitKey);
+                          if ("unitKey" in ent) {
+                            if (ent.coverSlug) pinRef.current = { key: ent.unitKey, slugs: new Set([ent.coverSlug]) };
+                            openUnit(ent.unitKey);
+                          }
                           // ★選んである入口をもう一度押す = 広げる(2026-10-06 ユーザ指示。 下の「広げる」ボタンと同じ)
                           else if (on) {
                             if (mixInfo.c.total) applyMix();
