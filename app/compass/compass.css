@@ -1836,6 +1836,20 @@
   top: auto;
   bottom: calc(100% + 3px);
 }
+/* ★真上・真下の本 = 名札は糸の線の右・すき間の真ん中に1行(案2-C・2026-10-16)。 top は MagicCompass が点ごとに入れる */
+.cp-root.wide .cp-ent.side b {
+  bottom: auto;
+  left: calc(50% + 9px);
+  transform: translateY(-50%);
+  text-align: left;
+}
+.cp-root.wide .cp-ent.side b i {
+  display: inline;
+  margin-left: 0.35em;
+}
+.cp-root.wide .cp-ent.side.hide-l b {
+  visibility: hidden;
+}
 .cp-root.wide .cp-ent.more {
   width: calc(var(--ew) * 1.15);
 }

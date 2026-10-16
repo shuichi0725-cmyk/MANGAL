@@ -19,6 +19,7 @@ import {
   spreadPositions,
   stageGeom,
   stageGeomWide,
+  ringLabelRect,
   ringPoints,
   labelBox,
   toneOrder,
@@ -976,14 +977,16 @@ describe("PC の横長画面(案B・2026-10-15)", () => {
     for (const c of cases) {
       const s = sizes(c.k);
       const g = stageGeomWide(c.W, c.H, { k: s.k, ew: s.ew, eh: s.eh, lh: s.efs * 2.6 });
-      const labels = LABELS.map((t, i) => labelBox(t, s.efs, 2, i === 5 ? 86 * (s.efs / 10) : undefined));
+      const labels = LABELS.map((t, i) => ({ ...labelBox(t, s.efs, 2, i === 5 ? 86 * (s.efs / 10) : undefined), noSide: i === 5 }));
       const pts = ringPoints(LABELS.length, g, { ew: s.ew, eh: s.eh, cw: s.cw, ch: s.ch, labels });
       const boxes: { i: number; b: B }[] = [];
       pts.forEach((p, i) => {
         boxes.push({ i, b: { x: p.x - s.ew / 2, y: p.y - s.eh / 2, w: s.ew, h: s.eh } });
         const lb = labels[i];
-        boxes.push({ i, b: { x: p.x - lb.w / 2, y: p.up ? p.y - s.eh / 2 - lb.h - 2 : p.y + s.eh / 2 + 2, w: lb.w, h: lb.h } });
+        boxes.push({ i, b: ringLabelRect(p, lb, s.ew, s.eh) });
         if (p.y < g.CY - 1) expect(p.up).toBe(true);
+        // 真上・真下(中心の本と縦に並ぶ)の本は名札を線の右に出す
+        if (Math.abs(p.x - g.CX) < (s.cw + s.ew) / 2 && i !== 5) expect(p.side).toBeDefined();
       });
       const cen = { x: g.CX - s.cw / 2, y: g.CY - s.ch / 2, w: s.cw, h: s.ch };
       for (const a of boxes) {

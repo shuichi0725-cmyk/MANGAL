@@ -508,7 +508,7 @@ export default function MagicCompass({
     const nG = entrances.more.length - nE;
     const moreLabel = `${[nE ? `要素 ほか${nE}` : "", nG ? `ジャンル ほか${nG}` : ""].filter(Boolean).join("・")} ▸`;
     const fk = S.efs / 10;
-    const labels = all.map((e) => (e === "more" ? labelBox(moreLabel, S.efs, 2, 86 * fk) : labelBox(`${e.label}`, S.efs, 2)));
+    const labels = all.map((e) => (e === "more" ? { ...labelBox(moreLabel, S.efs, 2, 86 * fk), noSide: true } : labelBox(`${e.label}`, S.efs, 2)));
     const pts = ringPoints(all.length, geom, S.wide ? { ew: S.ew, eh: S.eh, cw: S.cw, ch: S.ch, labels } : undefined);
     return { all, pts, moreLabel };
   }, [entrances, off, geom, S]);
@@ -1456,7 +1456,10 @@ export default function MagicCompass({
                     })}
                   </svg>
                   {all.map((e, k) => {
-                    const { x, y, up } = pts[k];
+                    const { x, y, up, side } = pts[k];
+                    // ★真下の本の「線の右」の名札は、掛け合わせ中は出さない(同じすき間に「N冊を広げる」が出る)
+                    const sideCls = side === undefined ? "" : any && side < 0 ? " side hide-l" : " side";
+                    const sideSt = side === undefined ? undefined : { top: S.eh / 2 + side };
                     if (e === "more") {
                       const stack = entrances.more.slice(0, 3);
                       return (
@@ -1493,7 +1496,7 @@ export default function MagicCompass({
                       <button
                         key={e.key}
                         type="button"
-                        className={`cp-ent${on ? " on" : ""}${!pick && any ? " quiet" : ""}${up ? " up" : ""}`}
+                        className={`cp-ent${on ? " on" : ""}${!pick && any ? " quiet" : ""}${up ? " up" : ""}${sideCls}`}
                         style={{ left: x - S.ew / 2, top: y - S.eh / 2, "--c": colorOf(e) } as CSSProperties}
                         aria-pressed={pick ? on : undefined}
                         disabled={pick && !on && any && cnt === 0}
@@ -1512,7 +1515,7 @@ export default function MagicCompass({
                         ) : (
                           <span className="cp-noimg" />
                         )}
-                        <b>
+                        <b style={sideSt}>
                           {e.label}
                           {!on && <i>{pick && any ? `→${cnt.toLocaleString()}` : cnt.toLocaleString()}</i>}
                         </b>
