@@ -2057,6 +2057,24 @@ export default function MagicCompass({
           )}
         </div>
       </div>
+      {/* ★スマホだけ: 札の上の縁に Kindle・Amazon の付箋(案C = 2026-10-16 ユーザ裁定)。
+       *   札は overflow:hidden なので札の外に置き、札の実際の高さ(sheetH)のすぐ上に乗せる。 PC は右の欄の段(案1)。 */}
+      {!S.wide &&
+        sheetItem &&
+        (() => {
+          const buy = amazonNameSearchUrls(sheetItem.title, sheetItem.authors?.[0]?.name, AMZ_TAG);
+          return (
+            <div className="cp-buytabs" style={{ bottom: sheetH }}>
+              <span className="cp-buytabs-pr">[PR]</span>
+              <a className="cp-buytab k" href={buy.kindle} target="_blank" rel="noopener noreferrer sponsored">
+                Kindle
+              </a>
+              <a className="cp-buytab a" href={buy.paper} target="_blank" rel="noopener noreferrer sponsored">
+                Amazon
+              </a>
+            </div>
+          );
+        })()}
       {KOMA && komaOpen && curItem && (
         <KomaPage
           item={curItem}

@@ -1040,6 +1040,46 @@
 .cp-units {
   transition: bottom 0.3s;
 }
+/* ★スマホの札の上の縁の付箋 = Kindle・Amazon(案C・2026-10-16)。 色は PC の案1 と同じ。
+ *   z-index は札と同じ 6 = 引き出し(cp-mix 7)・大きな書影(20)が開くとその下に隠れる */
+.cp-buytabs {
+  position: absolute;
+  right: 12px;
+  z-index: 6;
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  transition: bottom 0.3s;
+}
+.cp-buytab {
+  font-size: 11.5px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #fff;
+  padding: 5px 12px 4px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.cp-buytab.k {
+  background: #3b82f6;
+}
+.cp-buytab.a {
+  background: #e69500;
+}
+.cp-buytab:focus-visible {
+  outline: 2px solid #f2f2ec;
+  outline-offset: 2px;
+}
+.cp-buytabs-pr {
+  align-self: center;
+  font-size: 8.5px;
+  color: #8a96a0;
+  background: #141414cc;
+  padding: 1px 4px;
+}
+.cp-root.wide .cp-buytabs {
+  display: none;
+}
 
 /* ── 4b. 掛け合わせの引き出し(案C・2026-10-05・テスト環境だけ) ──
    帯のすぐ上に開く。 札は中心の本の要素(青)・ジャンル(橙)全部。 選ぶたび冊数が減り、選んでいない札は「足したら何冊か」。 */
