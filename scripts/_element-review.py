@@ -149,6 +149,9 @@ def agree(a1, a2, V):
 
 def one(stem, ctx, a, batch):
     ea, eh, V = ctx["ea"], ctx["eh"], ctx["V"]
+    # ★頁のファイルが無い stem で build_card が sys.exit し、流し全体が止まった(2026-10-15 14:40・1日止まったまま)。 その頁だけ飛ばす
+    if not os.path.exists(os.path.join(ROOT, "data", "manga.v2", stem + ".yml")):
+        return {"stem": stem, "skip": "頁のファイルが無い(改名・削除)= 表を作り直す"}
     card = eh.build_card(stem)
     cap = ctx["caps"].get(card["slug"]) or ctx["caps"].get(stem) or []
     bundle, chars = local_bundle(eh, card, cap, ctx["bl"].get(card["slug"]), ctx["ani"].get(int(card["anilist_id"])) if card.get("anilist_id") else None)
@@ -281,6 +284,9 @@ def cmd_run(a):
                         for f2 in futs:
                             f2.cancel()
                         break
+                    continue
+                except SystemExit as e:  # 道具の die/stop(その頁だけの問題)= 流しは止めない
+                    print(f"  ■ {s}: 道具が止まった(台帳に書かない・終了コード {e.code})", flush=True)
                     continue
                 done += 1
                 if r.get("skip"):

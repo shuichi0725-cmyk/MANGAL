@@ -155,7 +155,11 @@ def build():
             route = "L"
         else:
             route = "W"
+        # ★ファイル名(stem)= 対応表の元の名前。 ただし元の名前のファイルが無く公開 slug のファイルが在る頁はそちら
+        #   (2026-10-16: 芦屋山手お道具迎賓館 = 対応表は旧名、ファイルは公開 slug で、見直しが「頁が無い」で止まった)
         stem = p2s.get(s, s)
+        if stem != s and not os.path.exists(D("data", "manga.v2", stem + ".yml")) and os.path.exists(D("data", "manga.v2", s + ".yml")):
+            stem = s
         state = "適用済" if stem in applied else "案あり" if stem in proposed else "未"
         gk = group.get(s, "")
         out.append({"route": route, "state": state, "stem": stem, "slug": s, "title": r["title"], "tier": tier,
