@@ -267,3 +267,9 @@ x-twitter:
   name: X（旧Twitter）
   publisher: ''
   demographic: seinen
+# ★一般週刊誌(漫画誌ではない)。2026-10-17 恨ミシュラン(西原理恵子・1992-94連載)で追加=ユーザ指示。
+#   発行元は連載当時の朝日新聞社(2008〜朝日新聞出版)。publishers.yml の asahi-shimbun に寄せる。demographic は便宜値。
+weekly-asahi:
+  name: 週刊朝日
+  publisher: asahi-shimbun
+  demographic: seinen
