@@ -17,3 +17,4 @@ metadata:
 - [起動bat3本](launcher_bats_session_namespaces.md)
 - [クラウドセッション](cloud_sessions_usage.md)
 - [batは英数字のみ+CRLF(日本語remを命令として誤実行)](bat_ascii_crlf_cp932_rem_misparse.md)
+- [PCのLAN口2つ・固定IPは片側だけ](pc_lan_port_static_ip.md)
