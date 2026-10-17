@@ -1,11 +1,11 @@
 ---
 name: cf-analytics-unk-artifact
-description: 【罠・封鎖済】Cloudflare httpRequestsAdaptiveGroups は protocol=UNK の偽レコードが6割混ざり、method/statusが実在しない値で埋まる。素で数えると「サイトの29.6%が504」という完全な誤診断になる
+description: 【罠・封鎖済】Cloudflare httpRequestsAdaptiveGroups は protocol=UNK と Worker Cache API(requestSource=edgeWorkerCacheAPI) の偽レコードが混ざり、method/statusが実在しない値で埋まる。素で数えると「サイトの29.6%が504」という完全な誤診断になる
 metadata: 
   node_type: memory
   type: project
   originSessionId: f0744808-d697-4640-bcd9-3f109fc1665e
-  modified: 2026-10-15T00:28:03.572Z
+  modified: 2026-10-17T06:35:36.826Z
 ---
 
 Cloudflare の `httpRequestsAdaptiveGroups`(ゾーン解析)には **`clientRequestHTTPProtocol == "UNK"` の行が大量に混ざる**。
@@ -37,5 +37,12 @@ UNK を除いても、Googlebot の `paths` に「**504 が28%・204 が28%(同�
 クローラ本人が受け取ったのは別行の **GET 200(cacheStatus=none)**。 Worker の errors は同期間 **0件**。
 ★見分け方 = 504 と PUT 204 が**同数**・504 の cacheStatus が miss/stale。 実リクエスト数は 200(none+hit)+301+404 で数える
 (2026-10-13 の Googlebot 218件 → 実数 約96件)。
+
+**★封鎖済(2026-10-17)**: 10/15 は記憶に書いただけで道具を直さず、10/17 に同じ罠で再び誤読した
+(「504が33%」「名乗り無しが2万件404=末尾スラッシュ」とユーザに報告→撤回)。
+決め手の次元 = **`requestSource`**: 偽行は全部 `edgeWorkerCacheAPI`(match=GET 504 / put=PUT 204 / **delete=PURGE 404**
+= finalize の edge purge・IndexNow前purge が「UA空の404 約2万」に化ける)。 外部の実要求は `eyeball`。
+`REAL_ONLY` に `requestSource: "eyeball"` を追加 → 10/16 合計 89,461 ≒ Worker 89,237 で一致・504 消滅。
+★教訓: 罠を記憶に書いたら**その場で道具に封じる**(記憶だけでは次の自分が読まずに踏む)。
 
 関連: [[feedback_sanity_check_tool_warnings]] [[feedback_raw_count_is_not_worklist]] [[bing_search_reality_2026_09]]

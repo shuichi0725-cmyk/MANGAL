@@ -233,7 +233,13 @@ def web(days):
 #     (実測 30,758 ≒ 30,254)。UNK 除外後の 504 は **0件**。
 #   → 以後この定数で常に除外する。素の件数は約3倍に膨らむので、過去の記録と
 #     食い違ったら「UNK込みで数えていないか」をまず疑う。
-REAL_ONLY = ', clientRequestHTTPProtocol_neq: "UNK"'
+#   ★★2026-10-17 再発(形を変えて): UNK は消えたが、同じ偽行が **requestSource=edgeWorkerCacheAPI**
+#   (= Worker 自身の Cache API 呼び出し: cache.match の GET→504[miss] / cache.put の PUT→204 /
+#    cache.delete の PURGE→404)として HTTP/2 等の実在プロトコル付きで載るようになった。
+#   UNK 除外をすり抜けて件数が約3倍・「504が33%」「名乗り無しが2万件404」(=finalize の purge)と誤読した。
+#   ★検算: eyeball のみ 89,8xx ≒ Worker invocations 89,237(2026-10-16)。
+#   → 外部から来た要求(eyeball)だけを数える。UNK 除外も念のため残す。
+REAL_ONLY = ', clientRequestHTTPProtocol_neq: "UNK", requestSource: "eyeball"'
 
 
 def bots(date):
