@@ -53,3 +53,4 @@ metadata:
 - [buildにNODE_OPTIONS](build_routes_need_node_options.md)
 - [差分反映の関連計算の穴](diff_deploy_subset_related.md)
 - [容量/速度の残りレバー](size_speed_levers_2026_09_24.md)
+- [ボット急増=対策保留(実害待ち)](bot_surge_2026_10_hold.md)
