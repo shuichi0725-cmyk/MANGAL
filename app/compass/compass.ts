@@ -787,9 +787,11 @@ export function ringPoints(
         return arc[hi];
       };
       const step = acc / n;
+      // ★始点のずらしは真上を中心に ±半歩(2026-10-17 ユーザ裁定: 1つ目=作者をスマホと同じ真上に。
+      //   旧 0〜1歩 = 最良が1歩近くずれると作者が1時・最後の入口が真上に来た。並びの形は同じで番号が1つ回るだけ)
       for (let j = 0; j < 24; j++) {
         const pts = Array.from({ length: n }, (_, i) => {
-          const p = at((step * j) / 24 + i * step);
+          const p = at((step * (j - 12)) / 24 + i * step);
           return { x: geom.CX + p.x, y: geom.CY + p.y, up: p.y < -1 };
         });
         const boxes: { i: number; b: Box }[] = [];

@@ -1029,6 +1029,19 @@ describe("PC の横長画面(案B・2026-10-15)", () => {
     }
   });
 
+  it("★PCも1つ目(作者)が真上 = スマホと同じ並び(2026-10-17。 旧 = 作者が1時・最後の入口が真上)", () => {
+    for (const c of cases) {
+      const s = sizes(c.k);
+      const g = stageGeomWide(c.W, c.H, { k: s.k, ew: s.ew, eh: s.eh, lh: s.efs * 1.25 + 5 });
+      const labels = LABELS.map((t, i) => (i === 5 ? labelBox(t, s.efs, 2, 86 * (s.efs / 10)) : labelBox(`${t} 000`, s.efs, 1)));
+      const pts = ringPoints(LABELS.length, g, { ew: s.ew, eh: s.eh, cw: s.cw, ch: s.ch, labels });
+      const deg = (p: { x: number; y: number }) => (Math.atan2((p.y - g.CY) / g.ry, (p.x - g.CX) / g.rx) * 180) / Math.PI;
+      // 真上(-90°)からの角度差が、隣の入口との間隔の半分以内
+      expect(Math.abs(deg(pts[0]) + 90), `${c.W}`).toBeLessThanOrEqual(180 / LABELS.length + 1);
+      expect(Math.abs(deg(pts[0]) + 90)).toBeLessThan(Math.abs(deg(pts[LABELS.length - 1]) + 90));
+    }
+  });
+
   it("★ノートPCで真上・真下の本と中心の本の間が詰まらない(案Y3・2026-10-16。 旧 = 名札2行で11px)", () => {
     const c = cases[0];
     const s = sizes(c.k);
