@@ -106,12 +106,22 @@ def _authors_from(it, ndl_creators, ndl_ck):
         out.append({"name": nm2, "kana": ka})
     if not out and ndl_creators:
         for i, c in enumerate(ndl_creators):
-            nm2 = re.sub(r"[\s　]+", "", str(c).split(",")[0] + (str(c).split(",")[1] if "," in str(c) else ""))
+            parts = _ndl_name_parts(c)
+            nm2 = re.sub(r"[\s　]+", "", "".join(parts[:2]))
             ka = ""
             if i < len(ndl_ck or []):
-                ka = re.sub(r"[\s　,、]+", "", ndl_ck[i])
+                ka = re.sub(r"[\s　、]+", "", "".join(_ndl_name_parts(ndl_ck[i])))
             out.append({"name": nm2, "kana": ka})
     return [a for a in out if a["name"]]
+
+
+# NDL典拠の名前は「姓, 名」か「名前, 生年-」(例「ゆにこ, 1973-」)。 カンマの2つ目が生年の人もいるので、
+#   年の部分を落としてから姓+名をつなぐ(2026-10-19 月次1.2.21 実踏: 「ゆにこ1973-」「なーゆ2003-」が著者名になった)
+_NDL_YEAR = re.compile(r"(\d{3,4}\??-?(\d{3,4}\??)?|生没年不詳|生年不詳)")
+
+
+def _ndl_name_parts(c):
+    return [p for p in (x.strip() for x in str(c).split(",")) if p and not _NDL_YEAR.fullmatch(p)]
 
 
 def _surname_romaji(rk, vv, ndl_ck=None):
