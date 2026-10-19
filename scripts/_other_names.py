@@ -84,13 +84,24 @@ def _load_anilist_titles() -> dict:
     if ANILIST_TITLES.exists() and (not ANILIST_DUMP.exists()
                                     or ANILIST_TITLES.stat().st_mtime >= ANILIST_DUMP.stat().st_mtime):
         return json.loads(ANILIST_TITLES.read_text(encoding="utf-8"))
+    # ★dump が取り直し中(月次 run anilist の約2.5時間)だと、末尾が欠けて読めない(EOFError)か件数が少ない。
+    #   その時は前の軽量版を使い、上書きしない(2026-10-20 実踏: 取り直し中の反映で promote が落ちた。
+    #   読めた場合は途中までの件数で軽量版を上書きし、全頁の英題・ローマ字が欠ける所だった)。
     out = {}
     if ANILIST_DUMP.exists():
-        with gzip.open(ANILIST_DUMP, "rt", encoding="utf-8") as f:
-            for line in f:
-                d = json.loads(line)
-                t = d.get("title") or {}
-                out[str(d["id"])] = [t.get("english"), t.get("romaji"), d.get("synonyms") or []]
+        try:
+            with gzip.open(ANILIST_DUMP, "rt", encoding="utf-8") as f:
+                for line in f:
+                    d = json.loads(line)
+                    t = d.get("title") or {}
+                    out[str(d["id"])] = [t.get("english"), t.get("romaji"), d.get("synonyms") or []]
+        except (EOFError, OSError, ValueError):
+            out = None
+        old = json.loads(ANILIST_TITLES.read_text(encoding="utf-8")) if ANILIST_TITLES.exists() else None
+        if out is None or (old and len(out) < len(old) * 0.95):
+            if old is not None:
+                return old
+            return out or {}
         ANILIST_TITLES.write_text(json.dumps(out, ensure_ascii=False), encoding="utf-8")
     return out
 

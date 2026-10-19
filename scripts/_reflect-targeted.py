@@ -158,7 +158,11 @@ def main():
 
     # 2. promote --only (書影統合済)
     if only:
-        run([PY, "scripts/_promote-bulk-v2.py", "--only", ",".join(only)])
+        # ★promote が落ちたら止める(2026-10-20 実踏: AniList dump 取り直し中に promote が EOFError で落ちたのに
+        #   頁は前回のまま残るので検証ゲートを素通りし、直っていない頁で索引を作って push していた)
+        if run([PY, "scripts/_promote-bulk-v2.py", "--only", ",".join(only)]) != 0:
+            print("★promote が失敗した = 頁は再生成されていない。push せずに止める(上の traceback を見る)", file=sys.stderr)
+            sys.exit(6)
 
     # 2.3 ★減少差分レポート(2026-08-08 新設): 反映で**消えた巻/版**を必ず表示する。
     #     熱愛プリンス誤deny(実在68巻)/ワイルド7の欠落13巻 のような silent loss を目に入れるのが目的。
