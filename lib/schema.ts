@@ -210,6 +210,11 @@ export const MangaSchema = z.object({
   score: z.number().int().min(0).max(100).optional(),
   /** 他言語タイトル / 別名 (= AniList synonyms 由来、 alternative_titles.en 補助) */
   synonyms: z.array(z.string().min(1)).optional(),
+  /** ★他言語名 (2026-10-19)。 言語コード付き = en / zh-hans / zh-hant / zh / ko / th / vi / id / fr / de /
+   *  it / es / pt / ru / pl / ar / alt(言語不明のラテン文字表記)。 出所 = AniList公式英題・Wikidata言語別ラベル・
+   *  AniList別名(文字種判定)。 ★AIが埋めた英題は入れない。 組み立て正本 = scripts/_other_names.py。
+   *  欄が在れば(空配列でも)処理済み = 表示は alternative_titles.en を使わずこちらだけを出す。 */
+  other_names: z.array(z.object({ lang: z.string().min(1), name: z.string().min(1) })).optional(),
   editions: z.array(EditionSchema).min(1),
 });
 export type Manga = z.infer<typeof MangaSchema>;

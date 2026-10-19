@@ -283,6 +283,8 @@ for f in _files:
         "title_romaji": d["title_romaji"],
         "alt": [v for v in [alt.get("en"), alt.get("fr"), alt.get("de"), alt.get("it"), alt.get("pt")] if v]
                + [s for s in (d.get("synonyms") or []) if s]  # ★synonymsも検索可(2026-07-14: 統合頁の巻別題=ソーサリアン型)
+               # ★他言語名も検索可(2026-10-19: Ranma ½ / 乱马 / 란마 で引ける。 Wikidata・AniList公式英題)
+               + [o.get("name") for o in (d.get("other_names") or []) if o.get("name")]
                # ★巻の個別題(title_display)も検索可: 「副題(著者)〔新N〕」から括弧書きを剥いだ純副題を拾う
                + [t for e in (d.get("editions") or []) for v in (e.get("volumes") or [])
                   for t in [re.sub(r"[（(].*?[)）]|〔.*?〕", "", str(v.get("title_display") or "")).strip()] if t],

@@ -14,6 +14,7 @@ import MangaFacts, { MangaSynopsis } from "@/components/MangaFacts";
 import { yearStatusLabel } from "@/lib/format";
 import { buildOnlyMangaSlugs, loadAllManga, loadTagI18n, loadWameiTags } from "@/lib/loadData";
 import { coverUrl } from "@/lib/schema";
+import { otherNamesView } from "@/lib/otherNames";
 import { jaGenre, jaTag } from "@/lib/anilist-i18n";
 
 // ★プレビュー専用「しまう」ボタン(マイ本棚 docs/cloud-briefs/my-shelf.md)。本番は next.config.ts が
@@ -287,6 +288,11 @@ export default async function MangaDetailPage({
 
   // ★構造化データ(JSON-LD): ComicSeries — 検索リッチ化(2026-07-04 SEO)
   const seoTest = SEO_TEST(manga.slug);
+  // ★他言語名(2026-10-19): other_names 欄が在る頁は新表示(言語名つき・AI訳題なし)。 無い頁=旧表示のまま
+  const otherNames = otherNamesView(manga);
+  const altNames = otherNames
+    ? otherNames.all
+    : ([manga.alternative_titles?.en, ...(manga.synonyms ?? [])].filter(Boolean) as string[]);
   const svMain = seoTest ? seoVolPhrase(manga) : null;
   const jsonLd = {
     "@context": "https://schema.org",
@@ -304,7 +310,7 @@ export default async function MangaDetailPage({
           ...(svMain.nVols ? { numberOfItems: svMain.nVols } : {}),
           ...(manga.status === "completed" && manga.year_ended ? { endDate: String(manga.year_ended) } : {}),
           ...(manga.genres?.length ? { genre: manga.genres } : {}),
-          ...(manga.alternative_titles?.en ? { alternateName: [manga.alternative_titles.en, ...(manga.synonyms ?? [])] } : {}),
+          ...((otherNames ? altNames.length : manga.alternative_titles?.en) ? { alternateName: altNames } : {}),
           workExample: (() => {
             const std = manga.editions.find((e) => e.type === "standard") ?? manga.editions[0];
             const vs = (std?.volumes ?? []).filter((v) => v.number != null && v.isbn13);
@@ -375,48 +381,71 @@ export default async function MangaDetailPage({
             {manga.subtitle_kana ? ` : ${manga.subtitle_kana}` : ""}
           </p>
 
-          {manga.alternative_titles && (
-            <p className="text-xs text-ink/55 mt-1.5">
-              {[
-                manga.alternative_titles.en,
-                manga.alternative_titles.fr,
-                manga.alternative_titles.de,
-                manga.alternative_titles.it,
-                manga.alternative_titles.pt,
-              ]
-                .filter(Boolean)
-                .join(" / ")}
-            </p>
+          {otherNames ? (
+            <>
+              {/* ★他言語名(2026-10-19 ユーザ裁定A1): 言語名つき。 英語・中国語・韓国語は常に、残りは畳む。
+                  出所 = AniList公式英題・Wikidata言語別ラベル・AniList別名(文字種判定)。 AIが埋めた英題は出さない。 */}
+              {otherNames.primary.length > 0 && (
+                <OtherNameGrid rows={otherNames.primary} className="mt-2" />
+              )}
+              {otherNames.rest.length > 0 && (
+                <details className="mt-0.5 text-[11px] text-ink/45">
+                  <summary className="cursor-pointer select-none py-0.5">{otherNames.restSummary}</summary>
+                  <OtherNameGrid rows={otherNames.rest} className="mt-0.5" />
+                </details>
+              )}
+              {otherNames.jaAliases.length > 0 && (
+                <p className="text-[11px] text-ink/45 mt-1 leading-relaxed">
+                  別名: {otherNames.jaAliases.join(" / ")}
+                </p>
+              )}
+            </>
+          ) : (
+            <>
+              {manga.alternative_titles && (
+                <p className="text-xs text-ink/55 mt-1.5">
+                  {[
+                    manga.alternative_titles.en,
+                    manga.alternative_titles.fr,
+                    manga.alternative_titles.de,
+                    manga.alternative_titles.it,
+                    manga.alternative_titles.pt,
+                  ]
+                    .filter(Boolean)
+                    .join(" / ")}
+                </p>
+              )}
+              {manga.synonyms &&
+                manga.synonyms.length > 0 &&
+                (() => {
+                  // ★日本語別名と他言語を分離(2026-06-13)。 題名と同一の synonym は除外。
+                  const isJa = (s: string) => /[぀-ヿ㐀-鿿]/.test(s);
+                  const norm = (s: string) => s.replace(/\s+/g, "").toLowerCase();
+                  const titles = new Set(
+                    [manga.title, manga.title_kana, manga.alternative_titles?.en]
+                      .filter(Boolean)
+                      .map((s) => norm(s as string)),
+                  );
+                  const uniq = manga.synonyms.filter((s) => !titles.has(norm(s)));
+                  const ja = uniq.filter(isJa);
+                  const other = uniq.filter((s) => !isJa(s));
+                  return (
+                    <>
+                      {ja.length > 0 && (
+                        <p className="text-[11px] text-ink/45 mt-1 leading-relaxed">
+                          別名: {ja.join(" / ")}
+                        </p>
+                      )}
+                      {other.length > 0 && (
+                        <p className="text-[11px] text-ink/45 mt-1 leading-relaxed">
+                          他言語: {other.join(" / ")}
+                        </p>
+                      )}
+                    </>
+                  );
+                })()}
+            </>
           )}
-          {manga.synonyms &&
-            manga.synonyms.length > 0 &&
-            (() => {
-              // ★日本語別名と他言語を分離(2026-06-13)。 題名と同一の synonym は除外。
-              const isJa = (s: string) => /[぀-ヿ㐀-鿿]/.test(s);
-              const norm = (s: string) => s.replace(/\s+/g, "").toLowerCase();
-              const titles = new Set(
-                [manga.title, manga.title_kana, manga.alternative_titles?.en]
-                  .filter(Boolean)
-                  .map((s) => norm(s as string)),
-              );
-              const uniq = manga.synonyms.filter((s) => !titles.has(norm(s)));
-              const ja = uniq.filter(isJa);
-              const other = uniq.filter((s) => !isJa(s));
-              return (
-                <>
-                  {ja.length > 0 && (
-                    <p className="text-[11px] text-ink/45 mt-1 leading-relaxed">
-                      別名: {ja.join(" / ")}
-                    </p>
-                  )}
-                  {other.length > 0 && (
-                    <p className="text-[11px] text-ink/45 mt-1 leading-relaxed">
-                      他言語: {other.join(" / ")}
-                    </p>
-                  )}
-                </>
-              );
-            })()}
 
           {/* ★基本情報欄 = 見本その2「D3 コマ割り」(2026-10-07 ユーザ裁定。 部品 = components/MangaFacts.tsx)。
               旧 = 見出し列+灰色の枠の <dl>(9段)。 文字・リンク先は同じで、見た目だけ羅針盤の糸の色に揃えた。 */}
@@ -535,11 +564,11 @@ export default async function MangaDetailPage({
           <RelatedWorks items={related} />
 
           {/* ★③別題露出(テストゲート内 2026-08-06): 英題・略称・他言語題を検索エンジン可視に */}
-          {seoTest && (manga.alternative_titles?.en || manga.synonyms?.length) && (
+          {seoTest && altNames.length > 0 && (
             <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-ink/45">
               <span className="font-semibold text-ink/40">別題</span>
-              {[manga.alternative_titles?.en, ...(manga.synonyms ?? [])].filter(Boolean).map((t) => (
-                <span key={String(t)}>{String(t)}</span>
+              {altNames.map((t) => (
+                <span key={t}>{t}</span>
               ))}
             </div>
           )}
@@ -611,5 +640,27 @@ export default async function MangaDetailPage({
       </div>
       </div>
     </div>
+  );
+}
+
+/** 他言語名の表(言語名の列 + 名前の列)。 中国語は字体の札(簡/繁)を名前の後ろに小さく添える */
+function OtherNameGrid({ rows, className = "" }: { rows: import("@/lib/otherNames").OtherNameRow[]; className?: string }) {
+  return (
+    <dl className={`grid grid-cols-[max-content_1fr] gap-x-2.5 gap-y-0.5 text-xs leading-snug ${className}`}>
+      {rows.map((r) => (
+        <div key={r.lang} className="contents">
+          <dt className="whitespace-nowrap pt-px text-[10.5px] text-ink/45">{r.label}</dt>
+          <dd className="min-w-0 break-words text-ink/60">
+            {r.names.map((n, i) => (
+              <span key={i}>
+                {i > 0 && <span className="text-ink/30"> / </span>}
+                {n.name}
+                {n.tag && <span className="ml-0.5 text-[10px] text-ink/40">{n.tag}</span>}
+              </span>
+            ))}
+          </dd>
+        </div>
+      ))}
+    </dl>
   );
 }
