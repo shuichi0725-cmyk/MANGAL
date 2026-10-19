@@ -1,6 +1,7 @@
 {
  "slug_mush": 1205,
- "publisher_unknown": 337,
+ "publisher_unknown": 338,
  "seed4_auto_volumes": 3759,
- "_note_slug_mush": "2026-09-22 週次: 1200→1205。内訳検算= rename 23件は差引0(同じ頁が名前を替えただけ)。実増加5件の内訳: ①green-boy-tashiroyumiya2026 ②kaguya-omikawanamari2026 = 同名slug衝突の正規規則「姓+発売年」が生む17字token(規則どおり=欠陥ではない/検出器の盲点) ③rigai-itchikon-... = ちょうど78字・語分割は正 ④shin-mimibukuro-kaidan-hyakumonogatari = hyakumonogatari(百物語)が1語 ⑤hiroware-deshi-... = kutsushitasagashi の語分割欠陥を是正済(クツシタ サガシ)。ただし題が長く111字のため長さ判定では依然mush。= 是正可能な欠陥は全て是正した上での実測値。"
+ "_note_slug_mush": "2026-09-22 週次: 1200→1205。内訳検算= rename 23件は差引0(同じ頁が名前を替えただけ)。実増加5件の内訳: ①green-boy-tashiroyumiya2026 ②kaguya-omikawanamari2026 = 同名slug衝突の正規規則「姓+発売年」が生む17字token(規則どおり=欠陥ではない/検出器の盲点) ③rigai-itchikon-... = ちょうど78字・語分割は正 ④shin-mimibukuro-kaidan-hyakumonogatari = hyakumonogatari(百物語)が1語 ⑤hiroware-deshi-... = kutsushitasagashi の語分割欠陥を是正済(クツシタ サガシ)。ただし題が長く111字のため長さ判定では依然mush。= 是正可能な欠陥は全て是正した上での実測値。",
+ "_note_publisher_unknown": "2026-10-19 月次1.2.21: 337→338。+1 = 新規頁 neko-no-iibun-hito-no-iibun(林ユミ『ねこのいいぶん ひとのいいぶん』9784502597718)。MADB の出版社欄 = [ONDORI-BOOKS, 中央経済グループパブリッシング]・楽天 = 中央経済社 で、どれも publishers.yml 未キー(clean の正規パスは phase2 で差替済み=罠の型ではない)。キーを足すかはユーザ裁定待ち"
 }

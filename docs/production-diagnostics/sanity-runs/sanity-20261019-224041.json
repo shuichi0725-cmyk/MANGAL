@@ -1,0 +1,256 @@
+{
+ "at": "2026-10-19 22:40:41",
+ "tag": "1.2.21",
+ "results": {
+  "isbn-loss": {
+   "rc": 0,
+   "rows": 7,
+   "secs": 47.6,
+   "tail": [
+    "ISBN消失監視: 消失0 (前回 266,825 → 現在 266,875)"
+   ]
+  },
+  "solo-truncated": {
+   "rc": 0,
+   "rows": 40,
+   "secs": 41.6,
+   "tail": [
+    "走査69684頁 → 単巻切り詰め疑い 40件: DUP_ELSEWHERE=2 / NO_EVIDENCE=38",
+    "→ C:\\Users\\chiba shuichi\\code\\MANGAL\\docs\\production-diagnostics\\solo-truncated.tsv"
+   ]
+  },
+  "volume-numbering": {
+   "rc": 0,
+   "rows": null,
+   "secs": 10.4,
+   "tail": [
+    "「Sexy effect 96」 standard 番号[96] 1冊 max96",
+    "「女子高生チヨ（64）」 standard 番号[64] 1冊 max64"
+   ],
+   "auto_fixed": 1713,
+   "missing_half": 55,
+   "gap_other": 6360
+  },
+  "title-eq-author": {
+   "rc": 0,
+   "rows": 11,
+   "secs": 239.3,
+   "tail": [
+    "スキャン 69684 / title==著者名 11件 → C:\\Users\\chiba shuichi\\code\\MANGAL\\docs\\production-diagnostics\\title-eq-author.tsv",
+    "★該当は実タイトル/副題脱落の疑い(NDL by-ISBNで実題確認 → title/kana是正 or 抜粋本drop)"
+   ]
+  },
+  "foreign-editions": {
+   "rc": 0,
+   "rows": null,
+   "secs": 2.5,
+   "tail": [
+    "検算NG(typo疑い=報告のみ): 新規 0 / 全 0",
+    "(報告のみ。 --apply で safe を non-manga-drop.yml へ純粋追加)"
+   ]
+  },
+  "price-pack": {
+   "rc": 1,
+   "rows": 100,
+   "secs": 18.6,
+   "tail": [
+    "9784087920918  白妖の娘 : 完全版. 上巻  [ISBN(set)] → /byakuyou-no-musume",
+    "9784757589278  ACCA13区監察課10th anniversary book : letter  [ISBN(set)] → /acca-13-ku-kansatsuka-10th-anniversary-book"
+   ]
+  },
+  "vol0-hidden-first": {
+   "rc": 0,
+   "rows": 890,
+   "secs": 1.6,
+   "tail": [
+    "→ docs\\production-diagnostics\\vol0-hidden-first.tsv",
+    "(--apply で HIDDEN_FIX 20 件を楽天題ゲート→種4-auto純粋追加)"
+   ]
+  },
+  "orphan-new-series": {
+   "rc": 0,
+   "rows": 879,
+   "secs": 25.0,
+   "tail": [
+    "→ ★芯 C:\\Users\\chiba shuichi\\code\\MANGAL\\docs\\production-diagnostics\\orphan-new-series-core.tsv",
+    "★全件の数字を「未掲載の取りこぼし」として読むな(2026-09-06 裁定)。 芯だけ見る。"
+   ]
+  },
+  "shu2-unlisted-volumes": {
+   "rc": 0,
+   "rows": 118,
+   "secs": 16.6,
+   "tail": [
+    "→ C:\\Users\\chiba shuichi\\code\\MANGAL\\docs\\production-diagnostics\\half-volume-candidates.tsv",
+    "★トリニティ15.5 と同型はこちらで直撃する(種2駆動だと DUP に埋まる)。"
+   ]
+  },
+  "edition-lead-gap": {
+   "rc": 0,
+   "rows": 77,
+   "secs": 41.7,
+   "tail": [
+    "経路: {'seed4': 38, 'canon:volumes': 12, 'canon:extra[1]': 9, 'canon:extra[0]': 6, 'canon:extra[2]': 6, 'overrides': 3, 'canon:extra[4]': 2, 'canon:extra[7]': 1}",
+    "欠け巻数: {1: 43, 3: 7, 4: 6, 2: 6, 10: 6, 7: 4, 5: 4, 6: 1}"
+   ]
+  },
+  "intra-page-run-split": {
+   "rc": 0,
+   "rows": 12,
+   "secs": 40.0,
+   "tail": [
+    "tier: {'B': 6, 'C': 6}",
+    "canonical seed: {'有': 10, '無': 2}"
+   ]
+  },
+  "doujin-selection": {
+   "rc": 0,
+   "rows": 154,
+   "secs": 14.1,
+   "tail": [
+    "走査 818,456 item / 「同人」を含む本番掲載本 154",
+    "該当頁 29 (うち seriesName一致 = 強い信号 0) → C:\\Users\\chiba shuichi\\code\\MANGAL\\docs\\production-diagnostics\\doujin-selection.tsv"
+   ]
+  },
+  "edition-canonical": {
+   "rc": 0,
+   "rows": null,
+   "secs": 15.6,
+   "tail": [
+    "edition-canonical: 771 本 / 異常 0 本"
+   ]
+  },
+  "year-suffix-dup": {
+   "rc": 0,
+   "rows": 66,
+   "secs": 1.3,
+   "tail": [
+    "CLUSTER_SPLIT = per-case統合worklist / REDO_LEFTOVER = 機械削除可(要GO) / NO_OVERLAP = 概ね正当",
+    "→ docs\\production-diagnostics\\year-suffix-dup.tsv"
+   ]
+  },
+  "canonical-imprint-split": {
+   "rc": 0,
+   "rows": 103,
+   "secs": 40.2,
+   "tail": [
+    "巻番号: {'重複': 99, '相補': 4}",
+    "canonical: {'有': 95, '無': 8}"
+   ]
+  },
+  "edition-run-split": {
+   "rc": 0,
+   "rows": 11,
+   "secs": 40.1,
+   "tail": [
+    "刊行runが版タブに割れている疑い: 11 ペア / 11 頁 → C:\\Users\\chiba shuichi\\code\\MANGAL\\docs\\production-diagnostics\\edition-run-split.tsv",
+    "tier: {'B': 11}"
+   ]
+  },
+  "numeral-variant-split": {
+   "rc": 0,
+   "rows": 28,
+   "secs": 41.6,
+   "tail": [
+    "走査69684頁 → DUP=9 / SEQ?=19",
+    "→ C:\\Users\\chiba shuichi\\code\\MANGAL\\docs\\production-diagnostics\\numeral-variant-split.tsv"
+   ]
+  },
+  "vol-date-regression": {
+   "rc": 0,
+   "rows": 16,
+   "secs": 41.0,
+   "tail": [
+    "scan 50000/69684",
+    "scan 60000/69684"
+   ]
+  },
+  "deluxe-label-split": {
+   "rc": 0,
+   "rows": 401,
+   "secs": 12.5,
+   "tail": [
+    "分類: SPLIT(統合候補)=198 / DUP(汚染)=21 / PARALLEL(別版の可能性・自動統合禁止)=182",
+    "→ C:\\Users\\chiba shuichi\\code\\MANGAL\\docs\\production-diagnostics\\deluxe-label-split.tsv"
+   ]
+  },
+  "cover-dup": {
+   "rc": 0,
+   "rows": 257,
+   "secs": 40.7,
+   "tail": [
+    "neon-chou | ネオン蝶 | 10巻が重複画像",
+    "nesshou-hanazawa-koukou | 熱笑!!花沢高校 | 10巻が重複画像"
+   ]
+  },
+  "kana-from-other-volume": {
+   "rc": 0,
+   "rows": 5,
+   "secs": 245.9,
+   "tail": [
+    "nagi: 題='椰' ヨミ='ナギ' ← 犯人巻題='梛（ナギ）'",
+    "t-patrol-bon: 題='T・Pぼん' ヨミ='タイムパトロールボン' ← 犯人巻題='T・P（タイム・パトロール）ぼん'"
+   ]
+  },
+  "excerpt-subtitle": {
+   "skipped": "heavy(--heavy で実行)"
+  },
+  "edition-mix": {
+   "skipped": "heavy(--heavy で実行)"
+  },
+  "author-not-in-volumes": {
+   "skipped": "heavy(--heavy で実行)"
+  },
+  "subtitle-orphan-volume": {
+   "skipped": "heavy(--heavy で実行)"
+  },
+  "seed1-lost": {
+   "skipped": "heavy(--heavy で実行)"
+  },
+  "anilist-verify-gate": {
+   "skipped": "heavy(--heavy で実行)"
+  },
+  "furigana": {
+   "skipped": "heavy(--heavy で実行)"
+  },
+  "ssr-content": {
+   "rc": 0,
+   "rows": null,
+   "secs": 14.0,
+   "tail": [
+    "共通シェル実測 411字(先頭72+末尾339)/ 床 150字 ・art-books/=60字 ・author/=40字",
+    "配信HTMLの中身: FAIL 0 / 検査 2,575"
+   ]
+  },
+  "orphan-source-pages": {
+   "rc": 0,
+   "rows": null,
+   "secs": 1.3,
+   "tail": [
+    "★源なし頁(次のフルpromoteで消える): 0",
+    "→ C:\\Users\\chiba shuichi\\code\\MANGAL\\docs\\production-diagnostics\\orphan-source-pages.tsv"
+   ]
+  },
+  "duplicate-slug-files": {
+   "rc": 1,
+   "rows": 5,
+   "secs": 8.7,
+   "tail": [
+    "1=源あり(残す) / 0=源なし(残骸)。消す前に .cache/ へ退避。",
+    "→ docs\\production-diagnostics\\duplicate-slug-files.tsv"
+   ]
+  },
+  "frozen-page-new-volumes": {
+   "skipped": "heavy(--heavy で実行)"
+  },
+  "harvested-not-on-page": {
+   "rc": 0,
+   "rows": 258,
+   "secs": 41.4,
+   "tail": [
+    "NUM_PRESENT    159",
+    "→ docs\\production-diagnostics\\harvested-not-on-page.tsv  ★の新規増加=要対応(LOST/HARVEST は頁に足す・NO_PAGE は行き先を決める)"
+   ]
+  }
+ }
+}

@@ -4011,3 +4011,48 @@ dedup:
   title: Sランクパーティから解雇された〈呪具師〉
   isbns: 14
   note: "2026-10-06 再dedup: 同じ14 ISBNの頁が2枚。旧dropキー esu-rank-party-kara-kaikosareta-sareta-jugushi が「された」二重の slug 是正で SRC stem 改名され外れて復活(slug改名で slugキーseedが死ぬ型)。前回裁定どおり s-rank 側を残す"
+- drop: ayashi
+  canonical: noroi
+  title: 妖(犬木加奈子)
+  isbns: 1
+  note: 2026-10-19 月次1.2.21 フルpromote(2026-10-19)で戻った重複頁。ISBNが全冊、公開中の canonical 頁に在る(未公開=alias不要)。 slug ayashi を『あやし』(皇なつき・SRC ayashi-2012 → slug-override)と取り合い同一slug二重ファイル(#33)。1冊が noroi(呪)と完全一致
+- drop: desire
+  canonical: desire-2nd-season
+  title: Desire(小谷憲一)
+  isbns: 27
+  note: 2026-10-19 月次1.2.21 フルpromote(2026-10-19)で戻った重複頁。ISBNが全冊、公開中の canonical 頁に在る(未公開=alias不要)。 slug desire を金沢有倖『Desire』(SRC desire-kanazawa-2001 → slug-override)と取り合い#33。27冊全部が desire-2nd-season(32冊)に在る
+- drop: to-heart
+  canonical: to-heart
+  title: To Heart(高雄右京)
+  isbns: 3
+  note: 2026-10-19 月次1.2.21 フルpromote(2026-10-19)で戻った重複頁。ISBNが全冊、公開中の canonical 頁に在る(未公開=alias不要)。 SRC to-heart-2-2005(slug-override→to-heart)と3冊完全一致=同一作品の二重源。公開slug to-heart は to-heart-2-2005 側が出す(2026-07-10 3作合体の解体裁定)
+- drop: tobidase-doubutsu-no-mori
+  canonical: tobidase-doubutsu-no-mori-harikiri-sonchou-ippee
+  title: とびだせどうぶつの森(大崎亮平+コーヘー混在)
+  isbns: 7
+  note: 2026-10-19 月次1.2.21 フルpromote(2026-10-19)で戻った重複頁。ISBNが全冊、公開中の canonical 頁に在る(未公開=alias不要)。 slug を村上ゆみ子版(SRC -2014 → slug-override)と取り合い#33。3-7巻(5冊)は harikiri-sonchou-ippee と一致。1-2巻 9784091417121/9784091420176 はコーヘー『とびだせどうぶつの森』(コロコロコミックス)=別作品の混入 → 保留表 torikoboshi-1221-holds.tsv
+- drop: dai-chouhen-doraemon
+  canonical: daichouhen-doraemon
+  title: 大長編ドラえもん
+  isbns: 40
+  note: 2026-10-19 月次1.2.21 フルpromote(2026-10-19)で戻った重複頁。ISBNが全冊、公開中の canonical 頁に在る(未公開=alias不要)。 40冊全部が daichouhen-doraemon(41冊)に在る。dropキー dai-chouhen-doraemon-1984 とは別の源 stub
+- drop: pocket-monster-special
+  canonical: pocket-monsters-special
+  title: ポケットモンスターSPECIAL
+  isbns: 56
+  note: 2026-10-19 月次1.2.21 フルpromote(2026-10-19)で戻った重複頁。ISBNが全冊、公開中の canonical 頁に在る(未公開=alias不要)。 56冊全部が pocket-monsters-special(67冊)に在る。dropキー pocket-monster-special-2017 とは別の源 stub
+- drop: yami-no-ekusasaizu
+  canonical: fuufu-tantei-funsenki
+  title: 夫婦探偵奮戦記(源 stub yami-no-ekusasaizu)
+  isbns: 9
+  note: 2026-10-19 月次1.2.21 フルpromote(2026-10-19)で戻った重複頁。ISBNが全冊、公開中の canonical 頁に在る(未公開=alias不要)。 9冊全部が fuufu-tantei-funsenki(20冊)に在る。dropキー yami-no-ekusasaizu-1991 とは別の源 stub
+- drop: shounangurafutei
+  canonical: shounan-graffiti
+  title: 湘南グラフティ
+  isbns: 4
+  note: 2026-10-19 月次1.2.21 フルpromote(2026-10-19)で戻った重複頁。ISBNが全冊、公開中の canonical 頁に在る(未公開=alias不要)。 4冊完全一致。09-23 の dropキー shounan-graffiti-1989 は公開slug(slug-override 後)で、promote が照合する SRC の slug 欄(shounangurafutei)と違い効いていなかった
+- drop: hiroware-deshi-to-birei-majutsushi-monogusa-shishou-no-kutsushitasagashi-wa-kyou-mo-taihen-desu-attomaaku-comic
+  canonical: hiroware-deshi-to-birei-majutsushi-monogusa-shishou-no-kutsushita-sagashi-wa-kyou-mo-taihen-desu-attomaaku-comic
+  title: 拾われ弟子と美麗魔術師～ものぐさ師匠の靴下探しは今日も大変です～@COMIC
+  isbns: 1
+  note: 2026-10-19 月次1.2.21 フルpromote(2026-10-19)で戻った重複頁。ISBNが全冊、公開中の canonical 頁に在る(未公開=alias不要)。 1冊完全一致(源頁の slug 違い= kutsushitasagashi / kutsushita-sagashi)
