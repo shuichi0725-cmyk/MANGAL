@@ -51,10 +51,11 @@ def prepare(n_works, only=None):
         d = yaml.load(open(p, encoding='utf-8'), Loader=L)
         if not d:
             continue
-        miss = [(e.get('type'), v['number'], str(v.get('isbn13') or ''))
-                for e in d.get('editions') or [] if e.get('type') in KEEP
+        # ★版の番号(ei)も持つ: 書くのは目視で装丁を比べた**1つの版だけ**(下の cand 絞り込み)
+        miss = [(ei, e.get('type'), v['number'], str(v.get('isbn13') or ''))
+                for ei, e in enumerate(d.get('editions') or []) if e.get('type') in KEEP
                 for v in (e.get('volumes') or []) if not v.get('cover_url')]
-        miss_isbn = [m for m in miss if len(m[2]) == 13]
+        miss_isbn = [m for m in miss if len(m[3]) == 13]
         if miss_isbn:
             works.append((len(miss_isbn), os.path.basename(p)[:-4], d.get('title'), miss_isbn, d))
     works.sort(reverse=True, key=lambda x: x[0])
@@ -95,15 +96,20 @@ def prepare(n_works, only=None):
         if not vols and len(bare) >= 3:
             vols = bare
             print(f'  {slug}: 直結数字型として採用({len(bare)}巻)')
-        cand = [(et, vn, ib, vols[vn]) for et, vn, ib in miss if vn in vols]
+        cand = [(ei, et, vn, ib, vols[vn]) for ei, et, vn, ib in miss if vn in vols]
         if not cand:
             print(f'  {slug}: 欠{nmiss} → Kobo一致なし(skip)')
             done.append(slug)  # 再照会しない
             continue
+        # ★候補は**目視で比べる1つの版**だけに絞る(2026-10-20 月次1.2.21 実踏: 旧実装は全版の同巻に同じ電子書影を
+        #   書き、比べていない版にも付いた=cover-dup Kobo型 190行・48作。 ワイルド7 の徳間書店版と文庫版の両方に
+        #   少年画報社版の電子書影が出ていた)。 ほかの版は次の --slugs で、その版の紙表紙と比べてから。
+        ei0 = cand[0][0]
+        cand = [(et, vn, ib, u) for ei, et, vn, ib, u in cand if ei == ei0]
         # 比較ペアDL: kobo候補1枚 + 既存紙表紙1枚(同edition・近い巻)
         et0, vn0, ib0, kurl = cand[0]
         paper = None
-        e = next((x for x in d['editions'] if x.get('type') == et0), None)
+        e = d['editions'][ei0]
         if e:
             withc = sorted([v for v in e['volumes'] if v.get('cover_url') and v.get('number')],
                            key=lambda v: abs(v['number'] - vn0))
