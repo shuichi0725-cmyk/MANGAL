@@ -35,3 +35,4 @@ metadata:
 - [旧aliasと同名の新頁](redirect_key_collides_with_new_page.md)
 - [数字ペンネームがint化](yaml_numeric_penname_int_type.md)
 - [フルpromoteのslug改名](full_promote_resolves_public_slug.md)
+- [⏳作者が別人に化ける(NDL典拠ID8桁切りの名寄せ・公開頁≥113・要GO)](ndla_8digit_author_merge.md)
