@@ -2828,8 +2828,16 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
         )
     # ★ 種4 補完 = volumes-supplement.yml from 該当 sid の vol を 該当 edition_type に 追加
     supp_map = get_supplement_vols(con)
+    # ★同じ巻(ISBN+巻番号)が種2側の**どの版にでも**既に在れば種4は足さない(2026-10-20 月次1.2.21 実踏:
+    #   楽天予約で standard として種4に入った新刊を MADB が deluxe で取り込み、メイク・ディア・ホーム3巻 /
+    #   最強で最速の無限レベルアップ6-13巻 等が同じ本2冊で出た)。 下の番号ガードは同じ版の中しか見ない。
+    #   ★番号違いは足す(番号0の1巻化・MADB誤番号の是正など、同ISBNを別番号で出す正当な用途が204件ある)。
+    _s2_vol_keys = {(_norm_isbn(v.get("isbn13")), v.get("number"))
+                    for _g in by_type.values() for _e in _g for v in _e["volumes"] if v.get("isbn13")}
     for sid in series_ids:
         for supp_vol in supp_map.get(sid, []):
+            if supp_vol.get("isbn13") and (_norm_isbn(supp_vol["isbn13"]), supp_vol.get("number")) in _s2_vol_keys:
+                continue
             target_type = supp_vol["_edition_type"]
             if apply_edt_merge and target_type in ("shinsoban", "aizoban", "kanzenban", "deluxe"):
                 target_type = "standard"

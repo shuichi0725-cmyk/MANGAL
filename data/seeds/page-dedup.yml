@@ -4056,3 +4056,8 @@ dedup:
   title: 拾われ弟子と美麗魔術師～ものぐさ師匠の靴下探しは今日も大変です～@COMIC
   isbns: 1
   note: 2026-10-19 月次1.2.21 フルpromote(2026-10-19)で戻った重複頁。ISBNが全冊、公開中の canonical 頁に在る(未公開=alias不要)。 1冊完全一致(源頁の slug 違い= kutsushitasagashi / kutsushita-sagashi)
+- drop: esu-kyuu-party-kara-tsuihousareta-kariudo-jitsu-wa-sekai-saikyou
+  canonical: s-kyuu-party-kara-tsuihou-sareta-kariudo-jitsu-wa-sekai-saikyou
+  title: S級パーティーから追放された狩人、実は世界最強
+  isbns: 5
+  note: '2026-10-20 月次1.2.21 #22: 5冊完全一致の二重頁(どちらも公開)。源 stub(data/manga・slug欄 esu-kyuu-…)が残っていた。正は source-pages の s-kyuu-…(1文字英字は英字のまま)'
