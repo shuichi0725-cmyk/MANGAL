@@ -38,3 +38,5 @@ metadata:
 **別件(同題・別作品なので重複ではない)**: 『異世界に来たみたいだけど如何すれば良いのだろう』が2頁
 (森ゆきなつ2018/1巻 と 天野こひつじ2022/6巻)。現在はローマ字綴りの違いだけで区別されており、
 規則どおりなら従版は「姓+発売年」にすべき([[slug_collision_year_rule]])。
+
+**2026-10-19 追記**: ★drop キーは **SRC ファイルの slug 欄**(promote は slug-override **前**の `src["slug"]` で照合)。公開slug(override 後)で書くと効かない(09-23 の `shounan-graffiti-1989` は SRC slug 欄が `shounangurafutei` で素通り→復活)。登録前に「その slug 欄を持つ源が1件だけか」を確かめる。[[distill_2026_10_1221]]

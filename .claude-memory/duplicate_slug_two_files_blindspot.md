@@ -32,3 +32,5 @@ metadata:
 - **未登録**: この掃引は月次サニティの検出器になっていない(#19は上記の理由で代用不可)。
   登録するなら `scripts/_check-sanity-registry.py` の3点突合(CLAUDE.md索引 / docs本文 / DETECTORS)に乗せる = ユーザGO待ち
 - 関連: [[pubslug_src_stem_generator_trap]] [[slug_rename_kills_slugkeyed_seed]] [[orphan_source_pages_restored]] [[year_suffix_slug_survey]] [[feedback_one_bug_means_a_class]]
+
+**2026-10-19 追記(月次1.2.21・#33は検出器登録済み)**: 両方に源がある型が5組。年付き源が slug-override で無印を名乗り、無印の**源 stub**(data/manga)も同じ slug で出る。9月は「override 結線側が正」で無印の出力だけ消した→源が残り**毎フルpromoteで復活**。★正しい手順 = ①無印側の ISBN を全頁と照合 ②全冊が既存頁に在れば `page-dedup.yml`(drop=**SRC の slug 欄**)に恒久登録 ③ほかに頁が無ければ**別作品**(石川サブロウ版『天より高く』・コーヘー版『とびだせどうぶつの森』)= 削除せず保留して slug を -姓+年 で振り直す裁定へ。[[distill_2026_10_1221]]
