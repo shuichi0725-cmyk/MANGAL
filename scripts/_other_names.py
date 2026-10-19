@@ -31,6 +31,7 @@ ANILIST_TITLES = ROOT / ".cache" / "anilist-titles.json"   # dump から作る�
 WORK_QID = ROOT / ".cache" / "work-qid-map.json"           # _fetch-work-qid.py
 WORK_LABELS = ROOT / ".cache" / "work-labels.json"         # _fetch-work-labels.py
 FILLS_DIR = ROOT / "data" / "seeds" / "_fills"
+SEED3 = ROOT / "data" / "seeds" / "series-supplement-v2.yml"
 
 # 表示する言語(順番 = 表示順)。 これ以外の Wikidata ラベルは捨てる(少数言語・記事名の写しが多い)。
 LANG_ORDER = ["en", "zh-hans", "zh-hant", "zh", "ko", "th", "vi", "id",
@@ -52,7 +53,7 @@ SCRIPT_OF = {"zh-hans": HAN, "zh-hant": HAN, "zh": HAN, "ko": HANGUL, "th": THAI
 # Wikidata の記事名由来の曖昧さ回避「(manga)」「(манга)」等は落とす
 WD_PAREN = re.compile(r"\s*[（(][^()（）]*(manga|манг|漫画|マンガ|comic|anime|аниме)[^()（）]*[)）]\s*$", re.I)
 # 併記題に混ざるレーベル名・版名・年(MADB の「=」右側の誤り)
-JUNK_EN = re.compile(r"(^\d+$)|\b(label|edition|selection|collection|bunko|comics?)\b", re.I)
+JUNK_EN = re.compile(r"(^\d+$)|(^(special|manga|all in one)$)|\b(label|edition|selection|collection|bunko|comics?)\b", re.I)
 
 
 def _n(s) -> str:
@@ -112,6 +113,29 @@ def _load_ai_en() -> tuple[dict, set]:
     return keys, pairs
 
 
+def _load_seed3_en_owners() -> dict:
+    """{英題: {種3キー,...}}(種3 33MB を正規表現で1秒)。 種3キーを持たない既存頁のAI判定に使う。"""
+    if not SEED3.exists():
+        return {}
+    import yaml
+    txt = SEED3.read_text(encoding="utf-8")
+    owners: dict = {}
+    for mm in re.finditer(r"^- key: (.+?)\n(.*?)(?=^- key: |\Z)", txt, re.S | re.M):
+        e = re.search(r"^  alternative_titles:\n    en: (.+)$", mm.group(2), re.M)
+        if not e or e.group(1).strip() == "null":
+            continue
+        try:
+            v = str(yaml.safe_load(e.group(1).strip()))
+        except Exception:
+            v = e.group(1).strip()
+        try:
+            k = str(yaml.safe_load(mm.group(1).strip()))
+        except Exception:
+            k = mm.group(1).strip()
+        owners.setdefault(v.strip(), set()).add(k)
+    return owners
+
+
 class Sources:
     """出所データ一式(重いので1回だけ読む)。"""
 
@@ -121,6 +145,12 @@ class Sources:
         self.qid_by_anilist = {k: v["qid"] for k, v in qmap.items() if v and v.get("qid")}
         self.labels = json.loads(WORK_LABELS.read_text(encoding="utf-8")) if WORK_LABELS.exists() else {}
         self.ai_keys, self.ai_pairs = _load_ai_en()
+        # 題の表記ゆれ吸収用: {AI英題: {正規化した題,...}}
+        self.ai_titles_by_en: dict = {}
+        for k, vs in self.ai_keys.items():
+            for v in vs:
+                self.ai_titles_by_en.setdefault(v, set()).add(_n(_fill_title(k)))
+        self.seed3_en_owners = _load_seed3_en_owners()
 
     def summary(self) -> str:
         return (f"AniList題 {len(self.anilist):,} / 作品QID {len(self.qid_by_anilist):,} / "
@@ -133,7 +163,17 @@ def is_ai_en(src: Sources, title: str, en: str, seed3_key: str | None = None) ->
         return False
     if seed3_key and en in src.ai_keys.get(seed3_key, ()):
         return True                           # 種3キー+値の一致(後から手で直した英題は値が違うので AI 扱いしない)
-    return (str(title or ""), en) in src.ai_pairs
+    if (str(title or ""), en) in src.ai_pairs:
+        return True
+    if seed3_key:
+        return False                          # promote = 種3キーが判っている時はキー判定が正(下の推定は使わない)
+    # ↓ 種3キーを持たない既存頁(_apply-other-names.py)向けの推定
+    if _n(title) in src.ai_titles_by_en.get(en, ()):
+        return True                           # 題の表記ゆれ(空白・中黒・全半角)違いのAI埋め
+    owners = src.seed3_en_owners.get(en)
+    if owners and all(en in src.ai_keys.get(k, ()) for k in owners):
+        return True                           # この英題を持つ種3項目が全部AI埋め
+    return False
 
 
 def build(page: dict, src: Sources, seed3_key: str | None = None) -> list[dict]:
