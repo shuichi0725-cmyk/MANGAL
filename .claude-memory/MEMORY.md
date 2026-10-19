@@ -74,6 +74,7 @@
 - [うる星=版/巻/刷タブ規則](urusei_version_display_rules.md)
 - [⏳広域監査修正queue](audit_fix_queue_post_kobo.md)
 ## 未完(⏳・他分野から)
+- [⏳他言語名=言語名つき・AI訳題非表示](other_names_multilingual.md)
 - [⏳抜粋本=楽天副題だけの層](excerpt_subtitle_hidden_layer.md)
 - [⏳種2に在るのに出ない版](hidden_editions_pending.md)
 - [⏳コンビニ掃引(裁定待ち3)](konbini_sweep_2026_08_state.md)
