@@ -2906,3 +2906,7 @@
   - qid:Q11414072|name:湘南グラフティ
   separate_editions: imprint
   note: '巻抜け「1巻が無い」1冊頁の per-case 統合 2026-09-23: 吉田聡。NDL『湘南グラフィティ 1』(YOUNGKING COMICS 1988-09)『湘南グラフティ 2』(同 1989-01)=同一版の1・2巻。★種2の1巻は同typeのダイトコミックス版(2000)1巻に番号で隠されていた=separate_editions: imprint で版を分ける(銀河鉄道999の型)。残す頁=shounan-graffiti / 吸収=shounan-graffiti-1989'
+- merge_keys:
+  - name:よっしゃあっ!|name:モンスターがあふれる世界になったので、好きに生きたいと思います
+  - name:よっしゃあっ|name:モンスターがあふれる世界になったので、好きに生きたいと思います
+  note: '月次1.2.21 isbnloss 2026-10-19: 種2で作者表記「よっしゃあっ!」(1-11巻)と「よっしゃあっ」(12-15巻)に分裂。同題・同レーベル(ガンガンコミックスUP!)・巻番号連続。スクウェア・エニックスのISBN出版社コードが14巻から 978-4-7575→978-4-301 に変わり、15巻(1.2.21)で後半seriesの主コードが新コードと同数になって promote の出版社一致チェックが外れ、12-14巻が頁から消えた。残す頁=monster-ga-afureru-sekai-ni-nattanode-suki-ni-ikitai-to-omoimasu / 吸収=なし(後半seriesは源頁なし)'

@@ -899,6 +899,15 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
+"main": "デューン砂の惑星",
+"merge_keys": [
+"name:AllenRaul|name:デューン砂の惑星",
+"name:ブライアン・ハーバート|name:デューン砂の惑星|sub:フランク・ハーバート",
+"name:ブライアン・ハーバート|name:デューン砂の惑星|sub:フランク・ハーバート."
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
 "main": "Magica technica",
 "merge_keys": [
 "name:Allen|name:Magica technica",
@@ -2066,6 +2075,17 @@
 "merge_keys": [
 "name:Carole Mortimer|name:運命の出会い",
 "name:別府ちづ子|name:運命の出会い"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "X-MEN",
+"merge_keys": [
+"name:CaselliStefano|name:X-men",
+"name:DugganGerry|name:X-MEN",
+"name:ジェフ・パーカー|name:X-MEN",
+"name:ジェリー・ダガン|name:X-MEN",
+"name:ジョナサン・ヒックマン|name:X-MEN"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -3609,16 +3629,6 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
-"main": "X-MEN",
-"merge_keys": [
-"name:DugganGerry|name:X-MEN",
-"name:ジェフ・パーカー|name:X-MEN",
-"name:ジェリー・ダガン|name:X-MEN",
-"name:ジョナサン・ヒックマン|name:X-MEN"
-],
-"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
-},
-{
 "main": "ENDO",
 "merge_keys": [
 "name:DuratoGiuseppe|name:ENDO",
@@ -4246,6 +4256,14 @@
 "merge_keys": [
 "name:Genyaky|name:冥王様が通るのですよ!@COMIC",
 "name:Genyaky|name:冥王様が通るのですよ!@COMIC."
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "イモータルX-men",
+"merge_keys": [
+"name:GillenKieron|name:イモータルX-MEN",
+"name:GillenKieron|name:イモータルX-men"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -8897,6 +8915,14 @@
 "merge_keys": [
 "name:SattoufRiad|name:未来のアラブ人",
 "name:リアド・サトゥフ|name:未来のアラブ人|sub:中東の子ども時代〈1978-1984〉"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "TRPGプレイヤーが異世界で最強ビルドを目指す",
+"merge_keys": [
+"name:Schuld|name:TRPGプレイヤーが異世界で最強ビルドを目指す",
+"name:ランサネ|name:TRPGプレイヤーが異世界で最強ビルドを目指す"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -19517,6 +19543,14 @@
 "merge_keys": [
 "name:しまんだきよの/市川みなみ/吉田裕之/他|name:ファイアーエムブレム",
 "name:しまんだきよの|name:ファイアーエムブレム"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "たゆたう煙は掴めない",
+"merge_keys": [
+"name:しめさば|name:たゆたう煙は掴めない",
+"qid:Q114352494|name:たゆたう煙は掴めない"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -50533,14 +50567,6 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
-"main": "デューン砂の惑星",
-"merge_keys": [
-"name:ブライアン・ハーバート|name:デューン砂の惑星|sub:フランク・ハーバート",
-"name:ブライアン・ハーバート|name:デューン砂の惑星|sub:フランク・ハーバート."
-],
-"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
-},
-{
 "main": "ニューアベンジャーズ:ブレイクアウト",
 "merge_keys": [
 "name:ブライアン・マイケル・ベンディス,デビッド・フィンチ,ャスダ・シゲル|name:ニューアベンジャーズ:ブレイクアウト",
@@ -59608,6 +59634,14 @@
 "merge_keys": [
 "name:ラズウェル細木1956-|name:大江戸めし暦",
 "qid:Q11347037|name:大江戸めし暦|sub:納涼絶品グルメ"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "美味い話にゃ肴あり",
+"merge_keys": [
+"name:ラズウェル細木1956-|name:美味い話にゃ肴あり",
+"qid:Q11347037|name:美味い話にゃ肴あり"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -104577,6 +104611,14 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
+"main": "蜜を追う",
+"merge_keys": [
+"name:瀬戸晴海|name:蜜を追う",
+"qid:Q11611613|name:蜜を追う"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
 "main": "漫画博士読本",
 "merge_keys": [
 "name:瀬戸龍哉/山本敦司|name:漫画博士読本",
@@ -118447,6 +118489,14 @@
 "merge_keys": [
 "name:雪室俊一|name:おはよう!スパンク",
 "qid:Q3482405|name:おはよう!スパンク"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "景虎君はもどれない",
+"merge_keys": [
+"name:雪本愁二|name:景虎君はもどれない",
+"qid:Q62601597|name:景虎君はもどれない"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },

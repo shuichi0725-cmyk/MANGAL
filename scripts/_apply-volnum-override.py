@@ -21,6 +21,7 @@ def main():
     ov = {to13(k): int(v) for k, v in ov.items() if to13(k)}
     print(f"override: {len(ov)} isbn", flush=True)
     nfix = npage = 0
+    skipped = []
     for base in (".preview-data/manga", "data/manga.v2"):
         d0 = os.path.join(ROOT, base)
         if not os.path.isdir(d0): continue
@@ -33,13 +34,21 @@ def main():
                 for v in (e.get("volumes") or []):
                     ib = to13(v.get("isbn13"))
                     if ib in ov and v.get("number") != ov[ib]:
+                        # ★同じ版に正番号の巻が既に在るなら当てない(2026-10-19 月次1.2.21 実踏):
+                        #   override は「1冊だけの頁のレーベル位置誤番号→1」用。 後から巻が増えた頁に当て続けると
+                        #   恨ミシュラン 1・1・3 / 海街diary 4巻→1 のように同番号が2冊になる
+                        if any(w is not v and w.get("number") == ov[ib] for w in e.get("volumes") or []):
+                            skipped.append(f"{base}/{os.path.basename(fp)[:-4]} {ib}: {v.get('number')}→{ov[ib]} は同番号の巻が在るので当てない")
+                            continue
                         v["number"] = ov[ib]; ch = True; nfix += 1
                 if ch: e["volumes"].sort(key=lambda v: v.get("number") or 0)
             if ch:
                 open(fp, "w", encoding="utf-8").write(yaml.dump(doc, allow_unicode=True, sort_keys=False, Dumper=D))
                 npage += 1
         print(f"  [{base}] 番号是正 {nfix} / ページ {npage}", flush=True)
-    print(f"完了: 番号是正 {nfix} / ページ {npage}", flush=True)
+    for s in skipped:
+        print(f"  ★skip {s}", flush=True)
+    print(f"完了: 番号是正 {nfix} / ページ {npage} / 同番号ありで skip {len(skipped)}", flush=True)
 
 if __name__ == "__main__":
     main()
