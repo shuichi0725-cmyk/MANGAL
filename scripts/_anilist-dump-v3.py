@@ -19,7 +19,7 @@ CLI:
   python _anilist-dump-v2.py --test     # 2 chunk のみ test
   python _anilist-dump-v2.py --resume   # 中断時 続き
 """
-import sys, json, urllib.request, urllib.error, time, gzip
+import sys, json, urllib.request, urllib.error, time, gzip, datetime
 from pathlib import Path
 
 try:
@@ -34,21 +34,13 @@ PROGRESS = Path('.cache/anilist-dump-v3-progress.json')
 
 # 初期 chunk 計画 (= 年代範囲)。 各 chunk 5000 未満を 期待
 # (start_inclusive, end_exclusive) の YYYY 形式、 None = 上限/下限 なし
-INITIAL_YEAR_RANGES = [
-    (None, 1990),    # ~1989
-    (1990, 1995),
-    (1995, 2000),
-    (2000, 2005),
-    (2005, 2010),
-    (2010, 2013),
-    (2013, 2015),
-    (2015, 2017),
-    (2017, 2019),
-    (2019, 2021),
-    (2021, 2023),
-    (2023, 2025),
-    (2025, None),    # 2025+
-]
+# ★1990年以降は1年ごと(2026-10-20): 上限5,000に当たると100ページ分を捨てて二分し直す(1回~2.5分)。
+#   旧の数年まとめは本走で上限に9回当たっていた。 1年で5,000を超える年(2023年前後)だけ月単位に割れる
+INITIAL_YEAR_RANGES = (
+    [(None, 1970), (1970, 1980), (1980, 1985), (1985, 1990)]
+    + [(y, y + 1) for y in range(1990, 2026)]
+    + [(2026, None)]    # 2026+(上限は今年+5年)
+)
 # startDate なし の entry は 別 chunk
 NO_DATE_CHUNK = 'no_date'
 
@@ -160,17 +152,34 @@ def fetch_page(variables, max_retry=5):
             continue
     raise RuntimeError(f'page fetch failed after {max_retry} retries')
 
-def fetch_chunk(format_str, start_year, end_year, seen_ids):
-    """1 chunk を fetch + dedup。 cap (= 5000 hit) なら subdivide 再帰。"""
-    start_gt = yyyymmdd(start_year) if start_year else None
-    start_lt = yyyymmdd(end_year) if end_year else None
-    chunk_id = f'{format_str}_{start_year or "PRE"}_{end_year or "POST"}'
+def _first(m):
+    """月の通し番号(年*12+月-1) → その月の1日。"""
+    y, mo = divmod(m, 12)
+    return datetime.date(y, mo + 1, 1)
 
-    variables = {'format': format_str}
-    if start_gt:
-        variables['startGT'] = start_gt
-    if start_lt:
-        variables['startLT'] = start_lt
+
+def _fz(d):
+    return int(f'{d.year:04d}{d.month:02d}{d.day:02d}')
+
+
+def _mlabel(m):
+    y, mo = divmod(m, 12)
+    return f'{y}' if mo == 0 else f'{y}-{mo + 1:02d}'
+
+
+def fetch_chunk(format_str, lo_m, hi_m, seen_ids, chunk_id=None):
+    """[lo_m, hi_m) の月範囲(通し番号)を fetch + dedup。 cap (= 5000 hit) なら月単位で二分して再帰。
+    ★境目は**実在する日付だけ**を使い、両端を1日ずつ外へ広げて隣と重ねる(重なりは seen_ids で除く):
+      startDate_greater = 範囲の初日の前日 / startDate_lesser = 次範囲の初日の翌日。
+      → 年だけ(20250000)・月だけ(20250100)・境目の1日 のどれも、どこかの範囲に必ず入る。
+    ★実在しない日付(20250099 等)を境目に渡すと AniList はずれた日付として扱い、範囲の前の方が丸ごと落ちる
+      (2026-10-20 実測: 2025-01~2030-12 が 2,550件=2025年だけを年キーで取った 4,066件より少ない)。
+    ★旧版は年単位でしか割れず、端の開いた区分(~1989 / 2025~)が先頭5,000件で打ち切られていた
+      (2026-10-20 実踏: 106,832 → 88,444件。縮小ガードが止めた)。"""
+    chunk_id = chunk_id or f'{format_str}_{_mlabel(lo_m)}_{_mlabel(hi_m)}'
+    variables = {'format': format_str,
+                 'startGT': _fz(_first(lo_m) - datetime.timedelta(days=1)),
+                 'startLT': _fz(_first(hi_m) + datetime.timedelta(days=1))}
 
     page = 1
     chunk_entries = []
@@ -206,19 +215,18 @@ def fetch_chunk(format_str, start_year, end_year, seen_ids):
         if page >= 100:
             # cap hit, need subdivide
             print(f'[{chunk_id}] hit page=100 cap, need subdivide', flush=True)
-            if start_year and end_year and end_year - start_year > 1:
-                mid_year = (start_year + end_year) // 2
-                # subdivide
-                print(f'[{chunk_id}] subdivide → {start_year}-{mid_year} + {mid_year}-{end_year}', flush=True)
+            if hi_m - lo_m > 1:
+                mid = (lo_m + hi_m) // 2
+                print(f'[{chunk_id}] subdivide → {_mlabel(lo_m)}~{_mlabel(mid)} + {_mlabel(mid)}~{_mlabel(hi_m)}', flush=True)
                 # discard partial collection (will re-fetch via subdivision)
                 # remove chunk_entries from seen_ids so subdivisions re-collect them
                 for e in chunk_entries:
                     seen_ids.discard(e['id'])
-                a = fetch_chunk(format_str, start_year, mid_year, seen_ids)
-                b = fetch_chunk(format_str, mid_year, end_year, seen_ids)
+                a = fetch_chunk(format_str, lo_m, mid, seen_ids)
+                b = fetch_chunk(format_str, mid, hi_m, seen_ids)
                 return a + b
             else:
-                print(f'[{chunk_id}] WARN: cannot subdivide year=1, accept first 5000', flush=True)
+                print(f'[{chunk_id}] WARN: cannot subdivide (1か月で5,000件超), accept first 5000', flush=True)
                 break
 
         page += 1
@@ -266,16 +274,23 @@ def main():
     write_mode = 'ab' if resume else 'wb'
     total_written = len(seen_ids)
     start = time.time()
+    # ★本走は一時ファイルに書き、最後に差し替える(取り直し中の約2時間、正規の dump が書きかけになり
+    #   promote/他言語名が EOFError で落ちていた 2026-10-20)。 resume は既存に追記するので直接書く
+    out_path = OUT_JSONL if resume else OUT_JSONL.with_name(OUT_JSONL.name + '.tmp')
+    this_year = time.localtime().tm_year
 
-    with gzip.open(OUT_JSONL, write_mode) as f:
+    with gzip.open(out_path, write_mode) as f:
         for fmt in formats:
             for start_year, end_year in ranges:
                 chunk_id = f'{fmt}_{start_year or "PRE"}_{end_year or "POST"}'
                 if chunk_id in done_chunks:
                     print(f'[{chunk_id}] SKIP (done)', flush=True)
                     continue
+                # 端の開いた区分にも具体的な上下限を与える(=二分できる)。 西暦1000年1月 / 今年+5年1月
+                lo_m = (start_year or 1000) * 12
+                hi_m = (end_year or this_year + 5) * 12
                 try:
-                    entries = fetch_chunk(fmt, start_year, end_year, seen_ids)
+                    entries = fetch_chunk(fmt, lo_m, hi_m, seen_ids, chunk_id)
                 except Exception as e:
                     print(f'[{chunk_id}] FAIL: {e}', flush=True)
                     PROGRESS.write_text(json.dumps({'done_chunks': sorted(done_chunks)}))
@@ -288,6 +303,9 @@ def main():
                 elapsed = time.time() - start
                 print(f'  → total_written={total_written} elapsed={elapsed/60:.1f}min', flush=True)
 
+    if out_path != OUT_JSONL:
+        import os
+        os.replace(out_path, OUT_JSONL)
     elapsed = time.time() - start
     print(f'DONE: {total_written} entries, elapsed={elapsed/60:.1f} min', flush=True)
     print(f'  → {OUT_JSONL} ({OUT_JSONL.stat().st_size / 1024 / 1024:.1f} MB)', flush=True)
