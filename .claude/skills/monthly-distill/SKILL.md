@@ -67,7 +67,8 @@ python scripts/_monthly-distill.py phase2 --tag <tag> --go "<ユーザの発話�
 python scripts/_monthly-distill.py run intake
 python scripts/_monthly-distill.py status        # job intake … RUNNING → EXIT=0
 ```
-- 実体= `intake.py --run`: seedlint→volnum→roles→**rolecredits**→merge→seed4→detect→match v9→v13→v14→adultus→enrich→trailing→foreigndrop→**promote**→edisup/special/volnumoverride/coverfill→**isbnloss**。ログ= `.cache/madb-distill/run-intake-<ts>.log`。
+- 実体= `intake.py --run`: seedlint→volnum→roles→**rolecredits**→merge→seed4→detect→match v9→v13→v14→adultus→enrich→**workqid→worklabels**→trailing→foreigndrop→**promote**→edisup/special/volnumoverride/coverfill→**isbnloss**。ログ= `.cache/madb-distill/run-intake-<ts>.log`。
+- ★workqid/worklabels(2026-10-19〜)= 他言語名の出所(Wikidata)を**毎月全件取り直す**(`--refresh --soft`・計~4分)。作品QID(AniList ID→P8731)→ 言語別ラベル → promote が全頁の `other_names` に書く。新作だけでなく、後から Wikidata に項目ができた作品・足された言語も拾う(初回実走で作品QID +620)。QLever 不通・激減(95%未満)なら前回の cache のまま続行し、postflight 7 が FAIL で知らせる。
 - 60秒超は Monitor で節目だけ(1万頁ごと/ABORT/EXIT)。promote の完了後居座りは **os._exit で解消済(2026-09-02)**=待てば終わる。killしない。
 - EXIT≠0 はログ末尾の `✗ ABORT: stage [名]` で判断: seedlint=seed壊れ(yaml.safe_load検証) / clean鮮度=phase2の差替漏れ / isbnloss=理由なし消失(`docs/production-diagnostics/isbn-loss.tsv` を1件ずつ裁定・台帳記帳) / それ以外=当該scriptの traceback を読む(1.2.18で trailing の merge_keys / foreigndrop の2スペ追記を直した型)。
 - 終了後: `git status` → 派生seed(`series-merge-auto.json` / `non-manga-drop.yml` 等)の diff を確認 → commit/push。manga.v2 は gitignore(ディスク上で再生成済)。
@@ -76,7 +77,7 @@ python scripts/_monthly-distill.py status        # job intake … RUNNING → EX
 
 ### 4. enrich(任意・並走可)
 ```
-python scripts/_monthly-distill.py run anilist   # ~2.5h: dump backup→progress消去→フル再取得→enrich map→status map(縮小なら自動復元+abort)
+python scripts/_monthly-distill.py run anilist   # ~2.5h: dump backup→progress消去→フル再取得→enrich map→status map→作品QID/言語別ラベル(縮小なら自動復元+abort)
 ```
 - deltaは5,000capで月次には不足=フルダンプが正(2026-08-21確立)。synopsis和訳delta= skill wayaku-enrich。
 - ★種3 AI fill(旧v1の100件batch)は **v2機構では不要**(kana=頁化時NDL確定 / genre・synopsis=enrich系。新seriesは種3未登録のままpromote無依存=1.2.19確認)。種3スキーマ変更時のみ復活。
@@ -107,7 +108,7 @@ python scripts/_monthly-distill.py sanity --heavy        # 楽天キャッシュ
 
 ### 7. 成功判定
 ```
-python scripts/_monthly-postflight.py     # exit 0 が完了条件(seed lint/manga.v2≥66k/ISBN消失0/種4-auto不減/publisher unknown不増/マーカー整合/頁化月のsolo-truncated 0)
+python scripts/_monthly-postflight.py     # exit 0 が完了条件(seed lint/manga.v2≥66k/ISBN消失0/種4-auto不減/publisher unknown不増/マーカー整合/頁化月のsolo-truncated 0/他言語名の出所が enrich map の後に取り直し済)
 ```
 - 併せて言うこと: **Goサイン受領の発話引用** / phase2 の「検証 ✓」行 / intake の `EXIT=0` / 頁化件数+ゲート保留の裁定結果 / サニティΔ / tsc・vitest green。どれかが言えない=完了していない。
 - 最終summary= 累計件数+削除0+保留件数+次月予測。本番R2公開は別途「週次蒸留して」(ここでは出さない)。

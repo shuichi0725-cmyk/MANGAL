@@ -53,7 +53,7 @@
 - **MADB 入手 = 2 経路**: GitHub 全件 JSON (= 全件 snapshot・`madbdata:dateModified` で変更検知) / MADB サイト月次 CSV (= 登録日基準の差分・未来の発売前予約も載るが更新日列が無い)。 運用 = **全件 re-sync で訂正回収 + 月次差分で新刊 top-up** → [[madb_data_acquisition]]
 - ★**cm104 (シリーズ master) / cm105 (雑誌) / cm103 は 2024-11-25 で凍結**。 更新は **cm101 (巻) + cm504 (作者)** のみ = シリーズ層は空・著者役割は AniList 補完が恒久策で gap は毎月増える → [[madb_cm104_frozen]] [[author_roles_state]]
 - **取込の必須 2 策**: ★MADB-ID で upsert + ISBN/巻番号で dedup (= 冪等) / ★GitHub 全件 JSON の `dateModified` を定期比較して訂正を回収。 危険型 = 「別 MADB-ID + 別 ISBN での再登録」(虚構推理 vol23 型) → 監査で検知
-- **enrich = 毎月の必須ステップ** (= master が埋めないため): AniList 照合 → 著者補完 / synopsis 和訳 / 作品 QID / 種4 trailing 補完。 ★凍結で新作 gap が累積するので**毎蒸留で再フェッチ**
+- **enrich = 毎月の必須ステップ** (= master が埋めないため): AniList 照合 → 著者補完 / synopsis 和訳 / 作品 QID / 他言語名(Wikidata 言語別ラベル = intake 段 workqid→worklabels) / 種4 trailing 補完。 ★凍結で新作 gap が累積するので**毎蒸留で再フェッチ**
 - ★**synopsis 和訳 = git 追跡 seed** `data/seeds/synopsis-ja.json` (= key は anilist_id。 種3 には焼かない。 純粋追加 only。 手順は skill `wayaku-enrich`) → [[synopsis_ja_seed]]
 - **種4 の自己 retire**: render 時ガード実装済 = 同番号が種2 に在れば種4 を skip (= MADB 追いつき時の二重表示防止・種2 優先)。 退役 hygiene は月次で
 

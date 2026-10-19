@@ -619,7 +619,7 @@ def phase2(a) -> None:
     print("\n[5/5] 完了。★次の順(各コマンドの終了を待ってから次へ):")
     print(f"   git add data/madb-intake-state.yml data/madb-distill-ledger.jsonl && git commit -m \"月次蒸留 {tag}: 種2純増 series+{md['new_series']}/vol+{exp_vol} (INSERT only)\" && git push")
     print("   python scripts/_monthly-distill.py run intake      # ~2.5h デタッチ。status で完了(EXIT=0)確認。★途中killしない")
-    print("   python scripts/_monthly-distill.py run anilist     # ~2.5h(任意・並走可)。dump backup→フル再取得→enrich/status map")
+    print("   python scripts/_monthly-distill.py run anilist     # ~2.5h(任意・並走可)。dump backup→フル再取得→enrich/status map→作品QID/言語別ラベル")
     print("   python scripts/_torikoboshi-genpages.py --list      # 頁化(最新manifest自動)。--run 後は skill 6b/6c の後始末")
     print("   python scripts/_monthly-distill.py run sanity      # 月次サニティ(前回比Δ)")
     print("   python scripts/_monthly-postflight.py               # 成功判定(exit 0 が完了条件)")
@@ -669,7 +669,7 @@ def child_main(log: Path, cmd: list[str]) -> None:
 
 
 def anilist_seq() -> None:
-    """AniListフルダンプ列: backup → progress消去 → dump(~2.5h) → enrich map → status map。縮小なら復元してabort。"""
+    """AniListフルダンプ列: backup → progress消去 → dump(~2.5h) → enrich map → status map → 作品QID/言語別ラベル。縮小なら復元してabort。"""
     out = ROOT / ".cache" / "anilist-manga-dump-v3.jsonl.gz"
     prog = ROOT / ".cache" / "anilist-dump-v3-progress.json"
     old = out.stat().st_size if out.exists() else 0
@@ -691,7 +691,12 @@ def anilist_seq() -> None:
     for s in ("_build-anilist-enrich-map.py", "_gen-anilist-status-map.py"):
         if run([PY, SCRIPTS / s]).returncode != 0:
             die(f"{s} 失敗")
-    print("✓ AniList フルダンプ + enrich map + status map 完了")
+    # ★enrich map を作り直したので他言語名の出所も取り直す(intake の workqid/worklabels と同じ。
+    #   postflight は「enrich map より新しいか」で鮮度を見る)。 --soft = QLever 不通でも止めない
+    for s in ("_fetch-work-qid.py", "_fetch-work-labels.py"):
+        if run([PY, SCRIPTS / s, "--refresh", "--soft"]).returncode != 0:
+            die(f"{s} 失敗")
+    print("✓ AniList フルダンプ + enrich map + status map + 作品QID/言語別ラベル 完了")
 
 
 # ---------------------------------------------------------------- sanity

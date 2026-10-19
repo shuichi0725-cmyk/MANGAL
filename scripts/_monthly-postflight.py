@@ -11,6 +11,7 @@ exit 0 + 出力数値の引用が完了主張の条件(弱モデル耐性=_month
   4. 種4-auto台帳 ≥ baseline (全消し/誤退役)
   5. publisher (unknown) ≤ baseline (clean差し替え漏れの下流症状)
   6. solo-truncated: 頁化した月(genpages-last.json が14日以内)は新規頁の途中巻断片=0
+  7. 他言語名の出所: 作品QID/言語別ラベル(Wikidata)が enrich map の後に取り直されている
 
   python scripts/_monthly-postflight.py
 """
@@ -37,6 +38,30 @@ def fail(msg, hint=""):
     print(f"  FAIL {msg}")
     if hint:
         print(f"       → {hint}")
+
+
+def check_other_names_sources() -> None:
+    """intake の workqid/worklabels 段(--soft)が enrich map の後に取り直したか(2026-10-19 他言語名の月次組込)。
+    QLever 不通で素通りした月は新作に Wikidata の他言語名(中国語・韓国語ほか)が付かないまま = ここで止める。"""
+    c = os.path.join(ROOT, ".cache")
+    em, wq, wl = (os.path.join(c, n) for n in ("anilist-enrich-map.json", "work-qid-map.json", "work-labels.json"))
+    hint = ("QLever 不通で取り直せなかった。直ったら python scripts/intake.py --run --stages workqid,worklabels"
+            " → 頁へは次の promote で入る(急ぐ時だけ _apply-other-names.py --apply)")
+    missing = [os.path.basename(p) for p in (em, wq, wl) if not os.path.exists(p)]
+    if missing:
+        fail(f"他言語名の出所が無い: {', '.join(missing)}", hint)
+        return
+    if os.path.getmtime(wq) < os.path.getmtime(em) or os.path.getmtime(wl) < os.path.getmtime(wq):
+        fail("他言語名の出所が古い(作品QID/言語別ラベルが enrich map の後に取り直されていない)", hint)
+        return
+    qmap = json.load(io.open(wq, encoding="utf-8"))
+    labels = json.load(io.open(wl, encoding="utf-8"))
+    qids = {v["qid"] for v in qmap.values() if v and v.get("qid")}
+    lack = qids - set(labels)
+    if lack:
+        fail(f"言語別ラベル未取得の作品QID {len(lack):,} 件", hint)
+        return
+    ok(f"他言語名の出所 = 作品QID {len(qids):,} / ラベル {sum(len(v) for v in labels.values()):,} (enrich map の後に取り直し済)")
 
 
 def main() -> None:
@@ -137,6 +162,9 @@ def main() -> None:
             ok(f"新規頁の途中巻断片 0 (頁化 {len(made)} 頁 / 全体flag {len(tsv_slugs)})")
     else:
         ok(f"solo-truncated 全体flag {len(tsv_slugs)} (今月は頁化なし=情報のみ)")
+
+    # 7. 他言語名の出所の鮮度
+    check_other_names_sources()
 
     print(f"\n結果: FAIL {len(fails)}")
     if fails:

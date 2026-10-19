@@ -13,7 +13,7 @@
 
 依存順序 (フル、 ★promote は adult_us/enrich map を読むので最後):
    roles → merge → seed4 → detect
-   → match(v9) → match13 → merge14(=v14) → adultus → enrich → trailing
+   → match(v9) → match13 → merge14(=v14) → adultus → enrich → workqid → worklabels → trailing
    → promote
    (★merge の partial-overlap統合が role を使うので role が先。
     ★matcher v14 → adult_us/enrich map → promote が adult_us + anilist_id/synonyms/
@@ -74,6 +74,13 @@ STAGES = [
         ["_build-adult-us-map.py"], False),
     ("enrich",  "anilist", "AniList enrich map 生成 (anilist_id/synonyms/genres/tags、 本番埋込用)",
         ["_build-anilist-enrich-map.py"], False),
+    # ★他言語名の出所 (2026-10-19 らんま型・ユーザ指示で月次へ組込): 作品QID(AniList ID→P8731)→ Wikidata 言語別ラベル。
+    #   enrich map の anilist_id を読むので ★enrich の後・promote の前。 毎月全件取り直し(新作・後から足された言語を拾う)。
+    #   --soft = QLever 不通でも intake を止めない(前回の cache で promote。 postflight が FAIL で知らせる)
+    ("workqid", "anilist", "作品QID 取り直し (AniList ID→Wikidata P8731、 .cache/work-qid-map.json)",
+        ["_fetch-work-qid.py", "--refresh", "--soft"], False),
+    ("worklabels", "anilist", "作品の言語別ラベル 取り直し (Wikidata rdfs:label = 他言語名の出所、 .cache/work-labels.json)",
+        ["_fetch-work-labels.py", "--refresh", "--soft"], False),
     ("trailing","anilist", "末尾取込もれ再検出 (AniList総巻数 vs 種2max)",
         ["_audit-trailing-gaps.py"], False),
     # --- 外国版drop (promote が non-manga-drop を読むので ★promote前) ---
