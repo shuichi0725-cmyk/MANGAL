@@ -30,7 +30,8 @@ OUT = ROOT / ".cache" / "work-qid-map.json"
 ENDPOINT = "https://qlever.dev/api/wikidata"
 UA = "MANGAL-research/1.0 (https://mangal.shuichi0725.workers.dev; shuichi0725@gmail.com)"
 BATCH = 400
-SLEEP = 0.5
+SLEEP = 1.0   # batch 間の待ち(0.5 だと月次 intake で 429 が続いた)
+RETRIES = 6
 SHRINK_GUARD = 0.95   # 取り直しで作品QIDがこれ未満に減ったら書かない(QLever 側の不調を疑う)
 PREFIX = "PREFIX wdt: <http://www.wikidata.org/prop/direct/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "
 
@@ -41,13 +42,18 @@ def run(q):
                                  headers={"User-Agent": UA,
                                           "Accept": "application/sparql-results+json",
                                           "Content-Type": "application/x-www-form-urlencoded"})
-    for attempt in range(5):
+    for attempt in range(RETRIES):
         try:
             with urllib.request.urlopen(req, timeout=120) as r:
                 return json.loads(r.read().decode("utf-8"))["results"]["bindings"]
         except Exception as e:
-            wait = SLEEP * (2 ** attempt) + 1
-            print(f"    retry {attempt+1}/5 ({e}) wait {wait:.0f}s", file=sys.stderr)
+            # ★429(アクセス過多)は短い待ちだと連続で弾かれる(2026-10-19 月次 intake 実踏)= Retry-After か 15秒×回数待つ
+            if getattr(e, "code", None) == 429:
+                ra = (getattr(e, "headers", None) or {}).get("Retry-After") or ""
+                wait = int(ra) if ra.isdigit() else 15 * (attempt + 1)
+            else:
+                wait = SLEEP * (2 ** attempt) + 1
+            print(f"    retry {attempt+1}/{RETRIES} ({e}) wait {wait:.0f}s", file=sys.stderr)
             time.sleep(wait)
     raise RuntimeError("SPARQL failed after retries")
 
