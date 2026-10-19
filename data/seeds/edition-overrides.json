@@ -36348,5 +36348,41 @@
    }
   ],
   "note": "2026-10-17 ユーザ指定(ja.wikipedia「恨ミシュラン」)。旧頁=題が2巻副題『それでも行きたい恨ミシュラン』・通常版1/3巻・文庫下のみ。全5冊を楽天live×NDL SRUで確証(1巻ISBN=4022566884 1993.12: Wikiの1巻ISBNは2巻の誤記、Wikiの1993年3月も楽天/NDLとも1993年12月)。神足裕司=Wiki『評論』担当(楽天・NDLとも共著者表記)。年=Wiki連載期間1992-1994(週刊朝日・全106回)"
+ },
+ "teito-geigeki-sentoutai": {
+  "editions": [
+   {
+    "type": "standard",
+    "label": "通常版",
+    "imprint": "SPコミックス",
+    "volumes": [
+     {
+      "number": 1,
+      "isbn13": "9784845839049",
+      "release_date": "2011-07",
+      "cover_url": null,
+      "asin": null
+     }
+    ],
+    "publisher": "リイド社"
+   },
+   {
+    "type": "shinsoban",
+    "label": "新装版",
+    "imprint": "SPコミックス ポケットワイド",
+    "volumes": [
+     {
+      "number": 1,
+      "isbn13": "9784845872114",
+      "release_date": "2026-08-05",
+      "cover_url": null,
+      "asin": null
+     }
+    ],
+    "publisher": "リイド社"
+   }
+  ],
+  "year_started": 2011,
+  "_note": "2026-10-20 月次1.2.21 保留の裁定(ユーザ「よい」): 原本 リイド社 SPコミックス 2011-07(楽天)+新装版 ポケットワイド 2026-08。種2は新装版だけを standard number=0 で持つため版を明示"
  }
 }
