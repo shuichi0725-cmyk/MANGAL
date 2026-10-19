@@ -1,11 +1,11 @@
 ---
 name: other_names_multilingual
-description: 他言語名(other_names)=言語名つき表示・AIが埋めた英題は表示しない(ユーザ裁定A1 2026-10-19)。テスト10頁で見た目確認待ち→全頁適用が未完
+description: 他言語名(other_names)=言語名つき表示・AIが埋めた英題は表示しない(ユーザ裁定A1 2026-10-19)。全頁適用済み・本番は次の週次・月次配線が未完
 metadata:
   node_type: memory
   type: project
   originSessionId: 4eb881fe-cc0f-412d-b718-0578babc3249
-  modified: 2026-10-19T02:26:23.397Z
+  modified: 2026-10-19T02:56:41.857Z
 ---
 
 2026-10-19 らんま1/2「他言語がハングルしかない」報告 → 全頁見直し。
@@ -20,6 +20,9 @@ metadata:
 - promote が全頁に `other_names` を書く(空でも [] = 処理済みの印)。作品頁は欄が**在れば新表示・無ければ旧表示**(lib/otherNames.ts)。
 - AI判定は種3キー+値の一致(後から手で直した英題は値が違うのでAI扱いしない)。
 
-**⏳状態**: テスト環境に10頁(らんま・フリーレン・進撃・ベルばら・はだしのゲン・鬼滅・とんがり帽子・惡の華+比較用 ぼくのパパとパパの話/交換ウソ日記)を出して**見た目の確認待ち**。OKが出たら全頁(約6.6万)へ other_names を書く(フルpromote待ちにしない=一括適用を別途)→ 週次蒸留で本番。未適用の頁は旧表示のままなので、先に週次が走っても後退はしない。
+**状態(2026-10-19)**: テスト10頁の見た目 → ユーザ「ok」 → **全頁に一括適用済み**(`scripts/_apply-other-names.py`・commit fbd2536587)。本番データ 69,648頁: 他言語名あり 23,306 / AI訳題を外す 27,475(うち公式英題へ置換 3,102)/ 英題が新たに出る 861。退避 = `.cache/other-names-bak-20261019/manga.v2.tar.gz`、記録 = `data/seeds/other-names-changelog.jsonl`(概要1行)+ `other-names-apply-20261019.tsv.gz`(頁ごとの前後)。★統合台帳には概要1行だけ(slug="*")= `_ledger.py <slug>` には出ない、頁ごとは tsv.gz を引く。
+- ⏳**本番R2は次の週次蒸留**(作品頁コードを変えたので、それまで「差分反映して」はコードドリフトで週次へ回される)。
+- ⏳月次蒸留に `_fetch-work-qid.py` / `_fetch-work-labels.py` は**未配線**(新作に Wikidata ラベルが付かない。AniList 英題・別名は dump 更新で付く)。
+- 既存頁は種3キーが無いので AI判定は推定(題+値・表記ゆれ・持ち主が全部AI)。次のフルpromoteからキー判定に切替 = 数百頁で英題の出る/出ないが揺れうる。
 
 関連: [[display_data_polish_tasks]] [[work_qid_enrichment]] [[feedback_accuracy_is_the_goal]]
