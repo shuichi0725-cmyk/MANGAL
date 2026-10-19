@@ -196,10 +196,22 @@ def ndl_live(query, maximum=30, start=1, exit_on_429=True):
         g = lambda pat: (re.search(pat, r, re.S) or [None, ""])[1] if re.search(pat, r, re.S) else ""
         # ISBN10/13両対応(古典はISBN10)。creator複数(アンソロ/原作+作画)
         _isbn = g(r'ISBN">([0-9\-]+)') or g(r"(97[89][\d\-]{10,16})")
-        creators = re.findall(r"<dcterms:creator>.*?<foaf:name>([^<]+)", r, re.S) or re.findall(r"<dc:creator>([^<]+)", r)
-        # ★著者ヨミ = 典拠紐付きレコードの dcndl:transcription。 「サイトウ, ジュンイチロウ」と
-        #   **姓と名がカンマで分かれる** = slug衝突時の「-姓+年」suffix の姓が取れる(2026-07-25追加)。
-        creators_kana = re.findall(r"<dcterms:creator>.*?<dcndl:transcription>([^<]+)", r, re.S)
+        # ★著者と著者ヨミは **creator の塊ごと**に取る(2026-10-20 月次1.2.21 実踏)。 旧実装は2本の正規表現で
+        #   別々に拾い添字で対応させていたため、ヨミの無い著者(Schuld 等)がいると .*? が次の塊(出版社)の
+        #   ヨミまで進み、utaco の読みが「カドカワ」になった。 ヨミの無い著者は "" で位置を保つ。
+        _blocks = re.findall(r"<dcterms:creator>(.*?)</dcterms:creator>", r, re.S)
+        creators, creators_kana = [], []
+        for _b in _blocks:
+            _nm = re.search(r"<foaf:name>([^<]+)", _b)
+            if not _nm:
+                continue
+            _ka = re.search(r"<dcndl:transcription>([^<]+)", _b)
+            creators.append(_nm.group(1))
+            # ★著者ヨミ = 典拠紐付きレコードの dcndl:transcription。 「サイトウ, ジュンイチロウ」と
+            #   **姓と名がカンマで分かれる** = slug衝突時の「-姓+年」suffix の姓が取れる(2026-07-25追加)。
+            creators_kana.append(_ka.group(1) if _ka else "")
+        if not creators:
+            creators = re.findall(r"<dc:creator>([^<]+)", r)
         # ★題ヨミ = dc:title 内の dcndl:transcription(分かち書き)。 NDLヨミは ground truth
         #   ([[furigana_ndl_audit]])。 slug生成/索引ガードの土台になるので必ず拾う(2026-07-25追加)。
         _tk = re.search(r"<dc:title>.*?<dcndl:transcription>([^<]+)", r, re.S)

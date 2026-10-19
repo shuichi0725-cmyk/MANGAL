@@ -2095,6 +2095,31 @@ def _skey_override(slug: str, fallback):
     return _SKEY_OVR.get(slug, fallback)
 
 
+# ★著者の表示名・読みに典拠形の生没年が残る型(2026-10-20 月次1.2.21 実踏 25頁: 「ゆうしょう1985-」
+#   「ヤハギトシヒコ1950-」)。 MADB/NDL の典拠は「名前, 1985-」「ヤハギ, トシヒコ, 1950-」の形で、
+#   カンマを詰めると年が名前に付いたまま残る。 種2(mangaka)と author-yomi seed は不変のまま、
+#   頁を書き出す直前に1か所で落とす(年はハイフン付きの4桁だけ=「296」等の数字ペンネームは触らない)。
+_LIFE_DATES = re.compile(r"[\s,，、]*(\d{3,4}\??-(\d{3,4}\??)?|生没年不詳|生年不詳)$")
+
+
+def _strip_author_life_dates(doc: dict) -> bool:
+    changed = False
+    for fld in ("authors", "original_authors"):
+        for a in doc.get(fld) or []:
+            if not isinstance(a, dict):
+                continue
+            for k in ("name", "kana"):
+                v = a.get(k)
+                if isinstance(v, str):
+                    t = _LIFE_DATES.sub("", v).strip()
+                    if t and t != v:
+                        a[k] = t
+                        changed = True
+                        if k == "kana" and a.get("romaji"):
+                            a["romaji"] = romanize_kana(t) or a["romaji"]
+    return changed
+
+
 def enrich_author(a: dict) -> dict:
     """著者dictに kana(504由来カタカナ)+ romaji(kana→ヘボン)を付与。 無ければ素のまま。"""
     _load_author_yomi()
@@ -4451,6 +4476,7 @@ def main():
             else:
                 for _i, (_ce, _d) in enumerate(zip(_grp, _fd), 1):
                     _ce["label"] = f"{_base}({_d[:4]})[{_i}]" if _d else f"{_base}[{_i}]"
+        _strip_author_life_dates(new_yml)
         # ★他言語名: 全edition操作・enrich join の後(英題/AniList/作品QIDが確定してから)に組む
         new_yml["other_names"] = _other_names.build(new_yml, other_names_src, series["series_key"])
         if new_yml["other_names"]:
@@ -4739,6 +4765,8 @@ def main():
                     if _pd["year_ended"] != max(_years_after):
                         _pd["year_ended"] = max(_years_after)
                         _touched = True
+            if _strip_author_life_dates(_pd):
+                _touched = True
             # ★他言語名も本流と同じ規則で(予約頁は本流を通らない穴の7件目にしない)
             _on_new = _other_names.build(_pd, other_names_src)
             if _pd.get("other_names") != _on_new:
