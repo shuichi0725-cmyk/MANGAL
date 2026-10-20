@@ -67,7 +67,7 @@ python scripts/_monthly-distill.py phase2 --tag <tag> --go "<ユーザの発話�
 python scripts/_monthly-distill.py run intake
 python scripts/_monthly-distill.py status        # job intake … RUNNING → EXIT=0
 ```
-- 実体= `intake.py --run`: seedlint→volnum→roles→**rolecredits**→merge→seed4→detect→match v9→v13→v14→adultus→enrich→**workqid→worklabels**→trailing→foreigndrop→**promote**→edisup/special/volnumoverride/coverfill→**isbnloss**。ログ= `.cache/madb-distill/run-intake-<ts>.log`。
+- 実体= `intake.py --run`: seedlint→volnum→roles→**rolecredits**→merge→seed4→detect→match v9→v13→v14→**recover**→adultus→enrich→**animeflag**→**workqid→worklabels**→trailing→foreigndrop→**promote**→edisup/special/volnumoverride/coverfill→**isbnloss**。ログ= `.cache/madb-distill/run-intake-<ts>.log`。
 - ★workqid/worklabels(2026-10-19〜)= 他言語名の出所(Wikidata)を**毎月全件取り直す**(`--refresh --soft`・計~4分)。作品QID(AniList ID→P8731)→ 言語別ラベル → promote が全頁の `other_names` に書く。新作だけでなく、後から Wikidata に項目ができた作品・足された言語も拾う(初回実走で作品QID +620)。QLever 不通・激減(95%未満)なら前回の cache のまま続行し、postflight 7 が FAIL で知らせる。
 - 60秒超は Monitor で節目だけ(1万頁ごと/ABORT/EXIT)。promote の完了後居座りは **os._exit で解消済(2026-09-02)**=待てば終わる。killしない。
 - EXIT≠0 はログ末尾の `✗ ABORT: stage [名]` で判断: seedlint=seed壊れ(yaml.safe_load検証) / clean鮮度=phase2の差替漏れ / isbnloss=理由なし消失(`docs/production-diagnostics/isbn-loss.tsv` を1件ずつ裁定・台帳記帳) / それ以外=当該scriptの traceback を読む(1.2.18で trailing の merge_keys / foreigndrop の2スペ追記を直した型)。
@@ -77,7 +77,7 @@ python scripts/_monthly-distill.py status        # job intake … RUNNING → EX
 
 ### 4. enrich(任意・並走可)
 ```
-python scripts/_monthly-distill.py run anilist   # ~2.5h: dump backup→progress消去→フル再取得→enrich map→status map→作品QID/言語別ラベル(縮小なら自動復元+abort)
+python scripts/_monthly-distill.py run anilist   # ~2.5h: dump backup→progress消去→フル再取得→recover→enrich map→animeflag→status map→作品QID/言語別ラベル(縮小なら自動復元+abort)
 ```
 - deltaは5,000capで月次には不足=フルダンプが正(2026-08-21確立)。synopsis和訳delta= skill wayaku-enrich。
 - ★種3 AI fill(旧v1の100件batch)は **v2機構では不要**(kana=頁化時NDL確定 / genre・synopsis=enrich系。新seriesは種3未登録のままpromote無依存=1.2.19確認)。種3スキーマ変更時のみ復活。
@@ -129,6 +129,7 @@ Phase1: **~5分**(2026-09-02 リハーサル実測 4分16秒 = clean 150s / buil
 - **頁のdropは必ず `_reflect-targeted.py --drop` 経由**(手でyml消すと索引・ストックに残骸=検索404)。源頁ミラー `data/seeds/source-pages/` も消す。
 - **再登録の別MADB-ID二重化**(虚構推理vol23型)→ merge の ISBN/madb_book dedup guard + 監査。
 - **Bashツールの heredoc は `'` と `\` が化ける**→ 複数行scriptは Write で scratchpad に書いて実行。ログ読みは utf-8 で(cp932混在)。
+- **種3に無い新 series は v9/v13 の照合対象外**(種3=5月凍結)→ AniList に結ぶのは recover 段(`_match-recover-norm.py`=題強正規化×作者一致×1:1、`match-recovery.tsv` に★追記式)だけ。2026-10-20 まで6/2に1回作ったきりで新作の AniList リンクが増えなかった(組込初回 +1,827件)。★旧版は上書き式=手で回すと既存12,375件が消えた。enrich map を作り直すと delta 由来の anime:true が消える→ animeflag 段が直後に入れ直す
 - **Windowsの os.kill(pid, 0) はプロセスを殺す**→ 生死判定は ctypes OpenProcess(status が実装済)。CommandLine正規表現で殺すと自分のシェルも死ぬ。
 
 ## 検算(リハーサル)= 取込済tagで手順だけ通す

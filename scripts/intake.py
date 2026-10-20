@@ -13,7 +13,7 @@
 
 依存順序 (フル、 ★promote は adult_us/enrich map を読むので最後):
    roles → merge → seed4 → detect
-   → match(v9) → match13 → merge14(=v14) → adultus → enrich → workqid → worklabels → trailing
+   → match(v9) → match13 → merge14(=v14) → recover → adultus → enrich → animeflag → workqid → worklabels → trailing
    → promote
    (★merge の partial-overlap統合が role を使うので role が先。
     ★matcher v14 → adult_us/enrich map → promote が adult_us + anilist_id/synonyms/
@@ -70,10 +70,17 @@ STAGES = [
         ["_audit-match-v13.py"], False),
     ("merge14", "anilist", "v14 = v9⊕v13 grounded-best マージ (退行0、 match-v14-all.tsv)",
         ["_merge-v14-best.py"], False),
+    # ★v9/v13 は種3(5月凍結)の entry しか照合しない = 種3に無い新 series は ここ(題の強正規化一致×作者一致×1対1)
+    #   でしか AniList に結ばれない(2026-10-20 月次へ組込。 それまで6/2に1回作ったきり=新作の AniList リンクが増えなかった)
+    ("recover", "anilist", "種2新 series の安全回収 (題強正規化×作者一致×1:1、 match-recovery.tsv に追記)",
+        ["_match-recover-norm.py"], False),
     ("adultus", "anilist", "adult_us map 生成 (種a isAdult=米基準フラグ、 .cache/adult-us-map.json)",
         ["_build-adult-us-map.py"], False),
     ("enrich",  "anilist", "AniList enrich map 生成 (anilist_id/synonyms/genres/tags、 本番埋込用)",
         ["_build-anilist-enrich-map.py"], False),
+    # enrich map を作り直すと dump より新しい delta 由来の anime:true が消える → 直後に入れ直す(promote が読む)
+    ("animeflag", "anilist", "アニメ化フラグ差分を enrich map へ入れ直す (_anime-flag-delta.py)",
+        ["_anime-flag-delta.py"], False),
     # ★他言語名の出所 (2026-10-19 らんま型・ユーザ指示で月次へ組込): 作品QID(AniList ID→P8731)→ Wikidata 言語別ラベル。
     #   enrich map の anilist_id を読むので ★enrich の後・promote の前。 毎月全件取り直し(新作・後から足された言語を拾う)。
     #   --soft = QLever 不通でも intake を止めない(前回の cache で promote。 postflight が FAIL で知らせる)

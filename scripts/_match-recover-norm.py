@@ -5,6 +5,8 @@
   2. ★著者 overlap 必須(同名異作=中華一番/ガンダム型の誤マッチを防ぐ安全弁)
   3. ★1:1 衝突は保守的に skip(a_idを複数ページ/ページが複数a_id=曖昧→不採用)、 既存マッチ不可侵
 出力: .cache/match-recovery.tsv(s3_key, a_id, a_native, note)。 enrich builderが追加読み。
+★追記式(既存行は残す)。 月次 intake の recover 段 + run anilist が enrich map の直前に回す
+  (2026-10-20〜。 それまで6/2に1回作ったきりで、 種3に無い新 series は v9/v13 の照合対象外=AniList に結ばれなかった)
 """
 import sys, json, gzip, sqlite3, re, unicodedata
 from collections import defaultdict
@@ -111,11 +113,28 @@ for p, cands in page_cand.items():
     sk, native = cands[aid]
     rows.append((sk, aid, native))
 
-with open(".cache/match-recovery.tsv", "w", encoding="utf-8") as f:
+# ★既存行は残して新規だけ足す(2026-10-20 実踏: 上書きだと、既存マッチ=enrich map を除外して数えるので
+#   2回目以降は「今回の新規だけ」の表になり、6月の回収12,375件が enrich map から消える所だった)
+OUT = ".cache/match-recovery.tsv"
+old_rows = []
+try:
+    with open(OUT, encoding="utf-8") as f:
+        next(f, None)
+        old_rows = [ln.rstrip("\n").split("\t") for ln in f if ln.strip()]
+except FileNotFoundError:
+    pass
+old_keys = {r[0] for r in old_rows}
+new_rows = [r for r in rows if r[0] not in old_keys]
+with open(OUT + ".tmp", "w", encoding="utf-8") as f:
     f.write("s3_key\ta_id\ta_native\tnote\n")
-    for sk, aid, native in rows:
+    for r in old_rows:
+        f.write("\t".join(r) + "\n")
+    for sk, aid, native in new_rows:
         f.write(f"{sk}\t{aid}\t{native}\tnorm+author-gate\n")
-print(f"★安全回収マッチ: {len(rows):,}件 → .cache/match-recovery.tsv")
+import os
+os.replace(OUT + ".tmp", OUT)
+print(f"★安全回収マッチ: 既存 {len(old_rows):,} + 今回の新規 {len(new_rows):,}件 → {OUT}")
+rows = new_rows
 print("=== サンプル12 ===")
 for sk, aid, native in rows[:12]:
     print(f"  {sk.split('|')[-1][:22]:22} → {aid} 「{native[:20]}」")

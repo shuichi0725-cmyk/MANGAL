@@ -688,7 +688,9 @@ def anilist_seq() -> None:
             shutil.copy2(bak, out)
             print(f"★dump 失敗/縮小({old:,}→{new:,}B) → backup から復元した")
         die(f"AniList dump exit {r.returncode} / size {new:,}")
-    for s in ("_build-anilist-enrich-map.py", "_gen-anilist-status-map.py"):
+    # ★取り直した dump の新作を種2新 series に結ぶ(recover = intake と同じ追記式)→ enrich map →
+    #   作り直しで消える delta 由来の anime:true を入れ直す(animeflag)。 2026-10-20〜
+    for s in ("_match-recover-norm.py", "_build-anilist-enrich-map.py", "_anime-flag-delta.py", "_gen-anilist-status-map.py"):
         if run([PY, SCRIPTS / s]).returncode != 0:
             die(f"{s} 失敗")
     # ★enrich map を作り直したので他言語名の出所も取り直す(intake の workqid/worklabels と同じ。
