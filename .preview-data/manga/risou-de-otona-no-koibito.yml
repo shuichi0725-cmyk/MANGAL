@@ -15,7 +15,8 @@ original_authors: []
 publisher: nippan-ips
 magazine: null
 demographic: shounen
-genres: []
+genres:
+- romance
 synopsis: ''
 wikidata_qid: Q92924058
 editions:
@@ -36,5 +37,12 @@ editions:
     release_date: '2026-02-21'
 publishers:
 - nippan-ips
-genres_provisional: true
+anilist_id: 176653
+genres_anilist:
+- Romance
+tags:
+- name: Shoujo
+  category: Demographic
+  rank: 20
+popularity: 31
 other_names: []

@@ -15,7 +15,9 @@ original_authors: []
 publisher: to-books
 magazine: null
 demographic: shounen
-genres: []
+genres:
+- fantasy
+- romance
 synopsis: ''
 editions:
 - type: standard
@@ -30,5 +32,13 @@ editions:
     release_date: '2026-10-05'
 publishers:
 - to-books
-genres_provisional: true
+anilist_id: 217664
+genres_anilist:
+- Fantasy
+- Romance
+tags:
+- name: Shoujo
+  category: Demographic
+  rank: 20
+popularity: 6
 other_names: []

@@ -4,8 +4,8 @@ title: 生意気domの服従レッスン
 title_kana: ナマイキドムノフクジュウレッスン
 title_romaji: namaikidomunofukujuuressun
 year_started: 2026
-year_ended: null
-status: ongoing
+year_ended: 2026
+status: completed
 authors:
 - name: 御々
   role: writer_artist
@@ -15,7 +15,11 @@ original_authors: []
 publisher: fusion-product
 magazine: null
 demographic: shounen
-genres: []
+genres:
+- bl
+- fantasy
+- romance
+- school
 synopsis: ''
 editions:
 - type: standard
@@ -30,5 +34,19 @@ editions:
     release_date: '2026-10-12'
 publishers:
 - fusion-product
-genres_provisional: true
+anilist_id: 211004
+genres_anilist:
+- Fantasy
+- Romance
+tags:
+- name: Boys' Love
+  category: Theme-Romance
+  rank: 79
+- name: Magic
+  category: Theme-Fantasy
+  rank: 79
+- name: School
+  category: Setting-Scene
+  rank: 79
+popularity: 8
 other_names: []

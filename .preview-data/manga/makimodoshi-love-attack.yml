@@ -17,6 +17,8 @@ magazine: null
 demographic: shounen
 genres:
 - bl
+- romance
+- supernatural
 synopsis: ''
 editions:
 - type: standard
@@ -31,5 +33,20 @@ editions:
     release_date: '2026-10-12'
 publishers:
 - france-shoin
-genres_provisional: true
-other_names: []
+anilist_id: 208748
+synonyms:
+- rewind love attack
+genres_anilist:
+- Romance
+- Supernatural
+tags:
+- name: Boys' Love
+  category: Theme-Romance
+  rank: 79
+- name: Time Manipulation
+  category: Theme-Sci-Fi
+  rank: 79
+popularity: 57
+other_names:
+- lang: alt
+  name: rewind love attack

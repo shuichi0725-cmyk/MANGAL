@@ -15,7 +15,10 @@ original_authors: []
 publisher: g-walk
 magazine: null
 demographic: shounen
-genres: []
+genres:
+- bl
+- drama
+- romance
 synopsis: ''
 editions:
 - type: standard
@@ -30,5 +33,13 @@ editions:
     release_date: null
 publishers:
 - g-walk
-genres_provisional: true
+anilist_id: 216129
+genres_anilist:
+- Drama
+- Romance
+tags:
+- name: Boys' Love
+  category: Theme-Romance
+  rank: 79
+popularity: 10
 other_names: []
