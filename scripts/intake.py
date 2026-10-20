@@ -93,6 +93,10 @@ STAGES = [
     # --- 外国版drop (promote が non-manga-drop を読むので ★promote前) ---
     ("foreigndrop", "madb", "外国語版drop (複数証拠=latin題∧全巻非9784∧複数巻、 ISBN国コードでscope外検出 → non-manga-drop純粋追加。 単巻typo懸念は報告のみ)",
         ["_audit-foreign-editions.py", "--apply"], False),
+    # ★NDL典拠ID8桁切りで合体した作者行の組(promote が本のクレジットに載る名前へ分け直す)。 504 が毎月更新されるので
+    #   promote の前に毎回作り直す(2026-10-20 新設。 種2不変・data/seeds/ndla-merged-groups.json)
+    ("ndlagroups", "madb", "典拠ID8桁切りで合体した作者の組 (ndla-merged-groups.json、 promote が分け直す)",
+        ["_gen-ndla-merged-groups.py"], False),
     # --- 本番再生成 (adult_us map を読むので ★最後) ---
     ("promote", "madb", "本番 yml 再生成 (data/manga.v2、 adult_us 付与)",
         ["_promote-bulk-v2.py"], False),

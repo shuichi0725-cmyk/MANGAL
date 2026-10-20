@@ -48,6 +48,9 @@ def load_504():
             nm = nm.get("@value", "")
         if not isinstance(nm, str):
             nm = ""
+        # ★8桁切りは別人を合体させる(典拠IDは9桁が27,127人=頭8桁が同じ隣のIDの人が1行になる。 2026-10-20 発見)が、
+        #   種2の作者表はこの ndl:<8桁> で登録済みで populate は新しい作者行を足さない = 全桁に直すと新作の作者が空欄になる。
+        #   → 識別子はこのまま、 promote の _split_ndla_merged が本のクレジットで分け直す(組の表 = _gen-ndla-merged-groups.py)
         ndla = re.search(r"(\d{8})", str(b.get("ma:ndla", "")))
         bd = re.search(r"(\d{4})", str(b.get("schema:birthDate", "")))
         out[cid] = {

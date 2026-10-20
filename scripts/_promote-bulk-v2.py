@@ -493,7 +493,9 @@ def _role_credit_fix(o: dict, isbns: list) -> tuple[int, int]:
     ② 原作者が居る頁で、著者の writer_artist が過半数の巻で作画系タグのみ(原作タグに無い)なら artist へ。
     戻り値 = (足した原作者数, 役割を直した著者数)。"""
     rc = get_role_credits()
-    ents = [rc[i] for i in {str(x) for x in isbns if x} if i in rc]
+    # ★ISBN は並べてから数える(2026-10-20 実踏: set の反復順は実行ごとに変わり、同数の原作表記
+    #   「リベルエンタテインメント / リベル・エンタテインメント」・原作の並び順が再生成のたびに入れ替わっていた=40頁)
+    ents = [rc[i] for i in sorted({str(x) for x in isbns if x}) if i in rc]
     nv = len(ents)
     if not nv:
         return 0, 0
@@ -501,9 +503,9 @@ def _role_credit_fix(o: dict, isbns: list) -> tuple[int, int]:
     oc, ac = _C(), _C()
     for e in ents:
         if e:
-            for n in set(e.get("o") or []):
+            for n in sorted(set(e.get("o") or [])):
                 oc[n] += 1
-            for n in set(e.get("a") or []):
+            for n in sorted(set(e.get("a") or [])):
                 ac[n] += 1
     need = (nv + 1) // 2
     added = 0
@@ -1738,6 +1740,73 @@ def _apply_book_credit(authors: list[dict], isbns: list, alias: dict) -> list[di
                         tagged[_norm_pub(n)] += 1
             hit = sorted(hits, key=lambda h: (-tagged.get(_norm_pub(h), 0), -freq.get(h, 0), h))[0]
         out.append({**a, "name": hit} if hit else a)
+    return out
+
+
+_NDLA_MERGED: dict | None = None
+
+
+def _split_ndla_merged(authors: list[dict], isbns: list) -> list[dict]:
+    """★NDL典拠IDの8桁切りで別人が1行に合体した作者を、その本のクレジットに載る組の名前へ分け直す(2026-10-20)。
+    作者表の行「瞳ちご」(ndl:00121192)= 喜月かこ(001211922)+ 瞳ちご(001211925)の合体 → クレジットが喜月かこなら喜月かこ。
+    組の2人がどちらもクレジットに居れば2人に分ける(共作者が隣の典拠IDで1人に潰れた型)。
+    ★組の外の人は足さない・クレジットに組の誰も居なければ触らない(= _apply_book_credit と同じ「載っている名前だけ」)。
+    組の表 = data/seeds/ndla-merged-groups.json(scripts/_gen-ndla-merged-groups.py・月次 intake の ndlagroups 段)。"""
+    global _NDLA_MERGED
+    if _NDLA_MERGED is None:
+        p = ROOT / "data" / "seeds" / "ndla-merged-groups.json"
+        _NDLA_MERGED = (json.load(open(p, encoding="utf-8")).get("groups") or {}) if p.exists() else {}
+    if not authors or not isbns or not _NDLA_MERGED or not any(a.get("name") in _NDLA_MERGED for a in authors):
+        return authors
+    _load_pub_resolver()
+    cred = [c for ib in isbns for c in (_ISBN2CREDIT or {}).get(str(ib), [])]
+    if not cred:
+        return authors
+    from collections import Counter as _C3
+    freq = _C3(cred)
+    # 2人に分けた時の役割 = 巻書誌の役割タグの過半数([原作]=原作欄 / [作画]=artist)。 タグが無ければ元の役割のまま
+    #   (サイコアゲンスト 原作平石六+作画景山愁・外科医エリーゼ 原作yuin+作画mini が隣の典拠IDで1人に潰れていた)
+    rc = get_role_credits()
+    oc, ac, nv = _C3(), _C3(), 0
+    for ib in isbns:
+        e = rc.get(str(ib))
+        if e:
+            nv += 1
+            for n in set(e.get("o") or []):
+                oc[_norm_pub(n)] += 1
+            for n in set(e.get("a") or []):
+                ac[_norm_pub(n)] += 1
+    need = (nv + 1) // 2
+
+    def _role(k, base):
+        if nv and oc[k] >= need and ac[k] < need:
+            return "original_author"
+        if nv and ac[k] >= need and oc[k] < need:
+            return "artist"
+        return base
+
+    out, seen, changed = [], set(), []
+    for a in authors:
+        mem = _NDLA_MERGED.get(a.get("name") or "")
+        names = [a.get("name") or ""]
+        if mem:
+            ms = {_norm_pub(x) for x in mem}
+            hits = sorted({c for c in cred if _norm_pub(c) in ms}, key=lambda c: (-freq[c], c))
+            if hits:
+                names = hits
+        for nm in names:
+            k = _norm_pub(nm)
+            if k in seen:
+                continue
+            seen.add(k)
+            r = _role(k, a.get("role")) if len(names) >= 2 else a.get("role")
+            if r != a.get("role"):
+                changed.append(len(out))
+            out.append({**a, "name": nm, "role": r})
+    # 全員が原作欄に移ると作者欄が空になる → 役割の付け替えだけ戻す
+    if out and not any(x.get("role") != "original_author" for x in out):
+        for i in changed:
+            out[i] = {**out[i], "role": next((a.get("role") for a in authors), "writer_artist")}
     return out
 
 
@@ -3989,6 +4058,9 @@ def main():
         _apply_cluster_best(con, merged_series, related_ids)
         authors = get_authors(con, series["id"])
         authors = apply_author_corrections(authors, series["series_key"])
+        # ★典拠ID8桁切りで合体した作者行は、本のクレジットに載る組の名前へ分け直す(2026-10-20)
+        authors = _split_ndla_merged(
+            authors, [v.get("isbn13") for ed in editions for v in (ed.get("volumes") or []) if v.get("isbn13")])
         # ★表示名は「その本のクレジット」(ユーザ方針 2026-07-26)。 典拠解決の代表名で上書きしない。
         authors = _apply_book_credit(
             authors, [v.get("isbn13") for ed in editions for v in (ed.get("volumes") or []) if v.get("isbn13")],
