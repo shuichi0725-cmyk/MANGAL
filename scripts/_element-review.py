@@ -19,13 +19,15 @@ import argparse, collections, concurrent.futures, datetime, gzip, importlib.util
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
-VERSION = "r0.6"  # r0.6: rebuild(モデルを呼ばずに、残した答えから付与案と台帳を作り直す) # r0.5: 語に付いて返った [要素] の印を外してから2回の答えを合わせる # r0.4: 2回判定の合わせ方をゆるめる(芯+在る → 表。 表0が材料ありの2割だった)/ 材料からのジャンルは2回とも芯の時だけ / 2回とも芯の語は後ろの巻が根拠でも表に出す / 2回の生の答えを残す # r0.3: --twice(2回判定して一致した語だけ表に出す) # r0.2: 材料からのジャンルは2つ以上の紹介文に出る時だけ / --redo
+VERSION = "r0.7"  # r0.7: 表0の頁は2回とも「在る」の語を最大3語まで表に上げる / 材料から話数一覧(▼第N話／…)を外し、紹介文が少ない頁は1本を600字で切らない(点検9回ぶんのまとめ) # r0.6: rebuild(モデルを呼ばずに、残した答えから付与案と台帳を作り直す) # r0.5: 語に付いて返った [要素] の印を外してから2回の答えを合わせる # r0.4: 2回判定の合わせ方をゆるめる(芯+在る → 表。 表0が材料ありの2割だった)/ 材料からのジャンルは2回とも芯の時だけ / 2回とも芯の語は後ろの巻が根拠でも表に出す / 2回の生の答えを残す # r0.3: --twice(2回判定して一致した語だけ表に出す) # r0.2: 材料からのジャンルは2つ以上の紹介文に出る時だけ / --redo
 BASE = os.path.join(ROOT, ".cache", "element-harvest")
 LEDGER = os.path.join(ROOT, "data", "element-harvest", "review-ledger.jsonl")
 CAPS = os.path.join(BASE, "_local", "captions.jsonl")
 DUMP = os.path.join(ROOT, ".cache", "anilist-manga-dump-v3.jsonl.gz")
 MAX_CHARS = 3000   # 1作に渡す材料の上限
-CAP_CLIP = 600     # 1巻の紹介文の上限
+CAP_CLIP = 600     # 1巻の紹介文の上限(紹介文が5本以上の時)。 少ない時は MAX_CHARS を本数で割った分まで(最大 CAP_SOLO)
+CAP_SOLO = 1500    # ★点検9回ぶん: 紹介文1本だけの頁が600字で切れ、その4割強が表0だった(後半に作品全体の説明がある紹介文が多い)
+EPISODES = re.compile(r"▼[^▼●]{1,60}(?=▼|●|$)")  # 話数一覧「▼第81話／抜き打ち調査！」= 題の羅列で物語ではない。 小学館の紹介文で先頭200字以上を占め、本文が切れていた
 EARLY = 3          # 先頭からこの数の紹介文 = 物語。 それより後の巻 = 展開(ネタバレ扱い = その語は表に出さない)
 MAX_CAPS = 8
 LOCK = threading.Lock()
@@ -81,10 +83,12 @@ def anilist_self(aids):
 def local_bundle(eh, card, caps, bl, ani):
     """手元の材料だけで、要素付与の道具が読める束(material.json と同じ形)を作る。"""
     sources, picks, total = [], [], 0
+    use = [c for c in caps if not c["ad"]][:MAX_CAPS]
+    clip = min(CAP_SOLO, max(CAP_CLIP, MAX_CHARS // max(1, len(use) + bool(bl))))
 
     def add(domain, title, text, as_):
         nonlocal total
-        text = text[:CAP_CLIP]
+        text = EPISODES.sub("", text).strip()[:clip]
         if len(text) < 40 or total + len(text) > MAX_CHARS:
             return
         sid = len(sources) + 1
@@ -94,7 +98,7 @@ def local_bundle(eh, card, caps, bl, ani):
 
     if bl:
         add("booklive(紹介文)", card["title"], bl, "物語")
-    for i, c in enumerate([c for c in caps if not c["ad"]][:MAX_CAPS]):
+    for i, c in enumerate(use):
         add("books.rakuten.co.jp", c["title"], c["cap"], "物語" if i < EARLY else "展開")
     ents = [ani] if ani else []
     a = {"entries": ents, "skipped": [], "note": "" if ani else "頁に anilist_id が無い"}
@@ -111,7 +115,7 @@ def bare(w):  # _element-assign.bare と同じ(語に付いて返った [要素]
 
 
 def agree(a1, a2, V):
-    """2回の答えを1つに。 → (答え, 2回とも「芯」の語の集合)
+    """2回の答えを1つに。 → (答え, 2回とも「芯」の語の集合, 2回とも「在る」以上で挙げた語の集合)
     2回とも「芯」→ 芯 / 片方「芯」・もう片方「在る」→ 芯 / 片方「芯」・もう片方「違う」か挙げていない → 在る / 2回目だけが挙げた語 → 在る で足す。
     ★同じ材料でも判定は回ごとに約1割ゆれる(2026-10-12 実測: 193語中21語が片方だけ。 弱い語が中心)。
     ★r0.3 は「2回とも芯」だけを芯にしていた → 材料あり951頁のうち187頁で表が0語(カイジ=ギャンブルも隠し)。 r0.4 で 芯+在る を芯に。"""
@@ -144,7 +148,7 @@ def agree(a1, a2, V):
                 if isinstance(x, dict) and canon(x.get("word")) not in seen and x.get("tier") in ("芯", "在る"):
                     rows.append({**x, "tier": "在る"})
         out[g] = rows
-    return out, both
+    return out, both, {w for w in t1 if t1[w] >= 1 and t2.get(w, 0) >= 1}
 
 
 def one(stem, ctx, a, batch):
@@ -167,7 +171,7 @@ def one(stem, ctx, a, batch):
     m = ea.load_material(stem)
     cands = ea.find_candidates(m, V)
     row = {"at": now(), "batch": batch, "stem": stem, "slug": card["slug"], "title": card["title"], "route": a.route, "version": f"{VERSION}/{ea.VERSION}", "chars": chars}
-    raw, both = [], None
+    raw, both, agreed = [], None, None
     if not m["picks"]:
         ans, use = {"judged": [], "added": [], "new_words": []}, {"model": "(材料なし・モデルを呼ばない)", "sec": 0, "in": 0, "out": 0, "cost_usd": 0}
     else:
@@ -177,13 +181,13 @@ def one(stem, ctx, a, batch):
         if a.twice:  # 同じ材料でもう1回判定させ、2回とも「芯」の語だけ表に出す(片方だけの語は「在る」= 隠して持つ)
             ans2, use2 = ask()
             raw.append(ans2)
-            ans, both = agree(ans, ans2, V)
+            ans, both, agreed = agree(ans, ans2, V)
             use = {"model": use["model"] + " x2", "sec": round(use["sec"] + use2["sec"], 1), "in": use["in"] + use2["in"], "out": use["out"] + use2["out"],
                    "cost_usd": (use.get("cost_usd") or 0) + (use2.get("cost_usd") or 0)}
-    return settle(ea, V, stem, m, cands, card, row, ans, use, raw, both)
+    return settle(ea, V, stem, m, cands, card, row, ans, use, raw, both, agreed)
 
 
-def settle(ea, V, stem, m, cands, card, row, ans, use, raw, both, save=True):
+def settle(ea, V, stem, m, cands, card, row, ans, use, raw, both, agreed=None, save=True):
     """判定の答え → 付与案 → 台帳の1行。 ★モデルを呼ばない部分(rebuild もここを通る)。"""
     with LOCK:  # 付与案づくりは台帳・ファイルに書くので1件ずつ
         if save:
@@ -191,7 +195,8 @@ def settle(ea, V, stem, m, cands, card, row, ans, use, raw, both, save=True):
                 json.dump({"use": use, "answer": ans, "raw": raw}, f, ensure_ascii=False, indent=1)
         # ★後ろの巻の紹介文は「展開」(ネタバレ扱い)だが、2回とも芯 = 2回とも「作品全体を通して言える」と読んだ語は表に出す
         #   (r0.3 まで: カイジのギャンブル・10万分の1の闘病 が、根拠が4巻目以降というだけで隠れた。 その巻だけの出来事は判定の決まりで「違う」になる)
-        out, rows, ok, bad, missing = ea.make_proposal(stem, m, V, cands, ans, use, not_spoiler=both or ())
+        # ★表が0語になる頁は、2回とも「在る」で挙げた語を表に上げる(点検9回で型6「表0で芯が隠れている」が毎回4〜7頁。 材料あり頁の18.6%が表0だった)
+        out, rows, ok, bad, missing = ea.make_proposal(stem, m, V, cands, ans, use, not_spoiler=both or (), lift=agreed or ())
         with open(os.path.join(ea.adir(stem), "assign-proposal.json"), encoding="utf-8") as f:
             gadd = json.load(f).get("genres_add") or []
         gm = [e["word"] for e in rows if e["kind"] == "ジャンル"]
@@ -328,12 +333,13 @@ def cmd_rebuild(a):
         last[r["stem"]] = r
     batch = f"{a.route}-{datetime.datetime.now():%Y%m%d-%H%M%S}-rebuild"
     n = skip = 0
-    before = after = 0
+    before = after = z0 = z1 = 0
     for stem, old in sorted(last.items()):
         if old.get("route") != a.route:
             continue
         ap_ = os.path.join(ea.adir(stem), "assign-answer.json")
-        if not os.path.exists(ap_):
+        # ★頁のファイルが無い stem(改名・削除)で build_card が sys.exit し、作り直しが e の途中で止まった(2026-10-20。 流しの 10-15 と同じ型)
+        if not os.path.exists(ap_) or not os.path.exists(os.path.join(ROOT, "data", "manga.v2", stem + ".yml")):
             skip += 1
             continue
         with open(ap_, encoding="utf-8") as f:
@@ -345,17 +351,19 @@ def cmd_rebuild(a):
         m = ea.load_material(stem)
         cands = ea.find_candidates(m, V)
         if len(raw) == 2:
-            ans, both = agree(raw[0], raw[1], V)
+            ans, both, agreed = agree(raw[0], raw[1], V)
         else:
-            ans, both = (raw[0] if raw else {"judged": [], "added": [], "new_words": []}), None
+            ans, both, agreed = (raw[0] if raw else {"judged": [], "added": [], "new_words": []}), None, None
         card = eh.build_card(stem)
         row = {"at": now(), "batch": batch, "stem": stem, "slug": old["slug"], "title": old["title"], "route": a.route, "version": f"{VERSION}/{ea.VERSION}", "chars": old["chars"], "judged_as": old.get("judged_as") or old["version"], "judged_at": old.get("judged_at") or old["at"]}
         use = {k: old.get(k) for k in ("model", "sec", "in", "out", "cost_usd")}
-        new = settle(ea, V, stem, m, cands, card, row, ans, use, raw, both, save=False)
+        new = settle(ea, V, stem, m, cands, card, row, ans, use, raw, both, agreed, save=False)
         n += 1
         before += len(old["show"])
         after += len(new["show"])
-    print(f"== 作り直し(モデルを呼ばない){batch} == {n}頁 / 表に出す語 {before:,} → {after:,} / 生の答えが無くて飛ばした頁 {skip}")
+        z0 += str(old["chars"]) != "0" and not old["show"]
+        z1 += str(new["chars"]) != "0" and not new["show"]
+    print(f"== 作り直し(モデルを呼ばない){batch} == {n}頁 / 表に出す語 {before:,} → {after:,} / 表0の頁(材料あり){z0:,} → {z1:,} / 生の答えが無くて飛ばした頁 {skip}")
     write_summary(batch)
 
 
@@ -444,7 +452,7 @@ def cmd_inspect(a):
             if e["kind"] == "ジャンル":
                 L.append(f"- [ジ{'・案' if e['word'] in r['genres_mat'] else '・弱'}] {e['word']}: {ev}")
             elif e.get("cls") == "表":
-                L.append(f"- [表] {e['word']}: {ev}")
+                L.append(f"- [表{'・上げ' if e.get('lift') else ''}] {e['word']}: {ev}")  # 上げ = 表0の頁で2回とも「在る」の語を表に上げた物(r0.7)
             elif e.get("cls") == "隠し":
                 hid.append((e, ev))
         if not r["show"]:  # 表が0語の頁は、隠しの語を根拠つきで見せる(芯が隠れていないかを読むため)
