@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: reference
   originSessionId: 6146d01a-d071-41e5-9ffa-4568e252bbb1
-  modified: 2026-10-06T13:41:02.791Z
+  modified: 2026-10-20T15:15:05.905Z
 ---
 
 # OpenBD = サービス終了予定 + 書影は Amazon API 必須
@@ -15,6 +15,9 @@ metadata:
 - 利用資格 = アソシエイト参加 + **直近30日で対象売上10件以上**(Web上の移行解説複数で確認。旧PA-APIの「180日で3件」より重い)。
 - MANGAL = 2026-07-29 アソシエイト開設(mangal08-22)。まず本登録(180日で3件)→ API は月10件の売上が要る = **流入が先**。
 - 以下の本文の「PA-API」は Creators API と読み替える。
+- ★**2026-10-21 鍵を発行済み**(アプリ名 Mangal・Version 3.3 = 極東/日本)。鍵の CSV はユーザが持つ(会話に添付 = `~/.claude/uploads/d6d1e4c1-…/…-Mangal-credentials.csv`。★repo は公開なので git・記憶に鍵を書かない。本運用は GitHub Secrets)。
+  - 1回だけ試した結果: トークン取得 = **200(鍵は有効)** / getItems = **403 `AssociateNotEligible`**「Your account does not currently meet the eligibility requirements.」= 売上条件が未達。条件を満たせば同じ鍵でそのまま通るはず。
+  - 通った呼び方: トークン = POST `https://api.amazon.co.jp/auth/o2/token`・JSON `{grant_type: client_credentials, client_id, client_secret, scope: "creatorsapi::default"}` → getItems = POST `https://creatorsapi.amazon/catalog/v1/getItems`・`Authorization: Bearer <token>`・`x-marketplace: www.amazon.co.jp`・JSON `{itemIds:[ISBN-10], itemIdType:"ASIN", marketplace:"www.amazon.co.jp", partnerTag:"mangal08-22", resources:[images.primary.large, itemInfo.title, parentASIN]}`。
 
 ## OpenBD 状況
 
