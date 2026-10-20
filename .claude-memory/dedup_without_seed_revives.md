@@ -2,7 +2,10 @@
 name: dedup-without-seed-revives
 description: 【型・恒久機構】重複頁をファイル削除だけで消すとフルpromoteで復活する。正規の受け皿は data/seeds/page-dedup.yml
 metadata:
+  node_type: memory
   type: project
+  originSessionId: 4eb881fe-cc0f-412d-b718-0578babc3249
+  modified: 2026-10-20T09:11:07.318Z
 ---
 
 **2026-09-22 週次 preflight で実踏**: 「aliasのキーが実在の公開slugと衝突(転送が効くと実頁が消える)」2件。
@@ -31,7 +34,8 @@ metadata:
 - `esu-rank-party-kara-kaikosareta-jugushi` ⇔ `esurankupaateikarakaikosaretajugushi-...`(14冊)
 - `esu-kyuu-party-kara-tsuihousareta-kariudo-...` ⇔ `esukyuupaateiikara...-shateiki`(5冊)
 - `jigoku-shoujo-enma-ai-selection-geki-kowa-story` ⇔ `...-gekikowa-story`(1冊)
-- `tezuka-osamu-scenario-shuu` ⇔ `tezuka-osamu-shinarioshuu`(1冊)
+- ~~`tezuka-osamu-scenario-shuu` ⇔ `tezuka-osamu-shinarioshuu`(1冊)~~ → **2026-10-20 解決**: 正= scenario-shuu(予約頁 seed・7/21 全集400冊の別巻386として作った頁)、shinarioshuu を page-dedup に登録+alias
+- ★予約頁が片割れの重複(seed=preorder-pages)は page-dedup が効かない(予約合流ブロックは page-dedup を見ない)= **seed ファイルを消す**+alias(2026-10-20 無自覚聖女 tare-nagasu / カジムヌガタイ文庫 / 妖ー深淵の事件簿ー の3頁)。消し忘れると targeted promote の「無ければ補充コピー」で復活する
 - ★`god-mazinger`『ゴッドマジンガー』⇔ `majindensetsu`『魔神伝説』(4冊)= **題が違うので単純重複ではない**。
   ISBNの付け違いの疑いがあり要判断([[merge_needs_external_proof]])。
 

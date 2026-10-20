@@ -7,6 +7,7 @@ promote が join して本番 yml に出力(本番schema lib/schema.ts の箱を
 
 tags filter(案2): category==Demographic(全) OR Theme rank>=60(上位12)+ Cast-*/Setting-* rank>=70 を空きの分だけ(tag_fill)。
 synonyms filter: latin/CJK/hangul のみ(arabic/thai 等の不要スクリプト除外)。
+★予約頁(preorder-pages)は `preorder:<stem>` キーで入る(2026-10-20〜。 _match-preorder-anilist.py)。
 """
 import csv, gzip, json, re, sys
 from pathlib import Path
@@ -145,8 +146,16 @@ def main():
         if k in drop_keys and k not in relink_keys:
             del sk_aid[k]; dropped += 1
     print(f"  ★誤リンクrelink: {relinked:,} / drop: {dropped:,} (anilist-link-overrides.yml)", file=sys.stderr)
+    # ★予約頁(data/seeds/preorder-pages)の AniList 結線(2026-10-20): 予約頁は series_key が無く本流の join に
+    #   乗らない(2,454頁中1頁)。 巻ISBN→種2 series→ここの sk_aid / 題+作画側の著者 の2経路で結び、
+    #   `preorder:<stem>` キーで同じ map に足す(promote の予約合流ブロックが引く)。 規則と保留型は scripts/_match-preorder-anilist.py
+    import importlib.util
+    _spec = importlib.util.spec_from_file_location("_preorder_al", Path(__file__).with_name("_match-preorder-anilist.py"))
+    _pre = importlib.util.module_from_spec(_spec)
+    _spec.loader.exec_module(_pre)
+    pre_links = _pre.link(sk_aid, drop_keys)
     # a_id → enrich
-    need = set(sk_aid.values())
+    need = set(sk_aid.values()) | set(pre_links.values())
     aid_enrich = {}
     with gzip.open(DUMP, "rt", encoding="utf-8") as f:
         for line in f:
@@ -185,7 +194,13 @@ def main():
                 ent["score"] = int(e["averageScore"])
             aid_enrich[i] = ent
     out = {sk: aid_enrich[aid] for sk, aid in sk_aid.items() if aid in aid_enrich}
+    pre_n = 0
+    for stem, aid in pre_links.items():
+        if aid in aid_enrich:
+            out[_pre.PREFIX + stem] = aid_enrich[aid]
+            pre_n += 1
     OUT.write_text(json.dumps(out, ensure_ascii=False), encoding="utf-8")
+    print(f"  ★予約頁キー(preorder:<stem>): {pre_n:,}")
     # stats
     n = len(out)
     sy = sum(1 for v in out.values() if v["synonyms"])

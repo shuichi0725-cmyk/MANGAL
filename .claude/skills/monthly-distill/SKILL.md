@@ -67,8 +67,10 @@ python scripts/_monthly-distill.py phase2 --tag <tag> --go "<ユーザの発話�
 python scripts/_monthly-distill.py run intake
 python scripts/_monthly-distill.py status        # job intake … RUNNING → EXIT=0
 ```
-- 実体= `intake.py --run`: seedlint→volnum→roles→**rolecredits**→merge→seed4→detect→match v9→v13→v14→**recover**→adultus→enrich→**animeflag**→**workqid→worklabels**→trailing→foreigndrop→**ndlagroups**→**promote**→edisup/special/volnumoverride/coverfill→**isbnloss**。ログ= `.cache/madb-distill/run-intake-<ts>.log`。
+- 実体= `intake.py --run`: seedlint→volnum→roles→**rolecredits**→merge→seed4→detect→match v9→v13→v14→**recover**→**p8731→recall2**→adultus→enrich→**animeflag**→**workqid→worklabels**→trailing→foreigndrop→**ndlagroups**→**promote**→edisup/special/volnumoverride/coverfill→**isbnloss**。ログ= `.cache/madb-distill/run-intake-<ts>.log`。
 - ★workqid/worklabels(2026-10-19〜)= 他言語名の出所(Wikidata)を**毎月全件取り直す**(`--refresh --soft`・計~4分)。作品QID(AniList ID→P8731)→ 言語別ラベル → promote が全頁の `other_names` に書く。新作だけでなく、後から Wikidata に項目ができた作品・足された言語も拾う(初回実走で作品QID +620)。QLever 不通・激減(95%未満)なら前回の cache のまま続行し、postflight 7 が FAIL で知らせる。
+- ★p8731→recall2(2026-10-20〜)= v14 で結べなかった種3 key の広域回収(英題・別名・Wikidata P8731 の題・ローマ字骨格 × 著者/年/巻)。`match-recall-v2.tsv` に**追記**(前回行は不可侵・結び先を変える時は anilist-link-overrides の relink)。7/18 に1回作ったきりだった(取り直しで AniList の無い頁に +41)。P8731 全量表は `--soft`(QLever 不通なら前回の表)。
+- ★enrich 段の中で**予約頁の AniList 結線**も作る(2026-10-20〜・`_match-preorder-anilist.py`・enrich map に `preorder:<stem>` キー)。巻ISBN→種2 series / 題+作画側の著者 の2経路、食い違い・年差4年以上・続編同居型は結ばない。見るもの= `docs/production-diagnostics/preorder-anilist-holds.tsv`(保留)の前月比。
 - 60秒超は Monitor で節目だけ(1万頁ごと/ABORT/EXIT)。promote の完了後居座りは **os._exit で解消済(2026-09-02)**=待てば終わる。killしない。
 - EXIT≠0 はログ末尾の `✗ ABORT: stage [名]` で判断: seedlint=seed壊れ(yaml.safe_load検証) / clean鮮度=phase2の差替漏れ / isbnloss=理由なし消失(`docs/production-diagnostics/isbn-loss.tsv` を1件ずつ裁定・台帳記帳) / それ以外=当該scriptの traceback を読む(1.2.18で trailing の merge_keys / foreigndrop の2スペ追記を直した型)。
 - 終了後: `git status` → 派生seed(`series-merge-auto.json` / `non-manga-drop.yml` 等)の diff を確認 → commit/push。manga.v2 は gitignore(ディスク上で再生成済)。
@@ -77,7 +79,7 @@ python scripts/_monthly-distill.py status        # job intake … RUNNING → EX
 
 ### 4. enrich(任意・並走可)
 ```
-python scripts/_monthly-distill.py run anilist   # ~2.5h: dump backup→progress消去→フル再取得→recover→enrich map→animeflag→status map→作品QID/言語別ラベル(縮小なら自動復元+abort)
+python scripts/_monthly-distill.py run anilist   # ~2.5h: dump backup→progress消去→フル再取得→recover→P8731全量(--soft)→recall-v2→enrich map→animeflag→status map→作品QID/言語別ラベル(縮小なら自動復元+abort)
 ```
 - deltaは5,000capで月次には不足=フルダンプが正(2026-08-21確立)。synopsis和訳delta= skill wayaku-enrich。
 - ★種3 AI fill(旧v1の100件batch)は **v2機構では不要**(kana=頁化時NDL確定 / genre・synopsis=enrich系。新seriesは種3未登録のままpromote無依存=1.2.19確認)。種3スキーマ変更時のみ復活。

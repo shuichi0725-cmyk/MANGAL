@@ -74,6 +74,13 @@ STAGES = [
     #   でしか AniList に結ばれない(2026-10-20 月次へ組込。 それまで6/2に1回作ったきり=新作の AniList リンクが増えなかった)
     ("recover", "anilist", "種2新 series の安全回収 (題強正規化×作者一致×1:1、 match-recovery.tsv に追記)",
         ["_match-recover-norm.py"], False),
+    # ★v14 で結べなかった種3 key の広域回収(英題・別名・Wikidata P8731 の題・ローマ字骨格 × 著者/年/巻の合議)。
+    #   7/18 に1回作ったきりだった(2026-10-20 月次へ組込: 取り直しで AniList の無い頁に +41)。 recall-v2 が読む
+    #   P8731 全量表を先に取り直す(--soft = QLever 不通なら前回の表のまま)
+    ("p8731", "anilist", "Wikidata P8731 全量表 取り直し (.cache/p8731-full-map.json、 recall-v2 の題チャネル)",
+        ["_fetch-p8731-full.py", "--soft"], False),
+    ("recall2", "anilist", "AniList recall v2 (広域題一致+P8731+骨格・証拠合議、 match-recall-v2.tsv に追記)",
+        ["_anilist-recall-v2.py"], False),
     ("adultus", "anilist", "adult_us map 生成 (種a isAdult=米基準フラグ、 .cache/adult-us-map.json)",
         ["_build-adult-us-map.py"], False),
     ("enrich",  "anilist", "AniList enrich map 生成 (anilist_id/synonyms/genres/tags、 本番埋込用)",

@@ -1,11 +1,11 @@
 ---
 name: preorder_page_bypasses_mainline_class
-description: 【型・総論】予約頁(preorder-pages)は種2本流を通らない=本流に足した機構が1つずつ落ちる。既知6件目まで実測。新しい充填を足したら予約合流ループにも足す
+description: 【型・総論】予約頁(preorder-pages)は種2本流を通らない=本流に足した機構が1つずつ落ちる。既知9件(9=AniList は2026-10-20に実装)。新しい充填を足したら予約合流ループにも足す
 metadata:
   node_type: memory
   type: project
   originSessionId: 3694f556-496e-4196-90f0-578fafaf2df4
-  modified: 2026-10-20T07:18:39.303Z
+  modified: 2026-10-20T09:11:00.010Z
 ---
 
 `_promote-bulk-v2.py` の頁producerは2系統ある。
@@ -27,7 +27,7 @@ metadata:
 | 7 | **続巻の分類**(日次の「過去draft題」除外が予約頁の題も含み、続巻が分類前に消えていた) | **2026-10-06** [[daily_distill_hold_not_requeued]] |
 | 8 | **種4(volumes-supplement)**= 作品が後から種2に入って series_key が引けても、元頁(data/manga・source-pages)が無い限り seed が頁の正=種4は読まれない(97冊) | **2026-10-06**(apply-zokkan が seed へ直接追記に変更) |
 
-| 9 | **AniList(anilist_id / synonyms / genres_anilist / tags / 人気 / 和訳あらすじ)**= 予約合流ブロックに enrich map の join が無い。予約頁2,454頁で AniList 付きは1頁だけ。結べる見込み約1,200(巻ISBN→種2 series→enrich map 664 / 題+著者 1:1 531)、うちジャンル空240頁の237頁に AniList ジャンル(trusted)が入る。★2経路とも外れ型あり=ISBN経路は種2が続編を本編 series に同居させると本編IDになる(俺はヒロインになれません。破!)/ 題経路は原作者だけの一致で別コミカライズを拾う(インターネット巫女・昏き宮殿の死者の王)→ 両方一致=採用・食い違い/年差4年以上=保留。**未実装(2026-10-20 報告・裁定待ち)** | **2026-10-20** |
+| 9 | **AniList(anilist_id / synonyms / genres_anilist / tags / 人気 / 和訳あらすじ)**= 予約合流ブロックに enrich map の join が無い。予約頁2,454頁で AniList 付きは1頁だけ。結べる見込み約1,200(巻ISBN→種2 series→enrich map 664 / 題+著者 1:1 531)、うちジャンル空240頁の237頁に AniList ジャンル(trusted)が入る。★2経路とも外れ型あり=ISBN経路は種2が続編を本編 series に同居させると本編IDになる(俺はヒロインになれません。破!)/ 題経路は原作者だけの一致で別コミカライズを拾う(インターネット巫女・昏き宮殿の死者の王)→ 両方一致=採用・食い違い/年差4年以上=保留。**実装済み(2026-10-20 夜・ユーザ GO「1、2 と、3 の4頁までやる」)**= `_match-preorder-anilist.py`(enrich builder が中で呼び、enrich map に `preorder:<stem>` キーで足す)+ promote 予約合流ブロックが引く。1,227頁(ISBN 650/題 577)・保留93(`docs/production-diagnostics/preorder-anilist-holds.tsv`)。題経路は**作画側(Art/Story & Art)の著者一致**が必須(原作者だけ一致=別コミカライズ型は保留)、ISBN経路は**その series の巻が別の公開頁にも在れば保留**(続編同居型)。あらすじは空の時だけ・ジャンルは trusted が AI/楽天推定に勝つ(本流と同じ) | **2026-10-20** |
 
 ★#6 の実測: seed に文章が在るのに **何度 promote しても出ない** 頁が213頁358巻。
 検証は `bff`(seed 4件が 8/16 から在る)= 修正前は `promote --only` を回しても

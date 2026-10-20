@@ -6,6 +6,8 @@ _fetch-work-qid.py(既結線aidの逆引き)と違い、 ★P8731を持つ全項
 QLever(WDQSは1req/分制限のため不使用)・LIMIT/OFFSET ページング・中断再開は上書きで単純化。
 
 出力: .cache/p8731-full-map.json = {aid(str): {"qid","label","aliases":[...]}}
+★月次(intake の p8731 段 / run anilist)で取り直す(2026-10-20〜。 それまで7月に1回作ったきり)。
+  --soft = QLever 不通・激減(前回の95%未満)なら前回の表のまま exit 0(照合 recall-v2 を止めない)。
 """
 import json
 import sys
@@ -78,10 +80,18 @@ def main():
         aid = b["id"]["value"]
         if aid in out and not out[aid]["label"]:
             out[aid]["label"] = b["l"]["value"]
+    old_n = len(json.loads(OUT.read_text(encoding="utf-8"))) if OUT.exists() else 0
+    if len(out) < old_n * 0.95:
+        raise RuntimeError(f"P8731項目が激減 {old_n:,} → {len(out):,}(QLever 側の不調を疑う)= 書かない")
     OUT.write_text(json.dumps(out, ensure_ascii=False), encoding="utf-8")
     n_alias = sum(len(v["aliases"]) for v in out.values())
-    print(f"★wrote {OUT}: {len(out):,} aid / 別名 {n_alias:,}")
+    print(f"★wrote {OUT}: {len(out):,} aid / 別名 {n_alias:,}(前回 {old_n:,})")
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:
+        if "--soft" not in sys.argv:
+            raise
+        print(f"★P8731 全量を取り直せなかった({e})→ 前回の表のまま続行(--soft)", file=sys.stderr)

@@ -14,7 +14,9 @@ year_ended: null
 year_started: 2026
 status: ongoing
 demographic: null
-genres: []
+genres:
+- comedy
+- romance
 editions:
 - type: standard
   label: 通常版
@@ -27,4 +29,9 @@ editions:
     cover_url: null
     release_date: '2026-12-18'
 _note_origin: rakuten-preorder new1b promoted=2026-10-13 kana=pending
+anilist_id: 211916
+genres_anilist:
+- Comedy
+- Romance
+popularity: 8
 other_names: []

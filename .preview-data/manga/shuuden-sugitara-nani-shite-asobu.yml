@@ -14,7 +14,8 @@ year_ended: null
 year_started: 2026
 status: ongoing
 demographic: seinen
-genres: []
+genres:
+- romance
 editions:
 - type: standard
   label: 通常版
@@ -27,4 +28,12 @@ editions:
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9825/9784301009825.gif?_ex=300x300
     release_date: '2026-12-25'
 _note_origin: rakuten-preorder new1b promoted=2026-10-13 kana=confirmed
+anilist_id: 216263
+genres_anilist:
+- Romance
+popularity: 78
+tags:
+- name: Seinen
+  category: Demographic
+  rank: 20
 other_names: []

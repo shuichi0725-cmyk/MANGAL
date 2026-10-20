@@ -17,6 +17,9 @@
 出力: .cache/match-recall-v2.tsv (s3_key,a_id,a_native,note) = enrich builder 追加読み用
       .cache/recall-drop-relinks.tsv = drop→relink 復活提案(overrides更新は別途)
       .cache/recall-ai-worksheet.tsv = AI裁定素材
+★追記式(既存行は残す・既存行の a_id も不可侵)。 月次 intake の recall2 段 + run anilist が recover の後・enrich map の前に回す
+  (2026-10-20〜。 それまで7/18に1回作ったきり = 7月以降に AniList に載った作品が結ばれなかった。
+   取り直しで AniList の無い頁に +41。 既存行の結び先を変えたい時は anilist-link-overrides.yml の relink で)
 """
 import csv
 import gzip
@@ -101,6 +104,17 @@ def main():
     relink_map = {o["key"]: o["to_id"] for o in doc["overrides"] if o["action"] == "relink"}
     linked_keys |= set(relink_map)
     used_aids |= set(relink_map.values())
+    # ★前回までの行(追記式)= 不可侵。 drop 裁定済み key だけは従来どおり評価し直す(relink 復活提案へ)
+    OUT = ROOT / ".cache/match-recall-v2.tsv"
+    old_rows = []
+    if OUT.exists():
+        with OUT.open(encoding="utf-8") as f:
+            next(f, None)
+            old_rows = [ln.rstrip("\n").split("\t") for ln in f if ln.strip()]
+    for r in old_rows:
+        linked_keys.add(r[0])
+        if len(r) > 1 and r[1].isdigit():
+            used_aids.add(int(r[1]))
     linked_keys -= drop_keys
 
     # --- dump v3 + delta
@@ -302,10 +316,15 @@ def main():
                             str(d.get("volumes") or ""), str(d.get("chapters") or ""), "", note))
 
     clean = lambda v: re.sub(r"[\t\n\r]", " ", str(v))
-    with (ROOT / ".cache/match-recall-v2.tsv").open("w", encoding="utf-8") as f:
+    old_keys = {r[0] for r in old_rows}
+    accepts = [x for x in accepts if x[0] not in old_keys]
+    with OUT.with_suffix(".tsv.tmp").open("w", encoding="utf-8") as f:
         f.write("s3_key\ta_id\ta_native\tnote\n")
+        for r in old_rows:
+            f.write("\t".join(r) + "\n")
         for x in accepts:
             f.write("\t".join(clean(v) for v in x) + "\n")
+    OUT.with_suffix(".tsv.tmp").replace(OUT)
     with (ROOT / ".cache/recall-drop-relinks.tsv").open("w", encoding="utf-8") as f:
         f.write("s3_key\ta_id\ta_native\tnote\n")
         for x in drop_relinks:
@@ -317,7 +336,7 @@ def main():
             f.write("\t".join(clean(v) for v in x) + "\n")
 
     print(f"\n未マッチpool: {stats['pool']:,}")
-    print(f"accept(新規結線): {len(accepts):,}")
+    print(f"accept(新規結線): 既存 {len(old_rows):,} + 今回の新規 {len(accepts):,}")
     print(f"drop→relink復活提案: {len(drop_relinks):,}")
     print(f"AI裁定行き: {len(ai_rows):,}")
     print(f"reject: {stats['reject']:,} / aid占有skip: {stats['skip_aid_taken']:,} / 競合skip: {stats['skip_conflict']:,}")

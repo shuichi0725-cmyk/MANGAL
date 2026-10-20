@@ -688,10 +688,13 @@ def anilist_seq() -> None:
             shutil.copy2(bak, out)
             print(f"★dump 失敗/縮小({old:,}→{new:,}B) → backup から復元した")
         die(f"AniList dump exit {r.returncode} / size {new:,}")
-    # ★取り直した dump の新作を種2新 series に結ぶ(recover = intake と同じ追記式)→ enrich map →
+    # ★取り直した dump の新作を種2新 series に結ぶ(recover = intake と同じ追記式)→ 種3 key の広域回収
+    #   (recall-v2 も追記式。 先に P8731 全量表を --soft で取り直す)→ enrich map(予約頁の結線も中で作る)→
     #   作り直しで消える delta 由来の anime:true を入れ直す(animeflag)。 2026-10-20〜
-    for s in ("_match-recover-norm.py", "_build-anilist-enrich-map.py", "_anime-flag-delta.py", "_gen-anilist-status-map.py"):
-        if run([PY, SCRIPTS / s]).returncode != 0:
+    for s in ("_match-recover-norm.py", "_fetch-p8731-full.py", "_anilist-recall-v2.py",
+              "_build-anilist-enrich-map.py", "_anime-flag-delta.py", "_gen-anilist-status-map.py"):
+        args = ["--soft"] if s == "_fetch-p8731-full.py" else []
+        if run([PY, SCRIPTS / s, *args]).returncode != 0:
             die(f"{s} 失敗")
     # ★enrich map を作り直したので他言語名の出所も取り直す(intake の workqid/worklabels と同じ。
     #   postflight は「enrich map より新しいか」で鮮度を見る)。 --soft = QLever 不通でも止めない

@@ -17,7 +17,8 @@ year_ended: null
 year_started: 2026
 status: ongoing
 demographic: null
-genres: []
+genres:
+- romance
 editions:
 - type: standard
   label: 通常版
@@ -30,4 +31,8 @@ editions:
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1815/9784302131815.gif?_ex=300x300
     release_date: '2026-12-10'
 _note_origin: rakuten-preorder new1a promoted=2026-10-13 kana=confirmed
+anilist_id: 203314
+genres_anilist:
+- Romance
+popularity: 2
 other_names: []

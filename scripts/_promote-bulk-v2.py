@@ -4679,7 +4679,7 @@ def main():
     #   種2への正式INSERTは月次蒸留時に別途(それまでの恒久化がこのseed)。
     _pp_dir = ROOT / "data" / "seeds" / "preorder-pages"
     if _pp_dir.is_dir():
-        _pp_n = _pp_skip = _pp_seeded = 0
+        _pp_n = _pp_skip = _pp_seeded = _pp_anilist = 0
         for _f in sorted(_pp_dir.glob("*.yml")):
             _dst = OUT_DIR / _f.name
             _stem = _f.stem
@@ -4708,6 +4708,38 @@ def main():
             if not _pd.get("synopsis") and synslug_map.get(_stem):
                 _pd["synopsis"] = synslug_map[_stem]
                 _touched = True
+            # ★AniList も本流と同じ箱へ(2026-10-20 ユーザ GO・「予約頁は本流を通らない」穴の9件目)。
+            #   予約頁は series_key が無く本流の enrich join に乗らない = 2,454頁中 AniList 付きは1頁だった。
+            #   enrich map の `preorder:<stem>` キー(_match-preorder-anilist.py が 巻ISBN→種2 series / 題+作画側の著者 で結ぶ。
+            #   食い違い・年差4年以上・続編同居型は結ばない)を引く。 規則:
+            #   anilist_id / 別名 / AniListジャンル / 人気 / 評価 / 作品QID = 頁に無い時だけ、 要素 = AniList の語を先頭に
+            #   (既存の語は消さない)、 アニメ化 = OR、 ★あらすじ = 空の時だけ(予約頁のあらすじは出荷前レビュー済み =
+            #   本流のように和訳で上書きしない)、 ジャンル = 下の決定で trusted(AniList)を AI/楽天推定より優先(本流と同じ)。
+            #   edition-overrides の "anilist": false(キー=公開slug)で頁ごと止める(本流と同じ)。
+            _pen = None
+            if enrich_map and not _pd.get("anilist_id"):
+                _pen = enrich_map.get("preorder:" + _stem)
+                if _pen and (_load_edition_overrides().get(_pd.get("slug") or _stem) or {}).get("anilist") is False:
+                    _pen = None
+            if _pen:
+                _pd["anilist_id"] = _pen["anilist_id"]
+                for _fk in ("synonyms", "genres_anilist", "popularity", "score"):
+                    if _pen.get(_fk) and not _pd.get(_fk):
+                        _pd[_fk] = _pen[_fk]
+                if _pen.get("tags"):
+                    _tn0 = {t.get("name") for t in _pen["tags"]}
+                    _pd["tags"] = list(_pen["tags"]) + [t for t in (_pd.get("tags") or [])
+                                                        if not (isinstance(t, dict) and t.get("name") in _tn0)]
+                if _pen.get("anime") and not _pd.get("anime_adapted"):
+                    _pd["anime_adapted"] = True
+                _ja0 = synopsis_ja.get(str(_pen["anilist_id"]))
+                if _ja0 and not _pd.get("synopsis"):
+                    _pd["synopsis"] = _ja0
+                _wq0 = work_qid.get(str(_pen["anilist_id"]))
+                if _wq0 and _wq0.get("qid") and not _pd.get("work_wikidata_qid"):
+                    _pd["work_wikidata_qid"] = _wq0["qid"]
+                _touched = True
+                _pp_anilist += 1
             # ★掲載誌の per-case 是正も本流と同じくここに通す(2026-08-08 実害・下のジャンルと同型)。
             #   予約頁は種2を通らない=L2818の決定点に来ないため、magazine-corrections.yml に
             #   正しく書いても**頁の magazine が空のまま**だった(ひぐらし新規4頁で silent 空振り)。
@@ -4725,6 +4757,16 @@ def main():
             #   予約頁は種2を通らない=本流の決定点に来ないため、エンリッチ柱が genre-enrich-2425.json に
             #   正しく書いても**頁のgenresが空のまま**だった(新作25件が silent 空振り)。
             #   本流の順(trusted > rakuten > enrich)に合わせ、**頁が既にgenresを持つ時は触らない**。
+            #   ★trusted(AniList genres+themes)は本流と同じく最優先(2026-10-20): 頁のジャンルが空 / AI暫定 / 楽天推定 の時に置き換える
+            #   (旗の無いジャンル=手で入れた可能性があるものは触らない)。
+            _ptr = {g for g in ((_pen or {}).get("genres_trusted") or []) if g in valid_gens}
+            if _ptr and (not (_pd.get("genres") or []) or _pd.get("genres_provisional") or _pd.get("genres_rakuten")):
+                if _ptr & {"baseball", "soccer"}:
+                    _ptr.add("sports")
+                _pd["genres"] = sorted(_ptr)
+                _pd.pop("genres_provisional", None)
+                _pd.pop("genres_rakuten", None)
+                _touched = True
             if not (_pd.get("genres") or []):
                 for _src_map in (_RAKUTEN_GENRES, _GENRE_ENRICH):
                     _cand = [g for k in {_stem, _pd.get("slug") or _stem}
@@ -4873,7 +4915,7 @@ def main():
             _pp_n += 1
             if _touched:
                 _pp_seeded += 1
-        print(f"  preorder-pages合流: {_pp_n} (seed適用={_pp_seeded} / 種2側優先skip={_pp_skip})", file=sys.stderr)
+        print(f"  preorder-pages合流: {_pp_n} (seed適用={_pp_seeded} / 種2側優先skip={_pp_skip} / AniList結線={_pp_anilist})", file=sys.stderr)
 
     print(f"  巻書誌の役割で著者是正: {_ROLE_FIX_STATS['pages']}頁 (原作者を足した {_ROLE_FIX_STATS['added']}人 / "
           f"作画の役割を直した {_ROLE_FIX_STATS['fixed']}人 / うち最終段で拾った頁 {_ROLE_FIX_STATS.get('pass2', 0)})", file=sys.stderr)

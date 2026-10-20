@@ -38,8 +38,11 @@ AIZ_MIN, AIZ_MAX = 0.30, 0.70   # 通常版比の巻数(下限=登録もれ除�
 #   66k再走査(~5分)をせずに、その頁の分だけ既存JSONへ差し替える。reflect(targeted)から呼ぶ。
 _ap = argparse.ArgumentParser()
 _ap.add_argument("--only", default="", help="このstem(manga.v2のファイル名)だけ再計算し既存JSONへ差替")
+_ap.add_argument("--only-file", dest="only_file", default="", help="同上を1行1stemのファイルで(大量時=コマンドライン長対策)")
 _A = _ap.parse_args()
 ONLY = [x.strip() for x in _A.only.split(",") if x.strip()]
+if _A.only_file:
+    ONLY += [x.strip() for x in open(_A.only_file, encoding="utf-8") if x.strip()]
 
 _files = ([os.path.join(ROOT, "data", "manga.v2", x + ".yml") for x in ONLY] if ONLY
           else sorted(glob.glob(os.path.join(ROOT, "data", "manga.v2", "*.yml"))))

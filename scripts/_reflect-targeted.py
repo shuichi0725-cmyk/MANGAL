@@ -51,6 +51,9 @@ def run(cmd):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--only", default="", help="再生成する manga.v2 stem(カンマ区切り)")
+    # ★大量(数百頁〜)は1行1stemのファイルで(2026-10-20 予約頁 AniList 結線 約1,300頁。 Windows のコマンドライン長
+    #   上限32k をカンマ列挙が超える)。 promote には --only-file、 索引には --update-file、 コーナーには --only-file で渡す
+    ap.add_argument("--only-file", dest="only_file", default="", help="再生成する manga.v2 stem(1行1stemのファイル)")
     ap.add_argument("--drop", default="", help="削除する manga.v2 stem(カンマ区切り)")
     ap.add_argument("--push", action="store_true")
     ap.add_argument("--allow-loss", dest="allow_loss", action="store_true",
@@ -61,9 +64,18 @@ def main():
     ap.add_argument("--no-preview", action="store_true", help="preview同期をskip")
     a = ap.parse_args()
     only = [s.strip() for s in a.only.split(",") if s.strip()]
+    if a.only_file:
+        only += [s.strip() for s in open(a.only_file, encoding="utf-8") if s.strip()]
+    only = list(dict.fromkeys(only))
     drop = [s.strip() for s in a.drop.split(",") if s.strip()]
     if not only and not drop:
         print("--only か --drop を指定", file=sys.stderr); sys.exit(1)
+    # 下流(promote / 索引 / コーナー)へ渡す対象一覧。 長い時はファイルで渡す
+    _only_list_file = None
+    if len(",".join(only)) > 8000:
+        _only_list_file = os.path.join(ROOT, ".cache", f"reflect-only-{datetime.datetime.now().strftime('%Y%m%d-%H%M%S')}.txt")
+        with open(_only_list_file, "w", encoding="utf-8", newline="\n") as _lf:
+            _lf.write("\n".join(only) + "\n")
 
     # 0. ★反映前スナップショット(2026-08-08 新設): 対象頁の ISBN集合/巻数 を控える。
     #    狙い= **実在する巻を黙って消す事故**の検出。ユーザは「不自然な数字」には気付けるが
@@ -160,7 +172,8 @@ def main():
     if only:
         # ★promote が落ちたら止める(2026-10-20 実踏: AniList dump 取り直し中に promote が EOFError で落ちたのに
         #   頁は前回のまま残るので検証ゲートを素通りし、直っていない頁で索引を作って push していた)
-        if run([PY, "scripts/_promote-bulk-v2.py", "--only", ",".join(only)]) != 0:
+        _pargs = ["--only-file", _only_list_file] if _only_list_file else ["--only", ",".join(only)]
+        if run([PY, "scripts/_promote-bulk-v2.py", *_pargs]) != 0:
             print("★promote が失敗した = 頁は再生成されていない。push せずに止める(上の traceback を見る)", file=sys.stderr)
             sys.exit(6)
 
@@ -263,7 +276,7 @@ def main():
     upd = ",".join(only)
     rem = ",".join(remove_slugs)
     idx_data = [PY, "scripts/_build-list-index.py", "data/manga.v2", "data"]
-    if only: idx_data += ["--update", upd]
+    if only: idx_data += (["--update-file", _only_list_file] if _only_list_file else ["--update", upd])
     if remove_slugs: idx_data += ["--remove", rem]
     if only or remove_slugs: run(idx_data)
 
@@ -272,7 +285,7 @@ def main():
     #     manga.v2 から作る**生成物**なので、per-case修正のたびに古くなる(週次まで直らなかった)。
     #     --only で該当頁の行だけ差し替える(66k再走査 ~5分 → 数秒)。
     if only:
-        run([PY, "scripts/_gen-corner-auto.py", "--only", upd])
+        run([PY, "scripts/_gen-corner-auto.py", *(["--only-file", _only_list_file] if _only_list_file else ["--only", upd])])
         # 3c. ★試し読みの範囲(data/tameshiyomi-map.json)も作り直す(2026-10-04 ユーザ発見「9巻10巻試し読みがない」)。
         #     範囲は「索引の巻数まで構築で伸ばす」= 巻を足した頁は索引更新の後に作り直さないと週次まで古いまま。
         #     全件で数秒・BookLive へは1リクエストも出さない(title_id+巻番号の組み立てだけ)。

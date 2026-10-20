@@ -4061,3 +4061,8 @@ dedup:
   title: S級パーティーから追放された狩人、実は世界最強
   isbns: 5
   note: '2026-10-20 月次1.2.21 #22: 5冊完全一致の二重頁(どちらも公開)。源 stub(data/manga・slug欄 esu-kyuu-…)が残っていた。正は source-pages の s-kyuu-…(1文字英字は英字のまま)'
+- drop: tezuka-osamu-shinarioshuu
+  canonical: tezuka-osamu-scenario-shuu
+  title: 手塚治虫シナリオ集
+  isbns: 1
+  note: '2026-10-20 ユーザ GO「1、2 と、3 の4頁までやる」: 1冊完全一致の二重頁(どちらも公開)。正は予約頁 seed の tezuka-osamu-scenario-shuu = 2026-07-21 手塚治虫漫画全集400冊の別巻(全集386)として作った頁(NDL題ヨミ・キャッチ/あらすじ付き・外来語 シナリオ→scenario の slug 規則どおり)。こちらは種2の源 data/manga/tezuka-osamu-shinarioshuu.yml(slug欄=同名)から出ていた頁'

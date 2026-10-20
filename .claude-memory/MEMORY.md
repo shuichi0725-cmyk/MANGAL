@@ -76,7 +76,7 @@
 - [⏳広域監査修正queue](audit_fix_queue_post_kobo.md)
 ## 未完(⏳・他分野から)
 - [⏳他言語名=言語名つき・AI訳題非表示](other_names_multilingual.md)
-- [⏳月次1.2.21の残り(予約頁AniList・recall-v2 裁定待ち)](distill_2026_10_1221.md)
+- [⏳月次1.2.21の残り(予約頁の二重頁5・recall付替提案)](distill_2026_10_1221.md)
 - [⏳抜粋本=楽天副題だけの層](excerpt_subtitle_hidden_layer.md)
 - [⏳種2に在るのに出ない版](hidden_editions_pending.md)
 - [⏳コンビニ掃引(裁定待ち3)](konbini_sweep_2026_08_state.md)

@@ -1483,3 +1483,6 @@ overrides:
   - {key: "qid:Q11453576|name:源氏物語", action: drop}
   - {key: "qid:Q11583140|name:源氏物語", action: drop}
   - {key: "qid:Q11276101|name:ナヴァグラハ|sub:virgin 9 souls", action: drop}
+  # 2026-10-20 recall-v2 取り直し(ユーザ GO「1、2 と、3 の4頁までやる」): 7月の結び先 210476 は 2018年の再刊『森山塔選集 よい子の性教育』(年差 Y-)。
+  #   頁は1988年の単行本 = 本体の項目 203553『よい子の性教育』(1988・山本直樹・1巻)へ付け替え
+  - {key: "qid:Q324980|name:よい子の性教育", action: relink, to_id: 203553}
