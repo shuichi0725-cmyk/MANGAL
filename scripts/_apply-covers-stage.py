@@ -72,6 +72,19 @@ def apply():
         try: o = json.loads(line); cov[o["isbn13"]] = o["cover_url"]
         except: continue
     print(f"covers seed: {len(cov)}件 読込", flush=True)
+    # ★cover-override に在る ISBN は触らない(2026-10-20 フルpromote 実踏: 空値=「書影なし確定」を
+    #   promote は守るのに、この段が null を seed で埋め戻していた = 前日に外した Kobo 誤配置241件・
+    #   noimage 除去が毎月の intake で復活)。 値ありの override は promote が既に書いている。
+    ovr = set()
+    op = os.path.join(ROOT, "data", "seeds", "cover-override.jsonl")
+    if os.path.exists(op):
+        for line in open(op, encoding="utf-8"):
+            try: o = json.loads(line)
+            except: continue
+            ib = to13(o.get("isbn13"))
+            if ib and "cover_url" in o:
+                ovr.add(ib)
+    print(f"cover-override: {len(ovr)}件 は充填しない", flush=True)
     nfill = npage = 0
     for d in (".preview-data/manga", "data/manga.v2"):
         base = os.path.join(ROOT, d)
@@ -86,7 +99,7 @@ def apply():
                 for vols in srcs:
                     for v in vols:
                         ib = to13(v.get("isbn13"))
-                        if ib and not v.get("cover_url") and ib in cov:
+                        if ib and not v.get("cover_url") and ib in cov and ib not in ovr:
                             v["cover_url"] = cov[ib]; nfill += 1; ch = True
             if ch:
                 open(fp, "w", encoding="utf-8").write(yaml.dump(data, allow_unicode=True, sort_keys=False, Dumper=Dp))

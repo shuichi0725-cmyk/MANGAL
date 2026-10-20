@@ -2832,12 +2832,16 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
     #   楽天予約で standard として種4に入った新刊を MADB が deluxe で取り込み、メイク・ディア・ホーム3巻 /
     #   最強で最速の無限レベルアップ6-13巻 等が同じ本2冊で出た)。 下の番号ガードは同じ版の中しか見ない。
     #   ★番号違いは足す(番号0の1巻化・MADB誤番号の是正など、同ISBNを別番号で出す正当な用途が204件ある)。
+    #   ★判定は「在るか」でなく「同番号の取り合い(by_num)の後に頁に残ったか」で(2026-10-20 フルpromote 実踏:
+    #     「在れば足さない」だと、種2に在るのに同じ版種の別レーベルに番号を取られて出ない巻を種4で別版に
+    #     出していた表示修復=おそ松くんKCデラックス3-5巻・サイレントメビウス文庫等12冊が頁から消えた)。
+    #     → ここでは足しておき、下の out 組み立て後に、残った種2の巻と同じ(ISBN,巻番号)の種4だけ外す。
     _s2_vol_keys = {(_norm_isbn(v.get("isbn13")), v.get("number"))
                     for _g in by_type.values() for _e in _g for v in _e["volumes"] if v.get("isbn13")}
+    _s4_dup_ids: set[int] = set()   # 種2と同じ(ISBN,巻番号)の種4巻(dict の id)= out 後に残った種2があれば外す
     for sid in series_ids:
         for supp_vol in supp_map.get(sid, []):
-            if supp_vol.get("isbn13") and (_norm_isbn(supp_vol["isbn13"]), supp_vol.get("number")) in _s2_vol_keys:
-                continue
+            _s4_dup = bool(supp_vol.get("isbn13")) and (_norm_isbn(supp_vol["isbn13"]), supp_vol.get("number")) in _s2_vol_keys
             target_type = supp_vol["_edition_type"]
             if apply_edt_merge and target_type in ("shinsoban", "aizoban", "kanzenban", "deluxe"):
                 target_type = "standard"
@@ -2880,6 +2884,8 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
                     ed_group[0]["volumes"] = [v for v in ed_group[0]["volumes"]
                                               if not (v.get("number") == _num and not _occupies(v))]
                 ed_group[0]["volumes"].append(clean_vol)
+                if _s4_dup:
+                    _s4_dup_ids.add(id(clean_vol))
     # 全 edition_group の volumes を number 順 sort (= 単一 edition + 補完追加 で 順序崩れ防止)
     def _vol_sort_key(v):
         try: return (0, int(v.get("number") or 0))
@@ -2929,6 +2935,15 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
                 "_src_sid": primary_ed.get("_src_sid"),
             }
         )
+    # ★種4の重複外し(上の _s4_dup_ids の後半): 取り合いの後に残った種2の巻と同じ(ISBN,巻番号)の種4だけ外す。
+    #   種2側が別レーベルに番号を取られて消えていれば種4を残す(=表示修復が効く)。 空になった版は落とす。
+    if _s4_dup_ids:
+        _s2_shown = {(_norm_isbn(v.get("isbn13")), v.get("number"))
+                     for e in out for v in e["volumes"] if v.get("isbn13") and id(v) not in _s4_dup_ids}
+        for e in out:
+            e["volumes"] = [v for v in e["volumes"]
+                            if not (id(v) in _s4_dup_ids and (_norm_isbn(v.get("isbn13")), v.get("number")) in _s2_shown)]
+        out = [e for e in out if e["volumes"]]
     # ★MADB誤番号是正: 上下/上中下/前後 が完全に揃っているのに番号が連番でない
     #   (= 「下」を上中下の3番目として number=3 にする系統的バグ。 上下2冊が[1,3]に水増し)
     #   → ラベル順(上<中<下)で 1..N に振り直す。 全DB ~1,677件 + カラーED型。
