@@ -43,6 +43,11 @@ INITIAL_YEAR_RANGES = (
 )
 # startDate なし の entry は 別 chunk
 NO_DATE_CHUNK = 'no_date'
+# ★↑は使われておらず、発売日の範囲で区切る本走では startDate なしの作品が1件も取れない(2026-10-20 実測:
+#   旧 dump は delta 合流で33件持っていたが本走は0件)+ 範囲に入るはずの作品も稀に抜ける(勇者パーティーに
+#   かわいい子がいたので、告白してみた。2021-01-25)。 → 本走の最後に carry_over() で、前の dump と delta に
+#   在って今回取れていない ID を id_in で取り直す(在れば最新の中身で足す・無ければ AniList 側で削除済み)。
+DELTA_JSONL = Path('.cache/anilist-delta.jsonl')
 
 FORMATS = ['MANGA', 'ONE_SHOT']  # NOVEL は除外 (= LN 不要)
 
@@ -120,11 +125,27 @@ query ($page: Int, $format: MediaFormat) {
 }
 '''
 
+# ID 指定で取り直す用(本走と同じ field。 削除済みの ID は結果に出ないだけ)
+QUERY_IDS = (QUERY
+             .replace('query ($page: Int, $format: MediaFormat, $startGT: FuzzyDateInt, $startLT: FuzzyDateInt) {',
+                      'query ($ids: [Int]) {', 1)
+             .replace('Page(page: $page, perPage: 50)', 'Page(page: 1, perPage: 50)', 1)
+             .replace('''media(
+      type: MANGA,
+      countryOfOrigin: "JP",
+      format: $format,
+      startDate_greater: $startGT,
+      startDate_lesser: $startLT,
+      sort: ID
+    )''', 'media(id_in: $ids, type: MANGA, sort: ID)', 1))
+assert '$ids' in QUERY_IDS and 'startDate_greater' not in QUERY_IDS
+
+
 def yyyymmdd(year, month=1, day=1):
     return int(f'{year:04d}{month:02d}{day:02d}')
 
-def fetch_page(variables, max_retry=5):
-    data = json.dumps({'query': QUERY, 'variables': variables}).encode('utf-8')
+def fetch_page(variables, max_retry=5, query=None):
+    data = json.dumps({'query': query or QUERY, 'variables': variables}).encode('utf-8')
     for retry in range(max_retry):
         try:
             req = urllib.request.Request(
@@ -235,7 +256,67 @@ def fetch_chunk(format_str, lo_m, hi_m, seen_ids, chunk_id=None):
     print(f'[{chunk_id}] DONE pages={page} entries={len(chunk_entries)}', flush=True)
     return chunk_entries
 
+def _ids_in(path):
+    """dump(gzip)/delta(平文) の jsonl から MANGA/ONE_SHOT の id 集合。 拡張子でなく先頭バイトで gzip 判定(.bak-* 名)。"""
+    ids = set()
+    if not path or not Path(path).exists():
+        return ids
+    with open(path, 'rb') as fh:
+        gz = fh.read(2) == b'\x1f\x8b'
+    opener = (lambda: gzip.open(path, 'rt', encoding='utf-8')) if gz else (lambda: open(path, encoding='utf-8'))
+    with opener() as fh:
+        for line in fh:
+            try:
+                m = json.loads(line)
+            except Exception:
+                continue
+            if m.get('format') in FORMATS and m.get('countryOfOrigin', 'JP') == 'JP':
+                ids.add(m['id'])
+    return ids
+
+
+def carry_over(seen_ids, prev_paths):
+    """前の dump / delta に在って今回の本走で取れていない ID を id_in で取り直す(50件/req)。"""
+    cand = set()
+    for p in prev_paths:
+        cand |= _ids_in(p)
+    cand -= seen_ids
+    ids = sorted(cand)
+    got = []
+    for i in range(0, len(ids), 50):
+        pg = fetch_page({'ids': ids[i:i + 50]}, query=QUERY_IDS)
+        for m in (pg or {}).get('media') or []:
+            if m['id'] in seen_ids or m.get('format') not in FORMATS or m.get('countryOfOrigin') != 'JP':
+                continue
+            seen_ids.add(m['id'])
+            got.append(m)
+        time.sleep(1.5)
+    nd = sum(1 for m in got if not (m.get('startDate') or {}).get('year'))
+    print(f'[carry_over] 前の dump/delta に在り本走に無い {len(ids)} 件 → 取り直し {len(got)}(うち発売日なし {nd})'
+          f' / AniList 側で削除・対象外 {len(ids) - len(got)}', flush=True)
+    return got
+
+
+def carry_only(prev):
+    """今の dump に carry_over の分だけ足す(本走をやり直さずに直す用)。 --carry-only <前の dump>"""
+    import os
+    seen = _ids_in(OUT_JSONL)
+    extra = carry_over(seen, [Path(prev), DELTA_JSONL])
+    if not extra:
+        return
+    tmp = OUT_JSONL.with_name(OUT_JSONL.name + '.tmp')
+    with gzip.open(OUT_JSONL, 'rb') as src, gzip.open(tmp, 'wb') as out:
+        for line in src:
+            out.write(line)
+        for e in extra:
+            out.write((json.dumps(e, ensure_ascii=False) + '\n').encode('utf-8'))
+    os.replace(tmp, OUT_JSONL)
+    print(f'DONE: +{len(extra)} → {OUT_JSONL}', flush=True)
+
+
 def main():
+    if '--carry-only' in sys.argv:
+        return carry_only(sys.argv[sys.argv.index('--carry-only') + 1])
     test_mode = '--test' in sys.argv
     resume = '--resume' in sys.argv
 
@@ -302,6 +383,11 @@ def main():
                 PROGRESS.write_text(json.dumps({'done_chunks': sorted(done_chunks), 'total_written': total_written}))
                 elapsed = time.time() - start
                 print(f'  → total_written={total_written} elapsed={elapsed/60:.1f}min', flush=True)
+        if not test_mode:
+            # 前の dump(本走は .tmp に書くので正規パスはまだ前のまま)+ delta の取りこぼしを取り直す
+            for e in carry_over(seen_ids, ([] if resume else [OUT_JSONL]) + [DELTA_JSONL]):
+                f.write((json.dumps(e, ensure_ascii=False) + '\n').encode('utf-8'))
+                total_written += 1
 
     if out_path != OUT_JSONL:
         import os

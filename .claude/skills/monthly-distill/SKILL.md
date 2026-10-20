@@ -130,6 +130,7 @@ Phase1: **~5分**(2026-09-02 リハーサル実測 4分16秒 = clean 150s / buil
 - **再登録の別MADB-ID二重化**(虚構推理vol23型)→ merge の ISBN/madb_book dedup guard + 監査。
 - **Bashツールの heredoc は `'` と `\` が化ける**→ 複数行scriptは Write で scratchpad に書いて実行。ログ読みは utf-8 で(cp932混在)。
 - **種3に無い新 series は v9/v13 の照合対象外**(種3=5月凍結)→ AniList に結ぶのは recover 段(`_match-recover-norm.py`=題強正規化×作者一致×1:1、`match-recovery.tsv` に★追記式)だけ。2026-10-20 まで6/2に1回作ったきりで新作の AniList リンクが増えなかった(組込初回 +1,827件)。★旧版は上書き式=手で回すと既存12,375件が消えた。enrich map を作り直すと delta 由来の anime:true が消える→ animeflag 段が直後に入れ直す
+- **AniList 全件取得は発売日の範囲で区切る**= 発売日なしの作品は本走で取れない(2026-10-20 実測0件)→ 本走の最後の carry_over が「前の dump と delta に在って今回取れていない ID」を id_in で取り直す(初回 +206・削除済み10)。ログの `[carry_over]` 行を見る。★`_anilist-delta.py --merge` は delta 後勝ち=新しい本走を古い行で上書きするので、フル取得の直後には打たない
 - **Windowsの os.kill(pid, 0) はプロセスを殺す**→ 生死判定は ctypes OpenProcess(status が実装済)。CommandLine正規表現で殺すと自分のシェルも死ぬ。
 
 ## 検算(リハーサル)= 取込済tagで手順だけ通す
