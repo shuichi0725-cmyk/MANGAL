@@ -22,7 +22,7 @@ import argparse, ast, datetime, json, os, re, shutil, subprocess, sys, time, uni
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "v0.15"  # v0.15: 表が0語の頁は、2回判定で2回とも「在る」以上と読んだ語を強い順に最大3語まで表に上げる(lift)/ 否定文(「〜しない」)の中の語は「違う」(経路L 点検9回ぶんのまとめ) # v0.14: 語に付いて返った [要素] の印を外す(点検 L-20261013-0802: 猫村さんで2回の答えが食い違い扱いになった) # v0.13: ジャンルは作品全体をそう呼べる時だけ・ふつうの言い回しに1度出るだけの語は「違う」・表の語が別の表の語を含む時は詳しい方だけ出す・序盤の材料にも出る語はネタバレ扱いにしない(経路L 1,000件の点検) # v0.12: その巻だけの出来事・固有名の一部は「違う」(経路L 1回目の点検: ダイマジン=戦争・しずくちゃん=ミステリー・BUNGO=シニア) # v0.11: 語彙に無い新しい語も、隠し要素として持つ(付与案に載った=根拠の検査を通った語) # v0.10: ありふれた語(語ごとのユーザ裁定 rulings.yml word_rulings)は表に出さず隠して持つ  # v0.9: 関連作から引き継ぐのは本筋のエントリだけ(票は収集の道具 v0.5 が絞る。 ジャンルもそろえる)/ 使わなかったタグを付与案に見せる  # v0.8: 表に出すのは強い順に最大10語・語彙と訳が在る語だけ / AniList と材料が一致した語を先に / 隠して持つ語を欄に分ける  # v0.7: ネタバレ印は「その語を持つエントリの半分以上に付いている時だけ」有効 / 呼び出しは共通部品(_lean_claude)  # v0.6: 作品ごとのユーザ裁定(rulings.yml)を付与案より優先 / apply のジャンル追記を二重にしない  # v0.5: apply(表に出す案を seed へ書く口。ユーザの Go 発話の引用が必須)  # v0.4(2026-10-09 ユーザ裁定): ネタバレ印の語は表に出さない(控えへ)/ 控えはサイトに出さず記録だけ  # v0.2: 指示文から試金石の語の例を外す / タグ一覧の語を候補に / ありふれた名詞を候補から外す
+VERSION = "v0.16"  # v0.16: lift を {語: わけ} で受け、2回とも「在る」の語を先に、次に片方だけ「芯」の語を上げる # v0.15: 表が0語の頁は、2回判定で2回とも「在る」以上と読んだ語を強い順に最大3語まで表に上げる(lift)/ 否定文(「〜しない」)の中の語は「違う」(経路L 点検9回ぶんのまとめ) # v0.14: 語に付いて返った [要素] の印を外す(点検 L-20261013-0802: 猫村さんで2回の答えが食い違い扱いになった) # v0.13: ジャンルは作品全体をそう呼べる時だけ・ふつうの言い回しに1度出るだけの語は「違う」・表の語が別の表の語を含む時は詳しい方だけ出す・序盤の材料にも出る語はネタバレ扱いにしない(経路L 1,000件の点検) # v0.12: その巻だけの出来事・固有名の一部は「違う」(経路L 1回目の点検: ダイマジン=戦争・しずくちゃん=ミステリー・BUNGO=シニア) # v0.11: 語彙に無い新しい語も、隠し要素として持つ(付与案に載った=根拠の検査を通った語) # v0.10: ありふれた語(語ごとのユーザ裁定 rulings.yml word_rulings)は表に出さず隠して持つ  # v0.9: 関連作から引き継ぐのは本筋のエントリだけ(票は収集の道具 v0.5 が絞る。 ジャンルもそろえる)/ 使わなかったタグを付与案に見せる  # v0.8: 表に出すのは強い順に最大10語・語彙と訳が在る語だけ / AniList と材料が一致した語を先に / 隠して持つ語を欄に分ける  # v0.7: ネタバレ印は「その語を持つエントリの半分以上に付いている時だけ」有効 / 呼び出しは共通部品(_lean_claude)  # v0.6: 作品ごとのユーザ裁定(rulings.yml)を付与案より優先 / apply のジャンル追記を二重にしない  # v0.5: apply(表に出す案を seed へ書く口。ユーザの Go 発話の引用が必須)  # v0.4(2026-10-09 ユーザ裁定): ネタバレ印の語は表に出さない(控えへ)/ 控えはサイトに出さず記録だけ  # v0.2: 指示文から試金石の語の例を外す / タグ一覧の語を候補に / ありふれた名詞を候補から外す
 ME = "python scripts/_element-assign.py"
 TEST_ROOT = os.environ.get("EH_ROOT")
 BASE = TEST_ROOT or os.path.join(ROOT, ".cache", "element-harvest")
@@ -400,7 +400,7 @@ def load_word_rulings():
 
 
 def make_proposal(stem, m, V, cands, ans, use, not_spoiler=(), lift=()):
-    """lift = 2回判定で2回とも「在る」以上と読んだ語。 表が0語になる頁に限り、その中から強い順に LIFT_MAX 語まで表に上げる。"""
+    """lift = 2回判定で表0の頁に上げてよい語({語: わけ}。 2回とも「在る」以上 / 片方が「芯」でもう片方は挙げず)。 表が0語になる頁に限り、強い順に LIFT_MAX 語まで表に上げる。"""
     ani, gkeys, ani_skip, ani_weak = anilist_part(m, V)
     ok, bad, missing = verify(m, V, cands, ans)
     c = m["card"]
@@ -463,13 +463,15 @@ def make_proposal(stem, m, V, cands, ans, use, not_spoiler=(), lift=()):
         # ★表0の頁(経路L 材料あり頁の18.6%)は、2回とも「在る」と読んだ語を上げる。 点検9回ぶんで型6「表0で隠しの語のほうが芯に見える」が
         #   毎回4〜7頁出た(葬儀プランナーの葬儀・借金まみれの借金・同棲生活の同棲 など)。 短い材料ではモデルが「芯」をほとんど付けない。
         #   上げないもの: 材料の根拠が無い語(AniList の票だけ)・根拠が後ろの巻だけの語(ネタバレ扱い)・ありふれた語・語彙か訳が無い語・ユーザ裁定で出さない語
-        for e in sorted(merged.values(), key=strength):
+        #   r0.8(v0.16): lift が {語: わけ} の時は「片方が芯・もう片方は挙げず」の語も入る。 2回とも「在る」の語を先に上げる
+        why = lift if isinstance(lift, dict) else dict.fromkeys(lift, "表0の頁で2回とも「在る」")
+        for e in sorted(merged.values(), key=lambda e: ("片方" in why.get(e["word"], ""), strength(e))):
             if n_show >= LIFT_MAX:
                 break
             a = e["ani"] or {}
-            if (e["kind"] == "要素" and e.get("hid") == "在る" and e["word"] in lift and e["mat"] and not e["spoiler"] and not e.get("ruled")
+            if (e["kind"] == "要素" and e.get("hid") == "在る" and e["word"] in why and e["mat"] and not e["spoiler"] and not e.get("ruled")
                     and e["word"] not in common and a.get("en") not in HIDE_ALWAYS and e["vocab"] in ("語彙内", "表示できる語") and not a.get("no_ja") and not a.get("draft")):
-                e["cls"], e["hid"], e["lift"] = "表", "", "表0の頁で2回とも「在る」"
+                e["cls"], e["hid"], e["lift"] = "表", "", why[e["word"]]
                 n_show += 1
     shown = [e for e in merged.values() if e.get("cls") == "表"]
     for e in shown:  # 同じ意味の語を2つ並べない: 表の語が別の表の語にまるごと含まれる時は、詳しい方だけ出す(成長/成長物語、結婚/契約結婚)
