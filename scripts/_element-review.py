@@ -474,6 +474,9 @@ def cmd_inspect(a):
     out = os.path.join(INSP_DIR, iid + ".md")
     with open(out, "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(L) + "\n")
+    # ★設計どおり: 点検は約1,000頁のロットの抜き取り検査(30頁を読む + 全頁を機械で数える)= ロット全体(pool)を点検済みにする。 pick(30頁)だけにすると
+    #   点検待ちが970頁残り、次の run --until 1000 が30頁しか流さない。 2026-10-21 Haiku の窓がこれを「バグ」と読み違えた(pool→pick と記録の削除を提案)。
+    #   流した件数が1,000を超える(1,281件など)のは、材料なしの頁(chars 0)が点検待ちに数えられないため。
     with open(INSP_LEDGER, "a", encoding="utf-8", newline="\n") as f:
         f.write(json.dumps({"id": iid, "at": now(), "pool": n, "pages": [{"stem": r["stem"], "at": r.get("judged_at") or r["at"]} for r in pool]}, ensure_ascii=False) + "\n")
     print(f"点検 {iid}: 対象 {n:,}頁から {len(pick)}頁 → {os.path.relpath(out, ROOT)}\nこのファイルを読み、末尾の「報告」を埋める(Edit)。 終わったら 状態 を「報告済み」にして commit+push")
