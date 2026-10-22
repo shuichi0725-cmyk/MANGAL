@@ -25,6 +25,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DB = os.path.join(ROOT, ".cache", "db-v2.sqlite")
 DUMP = os.path.join(ROOT, ".cache", "anilist-manga-dump-v3.jsonl.gz")
 OUT = os.path.join(ROOT, "docs", "production-diagnostics", "author-qid-audit.tsv")
+# 作品頁が import する非表示一覧(app/manga/[slug]/page.tsx)。 不一致の頁(slug)= 著者: Wikidata リンクを出さない
+HIDE = os.path.join(ROOT, "data", "author-qid-hide.json")
 
 VAR = str.maketrans({"齋": "斎", "齊": "斉", "邊": "辺", "邉": "辺", "髙": "高", "﨑": "崎", "嶋": "島", "濱": "浜",
                      "澤": "沢", "國": "国", "廣": "広", "櫻": "桜", "眞": "真", "惠": "恵", "德": "徳", "藏": "蔵"})
@@ -115,7 +117,10 @@ def main():
         w = csv.writer(fo, delimiter="\t")
         w.writerow(["verdict", "slug", "stem", "title", "qid", "qid_name", "authors", "original_authors", "evidence"])
         w.writerows(sorted(rows))
-    print(f"→ {os.path.relpath(OUT, ROOT)}")
+    with open(HIDE, "w", encoding="utf-8", newline="\n") as fh:
+        json.dump(sorted({r[1] for r in rows}), fh, ensure_ascii=False, indent=0)
+        fh.write("\n")
+    print(f"→ {os.path.relpath(OUT, ROOT)} / {os.path.relpath(HIDE, ROOT)}({len(rows)}頁)")
 
 
 if __name__ == "__main__":

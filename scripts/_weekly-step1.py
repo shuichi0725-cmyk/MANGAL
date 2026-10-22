@@ -64,6 +64,10 @@ STEPS = [
      "AniList statusマップ(連載中→完結降格の鮮度維持)"),
     ("placeholder-queue", ["_placeholder-cover-refresh.py", "--build-queue"],
      "書影queue週次再算出(消化=アイドル運転⑩)"),
+    # ★2026-10-22: 作品頁の「著者: Wikidata」リンクを、頁の著者/原作者と一致しないQIDの頁で隠す一覧(data/author-qid-hide.json)。
+    #   per-case の著者是正で一致/不一致が動くので週次で焼き直す(外部へは出ない・手元の作家表/AniList dump/種2のみ)。
+    ("author-qid-hide",   ["_audit-author-qid.py"],
+     "著者QID不一致の頁一覧(著者: Wikidata リンクの非表示用)+監査TSV"),
     ("masters-json",      ["gen-masters-json.ts"],
      "左レール用マスタJSON(publishers+magazines 48.6KB を全頁RSCから外す受け皿。★2026-09-09新設)"),
     ("list-index",        ["_build-list-index.py", "data/manga.v2", "data"],

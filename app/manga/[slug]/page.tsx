@@ -16,6 +16,10 @@ import { buildOnlyMangaSlugs, loadAllManga, loadTagI18n, loadWameiTags } from "@
 import { coverUrl } from "@/lib/schema";
 import { otherNamesView } from "@/lib/otherNames";
 import { workSameAs } from "@/lib/sameAs";
+// ★著者QID(wikidata_qid)が頁の著者/原作者と一致しない頁の一覧(scripts/_audit-author-qid.py が生成・週次step1で焼き直す)。
+//   ここに在る頁は「著者: Wikidata」リンクを出さない(別人・キャラ原案の人を著者と見せない。2026-10-22)。
+import authorQidHide from "@/data/author-qid-hide.json";
+const AUTHOR_QID_HIDE = new Set<string>(authorQidHide as string[]);
 import { jaGenre, jaTag } from "@/lib/anilist-i18n";
 
 // ★プレビュー専用「しまう」ボタン(マイ本棚 docs/cloud-briefs/my-shelf.md)。本番は next.config.ts が
@@ -579,7 +583,7 @@ export default async function MangaDetailPage({
               ・作品 AniList = anilist_id(連携済み作品のみ)
               ・作品 Wikidata = work_wikidata_qid(AniList漫画ID経由で一意取得)
               ・著者 Wikidata = wikidata_qid(= series.qid は著者QIDなので「著者」と明示) */}
-          {(manga.anilist_id || manga.work_wikidata_qid || manga.wikidata_qid) && (
+          {(manga.anilist_id || manga.work_wikidata_qid || (manga.wikidata_qid && !AUTHOR_QID_HIDE.has(manga.slug))) && (
             <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[11px] text-ink/45">
               <span className="font-semibold text-ink/40">外部リンク</span>
               {manga.anilist_id && (
@@ -602,7 +606,7 @@ export default async function MangaDetailPage({
                   作品: Wikidata {manga.work_wikidata_qid}
                 </a>
               )}
-              {manga.wikidata_qid && (
+              {manga.wikidata_qid && !AUTHOR_QID_HIDE.has(manga.slug) && (
                 <a
                   href={`https://www.wikidata.org/wiki/${manga.wikidata_qid}`}
                   target="_blank"
