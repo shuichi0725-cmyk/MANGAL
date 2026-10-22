@@ -56,10 +56,12 @@ def load_seed() -> dict[str, dict]:
                 continue
             isbn = str(row.get("isbn13") or "").strip()
             url = str(row.get("cover_url") or "").strip()
-            if not isbn or not url:
+            if not isbn:
                 continue
             folded[isbn] = row
-    return folded
+    # 空値の最終行 = 「書影なし確定」(promote もキーが在れば空で勝たせる)= 未反映ではない。
+    # 空行を畳む前に捨てると、その前の行の URL が勝ち残って誤検出になる(2026-10-22 Kobo誤配置是正の22件)。
+    return {k: r for k, r in folded.items() if str(r.get("cover_url") or "").strip()}
 
 
 def parse_volumes(path: Path) -> dict[str, str]:
