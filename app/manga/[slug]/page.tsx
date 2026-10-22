@@ -15,6 +15,7 @@ import { yearStatusLabel } from "@/lib/format";
 import { buildOnlyMangaSlugs, loadAllManga, loadTagI18n, loadWameiTags } from "@/lib/loadData";
 import { coverUrl } from "@/lib/schema";
 import { otherNamesView } from "@/lib/otherNames";
+import { workSameAs } from "@/lib/sameAs";
 import { jaGenre, jaTag } from "@/lib/anilist-i18n";
 
 // ★プレビュー専用「しまう」ボタン(マイ本棚 docs/cloud-briefs/my-shelf.md)。本番は next.config.ts が
@@ -301,6 +302,7 @@ export default async function MangaDetailPage({
     url: `https://mangal-db.com/manga/${manga.slug}`,
     ...(cover ? { image: cover } : {}),
     author: (manga.authors ?? []).map((a) => ({ "@type": "Person", name: a.name })),
+    ...(workSameAs(manga).length ? { sameAs: workSameAs(manga) } : {}),
     ...(publisher ? { publisher: { "@type": "Organization", name: publisher.name } } : {}),
     ...(manga.year_started ? { startDate: String(manga.year_started) } : {}),
     ...(manga.synopsis ? { description: String(manga.synopsis).slice(0, 200) } : {}),
