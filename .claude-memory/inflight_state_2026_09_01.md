@@ -238,6 +238,6 @@ IndexNow は 298 URL 受理(削除分の通知)。鍵ファイルも本番に載
 
 ## ★2026-10-22 本番待ち(10-22 週次の後に入れたコード)
 - 全頁 `googlebot: max-image-preview:large, max-snippet:-1`(app/layout.tsx・12914a3a5)= 全頁の共通部が変わる=**次の週次はCODE週・全量PUT~18万**。
-  ★R2今期(10/27〆)は既に877,090 → 10/27までに週次を回すと枠1Mを超える。**期が替わってから(10/28以降)の週次で出す**のが安全。
+  R2今期(10/27〆)は877,090。10/27までに全量週次を回すと約6.2万超過=**約$0.28**(従量・[[r2_class_a_budget_arithmetic]])= 出し時は自由。
   公開後の確認: 本番HTMLに `<meta name="googlebot" content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"/>`、実験頁(noindex)は従来どおり noindex のまま。
 - バスルームのぺペン 分野 shoujo→seinen(データのみ=差分反映 or 週次)。
