@@ -321,7 +321,8 @@ for klass, r in targets:
         if slug in existing:
             holds.append((klass, isbn, title, f"slug衝突 {slug}")); continue
     existing.add(slug)
-    romaji = slug.replace("-", " ")
+    # ★同名衝突の「-姓+年」suffix はslug専用=ローマ字題に持ち込まない(sugar shimada2026型 2026-10-22)
+    romaji = re.sub(r"-[a-z]+(?:19|20)\d{2}$", "", slug).replace("-", " ")
     rd = ym + (f"-{r['day']:02d}" if r.get("day") else "")
     authors = []
     for i2, name in enumerate(auths):

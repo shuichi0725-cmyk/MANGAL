@@ -198,7 +198,8 @@ for r in [x for x in _pool if ONLY_ISBN is None or str(x.get("isbn")) in ONLY_IS
     slug = MANUAL_SLUG.get(str(r.get("isbn"))) or _make_slug(base, kana)
     if not slug:
         holds.append((r.get("isbn"), title, "slug生成不可")); continue
-    romaji = slug.replace("-", " ")
+    # ★手動slugの「-姓+年」suffix はローマ字題に持ち込まない(2026-10-22)
+    romaji = re.sub(r"-[a-z]+(?:19|20)\d{2}$", "", slug).replace("-", " ")
     if slug in existing:
         # ★同名異作品の衝突=規則「-姓+発売年」(chuka-ichiban-manabe1993型)。裸の-西暦は禁止(shion-2026事故 2026-07-14)
         from _slug_kana_lib import kana2romaji as _k2r
