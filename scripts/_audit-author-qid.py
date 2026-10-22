@@ -65,7 +65,7 @@ def main():
         for e in d.get("editions") or []:
             for vs in [e.get("volumes") or []] + [v.get("volumes") or [] for v in (e.get("versions") or [])]:
                 isbns += [str(v["isbn13"]) for v in vs if v.get("isbn13")]
-        pages.append({"slug": d.get("slug"), "title": d.get("title", ""), "qid": q, "au": au, "oa": oa,
+        pages.append({"slug": d.get("slug"), "stem": os.path.splitext(os.path.basename(f))[0], "title": d.get("title", ""), "qid": q, "au": au, "oa": oa,
                       "anilist": d.get("anilist_id"), "isbns": isbns[:30]})
     print(f"不一致(著者欄にも原作者欄にも居ない): {len(pages)}頁")
 
@@ -107,13 +107,13 @@ def main():
         else:
             v = "WRONG_PERSON"
         res[v] += 1
-        rows.append((v, p["slug"], p["title"], q, qdisp.get(q, ""), "|".join(p["au"]), "|".join(p["oa"]),
+        rows.append((v, p["slug"], p["stem"], p["title"], q, qdisp.get(q, ""), "|".join(p["au"]), "|".join(p["oa"]),
                      ";".join(sorted(set(ev)))))
     print(dict(res))
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w", encoding="utf-8", newline="") as fo:
         w = csv.writer(fo, delimiter="\t")
-        w.writerow(["verdict", "slug", "title", "qid", "qid_name", "authors", "original_authors", "evidence"])
+        w.writerow(["verdict", "slug", "stem", "title", "qid", "qid_name", "authors", "original_authors", "evidence"])
         w.writerows(sorted(rows))
     print(f"→ {os.path.relpath(OUT, ROOT)}")
 

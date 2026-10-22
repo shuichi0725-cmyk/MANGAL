@@ -227,6 +227,9 @@ def ndl_live(query, maximum=30, start=1, exit_on_429=True):
             "series": g(r"<dcndl:seriesTitle>.*?<rdf:value>([^<]+)"),
             "creators": [c.replace("/", "") for c in creators],
             "creators_kana": [c.strip() for c in creators_kana],
+            # ★役割つきの著者表記(dc:creator 例「上田敦夫 漫画」「真島ヒロ 原作」)。 creators は名前だけで
+            #   原作/作画の区別が落ちるため、役割の裏取りにはこちらを使う(2026-10-22 著者QID監査で追加)。
+            "creators_raw": [c.strip() for c in re.findall(r"<dc:creator>([^<]+)", r)],
         })
     return out
 
