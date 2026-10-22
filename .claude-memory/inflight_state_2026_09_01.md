@@ -241,3 +241,4 @@ IndexNow は 298 URL 受理(削除分の通知)。鍵ファイルも本番に載
   R2今期(10/27〆)は877,090。10/27までに全量週次を回すと約6.2万超過=**約$0.28**(従量・[[r2_class_a_budget_arithmetic]])= 出し時は自由。
   公開後の確認: 本番HTMLに `<meta name="googlebot" content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"/>`、実験頁(noindex)は従来どおり noindex のまま。
 - バスルームのぺペン 分野 shoujo→seinen(データのみ=差分反映 or 週次)。
+- 作品頁 JSON-LD に sameAs(作品Wikidata QID+AniList・b647e885f)= 同じく次の週次で公開。
