@@ -31,3 +31,4 @@ metadata:
 - [予約頁は本流を通らない型(9件目=AniList)](preorder_page_bypasses_mainline_class.md)
 - [dedup退役→予約頁にstub](dedup_retire_srcstub_vs_preorder.md)
 - [★日次=ドラフト廃止・途中報告なし・結果から](feedback_daily_distill_no_drafts_quiet.md)
+- [少年画報社YK2026の版(BADBOYS別頁/ギャングキング=overrides/おちこぼれ=新装版)](shonen_gahosha_yk_2026_editions.md)
