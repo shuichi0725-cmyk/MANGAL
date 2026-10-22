@@ -235,3 +235,9 @@ IndexNow は 298 URL 受理(削除分の通知)。鍵ファイルも本番に載
   方針の経緯 = [[kindle_link_browser_not_app]](エラーを出さない>ブラウザで開く)。
 - 週次後の確認: こんにちはマイコン頁の Amazon = `/s?k=こんにちはマイコン 1 すがやみつる`(紙・Kindle とも)/ ONE PIECE = `/dp/4088725093`。
   羅針盤は PC(幅900以上の横長)で右の欄+輪が横いっぱい・コマに「詳細 / Kindle / Amazon」+[PR]。
+
+## ★2026-10-22 本番待ち(10-22 週次の後に入れたコード)
+- 全頁 `googlebot: max-image-preview:large, max-snippet:-1`(app/layout.tsx・12914a3a5)= 全頁の共通部が変わる=**次の週次はCODE週・全量PUT~18万**。
+  ★R2今期(10/27〆)は既に877,090 → 10/27までに週次を回すと枠1Mを超える。**期が替わってから(10/28以降)の週次で出す**のが安全。
+  公開後の確認: 本番HTMLに `<meta name="googlebot" content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"/>`、実験頁(noindex)は従来どおり noindex のまま。
+- バスルームのぺペン 分野 shoujo→seinen(データのみ=差分反映 or 週次)。
