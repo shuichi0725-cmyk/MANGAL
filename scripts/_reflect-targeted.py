@@ -280,6 +280,12 @@ def main():
     if remove_slugs: idx_data += ["--remove", rem]
     if only or remove_slugs: run(idx_data)
 
+    # 3a. ★転送ファイル(public/_redirects + .cache/redirects.json)を slug-aliases.yml から作り直す(2026-10-22 新設)。
+    #     drop/統合で alias を足しても再生成を誰も呼ばず、週次 preflight の「リダイレクト衛生 形状NG」で
+    #     毎回止まっていた(10/20 の二重頁4+ギャングキング等 6件)。 ~1秒・冪等(alias 不変なら差分なし)なので毎回回す。
+    #     本番KVへの投入は週次 r2-sync の自動連鎖 / _kv-redirects-sync.py の役目(ここでは書かない)。
+    run([PY, "scripts/_gen-redirects.py"])
+
     # 3b. ★コーナーstockの増分更新(2026-09-06 ユーザ発見「さっき消した2巻がコーナーに残ってる」)。
     #     public/data/{anniversaries,deluxe-stock,aizouban-stock,tokusouban-stock}.json は
     #     manga.v2 から作る**生成物**なので、per-case修正のたびに古くなる(週次まで直らなかった)。

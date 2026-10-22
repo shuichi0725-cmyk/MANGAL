@@ -27,3 +27,7 @@ Cloudflare の `_redirects` は連鎖を辿らない。
 - 実踏: ホロビート改名(horobiito→horobeat・6b4d956ec)は `_redirects` に1行足しただけ → 週次で消えた →
   `slug-aliases.yml` に `horobiito: horobeat` を足して KV 再投入(31,573件)。旧slugが本番未公開だったので実害なし。
 - slug を改名したら **`slug-aliases.yml` に old: new を書く**(上の手順3)。`_redirects` を直接いじらない。
+
+## ★2026-10-22 追記: 再生成は反映が自動で回す
+- `_reflect-targeted.py` が毎回 `_gen-redirects.py` を呼ぶ(~1秒・冪等)。手でやるのは **slug-aliases.yml の追記と、既存の連鎖の張り替え(上の1)だけ**。
+- 契機: 10/20 の drop 6件が alias だけ入って `_redirects` 未再生成のまま → 10/22 週次 preflight が「リダイレクト衛生 形状NG」で停止。
