@@ -31,6 +31,14 @@ export const metadata: Metadata = {
     images: [{ url: "/og-default.png", width: 1200, height: 630, alt: "MANGAL — 日本の漫画データベース" }],
   },
   twitter: { card: "summary_large_image" },
+  // ★大きい画像プレビューの許可(2026-10-22 ユーザGO)。無指定だとGoogleは標準サイズ扱い=
+  //   Discover の事実上の必須条件(max-image-preview:large)を満たさず、通常検索でも大サムネが出にくい。
+  //   noindex を指定している実験頁等は頁側の robots が優先される(Next の metadata は robots を丸ごと上書き)。
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
+  },
 };
 
 // ★D3テーマ(黒×アシッドライム)= 2026-08-13 ユーザGOで本採用。全ビルドで常時付与。
