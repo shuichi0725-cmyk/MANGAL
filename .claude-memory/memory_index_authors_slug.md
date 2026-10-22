@@ -37,3 +37,4 @@ metadata:
 - [フルpromoteのslug改名](full_promote_resolves_public_slug.md)
 - [作者が別人に化ける(典拠ID8桁切り)=promoteが本のクレジットで分け直す](ndla_8digit_author_merge.md)
 - [⏳著者QIDが別人(3/40)](author_qid_wrong_person.md)
+- [著者QID是正は確認不要](feedback_author_qid_fix_no_confirm.md)
