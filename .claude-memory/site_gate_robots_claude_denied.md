@@ -37,3 +37,8 @@ skill manba-distill には robots への言及が無い。**2026-10-08 にユー
 
 **How to apply**: 新しいサイトを取りに行く処理を書く時は `_site_gate.check` → `pace` を必ず通す。門が不可と言ったサイトを WebFetch 等の別経路で取らない。
 関連: [[booklive_access_incident]] [[bookwalker_harvest_forbidden]] [[manba_booklive_titleid_route]]
+
+## 2026-10-22 追記: Wikimedia の API は門の対象外(既存の道具の作法で可)
+- wikidata.org / wikipedia の robots.txt は昔から `User-agent: * / Disallow: /w/`(=頁巡回クローラ向け)。門は `/w/api.php` も「robots不可」と返す。
+- Wikimedia は API の利用を UA 明示+節度ある間隔で公式に認めている。既存の道具(_fetch-work-qid.py=QLever / wiki-distill / external-enrich / _wiki_host の排他ロック+429冷却)は門を通さずこの作法で使っており正常。
+- ★「Wikidata は robots 不可で使えない」と言わない(10/22 にユーザへ誤って言った)。ただし新しく書く Wikimedia 取得も _wiki_host のロック/冷却と UA を必ず使う。
