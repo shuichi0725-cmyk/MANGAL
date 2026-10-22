@@ -209,6 +209,14 @@ def split_title(raw):
                 if m and m.group(1).strip():
                     base, vol = m.group(1).strip(), int(m.group(2))
                     matched = "tail_after_close"
+            # A3z. ★英字語+空白+ゼロ詰め2桁(フルメタル・パニック！ Family　03 型 2026-10-22): ゼロ詰めは巻番号の書き方
+            #   (題の一部の数字=Area 88 型はゼロ詰めしない)なので確定。A3 は [2-9]|[1-9]\d なので 01/03 を落とし、
+            #   3巻の本が vol=None の新作1巻としてドラフト化されていた(=単巻先行登録の事故)。
+            if matched is None:
+                m = re.search(r"^(.*?[A-Za-z!！?？])[\s　]+0([1-9])[\s　]*(?:[（(]完[)）])?$", t)
+                if m and m.group(1).strip():
+                    base, vol = m.group(1).strip(), int(m.group(2))
+                    matched = "tail_zeropad"
             # A3. 英字語+空白+裸数字(GOLD RUSH 8 / S-WITCH 2 型 2026-09-02): 題の一部かも(Area 88)なので suspect
             if matched is None:
                 m = re.search(r"^(.*?[A-Za-z])[\s　]+([2-9]|[1-9][0-9]{1,2})[\s　]*(?:[（(]完[)）])?$", t)

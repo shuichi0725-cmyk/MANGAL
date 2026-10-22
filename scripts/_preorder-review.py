@@ -174,6 +174,11 @@ def main():
         _maxv = max((v for v in _vols if isinstance(v, int)), default=0)
         _tails = _NUMR.get(_maxv, ())
         _hit = next((t for t in _tails if kana_v.endswith(t)), None)
+        # ★題自身が同じかなで終わるなら題の読み(たゆたう恋の散り際「に」型 2026-10-22 偽陽性)= 混入ではない
+        _title_kata = "".join(chr(ord(ch) + 0x60) if "ぁ" <= ch <= "ゖ" else ch
+                              for ch in re.sub(r"[\s　!！?？。、]+$", "", title))
+        if _hit and _title_kata.endswith(_hit):
+            _hit = None
         if _hit and _maxv >= 2 and not re.search(r"[0-9０-９]\s*[!！?？。]*$", title):
             rows.append(("KANA_VOLNUM", slug, f"kana末尾『{_hit}』=巻数{_maxv}の読み混入疑い(題末尾は非数字)→kana/romaji/slugから剥離", title))
 
