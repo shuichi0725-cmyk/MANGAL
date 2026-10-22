@@ -27,3 +27,9 @@ reason: BookLive! からアクセス規制を受けた(ユーザ報告)。
    200/404以外が返れば本体が exit 2 で止まり、この札が再び置かれる。
 4. 問題なければ札を消す: rm .cache/tameshiyomi/BLOCKED
 5. アイドル運転に戻すのは、残41件を消化してからで十分(実質もう枯れている)。
+
+■ 2026-10-22 復帰確認(ユーザ指示「試しに1件とってみて」・札は残置)
+- 送信 2リクエストのみ(MangalBot UA・直列・3秒間隔): robots.txt=200 / product頁 title_id 582763 vol 001(チェンソーマン1)=200・264KB・正常な作品頁。= **アクセス規制は解けている**。
+- ★ただし robots.txt が `Disallow: /bviewer/` (User-agent: *)。 収集道具は bviewer を HEAD して試し読み有無を判定している(_tameshiyomi-harvest.py の head200)
+  = 上の手順2の「禁止されていたら**この柱は畳む**」に該当。 札は消さず、柱を畳むかはユーザ裁定待ち。
+- 利用者がクリックする試し読みリンク(VolumeCoverflow の bviewer 直開き)は人の閲覧なので robots の対象外 = 表示は続けてよい。
