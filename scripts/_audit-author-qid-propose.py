@@ -37,7 +37,7 @@ INFO = ("著", "[著]", "ほか著", "編", "")
 def norm(s):
     s = unicodedata.normalize("NFKC", s or "").casefold().translate(VAR)
     s = "".join(chr(ord(c) + 0x60) if "ぁ" <= c <= "ゖ" else c for c in s)
-    return re.sub(r"[\s・=.\-ー〜~!！?？☆★♪,、。]", "", s)
+    return re.sub(r"[\s・=.\-ー〜~!！?？☆★♪,、。()（）]", "", s)
 
 
 def split_raw(x):

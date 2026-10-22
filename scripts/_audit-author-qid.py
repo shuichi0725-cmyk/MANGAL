@@ -35,7 +35,7 @@ VAR = str.maketrans({"齋": "斎", "齊": "斉", "邊": "辺", "邉": "辺", "�
 def norm(s):
     s = unicodedata.normalize("NFKC", s or "").casefold().translate(VAR)
     s = "".join(chr(ord(c) + 0x60) if "ぁ" <= c <= "ゖ" else c for c in s)  # ひらがな→カタカナ
-    return re.sub(r"[\s・=.\-ー〜~!！?？☆★♪]", "", s)
+    return re.sub(r"[\s・=.\-ー〜~!！?？☆★♪()（）]", "", s)
 
 
 def main():

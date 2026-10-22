@@ -2198,7 +2198,18 @@ def enrich_author(a: dict) -> dict:
         rom = romanize_kana(kana)
         if rom:
             a["romaji"] = rom
+    # ★NDL典拠の同名区別「あさひ (漫画家)」のかっこ落ち(=「あさひ漫画家」)を「あさひ（漫画家）」に戻す(2026-10-22 ユーザ裁定A)。
+    #   職業名を削ると同名の別人(別の「あさひ」)の著者頁と合流するため、区別は残す。 読みは元の名前で引いた後に変える
+    #   (author-yomi のキーが元の名前)。 著者頁のURLは読み(romaji)由来なので変わらない。
+    nm = a.get("name") or ""
+    m = _AUTHOR_QUALIFIER.match(nm)
+    if m and nm not in _AUTHOR_QUALIFIER_REAL:
+        a["name"] = f"{m.group(1)}（{m.group(2)}）"
     return a
+
+
+_AUTHOR_QUALIFIER = re.compile(r"^(.+?)(漫画家|作家|イラストレーター|小説家|デザイナー|公認会計士)$")
+_AUTHOR_QUALIFIER_REAL = {"ファンタスティック小説家"}  # 職業名で終わる本物のペンネーム(かっこを付けない)
 
 
 def _get_major_publisher_prefix_legacy(con: sqlite3.Connection, series_id: int) -> str | None:
