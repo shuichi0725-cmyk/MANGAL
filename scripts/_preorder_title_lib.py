@@ -247,6 +247,24 @@ def split_title(raw):
             vol = int(g) if g.isdigit() else _KANJI_NUM.get(g)
             matched = "sono"
 
+    # B'L. ★英字題+空白+裸数字+空白+副題(MAMBA 2 特殊業務委託機関マジカルステップ第19分室 型 2026-10-22):
+    #   B' mid_bare は題末が英字だと題の一部の数字(Area 88型)を恐れて素通しし、2巻が vol=None の新作1巻として
+    #   ドラフト化されていた(=単巻先行登録の事故)。確定はせず suspect(呼び出し側=巻2以上を巻扱い・全巻回収で確定)。
+    #   ★他の全規則の後に置く(9 to 5 Love × Mission(1) 型の末尾巻表示を先取りしない)。副題が括弧/数字始まり
+    #   (TOKUGAWA 15 (2) 型)や特装/限定/付録表記は対象外。
+    if matched is None:
+        m = re.match(r"^(.{2,}?[A-Za-z])[\s　]+([1-9]\d{0,2})[\s　]+([^\d\s　(（].*)$", t)
+        #   ★副題が数字で終わる題は真の巻数が末尾にある(血界戦線 Back 2 Back 10 / Devil May Cry 5 –5 /
+        #   TIGER&BUNNY 2 THE COMIC 1 / PAGE 1 NO.8 型)= 中間の数字は題の一部なので対象外。
+        #   ★副題が「英単語+数字」で始まる(血界戦線 Back 2 Back 10 型)/英字だけ(Slam dunk 10 days after /
+        #   Virtua fighter 2 ten stories 型=題の一部の数字)も対象外。副題に和文を含む形だけを読む。
+        if (m and not re.search(r"特装|限定|付き|付属|特別版|同梱", m.group(3))
+                and not re.search(r"\d[\s　]*[-ー–─)）]?[\s　]*$", m.group(3))
+                and not re.match(r"^[A-Za-z]+[\s　]+\d", m.group(3))
+                and not re.fullmatch(r"[A-Za-z\s　'’.,&]+", m.group(3))):
+            return {"base": m.group(1).strip(), "vol": None, "part": None, "subtitle": m.group(3).strip(),
+                    "clean": t, "matched": None, "vol_suspect": int(m.group(2))}
+
     clean = (base + ("　" + sub if sub else "")).strip() if matched else t
     return {"base": base if matched else t, "vol": vol, "part": part,
             "subtitle": sub, "clean": clean, "matched": matched, "vol_suspect": None}

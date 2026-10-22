@@ -69,6 +69,12 @@ def split_vol(title):
         else:
             v = int(n) if n else None
         return norm(VOLP.sub("", t)), v
+    # ★英字題+N+和文副題(MAMBA 2 特殊業務委託機関… 型 2026-10-22): split_title B'L と対。
+    #   ここが読めないと1巻が by_base に載らず「全巻回収不成立」で保留に落ちる。
+    from _preorder_title_lib import split_title as _st
+    _r = _st(t)
+    if _r.get("vol_suspect") and _r.get("subtitle") and re.search(r"[A-Za-z]$", _r.get("base") or ""):
+        return norm(_r["base"]), _r["vol_suspect"]
     return norm(t), None
 
 tm = json.load(open(f"{ROOT}/.cache/isbn-title-map.json", encoding="utf-8"))
