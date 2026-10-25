@@ -19,7 +19,7 @@ import argparse, collections, concurrent.futures, datetime, gzip, importlib.util
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
-VERSION = "r0.8"  # r0.8: 表0の頁で上げる語に「片方が芯・もう片方は挙げず」を足す(点検 L-20261021-0249/0753) # r0.7: 表0の頁は2回とも「在る」の語を最大3語まで表に上げる / 材料から話数一覧(▼第N話／…)を外し、紹介文が少ない頁は1本を600字で切らない(点検9回ぶんのまとめ) # r0.6: rebuild(モデルを呼ばずに、残した答えから付与案と台帳を作り直す) # r0.5: 語に付いて返った [要素] の印を外してから2回の答えを合わせる # r0.4: 2回判定の合わせ方をゆるめる(芯+在る → 表。 表0が材料ありの2割だった)/ 材料からのジャンルは2回とも芯の時だけ / 2回とも芯の語は後ろの巻が根拠でも表に出す / 2回の生の答えを残す # r0.3: --twice(2回判定して一致した語だけ表に出す) # r0.2: 材料からのジャンルは2つ以上の紹介文に出る時だけ / --redo
+VERSION = "r0.9"  # r0.9: 意味が重なる語の組(_element-assign v0.17 OVERLAP)/ words(語彙に無くて隠れる芯の語を数えて裁定表に)(見直しまとめて3回目) # r0.8: 表0の頁で上げる語に「片方が芯・もう片方は挙げず」を足す(点検 L-20261021-0249/0753) # r0.7: 表0の頁は2回とも「在る」の語を最大3語まで表に上げる / 材料から話数一覧(▼第N話／…)を外し、紹介文が少ない頁は1本を600字で切らない(点検9回ぶんのまとめ) # r0.6: rebuild(モデルを呼ばずに、残した答えから付与案と台帳を作り直す) # r0.5: 語に付いて返った [要素] の印を外してから2回の答えを合わせる # r0.4: 2回判定の合わせ方をゆるめる(芯+在る → 表。 表0が材料ありの2割だった)/ 材料からのジャンルは2回とも芯の時だけ / 2回とも芯の語は後ろの巻が根拠でも表に出す / 2回の生の答えを残す # r0.3: --twice(2回判定して一致した語だけ表に出す) # r0.2: 材料からのジャンルは2つ以上の紹介文に出る時だけ / --redo
 BASE = os.path.join(ROOT, ".cache", "element-harvest")
 LEDGER = os.path.join(ROOT, "data", "element-harvest", "review-ledger.jsonl")
 CAPS = os.path.join(BASE, "_local", "captions.jsonl")
@@ -373,6 +373,42 @@ def cmd_rebuild(a):
     write_summary(batch)
 
 
+def cmd_words(a):
+    """語彙か訳が無いので隠れている「芯」の語を全頁で数え、裁定表(TSV)にする。 モデルを呼ばない。
+    ★見直しまとめて3回目(2026-10-26): 点検11本の型6(表0で芯が隠れる)は、ほぼ全部これ(別れさせ屋・文化祭・霊感・Crossdressing)。
+      英語のまま = AniList のタグに訳が無い(tag-i18n.yml)/ 日本語 = 語彙(wamei-tags.yml allow)に無い。 どちらも語ごとのユーザ裁定。"""
+    last = {}
+    for r in jl(LEDGER):
+        last[r["stem"]] = r
+    core, zero, ani, ex = collections.Counter(), collections.Counter(), collections.Counter(), collections.defaultdict(list)
+    for r in last.values():
+        if r.get("route") != a.route or str(r["chars"]) == "0":
+            continue
+        p = os.path.join(BASE, r["stem"], "assign", "assign-proposal.json")
+        if not os.path.exists(p):
+            continue
+        with open(p, encoding="utf-8") as f:
+            rows = json.load(f)["rows"]
+        for e in rows:
+            if e.get("hid") == "語彙か訳が無い" and e["tier"] == "芯":
+                w = e["word"]
+                core[w] += 1
+                zero[w] += not r["show"]
+                ani[w] += bool(e.get("ani"))
+                if len(ex[w]) < 3:
+                    q = (e.get("mat") or [{}])[0].get("quote") or f"AniList 票{(e.get('ani') or {}).get('votes')}"
+                    ex[w].append(f"{r['title']}「{q[:40]}」")
+    out = os.path.join(ROOT, "data", "element-harvest", f"new-words-{a.route}.tsv")
+    with open(out, "w", encoding="utf-8-sig", newline="\n") as f:
+        f.write("語\t頁数\tうち表0の頁\t出どころ\t例\n")
+        for w, n in core.most_common():
+            if n >= a.min:
+                f.write(f"{w}\t{n}\t{zero[w]}\t{'AniList' if ani[w] == n else '材料' if not ani[w] else '両方'}\t{' / '.join(ex[w])}\n")
+    k = sum(1 for n in core.values() if n >= a.min)
+    print(f"== 語彙か訳が無くて隠れる「芯」の語 == {len(core):,}種・のべ {sum(core.values()):,}頁(うち表0の頁 {sum(zero.values()):,})"
+          f" / {a.min}頁以上 {k}種・のべ {sum(n for n in core.values() if n >= a.min):,} → {os.path.relpath(out, ROOT)}")
+
+
 def cmd_summary(a):
     if a.batch:
         return write_summary(a.batch)
@@ -490,6 +526,7 @@ def main():
     p.add_argument("--parallel", type=int, default=3); p.add_argument("--model", default="claude-haiku-5-5"); p.add_argument("--effort", default="low")
     p.add_argument("--route", default="L"); p.add_argument("--twice", action="store_true", help="2回判定して合わせる(芯+芯・芯+在る → 表 / 片方だけ → 隠し)"); p.add_argument("--redo", default="", help="この回の頁を判定し直す(道具の決まりを直した後)"); p.add_argument("--stems", default="", help="この頁だけ判定し直す(カンマ区切り。 直しの確かめ用)"); p.set_defaults(f=cmd_run)
     p = sp.add_parser("rebuild", help="モデルを呼ばずに、残してある答えから付与案と台帳を作り直す"); p.add_argument("--route", default="L"); p.set_defaults(f=cmd_rebuild)
+    p = sp.add_parser("words", help="語彙か訳が無くて隠れる「芯」の語を数えて裁定表に"); p.add_argument("--route", default="L"); p.add_argument("--min", type=int, default=5); p.set_defaults(f=cmd_words)
     p = sp.add_parser("summary"); p.add_argument("--batch", default=""); p.set_defaults(f=cmd_summary)
     p = sp.add_parser("sample"); p.add_argument("batch"); p.add_argument("--k", type=int, default=50); p.add_argument("--seed", type=int, default=1); p.set_defaults(f=cmd_sample)
     p = sp.add_parser("inspect"); p.add_argument("--k", type=int, default=30); p.add_argument("--route", default="L"); p.add_argument("--again", action="store_true", help="点検済みの頁からも抜き取る")
