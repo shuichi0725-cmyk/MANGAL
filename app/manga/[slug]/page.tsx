@@ -14,6 +14,7 @@ import MangaFacts, { MangaSynopsis } from "@/components/MangaFacts";
 import { yearStatusLabel } from "@/lib/format";
 import { buildOnlyMangaSlugs, loadAllManga, loadTagI18n, loadWameiTags } from "@/lib/loadData";
 import { coverUrl } from "@/lib/schema";
+import { EDITION_LABELS } from "@/lib/edition";
 import { otherNamesView } from "@/lib/otherNames";
 import { workSameAs } from "@/lib/sameAs";
 // ★著者QID(wikidata_qid)が頁の著者/原作者と一致しない頁の一覧(scripts/_audit-author-qid.py が生成・週次step1で焼き直す)。
@@ -117,9 +118,34 @@ function seoFactSentence(
     ? `${m.year_started}年〜${m.year_ended && m.year_ended !== m.year_started ? `${m.year_ended}年` : ""}`
     : "";
   if (yr) tail.push(yr);
-  const s = `${head}${tail.length ? `${tail.join("、")}。` : ""}`;
-  // 余白がある時だけ、頁が何を載せているかを添える(埋まっていれば切り捨てられるだけなので付けない)
-  return s.length <= 62 ? `${s}全巻の発売日・ISBN・書影を掲載。` : s;
+  // ★頁が何を載せているかの一文は generateMetadata が全体の長さを見て足す(seoPageTail)
+  return `${head}${tail.length ? `${tail.join("、")}。` : ""}`;
+}
+
+/** ★description が短い頁の締めの一文(2026-10-26 Bing「メタディスクリプションが短すぎる」1.2K頁)。
+ *  旧実装は事実文が62字以下の時だけ「全巻の発売日・ISBN・書影を掲載。」を足していたため、
+ *  巻数フレーズ込みで60字前後の頁が残った(つるぎのまい! 59字・髭とハイヒール 67字・手塚治虫エッセイ集 47字)。
+ *  全体が SEO_DESC_MIN 未満なら、catch の有無にかかわらず頁の中身を述べる一文を足す。
+ *  ★Bing の目安 150〜160字は英語向け。日本語SERPは約100〜120字で切れるので上限120字のまま。 */
+const SEO_DESC_MIN = 90;
+function seoPageTail(nVols: number): string {
+  return `${nVols > 1 ? "全巻の" : ""}発売日・ISBN・書影と、書店の購入リンクを掲載。`;
+}
+
+/** 短い頁に足す事実(頁に載っている物だけ): 1巻の発売年月(2巻以上の時)/ 通常版以外の版。 */
+function seoExtraFacts(m: import("@/lib/schema").Manga, nVols: number): string {
+  const out: string[] = [];
+  if (nVols > 1) {
+    let first = "";
+    for (const e of m.editions) for (const v of e.volumes) {
+      const d = String(v.release_date ?? "");
+      if (v.number === 1 && d.length >= 7 && (!first || d < first)) first = d;
+    }
+    if (first) out.push(`1巻は${Number(first.slice(0, 4))}年${Number(first.slice(5, 7))}月発売。`);
+  }
+  const eds = [...new Set(m.editions.map((e) => e.type).filter((t) => ["kanzenban", "shinsoban", "aizoban", "deluxe", "wideban", "bunkobon"].includes(t)))];
+  if (eds.length) out.push(`${eds.map((t) => EDITION_LABELS[t]).join("・")}も掲載。`);
+  return out.join("");
 }
 
 /** ★④ description の余白を書誌で埋める(2026-09-14)。上限120字に対し実測で
@@ -170,6 +196,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     let d = `${sv.phrase}${body}`;
     // ★④: catch を持つ頁で余白が大きい時だけ書誌を足す(catch 無しは事実文に既に入っている)
     if (hasText && d.length < 84) d = `${d}${seoBiblioTail(pubName, magName, m.year_started, m.year_ended)}`;
+    if (d.length < SEO_DESC_MIN) d = `${d}${seoExtraFacts(m, sv.nVols)}`;
+    if (d.length < SEO_DESC_MIN) d = `${d}${seoPageTail(sv.nVols)}`;
     desc = d.slice(0, 120) || desc;
   }
   const cover = coverUrl(m);

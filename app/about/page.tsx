@@ -5,7 +5,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/about" },
   title: "MANGAL について",
   description:
-    "MANGAL は日本の漫画を出版年・著者・出版社・分野・ジャンルから絞り込めるカタログサイトです。",
+    // ★2026-10-26 Bing「メタディスクリプションが短すぎる」(49字)
+    "MANGAL は日本の漫画を出版年・著者・出版社・分野・ジャンルから絞り込めるカタログサイトです。" +
+    "全巻の発売日・ISBN・書影をまとめた漫画データベースの成り立ち、データの出どころ、使い方を説明します。",
 };
 
 export default function AboutPage() {

@@ -9,7 +9,8 @@ export const metadata = {
   // ★description が既定のままだった(2026-09-15 番人 _check-ssr-content.py が検出)。
   description:
     "毎日1作ずつ紹介してきた「今日の一冊」の過去ログ。" +
-    "祖父母・親・子の三世代それぞれの時代から選んだ漫画を、発売日順にさかのぼって読めます。",
+    "祖父母・親・子の三世代それぞれの時代から選んだ漫画を、発売日順にさかのぼって読めます。" +
+    "各作品の全巻一覧・発売日へ進めます。",  // ★2026-10-26 Bing 短すぎる(68字)
 };
 
 export default function SansedaiArchive() {

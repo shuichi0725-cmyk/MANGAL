@@ -12,6 +12,13 @@ export function generateStaticParams() {
   return V.map((c) => ({ key: c.key }));
 }
 
+/** 収録作品数の一文。 作品名が「その他・巻題確認中」の束は数えない / 期セット型(石ノ森)は期の数 */
+function nWorks(c: ZenshuuCollection): string {
+  if (c.sets?.length) return `全${c.sets.length}期のセット構成で、`;
+  const n = (c.works ?? []).filter((w) => !w.name.startsWith("その他")).length;
+  return n > 1 ? `${n}作品を巻の順に、` : "";
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ key: string }> }) {
   const { key } = await params;
   const c = V.find((x) => x.key === key);
@@ -24,12 +31,13 @@ export async function generateMetadata({ params }: { params: Promise<{ key: stri
   const head = c?.author ? `${c.author} 作品一覧(${c.name} 全${c.total}巻)` : c ? `${c.name}(全${c.total}巻)` : "全集";
   return {
     title: head,
+    // ★2026-10-26 Bing「メタディスクリプションが短すぎる」(66〜76字)→ 収録作品数と掲載項目を足す
     description: c
       ? c.author
         ? `${c.author}の作品一覧を、${c.name}(全${c.total}巻・${c.publisher}・${c.years}刊行)の` +
-          "収録作品で。各巻の発売日・書影と、購入リンクを掲載。"
+          `収録作品で。${nWorks(c)}全巻の収録作品・発売日・ISBN・書影と、各作品の頁・購入リンクを掲載。`
         : `${c.name}の全${c.total}巻一覧。${c.publisher}・${c.years}刊行。` +
-          "各巻の収録作品・発売日・書影と、購入リンクを掲載。"
+          "各巻の収録作品・発売日・ISBN・書影と、購入リンクを掲載。"
       : "漫画全集の巻一覧。",
     alternates: { canonical: `/zenshuu/${key}` },
   };

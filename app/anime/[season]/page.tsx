@@ -23,7 +23,9 @@ export async function generateMetadata({ params }: { params: Promise<{ season: s
   const label = seasonLabel(season);
   return {
     title: `${label}アニメの原作漫画一覧`,  // ★サフィックスは layout template が付ける(2026-09-04 二重是正)
-    description: `${label}放送アニメの原作漫画・コミカライズ ${V.seasons[season].length}作品。巻一覧・発売日つき。`,
+    // ★2026-10-26 Bing「メタディスクリプションが短すぎる」(39字)→ 頁に載せている中身を具体的に
+    description: `${label}に放送されるアニメの原作漫画・コミカライズ ${V.seasons[season].length}作品の一覧。` +
+      "原作が何巻まで出ているか、完結か連載中か、最新刊の発売日を作品ごとに掲載。各作品の全巻一覧・書影・購入リンクへ進めます。",
     alternates: { canonical: `${SITE}/anime/${season}` },
   };
 }
