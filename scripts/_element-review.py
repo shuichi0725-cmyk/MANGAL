@@ -237,7 +237,13 @@ def run_total(a, batches, why):
           "\n★報告と commit の件数はこの行の「流した」を使う(最後の回の件数ではない)", flush=True)
 
 
+AUTO_ROUTES = ("L", "A", "後")  # ★W(材料なし)は 2026-10-12 ユーザ裁定「4保留でよい」で当面流さない = 自動では選ばない
+
+
 def cmd_run(a):
+    if not a.route:  # ★2026-10-26 経路L を流し切った。 日課「見直し進めて」のコマンドを変えずに次の経路へ進む
+        a.route = next((r for r in AUTO_ROUTES if a.stems or a.redo or next_stems(1, r)), "L")
+        print(f"経路 {a.route}(--route を省いた = 「未」が残る最初の経路)", flush=True)
     ea, eh = mod("_element-assign"), mod("_element-harvest")
     import _lean_claude
     ctx = {"ea": ea, "eh": eh, "lean": _lean_claude, "V": ea.load_vocab()}
@@ -481,6 +487,8 @@ def cmd_inspect(a):
                 st = next((line.strip() for line in fh if line.startswith("状態:")), "状態: ?")
             print(f"{f}\t{st}")
         return
+    if not a.route:
+        a.route = next((r for r in AUTO_ROUTES if uninspected(r, a.again)), "L")
     pool = uninspected(a.route, a.again)
     if not pool:
         print("まだ点検していない頁が無い(流した分は点検済み)。 もう一度抜き取るなら --again")
@@ -549,13 +557,13 @@ def main():
     p = sp.add_parser("run"); p.add_argument("--n", type=int, default=100); p.add_argument("--loops", type=int, default=1)
     p.add_argument("--until", type=int, default=0, help="点検待ちの頁(材料あり)がこの件数に届くまで流す。 再開しても足りない分だけ(--loops は見ない)")
     p.add_argument("--parallel", type=int, default=3); p.add_argument("--model", default="claude-haiku-5-5"); p.add_argument("--effort", default="low")
-    p.add_argument("--route", default="L"); p.add_argument("--twice", action="store_true", help="2回判定して合わせる(芯+芯・芯+在る → 表 / 片方だけ → 隠し)"); p.add_argument("--redo", default="", help="この回の頁を判定し直す(道具の決まりを直した後)"); p.add_argument("--stems", default="", help="この頁だけ判定し直す(カンマ区切り。 直しの確かめ用)"); p.set_defaults(f=cmd_run)
+    p.add_argument("--route", default="", help="省くと AUTO_ROUTES の順で「未」が残る経路"); p.add_argument("--twice", action="store_true", help="2回判定して合わせる(芯+芯・芯+在る → 表 / 片方だけ → 隠し)"); p.add_argument("--redo", default="", help="この回の頁を判定し直す(道具の決まりを直した後)"); p.add_argument("--stems", default="", help="この頁だけ判定し直す(カンマ区切り。 直しの確かめ用)"); p.set_defaults(f=cmd_run)
     p = sp.add_parser("rebuild", help="モデルを呼ばずに、残してある答えから付与案と台帳を作り直す"); p.add_argument("--route", default="L"); p.set_defaults(f=cmd_rebuild)
     p = sp.add_parser("compact", help="台帳を頁ごとの最新の1行に詰める"); p.set_defaults(f=cmd_compact)
     p = sp.add_parser("words", help="語彙か訳が無くて隠れる「芯」の語を数えて裁定表に"); p.add_argument("--route", default="L"); p.add_argument("--min", type=int, default=5); p.set_defaults(f=cmd_words)
     p = sp.add_parser("summary"); p.add_argument("--batch", default=""); p.set_defaults(f=cmd_summary)
     p = sp.add_parser("sample"); p.add_argument("batch"); p.add_argument("--k", type=int, default=50); p.add_argument("--seed", type=int, default=1); p.set_defaults(f=cmd_sample)
-    p = sp.add_parser("inspect"); p.add_argument("--k", type=int, default=30); p.add_argument("--route", default="L"); p.add_argument("--again", action="store_true", help="点検済みの頁からも抜き取る")
+    p = sp.add_parser("inspect"); p.add_argument("--k", type=int, default=30); p.add_argument("--route", default="", help="省くと点検待ちが残る経路"); p.add_argument("--again", action="store_true", help="点検済みの頁からも抜き取る")
     p.add_argument("--list", action="store_true", help="点検の報告の一覧と状態"); p.set_defaults(f=cmd_inspect)
     a = ap.parse_args()
     a.f(a)
