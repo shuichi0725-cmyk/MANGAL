@@ -328,6 +328,29 @@ def write_summary(batch):
           f"\n多い語: {'・'.join(f'{k}{v}' for k, v in w.most_common(20))}\n→ {os.path.relpath(p, ROOT)}", flush=True)
 
 
+def compact():
+    """台帳を「頁ごとの最新の1行」だけに詰める(前の台帳は .cache に退避)。 → (前の行数, 後の行数)
+    ★2026-10-26 ユーザ「詰めて良い」: rebuild のたびに全頁ぶん追記して 63.8MB(GitHub は 100MB で push 不可)。
+      読む側(表・点検・作り直し)はどれも頁ごとの最新行しか使わない。 失うのは古い回の summary(--batch)と --redo の対象だけ。"""
+    rows, last = 0, {}
+    with open(LEDGER, encoding="utf-8") as f:
+        for l in f:
+            if l.strip():
+                rows += 1
+                last[json.loads(l)["stem"]] = l if l.endswith("\n") else l + "\n"
+    bak = os.path.join(ROOT, ".cache", f"review-ledger-bak-{datetime.datetime.now():%Y%m%d-%H%M%S}.jsonl")
+    os.makedirs(os.path.dirname(bak), exist_ok=True)
+    os.replace(LEDGER, bak)
+    with open(LEDGER, "w", encoding="utf-8", newline="\n") as f:
+        f.writelines(sorted(last.values(), key=lambda l: json.loads(l)["at"]))
+    return rows, len(last), bak
+
+
+def cmd_compact(a):
+    n0, n1, bak = compact()
+    print(f"== 台帳を詰めた == {n0:,}行 → {n1:,}行(頁ごとの最新)/ 前の台帳 → {os.path.relpath(bak, ROOT)}")
+
+
 def cmd_rebuild(a):
     """モデルを呼ばずに、残してある2回の生の答えから付与案と台帳を作り直す(数分・0円)。
     ★機械の決まり(2回の合わせ方・ジャンル案の条件・語彙に足した語・隠す語の裁定・語の重なり)を変えた時はこれで全頁に効く。
@@ -371,6 +394,8 @@ def cmd_rebuild(a):
         z1 += str(new["chars"]) != "0" and not new["show"]
     print(f"== 作り直し(モデルを呼ばない){batch} == {n}頁 / 表に出す語 {before:,} → {after:,} / 表0の頁(材料あり){z0:,} → {z1:,} / 生の答えが無くて飛ばした頁 {skip}")
     write_summary(batch)
+    n0, n1, _ = compact()  # 作り直しは全頁ぶん追記する = そのたびに詰める
+    print(f"台帳を詰めた: {n0:,}行 → {n1:,}行")
 
 
 def cmd_words(a):
@@ -526,6 +551,7 @@ def main():
     p.add_argument("--parallel", type=int, default=3); p.add_argument("--model", default="claude-haiku-5-5"); p.add_argument("--effort", default="low")
     p.add_argument("--route", default="L"); p.add_argument("--twice", action="store_true", help="2回判定して合わせる(芯+芯・芯+在る → 表 / 片方だけ → 隠し)"); p.add_argument("--redo", default="", help="この回の頁を判定し直す(道具の決まりを直した後)"); p.add_argument("--stems", default="", help="この頁だけ判定し直す(カンマ区切り。 直しの確かめ用)"); p.set_defaults(f=cmd_run)
     p = sp.add_parser("rebuild", help="モデルを呼ばずに、残してある答えから付与案と台帳を作り直す"); p.add_argument("--route", default="L"); p.set_defaults(f=cmd_rebuild)
+    p = sp.add_parser("compact", help="台帳を頁ごとの最新の1行に詰める"); p.set_defaults(f=cmd_compact)
     p = sp.add_parser("words", help="語彙か訳が無くて隠れる「芯」の語を数えて裁定表に"); p.add_argument("--route", default="L"); p.add_argument("--min", type=int, default=5); p.set_defaults(f=cmd_words)
     p = sp.add_parser("summary"); p.add_argument("--batch", default=""); p.set_defaults(f=cmd_summary)
     p = sp.add_parser("sample"); p.add_argument("batch"); p.add_argument("--k", type=int, default=50); p.add_argument("--seed", type=int, default=1); p.set_defaults(f=cmd_sample)
