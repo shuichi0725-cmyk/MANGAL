@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { amazonDpUrlFromIsbn13, amazonSearchUrl } from "@/lib/amazon";
+import { amazonDpUrlFromIsbn13, amazonQuerySearchUrls, hasRakutenPaper } from "@/lib/amazon";
+import MarqueeTitle from "@/components/MarqueeTitle";
 import ShinkanDayHeader from "@/components/ShinkanDayHeader";
 import { sortedDays, weekdayOf, type KnownSet, type ShinkanItem, type ShinkanMonth } from "@/lib/shinkanDates";
 
@@ -9,38 +10,57 @@ const AMZ_TAG = process.env.NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG ?? "";
 
 export function ShinkanRow({ it, known }: { it: ShinkanItem; known: boolean }) {
   const [slug, vol, title, cover, isbn, authors, publisher, imprint] = it;
-  const amz = (isbn && amazonDpUrlFromIsbn13(isbn, AMZ_TAG)) || amazonSearchUrl(`${title} ${vol ?? ""}`.trim(), AMZ_TAG);
+  // ★Amazon・Kindle は作品頁(VolumeCoverflow)と同じ規則(2026-10-15 ユーザ裁定「エラーを出さない方を優先」):
+  //   書影が楽天ブックスの紙の画像なら ISBN-10 の /dp/(紙も Kindle も)、それ以外は「題名 巻 著者」で検索
+  const nameQ = [title, vol ? `${vol}巻` : "", (authors ?? "").split("・")[0]].filter(Boolean).join(" ");
+  const dp = isbn && hasRakutenPaper(cover) ? amazonDpUrlFromIsbn13(isbn, AMZ_TAG) : null;
+  const buy = dp ? { paper: dp, kindle: dp } : amazonQuerySearchUrls(nameQ, AMZ_TAG);
+  const amz = buy.paper;
   // 表示150px高に合わせ楽天サムネイルを300x300へ格上げ(120/200のままだとぼやける)
   const coverHi = cover ? cover.replace(/_ex=(120x120|200x200)/, "_ex=300x300") : null;
   return (
     <div className="flex items-start gap-3 border-b border-[#1d1d1d] px-3 py-2">
-      {/* 書影+題 → Amazon(アフィ。約105×150) */}
-      <a href={amz} target="_blank" rel="nofollow sponsored noopener" className="spring-press flex min-w-0 flex-1 items-start gap-3" title={`${title} をAmazonで見る`}>
-        <span className="relative block h-[150px] w-[105px] shrink-0 overflow-hidden bg-[#1a1a1a]">
-          {coverHi ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={coverHi} alt={vol ? `${title} ${vol}巻` : title} loading="lazy" className="h-full w-full bg-white object-cover" />
-          ) : (
-            <span className="flex h-full w-full items-center justify-center text-[10px] font-bold text-ink/40">NO IMG</span>
-          )}
-        </span>
-        <span className="min-w-0">
-          <span className="block text-[14px] font-bold leading-snug">
-            {title}
-            {vol ? <span className="ml-1 bg-[var(--color-accent)] px-1 text-[9.5px] font-black text-[#0d0d0d] align-[1px]">{vol}巻</span> : null}
-            {vol === 1 ? <span className="ml-1 border border-[var(--color-accent)] px-1 text-[9px] font-black text-[var(--color-accent)] align-[1px]">新刊1巻</span> : null}
-          </span>
+      {/* 書影 → Amazon(アフィ。約105×150) */}
+      <a href={amz} target="_blank" rel="nofollow sponsored noopener" className="spring-press block h-[150px] w-[105px] shrink-0 overflow-hidden bg-[#1a1a1a]" title={`${title} をAmazonで見る`}>
+        {coverHi ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={coverHi} alt={vol ? `${title} ${vol}巻` : title} loading="lazy" className="h-full w-full bg-white object-cover" />
+        ) : (
+          <span className="flex h-full w-full items-center justify-center text-[10px] font-bold text-ink/40">NO IMG</span>
+        )}
+      </a>
+      <div className="min-w-0 flex-1">
+        {/* ★2026-10-27 ユーザ裁定(見本 札3・C): 長い題は1行で横に流す / 巻の札は1つ(1巻だけ枠線の「1巻 NEW」)/ 下に 詳細・Kindle・Amazon */}
+        <a href={amz} target="_blank" rel="nofollow sponsored noopener" className="block">
+          <MarqueeTitle text={title} className="text-[14px] font-bold leading-snug" />
+          {vol ? (
+            <span className="mt-0.5 block leading-none">
+              {vol === 1 ? (
+                <span className="border border-[var(--color-accent)] px-1 text-[9.5px] font-black text-[var(--color-accent)]">1巻 NEW</span>
+              ) : (
+                <span className="bg-[var(--color-accent)] px-1 text-[9.5px] font-black text-[#0d0d0d]">{vol}巻</span>
+              )}
+            </span>
+          ) : null}
           {/* ★2026-08-27 ユーザ要望: 作者(複数でも1行)/会社/レーベル を1行ずつ */}
           {authors ? <span className="mt-1 block truncate text-[11.5px] leading-snug text-ink/60">{authors}</span> : null}
           {publisher ? <span className="mt-0.5 block truncate text-[10.5px] leading-snug text-ink/45">{publisher}</span> : null}
           {imprint ? <span className="mt-0.5 block truncate text-[10.5px] leading-snug text-ink/45">{imprint}</span> : null}
-        </span>
-      </a>
-      {known && (
-        <Link href={`/manga/${slug}`} className="spring-press shrink-0 border border-[var(--color-line)] px-1.5 py-0.5 text-[10px] font-bold text-ink/65">
-          詳細
-        </Link>
-      )}
+        </a>
+        <div className="mt-1.5 flex items-center gap-1.5">
+          {known && (
+            <Link href={`/manga/${slug}`} className="spring-press border border-[var(--color-line)] px-2 py-0.5 text-[10.5px] font-bold text-ink/65">
+              詳細
+            </Link>
+          )}
+          <a href={buy.kindle} target="_blank" rel="nofollow sponsored noopener" className="spring-press bg-[#3b82f6] px-2.5 py-0.5 text-[11px] font-extrabold text-white">
+            Kindle
+          </a>
+          <a href={buy.paper} target="_blank" rel="nofollow sponsored noopener" className="spring-press bg-[#e69500] px-2.5 py-0.5 text-[11px] font-extrabold text-white">
+            Amazon
+          </a>
+        </div>
+      </div>
     </div>
   );
 }
