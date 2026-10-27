@@ -91,7 +91,12 @@ def build():
     rows = [dict(zip(ix["f"], r)) for r in ix["d"]]
     with open(D("data", "seeds", "slug-overrides.yml"), encoding="utf-8") as f:
         ov = (yaml.safe_load(f) or {}).get("overrides", {})
-    p2s = {v["slug"]: k for k, v in ov.items() if isinstance(v, dict) and v.get("slug")}
+    # ★同じ公開 slug を名乗る元の名前が2つ在る(統合で消えた旧頁が残る)時は、ファイルが在る方
+    #   (2026-10-27: 超電磁砲 = 旧 …kinshomokurokugaiden(page-dedup で drop)が後勝ちし、本体 …-2025 が見直しから漏れていた)
+    p2s = {}
+    for k, v in ov.items():
+        if isinstance(v, dict) and v.get("slug") and (v["slug"] not in p2s or os.path.exists(D("data", "manga.v2", k + ".yml"))):
+            p2s[v["slug"]] = k
 
     # 手元の材料(頁の公開 slug → 出所ごとの字数)
     mat = collections.defaultdict(dict)
