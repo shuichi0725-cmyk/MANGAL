@@ -14,12 +14,12 @@
 
 置き場: 台帳 = data/element-harvest/review-ledger.jsonl(git 追跡)/ 束と付与案 = .cache/element-harvest/<stem>/ / 回の要約 = .cache/element-harvest/_review/
 """
-import argparse, collections, concurrent.futures, datetime, gzip, importlib.util, json, os, random, re, subprocess, sys, threading
+import argparse, collections, concurrent.futures, datetime, gzip, importlib.util, json, os, random, re, shutil, subprocess, sys, threading
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
-VERSION = "r0.10"  # r0.10: 票が平らなAniListエントリに印(点検で「票79(平ら)」。 芯から下げるのはユーザ裁定で止めた = _element-assign v0.18) # r0.9: 意味が重なる語の組(_element-assign v0.17 OVERLAP)/ words(語彙に無くて隠れる芯の語を数えて裁定表に)(見直しまとめて3回目) # r0.8: 表0の頁で上げる語に「片方が芯・もう片方は挙げず」を足す(点検 L-20261021-0249/0753) # r0.7: 表0の頁は2回とも「在る」の語を最大3語まで表に上げる / 材料から話数一覧(▼第N話／…)を外し、紹介文が少ない頁は1本を600字で切らない(点検9回ぶんのまとめ) # r0.6: rebuild(モデルを呼ばずに、残した答えから付与案と台帳を作り直す) # r0.5: 語に付いて返った [要素] の印を外してから2回の答えを合わせる # r0.4: 2回判定の合わせ方をゆるめる(芯+在る → 表。 表0が材料ありの2割だった)/ 材料からのジャンルは2回とも芯の時だけ / 2回とも芯の語は後ろの巻が根拠でも表に出す / 2回の生の答えを残す # r0.3: --twice(2回判定して一致した語だけ表に出す) # r0.2: 材料からのジャンルは2つ以上の紹介文に出る時だけ / --redo
+VERSION = "r0.11"  # r0.11: apply(付与案を本番の seed へ一括で書く・本番でも隠す語は tags-hide.json)/ _element-assign v0.19 # r0.10: 票が平らなAniListエントリに印(点検で「票79(平ら)」。 芯から下げるのはユーザ裁定で止めた = _element-assign v0.18) # r0.9: 意味が重なる語の組(_element-assign v0.17 OVERLAP)/ words(語彙に無くて隠れる芯の語を数えて裁定表に)(見直しまとめて3回目) # r0.8: 表0の頁で上げる語に「片方が芯・もう片方は挙げず」を足す(点検 L-20261021-0249/0753) # r0.7: 表0の頁は2回とも「在る」の語を最大3語まで表に上げる / 材料から話数一覧(▼第N話／…)を外し、紹介文が少ない頁は1本を600字で切らない(点検9回ぶんのまとめ) # r0.6: rebuild(モデルを呼ばずに、残した答えから付与案と台帳を作り直す) # r0.5: 語に付いて返った [要素] の印を外してから2回の答えを合わせる # r0.4: 2回判定の合わせ方をゆるめる(芯+在る → 表。 表0が材料ありの2割だった)/ 材料からのジャンルは2回とも芯の時だけ / 2回とも芯の語は後ろの巻が根拠でも表に出す / 2回の生の答えを残す # r0.3: --twice(2回判定して一致した語だけ表に出す) # r0.2: 材料からのジャンルは2つ以上の紹介文に出る時だけ / --redo
 BASE = os.path.join(ROOT, ".cache", "element-harvest")
 LEDGER = os.path.join(ROOT, "data", "element-harvest", "review-ledger.jsonl")
 CAPS = os.path.join(BASE, "_local", "captions.jsonl")
@@ -555,6 +555,123 @@ def cmd_inspect(a):
     print(f"点検 {iid}: 対象 {n:,}頁から {len(pick)}頁 → {os.path.relpath(out, ROOT)}\nこのファイルを読み、末尾の「報告」を埋める(Edit)。 終わったら 状態 を「報告済み」にして commit+push")
 
 
+APPLY_LOG = os.path.join(ROOT, "data", "seeds", "element-review-apply-changelog.jsonl")
+
+
+def cmd_apply(a):
+    """見直しの付与案を本番の seed へ一括で書く(★--go が無ければ計算と件数だけ・何も書かない)。
+    書く物(1頁ずつの apply と同じ決まり・_element-assign.plan_apply):
+      表に出す語 → tags-enrich-2425.json(足すだけ)/ AniList 由来のジャンル → genre-append.yml(足すだけ)/
+      隠して持つ語 → element-hidden.json(羅針盤の近さの鍵)/ 本番でも隠す語 → tags-hide.json(頁の表示から外す。 HIDE_REASONS だけ)。
+    ★頁(manga.v2)・索引は触らない。 反映(promote)は別工程。 書く前に4つの seed を丸ごと退避し、変わった頁ごとに記録を1行。"""
+    import yaml
+    ea = mod("_element-assign")
+    V = ea.load_vocab()
+    routes = [r for r in (a.route or "L,A,後").split(",") if r]
+    last = {}
+    for r in jl(LEDGER):
+        last[r["stem"]] = r
+    S = os.path.join(ROOT, "data", "seeds")
+    P = {"tags": os.path.join(S, "tags-enrich-2425.json"), "genre": os.path.join(S, "genre-append.yml"), "hidden": ea.HIDDEN_SEED, "hide": ea.TAGS_HIDE_SEED}
+    with open(P["tags"], encoding="utf-8") as f:
+        raw = f.read()
+    tags = json.loads(raw)
+    if json.dumps(tags, ensure_ascii=False, separators=(",", ":")) != raw:
+        sys.exit("tags-enrich-2425.json の書式が想定と違う(書き戻すと全体が変わる)→ 何も書かずに止める")
+    with open(P["genre"], encoding="utf-8") as f:
+        gdone = collections.defaultdict(set)
+        for e in (yaml.safe_load(f) or {}).get("additions") or []:
+            gdone[e.get("slug")].update(e.get("add") or [])
+    hidden = json.load(open(P["hidden"], encoding="utf-8")) if os.path.exists(P["hidden"]) else {}
+    hide = json.load(open(P["hide"], encoding="utf-8")) if os.path.exists(P["hide"]) else {}
+    Ld = getattr(yaml, "CSafeLoader", yaml.SafeLoader)
+    n = {"頁": 0, "変わる頁": 0, "要素を足す頁": 0, "足す語": 0, "ジャンルを足す頁": 0, "隠しの鍵が変わる頁": 0, "表示から外す頁": 0, "外す語": 0, "語彙に無くて足せない語": 0, "付与案なし": 0}
+    add_w, hide_w, gen_w = collections.Counter(), collections.Counter(), collections.Counter()
+    logs, gtext = [], []
+    for stem, r in sorted(last.items()):
+        if r.get("route") not in routes:
+            continue
+        pj = os.path.join(ea.adir(stem), "assign-proposal.json")
+        page = os.path.join(ROOT, "data", "manga.v2", stem + ".yml")
+        if not os.path.exists(pj) or not os.path.exists(page):
+            n["付与案なし"] += 1
+            continue
+        n["頁"] += 1
+        with open(pj, encoding="utf-8") as f:
+            prop = json.load(f)
+        with open(page, encoding="utf-8") as f:
+            doc = yaml.load(f, Loader=Ld) or {}
+        pub = doc.get("slug") or stem
+        names, blocked, hn, hk = ea.plan_apply(prop, V, doc.get("tags") or [])
+        n["語彙に無くて足せない語"] += len(blocked)
+        before_t = list(tags.get(stem) or [])
+        after_t = names + [x for x in before_t if x not in names]
+        gadd = [g for g in prop.get("genres_add") or [] if g in V["genres"] and g not in (prop.get("genres_now") or []) and g not in gdone[stem] and g not in gdone[pub]]
+        before_k = list((hidden.get(pub) or {}).get("keys") or [])
+        before_h = list(hide.get(stem) or [])
+        after_h = sorted(set(before_h) | set(hn))  # 足すだけ(一度外した語を、案が変わったからといって黙って戻さない)
+        ch_t, ch_k, ch_h = after_t != before_t, hk != before_k, after_h != before_h
+        if not (ch_t or gadd or ch_k or ch_h):
+            continue
+        n["変わる頁"] += 1
+        if ch_t:
+            new = [x for x in after_t if x not in before_t]
+            n["要素を足す頁"] += bool(new)
+            n["足す語"] += len(new)
+            add_w.update(V["tag_ja"].get(x) or x for x in new)
+            tags[stem] = after_t
+        if gadd:
+            n["ジャンルを足す頁"] += 1
+            gen_w.update(gadd)
+            gtext.append(f"  - slug: {stem}\n    add: [{', '.join(gadd)}]\n    source: \"element-review:{VERSION}/{prop['version']} anilist-family\"\n")
+        if ch_k:
+            n["隠しの鍵が変わる頁"] += 1
+            hidden[pub] = {"keys": hk, "at": now(), "proposal_version": prop["version"]}
+        if ch_h:
+            gone = [x for x in after_h if x not in before_h]
+            n["表示から外す頁"] += 1
+            n["外す語"] += len(gone)
+            hide_w.update(V["tag_ja"].get(x) or x for x in gone)
+            hide[stem] = after_h
+        logs.append({"slug": stem, "pub": pub, "op": "element-review apply", "route": r["route"], "proposal_version": prop["version"],
+                     "before": {"tags_enrich": before_t, "hidden": before_k, "tags_hide": before_h},
+                     "after": {"tags_enrich": after_t, "genre_append": gadd, "hidden": hk, "tags_hide": after_h}})
+    print(f"== 一括の書き込み{'(試運転・何も書かない)' if not a.go else ''} 経路 {'・'.join(routes)} ==")
+    print(" / ".join(f"{k} {v:,}" for k, v in n.items()))
+    print("足す語の多い順:", "・".join(f"{w}{c}" for w, c in add_w.most_common(30)))
+    print("表示から外す語の多い順:", "・".join(f"{w}{c}" for w, c in hide_w.most_common(30)))
+    print("足すジャンル:", "・".join(f"{V['genres'].get(g, g)}{c}" for g, c in gen_w.most_common()))
+    if not a.go:
+        print("★書くには --go \"<ユーザのGo発話>\"(本番の seed に書く。 頁への反映は別)")
+        return
+    if len(a.go.strip()) < 2:
+        sys.exit("--go にユーザの Go 発話を引用する")
+    bak = os.path.join(ROOT, ".cache", f"element-review-apply-bak-{datetime.datetime.now():%Y%m%d-%H%M%S}")
+    os.makedirs(bak, exist_ok=True)
+    for k, path in P.items():
+        if os.path.exists(path):
+            shutil.copyfile(path, os.path.join(bak, os.path.basename(path)))
+    with open(P["tags"], "w", encoding="utf-8", newline="") as f:
+        f.write(json.dumps(tags, ensure_ascii=False, separators=(",", ":")))
+    if gtext:
+        ea._rw_same_newline(P["genre"], "".join(gtext))
+    for k in ("hidden", "hide"):
+        d = hidden if k == "hidden" else hide
+        tmp = P[k] + ".tmp"
+        with open(tmp, "w", encoding="utf-8", newline="\n") as f:
+            json.dump(dict(sorted(d.items())), f, ensure_ascii=False, indent=1)
+            f.write("\n")
+        os.replace(tmp, P[k])
+    at, rel = now(), os.path.relpath(bak, ROOT).replace("\\", "/")
+    with open(APPLY_LOG, "a", encoding="utf-8", newline="\n") as f:
+        for x in logs:
+            f.write(json.dumps({**x, "at": at, "go": a.go.strip(), "backup": rel,
+                                "revert": "backup の4つの seed を戻す(または before に戻す)→ 反映し直す"}, ensure_ascii=False) + "\n")
+    print(f"書いた: {len(logs):,}頁 / 退避 {rel} / 記録 {os.path.relpath(APPLY_LOG, ROOT)}")
+    print("次: 頁への反映(数万頁 = フル promote か週次蒸留)。 羅針盤 = python scripts/_build-compass-hidden.py")
+
+
+
 def main():
     ap = argparse.ArgumentParser(description="ジャンル・要素の見直しを表の順に流す")
     sp = ap.add_subparsers(dest="cmd", required=True)
@@ -565,6 +682,7 @@ def main():
     p = sp.add_parser("rebuild", help="モデルを呼ばずに、残してある答えから付与案と台帳を作り直す"); p.add_argument("--route", default="L"); p.set_defaults(f=cmd_rebuild)
     p = sp.add_parser("compact", help="台帳を頁ごとの最新の1行に詰める"); p.set_defaults(f=cmd_compact)
     p = sp.add_parser("words", help="語彙か訳が無くて隠れる「芯」の語を数えて裁定表に"); p.add_argument("--route", default="L"); p.add_argument("--min", type=int, default=5); p.set_defaults(f=cmd_words)
+    p = sp.add_parser("apply", help="付与案を本番の seed へ一括で書く(--go が無ければ件数だけ)"); p.add_argument("--route", default="L,A,後"); p.add_argument("--go", default=""); p.set_defaults(f=cmd_apply)
     p = sp.add_parser("summary"); p.add_argument("--batch", default=""); p.set_defaults(f=cmd_summary)
     p = sp.add_parser("sample"); p.add_argument("batch"); p.add_argument("--k", type=int, default=50); p.add_argument("--seed", type=int, default=1); p.set_defaults(f=cmd_sample)
     p = sp.add_parser("inspect"); p.add_argument("--k", type=int, default=30); p.add_argument("--route", default="", help="省くと点検待ちが残る経路"); p.add_argument("--again", action="store_true", help="点検済みの頁からも抜き取る")

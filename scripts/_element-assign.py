@@ -22,7 +22,7 @@ import argparse, ast, datetime, json, os, re, shutil, subprocess, sys, time, uni
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "v0.18"  # v0.18: 票が「平ら」なエントリ(既定値79/60/50/40/20のタグが6割以上 = 1人が付けただけ)に印 flat を付ける。 芯から下げるのはユーザ裁定で止めた(FLAT_DEMOTE) # v0.17: v0.17: 字が違うが意味が重なる語の組(OVERLAP)も、詳しい方だけ表に出す(見直しまとめて3回目: 漫画家+絵・漫画 47頁・タイムループ+やり直し 9頁) # v0.16: lift を {語: わけ} で受け、2回とも「在る」の語を先に、次に片方だけ「芯」の語を上げる # v0.15: 表が0語の頁は、2回判定で2回とも「在る」以上と読んだ語を強い順に最大3語まで表に上げる(lift)/ 否定文(「〜しない」)の中の語は「違う」(経路L 点検9回ぶんのまとめ) # v0.14: 語に付いて返った [要素] の印を外す(点検 L-20261013-0802: 猫村さんで2回の答えが食い違い扱いになった) # v0.13: ジャンルは作品全体をそう呼べる時だけ・ふつうの言い回しに1度出るだけの語は「違う」・表の語が別の表の語を含む時は詳しい方だけ出す・序盤の材料にも出る語はネタバレ扱いにしない(経路L 1,000件の点検) # v0.12: その巻だけの出来事・固有名の一部は「違う」(経路L 1回目の点検: ダイマジン=戦争・しずくちゃん=ミステリー・BUNGO=シニア) # v0.11: 語彙に無い新しい語も、隠し要素として持つ(付与案に載った=根拠の検査を通った語) # v0.10: ありふれた語(語ごとのユーザ裁定 rulings.yml word_rulings)は表に出さず隠して持つ  # v0.9: 関連作から引き継ぐのは本筋のエントリだけ(票は収集の道具 v0.5 が絞る。 ジャンルもそろえる)/ 使わなかったタグを付与案に見せる  # v0.8: 表に出すのは強い順に最大10語・語彙と訳が在る語だけ / AniList と材料が一致した語を先に / 隠して持つ語を欄に分ける  # v0.7: ネタバレ印は「その語を持つエントリの半分以上に付いている時だけ」有効 / 呼び出しは共通部品(_lean_claude)  # v0.6: 作品ごとのユーザ裁定(rulings.yml)を付与案より優先 / apply のジャンル追記を二重にしない  # v0.5: apply(表に出す案を seed へ書く口。ユーザの Go 発話の引用が必須)  # v0.4(2026-10-09 ユーザ裁定): ネタバレ印の語は表に出さない(控えへ)/ 控えはサイトに出さず記録だけ  # v0.2: 指示文から試金石の語の例を外す / タグ一覧の語を候補に / ありふれた名詞を候補から外す
+VERSION = "v0.19"  # v0.19: AniList のネタバレ印でも序盤の材料に根拠がある語はネタバレにしない / 材料の語が訳語と同じなら英名で書く / plan_apply(一括と1頁の apply で同じ計算) # v0.18: 票が「平ら」なエントリ(既定値79/60/50/40/20のタグが6割以上 = 1人が付けただけ)に印 flat を付ける。 芯から下げるのはユーザ裁定で止めた(FLAT_DEMOTE) # v0.17: v0.17: 字が違うが意味が重なる語の組(OVERLAP)も、詳しい方だけ表に出す(見直しまとめて3回目: 漫画家+絵・漫画 47頁・タイムループ+やり直し 9頁) # v0.16: lift を {語: わけ} で受け、2回とも「在る」の語を先に、次に片方だけ「芯」の語を上げる # v0.15: 表が0語の頁は、2回判定で2回とも「在る」以上と読んだ語を強い順に最大3語まで表に上げる(lift)/ 否定文(「〜しない」)の中の語は「違う」(経路L 点検9回ぶんのまとめ) # v0.14: 語に付いて返った [要素] の印を外す(点検 L-20261013-0802: 猫村さんで2回の答えが食い違い扱いになった) # v0.13: ジャンルは作品全体をそう呼べる時だけ・ふつうの言い回しに1度出るだけの語は「違う」・表の語が別の表の語を含む時は詳しい方だけ出す・序盤の材料にも出る語はネタバレ扱いにしない(経路L 1,000件の点検) # v0.12: その巻だけの出来事・固有名の一部は「違う」(経路L 1回目の点検: ダイマジン=戦争・しずくちゃん=ミステリー・BUNGO=シニア) # v0.11: 語彙に無い新しい語も、隠し要素として持つ(付与案に載った=根拠の検査を通った語) # v0.10: ありふれた語(語ごとのユーザ裁定 rulings.yml word_rulings)は表に出さず隠して持つ  # v0.9: 関連作から引き継ぐのは本筋のエントリだけ(票は収集の道具 v0.5 が絞る。 ジャンルもそろえる)/ 使わなかったタグを付与案に見せる  # v0.8: 表に出すのは強い順に最大10語・語彙と訳が在る語だけ / AniList と材料が一致した語を先に / 隠して持つ語を欄に分ける  # v0.7: ネタバレ印は「その語を持つエントリの半分以上に付いている時だけ」有効 / 呼び出しは共通部品(_lean_claude)  # v0.6: 作品ごとのユーザ裁定(rulings.yml)を付与案より優先 / apply のジャンル追記を二重にしない  # v0.5: apply(表に出す案を seed へ書く口。ユーザの Go 発話の引用が必須)  # v0.4(2026-10-09 ユーザ裁定): ネタバレ印の語は表に出さない(控えへ)/ 控えはサイトに出さず記録だけ  # v0.2: 指示文から試金石の語の例を外す / タグ一覧の語を候補に / ありふれた名詞を候補から外す
 ME = "python scripts/_element-assign.py"
 TEST_ROOT = os.environ.get("EH_ROOT")
 BASE = TEST_ROOT or os.path.join(ROOT, ".cache", "element-harvest")
@@ -472,6 +472,13 @@ def make_proposal(stem, m, V, cands, ans, use, not_spoiler=(), lift=()):
             e["tier"] = "芯"
         if not e["ani"]:
             e["spoiler"] = all(x["spoiler"] for x in e["mat"])
+    for e in merged.values():  # ★AniList のネタバレ印でも、序盤の材料に根拠がある語はネタバレではない(v0.19。 見直しで494語:
+        #   恋は雨上がりのように=年の差・刻刻=時間操作・魔導具師ダリヤ=転生。 印が粗く、作品の前提にも付いている)
+        a = e["ani"]
+        if a and e["spoiler"] and any(not x.get("spoiler") for x in e["mat"]):
+            e["spoiler"] = False
+            if a["votes"] >= ANI_SHOW.get(a.get("category", "").split("-")[0], 999) and not (a.get("flat") and FLAT_DEMOTE):
+                e["tier"] = "芯"
     for e in merged.values():  # 根拠が終盤の展開だけの語も、表には出さない
         if e["spoiler"] and e["tier"] == "芯" and SPOILER_TO_SUB:
             e["tier"] = "在る"
@@ -498,7 +505,7 @@ def make_proposal(stem, m, V, cands, ans, use, not_spoiler=(), lift=()):
         a = e["ani"] or {}
         if e["tier"] != "芯":
             e["cls"], e["hid"] = "隠し", ("ネタバレ印" if e["spoiler"] and a.get("votes", 0) >= ANI_SHOW.get(a.get("category", "").split("-")[0], 999)
-                                        else "票が平ら" if a.get("flat") and not e["mat"] else "在る")
+                                        else "票が平ら" if a.get("flat") and FLAT_DEMOTE and not e["mat"] else "在る")
         elif e["word"] in common and not e.get("ruled"):
             e["cls"], e["hid"] = "隠し", "ありふれた語"
         elif a.get("en") in HIDE_ALWAYS and not e.get("ruled"):
@@ -722,6 +729,47 @@ def cmd_hidden(a):
     print("次: python scripts/_build-compass-hidden.py(羅針盤の隠し要素のファイルを作り直す)")
 
 
+TAGS_HIDE_SEED = os.path.join(ROOT, "data", "seeds", "tags-hide.json")
+# ★本番でも表示から外す「隠し」の理由(2026-10-28 ユーザ「隠す判定は本番でも隠したい。 ただ羅針盤の判定では使う」+「それでお願い」)。
+#   「在る」(モデルが芯ではないと読んだ・票が線に届かない)は外さない = 今本番に出ている語を Haiku の読みだけで消さない
+#   (見直し済み頁で のべ3,077語。 ヴァンガード=カードバトル・ARMS=超能力 のような芯の語も混ざる)。
+#   外した語は羅針盤の近さには残る(element-hidden.json の鍵 + _build-compass-hidden.py が頁に出ない AniList の票40以上を拾う)。
+HIDE_REASONS = {"ネタバレ印", "重なり", "ありふれた語", "上限", "出さない語"}
+
+
+def plan_apply(prop, V, page_tags):
+    """付与案 → (足すタグ名, 語彙に無くて足せない語, 頁から外すタグ名, 隠し要素の鍵)。 本番には書かない(計算だけ)。
+    page_tags = 今の頁(manga.v2)の tags。 外すのは今その頁に在るタグだけ(頁の表示と同じ訳し方で語と突き合わせる)。"""
+    core = [e for e in prop["rows"] if (e.get("cls") == "表" if any("cls" in x for x in prop["rows"]) else e["tier"] == "芯" and e["kind"] == "要素")]
+    names, blocked = [], []
+    ja2en = {}
+    for en, ja in sorted(V["tag_ja"].items()):
+        ja2en.setdefault(ja, en)
+    for e in core:
+        ani = e.get("ani") or {}
+        # 対訳表で表示できる AniList タグは英名で書く。 読み替え・仮の訳・材料由来の語は和名で書く(和名タグの allow に在る語だけ)
+        if ani and not ani.get("reread") and not ani.get("no_ja") and not ani.get("draft") and V["tag_ja"].get(ani["en"]):
+            names.append(ani["en"])
+        elif e["word"] in V["allow"]:
+            names.append(e["word"])
+        elif ja2en.get(e["word"]):  # ★材料から拾った語が AniList タグの訳語と同じ = 英名で書く(タイムトラベル・成長物語・警察。 見直しの試運転で 813/6,000頁)
+            names.append(ja2en[e["word"]])
+        else:
+            blocked.append(e["word"])
+    shown = {e["word"] for e in core}
+    hide_rows = [e for e in prop["rows"] if e.get("kind") == "要素" and e.get("cls") == "隠し" and e["word"] not in shown
+                 and (e.get("hid") in HIDE_REASONS or str(e.get("ruled") or "").startswith("ユーザ裁定で出さない"))]
+    hide = []
+    for t in page_tags or []:
+        n, cat = t.get("name"), t.get("category") or ""
+        if not n or cat == "Demographic" or n in names:
+            continue
+        ja = V["tag_ja"].get(n) or V["alias"].get(n) or n
+        if any(n == (e.get("ani") or {}).get("en") or ja == e["word"] or n == e["word"] for e in hide_rows) and n not in hide:
+            hide.append(n)
+    return names, blocked, hide, hidden_keys(prop)
+
+
 def cmd_apply(a):
     V = load_vocab()
     pj = os.path.join(adir(a.stem), "assign-proposal.json")
@@ -731,17 +779,11 @@ def cmd_apply(a):
         die('--go "<ユーザのGo発話の引用>" が要る(案を本番の seed に書くのはユーザの承認があった時だけ)')
     with open(pj, encoding="utf-8") as f:
         prop = json.load(f)
-    core = [e for e in prop["rows"] if (e.get("cls") == "表" if any("cls" in x for x in prop["rows"]) else e["tier"] == "芯" and e["kind"] == "要素")]
-    names, blocked = [], []
-    for e in core:
-        ani = e.get("ani") or {}
-        # 対訳表で表示できる AniList タグは英名で書く。 読み替え・仮の訳・材料由来の語は和名で書く(和名タグの allow に在る語だけ)
-        if ani and not ani.get("reread") and not ani.get("no_ja") and not ani.get("draft") and V["tag_ja"].get(ani["en"]):
-            names.append(ani["en"])
-        elif e["word"] in V["allow"]:
-            names.append(e["word"])
-        else:
-            blocked.append(e["word"])
+    with open(os.path.join(ROOT, "data", "manga.v2", a.stem + ".yml"), encoding="utf-8") as f:
+        import yaml as _y
+        _page_tags = (_y.safe_load(f) or {}).get("tags") or []
+    names, blocked, _hide, _ = plan_apply(prop, V, _page_tags)  # ★一括(_element-review.py apply)と同じ計算。 表示から外す語は一括の口だけが書く
+    core = [e for e in prop["rows"] if e.get("cls") == "表"]
     if blocked:
         die("表に出す案のうち、まだ語彙(data/seeds/wamei-tags.yml の allow)に無い語がある: " + "・".join(blocked)
             + "\n  語彙に足すのはユーザ裁定。 足してから apply し直す(足さない語は付けない)")

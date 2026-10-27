@@ -2063,6 +2063,31 @@ def _load_enrich_genres_tags():
 _GENRE_ENRICH, _TAGS_ENRICH = _load_enrich_genres_tags()
 
 
+def _load_tags_hide():
+    # ★表示から外す要素タグ(2026-10-28 ユーザ「隠す判定は本番でも隠したい。 ただ羅針盤の判定では使う」)。
+    #   key = SRC slug(stem)。 値 = 頁の tags の name(英名か和名)。 書くのは scripts/_element-review.py apply だけ。
+    #   ★ジャンル派生(_derive_genres)の**後**に外す = タグ由来のジャンルは変えない。 羅針盤の近さには残る
+    #     (element-hidden.json の鍵 + _build-compass-hidden.py が「頁に出ていない AniList の票40以上」を拾う)。
+    p = ROOT / "data" / "seeds" / "tags-hide.json"
+    return json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
+
+
+_TAGS_HIDE = _load_tags_hide()
+
+
+def _hide_tags(page: dict, keys) -> bool:
+    """頁の tags から tags-hide.json の語を外す(Demographic は外さない)。 → 外したか"""
+    th = {n for k in keys for n in (_TAGS_HIDE.get(k) or [])}
+    tags = page.get("tags") or []
+    if not th or not tags:
+        return False
+    kept = [t for t in tags if not (isinstance(t, dict) and t.get("category") != "Demographic" and t.get("name") in th)]
+    if len(kept) == len(tags):
+        return False
+    page["tags"] = kept
+    return True
+
+
 def _load_author_yomi() -> None:
     global _AUTHOR_YOMI
     if _AUTHOR_YOMI is not None:
@@ -4388,6 +4413,7 @@ def main():
         ) & set(valid_gens)
         if _drv - set(new_yml.get("genres") or []):
             new_yml["genres"] = sorted(set(new_yml.get("genres") or []) | _drv)
+        _hide_tags(new_yml, dict.fromkeys((slug, new_yml.get("slug") or slug)))  # ★表示から外す要素(派生ジャンルの後)
         # ★imprint最終pass(2026-09-06): imprint が **その版自身のタブ名(版ラベル)と同じ** なら落とす。
         #   種2(MADB)のレーベル欄に「愛蔵版」とだけ入っている行が17件あり、頁の出版社行が
         #   「講談社 / 愛蔵版」と出ていた(VolumeCoverflow は publisher と imprint を " / " で連結)。
@@ -4825,6 +4851,8 @@ def main():
             ) & set(valid_gens)
             if _pdrv - set(_pd.get("genres") or []):
                 _pd["genres"] = sorted(set(_pd.get("genres") or []) | _pdrv)
+                _touched = True
+            if _hide_tags(_pd, dict.fromkeys((_stem, _pd.get("slug") or _stem))):  # ★表示から外す要素(本流と同じ・派生ジャンルの後)
                 _touched = True
             # ★年レンジの追随用に「override 適用前」の巻年を控える(下で使う)。
             def _pp_years(_page):
