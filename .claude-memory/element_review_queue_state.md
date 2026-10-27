@@ -122,3 +122,4 @@ metadata:
 - 本番: AniList 由来の要素 48,357語のうち 25,624(53%)が平らな票由来(22,025エントリ)。 数えただけ・触っていない。
 - 直していない: 型3 宣伝文句 / 型6 東京ご利益さんぽ=神社(語彙外の語→全経路後の語の裁定)/ 哲学・政治・群像劇・美少女日常(型5と同根)。
 - 残り: 経路W(保留)/ 語彙外の語の裁定(全経路そろった = `words --route A` `--route 後` で数え直して L の案と同じ形の表に)/ 適用(seed へ)は未着手。
+- 2026-10-28 裁定表(全経路L・A・後 = 237語・5頁以上): `data/element-harvest/new-words-proposal.tsv`(L案180語+A・後で新しく57語に私が案)。 ★スマホ用の裁定ページ https://claude.ai/artifact/L1gQRZeRgoyaqzqD5Zvyuy (db capability)= 案から**変えた語だけ** collection `rulings`(doc id=番号、verdict/target)に保存、「裁定おわり」で `meta/status`。 読むのは ArtifactData list rulings。 触っていない語は案どおり。 未解決: お仕事は hide_common なので Work/Office/サラリーマン→お仕事 は寄せても表に出ない(ページに注記)。
