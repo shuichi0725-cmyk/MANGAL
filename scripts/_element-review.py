@@ -19,7 +19,7 @@ import argparse, collections, concurrent.futures, datetime, gzip, importlib.util
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
-VERSION = "r0.9"  # r0.9: 意味が重なる語の組(_element-assign v0.17 OVERLAP)/ words(語彙に無くて隠れる芯の語を数えて裁定表に)(見直しまとめて3回目) # r0.8: 表0の頁で上げる語に「片方が芯・もう片方は挙げず」を足す(点検 L-20261021-0249/0753) # r0.7: 表0の頁は2回とも「在る」の語を最大3語まで表に上げる / 材料から話数一覧(▼第N話／…)を外し、紹介文が少ない頁は1本を600字で切らない(点検9回ぶんのまとめ) # r0.6: rebuild(モデルを呼ばずに、残した答えから付与案と台帳を作り直す) # r0.5: 語に付いて返った [要素] の印を外してから2回の答えを合わせる # r0.4: 2回判定の合わせ方をゆるめる(芯+在る → 表。 表0が材料ありの2割だった)/ 材料からのジャンルは2回とも芯の時だけ / 2回とも芯の語は後ろの巻が根拠でも表に出す / 2回の生の答えを残す # r0.3: --twice(2回判定して一致した語だけ表に出す) # r0.2: 材料からのジャンルは2つ以上の紹介文に出る時だけ / --redo
+VERSION = "r0.9.1"  # r0.9: 意味が重なる語の組(_element-assign v0.17 OVERLAP)/ words(語彙に無くて隠れる芯の語を数えて裁定表に)(見直しまとめて3回目) # r0.8: 表0の頁で上げる語に「片方が芯・もう片方は挙げず」を足す(点検 L-20261021-0249/0753) # r0.7: 表0の頁は2回とも「在る」の語を最大3語まで表に上げる / 材料から話数一覧(▼第N話／…)を外し、紹介文が少ない頁は1本を600字で切らない(点検9回ぶんのまとめ) # r0.6: rebuild(モデルを呼ばずに、残した答えから付与案と台帳を作り直す) # r0.5: 語に付いて返った [要素] の印を外してから2回の答えを合わせる # r0.4: 2回判定の合わせ方をゆるめる(芯+在る → 表。 表0が材料ありの2割だった)/ 材料からのジャンルは2回とも芯の時だけ / 2回とも芯の語は後ろの巻が根拠でも表に出す / 2回の生の答えを残す # r0.3: --twice(2回判定して一致した語だけ表に出す) # r0.2: 材料からのジャンルは2つ以上の紹介文に出る時だけ / --redo
 BASE = os.path.join(ROOT, ".cache", "element-harvest")
 LEDGER = os.path.join(ROOT, "data", "element-harvest", "review-ledger.jsonl")
 CAPS = os.path.join(BASE, "_local", "captions.jsonl")
@@ -253,6 +253,7 @@ def cmd_run(a):
         print("✖ 手元の材料の束が無い → python scripts/_gen-element-review-queue.py --material")
         sys.exit(1)
     batches = []
+    skipped = set()
     loop = 0
     while True:
         n = a.n
@@ -266,7 +267,9 @@ def cmd_run(a):
             run_total(a, batches, "予定の回数を終えた")
             return
         loop += 1
-        stems = sorted(set(a.stems.split(","))) if a.stems else sorted({r["stem"] for r in jl(LEDGER) if r.get("batch") == a.redo}) if a.redo else next_stems(n, a.route)
+        # ★飛ばした頁(Web の束が在る・頁のファイルが無い)は台帳に書かないので「未」のまま表の先頭に残る。 除いて取り直す
+        #   (2026-10-27: 点検待ち998件で残り2件を取りに行き、先頭の飛ばす2頁だけを5秒ごとに8時間・2,310回くり返した)
+        stems = sorted(set(a.stems.split(","))) if a.stems else sorted({r["stem"] for r in jl(LEDGER) if r.get("batch") == a.redo}) if a.redo else [s for s in next_stems(n + len(skipped), a.route) if s not in skipped][:n]
         if not stems:
             print("表の「未」が無い(この経路は終わり)")
             run_total(a, batches, "表の「未」が尽きた")
@@ -307,6 +310,7 @@ def cmd_run(a):
                     continue
                 done += 1
                 if r.get("skip"):
+                    skipped.add(s)
                     print(f"  - {s}: {r['skip']}", flush=True)
                 else:
                     print(f"  [{done}/{len(stems)}] {r['title'][:24]}: 表 {len(r['show'])} {'・'.join(r['show'])} / 隠し {len(r['hide'])} / ジャンル+ {','.join(r['genres_add'] + r['genres_mat']) or '-'} / {r.get('sec')}秒", flush=True)
