@@ -19,7 +19,7 @@ import argparse, collections, concurrent.futures, datetime, gzip, importlib.util
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
-VERSION = "r0.9.1"  # r0.9: 意味が重なる語の組(_element-assign v0.17 OVERLAP)/ words(語彙に無くて隠れる芯の語を数えて裁定表に)(見直しまとめて3回目) # r0.8: 表0の頁で上げる語に「片方が芯・もう片方は挙げず」を足す(点検 L-20261021-0249/0753) # r0.7: 表0の頁は2回とも「在る」の語を最大3語まで表に上げる / 材料から話数一覧(▼第N話／…)を外し、紹介文が少ない頁は1本を600字で切らない(点検9回ぶんのまとめ) # r0.6: rebuild(モデルを呼ばずに、残した答えから付与案と台帳を作り直す) # r0.5: 語に付いて返った [要素] の印を外してから2回の答えを合わせる # r0.4: 2回判定の合わせ方をゆるめる(芯+在る → 表。 表0が材料ありの2割だった)/ 材料からのジャンルは2回とも芯の時だけ / 2回とも芯の語は後ろの巻が根拠でも表に出す / 2回の生の答えを残す # r0.3: --twice(2回判定して一致した語だけ表に出す) # r0.2: 材料からのジャンルは2つ以上の紹介文に出る時だけ / --redo
+VERSION = "r0.10"  # r0.10: 票が平らなAniListエントリに印(点検で「票79(平ら)」。 芯から下げるのはユーザ裁定で止めた = _element-assign v0.18) # r0.9: 意味が重なる語の組(_element-assign v0.17 OVERLAP)/ words(語彙に無くて隠れる芯の語を数えて裁定表に)(見直しまとめて3回目) # r0.8: 表0の頁で上げる語に「片方が芯・もう片方は挙げず」を足す(点検 L-20261021-0249/0753) # r0.7: 表0の頁は2回とも「在る」の語を最大3語まで表に上げる / 材料から話数一覧(▼第N話／…)を外し、紹介文が少ない頁は1本を600字で切らない(点検9回ぶんのまとめ) # r0.6: rebuild(モデルを呼ばずに、残した答えから付与案と台帳を作り直す) # r0.5: 語に付いて返った [要素] の印を外してから2回の答えを合わせる # r0.4: 2回判定の合わせ方をゆるめる(芯+在る → 表。 表0が材料ありの2割だった)/ 材料からのジャンルは2回とも芯の時だけ / 2回とも芯の語は後ろの巻が根拠でも表に出す / 2回の生の答えを残す # r0.3: --twice(2回判定して一致した語だけ表に出す) # r0.2: 材料からのジャンルは2つ以上の紹介文に出る時だけ / --redo
 BASE = os.path.join(ROOT, ".cache", "element-harvest")
 LEDGER = os.path.join(ROOT, "data", "element-harvest", "review-ledger.jsonl")
 CAPS = os.path.join(BASE, "_local", "captions.jsonl")
@@ -464,7 +464,7 @@ def cmd_sample(a):
             pr = json.load(f)
         for e in pr["rows"]:
             if e.get("cls") == "表" or e["kind"] == "ジャンル":
-                ev = (f"AniList {e['ani']['en']} 票{e['ani']['votes']}" if e.get("ani") else "") + " ".join(f"「{x['quote'][:70]}」" for x in e.get("mat", [])[:1])
+                ev = (f"AniList {e['ani']['en']} 票{e['ani']['votes']}{'(平ら)' if e['ani'].get('flat') else ''}" if e.get("ani") else "") + " ".join(f"「{x['quote'][:70]}」" for x in e.get("mat", [])[:1])
                 print(f"  {'[ジ]' if e['kind'] == 'ジャンル' else '[表]'} {e['word']}: {ev}")
 
 
@@ -527,7 +527,7 @@ def cmd_inspect(a):
         L.append(f"材料 {r['chars']}字 / 今のジャンル {','.join(r['genres_now']) or '-'} / AniList から足す {','.join(r['genres_add']) or '-'} / 材料からの案 {'・'.join(r['genres_mat']) or '-'}")
         hid = []
         for e in _proposal(r["stem"])["rows"]:
-            ev = (f"AniList {e['ani']['en']} 票{e['ani']['votes']} " if e.get("ani") else "") + " ".join(f"「{x['quote'][:70]}」" for x in e.get("mat", [])[:1])
+            ev = (f"AniList {e['ani']['en']} 票{e['ani']['votes']}{'(平ら)' if e['ani'].get('flat') else ''} " if e.get("ani") else "") + " ".join(f"「{x['quote'][:70]}」" for x in e.get("mat", [])[:1])
             if e["kind"] == "ジャンル":
                 L.append(f"- [ジ{'・案' if e['word'] in r['genres_mat'] else '・弱'}] {e['word']}: {ev}")
             elif e.get("cls") == "表":

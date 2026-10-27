@@ -22,7 +22,7 @@ import argparse, ast, datetime, json, os, re, shutil, subprocess, sys, time, uni
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "v0.17"  # v0.17: 字が違うが意味が重なる語の組(OVERLAP)も、詳しい方だけ表に出す(見直しまとめて3回目: 漫画家+絵・漫画 47頁・タイムループ+やり直し 9頁) # v0.16: lift を {語: わけ} で受け、2回とも「在る」の語を先に、次に片方だけ「芯」の語を上げる # v0.15: 表が0語の頁は、2回判定で2回とも「在る」以上と読んだ語を強い順に最大3語まで表に上げる(lift)/ 否定文(「〜しない」)の中の語は「違う」(経路L 点検9回ぶんのまとめ) # v0.14: 語に付いて返った [要素] の印を外す(点検 L-20261013-0802: 猫村さんで2回の答えが食い違い扱いになった) # v0.13: ジャンルは作品全体をそう呼べる時だけ・ふつうの言い回しに1度出るだけの語は「違う」・表の語が別の表の語を含む時は詳しい方だけ出す・序盤の材料にも出る語はネタバレ扱いにしない(経路L 1,000件の点検) # v0.12: その巻だけの出来事・固有名の一部は「違う」(経路L 1回目の点検: ダイマジン=戦争・しずくちゃん=ミステリー・BUNGO=シニア) # v0.11: 語彙に無い新しい語も、隠し要素として持つ(付与案に載った=根拠の検査を通った語) # v0.10: ありふれた語(語ごとのユーザ裁定 rulings.yml word_rulings)は表に出さず隠して持つ  # v0.9: 関連作から引き継ぐのは本筋のエントリだけ(票は収集の道具 v0.5 が絞る。 ジャンルもそろえる)/ 使わなかったタグを付与案に見せる  # v0.8: 表に出すのは強い順に最大10語・語彙と訳が在る語だけ / AniList と材料が一致した語を先に / 隠して持つ語を欄に分ける  # v0.7: ネタバレ印は「その語を持つエントリの半分以上に付いている時だけ」有効 / 呼び出しは共通部品(_lean_claude)  # v0.6: 作品ごとのユーザ裁定(rulings.yml)を付与案より優先 / apply のジャンル追記を二重にしない  # v0.5: apply(表に出す案を seed へ書く口。ユーザの Go 発話の引用が必須)  # v0.4(2026-10-09 ユーザ裁定): ネタバレ印の語は表に出さない(控えへ)/ 控えはサイトに出さず記録だけ  # v0.2: 指示文から試金石の語の例を外す / タグ一覧の語を候補に / ありふれた名詞を候補から外す
+VERSION = "v0.18"  # v0.18: 票が「平ら」なエントリ(既定値79/60/50/40/20のタグが6割以上 = 1人が付けただけ)に印 flat を付ける。 芯から下げるのはユーザ裁定で止めた(FLAT_DEMOTE) # v0.17: v0.17: 字が違うが意味が重なる語の組(OVERLAP)も、詳しい方だけ表に出す(見直しまとめて3回目: 漫画家+絵・漫画 47頁・タイムループ+やり直し 9頁) # v0.16: lift を {語: わけ} で受け、2回とも「在る」の語を先に、次に片方だけ「芯」の語を上げる # v0.15: 表が0語の頁は、2回判定で2回とも「在る」以上と読んだ語を強い順に最大3語まで表に上げる(lift)/ 否定文(「〜しない」)の中の語は「違う」(経路L 点検9回ぶんのまとめ) # v0.14: 語に付いて返った [要素] の印を外す(点検 L-20261013-0802: 猫村さんで2回の答えが食い違い扱いになった) # v0.13: ジャンルは作品全体をそう呼べる時だけ・ふつうの言い回しに1度出るだけの語は「違う」・表の語が別の表の語を含む時は詳しい方だけ出す・序盤の材料にも出る語はネタバレ扱いにしない(経路L 1,000件の点検) # v0.12: その巻だけの出来事・固有名の一部は「違う」(経路L 1回目の点検: ダイマジン=戦争・しずくちゃん=ミステリー・BUNGO=シニア) # v0.11: 語彙に無い新しい語も、隠し要素として持つ(付与案に載った=根拠の検査を通った語) # v0.10: ありふれた語(語ごとのユーザ裁定 rulings.yml word_rulings)は表に出さず隠して持つ  # v0.9: 関連作から引き継ぐのは本筋のエントリだけ(票は収集の道具 v0.5 が絞る。 ジャンルもそろえる)/ 使わなかったタグを付与案に見せる  # v0.8: 表に出すのは強い順に最大10語・語彙と訳が在る語だけ / AniList と材料が一致した語を先に / 隠して持つ語を欄に分ける  # v0.7: ネタバレ印は「その語を持つエントリの半分以上に付いている時だけ」有効 / 呼び出しは共通部品(_lean_claude)  # v0.6: 作品ごとのユーザ裁定(rulings.yml)を付与案より優先 / apply のジャンル追記を二重にしない  # v0.5: apply(表に出す案を seed へ書く口。ユーザの Go 発話の引用が必須)  # v0.4(2026-10-09 ユーザ裁定): ネタバレ印の語は表に出さない(控えへ)/ 控えはサイトに出さず記録だけ  # v0.2: 指示文から試金石の語の例を外す / タグ一覧の語を候補に / ありふれた名詞を候補から外す
 ME = "python scripts/_element-assign.py"
 TEST_ROOT = os.environ.get("EH_ROOT")
 BASE = TEST_ROOT or os.path.join(ROOT, ".cache", "element-harvest")
@@ -181,8 +181,49 @@ def load_material(stem):
 
 
 # ───────── 1) AniList を票で仕分ける(機械) ─────────
+# ★票の値が「平ら」なエントリ(v0.18・見直しまとめて4回目)。 AniList は誰も票を入れていない(付けた人だけの)タグに決まった値(79/60/50/40/20)を付ける。
+#   登録の少ないエントリはタグがほぼ全部この値で揃う(1人が全部付けた)= 票79 でも票ではない。 点検 A・後 8本の型5(票だけで合わない語)の大半がこれ
+#   (なのはViVid=メイド・サイボーグ・人工知能 / コハエース=吸血鬼・宇宙人 / 銀牙=弓道 / Fate/EXTRA=母系社会 / プリキュア=幽霊・ドラゴン)。
+#   人気作でも後から足されたタグは79になるが、既定値の割合は5割前後(チェンソーマン23%・七つの大罪52%・BANANA FISH 50%)で、中身も妥当(BANANA FISH=復讐)。
+#   → 既定値のタグが6割以上(3タグ以上)のエントリを「平ら」とし、既定値の票に印を付ける(点検の表示で「票79(平ら)」)。
+#   ★芯から下げる(FLAT_DEMOTE)のは試して止めた(2026-10-27): 表の語 55,465→47,703 だが、外れた語の約半分は作品に合っていた
+#     (はやて×ブレード=百合・瀬戸の花嫁=ヤクザ・あずみ=忍者)。 既定値タグの個数で絞っても分けられない。 ユーザ裁定「では2」= 誤りは残るが要素が一番出る方。
+FLAT_RANKS = {20, 40, 50, 60, 79}   # 登録の少ないエントリ(popularity<100)の票の 98% がこの5値
+FLAT_SHARE = 0.6
+FLAT_DEMOTE = False  # ★2026-10-27 ユーザ裁定「では2」= 下げない(印だけ付ける)。 下げると表の語 55,465→47,703、 外れた語の抜き取り40は約半分が作品に合い・明らかな誤りは約1割だった
+FLAT_CACHE = os.path.join(ROOT, ".cache", "element-harvest", "_local", "anilist-flat-ids.json")
+ANI_DUMP = os.path.join(ROOT, ".cache", "anilist-manga-dump-v3.jsonl.gz")
+_FLAT = None
+
+
+def flat_ids():
+    """票が平らなエントリの id の集合(dump から1回作ってキャッシュ。 dump が新しくなったら作り直す)。"""
+    global _FLAT
+    if _FLAT is not None:
+        return _FLAT
+    if os.path.exists(FLAT_CACHE) and (not os.path.exists(ANI_DUMP) or os.path.getmtime(FLAT_CACHE) >= os.path.getmtime(ANI_DUMP)):
+        with open(FLAT_CACHE, encoding="utf-8") as f:
+            _FLAT = set(json.load(f))
+        return _FLAT
+    import gzip
+    _FLAT = set()
+    if os.path.exists(ANI_DUMP):
+        with gzip.open(ANI_DUMP, "rt", encoding="utf-8") as f:
+            for line in f:
+                e = json.loads(line)
+                rs = [t.get("rank") or 0 for t in e.get("tags") or [] if isinstance(t, dict)]
+                if len(rs) >= 3 and sum(r in FLAT_RANKS for r in rs) >= FLAT_SHARE * len(rs):
+                    _FLAT.add(e["id"])
+        os.makedirs(os.path.dirname(FLAT_CACHE), exist_ok=True)
+        with open(FLAT_CACHE, "w", encoding="utf-8") as f:
+            json.dump(sorted(_FLAT), f)
+    return _FLAT
+
+
 def anilist_part(m, V):
     items, skipped, weak = [], [], []
+    mains = [e for e in m["anilist"]["entries"] if e.get("main", True) and e["group"] in ("自分", "小説", "アニメ")]
+    all_flat = bool(mains) and all(e["id"] in flat_ids() for e in mains)  # 票を引き継ぐエントリが全部「平ら」
     for r in m["anilist"]["tags"]:
         best = max(r["self"], r["novel"], r["anime"])  # 自分・原作小説・アニメ(本筋のエントリ)から引き継ぐ(他の漫画=アンソロジー等は使わない)
         spoiler = (r["ns"] * 2 >= r["n"]) if r.get("n") else r["spoiler"]  # n/ns が無い古い束は従来どおり
@@ -204,7 +245,10 @@ def anilist_part(m, V):
         tier = "芯" if best >= ANI_SHOW.get(base, 999) else "在る"
         if tier == "芯" and spoiler and SPOILER_TO_SUB:
             tier = "在る"
-        items.append({"word": ja or name, "en": name, "tier": tier, "votes": best, "by": {"自分": r["self"], "小説": r["novel"], "アニメ": r["anime"]},
+        flat = all_flat and best in FLAT_RANKS
+        if flat and FLAT_DEMOTE:
+            tier = "在る"
+        items.append({"word": ja or name, "en": name, "tier": tier, "votes": best, "flat": flat, "by": {"自分": r["self"], "小説": r["novel"], "アニメ": r["anime"]},
                       "spoiler": spoiler, "no_ja": not ja, "draft": draft, "reread": name in JA_OVERRIDE, "category": cat})
     fam = [e for e in m["anilist"]["entries"] if e.get("main", True) and (e["group"] in ("自分", "小説") or (e["group"] == "アニメ" and e.get("format") == "TV"))]
     gkeys = {}
@@ -453,7 +497,8 @@ def make_proposal(stem, m, V, cands, ans, use, not_spoiler=(), lift=()):
             continue
         a = e["ani"] or {}
         if e["tier"] != "芯":
-            e["cls"], e["hid"] = "隠し", "ネタバレ印" if e["spoiler"] and a.get("votes", 0) >= ANI_SHOW.get(a.get("category", "").split("-")[0], 999) else "在る"
+            e["cls"], e["hid"] = "隠し", ("ネタバレ印" if e["spoiler"] and a.get("votes", 0) >= ANI_SHOW.get(a.get("category", "").split("-")[0], 999)
+                                        else "票が平ら" if a.get("flat") and not e["mat"] else "在る")
         elif e["word"] in common and not e.get("ruled"):
             e["cls"], e["hid"] = "隠し", "ありふれた語"
         elif a.get("en") in HIDE_ALWAYS and not e.get("ruled"):
