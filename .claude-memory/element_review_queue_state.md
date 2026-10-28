@@ -123,3 +123,11 @@ metadata:
 - 直していない: 型3 宣伝文句 / 型6 東京ご利益さんぽ=神社(語彙外の語→全経路後の語の裁定)/ 哲学・政治・群像劇・美少女日常(型5と同根)。
 - 残り: 経路W(保留)/ 語彙外の語の裁定(全経路そろった = `words --route A` `--route 後` で数え直して L の案と同じ形の表に)/ 適用(seed へ)は未着手。
 - 2026-10-28 裁定表(全経路L・A・後 = 237語・5頁以上): `data/element-harvest/new-words-proposal.tsv`(L案180語+A・後で新しく57語に私が案)。 ★スマホ用の裁定ページ https://claude.ai/artifact/L1gQRZeRgoyaqzqD5Zvyuy (db capability)= 案から**変えた語だけ** collection `rulings`(doc id=番号、verdict/target)に保存、「裁定おわり」で `meta/status`。 読むのは ArtifactData list rulings。 触っていない語は案どおり。 未解決: お仕事は hide_common なので Work/Office/サラリーマン→お仕事 は寄せても表に出ない(ページに注記)。
+
+## 種へ書いた(2026-10-28)★頁への反映はまだ
+- ★ユーザ裁定(2026-10-28)「隠す判定は本番でも隠したい。 ただ羅針盤の判定では使う」= ネタバレ印・重なり・ありふれた語・上限 の語は本番の表示から外す(新しい種 `data/seeds/tags-hide.json`・key=SRC slug・promote がジャンル派生の後に外す)。 鍵には残す。 今出ている語を「在る」だけで外すことはしない。
+- 一括の書き口 = `python scripts/_element-review.py apply [--route L,A,後] [--go "<発話>"]`(--go 無し=件数だけ)。 4つの種(tags-enrich-2425 / genre-append / element-hidden / tags-hide)を退避して書き、変わった頁ごとに `data/seeds/element-review-apply-changelog.jsonl`。
+- ユーザ「今の案で書いて比較して裁定がよいかと」で書いた(commit 1e05fd11b2・退避 .cache/element-review-apply-bak-20261028-121042)。 28,369頁・足す語53,169・外す語4,312(2,933頁)。
+- 前と後 = `python scripts/_element-review-compare.py`(読むだけ・本番と同じ themes_of)→ .cache/element-review-compare/。 要素のべ 46,280→70,558・要素0の頁 11,241→6,582・減る 2,911頁4,254語(悲劇899・年の差446・お仕事239・時間操作235…)。 ページ https://claude.ai/artifact/N3GF41YnmEjszHyQbkfP1z(頁ごと・足す緑/外す赤+理由)。
+- ★`_build-list-index.py` は import すると索引作りまで走る(比較の道具は themes_of の節だけ exec する)。
+- 残り: 語彙外の語の裁定ページ → 裁定を語彙へ → rebuild(約25分)→ apply --go をもう一度(足すだけ・tags-hide も足すだけ)→ テスト環境で数頁 → フル promote か週次蒸留 → `_build-compass-hidden.py`。
