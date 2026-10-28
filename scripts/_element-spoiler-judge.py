@@ -19,7 +19,7 @@ sys.stdout.reconfigure(encoding="utf-8")
 import yaml
 
 Ld = getattr(yaml, "CSafeLoader", yaml.SafeLoader)
-VERSION = "s0.1"
+VERSION = "s0.2"  # s0.2: 「1巻に無い=展開」をやめる(2巻で恋敵が出るラブコメの三角関係を展開にしていた)。 展開=知ると驚きが損なわれる物だけ / --redo
 DIR = os.path.join(ROOT, "data", "element-harvest")
 CANDS = os.path.join(DIR, "spoiler-judge-candidates.jsonl")
 LEDGER = os.path.join(DIR, "spoiler-judge.jsonl")
@@ -133,8 +133,10 @@ SCHEMA = {"type": "object", "required": ["words"], "properties": {"words": {"typ
     "properties": {"word": {"type": "string"}, "verdict": {"type": "string", "enum": ["前提", "展開", "不明"]}, "why": {"type": "string"}}}}}}
 
 RULES = """漫画の頁に出す「要素」の語が、その作品にとってネタバレかを判定する。
-- 前提 = 1巻・作品紹介(あらすじ)の段階で読者に分かっている設定や関係。 物語の出発点。 例: 紹介文に「親友も彼に想いを寄せていて」とあれば三角関係は前提。
-- 展開 = 物語の途中や終盤で明かされる・起きること。 知らずに読みたい驚き・結末・主要人物の死・正体。
+- 展開 = 知ってしまうと、読む時の驚きが損なわれること。 結末・主要人物の死・正体・裏切り・黒幕・どんでん返し・隠された過去の真相。
+- 前提 = 展開でないもの。 1巻・作品紹介の段階で分かる設定や関係。 加えて、物語の中心として続く関係・題材は、2巻以降に出てきても前提
+  (例: ラブコメで2巻から恋敵が出て三角関係になる = 作品紹介でふつうに語られる中心の要素なので前提)。
+- 「1巻の紹介文に書いていない」だけでは展開にしない。 展開にするのは、隠されていた事実が明かされる・取り返しのつかない出来事が起きる時。
 - 不明 = 材料からも作品の知識からも決められない。 迷ったら不明。
 - 材料(あらすじ・紹介文)を第一の根拠にする。 作品を知っている場合は知識も使ってよいが、why に「知識」と書く。
 - why は20字以内。"""
@@ -157,7 +159,12 @@ def build_prompt(x, doc, en, ja_mat):
 def cmd_run(a):
     import _lean_claude
     ea = mod("_element-assign")
-    done = {(r["stem"], r["en"]) for r in jl(LEDGER)}
+    latest = {}
+    for r in jl(LEDGER):
+        latest[(r["stem"], r["en"])] = r
+    redo = set(a.redo.split(",")) if a.redo else set()
+    # --redo 展開 = 前の版で「展開」と出た語だけを今の版で判定し直す(台帳は足すだけ・新しい行が勝つ)
+    done = {k for k, r in latest.items() if not (r["verdict"] in redo and r.get("version") != VERSION)}
     todo = [x for x in jl(CANDS) if any(not w["auto"] and (x["stem"], w["en"]) not in done for w in x["words"])]
     if a.limit:
         todo = todo[:a.limit]
@@ -271,6 +278,7 @@ def main():
     sp.add_parser("candidates")
     p = sp.add_parser("run"); p.add_argument("--parallel", type=int, default=3); p.add_argument("--limit", type=int, default=0)
     p.add_argument("--model", default="claude-haiku-5-5")
+    p.add_argument("--redo", default="", help="前の版でこの判定だった語を判定し直す(例 展開)")
     sp.add_parser("status")
     p = sp.add_parser("apply"); p.add_argument("--go", default="")
     a = ap.parse_args()
