@@ -1,0 +1,9 @@
+# 要素収集(_element-harvest.py)の「検索用の題」の差し替え。 頁のデータ(manga.v2)は変えない。
+# 頁の題が短すぎる・一般語で、検索が別作品ばかり当たる時だけ足す。 確かめた出所を note に書く。
+#   title       = 検索と同定に使う題
+#   authors_add = 同定に足す著者名(頁の著者欄に居ない原作者など)
+titles:
+  zero:
+    title: ゼロ THE MAN OF THE CREATION
+    authors_add: [愛英史]
+    note: "2026-10-29 Wikipedia「ゼロ THE MAN OF THE CREATION」(原作 愛英史・絵 里見桂・スーパージャンプ)・楽天 9784088586212 は 愛英史/里見桂。 頁は題「ゼロ」・原作者なし・掲載誌 big-comic(別に per-case)"

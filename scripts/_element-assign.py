@@ -96,6 +96,13 @@ RULES = """あなたは漫画データベースの分類の助手。下の「材
 judged = 「候補」の語すべてについて1件ずつ(違う も必ず書く)。 added と new_words は該当があるものだけ。"""
 
 
+
+def _rel(p):  # 表示用。 置き場が別ドライブ(D:\mangal-cache)の時 relpath は ValueError になる
+    try:
+        return os.path.relpath(p, ROOT)
+    except ValueError:
+        return p
+
 def now():
     return datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
 
@@ -169,7 +176,7 @@ def word_status(word, V):
 def load_material(stem):
     p = os.path.join(wdir(stem), "material.json")
     if not os.path.exists(p):
-        die(f"材料の束が無い: {os.path.relpath(p, ROOT)}\n  先に要素収集を done まで: python scripts/_element-harvest.py status {stem}")
+        die(f"材料の束が無い: {_rel(p)}\n  先に要素収集を done まで: python scripts/_element-harvest.py status {stem}")
     with open(p, encoding="utf-8") as f:
         m = json.load(f)
     dom = {s["id"]: s for s in m["sources"]}
@@ -602,7 +609,7 @@ def cmd_prepare(a):
     with open(os.path.join(d, "assign-cands.json"), "w", encoding="utf-8") as f:
         json.dump(cands, f, ensure_ascii=False, indent=1)
     print(f"候補 {len(cands)}語(ジャンル {sum(1 for c in cands if c['kind'] == 'ジャンル')}・要素 {sum(1 for c in cands if c['kind'] == '要素')})"
-          f" / モデルに渡す文面 {len(prompt)}字 → {os.path.relpath(os.path.join(d, 'assign-prompt.txt'), ROOT)}")
+          f" / モデルに渡す文面 {len(prompt)}字 → {_rel(os.path.join(d, 'assign-prompt.txt'))}")
     return V, m, cands, prompt
 
 
@@ -615,7 +622,7 @@ def finish(a, V, m, cands, ans, use, record=True):
     print(f"表に出す案 {len(core)}: {'・'.join(core)}\n隠して持つ {len(sub)}: {'・'.join(sub)}\n新しい語 {len(new)}: {'・'.join(new) or 'なし'}")
     print(f"付けない {sum(1 for x in ok if x['tier'] == '違う')} / 道具が弾いた {len(bad)} / 判定なし {len(missing)}"
           f" / 読み込み {use.get('in')}・出力 {use.get('out')} トークン・{use.get('sec')}秒")
-    print(f"付与案 → {os.path.relpath(os.path.join(adir(a.stem), 'assign-proposal.md'), ROOT)}")
+    print(f"付与案 → {_rel(os.path.join(adir(a.stem), 'assign-proposal.md'))}")
     if not record:
         return
     os.makedirs(LEDGER_DIR, exist_ok=True)

@@ -58,6 +58,13 @@ NOT_MATERIAL = {
 }
 
 
+
+def _rel(p):  # 表示用。 置き場が別ドライブ(D:\mangal-cache)の時 relpath は ValueError になる
+    try:
+        return os.path.relpath(p, ROOT)
+    except ValueError:
+        return p
+
 def fix_url(u):
     """「/url?…&q=https://…」(検索の中継URL)から本当のURLを取り出す。"""
     if u.startswith("/url?") or re.match(r"^https?://(www\.)?google\.[a-z.]+/url\?", u):
@@ -364,6 +371,15 @@ def chars_all(st):
 
 
 # ───────── 同定カード ─────────
+def _search_titles():
+    import yaml
+    p = os.path.join(ROOT, "data", "element-harvest", "search-titles.yml")
+    if not os.path.exists(p):
+        return {}
+    with open(p, encoding="utf-8") as f:
+        return (yaml.safe_load(f) or {}).get("titles") or {}
+
+
 def build_card(stem):
     import yaml
     try:
@@ -387,10 +403,16 @@ def build_card(stem):
     names = lambda key: [str(a.get("name")) for a in (d.get(key) or []) if isinstance(a, dict) and a.get("name")]  # noqa: E731
     alt = d.get("alternative_titles") or {}
     title = str(d.get("title") or "")
+    # ★検索用の題の差し替え(data/element-harvest/search-titles.yml)。 頁の題が短すぎて別作品ばかり当たる時に使う
+    #   (2026-10-29: 頁の題「ゼロ」= 正式題『ゼロ THE MAN OF THE CREATION』で、検索が全部別作品 → 材料0字)。 頁のデータは変えない
+    ov = (_search_titles().get(stem) or {})
+    orig_extra = [str(x) for x in (ov.get("authors_add") or [])]
+    page_title, title = title, str(ov.get("title") or title)
     return {
         "stem": stem, "slug": d.get("slug") or stem, "title": title, "base_title": base_title(title),
+        **({"page_title": page_title} if title != page_title else {}),
         "title_kana": d.get("title_kana"), "title_en": alt.get("en") if isinstance(alt, dict) else None,
-        "authors": names("authors"), "original_authors": names("original_authors"),
+        "authors": names("authors"), "original_authors": names("original_authors") + [a for a in orig_extra if a not in names("original_authors")],
         "publisher": std.get("publisher") or d.get("publisher"), "imprint": std.get("imprint"),
         "magazine": d.get("magazine"), "year_started": d.get("year_started"), "year_ended": d.get("year_ended"),
         "status": d.get("status"), "demographic": d.get("demographic"), "genres": d.get("genres") or [],
@@ -1146,8 +1168,8 @@ def cmd_done(a):
         print(f"{k:<5}: 検索 {b['search']} 取得 {b['fetch']} 採用 {b['adopt']}({b['chars']}字)"
               + (f" 不採用={','.join(b['skip'])}" if b["skip"] else "") + (f" 取らない札={','.join(b['refused'])}" if b["refused"] else "")
               + (f" 取得失敗 {b['error']}" if b["error"] else "") + (f" none={b['none']}" if b["none"] else ""))
-    print(f"材料 合計 {line['chars']}字(上限 {CAP['chars_work']}) → {os.path.relpath(os.path.join(d, 'material.md'), ROOT)}")
-    print(f"台帳 1行追記 → {os.path.relpath(LEDGER, ROOT)}")
+    print(f"材料 合計 {line['chars']}字(上限 {CAP['chars_work']}) → {_rel(os.path.join(d, 'material.md'))}")
+    print(f"台帳 1行追記 → {_rel(LEDGER)}")
 
 
 # ───────── 自動運転(★道具が Haiku を「土台なし」で1回ずつ呼ぶ。 会話として運転させない = 1作 約200万→数万トークン) ─────────
