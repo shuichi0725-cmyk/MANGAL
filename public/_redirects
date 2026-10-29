@@ -2,6 +2,10 @@
 # 旧 slug → 新 slug の 301(漫画頁は /manga/ 配下=この形状以外は届かない)
 # ★Cloudflare Pages は静的redirect上限2,000行(preview=部分カバー)。本番全件は KV REDIRECTS 側。
 
+/manga/barao-no-soretsu /manga/baraou-no-souretsu 301
+/manga/boku-wa-asu-kino-no-kimi-to-deeto-suru /manga/boku-wa-asu-kinou-no-kimi-to-date-suru 301
+/manga/ichipaasento-orange /manga/1-orange 301
+/manga/kimagure-orenji-road /manga/kimagure-orange-road 301
 /manga/0-1996 /manga/zero-1996 301
 /manga/0-2009 /manga/zero-2009 301
 /manga/0-hour /manga/zero-hour 301
@@ -2117,7 +2121,6 @@
 /manga/barakamon-18-purasu-1 /manga/barakamon-18-plus-1 301
 /manga/baramura-e-yokoso /manga/baramura-e-youkoso 301
 /manga/baranosakamichi /manga/bara-no-sakamichi 301
-/manga/barao-no-soretsu /manga/baraou-no-souretsu 301
 /manga/baratokenju /manga/baratokenjuu 301
 /manga/barcelona-no-taiyo /manga/barcelona-no-taiyou 301
 /manga/baree-de-sekai-ni-idonda-otoko /manga/ballet-de-sekai-ni-idonda-otoko 301
@@ -2638,7 +2641,6 @@
 /manga/boku-to-utsukushiki-bengoshi-no-boken /manga/boku-to-utsukushiki-bengoshi-no-bouken 301
 /manga/boku-to-watashi-no-renai-jijo /manga/boku-to-watashi-no-love-jijou 301
 /manga/boku-wa-ai-o-shomei-shiyo-to-omo /manga/boku-wa-ai-o-shoumei-shiyou-to-omou 301
-/manga/boku-wa-asu-kino-no-kimi-to-deeto-suru /manga/boku-wa-asu-kinou-no-kimi-to-date-suru 301
 /manga/boku-wa-boku-yori-tomodachi-ga-oi-boku-no-kanojo-ga-shinpai /manga/boku-wa-boku-yori-tomodachi-ga-ooi-boku-no-kanojo-ga-shinpai 301
 /manga/boku-wa-chikyu-totau /manga/boku-wa-chikyuu-toutau 301
 /manga/boku-wa-haru-wo-hisagu /manga/boku-wa-haru-o-hisagu 301
@@ -9608,7 +9610,6 @@
 /manga/ichioku-nen-go-no-natsu-no-hanashi-o-shiyo /manga/ichioku-nen-go-no-natsu-no-hanashi-o-shiyou 301
 /manga/ichiokunen-bo-tan-o-renda-shita-ore-wa-kizuitara-saikyo-ni-natte-ita /manga/ichiokunen-bo-tan-o-renda-shita-ore-wa-kizuitara-saikyou-ni-natte-ita 301
 /manga/ichiokunen-bo-tan-wo-renda-shita-ore-wa-kizuitara-saikyo-ni-natte-ita /manga/ichiokunen-bo-tan-o-renda-shita-ore-wa-kizuitara-saikyou-ni-natte-ita 301
-/manga/ichipaasento-orange /manga/1-orange 301
 /manga/ichiro-hanakage-ninpo /manga/ichirou-hanakage-ninpou 301
 /manga/ichiro-hounkyo /manga/ichirou-houunkyou 301
 /manga/ichiro-iseijin /manga/ichirou-iseijin 301
@@ -12799,7 +12800,6 @@
 /manga/kimagure-joshaken /manga/kimagure-joushaken 301
 /manga/kimagure-kitchin /manga/kimagure-kitchen 301
 /manga/kimagure-mairodo /manga/kimagure-mairoodo 301
-/manga/kimagure-orenji-road /manga/kimagure-orange-road 301
 /manga/kimagure-shijushi /manga/kimagure-shijuushi 301
 /manga/kimagure-sukyandaru /manga/kimagure-scandal 301
 /manga/kimajime-onzoshi-to-migawari-konyakusha /manga/kimajime-onzoushi-to-migawari-konyakusha 301
