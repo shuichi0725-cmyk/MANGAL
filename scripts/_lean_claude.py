@@ -35,10 +35,23 @@ def ask(prompt, schema, model, system=SYSTEM, timeout=600, effort=None):
     if effort:  # low にすると Haiku の考える量が減る(2026-10-12 実測: 1作 65秒→41秒・出力 1.5万→1万トークン)
         args += ["--effort", effort]
     t = time.time()
+    # ★subprocess.run(timeout=) は Windows で効かないことがある(2026-10-29 実踏: 600秒の上限で30分固まった)。
+    #   kill() は claude.exe 本体しか止めず、孫プロセスが出力の口を握ったままなので communicate() が永久に待つ
+    #   → 時間切れの時は taskkill /T で子孫ごと止めてから口を閉じる。
+    p = subprocess.Popen(args, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=os.path.expanduser("~"))
     try:
-        r = subprocess.run(args, input=prompt.encode("utf-8"), capture_output=True, timeout=timeout, cwd=os.path.expanduser("~"))
+        so, se = p.communicate(prompt.encode("utf-8"), timeout=timeout)
     except subprocess.TimeoutExpired:
+        if os.name == "nt":
+            subprocess.run(["taskkill", "/T", "/F", "/PID", str(p.pid)], capture_output=True)
+        else:
+            p.kill()
+        try:
+            p.communicate(timeout=10)
+        except subprocess.TimeoutExpired:
+            pass
         raise LeanError(f"モデルの応答が{timeout}秒で返らなかった")
+    r = subprocess.CompletedProcess(args, p.returncode, so, se)
     out = r.stdout.decode("utf-8", "replace")
     try:
         d = json.loads(out)
