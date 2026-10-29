@@ -46,3 +46,5 @@ metadata:
 - ★(10-08) `_promote-bulk-v2.py --dry-run --only <slug>` は**予約頁(preorder-pages)2,318頁を全部** `data/manga.dryrun/` に書き出す
   (予約合流は --only を見ない)。`data/manga.dryrun/` は **git追跡ディレクトリ**(69k)= 試し生成の後は未追跡の新規を消し、
   変わった追跡ファイルは `git checkout` で戻す(放置すると次の `git add data` で巻き込む)。
+- ★(10-29) 「slug変更検知」は slug-overrides で SRC名≠公開slug の頁を**毎回**出す(19,558頁の反映で452行・全部誤報)。本当に変わったかは行を読まず、反映前後の `data/manga-list-index.json` の slug 集合を突き合わせて確かめる(前 = git show <反映前commit>:…)。
+- ★(10-29) **週次蒸留は頁を作り直さない**(書影差し替えの頁だけ promote)。promote が頁に焼く seed(tags-enrich / tags-hide / genre-append 等)を変えたら、先に targeted 反映で頁を作り直す。tag-i18n.yml / wamei-tags.yml はビルド時に lib/loadData.ts が読む = 週次だけで全頁に効く(片方だけ出すと半端な表示になる)。[[element-review-queue-state]]
