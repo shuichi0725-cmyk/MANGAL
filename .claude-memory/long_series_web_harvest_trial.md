@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 167f0cda-b9f6-41b5-bc39-8d561ce1d570
-  modified: 2026-10-29T09:30:26.839Z
+  modified: 2026-10-29T09:50:33.024Z
 ---
 
 2026-10-29 ユーザ「巻数が五巻以上あるのに要素が三以下(隠し以外)を改善したい」→「haikuを使って情報収集する仕組み」→「巻数の多いものから試したい」(ミナミの帝王=料理だけ、が発端)。[[element-review-queue-state]] [[element-harvest-pillar-state]] の続き。
@@ -21,6 +21,13 @@ metadata:
 - 費用: 収集 Haiku 計 $0.47(1作 約8.7万読み込み・約2分)/ 付与 Sonnet 計 $2.42 = **費用の8割は Sonnet の付与**。
 - 語彙に無くて隠れた語: 闇金・高利貸し・トイチ・取り立て・同心・捕り物・記者・二重生活・代打・ロードレース・熟年・逆境・魔球・番狂わせ・ブラックジョーク 等。Historical(英語のまま)2件=訳の穴。
 - 気になる案: 静かなるドン=ヤクザ・任侠・極道(重なり)/ サザエさん=学習 / NARUTO 和12語(上限10超)。
+
+## ★Web材料の器(2026-10-29 ユーザ発案「haikuがネットで集めた情報を入れる器を作ってほしい。いつ。どこで、情報をえたか。漫画ごとに情報を得るだけまず進めてみる」)
+- 道具 `scripts/_web-material.py` status / run --n N / run --stems a,b [--redo] / show <stem> [--text] / import <EH_ROOT>。集めるだけ(判定・付与しない)。
+- 置き場 `.cache/web-material/`(store/<stem>.json=回ごと全部残す・work/=EH_ROOT で raw 全文・runs.jsonl)。★ユーザ裁定「非公開、ローカルだけでよい」「DはつかわないでCでよい」= git に入れない・D ドライブを使わない。
+- 試し30頁は import 済み。ゼロは search-titles.yml(検索用の題)で集め直し 0→2,770字。
+- ユーザ「入れるのは良いという意味だがまだ色々試したい」= 30頁の付与案の適用は可だが保留中。
+- ゼロの頁の穴(題「ゼロ」・原作 愛英史なし・掲載誌 big-comic→正しくはスーパージャンプ)は per-case 未着手。
 
 ## ★流し方の罠(2026-10-29 実踏)
 - `while read s; do python … ; done < list` で回すと、子が一覧ファイルを標準入力に継いで claude -p が固まる(直接実行は90秒で完走)。→ 各コマンドに `</dev/null`。
