@@ -59,7 +59,7 @@ def main():
         have = {t.get("name") for t in tags}
         add = [x for k in keys for x in (enrich.get(k) or []) if x not in have]
         new = [t for t in tags if not (t.get("category") != "Demographic" and t.get("name") in th)]
-        new += [{"name": x} for x in dict.fromkeys(add)]
+        new += [{"name": x} for x in dict.fromkeys(add) if x not in th]  # promote も足してから外す(両方に在る語は出ない)
         aft = themes_of(dict(doc, tags=new))
         b_all += len(bef); a_all += len(aft); z_b += not bef; z_a += not aft
         p = [x for x in aft if x not in bef]; m = [x for x in bef if x not in aft]
