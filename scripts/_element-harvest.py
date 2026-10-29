@@ -33,7 +33,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 import _rate_gate, _site_gate  # noqa: E402
 
-VERSION = "v0.5"  # v0.5: 関連作の票は「本筋」のエントリだけ引き継ぐ(登録者の少ないエントリ・おまけ映像は使わない)/ rebundle  # v0.2: 折り返し行をつなぐ/タグ一覧を機械で採る/全文を見せて読んでから指す/公式の検索語
+VERSION = "v0.6"  # v0.6(2026-10-30): 同定の照合先に同定済みの資料(Wikipedia等)を足し、Haikuに見せる / 段落に「全体/一編」の印 / 百科の検索にマンガペディア / 短い題は著者名を足して検索 / JSで中身が取れない売り場を外す
+# v0.5: v0.5: 関連作の票は「本筋」のエントリだけ引き継ぐ(登録者の少ないエントリ・おまけ映像は使わない)/ rebundle  # v0.2: 折り返し行をつなぐ/タグ一覧を機械で採る/全文を見せて読んでから指す/公式の検索語
 # v0.3(2026-10-09): 出所を英字(A,B,C…)に=検索結果の番号との取り違え防止 / 取れなかった頁は取得数に数えない / 壊れた検索URLを直す
 # v0.4(2026-10-09): 自動運転(auto)= 道具が Haiku を土台なしで1回ずつ呼ぶ / AniList のネタバレ印を「何件中何件」で持つ
 ME = "python scripts/_element-harvest.py"
@@ -55,6 +56,7 @@ NOT_MATERIAL = {
     "SNS・動画": ["x.com", "twitter.com", "instagram.com", "tiktok.com", "facebook.com", "youtube.com", "nicovideo.jp"],
     "海外のwiki": ["baidu.com", "moegirl.org.cn", "fandom.com", "wikipedia.org"],  # ja.wikipedia.org だけは別扱い(API)
     "売り場・フリマ": ["mercari.com", "auctions.yahoo.co.jp", "lifetunes-mall.jp"],
+    "中身が取れない売り場": ["piccoma.com", "video.unext.jp"],  # 2026-10-30 30作の試し: 4回とも題すら取れず「別作品の疑い」
 }
 
 
@@ -95,7 +97,8 @@ CAP = {
     "chars_source": 2500, "chars_wikipedia": 5000, "chars_work": 16000, "fetch_work": 20,
 }
 QUERIES = {
-    "wiki": ["{t} アニヲタWiki", "{t} 登場人物 キャラクター紹介"],  # ピクシブ百科=robots拒否 / ニコニコ大百科=403(実踏)
+    "wiki": ["{t} アニヲタWiki", "{t} マンガペディア"],  # ピクシブ百科=robots拒否 / ニコニコ大百科=403(実踏)
+    # ★v0.6: 2本目を「登場人物 キャラクター紹介」→マンガペディア(30作の試しで百科として8回採用・古い長期連載にも記事がある)
     # ★1本目は頁の題そのもの(副題つき)+レーベル。 原作小説と版元が同じ漫画化(俺ガイル@comic)で、
     #   「題+版元」だと小説側の頁ばかり出た(2026-10-08 試走)
     "公式": ["{full} {imprint} 公式", "{t} {a} 1巻 あらすじ"],
@@ -437,6 +440,30 @@ def identity(card, text):
 def own_text(card):
     return norm(" ".join([card["synopsis"], card["catch"]] + card["volume_descriptions"] + card["authors"]
                          + card["original_authors"] + [str(card.get("publisher") or ""), str(card.get("imprint") or "")]))
+
+
+def trusted_picks(st):
+    """同定が通った出所(題+著者名が在る・または same が確かめられた)から採った段落。 タグ一覧は除く。"""
+    ok = {x["id"] for x in st["sources"] if (x.get("identity") or {}).get("verdict") == "OK" or x.get("same")}
+    return [p for p in st["picks"] if p["src"] in ok and not p.get("mech")]
+
+
+def anchor_text(st):
+    """「同じ作品か」の照合先 = こちらのデータ + 同定済みの資料。
+    ★v0.6: こちらのデータ(あらすじ数行)だけだと長期連載で重なる語が無く、30作の試しで本物の頁13件(マンガペディア等)を捨てた。"""
+    return own_text(st["card"]) + norm(" ".join(p["text"] for p in trusted_picks(st)))
+
+
+def anchor_view(st, budget=1200):
+    """Haiku に見せる照合用の抜粋(人物の段落を先に)+ こちらの巻説明を少し。"""
+    ps = sorted(trusted_picks(st), key=lambda p: p["as"] != "人物")
+    out, used = [], 0
+    for t in [p["text"] for p in ps] + st["card"]["volume_descriptions"][:3]:
+        t = " ".join(t.split())[:max(0, budget - used)]
+        if t:
+            out.append("- " + t)
+            used += len(t)
+    return out
 
 
 # ───────── 機械で取れる分: AniList / Wikipedia ─────────
@@ -889,6 +916,8 @@ def run_search(st, k, query=None, qi=None):
         au = (c["authors"] or c["original_authors"] or [""])[0]
         q = QUERIES[k][qi - 1].format(t=c["base_title"], full=c["title"], a=au, pub=c.get("publisher") or "",
                                       imprint=c.get("imprint") or c.get("publisher") or "")
+        if len(norm(c["base_title"])) <= 3 and au and au not in q:  # 短い題(ゼロ等)は別作品ばかり当たる → 著者名を足す
+            q += " " + au
         q = re.sub(r"\s+", " ", q).strip()
     _rate_gate.wait("tinyfish", 1.5)
     import _tinyfish
@@ -1185,9 +1214,10 @@ TRIAGE_SCHEMA = {"type": "object", "required": ["open"], "properties": {"open": 
 PICK_SCHEMA = {"type": "object", "required": ["skip", "same", "picks"], "properties": {
     "skip": {"type": "string", "enum": ["", "別作品", "薄い", "書誌や商品情報だけ", "重複"]},
     "same": {"type": "string"},
-    "picks": {"type": "array", "items": {"type": "object", "required": ["paras", "as"], "properties": {
+    "picks": {"type": "array", "items": {"type": "object", "required": ["paras", "as", "scope"], "properties": {
         "paras": {"type": "array", "items": {"type": "integer"}},
-        "as": {"type": "string", "enum": ["物語", "作風", "人物", "主題", "展開"]}}}}}}
+        "as": {"type": "string", "enum": ["物語", "作風", "人物", "主題", "展開"]},
+        "scope": {"type": "string", "enum": ["全体", "一編"]}}}}}}
 
 
 def card_text(c):
@@ -1256,10 +1286,13 @@ def judge_page(st, s, model, budget=5000):
         "- 主要人物の性格・関係・属性 → 人物", "- 何を描いているか(主題) → 主題", "- 中盤以降・結末の展開 → 展開",
         "■ 採らない段落", "発売日・巻数・価格 / スタッフ・声優・主題歌 / 売上・ランキング・受賞の羅列 / グッズ・イベントの告知 /",
         "書き手の自己紹介・前置き・近況 / コメント欄 / 別の作品の紹介 / 目次・メニュー。 迷ったら採らない。 全部で最大8段落",
+        "■ scope(段落ごと)", "全体 = 作品のどこを読んでも通じること(基本の設定・舞台・毎回の話の型・常連の人物・作品全体の主題や作風)",
+        "一編 = ある編・ある回・ある巻だけの出来事や人物", f"全{st['card']['volumes']}巻の作品。 全体の段落を優先して採る(一編の段落は、全体の段落が足りない時だけ)",
         "■ skip(この頁を使わない時だけ)", "別作品 = 作品カードと違う作品の頁 / 薄い = 使える段落が無い / 書誌や商品情報だけ / 重複 = 既に採った内容と同じ",
-        "■ same", ("同定が「要確認」なので必須: この頁と、上の作品カードの両方に一字一句で出てくる4字以上の語句(主人公の氏名など)。 無ければ skip=別作品"
-                   if v != "OK" else "空文字でよい"), "",
-        "■ 段落"] + lines + ["", '出力: {"skip": "", "same": "", "picks": [{"paras": [番号...], "as": "役割"}]}'])
+        "■ same", ("同定が「要確認」なので必須: この頁と、上の作品カードか下の照合用資料の両方に一字一句で出てくる4字以上の語句(主人公の氏名など)。 無ければ skip=別作品"
+                   if v != "OK" else "空文字でよい"), ""]
+        + (["■ 照合用資料(同じ作品だと確かめ済みの資料の抜粋。 same を探す所。 ここから段落は採らない)"] + anchor_view(st) + [""] if v != "OK" else [])
+        + ["■ 段落"] + lines + ["", '出力: {"skip": "", "same": "", "picks": [{"paras": [番号...], "as": "役割", "scope": "全体"}]}'])
     ans = ask_model(st, prompt, PICK_SCHEMA, model)
     s["seen"] = sorted(shown)
     if ans.get("skip"):
@@ -1271,7 +1304,7 @@ def judge_page(st, s, model, budget=5000):
         return
     if v == "要確認":
         ph = norm(ans.get("same") or "")
-        if len(ph) < 4 or ph not in norm(raw_of(st, s["id"])) or ph not in own_text(st["card"]):
+        if len(ph) < 4 or ph not in norm(raw_of(st, s["id"])) or ph not in anchor_text(st):
             s["skip"], s["why"] = "その他", "同じ作品だと示す語句を道具が確かめられなかった"
             return
         s["same"] = ans["same"]
@@ -1285,7 +1318,8 @@ def judge_page(st, s, model, budget=5000):
         idxs = [i for i in dict.fromkeys(pk.get("paras") or []) if isinstance(i, int) and i in shown and i not in got][:8 - n]
         if not idxs or pk.get("as") not in AS:
             continue
-        if add_pick(st, s, paras, idxs, pk["as"]):
+        if (pp := add_pick(st, s, paras, idxs, pk["as"])):
+            pp["scope"] = pk.get("scope") if pk.get("scope") in ("全体", "一編") else None
             got |= set(idxs)
             n += len(idxs)
     if not human_chars(st, s["id"]):

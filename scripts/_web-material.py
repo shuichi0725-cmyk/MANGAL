@@ -54,7 +54,7 @@ def to_record(st, work_dir):
     for p in st.get("picks") or []:
         picks_by_src.setdefault(p.get("src"), []).append({
             "paras": p.get("paras"), "role": p.get("as"), "label": p.get("label"), "text": p.get("text"),
-            "chars": p.get("chars"), "truncated": p.get("truncated"), "spoiler": p.get("spoiler"),
+            "chars": p.get("chars"), "truncated": p.get("truncated"), "spoiler": p.get("spoiler"), "scope": p.get("scope"),
             "by": "道具(機械)" if p.get("auto") or p.get("mech") else "モデル", "at": p.get("at")})
     sources = []
     for s in st.get("sources") or []:
