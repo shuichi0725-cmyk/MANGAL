@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { bigCover, loadVolCovers, type VolCover } from "@/lib/volCovers";
+import BuyLinks from "./BuyLinks";
 
 /**
  * 本棚: 番号タイルを押すと段の下に開く「前後の書影を覗かせる」パネル(2026-10-04 ユーザ裁定 3D)と、
@@ -16,6 +17,7 @@ const fmt = (d: string | null) => (d ? `${d.replace(/-/g, "/")} 発売` : "");
 export default function VolPeek({
   slug,
   title,
+  author,
   n,
   owned,
   onN,
@@ -23,6 +25,7 @@ export default function VolPeek({
 }: {
   slug: string;
   title: string;
+  author?: string;
   n: number;
   owned: number;
   onN: (n: number) => void;
@@ -42,6 +45,11 @@ export default function VolPeek({
     return (
       <div className="shelf-vp shelf-vp-msg">
         この作品の巻の書影はまだありません
+        {n > owned && (
+          <div className="shelf-vp-buy">
+            <BuyLinks title={title} author={author} n={n} label={`第${n}巻`} />
+          </div>
+        )}
         <button type="button" className="shelf-vp-x" onClick={onClose} aria-label="閉じる">
           ✕
         </button>
@@ -74,6 +82,7 @@ export default function VolPeek({
         <b>第{cur.n}巻</b>
         <span>{fmt(cur.date)}</span>
         {cur.n > owned && <span className="is-alert">まだ持っていない巻</span>}
+        {cur.n > owned && <BuyLinks title={title} author={author} n={cur.n} />}
         <span className="shelf-vp-tap">書影を押すと大きく</span>
       </div>
       <button type="button" className="shelf-vp-x" onClick={onClose} aria-label="閉じる">

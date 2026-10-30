@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { amazonSearchUrl } from "@/lib/amazon";
 import {
   type FetchFinal,
   type ImportMode,
@@ -28,6 +27,7 @@ import {
 import type { MangaListItem } from "@/lib/schema";
 import { ensureFullIndex, isFullIndexLoaded, useMangaIndex } from "@/lib/useMangaIndex";
 import { useMyShelf } from "@/lib/useMyShelf";
+import BuyLinks from "./BuyLinks";
 import VolPeek from "./VolPeek";
 
 type GenreDef = { key: string; name: string };
@@ -184,6 +184,7 @@ function Row({ d, onMenu, readOnly }: { d: CardData; onMenu: () => void; readOnl
   const { item, m, lost, note } = d;
   const title = m?.title ?? (item.title || item.slug);
   const cover = m?.cover ?? item.cover;
+  const author = m?.authors[0]?.name;
   const press = useLongPress(onMenu);
   const [vol, setVol] = useState<number | null>(null); // 書影を開いている巻(番号タイルを押した)
   const alert = note && (note.kind === "behind" || note.kind === "complete-behind");
@@ -234,8 +235,26 @@ function Row({ d, onMenu, readOnly }: { d: CardData; onMenu: () => void; readOnl
           ⋯
         </button>
       )}
+      {/* ★その場で Kindle・Amazon(2026-10-31 ユーザ要望): もってる=続きの最初の巻 / ほしい・気になる=作品名。 段(Link)の外に置く */}
+      {!lost && (item.shelf === "own" ? !!note?.next.length : true) && (
+        <div className="shelf-c3-buybar">
+          {item.shelf === "own" ? (
+            <BuyLinks title={title} author={author} n={note!.next[0]} label={`次は${note!.next[0]}巻`} />
+          ) : (
+            <BuyLinks title={title} author={author} />
+          )}
+        </div>
+      )}
       {vol !== null && !lost && (
-        <VolPeek slug={item.slug} title={title} n={vol} owned={item.owned ?? 0} onN={setVol} onClose={() => setVol(null)} />
+        <VolPeek
+          slug={item.slug}
+          title={title}
+          author={author}
+          n={vol}
+          owned={item.owned ?? 0}
+          onN={setVol}
+          onClose={() => setVol(null)}
+        />
       )}
     </li>
   );
@@ -280,7 +299,6 @@ function Sheet({
   const title = m?.title ?? (item.title || item.slug);
   const [confirm, setConfirm] = useState(false);
   const max = note?.total ?? 9999;
-  const tag = process.env.NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG ?? "";
   const nextVol = note?.next[0];
   const pick = (on: boolean) =>
     `rounded-full border px-3 py-1.5 text-xs font-semibold ${
@@ -346,14 +364,7 @@ function Sheet({
             {nextVol && !lost && (
               <p className="mt-2 flex flex-wrap gap-2">
                 {/* ★価格は書かない(静的な価格表示禁止)。検索リンクだけ */}
-                <a
-                  href={amazonSearchUrl(`${title} ${nextVol}`, tag)}
-                  target="_blank"
-                  rel="noopener nofollow sponsored"
-                  className="rounded-full border border-[var(--color-line)] px-3 py-1.5 text-xs text-ink/80"
-                >
-                  📖 {nextVol}巻をアマゾンで探す
-                </a>
+                <BuyLinks title={title} author={m?.authors[0]?.name} n={nextVol} label={`${nextVol}巻`} />
                 <Link href={`/manga/${item.slug}`} prefetch={false} className="rounded-full border border-[var(--color-line)] px-3 py-1.5 text-xs text-ink/80">
                   作品頁の巻一覧へ
                 </Link>
@@ -413,11 +424,14 @@ function Case({
       {cards.length === 0 ? (
         <p className="shelf-c3-empty">{readOnly ? "この棚は空です" : "作品頁の「しまう」から入れられます"}</p>
       ) : (
-        <ul className="shelf-c3-rows">
-          {cards.map((c) => (
-            <Row key={c.item.slug} d={c} readOnly={readOnly} onMenu={() => onMenu(c.item.slug)} />
-          ))}
-        </ul>
+        <>
+          <ul className="shelf-c3-rows">
+            {cards.map((c) => (
+              <Row key={c.item.slug} d={c} readOnly={readOnly} onMenu={() => onMenu(c.item.slug)} />
+            ))}
+          </ul>
+          <p className="shelf-c3-pr">[PR] 店舗リンクにはアフィリエイト広告を含みます</p>
+        </>
       )}
     </div>
   );

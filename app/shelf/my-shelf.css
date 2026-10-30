@@ -252,3 +252,26 @@
 .shelf-vpage-cap { margin: 12px 0 0; font-family: var(--shelf-mincho); font-weight: 900; font-size: 17px; color: var(--shelf-title); }
 .shelf-vpage-sub { margin: 2px 0 0; font-size: 11px; color: var(--shelf-dim); }
 .shelf-vpage-hint { position: absolute; bottom: 14px; left: 0; right: 0; margin: 0; text-align: center; font-size: 10.5px; color: #fff8; }
+
+/* ─── その場で Kindle・Amazon(2026-10-31 ユーザ要望)。 色は羅針盤のボタンと同じ(Kindle=青・Amazon=橙) ─── */
+.shelf-buy { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.shelf-buy-label { color: var(--shelf-coral); font-size: 11.5px; font-weight: 700; margin-right: 2px; }
+.shelf-buy-btn {
+  display: inline-block;
+  min-width: 72px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  text-align: center;
+  text-decoration: none;
+}
+.shelf-buy-btn.is-k { background: #3b82f6; }
+.shelf-buy-btn.is-a { background: #e69500; }
+.shelf-buy-btn:focus-visible { outline: 2px solid #f2f2ec; outline-offset: 2px; }
+/* 段の下 = 書影の右の列にそろえる(書影44 + 隙間10 + 余白10) */
+.shelf-c3-buybar { padding: 0 10px 10px 64px; margin-top: -2px; }
+.shelf-vp-info .shelf-buy { margin-top: 8px; justify-content: center; }
+.shelf-vp-buy { margin-top: 8px; display: flex; justify-content: center; }
+.shelf-c3-pr { padding: 6px 4px 0; color: var(--shelf-dim); font-size: 10.5px; }
