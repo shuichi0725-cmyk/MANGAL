@@ -180,7 +180,21 @@ function pickProps(n: number, onPick?: (n: number) => void) {
 }
 
 /** 棚の1段 = 1作品。左に1巻の書影、右に題名・所持状況・番号タイル(ほしい/気になるは巻数と状態+キャッチ)。 */
-function Row({ d, onMenu, readOnly }: { d: CardData; onMenu: () => void; readOnly: boolean }) {
+function Row({
+  d,
+  onMenu,
+  onOwned,
+  onBought,
+  readOnly,
+}: {
+  d: CardData;
+  onMenu: () => void;
+  /** U1: 書影欄の「ここ(N巻)まで持ってる」 */
+  onOwned: (n: number) => void;
+  /** U2: ほしい・気になるの「1巻を買った」= もってる・1巻まで へ */
+  onBought: () => void;
+  readOnly: boolean;
+}) {
   const { item, m, lost, note } = d;
   const title = m?.title ?? (item.title || item.slug);
   const cover = m?.cover ?? item.cover;
@@ -241,7 +255,15 @@ function Row({ d, onMenu, readOnly }: { d: CardData; onMenu: () => void; readOnl
           {item.shelf === "own" ? (
             <BuyLinks title={title} author={author} n={note!.next[0]} label={`次は${note!.next[0]}巻`} />
           ) : (
-            <BuyLinks title={title} author={author} />
+            <>
+              <BuyLinks title={title} author={author} />
+              {/* U2(2026-10-31 ユーザ裁定 A+U1+U2+U4): 買ったら1手で「もってる・1巻まで」へ(取り消しは札) */}
+              {!readOnly && (
+                <button type="button" className="shelf-c3-bought" onClick={onBought}>
+                  1巻を買った → もってるへ
+                </button>
+              )}
+            </>
           )}
         </div>
       )}
@@ -252,6 +274,7 @@ function Row({ d, onMenu, readOnly }: { d: CardData; onMenu: () => void; readOnl
           author={author}
           n={vol}
           owned={item.owned ?? 0}
+          onOwned={readOnly ? undefined : onOwned}
           onN={setVol}
           onClose={() => setVol(null)}
         />
@@ -264,17 +287,18 @@ function Row({ d, onMenu, readOnly }: { d: CardData; onMenu: () => void; readOnl
 function Plaque({ stats }: { stats: PlaqueStats }) {
   return (
     <div className="shelf-c3-plaque" role="group" aria-label="集計">
+      {/* 案A(2026-10-31): 1行に細く = 棚を上へ */}
       <div>
         <b>{stats.ownedVolumes.toLocaleString()}</b>
-        <span>もってる冊数</span>
+        <span>冊</span>
       </div>
       <div>
         <b>{stats.nextVolumes.toLocaleString()}</b>
-        <span>出ている続きの巻</span>
+        <span>続きの巻</span>
       </div>
       <div>
         <b>{stats.caughtUpWorks.toLocaleString()}</b>
-        <span>そろっている作品</span>
+        <span>そろった</span>
       </div>
     </div>
   );
@@ -411,11 +435,15 @@ function Case({
   cards,
   readOnly,
   onMenu,
+  onOwned,
+  onBought,
 }: {
   id: ShelfId;
   cards: CardData[];
   readOnly: boolean;
   onMenu: (slug: string) => void;
+  onOwned: (slug: string, n: number) => void;
+  onBought: (slug: string) => void;
 }) {
   const def = SHELVES.find((s) => s.id === id)!;
   return (
@@ -427,7 +455,14 @@ function Case({
         <>
           <ul className="shelf-c3-rows">
             {cards.map((c) => (
-              <Row key={c.item.slug} d={c} readOnly={readOnly} onMenu={() => onMenu(c.item.slug)} />
+              <Row
+                key={c.item.slug}
+                d={c}
+                readOnly={readOnly}
+                onMenu={() => onMenu(c.item.slug)}
+                onOwned={(n) => onOwned(c.item.slug, n)}
+                onBought={() => onBought(c.item.slug)}
+              />
             ))}
           </ul>
           <p className="shelf-c3-pr">[PR] 店舗リンクにはアフィリエイト広告を含みます</p>
@@ -458,6 +493,13 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
   const [lost, setLost] = useState<Set<string>>(new Set());
   const tried = useRef(new Set<string>());
   const [tab, setTab] = useState<ShelfId>("own");
+  // U1/U2 の後に出す札(取り消しつき)。 undo = 変える前の棚まるごと
+  const [toast, setToast] = useState<{ text: string; undo: ShelfItem[] } | null>(null);
+  useEffect(() => {
+    if (!toast) return;
+    const t = window.setTimeout(() => setToast(null), 6000);
+    return () => window.clearTimeout(t);
+  }, [toast]);
 
   // 選んだタブは端末に覚える(水和後に読む。保存できない環境は既定の「もってる」のまま)
   useEffect(() => {
@@ -537,6 +579,20 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
       });
     const rank = (c: CardData) => (c.note && (c.note.kind === "behind" || c.note.kind === "complete-behind") ? 0 : 1);
     return cards.sort((a, b) => rank(a) - rank(b) || b.item.updatedAt - a.item.updatedAt);
+  };
+
+  const titleOf = (slug: string) => bySlug.get(slug)?.title || items.find((x) => x.slug === slug)?.title || slug;
+  // U1: 書影欄の「ここ(N巻)まで持ってる」
+  const ownTo = (slug: string, n: number) => {
+    const before = items;
+    update((x) => setOwned(x, slug, n));
+    setToast({ text: `${titleOf(slug)} を ${n}巻まで持ってる にしました`, undo: before });
+  };
+  // U2: ほしい・気になる →「もってる・1巻まで」
+  const boughtFirst = (slug: string) => {
+    const before = items;
+    update((x) => setOwned(moveItem(x, slug, "own"), slug, 1));
+    setToast({ text: `${titleOf(slug)} を もってる(1巻まで)へ移しました`, undo: before });
   };
 
   const leaveShared = (msg?: string) => {
@@ -640,12 +696,28 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
           </button>
         ))}
       </div>
-      <Case id={tab} cards={cardsOf(tab)} readOnly={viewing} onMenu={setMenu} />
+      <Case id={tab} cards={cardsOf(tab)} readOnly={viewing} onMenu={setMenu} onOwned={ownTo} onBought={boughtFirst} />
+      {toast && (
+        <div className="shelf-toast" role="status">
+          <span>{toast.text}</span>
+          <button
+            type="button"
+            onClick={() => {
+              const undo = toast.undo;
+              update(() => undo);
+              setToast(null);
+            }}
+          >
+            取り消す
+          </button>
+        </div>
+      )}
 
 
       {!viewing && (
-        <section className="mt-10 border-t border-[var(--color-line)] pt-5 text-[12.5px]">
-          <h2 className="text-[14px] font-bold">棚をURLで保存・復元する</h2>
+        // U4(2026-10-31): 1行の見出しに畳む。 端末に保存できない時だけは開いたまま(消える前に持ち出してもらう)
+        <details className="shelf-url mt-10 border-t border-[var(--color-line)] pt-4 text-[12.5px]" open={!persisted}>
+          <summary className="text-[14px] font-bold">🔗 棚をURLで保存・復元する</summary>
           {/* ★日本語の文は1行に書く(JSX は改行を空白1つにする=「を メモ帳」のような空白が出る) */}
           <p className="mt-1 text-[11.5px] leading-relaxed text-ink/60">
             {"この本棚は、この端末(ブラウザ)の中だけにあります。「棚のURLを作る」で出るURL(文字列)をメモ帳・メールの下書き・自分宛てのLINEなどに"}
@@ -701,7 +773,7 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
             </button>
           </div>
           {pasteError && <p className="mt-1 text-[11px] text-ink/60">読めませんでした。棚のURLか「v1.」で始まる文字列を貼ってください。</p>}
-        </section>
+        </details>
       )}
 
       {menuCard && !viewing && (

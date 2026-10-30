@@ -20,6 +20,7 @@ export default function VolPeek({
   author,
   n,
   owned,
+  onOwned,
   onN,
   onClose,
 }: {
@@ -28,6 +29,8 @@ export default function VolPeek({
   author?: string;
   n: number;
   owned: number;
+  /** U1: 「ここ(N巻)まで持ってる」(見るだけの棚では渡さない) */
+  onOwned?: (n: number) => void;
   onN: (n: number) => void;
   onClose: () => void;
 }) {
@@ -48,6 +51,13 @@ export default function VolPeek({
         {n > owned && (
           <div className="shelf-vp-buy">
             <BuyLinks title={title} author={author} n={n} label={`第${n}巻`} />
+          </div>
+        )}
+        {onOwned && n !== owned && (
+          <div className="shelf-vp-buy">
+            <button type="button" className="shelf-vp-own" onClick={() => onOwned(n)}>
+              ここ({n}巻)まで持ってる
+            </button>
           </div>
         )}
         <button type="button" className="shelf-vp-x" onClick={onClose} aria-label="閉じる">
@@ -83,6 +93,12 @@ export default function VolPeek({
         <span>{fmt(cur.date)}</span>
         {cur.n > owned && <span className="is-alert">まだ持っていない巻</span>}
         {cur.n > owned && <BuyLinks title={title} author={author} n={cur.n} />}
+        {/* U1(2026-10-31): 巻数をタイルから1回で直す(旧 =「⋯」→＋を1冊ずつ)。 持っている巻を押せば減らす向きにも使える */}
+        {onOwned && cur.n !== owned && (
+          <button type="button" className="shelf-vp-own" onClick={() => onOwned(cur.n)}>
+            ここ({cur.n}巻)まで持ってる
+          </button>
+        )}
         <span className="shelf-vp-tap">書影を押すと大きく</span>
       </div>
       <button type="button" className="shelf-vp-x" onClick={onClose} aria-label="閉じる">
