@@ -1127,7 +1127,7 @@ def write_bundle(st):
         "sources": [{k: s[k] for k in ("id", "kind", "origin", "domain", "url", "title")} | {"identity": s["identity"]["verdict"], "same": s.get("same")}
                     for s in st["sources"] if s["id"] in used],
         "picks": [{"id": p["id"], "src": p["src"], "kind": src(st, p["src"])["kind"], "as": p["as"], "spoiler": p["spoiler"],
-                   "auto": p["auto"], "text": p["text"]} for p in st["picks"]],
+                   "auto": p["auto"], "scope": p.get("scope"), "text": p["text"]} for p in st["picks"]],
         "none": st["none"],
     }
     with open(os.path.join(d, "material.json"), "w", encoding="utf-8") as f:
