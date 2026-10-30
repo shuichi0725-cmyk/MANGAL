@@ -7,6 +7,8 @@
   python scripts/_web-material.py run --stems a,b        # 作品を指して集める(--redo で集め直し = 前の回も器に残る)
   python scripts/_web-material.py show <stem> [--text]   # 1作の中身(--text で採った段落の原文も)
   python scripts/_web-material.py import <EH_ROOT>       # 別の置き場で集めた結果を器へ移す(試し30頁など)
+  python scripts/_web-material.py judge --n 20           # 器の材料から付与案を作る(Haiku・案だけ = 頁に書かない。 まだ案の無い作品を巻数順に)
+  python scripts/_web-material.py judge --stems a,b [--redo]
 
 ★器はこのPCのローカルだけ(ユーザ裁定 2026-10-29「非公開、ローカルだけでよい」)= git に入れない。
   置き場 .cache\\web-material\\(C のリポジトリ内・git 管理外。 ユーザ裁定 2026-10-29「DはつかわないでCでよい」)
@@ -30,6 +32,8 @@ MODEL = "claude-haiku-5-5"
 VERSION = "w0.1"
 STEP_TIMEOUT = 900
 MIN_VOLS, MAX_ELEMS = 5, 3
+JUDGE_MODEL = "claude-haiku-5-5"  # ★2026-10-30 ユーザ裁定「Aでいく」= 付与案は Haiku(20作の比べ: Sonnet の1/8の費用・語は多いが芯の付けすぎ → 付与 v0.21 で決まりを補強)
+JUDGE_LEDGER = os.path.join(WORK, "assign-ledger.jsonl")  # _element-assign.py が EH_ROOT=WORK の時に書く台帳
 
 
 def now():
@@ -174,6 +178,77 @@ def cmd_run(a):
     print(f"== 終わり: 入れた {ok} / 失敗 {len(fails)} ==", flush=True)
 
 
+def judged(stem):
+    s = load_store(stem) or {}
+    return s.get("judges") or []
+
+
+def judge_one(stem):
+    env = dict(os.environ, EH_ROOT=WORK, PYTHONIOENCODING="utf-8")
+    args = [sys.executable, os.path.join(ROOT, "scripts", "_element-assign.py"), "run", stem, "--model", JUDGE_MODEL]
+    logp = os.path.join(WORK, "_log", stem + ".txt")
+    os.makedirs(os.path.dirname(logp), exist_ok=True)
+    n0 = sum(1 for _ in open(JUDGE_LEDGER, encoding="utf-8")) if os.path.exists(JUDGE_LEDGER) else 0
+    with open(logp, "a", encoding="utf-8") as lf:
+        lf.write(f"\n===== {now()} {' '.join(args[2:])}\n")
+        lf.flush()
+        p = subprocess.Popen(args, stdin=subprocess.DEVNULL, stdout=lf, stderr=subprocess.STDOUT, cwd=ROOT, env=env)
+        try:
+            p.wait(timeout=STEP_TIMEOUT)
+        except subprocess.TimeoutExpired:
+            if os.name == "nt":
+                subprocess.run(["taskkill", "/T", "/F", "/PID", str(p.pid)], capture_output=True)
+            else:
+                p.kill()
+            return None, f"{STEP_TIMEOUT}秒で終わらない"
+    new = [json.loads(l) for i, l in enumerate(open(JUDGE_LEDGER, encoding="utf-8")) if i >= n0 and l.strip()] if os.path.exists(JUDGE_LEDGER) else []
+    new = [r for r in new if r.get("stem") == stem]
+    if p.returncode != 0 or not new:
+        tail = open(logp, encoding="utf-8", errors="replace").read()[-300:].strip().splitlines()
+        return None, f"exit {p.returncode}: {tail[-1] if tail else ''}"
+    return new[-1], None
+
+
+def cmd_judge(a):
+    """器の材料から付与案(表に出す案・隠して持つ語・新しい語)を作り、器に「いつ・どのモデル・どの版」付きで残す。 頁には書かない。"""
+    if a.stems:
+        todo = [s for s in a.stems.split(",") if s]
+    else:
+        tg, _ = targets()
+        todo = [x[0] for x in tg if load_store(x[0]) and not judged(x[0])
+                and load_store(x[0])["runs"][-1]["chars"] > 0][:a.n]
+    print(f"== 付与案 {len(todo)}作 / {JUDGE_MODEL} ==", flush=True)
+    started, ok, fails, streak, cost = now(), 0, [], 0, 0.0
+    for i, stem in enumerate(todo, 1):
+        s = load_store(stem)
+        if not s:
+            print(f"[{i}/{len(todo)}] {stem} ✖ 器に無い(先に run)", flush=True)
+            continue
+        if judged(stem) and not a.redo:
+            continue
+        r, err = judge_one(stem)
+        if err:
+            fails.append({"stem": stem, "why": err})
+            streak += 1
+            print(f"[{i}/{len(todo)}] {stem} ✖ {err}", flush=True)
+            if streak >= 3:
+                print("✖ 3作続けて失敗 → 止める", flush=True)
+                break
+            continue
+        streak = 0
+        s.setdefault("judges", []).append({"at": r["at"], "model": r.get("model"), "version": r.get("version"), "material_at": s["runs"][-1]["collected_at"],
+                                           "core": r["core"], "sub": r["sub"], "new": r["new"], "cost_usd": r.get("cost_usd")})
+        tmp = store_path(stem) + ".tmp"
+        with open(tmp, "w", encoding="utf-8") as f:
+            json.dump(s, f, ensure_ascii=False, indent=1)
+        os.replace(tmp, store_path(stem))
+        ok += 1
+        cost += r.get("cost_usd") or 0
+        print(f"[{i}/{len(todo)}] {stem} ✔ 表に出す案 {len(r['core'])}: {'・'.join(r['core'])}", flush=True)
+    log_run({"at": started, "ended": now(), "kind": "judge", "version": VERSION, "model": JUDGE_MODEL, "asked": len(todo), "ok": ok, "fails": fails, "cost_usd": round(cost, 4)})
+    print(f"== 終わり: 案 {ok} / 失敗 {len(fails)} / ${cost:.3f} ==", flush=True)
+
+
 def cmd_import(a):
     n = 0
     for stp in sorted(glob.glob(os.path.join(a.root, "*", "state.json"))):
@@ -228,12 +303,14 @@ def cmd_status(a):
         zero += r["chars"] == 0
     print(f"対象(巻数{MIN_VOLS}以上・見える要素{MAX_ELEMS}以下) {n_all:,}頁 / うちファイル名=公開slug {len(tg):,}頁")
     print(f"器に在る {len(done):,}作(材料0字 {zero})・材料 計{chars:,}字 / 器の全作品 {len(have):,}")
+    nj = sum(1 for x in done if judged(x[0]))
+    print(f"付与案あり {nj:,}作(頁にはまだ書いていない)")
     nxt = [x for x in tg if x[0] not in have][:5]
     print("次: " + " / ".join(f"{t}({v}巻)" for _, t, v in nxt))
     if os.path.exists(RUNS):
-        last = [json.loads(l) for l in open(RUNS, encoding="utf-8") if l.strip()][-1:]
+        last = [json.loads(l) for l in open(RUNS, encoding="utf-8") if l.strip()][-2:]
         for o in last:
-            print(f"最後に流した回 {o['at']}〜{o['ended'][11:]} 入れた {o['ok']}/{o['asked']} 失敗 {len(o['fails'])}")
+            print(f"最後の{'付与案' if o.get('kind') == 'judge' else '収集'} {o['at']}〜{o['ended'][11:]} {o['ok']}/{o['asked']} 失敗 {len(o['fails'])}")
 
 
 if __name__ == "__main__":
@@ -243,5 +320,6 @@ if __name__ == "__main__":
     p = sp.add_parser("import"); p.add_argument("root"); p.set_defaults(f=cmd_import)
     p = sp.add_parser("show"); p.add_argument("stem"); p.add_argument("--text", action="store_true"); p.set_defaults(f=cmd_show)
     p = sp.add_parser("status"); p.set_defaults(f=cmd_status)
+    p = sp.add_parser("judge"); p.add_argument("--n", type=int, default=20); p.add_argument("--stems"); p.add_argument("--redo", action="store_true"); p.set_defaults(f=cmd_judge)
     a = ap.parse_args()
     a.f(a)
