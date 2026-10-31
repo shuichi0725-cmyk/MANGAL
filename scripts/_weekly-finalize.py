@@ -157,8 +157,10 @@ def main():
     if _token:
         # ★索引は scripts/_index_files.py の一覧が単一ソース(2026-09-23 列形式索引の追加で集約)
         sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-        from _index_files import INDEX_FILES
+        from _index_files import INDEX_FILES, VC_FILES
         _paths = ["/"] + [f"/{n}" for n in INDEX_FILES]
+        # ★本棚の巻の書影 vc/ 64本(2026-10-31)も同名のまま毎週変わる JSON(edge 1日+SWR)= 一緒に落とす
+        _paths += [f"/{n}" for n in VC_FILES]
         # ★"/"=トップHTML(2026-08-27追記: コーナー変更週にホームだけ最長1日古いまま=ユーザ発見)
         for _sub in ("data", "calendar", "shinkan"):
             _dirp = os.path.join(ROOT, "out", _sub)
