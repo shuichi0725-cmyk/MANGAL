@@ -53,11 +53,23 @@ import {
   threadEntrances,
   type Entrance,
   simThemeUnit,
+  roundOrder,
+  roundRanges,
+  roundItems,
+  wrapRound,
+  swapDelays,
+  SWAP_ORDERS,
+  SWAP_FX,
+  SWAP_ORDER_NAME,
+  SWAP_FX_NAME,
+  type SwapOrder,
+  type SwapFx,
 } from "./compass";
 import { Halftone } from "./halftone";
 import { CompassShelveButton, CompassShelvePanel } from "./CompassShelve";
 import KomaPage from "./KomaPage";
 import CompassLoading from "./CompassLoading";
+import RoundDial from "./RoundDial";
 import { useCompassHidden } from "./useHidden";
 
 // ★テスト環境か(next.config.ts がビルド時の定数で埋める)。 本番は false = 下のテスト専用分岐ごと刈り取られる。
@@ -86,6 +98,12 @@ const KOMA = true;
 //   要素・ジャンル=押して選ぶ(いくつでも重ねる)→ 真ん中の下の「広げる」。 入りきらない要素・ジャンルは「ほか ▸」の2段目。
 //   ★今の形(周りの本+下の帯)に戻す = false。
 const THREADS = true;
+// ★回(2026-10-31 ユーザ裁定・いまはテスト環境だけ): 「↻ 引き直す」(直前の24冊だけ外すくじ)をやめ、広げた時に全冊の並びを1回だけ決めて
+//   均等に割った「回」で順に見せる。 「次を見る →」で1つずつ・方位盤(◎ 3/14 = RoundDial)で好きな回へ。
+//   回が替わる時の出し方 = 「どこから順に × どうめくれるか」を毎回くじ(ユーザ「組み合わせは常にランダム」)。
+//   道具の並び = ✕ 閉じる ・ 年表 ・ ⚗ さらに絞る ・ 次を見る → ・ ◎ 回(さらに絞ると引き直すを入れ替え、その右に方位盤)。
+//   ★今の形(↻ 引き直す)に戻す = false。 本番にも出す = true。
+const ROUNDS = PREVIEW;
 /** 入口の大きさ(書影)と、帯が無い分の引き出しの位置 */
 const EW = 54;
 const EH = 76;
@@ -141,8 +159,14 @@ type Step = { slug: string; kind: ThreadKind | null; seed?: string };
 const newSeed = () => Math.random().toString(36).slice(2, 10);
 /** 詳細(作品頁)へ飛ぶ直前に旅の状態を書く = OS の戻るで帰ってきた時に復元する(2026-09-30 ユーザ要望) */
 const RESUME_KEY = "mangal:compass:resume:v1";
-type Resume = { path: Step[]; prev: string | null; backAng: number | null; sel: string | null; exp: string | null; drawn: { key: string; items: UnitItem[] } | null; mix?: Mix | null; re?: Regenre | null; narrow?: Mix | null; t: number };
-type Spawn = { fx: number; fy: number; fs: number; d: number };
+type RoundsMemo = { key: string; seed: string; k: number; seen: number[] };
+type Resume = { path: Step[]; prev: string | null; backAng: number | null; sel: string | null; exp: string | null; drawn: { key: string; items: UnitItem[] } | null; mix?: Mix | null; re?: Regenre | null; narrow?: Mix | null; rounds?: RoundsMemo | null; t: number };
+/** 回(ROUNDS): 広げた時に1回だけ決めた全冊の並び・回の切れ目・今の回(k)・見た回・いま描いている回(view = 方位盤を回している間は k と違う) */
+type Rounds = RoundsMemo & { order: UnitItem[]; ranges: [number, number][]; view: number };
+/** 回の入れ替わりの出し方(出ていく本の動き始め ms は slug ごと) */
+type SwapInfo = { order: SwapOrder; fx: SwapFx; dir: 1 | -1; origin: { x: number; y: number }; out: Map<string, number> };
+/** sw/sd = 回の入れ替わりで入ってくる本(めくり方・進んだ向き) */
+type Spawn = { fx: number; fy: number; fs: number; d: number; sw?: SwapFx; sd?: number };
 type NodeView = {
   slug: string;
   x: number;
@@ -158,6 +182,8 @@ type NodeView = {
   pick?: boolean;
   back?: boolean;
   gone?: boolean;
+  /** 回の入れ替わりで出ていく本(動き始め ms・めくり方・向き) */
+  swo?: { d: number; fx: SwapFx; dir: number };
   spawn: Spawn | null;
 };
 type LineView = {
@@ -342,6 +368,10 @@ export default function MagicCompass({
   const [lays, setLays] = useState<Partial<Record<UnitKind, string>>>({});
   // 広げた糸のうち画面に出している24冊(くじ引きの結果・2026-09-30)
   const [drawn, setDrawn] = useState<{ key: string; items: UnitItem[] } | null>(null);
+  const [rounds, setRounds] = useState<Rounds | null>(null);
+  const [dialOpen, setDialOpen] = useState(false);
+  const swapRef = useRef<SwapInfo | null>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
   const [cw, setCw] = useState({ x: 0, y: 0 }); // 中央の本の世界座標
   const [cam, setCam] = useState({ x: 0, y: 0 }); // 画面の中央に来る世界座標
   const [pan, setPan] = useState<Pan | null>(null);
@@ -384,6 +414,7 @@ export default function MagicCompass({
 
   // ── 旅の始まり: ?from=<slug> か、先頭100件(人気上位)からランダムに1冊 ──
   const resumeDrawn = useRef<{ key: string; items: UnitItem[] } | null>(null);
+  const resumeRounds = useRef<RoundsMemo | null>(null);
   /** 入口から広げた時、その入口の書影の本(最初の24冊に必ず入れる)。 key = 広げる単位 */
   const pinRef = useRef<{ key: string; slugs: Set<string> } | null>(null);
   useEffect(() => {
@@ -396,6 +427,7 @@ export default function MagicCompass({
         const r = JSON.parse(raw) as Resume;
         if (r && Array.isArray(r.path) && r.path.length && Date.now() - r.t < 3600_000) {
           resumeDrawn.current = r.drawn;
+          resumeRounds.current = r.rounds ?? null;
           setPath(r.path);
           setPrev(r.prev);
           setBackAng(r.backAng);
@@ -530,9 +562,13 @@ export default function MagicCompass({
   // 帯に出す単位: 掛け合わせの時は要素の単位(多い順4つ)を出さない = 引き出しから選ぶ
   const bandUnits = useMemo(() => (nb ? (MIX ? nb.units.filter((u) => u.kind !== "elem") : nb.units) : []), [nb]);
   // 開くたびに候補全体から24冊をくじで引く(引き直しは直前の24冊を外して引く)
+  //   ★回(ROUNDS): 開いた時に全冊の並びを1回だけ決め、1回目を出す(以後は次を見る/方位盤で回を替える)
   useEffect(() => {
+    swapRef.current = null;
     if (!unitFull) {
       setDrawn(null);
+      setRounds(null);
+      setDialOpen(false);
       return;
     }
     const r = resumeDrawn.current;
@@ -540,6 +576,20 @@ export default function MagicCompass({
     // 入口の書影の本は最初の1回に必ず入れる(同じ単位を広げた時だけ。 引き直しでは入れない)
     const pin = pinRef.current;
     pinRef.current = null;
+    if (ROUNDS) {
+      const rr = resumeRounds.current;
+      resumeRounds.current = null;
+      const same = rr && rr.key === unitFull.key ? rr : null;
+      const seed = same ? same.seed : newSeed();
+      const order = roundOrder(unitFull, rng(`${unitFull.key}:${seed}`), visitedSet(), pin && pin.key === unitFull.key ? pin.slugs : undefined);
+      const ranges = roundRanges(order.length);
+      const k = same ? Math.min(same.k, Math.max(0, ranges.length - 1)) : 0;
+      const seen = same ? same.seen.filter((x) => x < ranges.length) : [k];
+      setRounds({ key: unitFull.key, seed, order, ranges, k, view: k, seen: seen.length ? seen : [k] });
+      setDrawn({ key: unitFull.key, items: roundItems(order, ranges, k) });
+      setDialOpen(false);
+      return;
+    }
     if (r && r.key === unitFull.key) {
       setDrawn(r);
       return;
@@ -601,6 +651,52 @@ export default function MagicCompass({
     toneSlug.current = cur;
     toneRef.current?.setCover(curItem.cover);
   }, [cur, curItem]);
+
+  // ── 回(ROUNDS): k 回目を描く。 commit = 今の回にする(見た印)/ origin = 舞台の座標で指の位置(波紋の中心) ──
+  //   出し方(どこから順に × どうめくれるか)は毎回くじ。 出ていく本の順番はいまの星屑の位置で、入ってくる本は nodes で決める
+  const showRound = useCallback(
+    (k: number, o: { origin?: { x: number; y: number }; commit: boolean; announce: boolean }) => {
+      if (!rounds || !unitFull || rounds.key !== unitFull.key || busy.current) return;
+      const tot = rounds.ranges.length;
+      const kk = wrapRound(k, tot);
+      if (kk !== rounds.view) {
+        let d = kk - rounds.view;
+        if (Math.abs(d) > tot / 2) d = -d;
+        const dir: 1 | -1 = d >= 0 ? 1 : -1;
+        const order = SWAP_ORDERS[Math.floor(Math.random() * SWAP_ORDERS.length)];
+        const fx = SWAP_FX[Math.floor(Math.random() * SWAP_FX.length)];
+        const center = spread?.center ?? { x: geom.CX, y: geom.CY };
+        const origin = o.origin ?? center;
+        const outD = spread ? swapDelays(order, spread.P, center, dir, origin) : [];
+        swapRef.current = { order, fx, dir, origin, out: new Map(spread ? spread.P.map((p, i) => [p.slug, outD[i]]) : []) };
+        setDrawn({ key: rounds.key, items: roundItems(rounds.order, rounds.ranges, kk) });
+        // 出し方の名前は見比べ用 = テスト環境だけ(網点の出方と同じ)
+        if (PREVIEW && o.announce) showToast(`出し方: ${SWAP_ORDER_NAME[order]} × ${SWAP_FX_NAME[fx]}`);
+      }
+      setSel(null);
+      setRounds((r) =>
+        r && r.key === rounds.key
+          ? { ...r, view: kk, ...(o.commit ? { k: kk, seen: r.seen.includes(kk) ? r.seen : [...r.seen, kk] } : null) }
+          : r,
+      );
+    },
+    [rounds, unitFull, spread, geom, showToast],
+  );
+  // 次を見る → = 1回進む(最後の回の次は最初)。 波紋はボタンから
+  const nextRound = useCallback(
+    (btn: HTMLElement) => {
+      if (!rounds) return;
+      const st = stageRef.current?.getBoundingClientRect();
+      const b = btn.getBoundingClientRect();
+      const origin = st ? { x: b.left + b.width / 2 - st.left, y: b.top + b.height / 2 - st.top } : undefined;
+      showRound(rounds.k + 1, { origin, commit: true, announce: true });
+    },
+    [rounds, showRound],
+  );
+  // 広げた糸が無くなったら方位盤も閉じる
+  useEffect(() => {
+    if (!unit) setDialOpen(false);
+  }, [unit]);
 
   const [flash, setFlash] = useState<{ color: string; on: boolean }>({ color: "transparent", on: false });
   const [bump, setBump] = useState(0);
@@ -845,7 +941,8 @@ export default function MagicCompass({
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== "Escape" || busy.current) return;
-      if (komaOpen) setKomaOpen(false);
+      if (dialOpen) setDialOpen(false);
+      else if (komaOpen) setKomaOpen(false);
       else if (moreOpen) setMoreOpen(false);
       else if (mixOpen) setMixOpen(false);
       else if (nebOpen) setNebOpen(false);
@@ -856,7 +953,7 @@ export default function MagicCompass({
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [sel, exp, mixOpen, nebOpen, reOpen, narrowOpen, komaOpen, moreOpen]);
+  }, [sel, exp, mixOpen, nebOpen, reOpen, narrowOpen, komaOpen, moreOpen, dialOpen]);
 
   // ── 描く本(世界座標) ──
   const nodes = useMemo<NodeView[]>(() => {
@@ -910,6 +1007,9 @@ export default function MagicCompass({
       });
     });
     if (spread && unit) {
+      // ★回の入れ替わり(ROUNDS): 中央から飛び出さず、その場で「どこから順に × どうめくれるか」で入る
+      const sw = ROUNDS ? swapRef.current : null;
+      const inD = sw ? swapDelays(sw.order, spread.P, spread.center, sw.dir, sw.origin) : null;
       spread.P.forEach((p, i) => {
         if (p.slug === cur) return;
         out.push({
@@ -921,12 +1021,15 @@ export default function MagicCompass({
           color: unitColor(unit),
           pick: sel === p.slug,
           dim: !!sel && sel !== p.slug,
-          spawn: {
-            fx: spread.center.x - p.x,
-            fy: spread.center.y - p.y,
-            fs: Math.min(1, 10 / p.w),
-            d: 40 + i * 18,
-          },
+          spawn:
+            sw && inD
+              ? { fx: 0, fy: 0, fs: 1, d: inD[i], sw: sw.fx, sd: sw.dir }
+              : {
+                  fx: spread.center.x - p.x,
+                  fy: spread.center.y - p.y,
+                  fs: Math.min(1, 10 / p.w),
+                  d: 40 + i * 18,
+                },
         });
       });
     }
@@ -993,6 +1096,7 @@ export default function MagicCompass({
   const seqN = useRef(0);
   const prevRendered = useRef(new Map<string, NodeView>());
   const ghostUntil = useRef(new Map<string, number>());
+  const ghostSwo = useRef(new Map<string, NonNullable<NodeView["swo"]>>());
   const [, setGhostTick] = useState(0);
   const live = new Map(nodes.map((n) => [n.slug, n]));
   const ghosts: NodeView[] = [];
@@ -1004,8 +1108,12 @@ export default function MagicCompass({
       if (until === undefined) {
         until = now + 520;
         ghostUntil.current.set(slug, until);
+        // 回の入れ替わりで出ていく本 = 出し方の順番どおりに消える
+        const sw = ROUNDS ? swapRef.current : null;
+        const d = sw?.out.get(slug);
+        if (sw && d !== undefined) ghostSwo.current.set(slug, { d, fx: sw.fx, dir: sw.dir });
       }
-      if (until > now) ghosts.push({ ...n, gone: true, pick: false });
+      if (until > now) ghosts.push({ ...n, gone: true, pick: false, swo: ghostSwo.current.get(slug) });
     }
   }
   const lineDelay = firstRing ? 260 : 200;
@@ -1025,11 +1133,18 @@ export default function MagicCompass({
     .sort((a, b) => a.s.seq - b.s.seq);
   useLayoutEffect(() => {
     prevRendered.current = new Map(drawnNodes.map(({ n }) => [n.slug, n]));
-    for (const slug of live.keys()) ghostUntil.current.delete(slug);
+    for (const slug of live.keys()) {
+      ghostUntil.current.delete(slug);
+      ghostSwo.current.delete(slug);
+    }
     const keep = new Set([...drawnNodes.map(({ n }) => `n:${n.slug}`), ...drawnLines.map(({ l }) => `l:${l.key}`)]);
     for (const k of seen.current.keys()) if (!keep.has(k)) seen.current.delete(k);
     const now = Date.now();
-    for (const [slug, t] of ghostUntil.current) if (t <= now && !live.has(slug)) ghostUntil.current.delete(slug);
+    for (const [slug, t] of ghostUntil.current)
+      if (t <= now && !live.has(slug)) {
+        ghostUntil.current.delete(slug);
+        ghostSwo.current.delete(slug);
+      }
     if (!ghosts.length) return;
     const t = setTimeout(() => setGhostTick((x) => x + 1), 540);
     return () => clearTimeout(t);
@@ -1059,7 +1174,13 @@ export default function MagicCompass({
       why = `${KIND_NAME[unit.kind]} — ${unit.label}${it?.shared ? ` ・ 共通の要素${it.shared}つ` : ""}`;
       goLabel = `〈${unit.label}〉の糸で進む →`;
     } else {
-      why = `「${unit.label}」の糸を広げています(候補${(unitFull?.items.length ?? unit.items.length).toLocaleString()}冊から${unit.items.length}冊) ・ ${unit.note ? `${unit.note} ・ ` : ""}本に触れて選ぶ`;
+      const rr = ROUNDS && rounds && rounds.key === unit.key ? rounds : null;
+      const howMany = rr
+        ? rr.ranges.length > 1
+          ? `${rr.order.length.toLocaleString()}冊のうち${(rr.ranges[rr.k][0] + 1).toLocaleString()}〜${rr.ranges[rr.k][1].toLocaleString()}冊目`
+          : `${rr.order.length.toLocaleString()}冊`
+        : `候補${(unitFull?.items.length ?? unit.items.length).toLocaleString()}冊から${unit.items.length}冊`;
+      why = `「${unit.label}」の糸を広げています(${howMany}) ・ ${unit.note ? `${unit.note} ・ ` : ""}本に触れて選ぶ`;
     }
   } else {
     const o = sel ? placed.find((x) => x.slug === sel) : null;
@@ -1085,7 +1206,7 @@ export default function MagicCompass({
       : `/manga/${encodeURIComponent(slug)}`;
   const saveResume = () => {
     try {
-      const r: Resume = { path, prev, backAng, sel, exp, drawn, mix: exp && mixFull?.key === exp ? mixApplied : null, re: exp && reFull?.key === exp ? reApplied : null, narrow: exp ? narrowApplied : null, t: Date.now() };
+      const r: Resume = { path, prev, backAng, sel, exp, drawn, mix: exp && mixFull?.key === exp ? mixApplied : null, re: exp && reFull?.key === exp ? reApplied : null, narrow: exp ? narrowApplied : null, rounds: ROUNDS && rounds ? { key: rounds.key, seed: rounds.seed, k: rounds.k, seen: rounds.seen } : null, t: Date.now() };
       window.sessionStorage.setItem(RESUME_KEY, JSON.stringify(r));
     } catch {
       /* 書けなくても飛ぶ(戻った時は新しい旅) */
@@ -1237,7 +1358,8 @@ export default function MagicCompass({
       {/* 3. 羅針盤 */}
       {/* ★何もない所を押したら選択を外す(2026-09-30 ユーザ要望)。 本・年表ボタンなど button を押した時は各自の動き */}
       <div
-        className={`cp-stage${zoom ? " zoom" : ""}`}
+        ref={stageRef}
+        className={`cp-stage${zoom ? " zoom" : ""}${ROUNDS && dialOpen ? " dial" : ""}`}
         onClick={(e) => {
           if ((e.target as HTMLElement).closest("button, a")) return;
           if (busy.current) return;
@@ -1334,6 +1456,8 @@ export default function MagicCompass({
               n.dim && "dim",
               (n.hidden || n.gone) && "off",
               s.spawn && "enter",
+              s.spawn?.sw && `sw-${s.spawn.sw}`,
+              n.gone && n.swo && `swo swo-${n.swo.fx}`,
             ]
               .filter(Boolean)
               .join(" ");
@@ -1344,8 +1468,9 @@ export default function MagicCompass({
               height: n.h,
               "--kc": n.color ?? "#ffffff",
               ...(s.spawn
-                ? { "--fx": `${s.spawn.fx}px`, "--fy": `${s.spawn.fy}px`, "--fs": s.spawn.fs, "--d": `${s.spawn.d}ms` }
+                ? { "--fx": `${s.spawn.fx}px`, "--fy": `${s.spawn.fy}px`, "--fs": s.spawn.fs, "--d": `${s.spawn.d}ms`, ...(s.spawn.sd ? { "--sd": s.spawn.sd } : null) }
                 : null),
+              ...(n.gone && n.swo ? { "--od": `${n.swo.d}ms`, "--sd": n.swo.dir } : null),
             } as CSSProperties;
             return (
               <button
@@ -1400,7 +1525,7 @@ export default function MagicCompass({
                   </button>
                 );
               })()}
-            {(unitFull?.items.length ?? 0) > UNIT_MAX && (
+            {!ROUNDS && (unitFull?.items.length ?? 0) > UNIT_MAX && (
               <button
                 type="button"
                 className="cp-sp"
@@ -1428,7 +1553,64 @@ export default function MagicCompass({
                 ⚗ {narrowApplied ? [...narrowApplied.themes, ...narrowApplied.genres.map(genreName)].join("×") : "さらに絞る"}
               </button>
             )}
+            {/* ★回(ROUNDS): さらに絞るの右に「次を見る →」(最後の回では「最初から ↺」)・その右に方位盤(◎ 今の回/回の数) */}
+            {ROUNDS &&
+              rounds &&
+              rounds.key === unit.key &&
+              rounds.ranges.length > 1 &&
+              (() => {
+                const last = rounds.k === rounds.ranges.length - 1;
+                return (
+                  <>
+                    <button
+                      type="button"
+                      className={`cp-sp cp-sp-next${last ? " last" : ""}`}
+                      style={{ "--c": last ? "#e6ecf0" : unitColor(unit) } as CSSProperties}
+                      title={last ? "最初の回に戻る" : "次の回の本を見る"}
+                      onClick={(e) => nextRound(e.currentTarget)}
+                    >
+                      {last ? "最初から ↺" : "次を見る →"}
+                    </button>
+                    <button
+                      type="button"
+                      className={`cp-sp cp-sp-dial${dialOpen ? " on" : ""}`}
+                      style={{ "--c": unitColor(unit) } as CSSProperties}
+                      aria-expanded={dialOpen}
+                      aria-label={`回を選ぶ(いま${rounds.k + 1}回目・全${rounds.ranges.length}回)`}
+                      onClick={() => {
+                        if (busy.current) return;
+                        setSel(null);
+                        setNarrowOpen(false);
+                        setDialOpen((o) => !o);
+                      }}
+                    >
+                      <svg width="11" height="11" viewBox="0 0 12 12" aria-hidden="true">
+                        <circle cx="6" cy="6" r="5" fill="none" stroke="currentColor" strokeWidth="1.4" />
+                        <path d="M6 6 L9.2 3.2" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                        <circle cx="6" cy="6" r="1.2" fill="currentColor" />
+                      </svg>
+                      {rounds.k + 1}/{rounds.ranges.length}
+                    </button>
+                  </>
+                );
+              })()}
           </div>
+        )}
+        {/* ★方位盤(ROUNDS): 真ん中の本を囲む輪を回して回を選ぶ。 回している間は後ろの本がその回に入れ替わる */}
+        {ROUNDS && dialOpen && unit && spread && rounds && rounds.key === unit.key && rounds.ranges.length > 1 && (
+          <RoundDial
+            total={rounds.ranges.length}
+            k={rounds.k}
+            seen={rounds.seen}
+            ranges={rounds.ranges}
+            color={unitColor(unit)}
+            cx={spread.center.x}
+            cy={spread.center.y}
+            scale={geom.k ?? 1}
+            onPreview={(k, origin) => showRound(k, { origin, commit: false, announce: false })}
+            onCommit={(k, origin) => showRound(k, { origin, commit: true, announce: true })}
+            onClose={() => setDialOpen(false)}
+          />
         )}
         {/* 案B: 糸の入口の輪(広げていない時) */}
         {THREADS && entrances && ring && mixInfo && !unit && !pan && (

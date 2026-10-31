@@ -49,6 +49,15 @@ import {
   HIDDEN_FULL,
   proxCounts,
   proxNear,
+  roundRanges,
+  roundOrder,
+  roundItems,
+  dialSlots,
+  wrapRound,
+  swapDelays,
+  SWAP_ORDERS,
+  SWAP_SPAN,
+  type Unit,
 } from "./compass";
 
 function book(slug: string, o: Partial<MangaListItem> = {}): MangaListItem {
@@ -1070,5 +1079,99 @@ describe("PC の横長画面(案B・2026-10-15)", () => {
         for (const q of r.P) if (p !== q) expect(hit({ ...p, x: p.x - p.w / 2, y: p.y - p.h / 2 }, { ...q, x: q.x - q.w / 2, y: q.y - q.h / 2 })).toBe(false);
       }
     }
+  });
+});
+
+describe("回(2026-10-31) = 広げた糸を24冊ずつ順番に・均等割り", () => {
+  it("均等割り: 329冊=14回(24冊×7+23冊×7)・25冊=13+12・24冊以下は1回・0冊は0回", () => {
+    const sizes = (n: number) => roundRanges(n).map(([a, b]) => b - a);
+    expect(sizes(329)).toEqual([...Array(7).fill(24), ...Array(7).fill(23)]);
+    expect(sizes(25)).toEqual([13, 12]);
+    expect(sizes(24)).toEqual([24]);
+    expect(sizes(1)).toEqual([1]);
+    expect(roundRanges(0)).toEqual([]);
+    // 18,007冊(ジャンル 恋愛だけの本)= 751回・つなぎ目に抜けも重なりも無い
+    const r = roundRanges(18007);
+    expect(r).toHaveLength(751);
+    expect(r[0][0]).toBe(0);
+    expect(r[r.length - 1][1]).toBe(18007);
+    for (let i = 1; i < r.length; i++) expect(r[i][0]).toBe(r[i - 1][1]);
+    for (const [a, b] of r) expect(b - a === 23 || b - a === 24).toBe(true);
+  });
+
+  const unitOf = (n: number): Unit => ({
+    key: "genre",
+    kind: "genre",
+    label: "似たジャンル",
+    items: Array.from({ length: n }, (_, i) => ({ slug: `b${i}`, shared: 0, year: 2000, score: i < 10 ? 5 : 2.67 })),
+  });
+
+  it("並び: 全冊を1回ずつ(抜け・重複なし)= 回を全部見れば必ず全冊に会う。 同じ種なら同じ並び", () => {
+    const u = unitOf(329);
+    const o = roundOrder(u, rng("seed-a"));
+    expect(o).toHaveLength(329);
+    expect(new Set(o.map((i) => i.slug)).size).toBe(329);
+    expect(roundOrder(u, rng("seed-a")).map((i) => i.slug)).toEqual(o.map((i) => i.slug));
+    const ranges = roundRanges(o.length);
+    const seen = new Set<string>();
+    for (let k = 0; k < ranges.length; k++) for (const it of roundItems(o, ranges, k)) seen.add(it.slug);
+    expect(seen.size).toBe(329);
+  });
+
+  it("並び: 近い本ほど前の回に来やすい(1回目の近い本の割合 > 全体の割合)", () => {
+    const u = unitOf(329);
+    let first = 0;
+    for (let t = 0; t < 200; t++) first += roundOrder(u, rng(`t${t}`)).slice(0, 24).filter((i) => i.score === 5).length;
+    // 全体では 10/329 ≒ 3%。 くじの重み(6^3 対 3.67^3)で1回目に寄る = 2倍より多い
+    expect(first / (200 * 24)).toBeGreaterThan(0.06);
+  });
+
+  it("並び: 旅で辿った本は外す・入口の書影の本は1回目の先頭", () => {
+    const u = unitOf(50);
+    const o = roundOrder(u, rng("x"), new Set(["b3", "b4"]), new Set(["b40"]));
+    expect(o).toHaveLength(48);
+    expect(o[0].slug).toBe("b40");
+    expect(o.some((i) => i.slug === "b3" || i.slug === "b4")).toBe(false);
+  });
+
+  it("その回の本は近い順(星屑は内側ほど近い)", () => {
+    const o = roundOrder(unitOf(60), rng("y"));
+    const items = roundItems(o, roundRanges(60), 0);
+    for (let i = 1; i < items.length; i++) expect(items[i - 1].score).toBeGreaterThanOrEqual(items[i].score);
+    expect(roundItems(o, roundRanges(60), 9)).toEqual([]);
+  });
+
+  it("方位盤: 16回までは全部並べ、それより多いと12個の窓。 回は輪にまわる", () => {
+    expect(dialSlots(14)).toBe(14);
+    expect(dialSlots(16)).toBe(16);
+    expect(dialSlots(17)).toBe(12);
+    expect(dialSlots(751)).toBe(12);
+    expect(wrapRound(14, 14)).toBe(0);
+    expect(wrapRound(-1, 14)).toBe(13);
+    expect(wrapRound(5, 0)).toBe(0);
+  });
+
+  it("出し方: どれも 0〜SWAP_SPAN ms(速さは同じ)・規則どおりの順(左から=左の本が先)", () => {
+    const pts = Array.from({ length: 24 }, (_, i) => ({ x: 20 + ((i * 53) % 320), y: 150 + ((i * 37) % 300) }));
+    const c = { x: 180, y: 300 };
+    for (const o of SWAP_ORDERS) {
+      const d = swapDelays(o, pts, c, 1, { x: 180, y: 188 }, rng(o));
+      expect(d).toHaveLength(24);
+      expect(Math.min(...d)).toBe(0);
+      expect(Math.max(...d)).toBe(SWAP_SPAN);
+    }
+    const left = swapDelays("left", pts, c, 1, c);
+    const byX = [...pts.keys()].sort((a, b) => pts[a].x - pts[b].x);
+    for (let i = 1; i < byX.length; i++) expect(left[byX[i]]).toBeGreaterThanOrEqual(left[byX[i - 1]]);
+    // 波紋 = 指に近い本が先
+    const rip = swapDelays("ripple", pts, c, 1, pts[5]);
+    expect(rip[5]).toBe(0);
+    // 回す向き: 進む時と戻る時で順番が逆回り
+    const fw = swapDelays("turn", [{ x: 230, y: 300 }, { x: 130, y: 300 }], c, 1, c);
+    const bw = swapDelays("turn", [{ x: 230, y: 300 }, { x: 130, y: 300 }], c, -1, c);
+    expect(fw[1]).toBeLessThan(fw[0]); // 進む = 反時計回り = 左(9時)が先
+    expect(bw[0]).toBeLessThan(bw[1]);
+    // 1冊だけ = ずれ 0
+    expect(swapDelays("left", [{ x: 1, y: 1 }], c, 1, c)).toEqual([0]);
   });
 });

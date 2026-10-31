@@ -232,6 +232,122 @@ export function drawUnit(
   return [...pinned, ...weightedPick(rest, (i) => i.score, UNIT_MAX - pinned.length, rand)].sort((a, b) => b.score - a.score);
 }
 
+// ───────────────────────── 回(2026-10-31): 広げた糸を24冊ずつ順番に見せる ─────────────────────────
+// 旧 = 引き直すたびに直前の24冊だけ外してくじ → 3回目に1回目の本が戻り、14回押しても329冊の66%しか出なかった。
+// 新 = 広げた時に全冊の並びを1回だけくじで決め(近い本ほど前に来やすい・重みは drawUnit と同じ)、均等に割った「回」で順に見せる。
+// 回は「次を見る →」で1つずつ、方位盤(RoundDial)で好きな回へ飛ぶ。
+
+/** 回の切れ目 = 均等割り(329冊 = 24冊×7回 + 23冊×7回。 25冊 = 13+12)= 最後の回だけ1冊、が無い。 [始まり, 終わり](0始まり・終わりは含まない) */
+export function roundRanges(n: number, max = UNIT_MAX): [number, number][] {
+  if (n <= 0) return [];
+  const R = Math.ceil(n / max);
+  const base = Math.floor(n / R);
+  const extra = n - base * R;
+  const out: [number, number][] = [];
+  let a = 0;
+  for (let k = 0; k < R; k++) {
+    const sz = base + (k < extra ? 1 : 0);
+    out.push([a, a + sz]);
+    a += sz;
+  }
+  return out;
+}
+
+/**
+ * 広げた時に1回だけ決める全冊の並び = 重み (1+score)^WEIGHT_POW の非復元くじを最後まで引いた順(Efraimidis–Spirakis)。
+ * visited(旅で辿った本)は外す。 must(入口の書影の本)は先頭 = 1回目に必ず入る。
+ */
+export function roundOrder(
+  u: Unit,
+  rand: () => number,
+  visited: ReadonlySet<string> = new Set(),
+  must: ReadonlySet<string> = new Set(),
+): UnitItem[] {
+  const pool = u.items.filter((i) => !visited.has(i.slug));
+  const pinned = pool.filter((i) => must.has(i.slug));
+  const rest = pool
+    .filter((i) => !must.has(i.slug))
+    .map((it) => ({ it, k: Math.pow(rand(), 1 / Math.pow(1 + Math.max(0, it.score), WEIGHT_POW)) }))
+    .sort((a, b) => b.k - a.k)
+    .map((x) => x.it);
+  return [...pinned, ...rest];
+}
+
+/** k 回目(0始まり)に出す本。 並びは近い順(星屑は内側ほど近い・drawUnit と同じ) */
+export function roundItems(order: readonly UnitItem[], ranges: readonly [number, number][], k: number): UnitItem[] {
+  const r = ranges[k];
+  return r ? order.slice(r[0], r[1]).sort((a, b) => b.score - a.score) : [];
+}
+
+/** 方位盤の目盛りの数 = 16回までは全部並べる・それより多いと12個の窓を回す */
+export const dialSlots = (total: number): number => (total <= 16 ? total : 12);
+/** 0始まりの回を輪にまわす(最後の次は最初) */
+export const wrapRound = (k: number, total: number): number => (total ? ((k % total) + total) % total : 0);
+
+/**
+ * 回が入れ替わる時の「出し方」= どこから順に × どうめくれるか(2026-10-31 ユーザ「組み合わせは常にランダム」)。
+ * 速さはどれも同じ: 1冊ずつのずれは 0〜SWAP_SPAN ms、めくり 0.14秒。
+ */
+export const SWAP_ORDERS = ["bara", "near", "inner", "outer", "turn", "left", "top", "diag", "ripple"] as const;
+export type SwapOrder = (typeof SWAP_ORDERS)[number];
+export const SWAP_ORDER_NAME: Record<SwapOrder, string> = {
+  bara: "ばらばら",
+  near: "近い順",
+  inner: "内から",
+  outer: "外から",
+  turn: "回す向きに回る",
+  left: "左から",
+  top: "上から",
+  diag: "斜め",
+  ripple: "指から波紋",
+};
+export const SWAP_FX = ["flip", "fade", "pop", "slide", "drop"] as const;
+export type SwapFx = (typeof SWAP_FX)[number];
+export const SWAP_FX_NAME: Record<SwapFx, string> = { flip: "めくる", fade: "ふわっと", pop: "ぽん", slide: "すべる", drop: "落ちる" };
+export const SWAP_SPAN = 160;
+
+/**
+ * 入れ替わりで各本が動き始めるまでの ms(0〜SWAP_SPAN)。 pts = 舞台の座標で近い順(spread.P の順)。
+ * dir = 回が進んだ(1)/戻った(-1)。 「回す向きに回る」は真上から、進む時は反時計回り(輪を左へ回した向き)。
+ * origin = 指の位置(波紋の中心)。
+ */
+export function swapDelays(
+  order: SwapOrder,
+  pts: readonly { x: number; y: number }[],
+  center: { x: number; y: number },
+  dir: 1 | -1,
+  origin: { x: number; y: number },
+  rand: () => number = Math.random,
+): number[] {
+  const raw = pts.map((p, i) => {
+    switch (order) {
+      case "bara":
+        return rand();
+      case "near":
+        return i;
+      case "inner":
+        return Math.hypot(p.x - center.x, p.y - center.y);
+      case "outer":
+        return -Math.hypot(p.x - center.x, p.y - center.y);
+      case "turn": {
+        const a = ((Math.atan2(p.y - center.y, p.x - center.x) * 180) / Math.PI + 450) % 360; // 真上=0・時計回り
+        return dir > 0 ? (360 - a) % 360 : a;
+      }
+      case "left":
+        return p.x;
+      case "top":
+        return p.y;
+      case "diag":
+        return p.x + p.y;
+      case "ripple":
+        return Math.hypot(p.x - origin.x, p.y - origin.y);
+    }
+  });
+  const mn = Math.min(...raw);
+  const mx = Math.max(...raw);
+  return raw.map((v) => (mx > mn ? Math.round(((v - mn) / (mx - mn)) * SWAP_SPAN) : 0));
+}
+
 export function neighborhood(
   g: Graph,
   center: MangaListItem,

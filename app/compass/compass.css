@@ -1714,6 +1714,164 @@
   background: #e6ecf0 !important;
   color: #0b0e14 !important;
 }
+
+/* ── 回(2026-10-31・ROUNDS): 次を見る → / 方位盤 ◎ / 回の入れ替わりの出し方 ── */
+.cp-sp-next {
+  border-color: var(--c);
+  color: var(--c);
+  font-weight: 700;
+}
+.cp-sp-dial {
+  border-color: var(--c);
+  color: var(--c);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.cp-sp-dial.on {
+  background: var(--c);
+  color: #0b0e14;
+}
+/* 方位盤(RoundDial): 舞台を覆う(道具の列 z4 より下・本より上)。 指の動きは頁のスクロールに渡さない */
+.cp-dial {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  touch-action: none;
+  outline: none;
+  cursor: grab;
+}
+.cp-dial-svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.cp-dial-in {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+  white-space: nowrap;
+  text-shadow:
+    0 1px 4px #000,
+    0 0 10px #000;
+}
+.cp-dial-in b {
+  display: block;
+  font: 800 20px/1.15 ui-monospace, SFMono-Regular, Consolas, monospace;
+}
+.cp-dial-in i {
+  display: block;
+  font-style: normal;
+  font-size: 10px;
+}
+.cp-dial-in span {
+  display: block;
+  color: var(--dc);
+  font-size: 10px;
+  font-weight: 700;
+}
+.cp-dial-lab {
+  position: absolute;
+  transform: translateX(-50%);
+  font-size: 10.5px;
+  font-weight: 700;
+  background: #0b0e14e6;
+  border: 1px solid #ffffff40;
+  border-radius: 12px;
+  padding: 3px 10px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.cp-dial-lab span {
+  display: inline-block;
+  margin-left: 6px;
+  border: 1px solid var(--dc);
+  color: var(--dc);
+  border-radius: 8px;
+  padding: 0 5px;
+  font-size: 9.5px;
+}
+.cp-dial-lab span.on {
+  background: var(--dc);
+  color: #0b0e14;
+}
+.cp-root.wide .cp-dial-in b {
+  font-size: 26px;
+}
+.cp-root.wide .cp-dial-in i,
+.cp-root.wide .cp-dial-in span {
+  font-size: 12px;
+}
+/* 方位盤を開いている間 = 後ろの本は透ける(回すとこの本が入れ替わる) */
+.cp-stage.dial .cp-nd.small:not(.off) {
+  opacity: 0.42;
+  filter: grayscale(0.35);
+}
+.cp-stage.dial .cp-nd.center:not(.off) {
+  opacity: 0.22;
+}
+/* 回の入れ替わり = どこから順に(--d/--od = 0〜0.16秒のずれ)× どうめくれるか。 出ていく本は0.14秒で消え、入る本は0.15秒後から0.14秒で現れる */
+.cp-nd.off.swo {
+  transition: opacity 0.14s ease-in var(--od, 0ms);
+}
+.cp-nd.off.swo img {
+  transition: transform 0.14s ease-in var(--od, 0ms);
+}
+.cp-nd.off.swo-flip img {
+  transform: rotateY(70deg) scale(0.82);
+}
+.cp-nd.off.swo-pop img {
+  transform: scale(0.55);
+}
+.cp-nd.off.swo-slide img {
+  transform: translateX(calc(-16px * var(--sd, 1)));
+}
+.cp-nd.off.swo-drop img {
+  transform: translateY(14px);
+}
+.cp-nd.enter.sw-flip {
+  animation: cp-sw-flip 0.14s ease-out calc(var(--d, 0ms) + 150ms) backwards;
+}
+.cp-nd.enter.sw-fade {
+  animation: cp-in-fade 0.14s ease-out calc(var(--d, 0ms) + 150ms) backwards;
+}
+.cp-nd.enter.sw-pop {
+  animation: cp-sw-pop 0.14s cubic-bezier(0.3, 1.7, 0.5, 1) calc(var(--d, 0ms) + 150ms) backwards;
+}
+.cp-nd.enter.sw-slide {
+  animation: cp-sw-slide 0.14s ease-out calc(var(--d, 0ms) + 150ms) backwards;
+}
+.cp-nd.enter.sw-drop {
+  animation: cp-sw-drop 0.14s cubic-bezier(0.3, 1.5, 0.6, 1) calc(var(--d, 0ms) + 150ms) backwards;
+}
+@keyframes cp-sw-flip {
+  from {
+    transform: rotateY(-70deg) scale(0.82);
+    opacity: 0;
+  }
+}
+@keyframes cp-sw-pop {
+  from {
+    transform: scale(0.35);
+    opacity: 0;
+  }
+}
+@keyframes cp-sw-slide {
+  from {
+    transform: translateX(calc(18px * var(--sd, 1)));
+    opacity: 0;
+  }
+}
+@keyframes cp-sw-drop {
+  from {
+    transform: translateY(-22px);
+    opacity: 0;
+  }
+}
 /* 「ほか ▸」の2段目: 書影付きのタイル */
 .cp-mix.cp-more {
   border-top-color: #e6ecf0;
