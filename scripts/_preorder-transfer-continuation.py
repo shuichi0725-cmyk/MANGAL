@@ -60,9 +60,9 @@ def keys_for_stem(stem):
     return sorted(ks) or None
 
 
-def page_numbers(stem):
+def page_numbers(stem, etype="standard"):
     d = yaml.safe_load(open(f"{ROOT}/data/manga.v2/{stem}.yml", encoding="utf-8")) or {}
-    return {v["number"] for e in (d.get("editions") or []) if (e.get("type") or "standard") == "standard"
+    return {v["number"] for e in (d.get("editions") or []) if (e.get("type") or "standard") == etype
             for v in (e.get("volumes") or []) if isinstance(v.get("number"), int)}
 
 
@@ -75,6 +75,8 @@ ap.add_argument("--publisher")
 ap.add_argument("--title")
 ap.add_argument("--cover")
 ap.add_argument("--note", default="")
+# ★版違いの続巻(2026-10-31 文庫版 賭博黙示録カイジ 2-5 = 頁の bunkobon 版へ)。同巻番号ゲートもこの版で見る
+ap.add_argument("--edition-type", default="standard")
 a = ap.parse_args()
 
 stem = resolve_stem(a.stem)
@@ -83,14 +85,14 @@ if not stem:
 doc = yaml.safe_load(open(AUTO, encoding="utf-8")) or {"volumes": []}
 if str(a.isbn) in {str(v.get("isbn13")) for v in doc["volumes"]}:
     sys.exit(f"skip: 同ISBN既登録 {a.isbn}")
-if a.vol in page_numbers(stem):
-    sys.exit(f"skip: 同巻番号{a.vol}が頁のstandard版に既在 stem={stem}(版違い/二重登録を疑う)")
+if a.vol in page_numbers(stem, a.edition_type):
+    sys.exit(f"skip: 同巻番号{a.vol}が頁の{a.edition_type}版に既在 stem={stem}(版違い/二重登録を疑う)")
 keys = keys_for_stem(stem)
 if not keys:
     sys.exit(f"NG: series_key逆引き不可 stem={stem}")
 
 ent = {"series_keys": keys, "number": a.vol, "isbn13": str(a.isbn),
-       "release_date": a.date, "publisher": a.publisher, "edition_type": "standard",
+       "release_date": a.date, "publisher": a.publisher, "edition_type": a.edition_type,
        "title_display": a.title, "source": "rakuten-preorder",
        "added_at": TODAY, "note": a.note or f"出荷前レビューCONTINUATION裁定で種4転送(stem={stem})"}
 doc["volumes"].append({k: v for k, v in ent.items() if v not in (None, "")})
