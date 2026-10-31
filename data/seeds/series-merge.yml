@@ -2928,3 +2928,116 @@
   - qid:Q11675023|name:蝶か犯か|sub:極道様溢れて溢れて泣かせたい
   merge_edition_types: true
   note: '月次1.2.21 フルpromote isbnloss 2026-10-20: MADB は4巻だけ特装版ISBN(9784065230572)を standard「Kodansha comics」で登録し、通常版4巻(9784065225202)は楽天で KCデラックス=他の巻と同じ刊行。版種だけ統合して デラックス版タブに1〜12巻を揃える(特装版は4巻の別装丁に)'
+- merge_keys:
+  - name:坂木持丸|name:世界最強の魔女、始めました
+  - name:坂木持丸|name:世界最強の魔女、始めました|sub:私だけ『攻略サイト』を見れる世界で自由に生きます
+  - name:坂木持丸|name:世界最強の魔女、始めました|sub:私だけ『攻略サイト』を見れる世界で自由に生きます.
+  merge_edition_types: true
+  note: '版タブ割れの是正 2026-11-01(巻抜け見直し): 講談社 月刊少年マガジン。MADB の叢書が7巻から『講談社コミックスデラックス. 月刊少年マガジン』になり deluxe として別タブ(7〜13巻)に割れ、通常版タブが1〜5・14巻=6〜13巻の巻抜けに見えていた。ISBN 9784065327784(1)〜442999(13)〜448229(14) が巻順に連番の同じ run。auto の既存 entry のキーを全部含めて書く'
+- merge_keys:
+  - name:kisui|name:追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。|sub:俺は武器だけじゃなく、あらゆるものに『強化ポイント』を付与できるし、俺の意思でいつでも効果を解除できるけど、残った人たち大丈夫?
+  - name:六志麻あさ|name:追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。
+  merge_edition_types: true
+  note: '版タブ割れの是正 2026-11-01(巻抜け見直し): 講談社 月刊少年マガジン。11巻から叢書が『講談社コミックスデラックス. 月刊少年マガジン』で deluxe タブ(11〜21巻)に割れ、通常版タブが1〜10・12・22巻=巻抜けに見えていた(12巻は両タブに同じISBN)。同じ run。auto の既存 entry のキーを全部含めて書く'
+- merge_keys:
+  - qid:Q11593991|name:妻と僕の小規模な育児
+  merge_edition_types: true
+  note: '版タブ割れの是正 2026-11-01(巻抜け見直し): 講談社 KCデラックス 1〜14巻(種2は deluxe)に、楽天予約から standard として入った 11・12・15巻が別の『通常版』タブを作り、11・12巻が二重・15巻が巻抜けに見えていた。1つの run なので1タブへ'
+- merge_keys:
+  - name:創美社|name:ぽっかぽか
+  - qid:Q11560265|name:ぽっかぽか
+  merge_edition_types: true
+  note: '版タブ割れの是正 2026-11-01(巻抜け見直し): 集英社 YOUコミックス(デラックス)。1〜6巻が deluxe・7〜19巻が standard と種2で型が割れ、通常版タブが7〜19巻=1〜6巻の巻抜けに見えていた。ISBN 4-08-862110(1)〜862297(6)〜862330(7)〜862580(19) が巻順に連番の同じ run。通常版1巻に入っていた『ぽっかぽか : ちいさな絵本』(1996)は絵本=volume-exclude。auto の既存 entry のキーを全部含めて書く'
+- merge_keys:
+  - name:アサミダイジュ|name:ちょっと盛りました。
+  - name:アサミダイジュ|name:読者専用検索エンジン ちょっと盛りました。
+  - name:シマダヒデアキ|name:読者専用検索エンジン ちょっと盛りました。
+  - qid:Q11628480|name:読者専用検索エンジン ちょっと盛りました。
+  note: '頁分裂の統合 2026-11-01(巻抜け見直し): 楽天題『ちょっと盛りました。(1)〜(4)』・講談社KC 1〜2巻(2013)と3〜4巻(2014)が連番。MADB は1・2巻だけ冠『読者専用検索エンジン』付きの題。残す頁=chotto-morimashita / 吸収=dokusha-senyou-kensaku-engine-chotto-morimashita'
+- merge_keys:
+  - qid:Q618961|name:犯人たちの事件簿
+  - qid:Q966701|name:犯人たちの事件簿|sub:金田一少年の事件簿外伝
+  note: '頁分裂の統合 2026-11-01(巻抜け見直し): 『犯人たちの事件簿』(金田一少年の事件簿外伝)。種2は1・2巻と3〜11巻が別qid・別sid。講談社KC 2017-11〜 連続。残す頁=hannintachi-no-file-kindaichi-shounen-no-file-gaiden / 吸収=hannintachi-no-file'
+- merge_keys:
+  - qid:Q11653162|name:LÉGION
+  - qid:Q11653162|name:L〔E´〕GION
+  note: '頁分裂の統合 2026-11-01(巻抜け見直し): 長沢克泰『LÉGION』ぶんか社 1〜3巻(1996-11〜1997-06)。1・2巻の種2題『L〔E´〕GION』はアクセント記号の転記。残す頁=l-gion / 吸収=l-e-gion'
+- merge_keys:
+  - qid:Q3785783|name:舞勇伝キタキタ
+  - qid:Q3785783|name:魔法陣グルグル外伝舞勇伝キタキタ
+  note: '頁分裂の統合 2026-11-01(巻抜け見直し): 衛藤ヒロユキ『魔法陣グルグル外伝 舞勇伝キタキタ』ガンガンコミックスONLINE 1〜7巻(同qid)。1〜3巻だけ種2題が『舞勇伝キタキタ』。残す頁=mahoujin-guruguru-gaiden-mai-yuuden-kitakita / 吸収=buyuuden-kitakita'
+- merge_keys:
+  - name:長谷垣なるみ|name:俺ともう一度、初恋(ファーストラブ)。
+  - name:長谷垣なるみ|name:俺ともう一度、初恋。
+  note: '頁分裂の統合 2026-11-01(巻抜け見直し): 長谷垣なるみ『俺ともう一度、初恋(ファーストラブ)。』KCデラックス 1〜5巻。1・2巻だけ種2題にルビ括弧。残す頁=ore-to-mou-ichido-hatsukoi / 吸収=ore-to-mou-ichido-first-love'
+- merge_keys:
+  - qid:Q1012736|name:PEACE MAKER鐡
+  - qid:Q1012736|name:PEACE MAKER鐵
+  - qid:Q1012736|name:Peace maker鐡
+  note: '頁分裂の統合 2026-11-01(巻抜け見直し): 黒乃奈々絵『PEACE MAKER 鐵』1〜11巻(Blade comics)→12〜17巻(マッグガーデン MGC・同qid)。鐵/鐡の異体字ゆれ。残す頁=peace-maker-kurogane / 吸収=piisu-maker-kurogane'
+- merge_keys:
+  - qid:Q965600|name:PREMIUM
+  - qid:Q965600|name:Premium
+  - qid:Q965600|name:プレミア
+  merge_edition_types: true
+  note: '頁分裂の統合 2026-11-01(巻抜け見直し): 遊人『プレミア』スコラ バーガーSC 1996-05〜10。3・4巻だけ種2題『Premium』・叢書バーガーSCデラックス(deluxe)= merge_edition_types で1タブに。残す頁=premier / 吸収=premium'
+- merge_keys:
+  - name:森乃葉りふ|name:隣人を妹 (まい) せよ!
+  - name:森乃葉りふ|name:隣人を妹せよ!
+  note: '頁分裂の統合 2026-11-01(巻抜け見直し): 森乃葉りふ『隣人を妹せよ!』一迅社 4コマKINGSぱれっとコミックス 1〜3巻と4〜8巻(題のルビ括弧だけ違う)。残す頁=rinjin-o-maiseyo / 吸収=rinjin-o-maiseyo-2013'
+- merge_keys:
+  - qid:Q5362351|name:バカとテストと召喚獣 SPINOUT!
+  - qid:Q5362351|name:バカとテストと召喚獣SPINOUT!
+  - qid:Q5362351|name:バカとテストと召喚獣SPINOUT!それが僕らの日常。
+  - qid:Q5362351|name:バカとテストと召喚獣→spinout! それが僕らの日常。
+  - qid:Q5362351|name:バカとテストと召喚獣・spinout!
+  note: '頁分裂の統合 2026-11-01(巻抜け見直し): namo『バカとテストと召喚獣 SPINOUT! それが僕らの日常。』ファミ通クリアコミックス 1〜6巻(同qid・5つの題ゆれ)。残す頁=baka-to-test-to-shoukanjuu-spinout / 吸収=baka-to-test-to-shoukanjuu-supinauto-sore-ga-bokura-no-nichijou'
+- merge_keys:
+  - qid:Q11573764|name:Cafe
+  - qid:Q11573764|name:Cafe南青山骨董通り
+  - qid:Q11573764|name:cafe
+  note: '頁分裂の統合 2026-11-01(巻抜け見直し): 琴川彩『Cafe南青山骨董通り』秋田書店 Petit princess 1〜10巻(同qid)。6〜10巻だけ種2題『cafe』。残す頁=cafe-minamiaoyama-kottoudoori / 吸収=cafe'
+- merge_keys:
+  - name:松本零士・総設定・デザイン|name:キャプテンハーロック
+  - qid:Q431443|name:キャプテンハーロック
+  - qid:Q431443|name:キャプテンハーロック 次元航海
+  note: '頁分裂の統合 2026-11-01(巻抜け見直し): 嶋星光壱『キャプテンハーロック 次元航海』チャンピオンREDコミックス 1〜10巻(秋田書店 ISBN 4-253-2372xx が巻順に連番)。8〜10巻だけ種2題『キャプテンハーロック』。残す頁=captain-haarokku-jigen-koukai / 吸収=captain-harlock-jigen-koukai'
+- merge_keys:
+  - name:ゴムドリco.|name:学校勝ち抜き戦 実験対決
+  - name:ストーリーa.|name:学校勝ちぬき戦 実験対決
+  - name:洪鐘賢|name:学校勝ちぬき戦 実験対決
+  - name:洪鐘賢|name:学校勝ち抜き戦 実験対決
+  note: '頁分裂の統合 2026-11-01(巻抜け見直し): 洪鐘賢『学校勝ち抜き戦 実験対決』朝日新聞出版 かがくるBOOK 1〜25巻。21〜25巻だけ種2題『勝ちぬき』表記。残す頁=gakkou-kachinukisen-jikken-taiketsu / 吸収=gakkou-kachinukisen-jikken-taiketsu-2016'
+- merge_keys:
+  - name:100percent|name:ゴロロ mamonogatari
+  - qid:Q11274175|name:ゴロロ
+  - qid:Q11274175|name:ゴロロ mamonogatari
+  note: '頁分裂の統合 2026-11-01(巻抜け見直し): ながとしやすなり『ゴロロ』コロコロコミックス 1〜6巻(同qid)。4〜6巻の種2題『ゴロロ mamonogatari』。残す頁=gororo / 吸収=gororo-mamonogatari'
+- merge_keys:
+  - qid:Q106101827|name:〈配信中〉女神チャンネル!|sub:え、これ売名ですの!?
+  - qid:Q106101827|name:【配信中】女神チャンネル!|sub:え、これ売名ですの!?
+  note: '頁分裂の統合 2026-11-01(巻抜け見直し): 近江のこ『【配信中】女神チャンネル! え、これ売名ですの!?』ビッグガンガンコミックス 1〜3巻(同qid)。1巻だけ種2題が〈〉括弧。残す頁=haishin-chuu-megami-channel / 吸収=haishinchuu-megami-channel'
+- merge_keys:
+  - qid:Q112237875|name:星のカービィ
+  - qid:Q112237875|name:星のカービィ まんぷくプププファンタジー
+  - qid:Q112237875|name:星のカービィ|sub:まんぷくプププファンタジー
+  note: '頁分裂の統合 2026-11-01(巻抜け見直し): 武内いぶき『星のカービィ まんぷくプププファンタジー』コロコロコミックス 1〜14巻(同qid)。1巻だけ別sid・別頁。残す頁=hoshi-no-kirby-takeuchi / 吸収=hoshi-no-kirby-manpuku-pupupu-fantasy'
+- merge_keys:
+  - qid:Q11261772|name:ザールブルグの錬金術士　second season
+  - qid:Q11261772|name:マリーとエリーのアトリエ ザールブルグの錬金術士 Second Season
+  - qid:Q11261772|name:マリーとエリーのアトリエザールブルグの錬金術士 Second Season
+  note: '頁分裂の統合 2026-11-01(巻抜け見直し): 越智善彦『マリーとエリーのアトリエ ザールブルグの錬金術士 Second Season』マジキューコミックス 1〜8巻(同qid)。1〜3巻の種2題に冠なし。残す頁=marii-to-ellie-no-atelier-zaaruburugu-no-renkinjutsushi-sekando-season / 吸収=zaaruburugu-no-renkinjutsushi-2007'
+- merge_keys:
+  - qid:Q11543790|name:NON STOP!恭兵
+  - qid:Q11543790|name:NON STOP!恭平
+  note: '頁分裂の統合 2026-11-01(巻抜け見直し): 橋本きんいち『NON STOP!恭兵』講談社 1〜11巻(同qid)。10・11巻だけ種2題『恭平』(誤記)。残す頁=non-stop-kyouhei / 吸収=non-sutoppu-kyouhei'
+- merge_keys:
+  - name:河野紘一郎|name:神統記
+  - name:河野紘一郎|name:神統記(テオゴニア)
+  - name:谷舞司|name:神統記
+  note: '頁分裂の統合 2026-11-01(巻抜け見直し): 谷舞司/河野紘一郎(原作 青山俊介)『神統記(テオゴニア)』PASH!COMICS 1〜14巻。11〜14巻だけ種2題『神統記』。残す頁=teogonia / 吸収=shintouki'
+- merge_keys:
+  - qid:Q11523124|name:F1速報グランプリ天国
+  - qid:Q11523124|name:グランプリ天国
+  - qid:Q11523124|name:グランプリ天国クラシック
+  note: '頁分裂の統合 2026-11-01(巻抜け見直し): 村山文夫『グランプリ天国』三栄 NEWS MOOK 1〜7巻(同qid)。7巻だけ種2題『F1速報グランプリ天国』。残す頁=guranpuri-tengoku / 吸収=f1-sokuhou-guranpuri-tengoku'

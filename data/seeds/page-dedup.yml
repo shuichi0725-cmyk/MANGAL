@@ -4066,3 +4066,109 @@ dedup:
   title: 手塚治虫シナリオ集
   isbns: 1
   note: '2026-10-20 ユーザ GO「1、2 と、3 の4頁までやる」: 1冊完全一致の二重頁(どちらも公開)。正は予約頁 seed の tezuka-osamu-scenario-shuu = 2026-07-21 手塚治虫漫画全集400冊の別巻(全集386)として作った頁(NDL題ヨミ・キャッチ/あらすじ付き・外来語 シナリオ→scenario の slug 規則どおり)。こちらは種2の源 data/manga/tezuka-osamu-shinarioshuu.yml(slug欄=同名)から出ていた頁'
+
+- drop: dokusha-senyou-kensaku-engine-chotto-morimashita
+  canonical: chotto-morimashita
+  title: 読者専用検索エンジン ちょっと盛りました。
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01: 楽天題『ちょっと盛りました。(1)〜(4)』・講談社KC 1〜2巻(2013)と3〜4巻(2014)が連番。MADB は1・2巻だけ冠『読者専用検索エンジン』付きの題'
+- drop: hannintachi-no-file
+  canonical: hannintachi-no-file-kindaichi-shounen-no-file-gaiden
+  title: 犯人たちの事件簿
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01: 『犯人たちの事件簿』(金田一少年の事件簿外伝)。種2は1・2巻と3〜11巻が別qid・別sid。講談社KC 2017-11〜 連続'
+- drop: l-e-gion
+  canonical: l-gion
+  title: L〔E´〕GION
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01: 長沢克泰『LÉGION』ぶんか社 1〜3巻(1996-11〜1997-06)。1・2巻の種2題『L〔E´〕GION』はアクセント記号の転記'
+- drop: buyuuden-kitakita
+  canonical: mahoujin-guruguru-gaiden-mai-yuuden-kitakita
+  title: 舞勇伝キタキタ
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01: 衛藤ヒロユキ『魔法陣グルグル外伝 舞勇伝キタキタ』ガンガンコミックスONLINE 1〜7巻(同qid)。1〜3巻だけ種2題が『舞勇伝キタキタ』'
+- drop: ore-to-mou-ichido-first-love
+  canonical: ore-to-mou-ichido-hatsukoi
+  title: 俺ともう一度、初恋(ファーストラブ)。
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01: 長谷垣なるみ『俺ともう一度、初恋(ファーストラブ)。』KCデラックス 1〜5巻。1・2巻だけ種2題にルビ括弧'
+- drop: piisu-maker-kurogane
+  canonical: peace-maker-kurogane
+  title: PEACE MAKER鐡
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01: 黒乃奈々絵『PEACE MAKER 鐵』1〜11巻(Blade comics)→12〜17巻(マッグガーデン MGC・同qid)。鐵/鐡の異体字ゆれ'
+- drop: premium
+  canonical: premier
+  title: Premium
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01: 遊人『プレミア』スコラ バーガーSC 1996-05〜10。3・4巻だけ種2題『Premium』・叢書バーガーSCデラックス(deluxe)= merge_edition_types で1タブに'
+- drop: rinjin-o-maiseyo-2013
+  canonical: rinjin-o-maiseyo
+  title: 隣人を妹せよ!
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01: 森乃葉りふ『隣人を妹せよ!』一迅社 4コマKINGSぱれっとコミックス 1〜3巻と4〜8巻(題のルビ括弧だけ違う)'
+- drop: baka-to-test-to-shoukanjuu-supinauto-sore-ga-bokura-no-nichijou
+  canonical: baka-to-test-to-shoukanjuu-spinout
+  title: バカとテストと召喚獣→spinout! それが僕らの日常。
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01: namo『バカとテストと召喚獣 SPINOUT! それが僕らの日常。』ファミ通クリアコミックス 1〜6巻(同qid・5つの題ゆれ)'
+- drop: cafe
+  canonical: cafe-minamiaoyama-kottoudoori
+  title: cafe
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01: 琴川彩『Cafe南青山骨董通り』秋田書店 Petit princess 1〜10巻(同qid)。6〜10巻だけ種2題『cafe』'
+- drop: captain-harlock-jigen-koukai
+  canonical: captain-haarokku-jigen-koukai
+  title: キャプテンハーロック
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01: 嶋星光壱『キャプテンハーロック 次元航海』チャンピオンREDコミックス 1〜10巻(秋田書店 ISBN 4-253-2372xx が巻順に連番)。8〜10巻だけ種2題『キャプテンハーロック』'
+- drop: gakkou-kachinukisen-jikken-taiketsu-2016
+  canonical: gakkou-kachinukisen-jikken-taiketsu
+  title: 学校勝ちぬき戦 実験対決
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01: 洪鐘賢『学校勝ち抜き戦 実験対決』朝日新聞出版 かがくるBOOK 1〜25巻。21〜25巻だけ種2題『勝ちぬき』表記'
+- drop: gororo-mamonogatari
+  canonical: gororo
+  title: ゴロロ mamonogatari
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01: ながとしやすなり『ゴロロ』コロコロコミックス 1〜6巻(同qid)。4〜6巻の種2題『ゴロロ mamonogatari』'
+- drop: haishinchuu-megami-channeru
+  canonical: haishin-chuu-megami-channel
+  title: 〈配信中〉女神チャンネル!
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01: 近江のこ『【配信中】女神チャンネル! え、これ売名ですの!?』ビッグガンガンコミックス 1〜3巻(同qid)。1巻だけ種2題が〈〉括弧'
+- drop: hoshi-no-kirby-manpuku-pupupu-fantasy
+  canonical: hoshi-no-kirby-manpukupupupufantajii
+  title: 星のカービィ まんぷくプププファンタジー
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01: 武内いぶき『星のカービィ まんぷくプププファンタジー』コロコロコミックス 1〜14巻(同qid)。1巻だけ別sid・別頁'
+- drop: zaaruburugu-no-renkinjutsushi-2007
+  canonical: marii-to-ellie-no-atelier-zaaruburugu-no-renkinjutsushi-sekando-season
+  title: ザールブルグの錬金術士　second season
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01: 越智善彦『マリーとエリーのアトリエ ザールブルグの錬金術士 Second Season』マジキューコミックス 1〜8巻(同qid)。1〜3巻の種2題に冠なし'
+- drop: non-sutoppu-kyouhei
+  canonical: non-stop-kyouhei
+  title: NON STOP!恭平
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01: 橋本きんいち『NON STOP!恭兵』講談社 1〜11巻(同qid)。10・11巻だけ種2題『恭平』(誤記)'
+- drop: shintouki
+  canonical: teogonia
+  title: 神統記
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01: 谷舞司/河野紘一郎(原作 青山俊介)『神統記(テオゴニア)』PASH!COMICS 1〜14巻。11〜14巻だけ種2題『神統記』'
+- drop: f1-sokuhou-guranpuri-tengoku
+  canonical: guranpuri-tengoku
+  title: F1速報グランプリ天国
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01: 村山文夫『グランプリ天国』三栄 NEWS MOOK 1〜7巻(同qid)。7巻だけ種2題『F1速報グランプリ天国』'
+- drop: nono-chan-zenshuu
+  canonical: nono-chan
+  title: ののちゃん 全集
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01: 重複頁: 『ののちゃん 全集』頁の3冊はすべて ののちゃん 頁(Ghibli comics special)に同じISBNで載っている'
+- drop: shin-mimibukuro-kaidan-hyakumonogatari
+  canonical: shin-mimibukuro
+  title: 新耳袋 怪談百物語
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01: 重複頁: 『新耳袋 怪談百物語』頁の3冊はすべて 新耳袋 頁に同じISBNで載っている(2026-08-05 に統合を決めたが page-dedup が無くフルpromoteで復活していた)'

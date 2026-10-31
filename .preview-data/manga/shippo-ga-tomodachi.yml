@@ -25,17 +25,23 @@ editions:
 - type: standard
   label: 通常版
   publisher: 集英社
+  imprint: YOUコミックス
   volumes:
   - number: 1
     asin: null
-    isbn13: '9784087850239'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0239/9784087850239.jpg?_ex=200x200
+    isbn13: '9784088621302'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1302/9784088621302.jpg?_ex=200x200
     release_date: 1989-06
   - number: 2
     asin: null
     isbn13: '9784088621883'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1883/9784088621883.jpg?_ex=200x200
     release_date: 1991-05
+  - number: 3
+    asin: null
+    isbn13: '9784088622460'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2460/9784088622460.jpg?_ex=200x200
+    release_date: '1993-04-22'
   - number: 4
     asin: null
     isbn13: '9784088623498'
@@ -56,26 +62,17 @@ editions:
     isbn13: '9784088625652'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0886/08862565.jpg?_ex=200x200
     release_date: 2005-07
-- type: deluxe
-  label: デラックス版
-  publisher: 集英社
-  imprint: Youコミックスデラックス
-  volumes:
-  - number: 1
-    asin: null
-    isbn13: '9784088621302'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1302/9784088621302.jpg?_ex=200x200
-    release_date: 1989-06
-  - number: 3
-    asin: null
-    isbn13: '9784088622460'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2460/9784088622460.jpg?_ex=200x200
-    release_date: '1993-04-22'
 - type: bunkobon
   label: 文庫版
   publisher: 集英社
   imprint: 文庫版コミックス
   volumes:
+  - number: 1
+    volume_label: Volume:1
+    asin: null
+    isbn13: '9784087850239'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0239/9784087850239.jpg?_ex=200x200
+    release_date: 1997-01
   - number: 2
     volume_label: Volume:2
     asin: null
