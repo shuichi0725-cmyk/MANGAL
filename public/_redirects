@@ -2,6 +2,8 @@
 # 旧 slug → 新 slug の 301(漫画頁は /manga/ 配下=この形状以外は届かない)
 # ★Cloudflare Pages は静的redirect上限2,000行(preview=部分カバー)。本番全件は KV REDIRECTS 側。
 
+/manga/kimi-ni-dake-haato-be-to /manga/kimi-ni-dake-heart-beat 301
+/manga/kuro-no-jiiku /manga/kuro-no-sieg 301
 /manga/0-1996 /manga/zero-1996 301
 /manga/0-2009 /manga/zero-2009 301
 /manga/0-hour /manga/zero-hour 301
@@ -12839,7 +12841,6 @@
 /manga/kimi-janakya-dame-na-dorei-shojo /manga/kimi-janakya-dame-na-dorei-shoujo 301
 /manga/kimi-mo-jinsei-bo-ni-futte-minai-ka /manga/kimi-mo-jinsei-bou-ni-futte-minai-ka 301
 /manga/kimi-ni-aetara-nante-io /manga/kimi-ni-aetara-nante-iou 301
-/manga/kimi-ni-dake-haato-be-to /manga/kimi-ni-dake-heart-beat 301
 /manga/kimi-ni-horudo-appu /manga/kimi-ni-hoorudo-appu 301
 /manga/kimi-ni-kisetai-uedingu-doresu /manga/kimi-ni-kisetai-wedding-dress 301
 /manga/kimi-ni-kudetaa /manga/kimi-ni-kuudetaa 301
@@ -14774,7 +14775,6 @@
 /manga/kurisuto-magaki-kemono-to-seija-no-kai /manga/cristo-magaki-kemono-to-seija-no-kai 301
 /manga/kuro-maho-ryo-no-sanakunin /manga/kuro-mahou-ryou-no-sanakunin 301
 /manga/kuro-meikyu /manga/kuro-meikyuu 301
-/manga/kuro-no-jiiku /manga/kuro-no-sieg 301
 /manga/kuro-no-kenja-wa-kage-wo-oru /manga/kuro-no-kenja-wa-kage-o-oru 301
 /manga/kuro-no-kotaishi /manga/kuro-no-koutaishi 301
 /manga/kuro-no-mao /manga/kuro-no-maou 301
