@@ -1,4 +1,12 @@
 overrides:
+  kimi-ni-dake-haato-be-to:
+    at: '2026-10-31'
+    reason: 生成器の語中切り(ハートビート→haato-be-to)。katakana-english.yml の ハートビート=heart-beat に揃える(ユーザ指摘 2026-10-31)
+    slug: kimi-ni-dake-heart-beat
+  kuro-no-jiiku:
+    at: '2026-10-31'
+    reason: 主人公名ジーク=独語Sieg(公式英字なし・Web確認)。ユーザ指摘「フォルダ名改善必要」2026-10-31
+    slug: kuro-no-sieg
   faindaa:
     at: '2026-09-05'
     reason: カタカナ外来語のヘボン転写を英語綴りへ(CLEAR層=逆置換で現slugに戻る+カタカナ連が辞書で全被覆+日本語側のハイフン不変。ユーザGO 2026-09-05)
