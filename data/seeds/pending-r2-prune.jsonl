@@ -1,3 +1,5 @@
 # R2 prune 待ちの公開slug。週次蒸留の preflight が必ず表示する。
 # r2-sync --prune 実行後、.cache/r2-pruned-<日時>.txt に載った行をここから消し込む。
 # 2026-08-10 週次: 台帳15件すべて .cache/r2-pruned-20260810-020427.txt に載ったのを確認し消し込み。
+{"slug": "kimi-ni-dake-haato-be-to", "reason": "予約頁の slug 是正: きみにだけハートビート→kimi-ni-dake-heart-beat / 黒のジーク→kuro-no-sieg(ユーザ指摘・旧slugはalias)", "at": "2026-10-31", "source": "reflect-targeted --drop"}
+{"slug": "kuro-no-jiiku", "reason": "予約頁の slug 是正: きみにだけハートビート→kimi-ni-dake-heart-beat / 黒のジーク→kuro-no-sieg(ユーザ指摘・旧slugはalias)", "at": "2026-10-31", "source": "reflect-targeted --drop"}
