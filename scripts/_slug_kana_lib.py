@@ -81,7 +81,10 @@ def make_slug(title):
     t = re.sub(r'[ァ-ヶー]+(?:・[ァ-ヶー]+)+', _nakaguro_dict, t)
     t = re.sub(r'[・×↔→]', ' ', t)
     parts = []
-    for tk in T.tokenize(t):
+    _toks = list(T.tokenize(t)); _skip = 0
+    for _ti, tk in enumerate(_toks):
+        if _skip:
+            _skip -= 1; continue
         surf = tk.surface.strip()
         if not surf or re.fullmatch(r'[\s、。，．,.…‥!！?？〜~☆★♡♥◆■○●「」『』"\'"“”:：;；/／|＆&＋+*＊%％#＃-]+', surf):
             continue
@@ -91,6 +94,20 @@ def make_slug(title):
             parts.append(('lat', surf.lower(), pos)); continue
         # ★カタカナ連(長音含む)は貪欲辞書変換
         if re.fullmatch(r'[ァ-ヶー]+', surf):
+            # ★janomeが割った辞書語を戻す(2026-10-31 ハートビート→ハート+ビート→haato-be-to / ガンダム→gan-damu)。
+            #   続くカタカナtokenを連結し、連結形が辞書に**完全一致**する最長のものだけ採る(部分一致は従来どおり)。
+            #   ★題に空白を差し込む方式は前後の漢字の読みが変わる(聖アリス→kiyoshi)ので不可=token列の上で直す
+            _run, _best = surf, None
+            for _tj in range(_ti + 1, len(_toks)):
+                _s2 = _toks[_tj].surface.strip()
+                if not re.fullmatch(r'[ァ-ヶー]+', _s2 or ''):
+                    break
+                _run += _s2
+                if _run in DIC:
+                    _best = (_tj, _run)
+            if _best:
+                parts.append(('lat', DIC[_best[1]], pos)); _skip = _best[0] - _ti
+                continue
             for frag in kata_run_convert(surf):
                 parts.append(('lat' if not re.search(r'[^a-z0-9-]', frag) else 'ja', frag, pos))
             continue
