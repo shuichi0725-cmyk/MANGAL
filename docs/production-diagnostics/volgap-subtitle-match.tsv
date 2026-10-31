@@ -1,0 +1,1424 @@
+decision	stem	title	ei	etype	number	kind	isbn	date	rak_title	rak_author	rak_pub	src	prev	next	route
+APPLY	shinsengumi	新選組	0	standard	3	MID	9784840109253	2004-01	新選組3	工藤　かずや/金井　たつお	KADOKAWA	local	2:9784840109222:2003-12-22	4:9784840109314:2004-02-23	canon:volumes
+REJECT:本番に在る,次巻より後,版元違い	wild-7	ワイルド7	5	deluxe	7	MID	9784821185399	2008-01	ワイルド7(7(「黄金の新幹線」編))	望月三起也	ぶんか社	local	6::1987-04-01	8:9784197875436:1987-03-20	seed4
+REJECT:本番に在る,次巻より後,版元違い	wild-7	ワイルド7	5	deluxe	17	MID	9784199020360	1995-08	ワイルド7(17)	望月三起也	徳間書店	local	16::1987-08	18:9784197875924:1987-08-13	seed4
+REJECT:ISBN連番の外,前巻より前,本番に在る,次巻より後,版元違い	kozure-ookami	子連れ狼	3	other	2	MID	9784091904027	1982-11	子連れ狼(2)	小池一雄/小島剛夕	小学館	local	1::1990-08	9:9784883150830:1990-12	canon:extra[2]
+REJECT:ISBN連番の外,前巻より前,本番に在る,次巻より後,版元違い	kozure-ookami	子連れ狼	3	other	3	MID	9784091904034	1976-09	子連れ狼(3)	小池一雄/小島剛夕	小学館	local	1::1990-08	9:9784883150830:1990-12	canon:extra[2]
+REJECT:ISBN連番の外,前巻より前,本番に在る,次巻より後,版元違い	kozure-ookami	子連れ狼	3	other	4	MID	9784091904041	1983-02	子連れ狼(4)	小池一雄/小島剛夕	小学館	local	1::1990-08	9:9784883150830:1990-12	canon:extra[2]
+REJECT:ISBN連番の外,前巻より前,本番に在る,次巻より後,版元違い,著者違い	kozure-ookami	子連れ狼	3	other	5	MID	9784575486247	1982-09	子連れ狼(5)	小島剛夕/小池一夫	双葉社	local	1::1990-08	9:9784883150830:1990-12	canon:extra[2]
+REJECT:ISBN連番の外,前巻より前,本番に在る,次巻より後,版元違い	kozure-ookami	子連れ狼	3	other	6	MID	9784091904065	1983-01	子連れ狼(6)	小池一雄/小島剛夕	小学館	local	1::1990-08	9:9784883150830:1990-12	canon:extra[2]
+REJECT:ISBN連番の外,前巻より前,本番に在る,次巻より後,版元違い,著者違い	kozure-ookami	子連れ狼	3	other	7	MID	9784862258052	2012-04	子連れ狼 第7巻 愛蔵版	小池一夫/小島剛夕	小池書院	local	1::1990-08	9:9784883150830:1990-12	canon:extra[2]
+REJECT:ISBN連番の外,前巻より前,本番に在る,次巻より後,版元違い	kozure-ookami	子連れ狼	3	other	8	MID	9784862258069	2012-05	子連れ狼 第8巻 愛蔵版	小池一夫/小島剛夕	小池書院	local	1::1990-08	9:9784883150830:1990-12	canon:extra[2]
+REJECT:ISBN連番の外,前巻より前,本番に在る,次巻より後,版元違い	kozure-ookami	子連れ狼	3	other	11	MID	9784575486308	1982-12	子連れ狼(11)	小島剛夕/小池一夫	双葉社	local	10:9784883150847:1990-12	28:9784883151271:1991-09	canon:extra[2]
+REJECT:ISBN連番の外,前巻より前,本番に在る,次巻より後,版元違い	kozure-ookami	子連れ狼	3	other	12	MID	9784575486315	1982-12	子連れ狼(12)	小島剛夕/小池一夫	双葉社	local	10:9784883150847:1990-12	28:9784883151271:1991-09	canon:extra[2]
+REJECT:ISBN連番の外,前巻より前,本番に在る,次巻より後,版元違い	kozure-ookami	子連れ狼	3	other	13	MID	9784575486322	1983-01	子連れ狼(13)	小島剛夕/小池一夫	双葉社	local	10:9784883150847:1990-12	28:9784883151271:1991-09	canon:extra[2]
+REJECT:ISBN連番の外,前巻より前,本番に在る,次巻より後,版元違い	kozure-ookami	子連れ狼	3	other	14	MID	9784575486339	1983-01	子連れ狼(14)	小島剛夕/小池一夫	双葉社	local	10:9784883150847:1990-12	28:9784883151271:1991-09	canon:extra[2]
+REJECT:ISBN連番の外,本番に在る,次巻より後,版元違い	kozure-ookami	子連れ狼	3	other	15	MID	9784883156733	1995-09	子連れ狼 15	小池　一夫/小島　剛夕	小池書院	local	10:9784883150847:1990-12	28:9784883151271:1991-09	canon:extra[2]
+REJECT:ISBN連番の外,本番に在る,次巻より後,版元違い	kozure-ookami	子連れ狼	3	other	16	MID	9784862258441	2013-01	子連れ狼 第16巻 愛蔵版	小島剛夕/小池一夫	小池書院	local	10:9784883150847:1990-12	28:9784883151271:1991-09	canon:extra[2]
+REJECT:ISBN連番の外,本番に在る,次巻より後,版元違い	kozure-ookami	子連れ狼	3	other	17	MID	9784883156771	1995-10	子連れ狼 17	小池　一夫/小島　剛夕	小池書院	local	10:9784883150847:1990-12	28:9784883151271:1991-09	canon:extra[2]
+REJECT:ISBN連番の外,本番に在る,次巻より後,版元違い	kozure-ookami	子連れ狼	3	other	18	MID	9784862258465	2013-03	子連れ狼 第18巻 愛蔵版	小池　一夫/小島　剛夕	小池書院	local	10:9784883150847:1990-12	28:9784883151271:1991-09	canon:extra[2]
+REJECT:ISBN連番の外,本番に在る,次巻より後,版元違い	kozure-ookami	子連れ狼	3	other	19	MID	9784862258472	2013-04	子連れ狼(19)	小島剛夕/小池一夫	小池書院	local	10:9784883150847:1990-12	28:9784883151271:1991-09	canon:extra[2]
+REJECT:ISBN連番の外,本番に在る,次巻より後,版元違い	kozure-ookami	子連れ狼	3	other	20	MID	9784862258489	2013-05	子連れ狼 第20巻 愛蔵版	小池一夫/小島剛夕	小池書院	local	10:9784883150847:1990-12	28:9784883151271:1991-09	canon:extra[2]
+REJECT:ISBN連番の外,本番に在る,次巻より後	kozure-ookami	子連れ狼	3	other	21	MID	9784883156856	1995-11	子連れ狼 21	小池　一夫/小島　剛夕	小池書院	local	10:9784883150847:1990-12	28:9784883151271:1991-09	canon:extra[2]
+REJECT:ISBN連番の外,本番に在る,次巻より後	kozure-ookami	子連れ狼	3	other	22	MID	9784883156863	1995-11	子連れ狼 22	小池　一夫/小島　剛夕	小池書院	local	10:9784883150847:1990-12	28:9784883151271:1991-09	canon:extra[2]
+REJECT:ISBN連番の外,本番に在る,次巻より後	kozure-ookami	子連れ狼	3	other	23	MID	9784883156894	1996-01	子連れ狼 23	小池　一夫/小島　剛夕	小池書院	local	10:9784883150847:1990-12	28:9784883151271:1991-09	canon:extra[2]
+REJECT:ISBN連番の外,本番に在る,次巻より後	kozure-ookami	子連れ狼	3	other	24	MID	9784883156900	1996-01	子連れ狼 24	小池　一夫/小島　剛夕	小池書院	local	10:9784883150847:1990-12	28:9784883151271:1991-09	canon:extra[2]
+REJECT:ISBN連番の外,本番に在る,次巻より後	kozure-ookami	子連れ狼	3	other	25	MID	9784883156931	1996-02	子連れ狼 25	小池　一夫/小島　剛夕	小池書院	local	10:9784883150847:1990-12	28:9784883151271:1991-09	canon:extra[2]
+REJECT:ISBN連番の外,本番に在る,次巻より後	kozure-ookami	子連れ狼	3	other	26	MID	9784883156948	1996-02	子連れ狼 26	小池　一夫/小島　剛夕	小池書院	local	10:9784883150847:1990-12	28:9784883151271:1991-09	canon:extra[2]
+REJECT:ISBN連番の外,本番に在る,次巻より後	kozure-ookami	子連れ狼	3	other	27	MID	9784883156979	1996-03	子連れ狼 27	小池　一夫/小島　剛夕	小池書院	local	10:9784883150847:1990-12	28:9784883151271:1991-09	canon:extra[2]
+NOHIT	soorujaa	葬流者	3	shinsoban	2	MID							1:9784862254252:2009-02	3:9784862254320:2009-03	canon:extra[2]
+NOHIT	tinker-bell	ティンカー・ベル	0	standard	2	MID							1:9784257913252:1975-05-10	3:9784041178102:2026-10-28	seed4
+REJECT:ISBN連番の外,前巻より前,本番に在る,版元違い	swan	SWAN	3	kanzenban	7	MID	9784582287677	2007-11	SWAN愛蔵版(7)	有吉京子	平凡社	local	6:9784582288766:2024-05	13:9784582288490:2024-03	canon:extra[2]
+REJECT:ISBN連番の外,前巻より前,本番に在る,次巻より後,版元違い	swan	SWAN	3	kanzenban	8	MID	9784582287684	2007-12	SWAN愛蔵版(8)	有吉京子	平凡社	local	6:9784582288766:2024-05	13:9784582288490:2024-03	canon:extra[2]
+REJECT:ISBN連番の外,前巻より前,本番に在る,次巻より後,版元違い	swan	SWAN	3	kanzenban	9	MID	9784582287691	2008-01	SWAN愛蔵版(9)	有吉京子	平凡社	local	6:9784582288766:2024-05	13:9784582288490:2024-03	canon:extra[2]
+REJECT:ISBN連番の外,前巻より前,本番に在る,次巻より後,版元違い	swan	SWAN	3	kanzenban	10	MID	9784582287707	2008-02	SWAN愛蔵版(10)	有吉京子	平凡社	local	6:9784582288766:2024-05	13:9784582288490:2024-03	canon:extra[2]
+REJECT:ISBN連番の外,前巻より前,本番に在る,次巻より後,版元違い	swan	SWAN	3	kanzenban	11	MID	9784582287714	2008-03	SWAN愛蔵版(11)	有吉京子	平凡社	local	6:9784582288766:2024-05	13:9784582288490:2024-03	canon:extra[2]
+REJECT:ISBN連番の外,前巻より前,本番に在る,次巻より後,版元違い	swan	SWAN	3	kanzenban	12	MID	9784582287721	2008-04	SWAN愛蔵版(12)	有吉京子	平凡社	local	6:9784582288766:2024-05	13:9784582288490:2024-03	canon:extra[2]
+REJECT:本番に在る,次巻より後,版元違い	aahananoouendan	嗚呼!!花の応援団	1	shinsoban	8	MID	9784575816365	1990-04	嗚呼!!花の応援団(DX版)(8)	どおくまんプロ	双葉社	local	7:9784575486599:1983-09	9:9784575486612:1983-10	canon:extra[0]
+REJECT:本番に在る,次巻より後,版元違い	haru-ga-kita	春が来た	1	other	2	MID	9784862258151	2012-03	春が来た(2)	小池一夫/小島剛夕	小池書院	local	1::1990-10	3:9784883150854:1990-12	canon:extra[0]
+REJECT:前巻より前,本番に在る,次巻より後,版元違い	toki-no-gyouja	時の行者	6	shinsoban	2	MID	9784061010512	1983-08	時の行者(2)	横山光輝	講談社	local	1:9784845808922:1993-04	3:9784845808946:1993-05-21	canon:extra[5]
+REJECT:ISBN連番の外,次巻より後,版元違い	wani-bunsho	ワニ分署	2	shinsoban	2	MID	9784845813438	1996-01	ワニ分署(2)	篠原とおる	リイド社	local	1:9784088572017:1986-10	8:9784088572086:1988-02	canon:extra[1]
+REJECT:ISBN連番の外,次巻より後,版元違い	wani-bunsho	ワニ分署	2	shinsoban	3	MID	9784845813445	1996-03	ワニ分署(3)	篠原とおる	リイド社	local	1:9784088572017:1986-10	8:9784088572086:1988-02	canon:extra[1]
+REJECT:ISBN連番の外,次巻より後,版元違い	wani-bunsho	ワニ分署	2	shinsoban	4	MID	9784845813452	1996-05	ワニ分署(4)	篠原とおる	リイド社	local	1:9784088572017:1986-10	8:9784088572086:1988-02	canon:extra[1]
+REJECT:ISBN連番の外,次巻より後,版元違い	wani-bunsho	ワニ分署	2	shinsoban	5	MID	9784845813209	1996-07	ワニ分署(5)	篠原とおる	リイド社	local	1:9784088572017:1986-10	8:9784088572086:1988-02	canon:extra[1]
+REJECT:ISBN連番の外,次巻より後	wani-bunsho	ワニ分署	2	shinsoban	6	MID	9784088570266	2000	ワニ分署 (6)	篠原　とおる	集英社	live	1:9784088572017:1986-10	8:9784088572086:1988-02	canon:extra[1]
+NOHIT	wani-bunsho	ワニ分署	2	shinsoban	7	MID							1:9784088572017:1986-10	8:9784088572086:1988-02	canon:extra[1]
+NOHIT	wani-bunsho	ワニ分署	2	shinsoban	9	MID							8:9784088572086:1988-02	10:9784088572109:1988-08	canon:extra[1]
+REJECT:本番に在る,次巻より後	1-2-no-1-rou	1・2の三四郎	0	standard	8	MID	9784061013896	1988-10	1・2の三四郎(8)	小林まこと	講談社	local	7:9784061726642:1980-05	9:9784061726857:1980-09	canon:volumes
+REJECT:本番に在る	1-2-no-1-rou	1・2の三四郎	0	standard	15	MID	9784061727991	1981-12	1・2の三四郎(15)	小林まこと	講談社	local	14:9784061727816:1981-10-20	17:9784061728301:1982-05-20	canon:volumes
+REJECT:本番に在る	1-2-no-1-rou	1・2の三四郎	0	standard	16	MID	9784061728127	1982-02	1・2の三四郎(16)	小林まこと	講談社	local	14:9784061727816:1981-10-20	17:9784061728301:1982-05-20	canon:volumes
+REJECT:本番に在る	1-2-no-1-rou	1・2の三四郎	0	standard	18	MID	9784061728479	1982-08	1・2の三四郎(18)	小林まこと	講談社	local	17:9784061728301:1982-05-20	20:9784061728844:1983-03-20	canon:volumes
+REJECT:本番に在る	1-2-no-1-rou	1・2の三四郎	0	standard	19	MID	9784061728592	1983-01	1・2の三四郎(19)	小林まこと	講談社	local	17:9784061728301:1982-05-20	20:9784061728844:1983-03-20	canon:volumes
+REJECT:本番に在る,次巻より後	1-2-no-1-rou	1・2の三四郎	2	shinsoban	9	MID	9784061013902	1988-11	1・2の三四郎(9)	小林まこと	講談社	local	8:9784061726840:1980-08	15:9784061727991:1981-12-10	canon:extra[1]
+REJECT:本番に在る,次巻より後	1-2-no-1-rou	1・2の三四郎	2	shinsoban	10	MID	9784061727113	1989-09	1・2の三四郎(10)	小林まこと	講談社	local	8:9784061726840:1980-08	15:9784061727991:1981-12-10	canon:extra[1]
+REJECT:本番に在る,次巻より後	1-2-no-1-rou	1・2の三四郎	2	shinsoban	11	MID	9784061727236	1989-09	1・2の三四郎(11)	小林まこと	講談社	local	8:9784061726840:1980-08	15:9784061727991:1981-12-10	canon:extra[1]
+REJECT:本番に在る,次巻より後	1-2-no-1-rou	1・2の三四郎	2	shinsoban	12	MID	9784061727458	1981-05	1・2の三四郎(12)	小林まこと	講談社	local	8:9784061726840:1980-08	15:9784061727991:1981-12-10	canon:extra[1]
+REJECT:本番に在る	1-2-no-1-rou	1・2の三四郎	2	shinsoban	13	MID	9784061727687	1981-08	1・2の三四郎(13)	小林まこと	講談社	local	8:9784061726840:1980-08	15:9784061727991:1981-12-10	canon:extra[1]
+REJECT:本番に在る	1-2-no-1-rou	1・2の三四郎	2	shinsoban	14	MID	9784061727816	1981-10	1・2の三四郎(14)	小林まこと	講談社	local	8:9784061726840:1980-08	15:9784061727991:1981-12-10	canon:extra[1]
+REJECT:本番に在る	1-2-no-1-rou	1・2の三四郎	2	shinsoban	17	MID	9784061728301	1982-05	1・2の三四郎(17)	小林まこと	講談社	local	16:9784061728127:1982-02-10	18:9784061728479:1982-08-10	canon:extra[1]
+REJECT:ISBN連番の外	shutter-shower	シャッターシャワー	1	shinsoban	2	MID	9784088570525		シャッターシャワー(2)	池沢さとし	集英社	local	1:9784088572130:1986-10	4:9784088572161:1987-04	canon:extra[0]
+NOHIT	shutter-shower	シャッターシャワー	1	shinsoban	3	MID							1:9784088572130:1986-10	4:9784088572161:1987-04	canon:extra[0]
+NOHIT	isshokenmei-hajime-hajime-kun	いっしょけんめいハジメくん	1	shinsoban	14	MID							13:9784088612539:1984-09-25	15:9784088612553:1985-03-25	canon:extra[0]
+NOHIT	isshokenmei-hajime-hajime-kun	いっしょけんめいハジメくん	3	shinsoban	13	MID							12:9784088612522:	14:9784088612546:	canon:extra[2]
+NOHIT	isshokenmei-hajime-hajime-kun	いっしょけんめいハジメくん	3	shinsoban	15	MID							14:9784088612546:	17:9784088612577:	canon:extra[2]
+NOHIT	isshokenmei-hajime-hajime-kun	いっしょけんめいハジメくん	3	shinsoban	16	MID							14:9784088612546:	17:9784088612577:	canon:extra[2]
+NOHIT	kuchiyaku-mondo-kawaitesourou	唇役主丞乾いて候	1	shinsoban	5	MID							4:9784883152179:1993-06	6:9784883152551:1993-11	canon:extra[0]
+NOHIT	kasuribana	掏摸花	1	shinsoban	1	LEAD							::	2:9784874443811:1988-10	canon:extra[0]
+NOHIT	sakuranbomonogatari	桜桃物語	0	standard	16	MID							15:9784061755055:1989-12-06	17:9784061755116:1992-01-09	seed4
+REJECT:本番に在る	umezu-kazuo-kowai-hon	楳図かずおこわい本	1	shinsoban	4	MID	9784257904779	2003-08	楳図かずおこわい本(vol.4)愛蔵版	楳図かずお	朝日ソノラマ	local	3:9784257904762:2003-08-30	5:9784257904786:2003-09	canon:extra[0]
+REJECT:ISBN連番の外,前巻より前,本番に在る	umezu-kazuo-kowai-hon	楳図かずおこわい本	1	shinsoban	6	MID	9784257904793	2003-09	楳図かずおこわい本(vol.6)愛蔵版	楳図かずお	朝日ソノラマ	local	5:9784257904786:2003-09	7:9784257904809:2003-10	canon:extra[0]
+NOHIT	hyouman	豹マン	0	standard	2	MID							1::1981-06-15	3:9784775910276:2005-04-04	seed4
+NOHIT	pachikko-bojou	パチっ子慕情	0	standard	2	MID							1::1982-05	3::1982-10	seed4
+REJECT:前巻より前,本番に在る,次巻より後	plamo-kyoushirou	プラモ狂四郎	2	deluxe	4	MID	9784061004146	1983-06	プラモ狂四郎(4)	クラフト団/やまと虹一	講談社	local	3::1990-03-17	5::1990-05-17	canon:extra[1]
+APPLY	plamo-kyoushirou	プラモ狂四郎	4	deluxe	2	MID	9784063131253	1990-02	プラモ狂四郎(2)	やまと虹一/クラフト団	講談社	local	1:9784063131246:1990-01-17	4:9784063131277:	canon:extra[3]
+APPLY	plamo-kyoushirou	プラモ狂四郎	4	deluxe	3	MID	9784063131260	1990-03	プラモ狂四郎(3)	やまと虹一/クラフト団	講談社	local	1:9784063131246:1990-01-17	4:9784063131277:	canon:extra[3]
+APPLY	plamo-kyoushirou	プラモ狂四郎	4	deluxe	5	MID	9784063131284	1990-05	プラモ狂四郎(5)	やまと虹一/クラフト団	講談社	local	4:9784063131277:	6:9784063131291:1990-06-16	canon:extra[3]
+APPLY	fukushuu-no-kyoujuu	復讐の兇獣	1	shinsoban	3	MID	9784832227378	1995-10	復讐の兇獣(DX版)(3)	谷村ひとし/セルジオ関	芳文社	local	2:9784832227330:1995-10	4:9784832227408:1995-12	canon:extra[0]
+REJECT:次巻より後	sutegoma-ichi	捨て駒いち	0	standard	5	MID	9784061013339	1987-10	捨て駒いち(5)	政岡としや/北芝健	講談社	local	4::1982-09	6::1983-01	canon:volumes
+NOHIT	menkuiegurekeibu	面くいエグレ警部	0	bunkobon	2	MID							1::1982-05-20	3:9784253016858:1983-09	seed4
+REJECT:本番に在る,次巻より後	fushigi-tobe-kun	ふしぎトーボくん	0	standard	2	MID	9784834213942	1995-01	ふしぎトーボくん(2)	ちばあきお	集英社	local	1:9784088512211:1983-04-15	3:9784088512235:1983-12	seed4
+NOHIT	kamui-gaiden-dai-2-bu	カムイ外伝第2部	0	standard	1	LEAD							::	4:9784091805942:1983-06	seed4
+NOHIT	kamui-gaiden-dai-2-bu	カムイ外伝第2部	0	standard	2	LEAD							::	4:9784091805942:1983-06	seed4
+NOHIT	kamui-gaiden-dai-2-bu	カムイ外伝第2部	0	standard	3	LEAD							::	4:9784091805942:1983-06	seed4
+NOHIT	supeshiyaru-banguutara-mama	スペシャル版 ぐうたらママ	0	standard	1	LEAD							::	2:9784592760221:1983-04-27	seed4
+REJECT:次巻より後,版元違い,著者違い	sekainorekishi	世界の歴史	0	standard	4	MID	9784082491147	1986-05	世界の歴史(4)	岩田一彦	集英社	local	3:9784124024289:1983-12-20	7:9784124024333:1984-06-20	seed4
+REJECT:次巻より後,版元違い,著者違い	sekainorekishi	世界の歴史	0	standard	5	MID	9784082491154	1986-06	世界の歴史(5)	岩田一彦	集英社	local	3:9784124024289:1983-12-20	7:9784124024333:1984-06-20	seed4
+REJECT:次巻より後,版元違い,著者違い	sekainorekishi	世界の歴史	0	standard	6	MID	9784082491161	1986-07	世界の歴史(6)	岩田一彦	集英社	local	3:9784124024289:1983-12-20	7:9784124024333:1984-06-20	seed4
+REJECT:版元違い,著者違い	sekainorekishi	世界の歴史	0	standard	8	MID	9784082491185	1986-09	世界の歴史(8)	岩田一彦	集英社	local	7:9784124024333:1984-06-20	9::1986-10-24	seed4
+REJECT:次巻より後,版元違い,著者違い	sekainorekishi	世界の歴史	0	standard	10	MID	9784082491208	1986-11	世界の歴史(10)	岩田一彦	集英社	local	9::1986-10-24	11:9784124024371:1984-10-20	seed4
+REJECT:前巻より前,次巻より後,版元違い,著者違い	sekainorekishi	世界の歴史	0	standard	12	MID	9784082491222	1987-01	世界の歴史(12)	岩田一彦	集英社	local	11:9784124024371:1984-10-20	13:9784124024395:1984-12-20	seed4
+REJECT:前巻より前	boukenshatachi-no-sekaishi	冒険者たちの世界史	0	standard	17	MID	9784827511857	1983-01	冒険者たちの世界史 17 ラルース版	ミシェル・ド・フランス/榊原　晃三	角川GP（角川・エス・エス・コミュニ	live	16:9784827511840:1983-08	18:9784827511864:1983-09	seed4
+NOHIT	shisaku-nansensu-senshuu	思索ナンセンス選集	0	standard	1	LEAD							::	2:9784783510901:1983-11	seed4
+NOHIT	shisaku-nansensu-senshuu	思索ナンセンス選集	0	standard	3	MID							2:9784783510901:1983-11	4:9784783510925:1984-06	seed4
+NOHIT	shisaku-nansensu-senshuu	思索ナンセンス選集	0	standard	6	MID							5:9784783510932:1984-09	7:9784783510956:1984-12	seed4
+APPLY	hard-ando-ruuzu	ハード＆ルーズ	1	shinsoban	3	MID	9784575818826	1993-06	ハード&ルーズ(3)新装版	かわぐちかいじ/狩撫麻礼	双葉社	local	2:9784575818758:1993-06	4:9784575818895:1993-08	canon:extra[0]
+APPLY	hard-ando-ruuzu	ハード＆ルーズ	1	shinsoban	5	MID	9784575818949	1993-08	ハード&ルーズ(5)新装版	かわぐちかいじ/狩撫麻礼	双葉社	local	4:9784575818895:1993-08	7:9784575819106:1993-11	canon:extra[0]
+APPLY	hard-ando-ruuzu	ハード＆ルーズ	1	shinsoban	6	MID	9784575819014	1993-09	ハード&ルーズ(6)新装版	かわぐちかいじ/狩撫麻礼	双葉社	local	4:9784575818895:1993-08	7:9784575819106:1993-11	canon:extra[0]
+NOHIT	biiparu-kozou-no-autodoa-kyouhon	ビーパル小僧のアウトドア教本	0	standard	1	LEAD							::	2:9784093660020:1984-10	seed4
+NOHIT	kibaken	牙拳	0	standard	9	MID							8:9784821191024:1984-12	10:9784821191109:1985-02	seed4
+NOHIT	shakaikamanganihonnonbiriryokou	社会科まんが日本のんびり旅行	0	standard	1	LEAD							::	4:9784378041049:1984-01	seed4
+NOHIT	shakaikamanganihonnonbiriryokou	社会科まんが日本のんびり旅行	0	standard	2	LEAD							::	4:9784378041049:1984-01	seed4
+NOHIT	shakaikamanganihonnonbiriryokou	社会科まんが日本のんびり旅行	0	standard	3	LEAD							::	4:9784378041049:1984-01	seed4
+NOHIT	shakaikamanganihonnonbiriryokou	社会科まんが日本のんびり旅行	0	standard	5	MID							4:9784378041049:1984-01	6:9784378041063:1984-04	seed4
+NOHIT	kazenowatokinowasunanowa	風の輪・時の和・砂の環	0	standard	2	MID							1:9784403610523:1984-04-10	6:9784048526012:1996-02-11	seed4
+NOHIT	kazenowatokinowasunanowa	風の輪・時の和・砂の環	0	standard	3	MID							1:9784403610523:1984-04-10	6:9784048526012:1996-02-11	seed4
+NOHIT	kazenowatokinowasunanowa	風の輪・時の和・砂の環	0	standard	4	MID							1:9784403610523:1984-04-10	6:9784048526012:1996-02-11	seed4
+NOHIT	kazenowatokinowasunanowa	風の輪・時の和・砂の環	0	standard	5	MID							1:9784403610523:1984-04-10	6:9784048526012:1996-02-11	seed4
+NOHIT	doughnuts-books	Doughnuts books	0	standard	1	LEAD							::	8:9784575960099:1985-01-10	seed4
+NOHIT	doughnuts-books	Doughnuts books	0	standard	2	LEAD							::	8:9784575960099:1985-01-10	seed4
+NOHIT	doughnuts-books	Doughnuts books	0	standard	3	LEAD							::	8:9784575960099:1985-01-10	seed4
+NOHIT	doughnuts-books	Doughnuts books	0	standard	4	LEAD							::	8:9784575960099:1985-01-10	seed4
+NOHIT	doughnuts-books	Doughnuts books	0	standard	5	LEAD							::	8:9784575960099:1985-01-10	seed4
+NOHIT	doughnuts-books	Doughnuts books	0	standard	6	LEAD							::	8:9784575960099:1985-01-10	seed4
+NOHIT	doughnuts-books	Doughnuts books	0	standard	7	LEAD							::	8:9784575960099:1985-01-10	seed4
+NOHIT	doughnuts-books	Doughnuts books	0	standard	9	MID							8:9784575960099:1985-01-10	16:9784575960174:1987-06-09	seed4
+NOHIT	doughnuts-books	Doughnuts books	0	standard	10	MID							8:9784575960099:1985-01-10	16:9784575960174:1987-06-09	seed4
+NOHIT	doughnuts-books	Doughnuts books	0	standard	11	MID							8:9784575960099:1985-01-10	16:9784575960174:1987-06-09	seed4
+NOHIT	doughnuts-books	Doughnuts books	0	standard	12	MID							8:9784575960099:1985-01-10	16:9784575960174:1987-06-09	seed4
+NOHIT	doughnuts-books	Doughnuts books	0	standard	13	MID							8:9784575960099:1985-01-10	16:9784575960174:1987-06-09	seed4
+NOHIT	doughnuts-books	Doughnuts books	0	standard	14	MID							8:9784575960099:1985-01-10	16:9784575960174:1987-06-09	seed4
+NOHIT	doughnuts-books	Doughnuts books	0	standard	15	MID							8:9784575960099:1985-01-10	16:9784575960174:1987-06-09	seed4
+NOHIT	doughnuts-books	Doughnuts books	0	standard	28	MID							27:9784575960310:1992-02	29:9784575960334:1994-08	seed4
+NOHIT	doughnuts-books	Doughnuts books	0	standard	30	MID							29:9784575960334:1994-08	32::1991-05-14	seed4
+NOHIT	doughnuts-books	Doughnuts books	0	standard	31	MID							29:9784575960334:1994-08	32::1991-05-14	seed4
+NOHIT	doughnuts-books	Doughnuts books	0	standard	33	MID							32::1991-05-14	34:9784575960587:2000-10	seed4
+REJECT:前巻より前,次巻より後,版元違い	manhattan-op	マンハッタン・オプ	0	bunkobon	2	MID	9784797341744	2007-10	マンハッタン・オプ(2)	矢作俊彦	SBクリエイティブ	live	1:9784334700966:1985-01-20	3::1985-03-20	seed4
+NOHIT	gakushuu-comic-sengoku-no-bushou	学習コミック 戦国の武将	0	standard	2	MID							1:9784061891111:1985-04-05	3:9784061891135:1985-04-05	seed4
+NOHIT	miyazawa-kenji-mangakan-1985	宮沢賢治・漫画館	0	standard	1	LEAD							::	2:9784267010408:1985-08	seed4
+NOHIT	kasei-yakiyoku	華星夜曲	0	standard	1	LEAD							::	2:9784785945039:1985-05-15	seed4
+NOHIT	kaika-ansatsuchou-tenpousen	開化暗殺帳天保銭	0	standard	1	LEAD							::	2:9784331250655:1985-12	seed4
+REJECT:前巻より前,本番に在る,次巻より後	furoagari-no-yozora-ni	風呂上がりの夜空に	1	deluxe	2	MID	9784061020368	1985-12	風呂上がりの夜空に(2)	小林じんこ	講談社	local	1::1991-11-22	3::1992-01-23	seed4
+REJECT:前巻より前,本番に在る,次巻より後,版元違い	furoagari-no-yozora-ni	風呂上がりの夜空に	1	deluxe	4	MID	9784821196876	1998-07	風呂上がりの夜空に(4)	小林じんこ	ぶんか社	local	3::1992-01-23	5:9784063132649:1992-03-23	seed4
+REJECT:ISBN連番の外,本番に在る,版元違い,著者違い	b-boy	b-Boy	0	standard	2	MID	9784882716624	1997-05	b-BOY zips(2)	アンソロジー	ビブロス	local	1:9784088542997:1986-06-05	8:9784882711704:	seed4
+APPLY	b-boy	b-Boy	0	standard	3	MID	9784835214443	2003-05	B-boy luv(3)		ビブロス	live	1:9784088542997:1986-06-05	8:9784882711704:	seed4
+APPLY	b-boy	b-Boy	0	standard	4	MID	9784835214665	2003-07	B-boy luv(4)		ビブロス	live	1:9784088542997:1986-06-05	8:9784882711704:	seed4
+APPLY	b-boy	b-Boy	0	standard	5	MID	9784835214856	2003-09	B-boy luv(5)		ビブロス	live	1:9784088542997:1986-06-05	8:9784882711704:	seed4
+APPLY	b-boy	b-Boy	0	standard	6	MID	9784835215143	2003-11	B-boy luv(6)		ビブロス	live	1:9784088542997:1986-06-05	8:9784882711704:	seed4
+APPLY	b-boy	b-Boy	0	standard	7	MID	9784835215341	2004-01	B-boy luv(7)		ビブロス	live	1:9784088542997:1986-06-05	8:9784882711704:	seed4
+APPLY	b-boy	b-Boy	0	standard	9	MID	9784835215839	2004-05	B-boy luv(9)		ビブロス	live	8:9784882711704:	10:9784882711902:	seed4
+APPLY	b-boy	b-Boy	0	standard	20	MID	9784882713135	1995-04	b-BOY(20SM特集)		ビブロス	live	19:9784882713029:1995-02-15	21:9784882713265:	seed4
+REJECT:本番に在る,著者違い	the-combat	ザ・コンバット	0	standard	2	MID	9784257900825	1986-08	ザ・コンバット(マーク2)	あさりよしとお	朝日ソノラマ	local	1:9784257900757:1986-01	3:9784257900856:1986-11	seed4
+NOHIT	powerful-mazegohan	パワフル☆まぜごはん	0	standard	2	MID							1:9784893670212:1986-12-15	3::1989-10	seed4
+REJECT:本番に在る,次巻より後,版元違い,著者違い	pumpkin	パンプキン	0	standard	1	LEAD	9784801960060	2017-07	パンプキンナイト(1)	外薗昌也/谷口世磨	竹書房	local	::	2:9784938256098:1986-02-20	seed4
+REJECT:ISBN連番の外,本番に在る	pumpkin	パンプキン	0	standard	8	MID	9784893670076	1986-07	パンプキン NO.7+8		白夜書房	local	7:9784893670076:1986-07	9:9784893670151:1986-09-20	seed4
+NOHIT	yamamoto-fuutarou-kun	山本風太郎くん	0	standard	1	LEAD							::	2:9784331250846:1986-06	seed4
+REJECT:前巻より前,本番に在る,次巻より後,版元違い,著者違い	mobile-suit-z-gundam	機動戦士Zガンダム	0	standard	2	MID	9784048936385	2018-02	機動戦士Zガンダム外伝 審判のメイス2	ROHGUN/矢立肇・富野由悠季/神野　淳一	KADOKAWA	local	1:9784073065494:1997-07-15	3:9784073013518:1994-06	seed4
+NOHIT	mobile-suit-z-gundam	機動戦士Zガンダム	0	standard	4	MID							3:9784073013518:1994-06	11::1986-10-30	seed4
+REJECT:前巻より前,版元違い	mobile-suit-z-gundam	機動戦士Zガンダム	0	standard	5	MID	9784062026918	1986-02	機動戦士Zガンダム(第5部)	富野由悠季	講談社	live	3:9784073013518:1994-06	11::1986-10-30	seed4
+NOHIT	mobile-suit-z-gundam	機動戦士Zガンダム	0	standard	6	MID							3:9784073013518:1994-06	11::1986-10-30	seed4
+NOHIT	mobile-suit-z-gundam	機動戦士Zガンダム	0	standard	7	MID							3:9784073013518:1994-06	11::1986-10-30	seed4
+NOHIT	mobile-suit-z-gundam	機動戦士Zガンダム	0	standard	8	MID							3:9784073013518:1994-06	11::1986-10-30	seed4
+NOHIT	mobile-suit-z-gundam	機動戦士Zガンダム	0	standard	9	MID							3:9784073013518:1994-06	11::1986-10-30	seed4
+REJECT:次巻より後,版元違い	mobile-suit-z-gundam	機動戦士Zガンダム	0	standard	10	MID	9784063671926	2005-12	機動戦士Zガンダムヒストリカ(第10巻)		講談社	live	3:9784073013518:1994-06	11::1986-10-30	seed4
+NOHIT	milky-comic	milky comic	0	standard	1	LEAD							::	8:9784886724090:1987-06-15	seed4
+NOHIT	milky-comic	milky comic	0	standard	2	LEAD							::	8:9784886724090:1987-06-15	seed4
+NOHIT	milky-comic	milky comic	0	standard	3	LEAD							::	8:9784886724090:1987-06-15	seed4
+NOHIT	milky-comic	milky comic	0	standard	4	LEAD							::	8:9784886724090:1987-06-15	seed4
+NOHIT	milky-comic	milky comic	0	standard	5	LEAD							::	8:9784886724090:1987-06-15	seed4
+NOHIT	milky-comic	milky comic	0	standard	6	LEAD							::	8:9784886724090:1987-06-15	seed4
+NOHIT	milky-comic	milky comic	0	standard	7	LEAD							::	8:9784886724090:1987-06-15	seed4
+NOHIT	milky-comic	milky comic	0	standard	9	MID							8:9784886724090:1987-06-15	10:9784886724113:1987-08	seed4
+NOHIT	milky-comic	milky comic	0	standard	11	MID							10:9784886724113:1987-08	23:9784886724281:1989-03-20	seed4
+NOHIT	milky-comic	milky comic	0	standard	12	MID							10:9784886724113:1987-08	23:9784886724281:1989-03-20	seed4
+NOHIT	milky-comic	milky comic	0	standard	13	MID							10:9784886724113:1987-08	23:9784886724281:1989-03-20	seed4
+NOHIT	milky-comic	milky comic	0	standard	14	MID							10:9784886724113:1987-08	23:9784886724281:1989-03-20	seed4
+NOHIT	milky-comic	milky comic	0	standard	15	MID							10:9784886724113:1987-08	23:9784886724281:1989-03-20	seed4
+NOHIT	milky-comic	milky comic	0	standard	16	MID							10:9784886724113:1987-08	23:9784886724281:1989-03-20	seed4
+NOHIT	milky-comic	milky comic	0	standard	17	MID							10:9784886724113:1987-08	23:9784886724281:1989-03-20	seed4
+NOHIT	milky-comic	milky comic	0	standard	18	MID							10:9784886724113:1987-08	23:9784886724281:1989-03-20	seed4
+NOHIT	milky-comic	milky comic	0	standard	19	MID							10:9784886724113:1987-08	23:9784886724281:1989-03-20	seed4
+NOHIT	milky-comic	milky comic	0	standard	20	MID							10:9784886724113:1987-08	23:9784886724281:1989-03-20	seed4
+NOHIT	milky-comic	milky comic	0	standard	21	MID							10:9784886724113:1987-08	23:9784886724281:1989-03-20	seed4
+NOHIT	milky-comic	milky comic	0	standard	22	MID							10:9784886724113:1987-08	23:9784886724281:1989-03-20	seed4
+NOHIT	milky-comic	milky comic	0	standard	24	MID							23:9784886724281:1989-03-20	26:9784886724311:1989-09-30	seed4
+NOHIT	milky-comic	milky comic	0	standard	25	MID							23:9784886724281:1989-03-20	26:9784886724311:1989-09-30	seed4
+NOHIT	milky-comic	milky comic	0	standard	27	MID							26:9784886724311:1989-09-30	30:9784886724434:1990-05-20	seed4
+NOHIT	milky-comic	milky comic	0	standard	28	MID							26:9784886724311:1989-09-30	30:9784886724434:1990-05-20	seed4
+NOHIT	milky-comic	milky comic	0	standard	29	MID							26:9784886724311:1989-09-30	30:9784886724434:1990-05-20	seed4
+REJECT:ISBN連番の外,本番に在る,次巻より後,版元違い	cleopatra-d-c	クレオパトラD.C.	0	standard	4	MID	9784796204408	1997-05	クレオパトラD.C.(4)	新谷かおる	スコラ	local	3:9784063046236:1988-06	6:9784796240444:1990-05-16	canon:volumes
+REJECT:ISBN連番の外,本番に在る,次巻より後,版元違い	cleopatra-d-c	クレオパトラD.C.	0	standard	5	MID	9784796240062	1989-09	クレオパトラD.C.(5)	新谷かおる	スコラ	local	3:9784063046236:1988-06	6:9784796240444:1990-05-16	canon:volumes
+REJECT:本番に在る	cleopatra-d-c	クレオパトラD.C.	0	standard	7	MID	9784796240673	1990-09	クレオパトラD.C.(7)	新谷かおる	スコラ	local	6:9784796240444:1990-05-16	8:9784796241007:1991-03-16	canon:volumes
+REJECT:ISBN連番の外,本番に在る,次巻より後,版元違い	cleopatra-d-c	クレオパトラD.C.	3	shinsoban	6	MID	9784796204484	1997-07	クレオパトラD.C.(6)	新谷かおる	スコラ	local	5:9784796240062:1989-09-16	7:9784796240673:1990-09-14	canon:extra[2]
+NOHIT	big-rival	ビッグライバル	0	standard	2	MID							1:9784088511993:1987-08-15	3::1988-12-11	seed4
+NOHIT	horror-occult-kyousaku-daizenshuu	ホラーオカルト競作大全集	0	standard	2	MID							1:9784885702013:1987-06-10	6::1987-12-10	seed4
+NOHIT	horror-occult-kyousaku-daizenshuu	ホラーオカルト競作大全集	0	standard	3	MID							1:9784885702013:1987-06-10	6::1987-12-10	seed4
+NOHIT	horror-occult-kyousaku-daizenshuu	ホラーオカルト競作大全集	0	standard	4	MID							1:9784885702013:1987-06-10	6::1987-12-10	seed4
+NOHIT	horror-occult-kyousaku-daizenshuu	ホラーオカルト競作大全集	0	standard	5	MID							1:9784885702013:1987-06-10	6::1987-12-10	seed4
+APPLY	horror-occult-kyousaku-daizenshuu	ホラーオカルト競作大全集	0	standard	7	MID	9784885702167	1988-01	ホラーオカルト競作大全集 VOL.7		東京三世社	live	6::1987-12-10	8:9784885702181:1988-02	seed4
+NOHIT	wild-7-1969	ワイルド7 1969	0	deluxe	6	MID							5:9784197875405:1987-02-28	8:9784197875436:1987-03-20	seed4
+NOHIT	wild-7-1969	ワイルド7 1969	0	deluxe	7	MID							5:9784197875405:1987-02-28	8:9784197875436:1987-03-20	seed4
+NOHIT	wild-7-1969	ワイルド7 1969	0	deluxe	9	MID							8:9784197875436:1987-03-20	10:9784197875542:1987-05-18	seed4
+NOHIT	wild-7-1969	ワイルド7 1969	0	deluxe	13	MID							12:9784197875641:1987-05-15	18:9784197875924:1987-08-13	seed4
+NOHIT	wild-7-1969	ワイルド7 1969	0	deluxe	14	MID							12:9784197875641:1987-05-15	18:9784197875924:1987-08-13	seed4
+NOHIT	wild-7-1969	ワイルド7 1969	0	deluxe	15	MID							12:9784197875641:1987-05-15	18:9784197875924:1987-08-13	seed4
+NOHIT	wild-7-1969	ワイルド7 1969	0	deluxe	16	MID							12:9784197875641:1987-05-15	18:9784197875924:1987-08-13	seed4
+NOHIT	wild-7-1969	ワイルド7 1969	0	deluxe	17	MID							12:9784197875641:1987-05-15	18:9784197875924:1987-08-13	seed4
+NOHIT	wild-7-1969	ワイルド7 1969	0	deluxe	21	MID							20:9784197876037:1987-09-14	24:9784197876235:1987-11-14	seed4
+NOHIT	wild-7-1969	ワイルド7 1969	0	deluxe	22	MID							20:9784197876037:1987-09-14	24:9784197876235:1987-11-14	seed4
+NOHIT	wild-7-1969	ワイルド7 1969	0	deluxe	23	MID							20:9784197876037:1987-09-14	24:9784197876235:1987-11-14	seed4
+NOHIT	wild-7-1970-71	ワイルド7 1970-71	0	deluxe	6	MID							5:9784197875405:1987-02-28	8:9784197875436:1987-03-20	seed4
+NOHIT	wild-7-1970-71	ワイルド7 1970-71	0	deluxe	7	MID							5:9784197875405:1987-02-28	8:9784197875436:1987-03-20	seed4
+NOHIT	wild-7-1970-71	ワイルド7 1970-71	0	deluxe	9	MID							8:9784197875436:1987-03-20	10:9784197875542:1987-05-18	seed4
+NOHIT	wild-7-1970-71	ワイルド7 1970-71	0	deluxe	13	MID							12:9784197875641:1987-05-15	18:9784197875924:1987-08-13	seed4
+NOHIT	wild-7-1970-71	ワイルド7 1970-71	0	deluxe	14	MID							12:9784197875641:1987-05-15	18:9784197875924:1987-08-13	seed4
+NOHIT	wild-7-1970-71	ワイルド7 1970-71	0	deluxe	15	MID							12:9784197875641:1987-05-15	18:9784197875924:1987-08-13	seed4
+NOHIT	wild-7-1970-71	ワイルド7 1970-71	0	deluxe	16	MID							12:9784197875641:1987-05-15	18:9784197875924:1987-08-13	seed4
+NOHIT	wild-7-1970-71	ワイルド7 1970-71	0	deluxe	17	MID							12:9784197875641:1987-05-15	18:9784197875924:1987-08-13	seed4
+NOHIT	wild-7-1970-71	ワイルド7 1970-71	0	deluxe	21	MID							20:9784197876037:1987-09-14	24:9784197876235:1987-11-14	seed4
+NOHIT	wild-7-1970-71	ワイルド7 1970-71	0	deluxe	22	MID							20:9784197876037:1987-09-14	24:9784197876235:1987-11-14	seed4
+NOHIT	wild-7-1970-71	ワイルド7 1970-71	0	deluxe	23	MID							20:9784197876037:1987-09-14	24:9784197876235:1987-11-14	seed4
+NOHIT	wild-7-1972	ワイルド7 1972	0	deluxe	6	MID							5:9784197875405:1987-02-28	8:9784197875436:1987-03-20	seed4
+NOHIT	wild-7-1972	ワイルド7 1972	0	deluxe	7	MID							5:9784197875405:1987-02-28	8:9784197875436:1987-03-20	seed4
+NOHIT	wild-7-1972	ワイルド7 1972	0	deluxe	9	MID							8:9784197875436:1987-03-20	10:9784197875542:1987-05-18	seed4
+NOHIT	wild-7-1972	ワイルド7 1972	0	deluxe	13	MID							12:9784197875641:1987-05-15	18:9784197875924:1987-08-13	seed4
+NOHIT	wild-7-1972	ワイルド7 1972	0	deluxe	14	MID							12:9784197875641:1987-05-15	18:9784197875924:1987-08-13	seed4
+NOHIT	wild-7-1972	ワイルド7 1972	0	deluxe	15	MID							12:9784197875641:1987-05-15	18:9784197875924:1987-08-13	seed4
+NOHIT	wild-7-1972	ワイルド7 1972	0	deluxe	16	MID							12:9784197875641:1987-05-15	18:9784197875924:1987-08-13	seed4
+NOHIT	wild-7-1972	ワイルド7 1972	0	deluxe	17	MID							12:9784197875641:1987-05-15	18:9784197875924:1987-08-13	seed4
+NOHIT	wild-7-1972	ワイルド7 1972	0	deluxe	21	MID							20:9784197876037:1987-09-14	24:9784197876235:1987-11-14	seed4
+NOHIT	wild-7-1972	ワイルド7 1972	0	deluxe	22	MID							20:9784197876037:1987-09-14	24:9784197876235:1987-11-14	seed4
+NOHIT	wild-7-1972	ワイルド7 1972	0	deluxe	23	MID							20:9784197876037:1987-09-14	24:9784197876235:1987-11-14	seed4
+NOHIT	wild-7-1973-74	ワイルド7 1973-74	0	deluxe	6	MID							5:9784197875405:1987-02-28	8:9784197875436:1987-03-20	seed4
+NOHIT	wild-7-1973-74	ワイルド7 1973-74	0	deluxe	7	MID							5:9784197875405:1987-02-28	8:9784197875436:1987-03-20	seed4
+NOHIT	wild-7-1973-74	ワイルド7 1973-74	0	deluxe	9	MID							8:9784197875436:1987-03-20	10:9784197875542:1987-05-18	seed4
+NOHIT	wild-7-1973-74	ワイルド7 1973-74	0	deluxe	13	MID							12:9784197875641:1987-05-15	18:9784197875924:1987-08-13	seed4
+NOHIT	wild-7-1973-74	ワイルド7 1973-74	0	deluxe	14	MID							12:9784197875641:1987-05-15	18:9784197875924:1987-08-13	seed4
+NOHIT	wild-7-1973-74	ワイルド7 1973-74	0	deluxe	15	MID							12:9784197875641:1987-05-15	18:9784197875924:1987-08-13	seed4
+NOHIT	wild-7-1973-74	ワイルド7 1973-74	0	deluxe	16	MID							12:9784197875641:1987-05-15	18:9784197875924:1987-08-13	seed4
+NOHIT	wild-7-1973-74	ワイルド7 1973-74	0	deluxe	17	MID							12:9784197875641:1987-05-15	18:9784197875924:1987-08-13	seed4
+NOHIT	wild-7-1973-74	ワイルド7 1973-74	0	deluxe	21	MID							20:9784197876037:1987-09-14	24:9784197876235:1987-11-14	seed4
+NOHIT	wild-7-1973-74	ワイルド7 1973-74	0	deluxe	22	MID							20:9784197876037:1987-09-14	24:9784197876235:1987-11-14	seed4
+NOHIT	wild-7-1973-74	ワイルド7 1973-74	0	deluxe	23	MID							20:9784197876037:1987-09-14	24:9784197876235:1987-11-14	seed4
+REJECT:本番に在る,次巻より後	maboroshi-no-futsuu-shoujo	幻想の普通少女	0	standard	2	MID	9784575931549	1989-01	幻想の普通少女(2)	内田春菊	双葉社	local	1:9784575930269:1987-05-18	3:9784575932416:1992-04	canon:volumes
+NOHIT	crescent-2	CRESCENT	0	standard	2	MID							1:9784885702211:1988-04	3:9784885702297:1988-08	seed4
+NOHIT	crescent-2	CRESCENT	0	standard	4	MID							3:9784885702297:1988-08	5:9784885702341:1989-01	seed4
+NOHIT	crescent-2	CRESCENT	0	standard	7	MID							6:9784885702365:1989-04	8:9784885703591:	seed4
+NOHIT	crescent-2	CRESCENT	0	standard	10	MID							9:9784885702426:	12:9784885702488:1990-04	seed4
+NOHIT	crescent-2	CRESCENT	0	standard	11	MID							9:9784885702426:	12:9784885702488:1990-04	seed4
+NOHIT	crescent-2	CRESCENT	0	standard	13	MID							12:9784885702488:1990-04	18:9784885702570:1990-10	seed4
+NOHIT	crescent-2	CRESCENT	0	standard	14	MID							12:9784885702488:1990-04	18:9784885702570:1990-10	seed4
+NOHIT	crescent-2	CRESCENT	0	standard	15	MID							12:9784885702488:1990-04	18:9784885702570:1990-10	seed4
+NOHIT	crescent-2	CRESCENT	0	standard	16	MID							12:9784885702488:1990-04	18:9784885702570:1990-10	seed4
+NOHIT	crescent-2	CRESCENT	0	standard	17	MID							12:9784885702488:1990-04	18:9784885702570:1990-10	seed4
+NOHIT	crescent-2	CRESCENT	0	standard	19	MID							18:9784885702570:1990-10	23:9784885702655:1991-03	seed4
+NOHIT	crescent-2	CRESCENT	0	standard	20	MID							18:9784885702570:1990-10	23:9784885702655:1991-03	seed4
+NOHIT	crescent-2	CRESCENT	0	standard	21	MID							18:9784885702570:1990-10	23:9784885702655:1991-03	seed4
+NOHIT	crescent-2	CRESCENT	0	standard	22	MID							18:9784885702570:1990-10	23:9784885702655:1991-03	seed4
+NOHIT	crescent-2	CRESCENT	0	standard	24	MID							23:9784885702655:1991-03	25:9784885702686:1991-05	seed4
+NOHIT	crescent-2	CRESCENT	0	standard	26	MID							25:9784885702686:1991-05	27:9784885702716:1991-07	seed4
+NOHIT	crescent-2	CRESCENT	0	standard	31	MID							30:9784885702778:1991-10	33:9784885702822:1992-01	seed4
+NOHIT	crescent-2	CRESCENT	0	standard	32	MID							30:9784885702778:1991-10	33:9784885702822:1992-01	seed4
+NOHIT	crescent-2	CRESCENT	0	standard	35	MID							34:9784885702846:1992-02	36:9784885702884:1992-04	seed4
+NOHIT	crescent-2	CRESCENT	0	standard	37	MID							36:9784885702884:1992-04	39:9784885702945:	seed4
+NOHIT	crescent-2	CRESCENT	0	standard	38	MID							36:9784885702884:1992-04	39:9784885702945:	seed4
+NOHIT	crescent-2	CRESCENT	0	standard	40	MID							39:9784885702945:	41:9784885702983:1992-09	seed4
+NOHIT	crescent-2	CRESCENT	0	standard	42	MID							41:9784885702983:1992-09	43:9784885703416:1992-11	seed4
+NOHIT	help-1988	HELP	0	standard	3	MID							2:9784885702228:1988-04-10	6:9784885702303:1988-09	seed4
+NOHIT	help-1988	HELP	0	standard	4	MID							2:9784885702228:1988-04-10	6:9784885702303:1988-09	seed4
+NOHIT	help-1988	HELP	0	standard	5	MID							2:9784885702228:1988-04-10	6:9784885702303:1988-09	seed4
+NOHIT	mindy-land	Mindy land	0	standard	1	LEAD							::	2:9784943966128:1988-02	seed4
+REJECT:本番に在る,次巻より後,版元違い,著者違い	shion	Shion	0	standard	2	MID	9784091541826	2026-04	SHION(2)	ひなしょ	小学館	local	1:9784885705441:1988-02	3:9784885706141:1992-06	seed4
+NOHIT	himitsu-de-naito	ひ・み・つでナイト	0	standard	2	MID							1::1988-05-08	3:9784408430157:1988-04-08	seed4
+REJECT:ISBN連番の外,次巻より後,版元違い,著者違い	hontoni-atta-kowai-hanashi	ほんとにあった怖い話	0	standard	2	MID	9784257982043	1992-01	ほんとにあった怖い話作家編(2)	和気はるか	朝日ソノラマ	local	1:9784257986126:1988-06-21	3::1988-09-20	seed4
+APPLY	hontoni-atta-kowai-hanashi	ほんとにあった怖い話	0	standard	9	MID	9784257981329	1990-07	ほんとにあった怖い話(読者の恐怖体験読集)(9)		朝日ソノラマ	live	8::1990-05-20	10::1990-11-20	seed4
+REJECT:著者違い	hontoni-atta-kowai-hanashi	ほんとにあった怖い話	0	standard	25	MID	9784257985310	1994-03	ほんとにあった怖い話・読者の恐怖体験談集(25)	朝日ソノラマ	朝日ソノラマ	local	24::1993-03-20	26:9784257985396:1994-07-20	seed4
+REJECT:本番に在る,次巻より後	pokkapoka	ぽっかぽか	0	standard	2	MID	9784088652573	2004-12	ぽっかぽかthe best(vol.2)	深見じゅん	集英社	local	1:9784087820164:1988-09	7:9784088623306:1995-11	seed4
+REJECT:本番に在る,次巻より後	pokkapoka	ぽっかぽか	0	standard	3	MID	9784087850031	1995-08	ぽっかぽか(3)	深見じゅん	集英社	local	1:9784087820164:1988-09	7:9784088623306:1995-11	seed4
+REJECT:本番に在る,次巻より後	pokkapoka	ぽっかぽか	0	standard	4	MID	9784088622163	1992-04	ぽっかぽか(4)	深見じゅん	集英社	local	1:9784087820164:1988-09	7:9784088623306:1995-11	seed4
+REJECT:本番に在る,次巻より後	pokkapoka	ぽっかぽか	0	standard	5	MID	9784087850192	1996-12	ぽっかぽか(5)	深見じゅん	集英社	local	1:9784087820164:1988-09	7:9784088623306:1995-11	seed4
+REJECT:本番に在る,次巻より後	pokkapoka	ぽっかぽか	0	standard	6	MID	9784081062409	2002-07	ぽっかぽか(vol.6)	深見じゅん	集英社	local	1:9784087820164:1988-09	7:9784088623306:1995-11	seed4
+REJECT:次巻より後	mezase-mangaka-tezuka-akatsuka-show-jushou-sakuhinshuu	めざせ漫画家!手塚・赤塚賞受賞作品集	0	standard	3	MID	9784088583037	1990-07	めざせ漫画家!手塚・赤塚賞受賞作品集(3)		集英社	live	2:9784088583020:1988-09	4:9784088583044:1989-09-15	seed4
+APPLY	mezase-mangaka-tezuka-akatsuka-show-jushou-sakuhinshuu	めざせ漫画家!手塚・赤塚賞受賞作品集	0	standard	6	MID	9784088583068	1990-09	めざせ漫画家!手塚・赤塚賞受賞作品集(6)		集英社	live	5:9784088583051:1990-03	7:9784088583075:1991-01	seed4
+APPLY	mezase-mangaka-tezuka-akatsuka-show-jushou-sakuhinshuu	めざせ漫画家!手塚・赤塚賞受賞作品集	0	standard	9	MID	9784088583099	1992-01	めざせ漫画家!手塚・赤塚賞受賞作品集(9)		集英社	live	8:9784088583082:1991-07	10:9784088583105:1992-07-08	seed4
+NOHIT	comic-luna	コミックルナ	0	standard	1	LEAD							::	5:9784807830077:1988-12-01	seed4
+NOHIT	comic-luna	コミックルナ	0	standard	2	LEAD							::	5:9784807830077:1988-12-01	seed4
+NOHIT	comic-luna	コミックルナ	0	standard	3	LEAD							::	5:9784807830077:1988-12-01	seed4
+NOHIT	comic-luna	コミックルナ	0	standard	4	LEAD							::	5:9784807830077:1988-12-01	seed4
+NOHIT	saibaa-comics	サイバーコミックス	0	standard	1	LEAD							::	5::1988-12-25	seed4
+NOHIT	saibaa-comics	サイバーコミックス	0	standard	2	LEAD							::	5::1988-12-25	seed4
+NOHIT	saibaa-comics	サイバーコミックス	0	standard	3	LEAD							::	5::1988-12-25	seed4
+NOHIT	saibaa-comics	サイバーコミックス	0	standard	4	LEAD							::	5::1988-12-25	seed4
+NOHIT	saibaa-comics	サイバーコミックス	0	standard	6	MID							5::1988-12-25	11::1989-09-10	seed4
+NOHIT	saibaa-comics	サイバーコミックス	0	standard	7	MID							5::1988-12-25	11::1989-09-10	seed4
+NOHIT	saibaa-comics	サイバーコミックス	0	standard	8	MID							5::1988-12-25	11::1989-09-10	seed4
+NOHIT	saibaa-comics	サイバーコミックス	0	standard	9	MID							5::1988-12-25	11::1989-09-10	seed4
+NOHIT	saibaa-comics	サイバーコミックス	0	standard	10	MID							5::1988-12-25	11::1989-09-10	seed4
+NOHIT	saibaa-comics	サイバーコミックス	0	standard	12	MID							11::1989-09-10	13:9784891894665:1989-11	seed4
+NOHIT	doctor-hankotsui	ドクター反骨医	0	standard	11	MID							10:9784537036862:1991-05	12:9784537037036:1991-09	seed4
+REJECT:本番に在る,著者違い	bikkuriman-omoshirorando	ビックリマン おもしろランド	0	standard	4	MID	9784253099325	1988-05	ビックリマンおもしろランド(4)	企画者104	秋田書店	local	3:9784253099318:1988-05-15	5:9784253099332:1988-07-20	seed4
+REJECT:本番に在る,著者違い	bikkuriman-omoshirorando	ビックリマン おもしろランド	0	standard	6	MID	9784253099349	1988-08	ビックリマンおもしろランド(6)	企画者104	秋田書店	local	5:9784253099332:1988-07-20	7:9784253099356:1988-09-15	seed4
+REJECT:本番に在る,著者違い	bikkuriman-omoshiro-land	ビックリマンおもしろランド	0	standard	1	LEAD	9784253099295	1988-03	ビックリマンおもしろランド(1)	菅野誠一	秋田書店	local	::	4:9784253099325:1988-06-20	seed4
+REJECT:本番に在る,著者違い	bikkuriman-omoshiro-land	ビックリマンおもしろランド	0	standard	2	LEAD	9784253099301	1988-03	ビックリマンおもしろランド(2)	菅野誠一	秋田書店	local	::	4:9784253099325:1988-06-20	seed4
+REJECT:本番に在る,著者違い	bikkuriman-omoshiro-land	ビックリマンおもしろランド	0	standard	3	LEAD	9784253099318	1988-04	ビックリマンおもしろランド(3)	菅野誠一	秋田書店	local	::	4:9784253099325:1988-06-20	seed4
+REJECT:本番に在る	bikkuriman-omoshiro-land	ビックリマンおもしろランド	0	standard	5	MID	9784253099332	1988-06	ビックリマンおもしろランド(5)	企画者104	秋田書店	local	4:9784253099325:1988-06-20	6:9784253099349:1988-08	seed4
+NOHIT	shoki-sakuhin-shuu	レフトアンドライト	0	standard	1	LEAD							::	28:9784049230284:1988-03-17	seed4
+NOHIT	shoki-sakuhin-shuu	レフトアンドライト	0	standard	2	LEAD							::	28:9784049230284:1988-03-17	seed4
+NOHIT	shoki-sakuhin-shuu	レフトアンドライト	0	standard	3	LEAD							::	28:9784049230284:1988-03-17	seed4
+NOHIT	shoki-sakuhin-shuu	レフトアンドライト	0	standard	4	LEAD							::	28:9784049230284:1988-03-17	seed4
+NOHIT	shoki-sakuhin-shuu	レフトアンドライト	0	standard	5	LEAD							::	28:9784049230284:1988-03-17	seed4
+NOHIT	shoki-sakuhin-shuu	レフトアンドライト	0	standard	6	LEAD							::	28:9784049230284:1988-03-17	seed4
+NOHIT	shoki-sakuhin-shuu	レフトアンドライト	0	standard	7	LEAD							::	28:9784049230284:1988-03-17	seed4
+NOHIT	shoki-sakuhin-shuu	レフトアンドライト	0	standard	8	LEAD							::	28:9784049230284:1988-03-17	seed4
+NOHIT	shoki-sakuhin-shuu	レフトアンドライト	0	standard	9	LEAD							::	28:9784049230284:1988-03-17	seed4
+NOHIT	shoki-sakuhin-shuu	レフトアンドライト	0	standard	10	LEAD							::	28:9784049230284:1988-03-17	seed4
+NOHIT	shoki-sakuhin-shuu	レフトアンドライト	0	standard	11	LEAD							::	28:9784049230284:1988-03-17	seed4
+NOHIT	shoki-sakuhin-shuu	レフトアンドライト	0	standard	12	LEAD							::	28:9784049230284:1988-03-17	seed4
+NOHIT	shoki-sakuhin-shuu	レフトアンドライト	0	standard	13	LEAD							::	28:9784049230284:1988-03-17	seed4
+NOHIT	shoki-sakuhin-shuu	レフトアンドライト	0	standard	14	LEAD							::	28:9784049230284:1988-03-17	seed4
+NOHIT	shoki-sakuhin-shuu	レフトアンドライト	0	standard	15	LEAD							::	28:9784049230284:1988-03-17	seed4
+NOHIT	shoki-sakuhin-shuu	レフトアンドライト	0	standard	16	LEAD							::	28:9784049230284:1988-03-17	seed4
+NOHIT	shoki-sakuhin-shuu	レフトアンドライト	0	standard	17	LEAD							::	28:9784049230284:1988-03-17	seed4
+NOHIT	shoki-sakuhin-shuu	レフトアンドライト	0	standard	18	LEAD							::	28:9784049230284:1988-03-17	seed4
+NOHIT	shoki-sakuhin-shuu	レフトアンドライト	0	standard	19	LEAD							::	28:9784049230284:1988-03-17	seed4
+NOHIT	shoki-sakuhin-shuu	レフトアンドライト	0	standard	20	LEAD							::	28:9784049230284:1988-03-17	seed4
+NOHIT	shoki-sakuhin-shuu	レフトアンドライト	0	standard	21	LEAD							::	28:9784049230284:1988-03-17	seed4
+NOHIT	shoki-sakuhin-shuu	レフトアンドライト	0	standard	22	LEAD							::	28:9784049230284:1988-03-17	seed4
+NOHIT	shoki-sakuhin-shuu	レフトアンドライト	0	standard	23	LEAD							::	28:9784049230284:1988-03-17	seed4
+NOHIT	shoki-sakuhin-shuu	レフトアンドライト	0	standard	24	LEAD							::	28:9784049230284:1988-03-17	seed4
+NOHIT	shoki-sakuhin-shuu	レフトアンドライト	0	standard	25	LEAD							::	28:9784049230284:1988-03-17	seed4
+NOHIT	shoki-sakuhin-shuu	レフトアンドライト	0	standard	26	LEAD							::	28:9784049230284:1988-03-17	seed4
+NOHIT	shoki-sakuhin-shuu	レフトアンドライト	0	standard	27	LEAD							::	28:9784049230284:1988-03-17	seed4
+REJECT:版元違い	ningen-no-jouken	人間の條件	0	standard	1	LEAD	9784380560019		人間の條件(1)	五味川純平	三一書房	live	::	2:9784794503152:1988-05	seed4
+NOHIT	ningen-no-jouken	人間の條件	0	standard	3	MID							2:9784794503152:1988-05	4:9784794503176:1988	seed4
+REJECT:本番に在る	kizudarake-no-tenshitachi	傷だらけの天使たち	0	standard	2	MID	9784091780799	1990-01	傷だらけの天使たち 2	喜国 雅彦	小学館	local	1:9784091780782:1988-12	3:9784091780805:1991-09-27	seed4
+NOHIT	shin-agatte-nanbo-taichiyo-nakuna	新上ってなンボ!!太一よ泣くな	0	standard	16	MID							15:9784883153572:1995-05	17:9784883153947:1996-08	canon:volumes
+NOHIT	shin-agatte-nanbo-taichiyo-nakuna	新上ってなンボ!!太一よ泣くな	0	standard	22	MID							21:9784883154890:1998-08	31:9784883155705:2002-04	canon:volumes
+NOHIT	shin-agatte-nanbo-taichiyo-nakuna	新上ってなンボ!!太一よ泣くな	0	standard	23	MID							21:9784883154890:1998-08	31:9784883155705:2002-04	canon:volumes
+NOHIT	shin-agatte-nanbo-taichiyo-nakuna	新上ってなンボ!!太一よ泣くな	0	standard	24	MID							21:9784883154890:1998-08	31:9784883155705:2002-04	canon:volumes
+NOHIT	shin-agatte-nanbo-taichiyo-nakuna	新上ってなンボ!!太一よ泣くな	0	standard	25	MID							21:9784883154890:1998-08	31:9784883155705:2002-04	canon:volumes
+NOHIT	shin-agatte-nanbo-taichiyo-nakuna	新上ってなンボ!!太一よ泣くな	0	standard	26	MID							21:9784883154890:1998-08	31:9784883155705:2002-04	canon:volumes
+NOHIT	shin-agatte-nanbo-taichiyo-nakuna	新上ってなンボ!!太一よ泣くな	0	standard	27	MID							21:9784883154890:1998-08	31:9784883155705:2002-04	canon:volumes
+NOHIT	shin-agatte-nanbo-taichiyo-nakuna	新上ってなンボ!!太一よ泣くな	0	standard	28	MID							21:9784883154890:1998-08	31:9784883155705:2002-04	canon:volumes
+NOHIT	shin-agatte-nanbo-taichiyo-nakuna	新上ってなンボ!!太一よ泣くな	0	standard	29	MID							21:9784883154890:1998-08	31:9784883155705:2002-04	canon:volumes
+NOHIT	shin-agatte-nanbo-taichiyo-nakuna	新上ってなンボ!!太一よ泣くな	0	standard	30	MID							21:9784883154890:1998-08	31:9784883155705:2002-04	canon:volumes
+NOHIT	shin-agatte-nanbo-taichiyo-nakuna	新上ってなンボ!!太一よ泣くな	0	standard	32	MID							31:9784883155705:2002-04	33:9784883158065:2003-03	canon:volumes
+NOHIT	ashita-e-hashire	明日へ奔れ	0	standard	1	LEAD							::	3:9784754602772:1988-08-20	seed4
+NOHIT	ashita-e-hashire	明日へ奔れ	0	standard	2	LEAD							::	3:9784754602772:1988-08-20	seed4
+NOHIT	nagi	椰	0	standard	3	MID							2:9784803316032:1988-08	4:9784803323757:1989-11	seed4
+NOHIT	manga-heiki-saibaa-comics	漫画兵器サイバーコミックス	0	standard	1	LEAD							::	4:9784891893644:1988-11	seed4
+NOHIT	manga-heiki-saibaa-comics	漫画兵器サイバーコミックス	0	standard	2	LEAD							::	4:9784891893644:1988-11	seed4
+NOHIT	manga-heiki-saibaa-comics	漫画兵器サイバーコミックス	0	standard	3	LEAD							::	4:9784891893644:1988-11	seed4
+NOHIT	kuusou-kagaku-dai-bouken-katsugeki-kyousaku-dai-zenshuu	空想科学大冒険活劇競作大全集	0	standard	1	LEAD							::	8:9784885702174:1988-02	seed4
+NOHIT	kuusou-kagaku-dai-bouken-katsugeki-kyousaku-dai-zenshuu	空想科学大冒険活劇競作大全集	0	standard	2	LEAD							::	8:9784885702174:1988-02	seed4
+NOHIT	kuusou-kagaku-dai-bouken-katsugeki-kyousaku-dai-zenshuu	空想科学大冒険活劇競作大全集	0	standard	3	LEAD							::	8:9784885702174:1988-02	seed4
+NOHIT	kuusou-kagaku-dai-bouken-katsugeki-kyousaku-dai-zenshuu	空想科学大冒険活劇競作大全集	0	standard	4	LEAD							::	8:9784885702174:1988-02	seed4
+APPLY	kuusou-kagaku-dai-bouken-katsugeki-kyousaku-dai-zenshuu	空想科学大冒険活劇競作大全集	0	standard	5	LEAD	9784885702112	1987-11	空想科学大冒険活劇競作大全集5		東京三世社	live	::	8:9784885702174:1988-02	seed4
+APPLY	kuusou-kagaku-dai-bouken-katsugeki-kyousaku-dai-zenshuu	空想科学大冒険活劇競作大全集	0	standard	6	LEAD	9784885702136	1987-12	空想科学大冒険活劇競作大全集 6		東京三世社	live	::	8:9784885702174:1988-02	seed4
+NOHIT	kuusou-kagaku-dai-bouken-katsugeki-kyousaku-dai-zenshuu	空想科学大冒険活劇競作大全集	0	standard	7	LEAD							::	8:9784885702174:1988-02	seed4
+NOHIT	wakaoku-sama-wa-udemakuri	若奥さまは腕まくり!	0	standard	2	MID							1:9784847010576:1988-07-08	3:9784847010590:1988-08-10	seed4
+NOHIT	fuuhai-ni-kike	風牌に訊け	0	standard	2	MID							1::1988-03	3::1988-06	seed4
+NOHIT	foot-gear	Foot gear	0	standard	1	LEAD							::	3:9784785912079:1989-06	seed4
+NOHIT	foot-gear	Foot gear	0	standard	2	LEAD							::	3:9784785912079:1989-06	seed4
+NOHIT	non-sutoppu-kyouhei	NON STOP!恭平	0	standard	1	LEAD							::	10:9784063114492:1989-05-17	seed4
+NOHIT	non-sutoppu-kyouhei	NON STOP!恭平	0	standard	2	LEAD							::	10:9784063114492:1989-05-17	seed4
+NOHIT	non-sutoppu-kyouhei	NON STOP!恭平	0	standard	3	LEAD							::	10:9784063114492:1989-05-17	seed4
+NOHIT	non-sutoppu-kyouhei	NON STOP!恭平	0	standard	4	LEAD							::	10:9784063114492:1989-05-17	seed4
+NOHIT	non-sutoppu-kyouhei	NON STOP!恭平	0	standard	5	LEAD							::	10:9784063114492:1989-05-17	seed4
+NOHIT	non-sutoppu-kyouhei	NON STOP!恭平	0	standard	6	LEAD							::	10:9784063114492:1989-05-17	seed4
+NOHIT	non-sutoppu-kyouhei	NON STOP!恭平	0	standard	7	LEAD							::	10:9784063114492:1989-05-17	seed4
+NOHIT	non-sutoppu-kyouhei	NON STOP!恭平	0	standard	8	LEAD							::	10:9784063114492:1989-05-17	seed4
+NOHIT	non-sutoppu-kyouhei	NON STOP!恭平	0	standard	9	LEAD							::	10:9784063114492:1989-05-17	seed4
+NOHIT	maruboukabushikigaisha	〔○暴〕株式会社	0	standard	23	MID							22:9784832227057:1994-10	24:9784832227101:1995-01-13	seed4
+REJECT:本番に在る,次巻より後	shippo-ga-tomodachi	シッポがともだち	0	standard	3	MID	9784087852516	2003-11	シッポがともだち(volume 3)	桜沢エリカ	集英社	local	2:9784088621883:1991-05	4:9784088623498:1996-07-23	seed4
+REJECT:本番に在る,次巻より後	shippo-ga-tomodachi	シッポがともだち	1	deluxe	2	MID	9784087850260	1997-04	シッポがともだち(volume 2)	桜沢エリカ	集英社	local	1:9784088621302:1989-06	3:9784088622460:1993-04-22	seed4
+APPLY	lemon-kids	レモンキッズ	0	standard	2	MID	9784870422520	1990-02	レモンキッズ(no.2)		あまとりあ社	live	1:9784870422513:1989-12-25	3:9784870422537:1990-04	seed4
+APPLY	lemon-kids	レモンキッズ	0	standard	4	MID	9784870422544	1990-05	レモンキッズ(no.4)		あまとりあ社	live	3:9784870422537:1990-04	5:9784870422551:1990-06	seed4
+APPLY	lemon-kids	レモンキッズ	0	standard	8	MID	9784870422582	1990-09	レモンキッズ(no.8)		あまとりあ社	live	7:9784870422575:1990-08	11:9784870422612:1990-12-25	seed4
+APPLY	lemon-kids	レモンキッズ	0	standard	9	MID	9784870422599	1990-10	レモン・キッズ(no.9)		あまとりあ社	live	7:9784870422575:1990-08	11:9784870422612:1990-12-25	seed4
+APPLY	lemon-kids	レモンキッズ	0	standard	10	MID	9784870422605	1990-11	レモンキッズ(no.10)		あまとりあ社	live	7:9784870422575:1990-08	11:9784870422612:1990-12-25	seed4
+NOHIT	gekiga-ningen-kakumei	劇画人間革命	0	standard	3	MID							2::1989-04	4:9784412004467:1989-10-09	seed4
+REJECT:本番に在る,次巻より後,版元違い	youma-no-fuuin	妖魔の封印	1	deluxe	4	MID	9784930787125	2000-06	妖魔の封印(4)	葉月しのぶ	日本エディターズ	local	3:9784885706219:1993-02	5:9784885706721:1996-03	seed4
+NOHIT	shounan-bousouzoku	湘南暴走族	0	standard	1	LEAD							::	5:9784785946296:1989-06-15	seed4
+NOHIT	shounan-bousouzoku	湘南暴走族	0	standard	2	LEAD							::	5:9784785946296:1989-06-15	seed4
+NOHIT	shounan-bousouzoku	湘南暴走族	0	standard	3	LEAD							::	5:9784785946296:1989-06-15	seed4
+NOHIT	shounan-bousouzoku	湘南暴走族	0	standard	4	LEAD							::	5:9784785946296:1989-06-15	seed4
+NOHIT	ariel-comic	ARIEL COMIC	0	standard	1	LEAD							::	2:9784257901143:1990-12-01	seed4
+NOHIT	ariel-comic	ARIEL COMIC	0	standard	6	MID							5:9784257901198:1991-09-01	8::1992-04-01	seed4
+NOHIT	ariel-comic	ARIEL COMIC	0	standard	7	MID							5:9784257901198:1991-09-01	8::1992-04-01	seed4
+NOHIT	matamoya-daikichi	またもや大吉	0	standard	1	LEAD							::	2:9784575816211:1990-04	seed4
+NOHIT	sadistic-sayaka-chan	サディスティックさやかちゃん!	0	standard	1	LEAD							::	2:9784883150861:1990-12-20	seed4
+APPLY	doragonkuesuto-4-koma-manga-gekijou	ドラゴンクエスト4コママンガ劇場	0	standard	4	MID	9784900527577	1991-02	ドラゴンクエスト4コママンガ劇場(4)		スクウェア・エニックス	live	3:9784900527492:1990-11-30	5:9784900527690:1991-07-29	seed4
+NOHIT	power-bomb-theater	パワーボムtheater	0	standard	2	MID							1:9784845807611:1990-05	4:9784845807642:1992-08	seed4
+NOHIT	power-bomb-theater	パワーボムtheater	0	standard	3	MID							1:9784845807611:1990-05	4:9784845807642:1992-08	seed4
+REJECT:本番に在る,次巻より後,版元違い,著者違い	shamo-1990	軍鶏	0	standard	2	MID	9784575823943	1998-12	軍鶏(2)	たなか亜希夫/橋本以蔵	双葉社	local	1:9784845804382:1991-08	3:9784845804405:1990-09	seed4
+REJECT:本番に在る,次巻より後,版元違い,著者違い	shamo-1990	軍鶏	0	standard	4	MID	9784575824322	1999-06	軍鶏(4)	たなか亜希夫/橋本以蔵	双葉社	local	3:9784845804405:1990-09	5:9784845804429:1991-04	seed4
+REJECT:本番に在る,次巻より後,版元違い,著者違い	shamo-1990	軍鶏	0	standard	6	MID	9784063761207	2011-09	軍鶏(巻之6)	たなか亜希夫	講談社	local	5:9784845804429:1991-04	9:9784845804467:1992-07	seed4
+REJECT:本番に在る,次巻より後,版元違い,著者違い	shamo-1990	軍鶏	0	standard	7	MID	9784575824926	2000-04	軍鶏(7)	たなか亜希夫/橋本以蔵	双葉社	local	5:9784845804429:1991-04	9:9784845804467:1992-07	seed4
+REJECT:本番に在る,次巻より後,版元違い,著者違い	shamo-1990	軍鶏	0	standard	8	MID	9784575992144	2004-12	軍鶏(8)	たなか亜希夫/橋本以蔵	双葉社	local	5:9784845804429:1991-04	9:9784845804467:1992-07	seed4
+NOHIT	yuujin-brand	遊人ブランド	0	standard	1	LEAD							::	2::1990-07-20	seed4
+NOHIT	mameda-sensei	まめだ先生	0	standard	2	MID							1:9784905936565:1991-03	3:9784838307012:1993-04	seed4
+NOHIT	image	イマージュ	0	standard	14	MID							13:9784893673961:1994-05	16:9784893674357:1994-11	seed4
+NOHIT	image	イマージュ	0	standard	15	MID							13:9784893673961:1994-05	16:9784893674357:1994-11	seed4
+REJECT:本番に在る,次巻より後,版元違い,著者違い	zebra	ゼブラ	0	standard	1	LEAD	9784091872715	2004-02	ゼブラーマン(1)	山田玲司/宮藤官九郎	小学館	local	::	7:9784845804009:1991-02	seed4
+REJECT:本番に在る,次巻より後,版元違い,著者違い	zebra	ゼブラ	0	standard	2	LEAD	9784091872722	2004-06	ゼブラーマン(2)	山田玲司/宮藤官九郎	小学館	local	::	7:9784845804009:1991-02	seed4
+REJECT:本番に在る,次巻より後,版元違い,著者違い	zebra	ゼブラ	0	standard	3	LEAD	9784091872739	2004-09	ゼブラーマン(3)	山田玲司/宮藤官九郎	小学館	local	::	7:9784845804009:1991-02	seed4
+REJECT:本番に在る,次巻より後,版元違い,著者違い	zebra	ゼブラ	0	standard	4	LEAD	9784091872746	2004-12	ゼブラーマン(4)	山田玲司/宮藤官九郎	小学館	local	::	7:9784845804009:1991-02	seed4
+REJECT:本番に在る,次巻より後,版元違い,著者違い	zebra	ゼブラ	0	standard	5	LEAD	9784091872753	2005-03	ゼブラーマン(5)	山田玲司/宮藤官九郎	小学館	local	::	7:9784845804009:1991-02	seed4
+NOHIT	zebra	ゼブラ	0	standard	6	LEAD							::	7:9784845804009:1991-02	seed4
+REJECT:本番に在る	torufan-no-nishi	トルファンの西	1	shinsoban	2	MID	9784391904468	1992-01	トルファンの西(2)	志賀公江	主婦と生活社	local	1:9784391904390:1991-12	3:9784391904482:1993-01	canon:extra[0]
+NOHIT	waibaan-no-kodomotachi	ワイバーンの子供たち	0	standard	3	MID							2:9784885706042:1991-09	5:9784885706202:1992-12	seed4
+NOHIT	waibaan-no-kodomotachi	ワイバーンの子供たち	0	standard	4	MID							2:9784885706042:1991-09	5:9784885706202:1992-12	seed4
+NOHIT	sora-no-ue-no-aren	空の上のアレン	0	standard	3	MID							2:9784885706165:1992-08	4:9784885706639:1995-07	seed4
+NOHIT	comic-hero	Comic HERO	0	standard	1	LEAD							::	6:9784870423060:1992-01-25	seed4
+NOHIT	comic-hero	Comic HERO	0	standard	2	LEAD							::	6:9784870423060:1992-01-25	seed4
+NOHIT	comic-hero	Comic HERO	0	standard	3	LEAD							::	6:9784870423060:1992-01-25	seed4
+NOHIT	comic-hero	Comic HERO	0	standard	4	LEAD							::	6:9784870423060:1992-01-25	seed4
+NOHIT	comic-hero	Comic HERO	0	standard	5	LEAD							::	6:9784870423060:1992-01-25	seed4
+REJECT:本番に在る,次巻より後	heba-hello-chan	へば!Helloちゃん	0	standard	2	MID	9784063348552	2004-03	へば!Helloちゃん(2)	小林まこと	講談社	local	1:9784063132878:1992-04-09	3:9784063193541:1993-02-09	canon:volumes
+NOHIT	heba-hello-chan	へば!Helloちゃん	0	standard	4	MID							3:9784063193541:1993-02-09	5:9784063194463:1994-02-09	canon:volumes
+REJECT:前巻より前	pose-file	ポーズ・ファイル	0	standard	2	MID	9784871990295	1992-02	ポーズ・ファイル 2	エイト企画	エルテ出版	live	1:9784871990240:1992-05	3:9784871990301:1993-03	seed4
+APPLY	pose-file	ポーズ・ファイル	0	standard	7	MID	9784871990431	1994-12	ポーズ・ファイル 7	エイト企画	エルテ出版	live	6:9784871990417:1994-06	8:9784871990479:1995-12	seed4
+NOHIT	rockman-world	ロックマンワールド	0	standard	2	MID							1:9784063193022:1992-07	3:9784063216738:1993-06-04	canon:volumes
+REJECT:前巻より前	gakken-manga-sekai-no-rekishi	学研まんが 世界の歴史	0	standard	4	MID	9784051061999	1992-05	学研まんが世界の歴史(第4巻)	ムロタニツネ象	Gakken	live	3:9784051061982:1992-10	6:9784051062019:1992-11	seed4
+REJECT:次巻より後	gakken-manga-sekai-no-rekishi	学研まんが 世界の歴史	0	standard	5	MID	9784051062002	1993-02	学研まんが世界の歴史(第5巻)	ムロタニツネ象	Gakken	live	3:9784051061982:1992-10	6:9784051062019:1992-11	seed4
+NOHIT	janrou-densetsu-aoki-ookamitachi	雀狼伝説 蒼き狼たち	0	standard	3	MID							2:9784575817775:1992-03	4:9784575817881:1992-05	seed4
+NOHIT	janrou-densetsu-aoki-ookamitachi	雀狼伝説 蒼き狼たち	0	standard	5	MID							4:9784575817881:1992-05	6:9784812450512:1996-06	seed4
+NOHIT	kuooto-ando-half	1/4×1/2	0	standard	3	MID							2:9784257902904:1997-03	5:9784022131751:2012-06	seed4
+NOHIT	kuooto-ando-half	1/4×1/2	0	standard	4	MID							2:9784257902904:1997-03	5:9784022131751:2012-06	seed4
+NOHIT	sleeping-beauty-clinic	Sleeping beauty clinic	0	standard	2	MID							1:9784893673688:1993-12	3:9784893673695:1993-12	seed4
+NOHIT	bokutachi-no-kichijouji-koimonogatari	ぼくたちの吉祥寺恋物語	0	standard	5	MID							4::1995-01	6::1995-12	seed4
+NOHIT	alice-no-ochakai	アリスのお茶会	0	standard	5	MID							4:9784885323843:1995-06	6:9784885324697:1997-12	seed4
+APPLY	zeruda-no-densetsu-4-koma-manga-gekijou	ゼルダの伝説 4コママンガ劇場	0	standard	1	LEAD	9784900527942	1992-06	ゼルダの伝説4コママンガ劇場		スクウェア・エニックス	live	::	2:9784870257078:1993-02	seed4
+REJECT:本番に在る,次巻より後,版元違い,著者違い	takeru-1997-2	タケル	0	standard	3	MID	9784091261533	2001-05	タケル道(3)	大和八重子	小学館	local	2:9784796242592:1994-03-16	5:9784790102342:1997-06	seed4
+NOHIT	takeru-1997-2	タケル	0	standard	4	MID							2:9784796242592:1994-03-16	5:9784790102342:1997-06	seed4
+REJECT:本番に在る,次巻より後,版元違い	chou-diienuei-suit-furogguman	超DNA戦士フロッグマン	0	standard	2	MID	9784883324125	1996-03	超DNA戦士フロッグマン(2)	遊人	シュベール出版	local	1:9784845806294:1993-07	3:9784845806348:1994-11	seed4
+NOHIT	comic-indeep	COMIC INDEEP	0	standard	1	LEAD							::	3:9784756701237:1994-09-30	seed4
+NOHIT	comic-indeep	COMIC INDEEP	0	standard	2	LEAD							::	3:9784756701237:1994-09-30	seed4
+NOHIT	crew-1994	Crew 1994	0	standard	2	MID							1:9784885703706:1994-01-15	7:9784885703829:1994-07	seed4
+NOHIT	crew-1994	Crew 1994	0	standard	3	MID							1:9784885703706:1994-01-15	7:9784885703829:1994-07	seed4
+NOHIT	crew-1994	Crew 1994	0	standard	4	MID							1:9784885703706:1994-01-15	7:9784885703829:1994-07	seed4
+NOHIT	crew-1994	Crew 1994	0	standard	5	MID							1:9784885703706:1994-01-15	7:9784885703829:1994-07	seed4
+NOHIT	crew-1994	Crew 1994	0	standard	6	MID							1:9784885703706:1994-01-15	7:9784885703829:1994-07	seed4
+NOHIT	crew-1994	Crew 1994	0	standard	8	MID							7:9784885703829:1994-07	9:9784885703867:1994-09	seed4
+REJECT:ISBN連番の外	shiikyuu-salaryman-kouza	C級さらりーまん講座	0	standard	7	MID	9784091791672	2000-11	C級さらりーまん講座(7)	山科 けいすけ	小学館	local	6:9784091791665:1998-10-28	12:9784091790156:2007-05-30	seed4
+REJECT:ISBN連番の外	shiikyuu-salaryman-kouza	C級さらりーまん講座	0	standard	8	MID	9784091791689	2003-05	C級さらりーまん講座(8)	山科 けいすけ	小学館	local	6:9784091791665:1998-10-28	12:9784091790156:2007-05-30	seed4
+REJECT:ISBN連番の外	shiikyuu-salaryman-kouza	C級さらりーまん講座	0	standard	9	MID	9784091791696	2003-06	C級さらりーまん講座(9)	山科 けいすけ	小学館	local	6:9784091791665:1998-10-28	12:9784091790156:2007-05-30	seed4
+REJECT:ISBN連番の外	shiikyuu-salaryman-kouza	C級さらりーまん講座	0	standard	10	MID	9784091791702	2006-03	C級さらりーまん講座(10)	山科 けいすけ	小学館	local	6:9784091791665:1998-10-28	12:9784091790156:2007-05-30	seed4
+REJECT:ISBN連番の外	shiikyuu-salaryman-kouza	C級さらりーまん講座	0	standard	11	MID	9784091790071	2006-05	C級さらりーまん講座(11)	山科 けいすけ	小学館	local	6:9784091791665:1998-10-28	12:9784091790156:2007-05-30	seed4
+REJECT:本番に在る,次巻より後,版元違い,著者違い	x-men-1994	X-MEN	0	standard	2	MID	9784796873925	2024-09	X-MEN Vol.2:徒花	ジェリー・ダガン/ペペ・ララス/ハビエル・ピナ/高木 亮	小学館集英社プロダクション	local	1:9784884757090:1994-06	3:9784884757304:1994-08	overrides
+REJECT:本番に在る,次巻より後,版元違い,著者違い	x-men-1994	X-MEN	0	standard	12	MID	9784884757441	1994-12	X-men(12)		竹書房	local	11:9784884757434:1994-12	13:9784884757458:1995-01	overrides
+REJECT:本番に在る,次巻より後,版元違い,著者違い	x-men	X-MEN	0	standard	2	MID	9784796873925	2024-09	X-MEN Vol.2:徒花	ジェリー・ダガン/ペペ・ララス/ハビエル・ピナ/高木 亮	小学館集英社プロダクション	local	1:9784884757090:1994-06	4:9784884757311:1994-08	canon:volumes
+REJECT:本番に在る,次巻より後,版元違い,著者違い	x-men	X-MEN	0	standard	3	MID	9784796873932	2025-03	X-MEN Vol. 3:双樹	ジェリー・ダガン他/C.F.ヴィラ他/高木 亮	小学館集英社プロダクション	local	1:9784884757090:1994-06	4:9784884757311:1994-08	canon:volumes
+REJECT:本番に在る,次巻より後,版元違い,著者違い	x-men	X-MEN	0	standard	11	MID	9784884757434	1994-11	X-men(11)		竹書房	local	10:9784884757427:1994-11	13:9784884757458:1995-01	canon:volumes
+REJECT:本番に在る,次巻より後,版元違い,著者違い	x-men	X-MEN	0	standard	12	MID	9784884757441	1994-12	X-men(12)		竹書房	local	10:9784884757427:1994-11	13:9784884757458:1995-01	canon:volumes
+REJECT:前巻より前,本番に在る	x-men	X-MEN	1	shinsoban	4	MID	9784884757311	1994-07	X-men(4)		竹書房	local	3:9784884757304:1994-08	11:9784884757434:1994-12-28	canon:extra[0]
+REJECT:前巻より前,本番に在る	x-men	X-MEN	1	shinsoban	5	MID	9784884757328	1994-07	X-men(5)		竹書房	local	3:9784884757304:1994-08	11:9784884757434:1994-12-28	canon:extra[0]
+REJECT:本番に在る,次巻より後,版元違い,著者違い	x-men	X-MEN	1	shinsoban	6	MID	9784884757380	1994-08	X-men(6)		竹書房	local	3:9784884757304:1994-08	11:9784884757434:1994-12-28	canon:extra[0]
+REJECT:本番に在る	x-men	X-MEN	1	shinsoban	7	MID	9784884757397	1994-08	X-men(7)		竹書房	local	3:9784884757304:1994-08	11:9784884757434:1994-12-28	canon:extra[0]
+REJECT:本番に在る	x-men	X-MEN	1	shinsoban	8	MID	9784884757403	1994-09	X-men(8)		竹書房	local	3:9784884757304:1994-08	11:9784884757434:1994-12-28	canon:extra[0]
+REJECT:本番に在る,次巻より後,版元違い,著者違い	x-men	X-MEN	1	shinsoban	9	MID	9784884757410	1994-09	X-men(9)		竹書房	local	3:9784884757304:1994-08	11:9784884757434:1994-12-28	canon:extra[0]
+REJECT:本番に在る,次巻より後,版元違い,著者違い	x-men	X-MEN	1	shinsoban	10	MID	9784884757427	1994-10	X-men(10)		竹書房	local	3:9784884757304:1994-08	11:9784884757434:1994-12-28	canon:extra[0]
+REJECT:前巻より前,本番に在る,版元違い	x-men	X-MEN	2	shinsoban	7	MID	9784884757397	1994-08	X-men(7)		竹書房	local	6:9784796840064:1995-05-19	9:9784796840095:1995-08-25	canon:extra[1]
+REJECT:前巻より前,本番に在る,版元違い	x-men	X-MEN	2	shinsoban	8	MID	9784884757403	1994-09	X-men(8)		竹書房	local	6:9784796840064:1995-05-19	9:9784796840095:1995-08-25	canon:extra[1]
+REJECT:前巻より前,本番に在る,次巻より後,版元違い,著者違い	x-men	X-MEN	2	shinsoban	10	MID	9784884757427	1994-10	X-men(10)		竹書房	local	9:9784796840095:1995-08-25	12:9784796840125:1995-12-18	canon:extra[1]
+REJECT:前巻より前,本番に在る,次巻より後,版元違い,著者違い	x-men	X-MEN	2	shinsoban	11	MID	9784884757434	1994-11	X-men(11)		竹書房	local	9:9784796840095:1995-08-25	12:9784796840125:1995-12-18	canon:extra[1]
+REJECT:本番に在る,次巻より後,版元違い,著者違い	usagi-1994	うさぎ	0	standard	1	LEAD	9784785981303	2026-01	うさぎも夢見るクリームソーダ 1	二宮ひかる	少年画報社	local	::	2:9784883153220:1994-10	seed4
+NOHIT	onetsu-wa-nando	お熱は何度?	0	standard	1	LEAD							::	4:9784898291429:1994-02-01	seed4
+NOHIT	onetsu-wa-nando	お熱は何度?	0	standard	2	LEAD							::	4:9784898291429:1994-02-01	seed4
+NOHIT	onetsu-wa-nando	お熱は何度?	0	standard	3	LEAD							::	4:9784898291429:1994-02-01	seed4
+REJECT:次巻より後,版元違い,著者違い	x-men-1994-4	エックスメン	0	standard	1	LEAD	9784073022503	1995-01	エックスメン(1)	吉岡跳	アスキー・メディアワークス	live	::	2:9784884757106:1994-07	seed4
+REJECT:次巻より後,版元違い,著者違い	x-men-1994-4	エックスメン	0	standard	3	MID	9784073027065	1995-04	エックスメン(3)	柴田ユージン	アスキー・メディアワークス	live	2:9784884757106:1994-07	7:9784884757397:1994-09-15	seed4
+NOHIT	x-men-1994-4	エックスメン	0	standard	4	MID							2:9784884757106:1994-07	7:9784884757397:1994-09-15	seed4
+NOHIT	x-men-1994-4	エックスメン	0	standard	5	MID							2:9784884757106:1994-07	7:9784884757397:1994-09-15	seed4
+NOHIT	x-men-1994-4	エックスメン	0	standard	6	MID							2:9784884757106:1994-07	7:9784884757397:1994-09-15	seed4
+NOHIT	x-men-1994-4	エックスメン	0	standard	8	MID							7:9784884757397:1994-09-15	12:9784884757441:1995-01	seed4
+NOHIT	x-men-1994-4	エックスメン	0	standard	9	MID							7:9784884757397:1994-09-15	12:9784884757441:1995-01	seed4
+NOHIT	x-men-1994-4	エックスメン	0	standard	10	MID							7:9784884757397:1994-09-15	12:9784884757441:1995-01	seed4
+NOHIT	x-men-1994-4	エックスメン	0	standard	11	MID							7:9784884757397:1994-09-15	12:9784884757441:1995-01	seed4
+NOHIT	kureyon-shin-chan-gemu-book	クレヨンしんちゃんゲームブック	0	standard	1	LEAD							::	2:9784575283297:1994-04	seed4
+NOHIT	comic-bii-tarou	コミックビー太郎	0	standard	1	LEAD							::	2:9784871821308:1994-12	seed4
+NOHIT	piasu-club	ピアスクラブ	0	standard	3	MID							2:9784885708428:1994-04-30	13:9784885709234:1995-07-31	seed4
+NOHIT	piasu-club	ピアスクラブ	0	standard	4	MID							2:9784885708428:1994-04-30	13:9784885709234:1995-07-31	seed4
+NOHIT	piasu-club	ピアスクラブ	0	standard	5	MID							2:9784885708428:1994-04-30	13:9784885709234:1995-07-31	seed4
+NOHIT	piasu-club	ピアスクラブ	0	standard	6	MID							2:9784885708428:1994-04-30	13:9784885709234:1995-07-31	seed4
+NOHIT	piasu-club	ピアスクラブ	0	standard	7	MID							2:9784885708428:1994-04-30	13:9784885709234:1995-07-31	seed4
+NOHIT	piasu-club	ピアスクラブ	0	standard	8	MID							2:9784885708428:1994-04-30	13:9784885709234:1995-07-31	seed4
+NOHIT	piasu-club	ピアスクラブ	0	standard	9	MID							2:9784885708428:1994-04-30	13:9784885709234:1995-07-31	seed4
+NOHIT	piasu-club	ピアスクラブ	0	standard	10	MID							2:9784885708428:1994-04-30	13:9784885709234:1995-07-31	seed4
+NOHIT	piasu-club	ピアスクラブ	0	standard	11	MID							2:9784885708428:1994-04-30	13:9784885709234:1995-07-31	seed4
+NOHIT	piasu-club	ピアスクラブ	0	standard	12	MID							2:9784885708428:1994-04-30	13:9784885709234:1995-07-31	seed4
+NOHIT	piasu-club	ピアスクラブ	0	standard	14	MID							13:9784885709234:1995-07-31	16:9784885709388:1995-10-31	seed4
+NOHIT	piasu-club	ピアスクラブ	0	standard	15	MID							13:9784885709234:1995-07-31	16:9784885709388:1995-10-31	seed4
+NOHIT	piasu-club	ピアスクラブ	0	standard	17	MID							16:9784885709388:1995-10-31	24:9784885709814:1996-06-30	seed4
+NOHIT	piasu-club	ピアスクラブ	0	standard	18	MID							16:9784885709388:1995-10-31	24:9784885709814:1996-06-30	seed4
+NOHIT	piasu-club	ピアスクラブ	0	standard	19	MID							16:9784885709388:1995-10-31	24:9784885709814:1996-06-30	seed4
+NOHIT	piasu-club	ピアスクラブ	0	standard	20	MID							16:9784885709388:1995-10-31	24:9784885709814:1996-06-30	seed4
+NOHIT	piasu-club	ピアスクラブ	0	standard	21	MID							16:9784885709388:1995-10-31	24:9784885709814:1996-06-30	seed4
+NOHIT	piasu-club	ピアスクラブ	0	standard	22	MID							16:9784885709388:1995-10-31	24:9784885709814:1996-06-30	seed4
+NOHIT	piasu-club	ピアスクラブ	0	standard	23	MID							16:9784885709388:1995-10-31	24:9784885709814:1996-06-30	seed4
+NOHIT	yume-ha-taafu-o-kakemeguru	夢はターフを駆けめぐる	0	standard	1	LEAD							::	2:9784877190972:1994-04-15	seed4
+NOHIT	shousetsu-fajji	小説FUDGE	0	standard	1	LEAD							::	2:9784756700261:1994-10-15	seed4
+NOHIT	shousetsu-fajji	小説FUDGE	0	standard	6	MID							5:9784756709431:1995-10-15	8:9784756709899:1996-04	seed4
+NOHIT	shousetsu-fajji	小説FUDGE	0	standard	7	MID							5:9784756709431:1995-10-15	8:9784756709899:1996-04	seed4
+NOHIT	shousetsu-fajji	小説FUDGE	0	standard	9	MID							8:9784756709899:1996-04	11:9784756704023:1996-10	seed4
+NOHIT	shousetsu-fajji	小説FUDGE	0	standard	10	MID							8:9784756709899:1996-04	11:9784756704023:1996-10	seed4
+NOHIT	dotou-no-saikyou-suit-suima-kun	怒涛の最強戦士睡魔くん	0	standard	1	LEAD							::	2:9784049244786:1994-12-07	seed4
+NOHIT	optional-tour	オプショナル・ツアー	0	standard	1	LEAD							::	2:9784885706608:1995-05	seed4
+REJECT:本番に在る,版元違い,著者違い	megami	女神	0	standard	2	MID	9784866970455	2020-06	女神降臨2	yaongyi	LINE　Digital　Frontier	local	1:9784061788152:1995-09-06	3::	seed4
+REJECT:本番に在る,著者違い	megami	女神	0	standard	4	MID	9784866971568	2021-03	女神降臨4	yaongyi	LINE Digital Frontier	local	3::	5::	seed4
+NOHIT	gensou-tairiku	幻想大陸	0	standard	3	MID							2:9784870256255:1996-07-12	6:9784870252561:1998-04	seed4
+NOHIT	gensou-tairiku	幻想大陸	0	standard	4	MID							2:9784870256255:1996-07-12	6:9784870252561:1998-04	seed4
+NOHIT	gensou-tairiku	幻想大陸	0	standard	5	MID							2:9784870256255:1996-07-12	6:9784870252561:1998-04	seed4
+NOHIT	mobile-suit-gundam-moon-crisis	機動戦士ガンダムムーンライトクライシス	0	standard	2	MID							1:9784073024804:1995-01	3:9784073077091:1998-01-15	seed4
+REJECT:版元違い,著者違い	makai-densetsu	魔界伝説	0	standard	1	LEAD	9784576940588	1994-04	魔界伝説	ルイス・ラム-ア/中野圭二	リヨン社	live	::	2:9784897991559:1995-01	seed4
+APPLY	comic-cue	Comic cue	0	standard	1	LEAD	9784872570359	1994-01	COMIC CUE(コミック・キュー)1	江口寿史	イースト・プレス	local	::	2::1996-01	seed4
+REJECT:本番に在る,次巻より後,版元違い,著者違い	holy-maruo-1996	Holy	0	standard	1	LEAD	9784861762918	2006-04	Holy・Hearts! 1	神代　明/緋賀　ゆかり	ジャイブ	local	::	2:9784041994016:1996-08	seed4
+NOHIT	perfect-angel-lip	Perfectエンジェルリップ	0	standard	1	LEAD							::	2:9784796243902:1996-09-28	seed4
+NOHIT	perfect-angel-lip	Perfectエンジェルリップ	0	standard	3	MID							2:9784796243902:1996-09-28	4:9784796244008:1996-11-29	seed4
+REJECT:次巻より後,版元違い,著者違い	premium	Premium	0	standard	1	LEAD	9784861170584	2005-10	Premium	アンソロジー	文苑堂	local	::	3:9784796243810:1996-07-29	seed4
+NOHIT	premium	Premium	0	standard	2	LEAD							::	3:9784796243810:1996-07-29	seed4
+NOHIT	aan-kremlin-iq200-no-soap-story	あぁん・クレムリン　IQ200のソープ・ストーリー	0	standard	2	MID							1:9784845813889:1996-05	3:9784845813629:1997-02	seed4
+NOHIT	aan-kremlin-iq200-no-soap-story	あぁん・クレムリン　IQ200のソープ・ストーリー	0	standard	4	MID							3:9784845813629:1997-02	5:9784845813902:1997-11	seed4
+NOHIT	evangelion-anthology-comic	エヴァンゲリオン・アンソロジィコミック	0	standard	1	LEAD							::	2:9784896012507:1996-08	seed4
+REJECT:本番に在る,次巻より後	premier	プレミア	0	standard	3	MID	9784796205412	1999-03	プレミア(3)	遊人	スコラ	local	2:9784796243803:1996-06-29	5:9784796243919:1996-09-28	canon:volumes
+REJECT:本番に在る	premier	プレミア	0	standard	4	MID	9784796243865	1996-08	プレミア(4)	遊人	スコラ	local	2:9784796243803:1996-06-29	5:9784796243919:1996-09-28	canon:volumes
+NOHIT	noroi-no-shoutaijou	呪いの招待状	0	standard	4	MID							3:9784796288255:1997-09-16	9:9784821181056:2004-09-17	seed4
+NOHIT	noroi-no-shoutaijou	呪いの招待状	0	standard	5	MID							3:9784796288255:1997-09-16	9:9784821181056:2004-09-17	seed4
+NOHIT	noroi-no-shoutaijou	呪いの招待状	0	standard	6	MID							3:9784796288255:1997-09-16	9:9784821181056:2004-09-17	seed4
+NOHIT	noroi-no-shoutaijou	呪いの招待状	0	standard	7	MID							3:9784796288255:1997-09-16	9:9784821181056:2004-09-17	seed4
+NOHIT	noroi-no-shoutaijou	呪いの招待状	0	standard	8	MID							3:9784796288255:1997-09-16	9:9784821181056:2004-09-17	seed4
+REJECT:本番に在る,次巻より後,版元違い,著者違い	shitsurakuen-1996	失楽園	0	standard	3	MID	9784886539922	2012-12	失楽園に濡れる花(3)	冬森雪湖	秋水社	local	2:9784893931870:1996-11	5:9784893932006:1997-05-23	seed4
+REJECT:本番に在る,次巻より後,版元違い,著者違い	shitsurakuen-1996	失楽園	0	standard	4	MID	9784864950411	2014-03	失楽園に濡れる花(4)	冬森雪湖	秋水社	local	2:9784893931870:1996-11	5:9784893932006:1997-05-23	seed4
+NOHIT	l-gion	LÉGION	0	standard	1	LEAD							::	3:9784821195756:1997-06	seed4
+NOHIT	l-gion	LÉGION	0	standard	2	LEAD							::	3:9784821195756:1997-06	seed4
+NOHIT	pet-boy-s	Pet-boy's	0	standard	1	LEAD							::	2:9784812800980:1997-12	seed4
+NOHIT	hajime-ningen-gon	はじめ人間ゴン	0	standard	6	MID							5::	7::	seed4
+NOHIT	jinjuu-houretsuden	仁獣芳烈伝	0	standard	11	MID							10:9784887413528:2000-01	12:9784887413870:2000-06	seed4
+REJECT:次巻より後,版元違い,著者違い	inukko-club	犬っこ倶楽部	0	standard	2	MID	9784873170558	1999-10	犬っこ倶楽部ジュニア(2)	アンソロジー	あおば出版	local	1:9784796287944:1997-04-16	5:9784796288651:1998-04-16	seed4
+REJECT:次巻より後,版元違い,著者違い	inukko-club	犬っこ倶楽部	0	standard	3	MID	9784873171241	2000-01	犬っこ倶楽部ジュニア(3)	アンソロジー	あおば出版	local	1:9784796287944:1997-04-16	5:9784796288651:1998-04-16	seed4
+REJECT:次巻より後,版元違い,著者違い	inukko-club	犬っこ倶楽部	0	standard	4	MID	9784873170985	1999-12	犬っこ倶楽部(4)	アンソロジー	あおば出版	local	1:9784796287944:1997-04-16	5:9784796288651:1998-04-16	seed4
+NOHIT	keishichou-0-ka-no-onna	警視庁0課の女	0	standard	1	LEAD							::	6:9784845809950:1997-04	seed4
+NOHIT	keishichou-0-ka-no-onna	警視庁0課の女	0	standard	2	LEAD							::	6:9784845809950:1997-04	seed4
+NOHIT	keishichou-0-ka-no-onna	警視庁0課の女	0	standard	3	LEAD							::	6:9784845809950:1997-04	seed4
+NOHIT	keishichou-0-ka-no-onna	警視庁0課の女	0	standard	4	LEAD							::	6:9784845809950:1997-04	seed4
+NOHIT	keishichou-0-ka-no-onna	警視庁0課の女	0	standard	5	LEAD							::	6:9784845809950:1997-04	seed4
+NOHIT	chuchu-hunter	Chu❤chuハンター	0	standard	1	LEAD							::	2:9784408164236:1998-01	seed4
+NOHIT	crash-junky-spirit	Crash junky × spirit	0	standard	1	LEAD							::	2:9784756704924:1998-02-10	seed4
+REJECT:著者違い	generous-kiss	GENEROUS KISS	0	standard	3	MID	9784756712349	1999-01	Generous kiss(3)	栗栖ひとみ/藤たまき	桜桃書房	live	2:9784756712219:1998-12	4:9784756712455:1999-03-15	seed4
+REJECT:著者違い	generous-kiss	GENEROUS KISS	0	standard	5	MID	9784756712530	1999-05	Generous kiss(5)	栗栖ひとみ/藤たまき	桜桃書房	live	4:9784756712455:1999-03-15	6:9784756712738:1999-09	seed4
+REJECT:ISBN連番の外,本番に在る,次巻より後,版元違い	kirikiritei-no-buraun-sensei	きりきり亭のぶら雲先生	0	standard	3	MID	9784344817197	2009-07	きりきり亭のぶら雲先生(其之3)	きくち正太	幻冬舎コミックス	local	2:9784796297479:1998-11-16	6:9784344800304:2002-02-23	overrides
+REJECT:ISBN連番の外,本番に在る,次巻より後,版元違い	kirikiritei-no-buraun-sensei	きりきり亭のぶら雲先生	0	standard	4	MID	9784344817203	2009-07	きりきり亭のぶら雲先生(其之4)	きくち正太	幻冬舎コミックス	local	2:9784796297479:1998-11-16	6:9784344800304:2002-02-23	overrides
+REJECT:ISBN連番の外,本番に在る,次巻より後,版元違い	kirikiritei-no-buraun-sensei	きりきり亭のぶら雲先生	0	standard	5	MID	9784789783262	2001-01	きりきり亭のぶら雲先生(其之5)	きくち正太	ソニー・ミュージックソリューションズ	local	2:9784796297479:1998-11-16	6:9784344800304:2002-02-23	overrides
+NOHIT	saakitto-no-ookami-2	サーキットの狼Ⅱ	0	standard	1	LEAD							::	20:9784944017409:1998-03	seed4
+NOHIT	saakitto-no-ookami-2	サーキットの狼Ⅱ	0	standard	2	LEAD							::	20:9784944017409:1998-03	seed4
+NOHIT	saakitto-no-ookami-2	サーキットの狼Ⅱ	0	standard	3	LEAD							::	20:9784944017409:1998-03	seed4
+NOHIT	saakitto-no-ookami-2	サーキットの狼Ⅱ	0	standard	4	LEAD							::	20:9784944017409:1998-03	seed4
+NOHIT	saakitto-no-ookami-2	サーキットの狼Ⅱ	0	standard	5	LEAD							::	20:9784944017409:1998-03	seed4
+NOHIT	saakitto-no-ookami-2	サーキットの狼Ⅱ	0	standard	6	LEAD							::	20:9784944017409:1998-03	seed4
+NOHIT	saakitto-no-ookami-2	サーキットの狼Ⅱ	0	standard	7	LEAD							::	20:9784944017409:1998-03	seed4
+NOHIT	saakitto-no-ookami-2	サーキットの狼Ⅱ	0	standard	8	LEAD							::	20:9784944017409:1998-03	seed4
+NOHIT	saakitto-no-ookami-2	サーキットの狼Ⅱ	0	standard	9	LEAD							::	20:9784944017409:1998-03	seed4
+NOHIT	saakitto-no-ookami-2	サーキットの狼Ⅱ	0	standard	10	LEAD							::	20:9784944017409:1998-03	seed4
+NOHIT	saakitto-no-ookami-2	サーキットの狼Ⅱ	0	standard	11	LEAD							::	20:9784944017409:1998-03	seed4
+NOHIT	saakitto-no-ookami-2	サーキットの狼Ⅱ	0	standard	12	LEAD							::	20:9784944017409:1998-03	seed4
+NOHIT	saakitto-no-ookami-2	サーキットの狼Ⅱ	0	standard	13	LEAD							::	20:9784944017409:1998-03	seed4
+NOHIT	saakitto-no-ookami-2	サーキットの狼Ⅱ	0	standard	14	LEAD							::	20:9784944017409:1998-03	seed4
+NOHIT	saakitto-no-ookami-2	サーキットの狼Ⅱ	0	standard	15	LEAD							::	20:9784944017409:1998-03	seed4
+NOHIT	saakitto-no-ookami-2	サーキットの狼Ⅱ	0	standard	16	LEAD							::	20:9784944017409:1998-03	seed4
+NOHIT	saakitto-no-ookami-2	サーキットの狼Ⅱ	0	standard	17	LEAD							::	20:9784944017409:1998-03	seed4
+NOHIT	saakitto-no-ookami-2	サーキットの狼Ⅱ	0	standard	18	LEAD							::	20:9784944017409:1998-03	seed4
+NOHIT	saakitto-no-ookami-2	サーキットの狼Ⅱ	0	standard	19	LEAD							::	20:9784944017409:1998-03	seed4
+NOHIT	bolt-and-nut	ボルト＆ナット	0	standard	1	LEAD							::	2:9784777001866:2004-08	canon:volumes
+REJECT:ISBN連番の外,前巻より前,次巻より後	bolt-and-nut	ボルト＆ナット	0	standard	3	MID	9784777000890	2004-01	ボルト&ナット3NE		ネコ・パブリッシング	live	2:9784777001866:2004-08	4:9784873665153:1998-04	canon:volumes
+REJECT:本番に在る	kandouou-rendetsu	感動王列伝	0	standard	1	LEAD	9784091254115	1998-05	感動王列伝(1)	藤原芳秀/根岸康雄	小学館	local	::	2:9784091254122:1998-07-15	seed4
+NOHIT	shiro-no-fiorenteiina	白のフィオレンティーナ	1	bunkobon	3	MID							2:9784887417601:2007-04	9:9784887417755:2007-08	seed4
+NOHIT	shiro-no-fiorenteiina	白のフィオレンティーナ	1	bunkobon	4	MID							2:9784887417601:2007-04	9:9784887417755:2007-08	seed4
+NOHIT	shiro-no-fiorenteiina	白のフィオレンティーナ	1	bunkobon	5	MID							2:9784887417601:2007-04	9:9784887417755:2007-08	seed4
+NOHIT	shiro-no-fiorenteiina	白のフィオレンティーナ	1	bunkobon	6	MID							2:9784887417601:2007-04	9:9784887417755:2007-08	seed4
+NOHIT	shiro-no-fiorenteiina	白のフィオレンティーナ	1	bunkobon	7	MID							2:9784887417601:2007-04	9:9784887417755:2007-08	seed4
+NOHIT	shiro-no-fiorenteiina	白のフィオレンティーナ	1	bunkobon	8	MID							2:9784887417601:2007-04	9:9784887417755:2007-08	seed4
+REJECT:著者違い	zettai-reido	絶対麗奴	0	standard	1	LEAD	9784905965442	1998-02	絶対麗奴(1)	アンソロジー	光彩書房	live	::	2:9784905965572:1998-06-15	seed4
+NOHIT	nanoda-tensai-bakabon-no-oyaji	なのだ!?天才バカボンのおやじ	0	standard	1	LEAD							::	9:9784921068400:1999-12	seed4
+NOHIT	nanoda-tensai-bakabon-no-oyaji	なのだ!?天才バカボンのおやじ	0	standard	2	LEAD							::	9:9784921068400:1999-12	seed4
+NOHIT	nanoda-tensai-bakabon-no-oyaji	なのだ!?天才バカボンのおやじ	0	standard	3	LEAD							::	9:9784921068400:1999-12	seed4
+NOHIT	nanoda-tensai-bakabon-no-oyaji	なのだ!?天才バカボンのおやじ	0	standard	4	LEAD							::	9:9784921068400:1999-12	seed4
+NOHIT	nanoda-tensai-bakabon-no-oyaji	なのだ!?天才バカボンのおやじ	0	standard	5	LEAD							::	9:9784921068400:1999-12	seed4
+NOHIT	nanoda-tensai-bakabon-no-oyaji	なのだ!?天才バカボンのおやじ	0	standard	6	LEAD							::	9:9784921068400:1999-12	seed4
+NOHIT	nanoda-tensai-bakabon-no-oyaji	なのだ!?天才バカボンのおやじ	0	standard	7	LEAD							::	9:9784921068400:1999-12	seed4
+NOHIT	nanoda-tensai-bakabon-no-oyaji	なのだ!?天才バカボンのおやじ	0	standard	8	LEAD							::	9:9784921068400:1999-12	seed4
+NOHIT	adonisu-no-yuuutsu-na-hibi	アドニスの憂欝な日々	0	standard	1	LEAD							::	3:9784253092180:1999-03-20	seed4
+NOHIT	adonisu-no-yuuutsu-na-hibi	アドニスの憂欝な日々	0	standard	2	LEAD							::	3:9784253092180:1999-03-20	seed4
+REJECT:著者違い	hyper-restaurant	ハイパーレストラン	0	standard	1	LEAD	9784870256590	1997-12	ハイパーレストラン(1)	霧香＆聖娜	スクウェア・エニックス	local	::	3:9784757500464:1999-07-27	seed4
+REJECT:著者違い	hyper-restaurant	ハイパーレストラン	0	standard	2	LEAD	9784870253872	1998-09	ハイパーレストラン(2)	霧香＆聖娜	スクウェア・エニックス	local	::	3:9784757500464:1999-07-27	seed4
+REJECT:前巻より前,本番に在る,次巻より後,版元違い,著者違い	fire-emblem-seisen-no-keifu	ファイアーエムブレム聖戦の系譜	0	standard	2	MID	9784870253179	1998-06	ファイアーエムブレム聖戦の系譜(2)	藤森ナッツ	スクウェア・エニックス	local	1:9784889917321:1999-10-23	3:9784889917345:1999-10-23	seed4
+REJECT:前巻より前,本番に在る,次巻より後,版元違い,著者違い	fire-emblem-seisen-no-keifu	ファイアーエムブレム聖戦の系譜	0	standard	4	MID	9784757501539	1999-12	ファイアーエムブレム聖戦の系譜(4)	藤森ナッツ	スクウェア・エニックス	local	3:9784889917345:1999-10-23	7:9784889917383:1999-10-23	seed4
+REJECT:本番に在る,次巻より後,版元違い,著者違い	fire-emblem-seisen-no-keifu	ファイアーエムブレム聖戦の系譜	0	standard	5	MID	9784757504691	2001-06	ファイアーエムブレム聖戦の系譜(5)	藤森ナッツ	スクウェア・エニックス	local	3:9784889917345:1999-10-23	7:9784889917383:1999-10-23	seed4
+REJECT:本番に在る,次巻より後,版元違い,著者違い	fire-emblem-seisen-no-keifu	ファイアーエムブレム聖戦の系譜	0	standard	6	MID	9784757505780	2001-11	ファイアーエムブレム聖戦の系譜(6)	藤森ナッツ	スクウェア・エニックス	local	3:9784889917345:1999-10-23	7:9784889917383:1999-10-23	seed4
+NOHIT	kaikyaku-sengen	海客宣言	0	standard	1	LEAD							::	12::	seed4
+NOHIT	kaikyaku-sengen	海客宣言	0	standard	2	LEAD							::	12::	seed4
+NOHIT	kaikyaku-sengen	海客宣言	0	standard	3	LEAD							::	12::	seed4
+NOHIT	kaikyaku-sengen	海客宣言	0	standard	4	LEAD							::	12::	seed4
+NOHIT	kaikyaku-sengen	海客宣言	0	standard	5	LEAD							::	12::	seed4
+NOHIT	kaikyaku-sengen	海客宣言	0	standard	6	LEAD							::	12::	seed4
+NOHIT	kaikyaku-sengen	海客宣言	0	standard	7	LEAD							::	12::	seed4
+NOHIT	kaikyaku-sengen	海客宣言	0	standard	8	LEAD							::	12::	seed4
+NOHIT	kaikyaku-sengen	海客宣言	0	standard	9	LEAD							::	12::	seed4
+NOHIT	kaikyaku-sengen	海客宣言	0	standard	10	LEAD							::	12::	seed4
+NOHIT	kaikyaku-sengen	海客宣言	0	standard	11	LEAD							::	12::	seed4
+REJECT:ISBN連番の外,本番に在る,次巻より後,版元違い	81-bunch-no-inu	81番地の犬	1	shinsoban	3	MID	9784873170596	1999-10	81番地の犬(3)	西田陽子（漫画家）	あおば出版	local	2:9784796288590:1998-03-16	6:9784796287203:1995-12-11	canon:extra[0]
+REJECT:本番に在る,次巻より後,版元違い	81-bunch-no-inu	81番地の犬	1	shinsoban	4	MID	9784873170602	1999-10	81番地の犬(4)	西田陽子（漫画家）	あおば出版	local	2:9784796288590:1998-03-16	6:9784796287203:1995-12-11	canon:extra[0]
+REJECT:本番に在る,次巻より後,版元違い	81-bunch-no-inu	81番地の犬	1	shinsoban	5	MID	9784873171296	2000-02	81番地の犬(5)	西田陽子（漫画家）	あおば出版	local	2:9784796288590:1998-03-16	6:9784796287203:1995-12-11	canon:extra[0]
+REJECT:本番に在る	etchi-ni-kisu-shite	Hにキスして!	0	standard	4	MID	9784785921897	2002-05	Hにキスして!(vol.4)	かわもりみさき	少年画報社	local	3:9784785921132:2001-08	5:9784785922634:2002-12	seed4
+NOHIT	manga-zankoku-nippon-banashi-inagaki	まんが残酷日本むかしばなし	0	standard	1	LEAD							::	3:9784821197620:1999-07-30	seed4
+NOHIT	manga-zankoku-nippon-banashi-inagaki	まんが残酷日本むかしばなし	0	standard	2	LEAD							::	3:9784821197620:1999-07-30	seed4
+REJECT:本番に在る,著者違い	star-ocean-second-story	スターオーシャン セカンドストーリー	0	standard	1	LEAD	9784757500297	1999-05	スターオーシャンセカンドストーリー(1)	東まゆみ	スクウェア・エニックス	local	::	4:9784757502406:2000-05	seed4
+REJECT:本番に在る,次巻より後,版元違い,著者違い	star-ocean-second-story	スターオーシャン セカンドストーリー	0	standard	2	LEAD	9784757501300	1999-11	スターオーシャンセカンドストーリー(2)	東まゆみ	スクウェア・エニックス	local	::	4:9784757502406:2000-05	seed4
+APPLY	star-ocean-second-story	スターオーシャン セカンドストーリー	0	standard	3	LEAD	9784757500853	1999-10	スターオーシャンセカンドストーリー(第3集)		スクウェア・エニックス	local	::	4:9784757502406:2000-05	seed4
+REJECT:本番に在る,著者違い	star-ocean-sekando-story	スターオーシャン セカンドストーリー	0	standard	1	LEAD	9784757500297	1999-05	スターオーシャンセカンドストーリー(1)	東まゆみ	スクウェア・エニックス	local	::	5:9784757503175:2000-10	seed4
+REJECT:本番に在る,版元違い,著者違い	star-ocean-sekando-story	スターオーシャン セカンドストーリー	0	standard	2	LEAD	9784757501300	1999-11	スターオーシャンセカンドストーリー(2)	東まゆみ	スクウェア・エニックス	local	::	5:9784757503175:2000-10	seed4
+APPLY	star-ocean-sekando-story	スターオーシャン セカンドストーリー	0	standard	3	LEAD	9784757500853	1999-10	スターオーシャンセカンドストーリー(第3集)		スクウェア・エニックス	local	::	5:9784757503175:2000-10	seed4
+REJECT:ISBN連番の外,本番に在る,次巻より後,著者違い	star-ocean-sekando-story	スターオーシャン セカンドストーリー	0	standard	4	LEAD	9784757500075	1999-04	スターオーシャンセカンドストーリー4コママンガ劇場(3)	エニックス出版局	スクウェア・エニックス	local	::	5:9784757503175:2000-10	seed4
+NOHIT	football-taka-amerikan-football-comics	フットボール鷹―American football comics	0	standard	1	LEAD							::	4:9784583027623:	seed4
+NOHIT	football-taka-amerikan-football-comics	フットボール鷹―American football comics	0	standard	2	LEAD							::	4:9784583027623:	seed4
+NOHIT	football-taka-amerikan-football-comics	フットボール鷹―American football comics	0	standard	3	LEAD							::	4:9784583027623:	seed4
+NOHIT	buya-jitsuroku-andou-gumi	ブヤ 実録・安藤組	0	standard	1	LEAD							::	3:9784575933215:1993-01-12	seed4
+NOHIT	buya-jitsuroku-andou-gumi	ブヤ 実録・安藤組	0	standard	2	LEAD							::	3:9784575933215:1993-01-12	seed4
+NOHIT	osaka-geijutsu-daigaku-kanan-bungei-manga-hen	大阪芸術大学河南文藝 漫画篇	0	standard	1	LEAD							::	5:9784883159260:	seed4
+NOHIT	osaka-geijutsu-daigaku-kanan-bungei-manga-hen	大阪芸術大学河南文藝 漫画篇	0	standard	2	LEAD							::	5:9784883159260:	seed4
+NOHIT	osaka-geijutsu-daigaku-kanan-bungei-manga-hen	大阪芸術大学河南文藝 漫画篇	0	standard	3	LEAD							::	5:9784883159260:	seed4
+NOHIT	osaka-geijutsu-daigaku-kanan-bungei-manga-hen	大阪芸術大学河南文藝 漫画篇	0	standard	4	LEAD							::	5:9784883159260:	seed4
+REJECT:版元違い,著者違い	kodomo-kagaku-gijutsu-hakusho	子ども科学技術白書	0	standard	3	MID	9784052016684	2002-04	子ども科学技術白書(3)	子ども科学技術白書編集委員会/文部科学省科学技術・学術政策局	Gakken	live	2:9784171964019:2000-12-25	8:9784171964040:2007-03-30	seed4
+REJECT:版元違い,著者違い	kodomo-kagaku-gijutsu-hakusho	子ども科学技術白書	0	standard	4	MID	9784052018817	2003-05	子ども科学技術白書(4)	子ども科学技術白書編集委員会/文部科学省科学技術・学術政策局	Gakken	live	2:9784171964019:2000-12-25	8:9784171964040:2007-03-30	seed4
+REJECT:版元違い,著者違い	kodomo-kagaku-gijutsu-hakusho	子ども科学技術白書	0	standard	5	MID	9784051522742	2004-06	子ども科学技術白書(5)	子ども科学技術白書編集委員会/文部科学省科学技術・学術政策局	Gakken	live	2:9784171964019:2000-12-25	8:9784171964040:2007-03-30	seed4
+REJECT:著者違い	kodomo-kagaku-gijutsu-hakusho	子ども科学技術白書	0	standard	6	MID	9784171964026	2005-03	子ども科学技術白書 6	子ども科学技術白書編集委員会	国立印刷局	live	2:9784171964019:2000-12-25	8:9784171964040:2007-03-30	seed4
+REJECT:著者違い	kodomo-kagaku-gijutsu-hakusho	子ども科学技術白書	0	standard	7	MID	9784171964033	2006-03	子ども科学技術白書 7	子ども科学技術白書編集委員会	国立印刷局	live	2:9784171964019:2000-12-25	8:9784171964040:2007-03-30	seed4
+NOHIT	matenrou	摩天楼	0	standard	9	MID							8::	10::	seed4
+NOHIT	saishinban-heisei-tensai-bakabon	最新版平成天才バカボン	0	standard	1	LEAD							::	2:9784090017650:	seed4
+NOHIT	kounai-shasei-sutoresu-furiiku	校内写生＆ストレスフリーク	0	standard	1	LEAD							::	3:9784915858260:	seed4
+NOHIT	kounai-shasei-sutoresu-furiiku	校内写生＆ストレスフリーク	0	standard	2	LEAD							::	3:9784915858260:	seed4
+NOHIT	kikou-kiden-hiwou-senki	機巧奇伝ヒヲウ戦記	0	standard	1	LEAD							::	2:9784063490329:2000-10-23	seed4
+NOHIT	mayonaka-no-raburetaa	真夜中のラブレター	0	standard	1	LEAD							::	2:9784391903904:1989-12-14	seed4
+NOHIT	satoshi	聖	0	standard	3	MID							2:9784091856029:2000-09	4:9784091856043:2001-04	canon:volumes
+NOHIT	the-mad-pachi-slot-brother-s	THE MAD PACHI-SLOT BROTHER'S	0	standard	2	MID							1:9784893676801:2000-11-21	3:9784893677419:2001-12	seed4
+NOHIT	guruguru-shoukougun	ぐるぐる症候群	0	standard	1	LEAD							::	8:9784860020309:2001-11	seed4
+APPLY	guruguru-shoukougun	ぐるぐる症候群	0	standard	2	LEAD	9784860020033	2000-12	ぐるぐる症候群(2)		ノアール出版	live	::	8:9784860020309:2001-11	seed4
+APPLY	guruguru-shoukougun	ぐるぐる症候群	0	standard	3	LEAD	9784860020071	2001-01	ぐるぐる症候群(3)		ノアール出版	live	::	8:9784860020309:2001-11	seed4
+APPLY	guruguru-shoukougun	ぐるぐる症候群	0	standard	4	LEAD	9784860020095	2001-03	ぐるぐる症候群(4)		ノアール出版	live	::	8:9784860020309:2001-11	seed4
+APPLY	guruguru-shoukougun	ぐるぐる症候群	0	standard	5	LEAD	9784860020149	2001-05	ぐるぐる症候群(5)		ノアール出版	live	::	8:9784860020309:2001-11	seed4
+APPLY	guruguru-shoukougun	ぐるぐる症候群	0	standard	6	LEAD	9784860020194	2001-07	ぐるぐる症候群(6)		ノアール出版	live	::	8:9784860020309:2001-11	seed4
+APPLY	guruguru-shoukougun	ぐるぐる症候群	0	standard	7	LEAD	9784860020255	2001-09	ぐるぐる症候群(7)		ノアール出版	live	::	8:9784860020309:2001-11	seed4
+APPLY	guruguru-shoukougun	ぐるぐる症候群	0	standard	9	MID	9784860020347	2001-12	ぐるぐる症候群(9)		ノアール出版	live	8:9784860020309:2001-11	10:9784860020378:2002-03	seed4
+REJECT:本番に在る,著者違い	suteki-na-kekkon	すてきな結婚	0	bunkobon	1	LEAD	9784575722734	2000-11	すてきな結婚(1(運命の赤い糸編))	風間宏子	双葉社	local	::	3:9784575722963:2001-02	seed4
+REJECT:本番に在る,著者違い	suteki-na-kekkon	すてきな結婚	0	bunkobon	2	LEAD	9784575722857	2001-01	すてきな結婚(2(運命の出会い編))	風間宏子	双葉社	local	::	3:9784575722963:2001-02	seed4
+NOHIT	pachisuro-yancha-bugi	パチスロやんちゃブギ	0	standard	3	MID							2:9784915450341:2000-11-15	5:9784915450471:2002-10-30	seed4
+NOHIT	pachisuro-yancha-bugi	パチスロやんちゃブギ	0	standard	4	MID							2:9784915450341:2000-11-15	5:9784915450471:2002-10-30	seed4
+NOHIT	pachisuro-yancha-bugi	パチスロやんちゃブギ	0	standard	7	MID							6:9784915450556:2003-05-30	8:9784915450662:2004-06-30	seed4
+NOHIT	pachisuro-yancha-bugi	パチスロやんちゃブギ	0	standard	10	MID							9:9784915450723:2005-03	12:9784915450907:2007-03	seed4
+NOHIT	pachisuro-yancha-bugi	パチスロやんちゃブギ	0	standard	11	MID							9:9784915450723:2005-03	12:9784915450907:2007-03	seed4
+NOHIT	pachisuro-yancha-bugi	パチスロやんちゃブギ	0	standard	13	MID							12:9784915450907:2007-03	14:9784862980182:2008-05	seed4
+NOHIT	pachisuro-yancha-bugi	パチスロやんちゃブギ	0	standard	15	MID							14:9784862980182:2008-05	16:9784862980496:2010-04	seed4
+NOHIT	pachisuro-yancha-bugi	パチスロやんちゃブギ	0	standard	18	MID							17:9784862980557:2011-01	19:9784862980823:2012-10	seed4
+REJECT:ISBN連番の外,本番に在る,次巻より後,版元違い,著者違い	hana-ichimonme	花いちもんめ	0	standard	1	LEAD	9784088625133	2000-11	花いちもんめ	あまねかずみ	集英社	local	::	2:9784821198658:2001-04	seed4
+REJECT:ISBN連番の外,前巻より前,本番に在る,次巻より後,版元違い	gunnm-last-order	銃夢last order	1	shinsoban	11	MID	9784063769913	2014-04	銃夢 Last Order NEW EDITION(11)	木城 ゆきと	講談社	local	10:9784063766318:2012-04	16:9784063760620:2011-05	canon:extra[0]
+REJECT:前巻より前,本番に在る,版元違い	gunnm-last-order	銃夢last order	1	shinsoban	12	MID	9784088774831	2008-08	銃夢Last Order(12)	木城ゆきと	集英社	local	10:9784063766318:2012-04	16:9784063760620:2011-05	canon:extra[0]
+REJECT:前巻より前,本番に在る,版元違い	gunnm-last-order	銃夢last order	1	shinsoban	13	MID	9784088776071	2009-04	銃夢Last Order(13)	木城ゆきと	集英社	local	10:9784063766318:2012-04	16:9784063760620:2011-05	canon:extra[0]
+REJECT:前巻より前,本番に在る,版元違い	gunnm-last-order	銃夢last order	1	shinsoban	14	MID	9784088777481	2009-11	銃夢Last Order(14)	木城ゆきと	集英社	local	10:9784063766318:2012-04	16:9784063760620:2011-05	canon:extra[0]
+REJECT:前巻より前,本番に在る,版元違い	gunnm-last-order	銃夢last order	1	shinsoban	15	MID	9784088778853	2010-06	銃夢Last Order(15)	木城ゆきと	集英社	local	10:9784063766318:2012-04	16:9784063760620:2011-05	canon:extra[0]
+REJECT:前巻より前,本番に在る,版元違い	gunnm-last-order	銃夢last order	2	shinsoban	13	MID	9784088776071	2009-04	銃夢Last Order(13)	木城ゆきと	集英社	local	12:9784063769920:2014-04	18:9784063768138:2013-04	canon:extra[1]
+REJECT:前巻より前,本番に在る,版元違い	gunnm-last-order	銃夢last order	2	shinsoban	14	MID	9784088777481	2009-11	銃夢Last Order(14)	木城ゆきと	集英社	local	12:9784063769920:2014-04	18:9784063768138:2013-04	canon:extra[1]
+REJECT:前巻より前,本番に在る,版元違い	gunnm-last-order	銃夢last order	2	shinsoban	15	MID	9784088778853	2010-06	銃夢Last Order(15)	木城ゆきと	集英社	local	12:9784063769920:2014-04	18:9784063768138:2013-04	canon:extra[1]
+REJECT:ISBN連番の外,前巻より前,本番に在る	gunnm-last-order	銃夢last order	2	shinsoban	16	MID	9784063760620	2011-05	銃夢 Last Order(16)	木城 ゆきと	講談社	local	12:9784063769920:2014-04	18:9784063768138:2013-04	canon:extra[1]
+REJECT:ISBN連番の外,前巻より前,本番に在る	gunnm-last-order	銃夢last order	2	shinsoban	17	MID	9784063766301	2012-04	銃夢 Last Order(17)	木城 ゆきと	講談社	local	12:9784063769920:2014-04	18:9784063768138:2013-04	canon:extra[1]
+NOHIT	manga-time-mini	まんがタイムmini	0	standard	1	LEAD							::	5:9784832262607:2002-08	seed4
+NOHIT	manga-time-mini	まんがタイムmini	0	standard	2	LEAD							::	5:9784832262607:2002-08	seed4
+NOHIT	manga-time-mini	まんがタイムmini	0	standard	3	LEAD							::	5:9784832262607:2002-08	seed4
+NOHIT	manga-time-mini	まんがタイムmini	0	standard	4	LEAD							::	5:9784832262607:2002-08	seed4
+NOHIT	riiman-senki-dokushinsan	リーマン戦記独身3	0	standard	3	MID							2:9784575827835:2002-12	4:9784575828856:2003-09	seed4
+NOHIT	wada-radio-no-jojo-ni-poiman	和田ラヂヲの徐々にポイマン	0	standard	1	LEAD							::	2:9784757707245:2002-02	seed4
+NOHIT	gamurakan	臥夢螺館	0	standard	2	MID							1:9784063504026:2002-03	3:9784063347920:2003-09	seed4
+REJECT:ISBN連番の外,次巻より後	guruguru-kakumei	ぐるぐる革命	0	standard	7	MID	9784860022204	2006-05	ぐるぐる革命カカ・イルSPECIAL(7)	アンソロジー	ノアール出版	local	6:9784860022068:2006-03	9:9784860021115:2004-08	seed4
+REJECT:ISBN連番の外,次巻より後	guruguru-kakumei	ぐるぐる革命	0	standard	8	MID	9784860022341	2006-07	ぐるぐる革命カカ・イルSPECIAL(8)	アンソロジー	ノアール出版	local	6:9784860022068:2006-03	9:9784860021115:2004-08	seed4
+REJECT:本番に在る,著者違い	manga-grimm-douwa	まんがグリム童話	0	standard	2	MID	9784821188192	2009-06	まんがグリム童話(オズの魔法使い 2)	かずはしとも	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る,著者違い	manga-grimm-douwa	まんがグリム童話	0	standard	3	MID	9784821188208	2009-06	まんがグリム童話(オズの魔法使い 3)	かずはしとも	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る,著者違い	manga-grimm-douwa	まんがグリム童話	0	standard	4	MID	9784821185573	2008-02	まんがグリム童話(吉原華の乱 4)	岡田純子	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る,著者違い	manga-grimm-douwa	まんがグリム童話	0	standard	5	MID	9784821181322	2005-03	まんがグリム童話(クレオパトラ氷の微笑 5)	森園みるく/村崎百郎	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	6	MID	9784821184514	2007-06	まんがグリム童話(金瓶梅 6)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	7	MID	9784821185504	2008-01	まんがグリム童話(金瓶梅 7)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	8	MID	9784821185948	2008-04	まんがグリム童話(金瓶梅 8)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	9	MID	9784821186341	2008-07	まんがグリム童話(金瓶梅 9)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	10	MID	9784821187294	2009-01	まんがグリム童話(金瓶梅 10)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	11	MID	9784821188048	2009-05	まんがグリム童話(金瓶梅 11)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	12	MID	9784821188888	2009-09	まんがグリム童話(金瓶梅 12)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	13	MID	9784821189915	2010-04	まんがグリム童話(金瓶梅 13)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	14	MID	9784821170791	2010-10	まんがグリム童話(金瓶梅 14)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	15	MID	9784821171019	2010-12	まんがグリム童話(金瓶梅 15)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	16	MID	9784821171279	2011-02	まんがグリム童話(金瓶梅 16)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	17	MID	9784821172061	2011-08	まんがグリム童話(金瓶梅 17)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	18	MID	9784821172528	2012-01	まんがグリム童話(金瓶梅 18)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	19	MID	9784821173013	2012-05	まんがグリム童話(金瓶梅 19)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	20	MID	9784821173549	2012-09	まんがグリム童話(金瓶梅 20)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	21	MID	9784821174058	2013-01	まんがグリム童話(金瓶梅 21)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	22	MID	9784821174522	2013-05	まんがグリム童話(金瓶梅 22)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	23	MID	9784821174836	2013-09	まんがグリム童話(金瓶梅 23)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	24	MID	9784821175246	2014-01	まんがグリム童話(金瓶梅 24)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	25	MID	9784821175659	2014-05	まんがグリム童話(金瓶梅 25)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	26	MID	9784821176052	2014-09	まんがグリム童話(金瓶梅 26)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	27	MID	9784821176557	2015-01	まんがグリム童話(金瓶梅 27)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	28	MID	9784821177004	2015-05	まんがグリム童話(金瓶梅 28)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	29	MID	9784821177455	2015-09	まんがグリム童話(金瓶梅 29)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	30	MID	9784821177462	2015-11	まんがグリム童話(金瓶梅 30)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	31	MID	9784821178223	2016-02	まんがグリム童話(金瓶梅 31)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	32	MID	9784821178582	2016-05	まんがグリム童話金瓶梅(32)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	33	MID	9784821178995	2016-08	まんがグリム童話金瓶梅(33)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	34	MID	9784821179442	2016-11	まんがグリム童話金瓶梅(34)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	35	MID	9784821179893	2017-02	まんがグリム童話金瓶梅(35)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	36	MID	9784821134373	2017-05	まんがグリム童話金瓶梅(36)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	37	MID	9784821135479	2017-11	まんがグリム童話金瓶梅(37)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	38	MID	9784821136063	2018-03	まんがグリム童話金瓶梅(38)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+REJECT:本番に在る	manga-grimm-douwa	まんがグリム童話	0	standard	39	MID	9784821136797	2018-07	まんがグリム童話金瓶梅(39)	竹崎真実	ぶんか社	local	1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+NOHIT	manga-grimm-douwa	まんがグリム童話	0	standard	40	MID							1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+NOHIT	manga-grimm-douwa	まんがグリム童話	0	standard	41	MID							1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+NOHIT	manga-grimm-douwa	まんがグリム童話	0	standard	42	MID							1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+NOHIT	manga-grimm-douwa	まんがグリム童話	0	standard	43	MID							1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+NOHIT	manga-grimm-douwa	まんがグリム童話	0	standard	44	MID							1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+NOHIT	manga-grimm-douwa	まんがグリム童話	0	standard	45	MID							1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+NOHIT	manga-grimm-douwa	まんがグリム童話	0	standard	46	MID							1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+NOHIT	manga-grimm-douwa	まんがグリム童話	0	standard	47	MID							1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+NOHIT	manga-grimm-douwa	まんがグリム童話	0	standard	48	MID							1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+NOHIT	manga-grimm-douwa	まんがグリム童話	0	standard	49	MID							1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+NOHIT	manga-grimm-douwa	まんがグリム童話	0	standard	50	MID							1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+NOHIT	manga-grimm-douwa	まんがグリム童話	0	standard	51	MID							1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+NOHIT	manga-grimm-douwa	まんがグリム童話	0	standard	52	MID							1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+NOHIT	manga-grimm-douwa	まんがグリム童話	0	standard	53	MID							1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+NOHIT	manga-grimm-douwa	まんがグリム童話	0	standard	54	MID							1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+NOHIT	manga-grimm-douwa	まんがグリム童話	0	standard	55	MID							1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+NOHIT	manga-grimm-douwa	まんがグリム童話	0	standard	56	MID							1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+NOHIT	manga-grimm-douwa	まんがグリム童話	0	standard	57	MID							1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+NOHIT	manga-grimm-douwa	まんがグリム童話	0	standard	58	MID							1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+NOHIT	manga-grimm-douwa	まんがグリム童話	0	standard	59	MID							1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+NOHIT	manga-grimm-douwa	まんがグリム童話	0	standard	60	MID							1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+NOHIT	manga-grimm-douwa	まんがグリム童話	0	standard	61	MID							1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+NOHIT	manga-grimm-douwa	まんがグリム童話	0	standard	62	MID							1:9784821180318:2003-08	63:9784821112050:2026-07-20	seed4
+NOHIT	pachisuro-yancha-gaiden	パチスロやんちゃ外伝	0	standard	3	MID							2:9784915450488:2003-01	4:9784915450716:2004-11-29	seed4
+NOHIT	pachisuro-yancha-gaiden	パチスロやんちゃ外伝	0	standard	5	MID							4:9784915450716:2004-11-29	7:9784862980335:2008-12	seed4
+NOHIT	pachisuro-yancha-gaiden	パチスロやんちゃ外伝	0	standard	6	MID							4:9784915450716:2004-11-29	7:9784862980335:2008-12	seed4
+NOHIT	hodogaya-saichuusokuha-seven	保土ヶ谷最中速派セブン	0	standard	1	LEAD							::	2:9784091867629:2003-06	seed4
+NOHIT	senri-no-michi-mo-dai-sanshou	千里の道も 第三章	0	standard	12	MID							11:9784772850629:2006-06	13:9784772810715:2006-12	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	5	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	6	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	7	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	8	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	9	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	10	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	11	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	12	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	13	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	14	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	15	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	16	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	17	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	18	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	19	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	20	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	21	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	22	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	23	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	24	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	25	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	26	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	27	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	28	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	29	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	30	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	31	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	32	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	33	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	34	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	35	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	36	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	37	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	38	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	39	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	40	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	41	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	42	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	43	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	44	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	45	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	46	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	47	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	48	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	49	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	50	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	51	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	52	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	53	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	54	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	55	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	56	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	57	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	58	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	59	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	60	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	61	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	62	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	63	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	64	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	65	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	66	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	67	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	68	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	69	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	70	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	71	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	72	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	73	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	74	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	75	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	0	standard	76	MID							4:9784861912153:2006-11-22	77:9784861917769:2011-06	seed4
+NOHIT	kaettekita-kita-dora-neko	帰って来たどらン猫(こ)	1	bunkobon	2	MID							1:9784575727180:2009-07	3:9784575727197:2009-07	canon:extra[0]
+NOHIT	kaettekita-kita-dora-neko	帰って来たどらン猫(こ)	2	bunkobon	1	MID							0:9784575728316:2022-09	2:9784575728330:2022-11-10	canon:extra[1]
+NOHIT	show-chan-no-bouken	正チャンの冒険	0	standard	2	MID							1:9784778030018:2003-12-10	5::	seed4
+NOHIT	show-chan-no-bouken	正チャンの冒険	0	standard	3	MID							1:9784778030018:2003-12-10	5::	seed4
+NOHIT	show-chan-no-bouken	正チャンの冒険	0	standard	4	MID							1:9784778030018:2003-12-10	5::	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	2	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	3	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	4	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	5	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	6	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	7	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	8	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	9	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	10	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	11	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	12	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	13	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	14	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	15	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	16	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	17	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	18	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	19	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	20	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	21	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	22	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	23	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	24	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	25	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	26	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	27	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	28	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	29	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	30	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	31	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	32	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	33	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+NOHIT	tokusen-ol-shinkaron	特選OL進化論	0	standard	34	MID							1:9784063645408:2003-12	35:9784063645446:2003-12	seed4
+APPLY	fate-kishi	Fate騎士	0	standard	1	LEAD	9784860021214	2004-10	Fate騎士(1)		ノアール出版	live	::	2:9784860021337:2004-12	seed4
+NOHIT	gush-mania	GUSH mania	0	standard	1	LEAD							::	7:9784877243425:2004-02-14	canon:volumes
+NOHIT	gush-mania	GUSH mania	0	standard	2	LEAD							::	7:9784877243425:2004-02-14	canon:volumes
+NOHIT	gush-mania	GUSH mania	0	standard	3	LEAD							::	7:9784877243425:2004-02-14	canon:volumes
+NOHIT	gush-mania	GUSH mania	0	standard	4	LEAD							::	7:9784877243425:2004-02-14	canon:volumes
+NOHIT	gush-mania	GUSH mania	0	standard	5	LEAD							::	7:9784877243425:2004-02-14	canon:volumes
+NOHIT	gush-mania	GUSH mania	0	standard	6	LEAD							::	7:9784877243425:2004-02-14	canon:volumes
+NOHIT	gush-mania	GUSH mania	0	standard	8	MID							7:9784877243425:2004-02-14	9:9784877243586:2004-06-15	canon:volumes
+NOHIT	oppai-no-tatsujin	おっぱいの達人	0	standard	1	LEAD							::	2:9784877551810:2004-07	seed4
+NOHIT	tatoeba-haha-ga	たとえば母が	0	standard	5	MID							4:9784575832914:2006-10	6:9784575834710:2008-03	seed4
+NOHIT	comic-shin-3-goku-musou-san-battle-iryuujon	コミック真・三國無双3バトルイリュージョン	0	standard	1	LEAD							::	7:9784775802076:2004-08-03	seed4
+NOHIT	comic-shin-3-goku-musou-san-battle-iryuujon	コミック真・三國無双3バトルイリュージョン	0	standard	2	LEAD							::	7:9784775802076:2004-08-03	seed4
+NOHIT	comic-shin-3-goku-musou-san-battle-iryuujon	コミック真・三國無双3バトルイリュージョン	0	standard	3	LEAD							::	7:9784775802076:2004-08-03	seed4
+NOHIT	comic-shin-3-goku-musou-san-battle-iryuujon	コミック真・三國無双3バトルイリュージョン	0	standard	4	LEAD							::	7:9784775802076:2004-08-03	seed4
+NOHIT	comic-shin-3-goku-musou-san-battle-iryuujon	コミック真・三國無双3バトルイリュージョン	0	standard	5	LEAD							::	7:9784775802076:2004-08-03	seed4
+NOHIT	comic-shin-3-goku-musou-san-battle-iryuujon	コミック真・三國無双3バトルイリュージョン	0	standard	6	LEAD							::	7:9784775802076:2004-08-03	seed4
+NOHIT	hamster-family	ハムスターファミリー	0	standard	1	LEAD							::	3:9784873173788:2004-07-16	seed4
+NOHIT	hamster-family	ハムスターファミリー	0	standard	2	LEAD							::	3:9784873173788:2004-07-16	seed4
+REJECT:著者違い	sekai-no-meisaku-opera	世界の名作オペラ	0	standard	9	MID	9784880238760	2005-03	世界の名作オペラ(9)	つづき佳子	本の泉社	live	8:9784880238753:2005-02	10:9784880238777:2005-03-20	seed4
+NOHIT	daiki-no-baka-h-special	大紀のバカHスペシャル	0	standard	1	LEAD							::	2:9784861350290:2004-03	seed4
+NOHIT	daiki-no-baka-h-special	大紀のバカHスペシャル	0	standard	3	MID							2:9784861350290:2004-03	10:9784861352010:2006-02	seed4
+NOHIT	daiki-no-baka-h-special	大紀のバカHスペシャル	0	standard	4	MID							2:9784861350290:2004-03	10:9784861352010:2006-02	seed4
+NOHIT	daiki-no-baka-h-special	大紀のバカHスペシャル	0	standard	5	MID							2:9784861350290:2004-03	10:9784861352010:2006-02	seed4
+NOHIT	daiki-no-baka-h-special	大紀のバカHスペシャル	0	standard	6	MID							2:9784861350290:2004-03	10:9784861352010:2006-02	seed4
+NOHIT	daiki-no-baka-h-special	大紀のバカHスペシャル	0	standard	7	MID							2:9784861350290:2004-03	10:9784861352010:2006-02	seed4
+NOHIT	daiki-no-baka-h-special	大紀のバカHスペシャル	0	standard	8	MID							2:9784861350290:2004-03	10:9784861352010:2006-02	seed4
+NOHIT	daiki-no-baka-h-special	大紀のバカHスペシャル	0	standard	9	MID							2:9784861350290:2004-03	10:9784861352010:2006-02	seed4
+NOHIT	daiki-no-baka-h-special	大紀のバカHスペシャル	0	standard	11	MID							10:9784861352010:2006-02	22:9784861354809:2008-09	seed4
+NOHIT	daiki-no-baka-h-special	大紀のバカHスペシャル	0	standard	12	MID							10:9784861352010:2006-02	22:9784861354809:2008-09	seed4
+NOHIT	daiki-no-baka-h-special	大紀のバカHスペシャル	0	standard	13	MID							10:9784861352010:2006-02	22:9784861354809:2008-09	seed4
+NOHIT	daiki-no-baka-h-special	大紀のバカHスペシャル	0	standard	14	MID							10:9784861352010:2006-02	22:9784861354809:2008-09	seed4
+NOHIT	daiki-no-baka-h-special	大紀のバカHスペシャル	0	standard	15	MID							10:9784861352010:2006-02	22:9784861354809:2008-09	seed4
+NOHIT	daiki-no-baka-h-special	大紀のバカHスペシャル	0	standard	16	MID							10:9784861352010:2006-02	22:9784861354809:2008-09	seed4
+NOHIT	daiki-no-baka-h-special	大紀のバカHスペシャル	0	standard	17	MID							10:9784861352010:2006-02	22:9784861354809:2008-09	seed4
+NOHIT	daiki-no-baka-h-special	大紀のバカHスペシャル	0	standard	18	MID							10:9784861352010:2006-02	22:9784861354809:2008-09	seed4
+NOHIT	daiki-no-baka-h-special	大紀のバカHスペシャル	0	standard	19	MID							10:9784861352010:2006-02	22:9784861354809:2008-09	seed4
+NOHIT	daiki-no-baka-h-special	大紀のバカHスペシャル	0	standard	20	MID							10:9784861352010:2006-02	22:9784861354809:2008-09	seed4
+NOHIT	daiki-no-baka-h-special	大紀のバカHスペシャル	0	standard	21	MID							10:9784861352010:2006-02	22:9784861354809:2008-09	seed4
+REJECT:版元違い,著者違い	gensou-fantasy	幻想ファンタジー	0	standard	1	LEAD	9784000089630	2004-02	幻想 ファンタジー	高階　秀爾	岩波書店	live	::	4:9784837261698:2004-10	seed4
+NOHIT	gensou-fantasy	幻想ファンタジー	0	standard	2	LEAD							::	4:9784837261698:2004-10	seed4
+NOHIT	gensou-fantasy	幻想ファンタジー	0	standard	3	LEAD							::	4:9784837261698:2004-10	seed4
+NOHIT	tokusen-kobo-chan	特選コボちゃん	0	standard	15	MID							14:9784832264984:2006-11-12	16:9784832265240:2007-02-26	seed4
+NOHIT	arasu-kagayakeru-tsubasa	Alas～輝ける翼	0	standard	9	MID							8:9784088772790:2007-06	10:9784088773537:2007-11	seed4
+NOHIT	mangetsunoyoruni	まんげつのよるに	0	standard	2	MID							1:9784062785044:2006-02-14	3:9784062764025:2009-07	seed4
+NOHIT	mangetsunoyoruni	まんげつのよるに	0	standard	4	MID							3:9784062764025:2009-07	7:9784062528788:2005-11	seed4
+NOHIT	mangetsunoyoruni	まんげつのよるに	0	standard	5	MID							3:9784062764025:2009-07	7:9784062528788:2005-11	seed4
+NOHIT	mangetsunoyoruni	まんげつのよるに	0	standard	6	MID							3:9784062764025:2009-07	7:9784062528788:2005-11	seed4
+NOHIT	motsu-chan	モッちゃん	0	standard	2	MID							1:9784861910364:2005-07	5:9784861911989:2006-08-19	seed4
+NOHIT	motsu-chan	モッちゃん	0	standard	3	MID							1:9784861910364:2005-07	5:9784861911989:2006-08-19	seed4
+NOHIT	motsu-chan	モッちゃん	0	standard	4	MID							1:9784861910364:2005-07	5:9784861911989:2006-08-19	seed4
+NOHIT	osaka-geijutsu-daigaku-daigaku-manga	大阪芸術大学 大学漫画	0	standard	7	MID							6:9784862250926:2006-09	11:9784862254030:2008-12	seed4
+NOHIT	osaka-geijutsu-daigaku-daigaku-manga	大阪芸術大学 大学漫画	0	standard	8	MID							6:9784862250926:2006-09	11:9784862254030:2008-12	seed4
+NOHIT	osaka-geijutsu-daigaku-daigaku-manga	大阪芸術大学 大学漫画	0	standard	9	MID							6:9784862250926:2006-09	11:9784862254030:2008-12	seed4
+NOHIT	osaka-geijutsu-daigaku-daigaku-manga	大阪芸術大学 大学漫画	0	standard	10	MID							6:9784862250926:2006-09	11:9784862254030:2008-12	seed4
+REJECT:ISBN連番の外,次巻より後	bushigin	武士銀	0	standard	1	LEAD	9784860021658	2005-06	武士銀真選組スペシャル(1)	アンソロジー	ノアール出版	local	::	2:9784860021528:2005-04	seed4
+NOHIT	akashiro-tamago	赤白たまご	1	bunkobon	3	MID							2:9784864232012:2012-10	5:9784864232043:2012-12	canon:extra[0]
+NOHIT	akashiro-tamago	赤白たまご	1	bunkobon	4	MID							2:9784864232012:2012-10	5:9784864232043:2012-12	canon:extra[0]
+APPLY	hontoni-atta-noroi-no-video-comic	ほんとにあった!呪いのビデオcomic	0	standard	1	LEAD	9784892363481	2005-11	ほんとにあった!呪いのビデオcomic(v.1)		メディレクト	live	::	3:9784892363528:2006-02	seed4
+APPLY	hontoni-atta-noroi-no-video-comic	ほんとにあった!呪いのビデオcomic	0	standard	2	LEAD	9784892363504	2006-01	ほんとにあった!呪いのビデオcomic(v.2)		メディレクト	live	::	3:9784892363528:2006-02	seed4
+NOHIT	shinshin-agatte-nanbo-taichi-yo-nakuna-2006	新々上がってなンボ!!太一よ泣くな	0	standard	1	LEAD							::	4:9784862250049:2006-01	seed4
+NOHIT	shinshin-agatte-nanbo-taichi-yo-nakuna-2006	新々上がってなンボ!!太一よ泣くな	0	standard	2	LEAD							::	4:9784862250049:2006-01	seed4
+NOHIT	shinshin-agatte-nanbo-taichi-yo-nakuna-2006	新々上がってなンボ!!太一よ泣くな	0	standard	3	LEAD							::	4:9784862250049:2006-01	seed4
+NOHIT	neko-banashi	ねこばなし	0	standard	1	LEAD							::	3:9784812816097:2007-04	seed4
+NOHIT	neko-banashi	ねこばなし	0	standard	2	LEAD							::	3:9784812816097:2007-04	seed4
+NOHIT	neko-punch	ねこぱんち	0	standard	1	LEAD							::	10:9784785927943:2007-07	seed4
+NOHIT	neko-punch	ねこぱんち	0	standard	2	LEAD							::	10:9784785927943:2007-07	seed4
+NOHIT	neko-punch	ねこぱんち	0	standard	3	LEAD							::	10:9784785927943:2007-07	seed4
+NOHIT	neko-punch	ねこぱんち	0	standard	4	LEAD							::	10:9784785927943:2007-07	seed4
+NOHIT	neko-punch	ねこぱんち	0	standard	5	LEAD							::	10:9784785927943:2007-07	seed4
+NOHIT	neko-punch	ねこぱんち	0	standard	6	LEAD							::	10:9784785927943:2007-07	seed4
+NOHIT	neko-punch	ねこぱんち	0	standard	7	LEAD							::	10:9784785927943:2007-07	seed4
+NOHIT	neko-punch	ねこぱんち	0	standard	8	LEAD							::	10:9784785927943:2007-07	seed4
+NOHIT	neko-punch	ねこぱんち	0	standard	9	LEAD							::	10:9784785927943:2007-07	seed4
+APPLY	neko-punch	ねこぱんち	0	standard	11	MID	9784785928155	2007-07	ねこぱんち(11(夏休み号))		少年画報社	live	10:9784785927943:2007-07	17:9784785928971:2008-02	seed4
+APPLY	neko-punch	ねこぱんち	0	standard	12	MID	9784785928346	2007-08	ねこぱんち(12(夏の思い出号))		少年画報社	live	10:9784785927943:2007-07	17:9784785928971:2008-02	seed4
+APPLY	neko-punch	ねこぱんち	0	standard	13	MID	9784785928476	2007-09	ねこぱんち(13(一周年記念号))		少年画報社	live	10:9784785927943:2007-07	17:9784785928971:2008-02	seed4
+APPLY	neko-punch	ねこぱんち	0	standard	14	MID	9784785928643	2007-10	ねこぱんち(14(もみじ号))		少年画報社	local	10:9784785927943:2007-07	17:9784785928971:2008-02	seed4
+APPLY	neko-punch	ねこぱんち	0	standard	15	MID	9784785928742	2007-11	ねこぱんち(15(クリスマス号))		少年画報社	live	10:9784785927943:2007-07	17:9784785928971:2008-02	seed4
+APPLY	neko-punch	ねこぱんち	0	standard	16	MID	9784785928902	2007-12	ねこぱんち(16(ねずニャー号))		少年画報社	live	10:9784785927943:2007-07	17:9784785928971:2008-02	seed4
+APPLY	neko-punch	ねこぱんち	0	standard	18	MID	9784785929169	2008-02	ねこぱんち(18(たんぽぽ号))		少年画報社	local	17:9784785928971:2008-02	23:9784785929947:2008-07-14	seed4
+APPLY	neko-punch	ねこぱんち	0	standard	19	MID	9784785929244	2008-03	ねこぱんち(19(桜満開号))		少年画報社	live	17:9784785928971:2008-02	23:9784785929947:2008-07-14	seed4
+APPLY	neko-punch	ねこぱんち	0	standard	20	MID	9784785929367	2008-04	ねこぱんち(20(ねこ旅号))		少年画報社	live	17:9784785928971:2008-02	23:9784785929947:2008-07-14	seed4
+APPLY	neko-punch	ねこぱんち	0	standard	21	MID	9784785929619	2008-05	ねこぱんち(21(さくらんぼ号))		少年画報社	live	17:9784785928971:2008-02	23:9784785929947:2008-07-14	seed4
+APPLY	neko-punch	ねこぱんち	0	standard	22	MID	9784785929770	2008-06	ねこぱんち(22(夕涼み号))		少年画報社	live	17:9784785928971:2008-02	23:9784785929947:2008-07-14	seed4
+APPLY	neko-punch	ねこぱんち	0	standard	24	MID	9784785930097	2008-08	ねこぱんち(24(まねき猫号))		少年画報社	live	23:9784785929947:2008-07-14	30:9784785930899:2009-01-13	seed4
+APPLY	neko-punch	ねこぱんち	0	standard	25	MID	9784785930240	2008-09	ねこぱんち(25(二周年号))		少年画報社	live	23:9784785929947:2008-07-14	30:9784785930899:2009-01-13	seed4
+APPLY	neko-punch	ねこぱんち	0	standard	26	MID	9784785930400	2008-10	ねこぱんち(26(みかん号))		少年画報社	live	23:9784785929947:2008-07-14	30:9784785930899:2009-01-13	seed4
+APPLY	neko-punch	ねこぱんち	0	standard	27	MID	9784785930585	2008-11	ねこぱんち(27(サンタ号))		少年画報社	live	23:9784785929947:2008-07-14	30:9784785930899:2009-01-13	seed4
+APPLY	neko-punch	ねこぱんち	0	standard	28	MID	9784785930752	2008-12	ねこぱんち(28(新年号))		少年画報社	live	23:9784785929947:2008-07-14	30:9784785930899:2009-01-13	seed4
+REJECT:ISBN連番の外,本番に在る	neko-punch	ねこぱんち	0	standard	29	MID	9784785930899	2009-01	ねこぱんち(29(ハート号))		少年画報社	local	23:9784785929947:2008-07-14	30:9784785930899:2009-01-13	seed4
+APPLY	tv-animation-major-characters-handbook-heroes	TV ANIMATION MAJOR キャラクターズハンドブック HEROES	0	standard	1	LEAD	9784091206480	2006-09	TV ANIMATION MAJOR[キャラクターズハンドブック]HEROES 1	満田 拓也	小学館	local	::	2:9784091214744:2008-11-23	seed4
+NOHIT	nono-chan-zenshuu	ののちゃん 全集	0	standard	1	LEAD							::	6:9784197500093:2008-07	seed4
+NOHIT	nono-chan-zenshuu	ののちゃん 全集	0	standard	2	LEAD							::	6:9784197500093:2008-07	seed4
+NOHIT	nono-chan-zenshuu	ののちゃん 全集	0	standard	3	LEAD							::	6:9784197500093:2008-07	seed4
+NOHIT	nono-chan-zenshuu	ののちゃん 全集	0	standard	4	LEAD							::	6:9784197500093:2008-07	seed4
+NOHIT	nono-chan-zenshuu	ののちゃん 全集	0	standard	5	LEAD							::	6:9784197500093:2008-07	seed4
+NOHIT	watashi-no-ojou-sama	わたしのお嬢様	0	standard	1	LEAD							::	2:9784777805310:2008-05	seed4
+NOHIT	shima-kousaku-zenshuu	島耕作全集	0	standard	2	MID							1:9784063647181:2008-05-15	5:9784063647198:2008-08	seed4
+NOHIT	shima-kousaku-zenshuu	島耕作全集	0	standard	3	MID							1:9784063647181:2008-05-15	5:9784063647198:2008-08	seed4
+NOHIT	shima-kousaku-zenshuu	島耕作全集	0	standard	4	MID							1:9784063647181:2008-05-15	5:9784063647198:2008-08	seed4
+NOHIT	shima-kousaku-zenshuu	島耕作全集	0	standard	6	MID							5:9784063647198:2008-08	9:9784063647204:2008-11	seed4
+NOHIT	shima-kousaku-zenshuu	島耕作全集	0	standard	7	MID							5:9784063647198:2008-08	9:9784063647204:2008-11	seed4
+NOHIT	shima-kousaku-zenshuu	島耕作全集	0	standard	8	MID							5:9784063647198:2008-08	9:9784063647204:2008-11	seed4
+APPLY	elysion	エリュシオン	0	standard	2	MID	9784344819580	2010-05	エリュシオンー青宵廻廊ー(2)	市東亮子	幻冬舎コミックス	local	1:9784344818248:2009-11	5:9784344825802:2012-08	seed4
+APPLY	elysion	エリュシオン	0	standard	3	MID	9784344821538	2011-02	エリュシオンー青宵廻廊ー(3)	市東亮子	幻冬舎コミックス	local	1:9784344818248:2009-11	5:9784344825802:2012-08	seed4
+APPLY	elysion	エリュシオン	0	standard	4	MID	9784344823839	2011-12	エリュシオン(4)-青宵廻廊ー	市東亮子	幻冬舎コミックス	local	1:9784344818248:2009-11	5:9784344825802:2012-08	seed4
+NOHIT	onape	オナぺ	0	standard	1	LEAD							::	2:9784790122586:2009-07	seed4
+NOHIT	onape	オナぺ	0	standard	3	MID							2:9784790122586:2009-07	5:9784790122906:2009-10	seed4
+NOHIT	onape	オナぺ	0	standard	4	MID							2:9784790122586:2009-07	5:9784790122906:2009-10	seed4
+APPLY	teiaazu-tou-tiara	ティアーズ・トゥ・ティアラ	0	standard	1	LEAD	9784840125819	2009-06	ティアーズ・トゥ・ティアラ -花冠の大地ー 1	城爪草/アクアプラス	KADOKAWA	local	::	2:9784840129572:2009-12-22	seed4
+REJECT:版元違い,著者違い	love-neko	ラブ・ネコ	0	standard	1	LEAD	9784835218748	2006-03	ラブネコ	三島一彦	ビブロス	local	::	4:9784832267282:2009-04	seed4
+NOHIT	love-neko	ラブ・ネコ	0	standard	2	LEAD							::	4:9784832267282:2009-04	seed4
+NOHIT	love-neko	ラブ・ネコ	0	standard	3	LEAD							::	4:9784832267282:2009-04	seed4
+NOHIT	shinshin-agatte-nanbo-taichi-yo-nakuna	新々上ってなンボ!!太一よ泣くな	0	standard	1	LEAD							::	4::	seed4
+NOHIT	shinshin-agatte-nanbo-taichi-yo-nakuna	新々上ってなンボ!!太一よ泣くな	0	standard	2	LEAD							::	4::	seed4
+NOHIT	shinshin-agatte-nanbo-taichi-yo-nakuna	新々上ってなンボ!!太一よ泣くな	0	standard	3	LEAD							::	4::	seed4
+NOHIT	shinshin-agatte-nanbo-taichi-yo-nakuna	新々上ってなンボ!!太一よ泣くな	0	standard	5	MID							4::	9:9784862256560:2010-10-15	seed4
+NOHIT	shinshin-agatte-nanbo-taichi-yo-nakuna	新々上ってなンボ!!太一よ泣くな	0	standard	6	MID							4::	9:9784862256560:2010-10-15	seed4
+NOHIT	shinshin-agatte-nanbo-taichi-yo-nakuna	新々上ってなンボ!!太一よ泣くな	0	standard	7	MID							4::	9:9784862256560:2010-10-15	seed4
+NOHIT	shinshin-agatte-nanbo-taichi-yo-nakuna	新々上ってなンボ!!太一よ泣くな	0	standard	8	MID							4::	9:9784862256560:2010-10-15	seed4
+NOHIT	shinshin-agatte-nanbo-taichi-yo-nakuna	新々上ってなンボ!!太一よ泣くな	0	standard	10	MID							9:9784862256560:2010-10-15	11:9784862254399:2009-04	seed4
+APPLY	yuri-shoujo	百合少女	0	standard	2	MID	9784774730301	2010-06	百合少女(2)		コスミック出版	live	1:9784774730233:2009-11	3:9784774730356:2010-11	seed4
+REJECT:次巻より後	dorabeesu-doraemon-super-baseball-gaiden	ドラベース ドラえもん超野球外伝	0	standard	1	LEAD	9784091424785	2017-08	ドラベース ドラえもん超野球外伝 傑作選(1)	藤子プロ/むぎわら しんたろう	小学館	local	::	12:9784091402790:2007-01-26	seed4
+REJECT:次巻より後	dorabeesu-doraemon-super-baseball-gaiden	ドラベース ドラえもん超野球外伝	0	standard	2	LEAD	9784091426437	2018-01	ドラベース ドラえもん超野球外伝 傑作選(2)	むぎわら しんたろう/藤子プロ	小学館	local	::	12:9784091402790:2007-01-26	seed4
+NOHIT	dorabeesu-doraemon-super-baseball-gaiden	ドラベース ドラえもん超野球外伝	0	standard	3	LEAD							::	12:9784091402790:2007-01-26	seed4
+NOHIT	dorabeesu-doraemon-super-baseball-gaiden	ドラベース ドラえもん超野球外伝	0	standard	4	LEAD							::	12:9784091402790:2007-01-26	seed4
+NOHIT	dorabeesu-doraemon-super-baseball-gaiden	ドラベース ドラえもん超野球外伝	0	standard	5	LEAD							::	12:9784091402790:2007-01-26	seed4
+NOHIT	dorabeesu-doraemon-super-baseball-gaiden	ドラベース ドラえもん超野球外伝	0	standard	6	LEAD							::	12:9784091402790:2007-01-26	seed4
+NOHIT	dorabeesu-doraemon-super-baseball-gaiden	ドラベース ドラえもん超野球外伝	0	standard	7	LEAD							::	12:9784091402790:2007-01-26	seed4
+NOHIT	dorabeesu-doraemon-super-baseball-gaiden	ドラベース ドラえもん超野球外伝	0	standard	8	LEAD							::	12:9784091402790:2007-01-26	seed4
+NOHIT	dorabeesu-doraemon-super-baseball-gaiden	ドラベース ドラえもん超野球外伝	0	standard	9	LEAD							::	12:9784091402790:2007-01-26	seed4
+NOHIT	dorabeesu-doraemon-super-baseball-gaiden	ドラベース ドラえもん超野球外伝	0	standard	10	LEAD							::	12:9784091402790:2007-01-26	seed4
+NOHIT	dorabeesu-doraemon-super-baseball-gaiden	ドラベース ドラえもん超野球外伝	0	standard	11	LEAD							::	12:9784091402790:2007-01-26	seed4
+REJECT:ISBN連番の外,本番に在る,次巻より後,版元違い,著者違い	cafe	cafe	0	standard	1	LEAD	9784403670091	2001-06	Cafe吉祥寺で(1)	ねぎしきょうこ	新書館	local	::	6:9784253197847:2011-02	seed4
+REJECT:ISBN連番の外,本番に在る,次巻より後,版元違い,著者違い	cafe	cafe	0	standard	2	LEAD	9784403670114	2002-05	Cafe吉祥寺で(2)	ねぎしきょうこ	新書館	local	::	6:9784253197847:2011-02	seed4
+REJECT:本番に在る,版元違い,著者違い	cafe	cafe	0	standard	3	LEAD	9784403670152	2003-05	Cafe吉祥寺で(3)	ねぎしきょうこ	新書館	local	::	6:9784253197847:2011-02	seed4
+REJECT:本番に在る	cafe	cafe	0	standard	4	LEAD	9784253197724	2009-12	Cafe南青山骨董通り(4)	琴川彩	秋田書店	local	::	6:9784253197847:2011-02	seed4
+REJECT:本番に在る	cafe	cafe	0	standard	5	LEAD	9784253197731	2010-07	Cafe南青山骨董通り(5)	琴川彩	秋田書店	local	::	6:9784253197847:2011-02	seed4
+NOHIT	goshujin-sama-no-oshioki	ご主人様のおしおき?	0	standard	2	MID							1:9784776731559:2011-09	3:9784776748021:2018-10	seed4
+REJECT:本番に在る	nakayoshi-orijinaruban-sakuhinshuu	なかよしオリジナル版作品集	0	bunkobon	1	LEAD	9784063708127	2011-08	なかよしオリジナル版作品集(1)ロマンスの薬あげます!	楳図 かずお	講談社コミッククリエイト	local	::	2:9784063708158:2011-09-09	seed4
+NOHIT	gororo-mamonogatari	ゴロロ mamonogatari	0	standard	1	LEAD							::	4:9784091413628:2011-11-02	seed4
+NOHIT	gororo-mamonogatari	ゴロロ mamonogatari	0	standard	2	LEAD							::	4:9784091413628:2011-11-02	seed4
+NOHIT	gororo-mamonogatari	ゴロロ mamonogatari	0	standard	3	LEAD							::	4:9784091413628:2011-11-02	seed4
+NOHIT	transistor-teaset-denki-gairozu	トランジスタティーセット	0	standard	1	LEAD							::	5:9784832240810:2011-11	seed4
+NOHIT	transistor-teaset-denki-gairozu	トランジスタティーセット	0	standard	2	LEAD							::	5:9784832240810:2011-11	seed4
+NOHIT	transistor-teaset-denki-gairozu	トランジスタティーセット	0	standard	3	LEAD							::	5:9784832240810:2011-11	seed4
+NOHIT	transistor-teaset-denki-gairozu	トランジスタティーセット	0	standard	4	LEAD							::	5:9784832240810:2011-11	seed4
+NOHIT	baka-to-test-to-shoukanjuu-supinauto-sore-ga-bokura-no-nichijou	バカとテストと召喚獣→spinout! それが僕らの日常。	0	standard	1	LEAD							::	4:9784047273733:2011-07-27	seed4
+NOHIT	baka-to-test-to-shoukanjuu-supinauto-sore-ga-bokura-no-nichijou	バカとテストと召喚獣→spinout! それが僕らの日常。	0	standard	2	LEAD							::	4:9784047273733:2011-07-27	seed4
+NOHIT	baka-to-test-to-shoukanjuu-supinauto-sore-ga-bokura-no-nichijou	バカとテストと召喚獣→spinout! それが僕らの日常。	0	standard	3	LEAD							::	4:9784047273733:2011-07-27	seed4
+REJECT:本番に在る	marii-to-ellie-no-atelier-zaaruburugu-no-renkinjutsushi-sekando-season	マリーとエリーのアトリエザールブルグの錬金術士 Second Season	0	standard	1	LEAD	9784757737099	2007-07	マリーとエリーのアトリエ ザールブルグの錬金術士 Second Season	越智　善彦	KADOKAWA	live	::	4:9784047271616:2011-04	seed4
+REJECT:本番に在る	marii-to-ellie-no-atelier-zaaruburugu-no-renkinjutsushi-sekando-season	マリーとエリーのアトリエザールブルグの錬金術士 Second Season	0	standard	2	LEAD	9784757745476	2008-10	マリーとエリーのアトリエ ザールブルグの錬金術士 Second Season(2)	越智　善彦	KADOKAWA	live	::	4:9784047271616:2011-04	seed4
+REJECT:本番に在る	marii-to-ellie-no-atelier-zaaruburugu-no-renkinjutsushi-sekando-season	マリーとエリーのアトリエザールブルグの錬金術士 Second Season	0	standard	3	LEAD	9784047261204	2009-11	マリーとエリーのアトリエ ザールブルグの錬金術士 Second Season(3)	越智　善彦	KADOKAWA	live	::	4:9784047271616:2011-04	seed4
+NOHIT	gensou-labyrinth	幻想ラビリンス	0	standard	1	LEAD							::	5:9784834261967:2011-06	seed4
+NOHIT	gensou-labyrinth	幻想ラビリンス	0	standard	2	LEAD							::	5:9784834261967:2011-06	seed4
+NOHIT	gensou-labyrinth	幻想ラビリンス	0	standard	3	LEAD							::	5:9784834261967:2011-06	seed4
+NOHIT	gensou-labyrinth	幻想ラビリンス	0	standard	4	LEAD							::	5:9784834261967:2011-06	seed4
+REJECT:ISBN連番の外,本番に在る,次巻より後	kaina-surugajou-gozen-jiai	腕 駿河城御前試合	0	standard	1	LEAD	9784845840984	2011-06	腕〜駿河城御前試合〜(1)	森秀樹（漫画家）/南條範夫	リイド社	local	::	2:9784845841974:2011-12-26	seed4
+REJECT:本番に在る	mahoujin-guruguru-gaiden-mai-yuuden-kitakita	魔法陣グルグル外伝舞勇伝キタキタ	0	standard	1	LEAD	9784757526112	2009-07	魔法陣グルグル外伝舞勇伝キタキタ(1)	衛藤ヒロユキ	スクウェア・エニックス	local	::	4:9784757532007:2011-04	seed4
+REJECT:本番に在る	mahoujin-guruguru-gaiden-mai-yuuden-kitakita	魔法陣グルグル外伝舞勇伝キタキタ	0	standard	2	LEAD	9784757527997	2010-02	魔法陣グルグル外伝舞勇伝キタキタ(2)	衛藤ヒロユキ	スクウェア・エニックス	local	::	4:9784757532007:2011-04	seed4
+REJECT:本番に在る	mahoujin-guruguru-gaiden-mai-yuuden-kitakita	魔法陣グルグル外伝舞勇伝キタキタ	0	standard	3	LEAD	9784757530294	2010-10	魔法陣グルグル外伝舞勇伝キタキタ(3)	衛藤ヒロユキ	スクウェア・エニックス	local	::	4:9784757532007:2011-04	seed4
+NOHIT	momopan-clover-2012	MOMOPAN	0	standard	1	LEAD							::	25:9784862973382:2012-06-28	seed4
+NOHIT	momopan-clover-2012	MOMOPAN	0	standard	2	LEAD							::	25:9784862973382:2012-06-28	seed4
+NOHIT	momopan-clover-2012	MOMOPAN	0	standard	3	LEAD							::	25:9784862973382:2012-06-28	seed4
+NOHIT	momopan-clover-2012	MOMOPAN	0	standard	4	LEAD							::	25:9784862973382:2012-06-28	seed4
+NOHIT	momopan-clover-2012	MOMOPAN	0	standard	5	LEAD							::	25:9784862973382:2012-06-28	seed4
+NOHIT	momopan-clover-2012	MOMOPAN	0	standard	6	LEAD							::	25:9784862973382:2012-06-28	seed4
+NOHIT	momopan-clover-2012	MOMOPAN	0	standard	7	LEAD							::	25:9784862973382:2012-06-28	seed4
+NOHIT	momopan-clover-2012	MOMOPAN	0	standard	8	LEAD							::	25:9784862973382:2012-06-28	seed4
+NOHIT	momopan-clover-2012	MOMOPAN	0	standard	9	LEAD							::	25:9784862973382:2012-06-28	seed4
+NOHIT	momopan-clover-2012	MOMOPAN	0	standard	10	LEAD							::	25:9784862973382:2012-06-28	seed4
+NOHIT	momopan-clover-2012	MOMOPAN	0	standard	11	LEAD							::	25:9784862973382:2012-06-28	seed4
+NOHIT	momopan-clover-2012	MOMOPAN	0	standard	12	LEAD							::	25:9784862973382:2012-06-28	seed4
+NOHIT	momopan-clover-2012	MOMOPAN	0	standard	13	LEAD							::	25:9784862973382:2012-06-28	seed4
+NOHIT	momopan-clover-2012	MOMOPAN	0	standard	14	LEAD							::	25:9784862973382:2012-06-28	seed4
+NOHIT	momopan-clover-2012	MOMOPAN	0	standard	15	LEAD							::	25:9784862973382:2012-06-28	seed4
+NOHIT	momopan-clover-2012	MOMOPAN	0	standard	16	LEAD							::	25:9784862973382:2012-06-28	seed4
+NOHIT	momopan-clover-2012	MOMOPAN	0	standard	17	LEAD							::	25:9784862973382:2012-06-28	seed4
+NOHIT	momopan-clover-2012	MOMOPAN	0	standard	18	LEAD							::	25:9784862973382:2012-06-28	seed4
+NOHIT	momopan-clover-2012	MOMOPAN	0	standard	19	LEAD							::	25:9784862973382:2012-06-28	seed4
+NOHIT	momopan-clover-2012	MOMOPAN	0	standard	20	LEAD							::	25:9784862973382:2012-06-28	seed4
+NOHIT	momopan-clover-2012	MOMOPAN	0	standard	21	LEAD							::	25:9784862973382:2012-06-28	seed4
+NOHIT	momopan-clover-2012	MOMOPAN	0	standard	22	LEAD							::	25:9784862973382:2012-06-28	seed4
+NOHIT	momopan-clover-2012	MOMOPAN	0	standard	23	LEAD							::	25:9784862973382:2012-06-28	seed4
+NOHIT	momopan-clover-2012	MOMOPAN	0	standard	24	LEAD							::	25:9784862973382:2012-06-28	seed4
+REJECT:本番に在る	gaddesu-megami-no-ketsumyaku	ガッデス 女神の血脈	0	standard	1	LEAD	9784785935375	2010-12	ガッデス〜女神の血脈〜(1)	塩崎雄二	少年画報社	local	::	2:9784785937904:2012-03	seed4
+NOHIT	manga-de-shitashimu-izumo-shinwa	マンガで親しむ出雲神話	0	standard	1	LEAD							::	4:9784879031723:2012-10	seed4
+NOHIT	manga-de-shitashimu-izumo-shinwa	マンガで親しむ出雲神話	0	standard	2	LEAD							::	4:9784879031723:2012-10	seed4
+NOHIT	manga-de-shitashimu-izumo-shinwa	マンガで親しむ出雲神話	0	standard	3	LEAD							::	4:9784879031723:2012-10	seed4
+NOHIT	mondeki	モンでき。	0	standard	1	LEAD							::	2:9784047283817:2012-10	seed4
+APPLY	koyoi-omae-to	今宵おまえと	0	standard	1	LEAD	9784813052838	2010-11	今宵おまえと(1章)	木下けい子	大洋図書	local	::	2:9784813053439:2012-01	seed4
+NOHIT	kizuato	痕	0	standard	1	LEAD							::	2:9784048864886:2012-03-27	seed4
+NOHIT	bolts-and-nuts-prologue	BOLTS AND NUTS!Prologue	0	standard	1	LEAD							::	20:9784777013715:2013-01-30	seed4
+NOHIT	bolts-and-nuts-prologue	BOLTS AND NUTS!Prologue	0	standard	2	LEAD							::	20:9784777013715:2013-01-30	seed4
+NOHIT	bolts-and-nuts-prologue	BOLTS AND NUTS!Prologue	0	standard	3	LEAD							::	20:9784777013715:2013-01-30	seed4
+NOHIT	bolts-and-nuts-prologue	BOLTS AND NUTS!Prologue	0	standard	4	LEAD							::	20:9784777013715:2013-01-30	seed4
+NOHIT	bolts-and-nuts-prologue	BOLTS AND NUTS!Prologue	0	standard	5	LEAD							::	20:9784777013715:2013-01-30	seed4
+NOHIT	bolts-and-nuts-prologue	BOLTS AND NUTS!Prologue	0	standard	6	LEAD							::	20:9784777013715:2013-01-30	seed4
+NOHIT	bolts-and-nuts-prologue	BOLTS AND NUTS!Prologue	0	standard	7	LEAD							::	20:9784777013715:2013-01-30	seed4
+NOHIT	bolts-and-nuts-prologue	BOLTS AND NUTS!Prologue	0	standard	8	LEAD							::	20:9784777013715:2013-01-30	seed4
+NOHIT	bolts-and-nuts-prologue	BOLTS AND NUTS!Prologue	0	standard	9	LEAD							::	20:9784777013715:2013-01-30	seed4
+NOHIT	bolts-and-nuts-prologue	BOLTS AND NUTS!Prologue	0	standard	10	LEAD							::	20:9784777013715:2013-01-30	seed4
+NOHIT	bolts-and-nuts-prologue	BOLTS AND NUTS!Prologue	0	standard	11	LEAD							::	20:9784777013715:2013-01-30	seed4
+NOHIT	bolts-and-nuts-prologue	BOLTS AND NUTS!Prologue	0	standard	12	LEAD							::	20:9784777013715:2013-01-30	seed4
+NOHIT	bolts-and-nuts-prologue	BOLTS AND NUTS!Prologue	0	standard	13	LEAD							::	20:9784777013715:2013-01-30	seed4
+NOHIT	bolts-and-nuts-prologue	BOLTS AND NUTS!Prologue	0	standard	14	LEAD							::	20:9784777013715:2013-01-30	seed4
+NOHIT	bolts-and-nuts-prologue	BOLTS AND NUTS!Prologue	0	standard	15	LEAD							::	20:9784777013715:2013-01-30	seed4
+NOHIT	bolts-and-nuts-prologue	BOLTS AND NUTS!Prologue	0	standard	16	LEAD							::	20:9784777013715:2013-01-30	seed4
+NOHIT	bolts-and-nuts-prologue	BOLTS AND NUTS!Prologue	0	standard	17	LEAD							::	20:9784777013715:2013-01-30	seed4
+NOHIT	bolts-and-nuts-prologue	BOLTS AND NUTS!Prologue	0	standard	18	LEAD							::	20:9784777013715:2013-01-30	seed4
+NOHIT	bolts-and-nuts-prologue	BOLTS AND NUTS!Prologue	0	standard	19	LEAD							::	20:9784777013715:2013-01-30	seed4
+REJECT:本番に在る,版元違い	da-capo-3	D.C.Ⅲ～ダ・カーポⅢ～	0	standard	1	LEAD	9784048911993	2012-12	D.C.III 〜ダ・カーポIII〜(1)	日向　ののか/CIRCUS	KADOKAWA	local	::	2:9784041207468:2013-06-06	seed4
+NOHIT	miaki-hitamuki	みあき♥ひたむき	0	standard	1	LEAD							::	4:9784873064833:2013-01	seed4
+NOHIT	miaki-hitamuki	みあき♥ひたむき	0	standard	2	LEAD							::	4:9784873064833:2013-01	seed4
+NOHIT	miaki-hitamuki	みあき♥ひたむき	0	standard	3	LEAD							::	4:9784873064833:2013-01	seed4
+NOHIT	shin-mimibukuro-kaidan-hyakumonogatari	新耳袋 怪談百物語	0	standard	1	LEAD							::	2:9784834231960:2013-07-19	seed4
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	0	standard	9	MID							8:9784063775051:2014-09-03	12:9784063775365:2015-11-02	canon:volumes
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	0	standard	10	MID							8:9784063775051:2014-09-03	12:9784063775365:2015-11-02	canon:volumes
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	0	standard	11	MID							8:9784063775051:2014-09-03	12:9784063775365:2015-11-02	canon:volumes
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	0	standard	13	MID							12:9784063775365:2015-11-02	14:9784063775068:2014-05-02	canon:volumes
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	0	standard	18	MID							17:9784063775396:2015-07-03	21:9784063775075:2013-06-03	canon:volumes
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	0	standard	19	MID							17:9784063775396:2015-07-03	21:9784063775075:2013-06-03	canon:volumes
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	0	standard	20	MID							17:9784063775396:2015-07-03	21:9784063775075:2013-06-03	canon:volumes
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	0	standard	22	MID							21:9784063775075:2013-06-03	25:9784063775419:2015-12-03	canon:volumes
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	0	standard	23	MID							21:9784063775075:2013-06-03	25:9784063775419:2015-12-03	canon:volumes
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	0	standard	24	MID							21:9784063775075:2013-06-03	25:9784063775419:2015-12-03	canon:volumes
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	0	standard	32	MID							31:9784063775426:2015-02-03	33:9784063775440:2015-09-03	canon:volumes
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	0	standard	40	MID							39:9784063775808:2017-03-03	47:9784063775884:2017-01-05	canon:volumes
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	0	standard	41	MID							39:9784063775808:2017-03-03	47:9784063775884:2017-01-05	canon:volumes
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	0	standard	42	MID							39:9784063775808:2017-03-03	47:9784063775884:2017-01-05	canon:volumes
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	0	standard	43	MID							39:9784063775808:2017-03-03	47:9784063775884:2017-01-05	canon:volumes
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	0	standard	44	MID							39:9784063775808:2017-03-03	47:9784063775884:2017-01-05	canon:volumes
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	0	standard	45	MID							39:9784063775808:2017-03-03	47:9784063775884:2017-01-05	canon:volumes
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	0	standard	46	MID							39:9784063775808:2017-03-03	47:9784063775884:2017-01-05	canon:volumes
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	0	standard	51	MID							50:9784063775501:2016-03-03	52:9784063775525:2015-08-03	canon:volumes
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	0	standard	58	MID							57:9784063775907:2017-02-03	59:9784063775174:2014-07-03	canon:volumes
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	0	standard	61	MID							60:9784063775549:2016-06-03	62:9784063775198:2014-02-03	canon:volumes
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	0	standard	67	MID							66:9784063775211:2013-08-02	68:9784063775570:2015-11-02	canon:volumes
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	0	standard	71	MID							70:9784063775587:2016-06-03	72:9784063775594:2016-05-02	canon:volumes
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	0	standard	73	MID							72:9784063775594:2016-05-02	74:9784063775617:2015-04-03	canon:volumes
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	0	standard	82	MID							81:9784063775273:2013-06-03	83:9784063775938:2017-04-03	canon:volumes
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	0	standard	88	MID							87:9784063775327:2014-06-03	91:9784063775976:2017-03-03	canon:volumes
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	0	standard	89	MID							87:9784063775327:2014-06-03	91:9784063775976:2017-03-03	canon:volumes
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	0	standard	90	MID							87:9784063775327:2014-06-03	91:9784063775976:2017-03-03	canon:volumes
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	0	standard	92	MID							91:9784063775976:2017-03-03	93:9784063775648:2015-10-02	canon:volumes
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	0	standard	98	MID							97:9784063775686:2015-05-01	101:9784063775334:2014-07-03	canon:volumes
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	0	standard	99	MID							97:9784063775686:2015-05-01	101:9784063775334:2014-07-03	canon:volumes
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	0	standard	100	MID							97:9784063775686:2015-05-01	101:9784063775334:2014-07-03	canon:volumes
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	6	MID							5:9784065107904:2018-05	9:9784063775709:2017-07-03	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	7	MID							5:9784065107904:2018-05	9:9784063775709:2017-07-03	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	8	MID							5:9784065107904:2018-05	9:9784063775709:2017-07-03	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	12	MID							11:9784063775723:2017-05-02	13:9784063775730:2017-06-02	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	14	MID							13:9784063775730:2017-06-02	18:9784063775402:2016-03-03	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	15	MID							13:9784063775730:2017-06-02	18:9784063775402:2016-03-03	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	16	MID							13:9784063775730:2017-06-02	18:9784063775402:2016-03-03	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	17	MID							13:9784063775730:2017-06-02	18:9784063775402:2016-03-03	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	21	MID							20:9784063775754:2017-11-02	22:9784063775082:2014-08-01	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	25	MID							24:9784063775778:2018-02-02	32:9784063775433:2015-03-03	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	26	MID							24:9784063775778:2018-02-02	32:9784063775433:2015-03-03	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	27	MID							24:9784063775778:2018-02-02	32:9784063775433:2015-03-03	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	28	MID							24:9784063775778:2018-02-02	32:9784063775433:2015-03-03	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	29	MID							24:9784063775778:2018-02-02	32:9784063775433:2015-03-03	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	30	MID							24:9784063775778:2018-02-02	32:9784063775433:2015-03-03	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	31	MID							24:9784063775778:2018-02-02	32:9784063775433:2015-03-03	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	33	MID							32:9784063775433:2015-03-03	40:9784063775815:2017-09-01	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	34	MID							32:9784063775433:2015-03-03	40:9784063775815:2017-09-01	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	35	MID							32:9784063775433:2015-03-03	40:9784063775815:2017-09-01	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	36	MID							32:9784063775433:2015-03-03	40:9784063775815:2017-09-01	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	37	MID							32:9784063775433:2015-03-03	40:9784063775815:2017-09-01	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	38	MID							32:9784063775433:2015-03-03	40:9784063775815:2017-09-01	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	39	MID							32:9784063775433:2015-03-03	40:9784063775815:2017-09-01	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	47	MID							46:9784063775877:2018-04-03	51:9784063775518:2016-04-01	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	48	MID							46:9784063775877:2018-04-03	51:9784063775518:2016-04-01	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	49	MID							46:9784063775877:2018-04-03	51:9784063775518:2016-04-01	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	50	MID							46:9784063775877:2018-04-03	51:9784063775518:2016-04-01	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	52	MID							51:9784063775518:2016-04-01	58:9784063775532:2015-02-03	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	53	MID							51:9784063775518:2016-04-01	58:9784063775532:2015-02-03	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	54	MID							51:9784063775518:2016-04-01	58:9784063775532:2015-02-03	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	55	MID							51:9784063775518:2016-04-01	58:9784063775532:2015-02-03	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	56	MID							51:9784063775518:2016-04-01	58:9784063775532:2015-02-03	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	57	MID							51:9784063775518:2016-04-01	58:9784063775532:2015-02-03	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	59	MID							58:9784063775532:2015-02-03	61:9784063775181:2014-01-04	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	60	MID							58:9784063775532:2015-02-03	61:9784063775181:2014-01-04	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	62	MID							61:9784063775181:2014-01-04	67:9784063775914:2018-05-02	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	63	MID							61:9784063775181:2014-01-04	67:9784063775914:2018-05-02	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	64	MID							61:9784063775181:2014-01-04	67:9784063775914:2018-05-02	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	65	MID							61:9784063775181:2014-01-04	67:9784063775914:2018-05-02	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	66	MID							61:9784063775181:2014-01-04	67:9784063775914:2018-05-02	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	68	MID							67:9784063775914:2018-05-02	71:9784063775921:2017-09-01	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	69	MID							67:9784063775914:2018-05-02	71:9784063775921:2017-09-01	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	70	MID							67:9784063775914:2018-05-02	71:9784063775921:2017-09-01	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	72	MID							71:9784063775921:2017-09-01	73:9784063775600:2016-02-03	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	74	MID							73:9784063775600:2016-02-03	82:9784063775280:2014-02-03	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	75	MID							73:9784063775600:2016-02-03	82:9784063775280:2014-02-03	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	76	MID							73:9784063775600:2016-02-03	82:9784063775280:2014-02-03	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	77	MID							73:9784063775600:2016-02-03	82:9784063775280:2014-02-03	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	78	MID							73:9784063775600:2016-02-03	82:9784063775280:2014-02-03	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	79	MID							73:9784063775600:2016-02-03	82:9784063775280:2014-02-03	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	80	MID							73:9784063775600:2016-02-03	82:9784063775280:2014-02-03	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	81	MID							73:9784063775600:2016-02-03	82:9784063775280:2014-02-03	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	83	MID							82:9784063775280:2014-02-03	88:9784063775945:2017-05-02	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	84	MID							82:9784063775280:2014-02-03	88:9784063775945:2017-05-02	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	85	MID							82:9784063775280:2014-02-03	88:9784063775945:2017-05-02	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	86	MID							82:9784063775280:2014-02-03	88:9784063775945:2017-05-02	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	87	MID							82:9784063775280:2014-02-03	88:9784063775945:2017-05-02	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	91	MID							90:9784063775969:2018-03-02	92:9784063775983:2018-03-02	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	93	MID							92:9784063775983:2018-03-02	98:9784063775990:2017-12-01	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	94	MID							92:9784063775983:2018-03-02	98:9784063775990:2017-12-01	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	95	MID							92:9784063775983:2018-03-02	98:9784063775990:2017-12-01	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	96	MID							92:9784063775983:2018-03-02	98:9784063775990:2017-12-01	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	97	MID							92:9784063775983:2018-03-02	98:9784063775990:2017-12-01	canon:extra[0]
+NOHIT	mizuki-shigeru-manga-dai-zenshuu	水木しげる漫画大全集	1	shinsoban	101	MID							100:9784063781519:2018-02-02	102:9784063781526:2018-04-03	canon:extra[0]
+REJECT:本番に在る	chotto-morimashita	ちょっと盛りました。	0	standard	1	LEAD	9784063848557	2013-04	ちょっと盛りました。(1)	にしもとひでお	講談社	local	::	3:9784063950021:2014-01-17	seed4
+REJECT:本番に在る	chotto-morimashita	ちょっと盛りました。	0	standard	2	LEAD	9784063949209	2013-08	ちょっと盛りました。(2)	にしもとひでお	講談社	local	::	3:9784063950021:2014-01-17	seed4
+REJECT:版元違い	pachisuro-de-atta-zenbu-umai-hanashi-zetto	パチスロであった全部旨い話Z	0	standard	1	LEAD	9784861913846	2008-03	パチスロであった全部旨い話Z(其の1)	村上真裕	白夜書房	local	::	9:9784865350562:2014-01	seed4
+REJECT:版元違い	pachisuro-de-atta-zenbu-umai-hanashi-zetto	パチスロであった全部旨い話Z	0	standard	2	LEAD	9784861914836	2008-11	パチスロであった全部旨い話Z(其の2)	村上真裕	白夜書房	local	::	9:9784865350562:2014-01	seed4
+REJECT:版元違い	pachisuro-de-atta-zenbu-umai-hanashi-zetto	パチスロであった全部旨い話Z	0	standard	3	LEAD	9784861915123	2009-03	パチスロであった全部旨い話Z(其の3)	村上真裕	白夜書房	local	::	9:9784865350562:2014-01	seed4
+REJECT:版元違い	pachisuro-de-atta-zenbu-umai-hanashi-zetto	パチスロであった全部旨い話Z	0	standard	4	LEAD	9784861915611	2009-09	パチスロであった全部旨い話Z(其の4)	村上真裕	白夜書房	local	::	9:9784865350562:2014-01	seed4
+REJECT:版元違い	pachisuro-de-atta-zenbu-umai-hanashi-zetto	パチスロであった全部旨い話Z	0	standard	5	LEAD	9784861916359	2010-06	パチスロであった全部旨い話Z(其の5)	村上真裕	白夜書房	local	::	9:9784865350562:2014-01	seed4
+REJECT:版元違い	pachisuro-de-atta-zenbu-umai-hanashi-zetto	パチスロであった全部旨い話Z	0	standard	6	LEAD	9784861917028	2011-01	パチスロであった全部旨い話Z(其の6)	村上真裕	白夜書房	local	::	9:9784865350562:2014-01	seed4
+REJECT:版元違い	pachisuro-de-atta-zenbu-umai-hanashi-zetto	パチスロであった全部旨い話Z	0	standard	7	LEAD	9784861918506	2011-12	パチスロであった全部旨い話Z(其の7)	村上真裕	白夜書房	local	::	9:9784865350562:2014-01	seed4
+APPLY	pachisuro-de-atta-zenbu-umai-hanashi-zetto	パチスロであった全部旨い話Z	0	standard	8	LEAD	9784906936304	2012-11	パチスロであった全部旨い話Z(其の8)	村上真裕	ガイドワークス	local	::	9:9784865350562:2014-01	seed4
+REJECT:本番に在る,版元違い	ramen-daisuki-koizumi-san-narumi-2014	ラーメン大好き小泉さん	0	standard	12	MID	9784253297165	2024-12	ラーメン大好き小泉さん 12	鳴見なる	秋田書店	local	11:9784801980907:2023-07-11	14:9784253004343:2025-10-08	seed4
+REJECT:本番に在る,版元違い	ramen-daisuki-koizumi-san-narumi-2014	ラーメン大好き小泉さん	0	standard	13	MID	9784253297189	2025-04	ラーメン大好き小泉さん 13	鳴見なる	秋田書店	local	11:9784801980907:2023-07-11	14:9784253004343:2025-10-08	seed4
+REJECT:ISBN連番の外,本番に在る,次巻より後	jinrou-game	人狼ゲーム	0	standard	2	MID	9784801978256	2022-08	人狼ゲーム ロスト・エデン(2)	麗太朗/川上亮	竹書房	local	1:9784812487204:2014-07	3:9784801953017:2015-07	canon:volumes
+APPLY	nippon-jinbutsushi	日本人物史	0	standard	1	LEAD	9784904826720	2012-09	日本人物史れは歴史のれ 1	つぼい　こう	朝日学生新聞社	live	::	4:9784907150273:2014-05-30	seed4
+APPLY	nippon-jinbutsushi	日本人物史	0	standard	2	LEAD	9784904826898	2013-03	日本人物史れは歴史のれ 2	つぼい　こう	朝日学生新聞社	live	::	4:9784907150273:2014-05-30	seed4
+APPLY	nippon-jinbutsushi	日本人物史	0	standard	3	LEAD	9784907150112	2013-10	日本人物史れは歴史のれ 3	つぼい　こう	朝日学生新聞社	live	::	4:9784907150273:2014-05-30	seed4
+REJECT:前巻より前,本番に在る,版元違い,著者違い	itadakimasu-uekan-2015	いただきます	0	standard	3	MID	9784091300874	2005-01	いただきます(3)	吉原由起	小学館	local	2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+REJECT:前巻より前,本番に在る,版元違い,著者違い	itadakimasu-uekan-2015	いただきます	0	standard	4	MID	9784091301536	2005-06	いただきます(4)	吉原由起	小学館	local	2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+REJECT:前巻より前,本番に在る,版元違い,著者違い	itadakimasu-uekan-2015	いただきます	0	standard	5	MID	9784091232557	1994-05	いただきます!(5)	山田貴敏	小学館	local	2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+REJECT:前巻より前,本番に在る,版元違い,著者違い	itadakimasu-uekan-2015	いただきます	0	standard	6	MID	9784091232564	1994-08	いただきます!(6)	山田貴敏	小学館	local	2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+REJECT:前巻より前,本番に在る,版元違い,著者違い	itadakimasu-uekan-2015	いただきます	0	standard	7	MID	9784091232571	1994-11	いただきます!(7)	山田貴敏	小学館	local	2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+REJECT:前巻より前,本番に在る,版元違い,著者違い	itadakimasu-uekan-2015	いただきます	0	standard	8	MID	9784091232588	1995-01	いただきます!(8)	山田貴敏	小学館	local	2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+REJECT:前巻より前,本番に在る,版元違い,著者違い	itadakimasu-uekan-2015	いただきます	0	standard	9	MID	9784091232595	1995-04	いただきます!(9)	山田貴敏	小学館	local	2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+REJECT:前巻より前,本番に在る,版元違い,著者違い	itadakimasu-uekan-2015	いただきます	0	standard	10	MID	9784091232601	1995-07	いただきます!(10)	山田貴敏	小学館	local	2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+REJECT:前巻より前,本番に在る,版元違い,著者違い	itadakimasu-uekan-2015	いただきます	0	standard	11	MID	9784091235817	1995-08	いただきます!(11)	山田貴敏	小学館	local	2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	12	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	13	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	14	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	15	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	16	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	17	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	18	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	19	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	20	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	21	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	22	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	23	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	24	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	25	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	26	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	27	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	28	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	29	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+REJECT:前巻より前,版元違い	itadakimasu-uekan-2015	いただきます	0	standard	30	MID	9784896222685	2009-12	いただきますごちそうさま(vol.30)		幼年教育・子育て支援推進機構	live	2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+REJECT:前巻より前,版元違い	itadakimasu-uekan-2015	いただきます	0	standard	31	MID	9784896222692	2010-03	いただきますごちそうさま(vol.31)		幼年教育・子育て支援推進機構	live	2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	32	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	33	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	34	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	35	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	36	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	37	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	38	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	39	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	40	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	41	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	42	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	43	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	44	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	45	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	46	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	47	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	48	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	49	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	itadakimasu-uekan-2015	いただきます	0	standard	50	MID							2:9784253159432:2016-06-16	51:9784253159906:2018-06	seed4
+NOHIT	bouken-kyouryuukan	まんが 冒険恐竜館	0	standard	1	LEAD							::	2:9784406058315:2015-02-25	seed4
+APPLY	kemono-otoko-to-yuutousei-joshi	ケモノ男子と優等生女子	0	standard	1	LEAD	9784864950718	2014-11	ケモノ男子と優等生女子〜秘密の調教〜(1)	渡辺くらこ	秋水社	local	::	3:9784864950930:2015-05-12	seed4
+APPLY	kemono-otoko-to-yuutousei-joshi	ケモノ男子と優等生女子	0	standard	2	LEAD	9784864950725	2014-11	ケモノ男子と優等生女子〜秘密の調教〜(2)	渡辺くらこ	秋水社	local	::	3:9784864950930:2015-05-12	seed4
+NOHIT	hitokui-origin	ヒトクイ-origin-	0	standard	1	LEAD							::	3:9784091265869:2015-11-12	seed4
+NOHIT	hitokui-origin	ヒトクイ-origin-	0	standard	2	LEAD							::	3:9784091265869:2015-11-12	seed4
+NOHIT	booska-plus	ブースカプラス	0	standard	1	LEAD							::	2:9784864684132:2015-04-04	seed4
+APPLY	shitsuji-emu	執事M	0	standard	1	LEAD	9784758059299	2014-06	執事M(1)	佐倉牡丹	一迅社	live	::	3:9784758030304:2015-04	seed4
+APPLY	shitsuji-emu	執事M	0	standard	2	LEAD	9784758059626	2014-10	執事M(2)	佐倉牡丹	一迅社	live	::	3:9784758030304:2015-04	seed4
+NOHIT	gakkou-kachinukisen-jikken-taiketsu-2016	学校勝ちぬき戦 実験対決	0	standard	1	LEAD							::	21:9784023314399:2015-09-30	seed4
+NOHIT	gakkou-kachinukisen-jikken-taiketsu-2016	学校勝ちぬき戦 実験対決	0	standard	2	LEAD							::	21:9784023314399:2015-09-30	seed4
+NOHIT	gakkou-kachinukisen-jikken-taiketsu-2016	学校勝ちぬき戦 実験対決	0	standard	3	LEAD							::	21:9784023314399:2015-09-30	seed4
+NOHIT	gakkou-kachinukisen-jikken-taiketsu-2016	学校勝ちぬき戦 実験対決	0	standard	4	LEAD							::	21:9784023314399:2015-09-30	seed4
+NOHIT	gakkou-kachinukisen-jikken-taiketsu-2016	学校勝ちぬき戦 実験対決	0	standard	5	LEAD							::	21:9784023314399:2015-09-30	seed4
+NOHIT	gakkou-kachinukisen-jikken-taiketsu-2016	学校勝ちぬき戦 実験対決	0	standard	6	LEAD							::	21:9784023314399:2015-09-30	seed4
+NOHIT	gakkou-kachinukisen-jikken-taiketsu-2016	学校勝ちぬき戦 実験対決	0	standard	7	LEAD							::	21:9784023314399:2015-09-30	seed4
+NOHIT	gakkou-kachinukisen-jikken-taiketsu-2016	学校勝ちぬき戦 実験対決	0	standard	8	LEAD							::	21:9784023314399:2015-09-30	seed4
+NOHIT	gakkou-kachinukisen-jikken-taiketsu-2016	学校勝ちぬき戦 実験対決	0	standard	9	LEAD							::	21:9784023314399:2015-09-30	seed4
+NOHIT	gakkou-kachinukisen-jikken-taiketsu-2016	学校勝ちぬき戦 実験対決	0	standard	10	LEAD							::	21:9784023314399:2015-09-30	seed4
+NOHIT	gakkou-kachinukisen-jikken-taiketsu-2016	学校勝ちぬき戦 実験対決	0	standard	11	LEAD							::	21:9784023314399:2015-09-30	seed4
+NOHIT	gakkou-kachinukisen-jikken-taiketsu-2016	学校勝ちぬき戦 実験対決	0	standard	12	LEAD							::	21:9784023314399:2015-09-30	seed4
+NOHIT	gakkou-kachinukisen-jikken-taiketsu-2016	学校勝ちぬき戦 実験対決	0	standard	13	LEAD							::	21:9784023314399:2015-09-30	seed4
+NOHIT	gakkou-kachinukisen-jikken-taiketsu-2016	学校勝ちぬき戦 実験対決	0	standard	14	LEAD							::	21:9784023314399:2015-09-30	seed4
+NOHIT	gakkou-kachinukisen-jikken-taiketsu-2016	学校勝ちぬき戦 実験対決	0	standard	15	LEAD							::	21:9784023314399:2015-09-30	seed4
+NOHIT	gakkou-kachinukisen-jikken-taiketsu-2016	学校勝ちぬき戦 実験対決	0	standard	16	LEAD							::	21:9784023314399:2015-09-30	seed4
+NOHIT	gakkou-kachinukisen-jikken-taiketsu-2016	学校勝ちぬき戦 実験対決	0	standard	17	LEAD							::	21:9784023314399:2015-09-30	seed4
+NOHIT	gakkou-kachinukisen-jikken-taiketsu-2016	学校勝ちぬき戦 実験対決	0	standard	18	LEAD							::	21:9784023314399:2015-09-30	seed4
+NOHIT	gakkou-kachinukisen-jikken-taiketsu-2016	学校勝ちぬき戦 実験対決	0	standard	19	LEAD							::	21:9784023314399:2015-09-30	seed4
+NOHIT	gakkou-kachinukisen-jikken-taiketsu-2016	学校勝ちぬき戦 実験対決	0	standard	20	LEAD							::	21:9784023314399:2015-09-30	seed4
+NOHIT	rinjin-o-maiseyo	隣人を妹 (まい) せよ!	0	standard	1	LEAD							::	4:9784758082624:2016-06	seed4
+NOHIT	rinjin-o-maiseyo	隣人を妹 (まい) せよ!	0	standard	2	LEAD							::	4:9784758082624:2016-06	seed4
+NOHIT	rinjin-o-maiseyo	隣人を妹 (まい) せよ!	0	standard	3	LEAD							::	4:9784758082624:2016-06	seed4
+NOHIT	piisu-maker-kurogane	PEACE MAKER鐡	0	standard	1	LEAD							::	12:9784800006769:2017-04-14	seed4
+NOHIT	piisu-maker-kurogane	PEACE MAKER鐡	0	standard	2	LEAD							::	12:9784800006769:2017-04-14	seed4
+NOHIT	piisu-maker-kurogane	PEACE MAKER鐡	0	standard	3	LEAD							::	12:9784800006769:2017-04-14	seed4
+NOHIT	piisu-maker-kurogane	PEACE MAKER鐡	0	standard	4	LEAD							::	12:9784800006769:2017-04-14	seed4
+NOHIT	piisu-maker-kurogane	PEACE MAKER鐡	0	standard	5	LEAD							::	12:9784800006769:2017-04-14	seed4
+NOHIT	piisu-maker-kurogane	PEACE MAKER鐡	0	standard	6	LEAD							::	12:9784800006769:2017-04-14	seed4
+NOHIT	piisu-maker-kurogane	PEACE MAKER鐡	0	standard	7	LEAD							::	12:9784800006769:2017-04-14	seed4
+NOHIT	piisu-maker-kurogane	PEACE MAKER鐡	0	standard	8	LEAD							::	12:9784800006769:2017-04-14	seed4
+NOHIT	piisu-maker-kurogane	PEACE MAKER鐡	0	standard	9	LEAD							::	12:9784800006769:2017-04-14	seed4
+NOHIT	piisu-maker-kurogane	PEACE MAKER鐡	0	standard	10	LEAD							::	12:9784800006769:2017-04-14	seed4
+NOHIT	piisu-maker-kurogane	PEACE MAKER鐡	0	standard	11	LEAD							::	12:9784800006769:2017-04-14	seed4
+APPLY	romeo	Romeo	0	standard	1	LEAD	9784896442717	2015-12	ROMEO(1)	わたなべあじあ	サン・メディアレップ	live	::	2:9784896442984:2017-03	seed4
+APPLY	shin-nippon-jinbutsushi	新日本人物史	0	standard	1	LEAD	9784907150679	2015-10	新日本人物史(1)	つぼいこう	朝日学生新聞社	local	::	3:9784909064004:2017-01-30	overrides
+APPLY	shin-nippon-jinbutsushi	新日本人物史	0	standard	2	LEAD	9784907150686	2015-10	新日本人物史(2)	つぼいこう	朝日学生新聞社	local	::	3:9784909064004:2017-01-30	overrides
+APPLY	omatsuri-piisu-denkiten	おまつり!ピース電器店	0	standard	2	MID	9784868051770	2026-05	おまつり!ピース電器店(2)	能田　達規	ヒーローズ	local	1:9784864685801:2018-07-05	3:9784868052463:2026-12-04	seed4
+NOHIT	kemono-friends-comic-arakaruto	けものフレンズコミックアラカルト	0	standard	1	LEAD							::	3:9784041065006:2018-12-25	seed4
+REJECT:本番に在る,著者違い	kemono-friends-comic-arakaruto	けものフレンズコミックアラカルト	0	standard	2	LEAD	9784041059968	2017-08	けものフレンズ コミックアラカルト ジャパリパーク編 その2	少年エース編集部/けものフレンズプロジェクト	KADOKAWA	local	::	3:9784041065006:2018-12-25	seed4
+REJECT:本番に在る,版元違い	captain-harlock-jigen-koukai	キャプテンハーロック	0	standard	1	LEAD	9784253237215	2015-01	キャプテンハーロック〜次元航海〜(1)	松本零士/嶋星光壱	秋田書店	local	::	8:9784253237284:2018-04	seed4
+REJECT:本番に在る	captain-harlock-jigen-koukai	キャプテンハーロック	0	standard	2	LEAD	9784253237222	2015-06	キャプテンハーロック〜次元航海〜(2)	松本零士/嶋星光壱	秋田書店	local	::	8:9784253237284:2018-04	seed4
+REJECT:本番に在る	captain-harlock-jigen-koukai	キャプテンハーロック	0	standard	3	LEAD	9784253237239	2015-11	キャプテンハーロック〜次元航海〜(3)	松本零士/嶋星光壱	秋田書店	local	::	8:9784253237284:2018-04	seed4
+REJECT:本番に在る	captain-harlock-jigen-koukai	キャプテンハーロック	0	standard	4	LEAD	9784253237246	2016-05	キャプテンハーロック〜次元航海〜(4)	松本零士/嶋星光壱	秋田書店	local	::	8:9784253237284:2018-04	seed4
+REJECT:本番に在る	captain-harlock-jigen-koukai	キャプテンハーロック	0	standard	5	LEAD	9784253237253	2016-10	キャプテンハーロック〜次元航海〜(5)	松本零士/嶋星光壱	秋田書店	local	::	8:9784253237284:2018-04	seed4
+REJECT:本番に在る	captain-harlock-jigen-koukai	キャプテンハーロック	0	standard	6	LEAD	9784253237260	2017-05	キャプテンハーロック〜次元航海〜(6)	松本零士/嶋星光壱	秋田書店	local	::	8:9784253237284:2018-04	seed4
+REJECT:本番に在る	captain-harlock-jigen-koukai	キャプテンハーロック	0	standard	7	LEAD	9784253237277	2017-10	キャプテンハーロック〜次元航海〜(7)	松本零士/嶋星光壱	秋田書店	local	::	8:9784253237284:2018-04	seed4
+NOHIT	palm	パーム	0	standard	1	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	2	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	3	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	4	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	5	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	6	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	7	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	8	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	9	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	10	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	11	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	12	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	13	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	14	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	15	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	16	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	17	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	18	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	19	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	20	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	21	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	22	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	23	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	24	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	25	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	26	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	27	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	28	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	29	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	30	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	31	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	32	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	33	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	34	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	35	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	36	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	37	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	38	LEAD							::	40:9784403622571:2018-03	seed4
+NOHIT	palm	パーム	0	standard	39	LEAD							::	40:9784403622571:2018-03	seed4
+APPLY	heterogenia-ringisuteiko	ヘテロゲニア リンギスティコ	0	standard	6	MID	9784041154861	2024-10	ヘテロゲニア リンギスティコ 〜異種族言語学入門〜 (6)	瀬野　反人	KADOKAWA	local	5:9784041131589:2023-07-03	7:9784041170045:2026-08-07	seed4
+NOHIT	nanimo-kikazu-ni-dakasetekure	何も聞かずに抱かせてくれ	0	standard	1	LEAD							::	2:9784396701048:2018-09-25	seed4
+APPLY	houkago-pedal	放課後ペダル	0	standard	1	LEAD	9784253213196	2014-06	放課後ペダル	渡辺航	秋田書店	local	::	6:9784253217033:2018-05-08	seed4
+APPLY	houkago-pedal	放課後ペダル	0	standard	2	LEAD	9784253213202	2015-02	放課後ペダル(2)	渡辺航/プリンセス編集部	秋田書店	local	::	6:9784253217033:2018-05-08	seed4
+APPLY	houkago-pedal	放課後ペダル	0	standard	3	LEAD	9784253213776	2015-08	放課後ペダル(3)	渡辺航/プリンセス編集部	秋田書店	local	::	6:9784253217033:2018-05-08	seed4
+APPLY	houkago-pedal	放課後ペダル	0	standard	4	LEAD	9784253213783	2016-05	放課後ペダル(4)	渡辺航/プリンセス編集部	秋田書店	local	::	6:9784253217033:2018-05-08	seed4
+APPLY	houkago-pedal	放課後ペダル	0	standard	5	LEAD	9784253213790	2017-01	放課後ペダル(5)	渡辺航/プリンセス編集部	秋田書店	local	::	6:9784253217033:2018-05-08	seed4
+REJECT:本番に在る,版元違い,著者違い	hoshi-no-kirby-manpukupupupufantajii	星のカービィ	0	standard	1	LEAD	9784091403544	2007-08	星のカービィ! もーれつプププアワー!(1)	谷口 あさみ	小学館	local	::	2:9784091426598:2018-06	seed4
+APPLY	murabito-tensei	村人転生	0	standard	17	MID	9784575423204	2025-12	村人転生 最強のスローライフ(17)	イチソウヨウ/タカハシあん	双葉社	local	16:9784575421842:2025-06-21	18:9784575424546:2026-08-31	seed4
+NOHIT	hannintachi-no-file-kindaichi-shounen-no-file-gaiden	犯人たちの事件簿	0	standard	1	LEAD							::	3:9784065119044:2018-06-15	seed4
+NOHIT	hannintachi-no-file-kindaichi-shounen-no-file-gaiden	犯人たちの事件簿	0	standard	2	LEAD							::	3:9784065119044:2018-06-15	seed4
+APPLY	houga-purezen-joshikousei-houkichi-eiko-san	邦画プレゼン女子高生邦キチ!映子さん	0	standard	14	MID	9784834285406	2025-12	邦画プレゼン女子高生 邦キチ! 映子さん Season14	服部 昇大	ホーム社	local	13:9784834285390:2025-06-04	15:9784834285420:2026-07-10	seed4
+NOHIT	f1-sokuhou-guranpuri-tengoku	F1速報グランプリ天国	0	standard	1	LEAD							::	7:9784779640209:2019-11	seed4
+NOHIT	f1-sokuhou-guranpuri-tengoku	F1速報グランプリ天国	0	standard	2	LEAD							::	7:9784779640209:2019-11	seed4
+NOHIT	f1-sokuhou-guranpuri-tengoku	F1速報グランプリ天国	0	standard	3	LEAD							::	7:9784779640209:2019-11	seed4
+NOHIT	f1-sokuhou-guranpuri-tengoku	F1速報グランプリ天国	0	standard	4	LEAD							::	7:9784779640209:2019-11	seed4
+NOHIT	f1-sokuhou-guranpuri-tengoku	F1速報グランプリ天国	0	standard	5	LEAD							::	7:9784779640209:2019-11	seed4
+REJECT:本番に在る	f1-sokuhou-guranpuri-tengoku	F1速報グランプリ天国	0	standard	6	LEAD	9784779630767	2016-10	F1速報 グランプリ天国 LAP6	村山文夫	三栄	local	::	7:9784779640209:2019-11	seed4
+APPLY	netchuu-kobo-chan	熱中!コボちゃん	0	standard	10	MID	9784832258778	2022-08	熱中!コボちゃん10 おいしいお使い編	植田まさし	芳文社	local	9:9784832258655:2022-04-21	11:9784832258990:2023-04-24	seed4
+NOHIT	dainiji-chousen-sensou-yugio	第二次朝鮮戦争ユギオ	0	standard	1	LEAD							::	2:9784814918843:2019-01	seed4
+NOHIT	kantai-collection-kancolle-comic-a-ra-carte-kai	艦隊これくしょん-艦これ-コミックアラカルト改	0	standard	1	LEAD							::	20:9784041085080:2019-08-24	seed4
+NOHIT	kantai-collection-kancolle-comic-a-ra-carte-kai	艦隊これくしょん-艦これ-コミックアラカルト改	0	standard	2	LEAD							::	20:9784041085080:2019-08-24	seed4
+NOHIT	kantai-collection-kancolle-comic-a-ra-carte-kai	艦隊これくしょん-艦これ-コミックアラカルト改	0	standard	3	LEAD							::	20:9784041085080:2019-08-24	seed4
+NOHIT	kantai-collection-kancolle-comic-a-ra-carte-kai	艦隊これくしょん-艦これ-コミックアラカルト改	0	standard	4	LEAD							::	20:9784041085080:2019-08-24	seed4
+NOHIT	kantai-collection-kancolle-comic-a-ra-carte-kai	艦隊これくしょん-艦これ-コミックアラカルト改	0	standard	5	LEAD							::	20:9784041085080:2019-08-24	seed4
+NOHIT	kantai-collection-kancolle-comic-a-ra-carte-kai	艦隊これくしょん-艦これ-コミックアラカルト改	0	standard	6	LEAD							::	20:9784041085080:2019-08-24	seed4
+NOHIT	kantai-collection-kancolle-comic-a-ra-carte-kai	艦隊これくしょん-艦これ-コミックアラカルト改	0	standard	7	LEAD							::	20:9784041085080:2019-08-24	seed4
+NOHIT	kantai-collection-kancolle-comic-a-ra-carte-kai	艦隊これくしょん-艦これ-コミックアラカルト改	0	standard	8	LEAD							::	20:9784041085080:2019-08-24	seed4
+NOHIT	kantai-collection-kancolle-comic-a-ra-carte-kai	艦隊これくしょん-艦これ-コミックアラカルト改	0	standard	9	LEAD							::	20:9784041085080:2019-08-24	seed4
+NOHIT	kantai-collection-kancolle-comic-a-ra-carte-kai	艦隊これくしょん-艦これ-コミックアラカルト改	0	standard	10	LEAD							::	20:9784041085080:2019-08-24	seed4
+NOHIT	kantai-collection-kancolle-comic-a-ra-carte-kai	艦隊これくしょん-艦これ-コミックアラカルト改	0	standard	11	LEAD							::	20:9784041085080:2019-08-24	seed4
+NOHIT	kantai-collection-kancolle-comic-a-ra-carte-kai	艦隊これくしょん-艦これ-コミックアラカルト改	0	standard	12	LEAD							::	20:9784041085080:2019-08-24	seed4
+NOHIT	kantai-collection-kancolle-comic-a-ra-carte-kai	艦隊これくしょん-艦これ-コミックアラカルト改	0	standard	13	LEAD							::	20:9784041085080:2019-08-24	seed4
+NOHIT	kantai-collection-kancolle-comic-a-ra-carte-kai	艦隊これくしょん-艦これ-コミックアラカルト改	0	standard	14	LEAD							::	20:9784041085080:2019-08-24	seed4
+NOHIT	kantai-collection-kancolle-comic-a-ra-carte-kai	艦隊これくしょん-艦これ-コミックアラカルト改	0	standard	15	LEAD							::	20:9784041085080:2019-08-24	seed4
+NOHIT	kantai-collection-kancolle-comic-a-ra-carte-kai	艦隊これくしょん-艦これ-コミックアラカルト改	0	standard	16	LEAD							::	20:9784041085080:2019-08-24	seed4
+NOHIT	kantai-collection-kancolle-comic-a-ra-carte-kai	艦隊これくしょん-艦これ-コミックアラカルト改	0	standard	17	LEAD							::	20:9784041085080:2019-08-24	seed4
+NOHIT	kantai-collection-kancolle-comic-a-ra-carte-kai	艦隊これくしょん-艦これ-コミックアラカルト改	0	standard	18	LEAD							::	20:9784041085080:2019-08-24	seed4
+NOHIT	kantai-collection-kancolle-comic-a-ra-carte-kai	艦隊これくしょん-艦これ-コミックアラカルト改	0	standard	19	LEAD							::	20:9784041085080:2019-08-24	seed4
+NOHIT	ookisugite-kare-no-are-ga-sakitcho-shika-hairimasen	大きすぎて、 (彼のアレが) 先っちょしか入りません!	0	standard	1	LEAD							::	2:9784821139989:2020-11	seed4
+REJECT:本番に在る,版元違い	tsuma-to-boku-no-shoukibo-na-ikuji	妻と僕の小規模な育児	1	standard	13	MID	9784065411742	2025-10	妻と僕の小規模な育児(13)	福満 しげゆき	講談社	local	12:9784065392362:2025-04-18	15:9784065452141:2026-10-20	seed4
+REJECT:本番に在る,版元違い	tsuma-to-boku-no-shoukibo-na-ikuji	妻と僕の小規模な育児	1	standard	14	MID	9784065432204	2026-04	妻と僕の小規模な育児(14)	福満 しげゆき	講談社	local	12:9784065392362:2025-04-18	15:9784065452141:2026-10-20	seed4
+APPLY	senki-to-yobareta-otoko-ouke-ni-ansatsu-saretara-musume-o-hiroi-isshokenmei-ni-slow-life-o-hajimeru	戦鬼と呼ばれた(男)、王家に暗殺されたら娘を拾い、一緒にスローライフをはじめる	0	standard	6	MID	9784803020441	2024-12	戦鬼と呼ばれた男、王家に暗殺されたら娘を拾い、一緒にスローライフをはじめる innocent days(6)	田野かかし/ハーーナ殿下/DeeCHA	アース・スターエンターテイメント	local	5:9784803017601:2023-03-10	7:9784803023534:2026-08-24	seed4
+NOHIT	katakoi-kekkon	片恋結婚	0	standard	1	LEAD							::	2:9784821139996:2020-12	seed4
+NOHIT	hayato-kun-to-saho-chan-wa-honjitsu-mo-ichaama	隼人くんと早穂ちゃんは本日もいちゃ甘。	0	standard	1	LEAD							::	2:9784821139965:2020-11	seed4
+NOHIT	moto-yakuza-wa-shinshi-de-moujuu	(元) ヤクザは紳士で猛獣	0	standard	1	LEAD							::	2:9784821127665:2021-05	seed4
+REJECT:本番に在る	haishin-chuu-megami-channel	【配信中】女神チャンネル!	0	standard	1	LEAD	9784757567160	2020-06	【配信中】女神チャンネル!え、これ売名ですの!?(1)	徳山銀次郎/近江のこ	スクウェア・エニックス	local	::	2:9784757570535:2021-01-25	seed4
+APPLY	mirrorman-2d	ミラーマン2D	0	standard	6	MID	9784868051343	2025-12	ミラーマン2D(6)	久　正人/円谷プロダクション	ヒーローズ	local	5:9784864682862:2024-09-05	7:9784868052456:2026-12-04	seed4
+NOHIT	linkman	リンクマン	0	standard	1	LEAD							::	2:9784107724403:2021-11-09	seed4
+APPLY	seijo-yuusha-party-kara-kaikosareta-node-guild-o-tsukuttara-attohoomu-na-saikyou-guild-ni	聖女、勇者パーティーから解雇されたのでギルドを作ったらアットホームな最強ギルドに育ちました。	0	standard	4	MID	9784867946114	2025-07	聖女、勇者パーティーから解雇されたのでギルドを作ったらアットホームな最強ギルドに育ちました。@COMIC 第4巻	わかば	TOブックス	live	3:9784866998091:2023-04	5:9784868542537:2027-01-10	seed4
+NOHIT	collar-me	Collar me	0	standard	1	LEAD							::	2:9784403668333:2022-09-01	seed4
+NOHIT	honomi-bureikutsu	ほのみぶれいくっ!	0	standard	1	LEAD							::	2:9784861173905:2022-03	seed4
+REJECT:前巻より前	pittosporum	ピットスポルム	0	standard	2	MID	9784823603754	2022-10	ピットスポルム 二葉	三上志乃	ジーオーティー	local	1:9784823603747:2022-11	4:9784823605871:2024-01-04	seed4
+APPLY	pittosporum	ピットスポルム	0	standard	3	MID	9784823605833	2023-12	ピットスポルム 三葉	三上志乃	ジーオーティー	local	1:9784823603747:2022-11	4:9784823605871:2024-01-04	seed4
+NOHIT	kyuukoku-no-seijo-desu-kokugai-tsuihousareta-sarechaimashita	救国の聖女ですが、国外追放されちゃいましたー!?	0	standard	1	LEAD							::	2:9784758037488:2022-06	seed4
+NOHIT	sora-made-itchau	空までイっちゃう	0	standard	1	LEAD							::	2:9784253137904:2022-01-14	seed4
+REJECT:本番に在る	tsuihousareta-cheat-fuyo-majutsushi-wa-kimama-na-sekando-life-o-ouka-suru	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。	0	standard	11	MID	9784065372777	2024-09	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。 〜俺は武器だけじゃなく、あらゆるものに『強化ポイント』を付与できるし、俺の意思でいつでも効果を解除できるけど、残った人たち大丈夫?〜(11)	業務用餅/六志麻 あさ/kisui	講談社	local	10:9784065359518:2024-06-07	12:9784065378045:2024-11-08	seed4
+REJECT:本番に在る	tsuihousareta-cheat-fuyo-majutsushi-wa-kimama-na-sekando-life-o-ouka-suru	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。	0	standard	13	MID	9784065379349	2025-01	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。 〜俺は武器だけじゃなく、あらゆるものに『強化ポイント』を付与できるし、俺の意思でいつでも効果を解除できるけど、残った人たち大丈夫?〜(13)	業務用餅/六志麻 あさ/kisui	講談社	local	12:9784065378045:2024-11-08	22:9784065448977:2026-10-08	seed4
+REJECT:本番に在る	tsuihousareta-cheat-fuyo-majutsushi-wa-kimama-na-sekando-life-o-ouka-suru	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。	0	standard	14	MID	9784065391013	2025-04	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。 〜俺は武器だけじゃなく、あらゆるものに『強化ポイント』を付与できるし、俺の意思でいつでも効果を解除できるけど、残った人たち大丈夫?〜(14)	業務用餅/六志麻 あさ/kisui	講談社	local	12:9784065378045:2024-11-08	22:9784065448977:2026-10-08	seed4
+REJECT:本番に在る	tsuihousareta-cheat-fuyo-majutsushi-wa-kimama-na-sekando-life-o-ouka-suru	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。	0	standard	15	MID	9784065400937	2025-07	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。 〜俺は武器だけじゃなく、あらゆるものに『強化ポイント』を付与できるし、俺の意思でいつでも効果を解除できるけど、残った人たち大丈夫?〜(15)	業務用餅/六志麻 あさ/kisui	講談社	local	12:9784065378045:2024-11-08	22:9784065448977:2026-10-08	seed4
+REJECT:本番に在る	tsuihousareta-cheat-fuyo-majutsushi-wa-kimama-na-sekando-life-o-ouka-suru	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。	0	standard	16	MID	9784065401576	2025-08	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。 〜俺は武器だけじゃなく、あらゆるものに『強化ポイント』を付与できるし、俺の意思でいつでも効果を解除できるけど、残った人たち大丈夫?〜(16)	業務用餅/六志麻 あさ/kisui	講談社	local	12:9784065378045:2024-11-08	22:9784065448977:2026-10-08	seed4
+REJECT:本番に在る	tsuihousareta-cheat-fuyo-majutsushi-wa-kimama-na-sekando-life-o-ouka-suru	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。	0	standard	17	MID	9784065411179	2025-10	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。 〜俺は武器だけじゃなく、あらゆるものに『強化ポイント』を付与できるし、俺の意思でいつでも効果を解除できるけど、残った人たち大丈夫?〜(17)	業務用餅/六志麻 あさ/kisui	講談社	local	12:9784065378045:2024-11-08	22:9784065448977:2026-10-08	seed4
+REJECT:本番に在る	tsuihousareta-cheat-fuyo-majutsushi-wa-kimama-na-sekando-life-o-ouka-suru	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。	0	standard	18	MID	9784065414347	2025-11	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。 〜俺は武器だけじゃなく、あらゆるものに『強化ポイント』を付与できるし、俺の意思でいつでも効果を解除できるけど、残った人たち大丈夫?〜(18)	業務用餅/六志麻 あさ/kisui	講談社	local	12:9784065378045:2024-11-08	22:9784065448977:2026-10-08	seed4
+REJECT:本番に在る	tsuihousareta-cheat-fuyo-majutsushi-wa-kimama-na-sekando-life-o-ouka-suru	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。	0	standard	19	MID	9784065423127	2026-02	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。 〜俺は武器だけじゃなく、あらゆるものに『強化ポイント』を付与できるし、俺の意思でいつでも効果を解除できるけど、残った人たち大丈夫?〜(19)	業務用餅/六志麻 あさ/kisui	講談社	local	12:9784065378045:2024-11-08	22:9784065448977:2026-10-08	seed4
+REJECT:本番に在る	tsuihousareta-cheat-fuyo-majutsushi-wa-kimama-na-sekando-life-o-ouka-suru	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。	0	standard	20	MID	9784065434352	2026-05	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。 〜俺は武器だけじゃなく、あらゆるものに『強化ポイント』を付与できるし、俺の意思でいつでも効果を解除できるけど、残った人たち大丈夫?〜(20)	業務用餅/六志麻 あさ/kisui	講談社	local	12:9784065378045:2024-11-08	22:9784065448977:2026-10-08	seed4
+REJECT:本番に在る	tsuihousareta-cheat-fuyo-majutsushi-wa-kimama-na-sekando-life-o-ouka-suru	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。	0	standard	21	MID	9784065444580	2026-08	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。 〜俺は武器だけじゃなく、あらゆるものに『強化ポイント』を付与できるし、俺の意思でいつでも効果を解除できるけど、残った人たち大丈夫?〜(21)	業務用餅/六志麻 あさ/kisui	講談社	live	12:9784065378045:2024-11-08	22:9784065448977:2026-10-08	seed4
+NOHIT	16-nen-kimi-o-omou-to-konnani-ookiku	16年、君を想うとこんなに大きく…♡	0	standard	1	LEAD							::	2:9784821155613:2023-04	seed4
+APPLY	sekai-saikyou-no-majo-hajimemashita	世界最強の魔女、始めました	0	standard	6	MID	9784065377864	2024-11	世界最強の魔女、始めました 〜私だけ『攻略サイト』を見れる世界で自由に生きます〜(6)	戸賀 環/坂木 持丸/riritto	講談社	live	5:9784065360897:2024-08-07	14:9784065448229:2026-10-08	seed4
+REJECT:本番に在る	sekai-saikyou-no-majo-hajimemashita	世界最強の魔女、始めました	0	standard	7	MID	9784065382202	2025-02	世界最強の魔女、始めました 〜私だけ『攻略サイト』を見れる世界で自由に生きます〜(7)	戸賀 環/坂木 持丸/riritto	講談社	local	5:9784065360897:2024-08-07	14:9784065448229:2026-10-08	seed4
+REJECT:本番に在る	sekai-saikyou-no-majo-hajimemashita	世界最強の魔女、始めました	0	standard	8	MID	9784065392652	2025-05	世界最強の魔女、始めました 〜私だけ『攻略サイト』を見れる世界で自由に生きます〜(8)	戸賀 環/坂木 持丸/riritto	講談社	local	5:9784065360897:2024-08-07	14:9784065448229:2026-10-08	seed4
+REJECT:本番に在る	sekai-saikyou-no-majo-hajimemashita	世界最強の魔女、始めました	0	standard	9	MID	9784065401156	2025-08	世界最強の魔女、始めました 〜私だけ『攻略サイト』を見れる世界で自由に生きます〜(9)	戸賀 環/坂木 持丸/riritto	講談社	local	5:9784065360897:2024-08-07	14:9784065448229:2026-10-08	seed4
+REJECT:本番に在る	sekai-saikyou-no-majo-hajimemashita	世界最強の魔女、始めました	0	standard	10	MID	9784065415115	2025-11	世界最強の魔女、始めました 〜私だけ『攻略サイト』を見れる世界で自由に生きます〜(10)	戸賀 環/坂木 持丸/riritto	講談社	local	5:9784065360897:2024-08-07	14:9784065448229:2026-10-08	seed4
+REJECT:本番に在る	sekai-saikyou-no-majo-hajimemashita	世界最強の魔女、始めました	0	standard	11	MID	9784065422434	2026-02	世界最強の魔女、始めました 〜私だけ『攻略サイト』を見れる世界で自由に生きます〜(11)	戸賀 環/坂木 持丸/riritto	講談社	local	5:9784065360897:2024-08-07	14:9784065448229:2026-10-08	seed4
+REJECT:本番に在る	sekai-saikyou-no-majo-hajimemashita	世界最強の魔女、始めました	0	standard	12	MID	9784065432495	2026-05	世界最強の魔女、始めました 〜私だけ『攻略サイト』を見れる世界で自由に生きます〜(12)	戸賀 環/坂木 持丸/riritto	講談社	live	5:9784065360897:2024-08-07	14:9784065448229:2026-10-08	seed4
+REJECT:本番に在る	sekai-saikyou-no-majo-hajimemashita	世界最強の魔女、始めました	0	standard	13	MID	9784065442999	2026-08	世界最強の魔女、始めました 〜私だけ『攻略サイト』を見れる世界で自由に生きます〜(13)	戸賀 環/坂木 持丸/riritto	講談社	live	5:9784065360897:2024-08-07	14:9784065448229:2026-10-08	seed4
+NOHIT	moto-yan-ooeru-wa-kojirase-elite-no-iinari-omocha	元ヤンOLはこじらせエリートのいいなりおもちゃ♡	0	standard	1	LEAD							::	2:9784821156191:2023-07	seed4
+NOHIT	minami-kun-wa-sono-koe-ni-jirasaretai	南くんはその声に焦らされたい	0	standard	1	LEAD							::	2:9784773062618:2023-09	seed4
+NOHIT	kiken-na-chouai	危険な寵愛	0	standard	1	LEAD							::	2:9784776754237:2023-03	seed4
+NOHIT	chou-ten-chan	超てんちゃん!	0	standard	1	LEAD							::	2:9784046827012:2023-08-23	seed4
+APPLY	dragon-circus	DRAGON CIRCUS	0	standard	2	MID	9784868051329	2025-12	DRAGON CIRCUS(2)	清水　栄一/下口　智裕	ヒーローズ	local	1:9784864682640:2024-07-12	3:9784868052487:2026-12-04	seed4
+APPLY	inoz	INOZ	0	standard	2	MID	9784098635238	2025-07	INOZ -55歳から歩いて作る日本地図ー(2)	こやす 珠世	小学館	local	1:9784098627936:2024-06	3:9784098641192:2026-09-30	seed4
+REJECT:ISBN連番の外,本番に在る	nanda-kanda-de-onna-no-hashori-michi	なんだかんだで!女のはしょり道	0	standard	1	LEAD	9784065357255	2024-05	なんだかんだで! 女のはしょり道	伊藤 理佐	講談社	local	::	6:9784065357255:2024-05-15	seed4
+NOHIT	nanda-kanda-de-onna-no-hashori-michi	なんだかんだで!女のはしょり道	0	standard	2	LEAD							::	6:9784065357255:2024-05-15	seed4
+NOHIT	nanda-kanda-de-onna-no-hashori-michi	なんだかんだで!女のはしょり道	0	standard	3	LEAD							::	6:9784065357255:2024-05-15	seed4
+NOHIT	nanda-kanda-de-onna-no-hashori-michi	なんだかんだで!女のはしょり道	0	standard	4	LEAD							::	6:9784065357255:2024-05-15	seed4
+NOHIT	nanda-kanda-de-onna-no-hashori-michi	なんだかんだで!女のはしょり道	0	standard	5	LEAD							::	6:9784065357255:2024-05-15	seed4
+NOHIT	yuru-days	ゆるデイズ	0	standard	1	LEAD							::	2:9784801983724:2024-07-17	seed4
+APPLY	blue-flight	ブルーフライト	0	standard	4	MID	9784098732210	2025-12	ブルーフライト〜グラハン女子物語〜(4)	のの子	小学館	local	3:9784098730612:2025-07-21	5:9784098734078:2026-09-05	seed4
+APPLY	hereteku-no-ana	ヘレテクの穴	0	standard	1	LEAD	9784344041387	2023-07	ヘレテクの穴1	沖田 ×華	幻冬舎	live	::	2:9784344042964:2024-06-05	seed4
+REJECT:本番に在る	ore-to-mou-ichido-hatsukoi	俺ともう一度、初恋。	0	standard	1	LEAD	9784065314067	2023-05	俺ともう一度、初恋。(1)	長谷垣 なるみ	講談社	local	::	3:9784065349687:2024-03-13	seed4
+REJECT:本番に在る	ore-to-mou-ichido-hatsukoi	俺ともう一度、初恋。	0	standard	2	LEAD	9784065329269	2023-09	俺ともう一度、初恋。(2)	長谷垣 なるみ	講談社	local	::	3:9784065349687:2024-03-13	seed4
+REJECT:版元違い,著者違い	love-taishitsu	恋愛体質	0	standard	1	LEAD	9784062116596	2003-04	恋愛体質	梨花	講談社	live	::	2:9784864956420:2024-03	seed4
+REJECT:ISBN連番の外,本番に在る,次巻より後,版元違い,著者違い	shintouki	神統記	0	standard	1	LEAD	9784391152555	2018-11	神統記(テオゴニア)1	青山 俊介/谷舞 司/河野 紘一郎	主婦と生活社	local	::	11:9784391162301:2024-04-05	seed4
+APPLY	shintouki	神統記	0	standard	2	LEAD	9784391152173	2018-07	神統記(テオゴニア) 2	谷舞 司/河野 紘一郎	主婦と生活社	live	::	11:9784391162301:2024-04-05	seed4
+APPLY	shintouki	神統記	0	standard	3	LEAD	9784391152791	2019-06	神統記(テオゴニア)3	谷舞 司/河野 紘一郎	主婦と生活社	live	::	11:9784391162301:2024-04-05	seed4
+REJECT:ISBN連番の外,本番に在る,次巻より後	shintouki	神統記	0	standard	4	LEAD	9784391154573	2020-04	神統記(テオゴニア)4	青山 俊介/谷舞 司/河野 紘一郎	主婦と生活社	local	::	11:9784391162301:2024-04-05	seed4
+REJECT:ISBN連番の外,本番に在る,次巻より後	shintouki	神統記	0	standard	5	LEAD	9784391155242	2020-10	神統記(テオゴニア) 5	青山 俊介/谷舞 司/河野 紘一郎	主婦と生活社	local	::	11:9784391162301:2024-04-05	seed4
+REJECT:本番に在る	shintouki	神統記	0	standard	6	LEAD	9784391155952	2021-05	神統記(テオゴニア) 6	青山 俊介/谷舞 司/河野 紘一郎	主婦と生活社	local	::	11:9784391162301:2024-04-05	seed4
+REJECT:本番に在る	shintouki	神統記	0	standard	7	LEAD	9784391155969	2021-12	神統記(テオゴニア) 7	青山 俊介/谷舞 司/河野 紘一郎	主婦と生活社	local	::	11:9784391162301:2024-04-05	seed4
+REJECT:本番に在る	shintouki	神統記	0	standard	8	LEAD	9784391157772	2022-07	神統記(テオゴニア) 8	青山 俊介/谷舞 司/河野 紘一郎	主婦と生活社	local	::	11:9784391162301:2024-04-05	seed4
+REJECT:本番に在る	shintouki	神統記	0	standard	9	LEAD	9784391159110	2023-01	神統記(テオゴニア) 9	青山 俊介/谷舞 司/河野 紘一郎	主婦と生活社	local	::	11:9784391162301:2024-04-05	seed4
+REJECT:本番に在る	shintouki	神統記	0	standard	10	LEAD	9784391160291	2023-08	神統記(テオゴニア)10	青山 俊介/谷舞 司/河野 紘一郎	主婦と生活社	local	::	11:9784391162301:2024-04-05	seed4
+NOHIT	ura-aka-otoko-wa-dakaretai-seme-sama-no-1-ni-xx-saretai	裏アカ男子は抱かれたい攻め様No.1にXXされたい	0	standard	1	LEAD							::	3:9784910582382:2024-04	seed4
+NOHIT	ura-aka-otoko-wa-dakaretai-seme-sama-no-1-ni-xx-saretai	裏アカ男子は抱かれたい攻め様No.1にXXされたい	0	standard	2	LEAD							::	3:9784910582382:2024-04	seed4
+NOHIT	saitsuyo-akuyaku-reijou-nikki	さいつよ☆悪役令嬢日記	0	standard	1	LEAD							::	2:9784866454344:2025-08-01	seed4
+NOHIT	kiraware-reijou-wa-gin-no-ouji-ni-amayakasareru	嫌われ令嬢は銀の王子に甘やかされる	0	standard	1	LEAD							::	2:9784776755586:2025-12-08	seed4
+APPLY	inukai-kun-no-shippo	犬飼くんのシッポ	0	standard	2	MID	9784592231042	2025-12	犬飼くんのシッポー恋するMOON DOGスピンオフー 2	山田 南平	白泉社	local	1:9784592230748:2025-05-16	3:9784592231547:2026-08-07	seed4
+NOHIT	sanjigen-okotowarinawatashinokeiyakukekkon	3次元お断りな私の契約結婚	0	standard	3	MID							2:9784575340105:2026-08-17	4:9784575340266:2026-12-17	seed4

@@ -10,7 +10,7 @@ metadata:
 - [カナ正規化の誤merge](kana_normalize_drops_latin_digits.md)
 - [特装版のみ版のレーベル残り](special_only_edition_imprint_leak.md)
 - [鉄腕アトム型=版タブ先頭欠け](edition_lead_gap_atom_type.md)
-- [巻抜け充填3段](volgap_fill_pipeline_2026_09.md)
+- [巻抜け充填3段+11/1見直し(81頁直せる・副題照合)](volgap_fill_pipeline_2026_09.md)
 - [run分裂頁に足すと二重](volgap_edition_split_double_add.md)
 - [巻抜け=ISBN無し版除外](volgap_skip_isbnless_edition.md)
 - [巻抜け仮想](volgap_virtual_tool_trigger.md)

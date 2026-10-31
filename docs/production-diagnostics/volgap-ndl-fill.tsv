@@ -1,4 +1,9 @@
 tier	stem	title	route	ei	etype	label	imprint	number	kind	isbn	date	rak_title	rak_author	rak_publisher	g_pub	g_isbn	g_date	g_author	g_token	main_prefix	prev_num	prev_isbn	prev_date	next_num	next_isbn	next_date	publisher	n_cands	why	cover
+ACCEPT	heterogenia-ringisuteiko	ヘテロゲニア リンギスティコ	seed4	0	standard	通常版	角川コミックス・エース	6	MID	9784041154861	2024-11	ヘテロゲニア リンギスティコ : 異種族言語学入門. 6	瀬野, 反人	KADOKAWA	o	o	o	o	o	9784041	5	9784041131589	2023-07-03	7	9784041170045	2026-08-07	KADOKAWA	1	版元o+ISBN連番o+日付o	
+ACCEPT	inukai-kun-no-shippo	犬飼くんのシッポ	seed4	0	standard	通常版	HC Special	2	MID	9784592231042	2025-12	犬飼くんのシッポ : 恋するMOON DOGスピンオフ. 2	山田, 南平	白泉社	o	o	o	o	o	9784592	1	9784592230748	2025-05-16	3	9784592231547	2026-08-07	白泉社	1	版元o+ISBN連番o+日付o	
+ACCEPT	murabito-tensei	村人転生	seed4	0	standard	通常版	モンスターコミックス	17	MID	9784575423204	2025-12	村人転生 : 最強のスローライフ. 17	イチソウヨウ/タカハシ, あん	双葉社	o	o	o	o	o	9784575	16	9784575421842	2025-06-21	18	9784575424546	2026-08-31	双葉社	1	版元o+ISBN連番o+日付o	
+ACCEPT	sanjigen-okotowarinawatashinokeiyakukekkon	3次元お断りな私の契約結婚	seed4	0	standard	通常版		3	MID	9784575340198	2026-10	3次元お断りな私の契約結婚. 3	伊吹, 楓/橘, しづき	双葉社	o	o	o	o	o	9784575	2	9784575340105	2026-08-17	4	9784575340266	2026-12-17	双葉社	1	版元o+ISBN連番o+日付o	
+ACCEPT	senki-to-yobareta-otoko-ouke-ni-ansatsu-saretara-musume-o-hiroi-isshokenmei-ni-slow-life-o-hajimeru	戦鬼と呼ばれた(男)、王家に暗殺されたら娘を拾い、一緒にスローライフをはじめる	seed4	0	standard	通常版	EARTH STAR COMICS	6	MID	9784803020441	2024-12	戦鬼と呼ばれた(男)、王家に暗殺されたら娘を拾い、一緒にスローライフをはじめる : innocent days. 06	ハーーナ殿下/田野, かかし	アース・スターエンターテイメント	o	o	o	o	o	9784803	5	9784803017601	2023-03-10	7	9784803023534	2026-08-24	アース・スターエンターテイメント	1	版元o+ISBN連番o+日付o	
 REJECT_EDITION	manhattan-op	マンハッタン・オプ	seed4	0	bunkobon	文庫版	光文社文庫	2	MID	9784789700207	1982-01	マンハッタン・オプ. 2	矢作, 俊彦, 1950-/谷口, ジロー, 1947-2017	CBS・ソニー出版	x	o	x	o	o	9784334	1	9784334700966	1985-01-20	3		1985-03-20	光文社	3	版元prefix不一致	
 REJECT_EDITION	piisu-maker-kurogane	PEACE MAKER鐡	seed4	0	standard	通常版	MGC	1	LEAD	9783865807014		Peace maker Kurogane 1	平田, 智浩/黒乃, 奈々絵	Universum Film	x	o	?	o	o	9784800				12	9784800006769	2017-04-14	マッグガーデン	1	版元prefix不一致	
 EXISTS	akashiro-tamago	赤白たまご	canon:extra[0]	1	bunkobon	冬水社文庫	冬水社文庫	3	MID	9784887417632	2007-05	赤白たまご. 3	東宮, 千子	冬水社					o	9784864	2	9784864232012	2012-10	5	9784864232043	2012-12	冬水社	1	候補ISBNが既に本番/種2に在る=取込もれでない(under-merge)	
@@ -6,6 +11,9 @@ EXISTS	akashiro-tamago	赤白たまご	canon:extra[0]	1	bunkobon	冬水社文庫
 EXISTS	hannintachi-no-file-kindaichi-shounen-no-file-gaiden	犯人たちの事件簿	seed4	0	standard	通常版	講談社コミックス	1	LEAD	9784065104323	2017-11	犯人たちの事件簿 : 金田一少年の事件簿外伝. 1	天樹, 征丸, 1962-/金成, 陽三郎/さとう, ふみや/船津, 紳平, 1989-	講談社					o	9784065				3	9784065119044	2018-06-15	講談社	1	候補ISBNが既に本番/種2に在る=取込もれでない(under-merge)	
 EXISTS	hannintachi-no-file-kindaichi-shounen-no-file-gaiden	犯人たちの事件簿	seed4	0	standard	通常版	講談社コミックス	2	LEAD	9784065112397	2018-02	犯人たちの事件簿 : 金田一少年の事件簿外伝. 2	天樹, 征丸, 1962-/金成, 陽三郎/さとう, ふみや/船津, 紳平, 1989-	講談社					o	9784065				3	9784065119044	2018-06-15	講談社	1	候補ISBNが既に本番/種2に在る=取込もれでない(under-merge)	
 EXISTS	heba-hello-chan	へば!Helloちゃん	canon:volumes	0	standard	通常版	ミスターマガジンKCDX	4	MID	9784063194135	1993-08-09	へば!Helloちゃん 4	小林まこと	講談社					o	9784063	3	9784063193541	1993-02-09	5	9784063194463	1994-02-09	講談社	1	候補ISBNが既に本番/種2に在る=取込もれでない(under-merge)	
+EXISTS	isshokenmei-hajime-hajime-kun	いっしょけんめいハジメくん	canon:extra[2]	3	shinsoban	集英社版	集英社版	13	MID	9784088612539	1984-09-25	いっしょけんめいハジメくん 13	コンタロウ	集英社					o	9784088	12	9784088612522		14	9784088612546		集英社	1	候補ISBNが既に本番/種2に在る=取込もれでない(under-merge)	
+EXISTS	isshokenmei-hajime-hajime-kun	いっしょけんめいハジメくん	canon:extra[2]	3	shinsoban	集英社版	集英社版	15	MID	9784088612553	1985-03-25	いっしょけんめいハジメくん 15	コンタロウ	集英社					o	9784088	14	9784088612546		17	9784088612577		集英社	1	候補ISBNが既に本番/種2に在る=取込もれでない(under-merge)	
+EXISTS	isshokenmei-hajime-hajime-kun	いっしょけんめいハジメくん	canon:extra[2]	3	shinsoban	集英社版	集英社版	16	MID	9784088612560	1985-06-25	いっしょけんめいハジメくん 16	コンタロウ	集英社					o	9784088	14	9784088612546		17	9784088612577		集英社	1	候補ISBNが既に本番/種2に在る=取込もれでない(under-merge)	
 EXISTS	jinrou-game	人狼ゲーム	canon:volumes	0	standard	通常版	Bamboo comics	2	MID	9784801962682	2018-06	人狼ゲーム : クレイジーフォックス. 2	川上, 亮, 1976-/小独活	竹書房					o	9784812	1	9784812487204	2014-07	3	9784801953017	2015-07	竹書房	1	候補ISBNが既に本番/種2に在る=取込もれでない(under-merge)	
 EXISTS	kuchiyaku-mondo-kawaitesourou	唇役主丞乾いて候	canon:extra[0]	1	shinsoban	劇画キングシリーズ	劇画キングシリーズ	5	MID	9784575813531	1986-11	唇役主丞乾いて候 第5巻	小池一夫/小島剛夕	双葉社					o	9784883	4	9784883152179	1993-06	6	9784883152551	1993-11	小池書院	1	候補ISBNが既に本番/種2に在る=取込もれでない(under-merge)	
 EXISTS	l-gion	LÉGION	seed4	0	standard	通常版	Bunkasha comics young teioh series	1	LEAD	9784821195121	1996-11	Légion. 第1巻	長沢, 克泰, 1961-	ぶんか社					o	9784821				3	9784821195756	1997-06	ぶんか社	1	候補ISBNが既に本番/種2に在る=取込もれでない(under-merge)	
@@ -27,8 +35,16 @@ EXISTS	shiro-no-fiorenteiina	白のフィオレンティーナ	seed4	1	bunkobon	
 EXISTS	shiro-no-fiorenteiina	白のフィオレンティーナ	seed4	1	bunkobon	文庫版	冬水社文庫	6	MID	9784887413436	1999-12	白のフィオレンティーナ. 6	戸川, 視友	冬水社					o	9784887	2	9784887417601	2007-04	9	9784887417755	2007-08	冬水社	1	候補ISBNが既に本番/種2に在る=取込もれでない(under-merge)	
 EXISTS	shiro-no-fiorenteiina	白のフィオレンティーナ	seed4	1	bunkobon	文庫版	冬水社文庫	7	MID	9784887413726	2000-04	白のフィオレンティーナ. 7	戸川, 視友	冬水社					o	9784887	2	9784887417601	2007-04	9	9784887417755	2007-08	冬水社	1	候補ISBNが既に本番/種2に在る=取込もれでない(under-merge)	
 EXISTS	shiro-no-fiorenteiina	白のフィオレンティーナ	seed4	1	bunkobon	文庫版	冬水社文庫	8	MID	9784887414020	2000-09	白のフィオレンティーナ. 8	戸川, 視友	冬水社					o	9784887	2	9784887417601	2007-04	9	9784887417755	2007-08	冬水社	1	候補ISBNが既に本番/種2に在る=取込もれでない(under-merge)	
-EXISTS	toaru-majutsu-no-baacharon	とある魔術の電脳戦機(バーチャロン)	seed4	0	standard	通常版	電撃コミックスNEXT	1	LEAD	9784048937740	2018-03	とある魔術の電脳戦機(バーチャロン) : とある魔術の禁書目録×電脳戦機バーチャロン. 1	鎌池, 和馬/ひびぽん/灰村, キヨタカ/竹/カトキ, ハジメ	KADOKAWA					o	9784049				2	9784049121308	2018-10-26	KADOKAWA	1	候補ISBNが既に本番/種2に在る=取込もれでない(under-merge)	
-EXISTS	touhou-tetsuwan-komachi-dokidoki-locomotion	東方鉄腕小町ドキドキ♡ロコモーション	seed4	0	standard	通常版	YKコミックス	1	LEAD	9784785920074	2000-08	東方鉄腕小町ドキドキ♡ロコモーション. 1	幸田, 朋弘	少年画報社					o	9784785				2	9784785920951	2001-07	少年画報社	1	候補ISBNが既に本番/種2に在る=取込もれでない(under-merge)	
+EXISTS	tsuihousareta-cheat-fuyo-majutsushi-wa-kimama-na-sekando-life-o-ouka-suru	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。	seed4	0	standard	通常版	月刊少年マガジン	11	MID	9784065372777	2024-09	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。 : 俺は武器だけじゃなく、あらゆるものに『強化ポイント』を付与できるし、俺の意思でいつでも効果を解除できるけど、残った人たち大丈夫? 11	業務用餅/六志麻, あさ	講談社					o	9784065	10	9784065359518	2024-06-07	12	9784065378045	2024-11-08	講談社	1	候補ISBNが既に本番/種2に在る=取込もれでない(under-merge)	
+EXISTS	tsuihousareta-cheat-fuyo-majutsushi-wa-kimama-na-sekando-life-o-ouka-suru	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。	seed4	0	standard	通常版	月刊少年マガジン	13	MID	9784065379349	2025-01	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。 : 俺は武器だけじゃなく、あらゆるものに『強化ポイント』を付与できるし、俺の意思でいつでも効果を解除できるけど、残った人たち大丈夫? 13	業務用餅/六志麻, あさ	講談社					o	9784065	12	9784065378045	2024-11-08	22	9784065448977	2026-10-08	講談社	1	候補ISBNが既に本番/種2に在る=取込もれでない(under-merge)	
+EXISTS	tsuihousareta-cheat-fuyo-majutsushi-wa-kimama-na-sekando-life-o-ouka-suru	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。	seed4	0	standard	通常版	月刊少年マガジン	14	MID	9784065391013	2025-04	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。 : 俺は武器だけじゃなく、あらゆるものに『強化ポイント』を付与できるし、俺の意思でいつでも効果を解除できるけど、残った人たち大丈夫? 14	業務用餅/六志麻, あさ	講談社					o	9784065	12	9784065378045	2024-11-08	22	9784065448977	2026-10-08	講談社	1	候補ISBNが既に本番/種2に在る=取込もれでない(under-merge)	
+EXISTS	tsuihousareta-cheat-fuyo-majutsushi-wa-kimama-na-sekando-life-o-ouka-suru	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。	seed4	0	standard	通常版	月刊少年マガジン	15	MID	9784065400937	2025-07	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。 : 俺は武器だけじゃなく、あらゆるものに『強化ポイント』を付与できるし、俺の意思でいつでも効果を解除できるけど、残った人たち大丈夫? 15	業務用餅/六志麻, あさ	講談社					o	9784065	12	9784065378045	2024-11-08	22	9784065448977	2026-10-08	講談社	1	候補ISBNが既に本番/種2に在る=取込もれでない(under-merge)	
+EXISTS	tsuihousareta-cheat-fuyo-majutsushi-wa-kimama-na-sekando-life-o-ouka-suru	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。	seed4	0	standard	通常版	月刊少年マガジン	16	MID	9784065401576	2025-08	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。 : 俺は武器だけじゃなく、あらゆるものに『強化ポイント』を付与できるし、俺の意思でいつでも効果を解除できるけど、残った人たち大丈夫? 16	業務用餅/六志麻, あさ	講談社					o	9784065	12	9784065378045	2024-11-08	22	9784065448977	2026-10-08	講談社	1	候補ISBNが既に本番/種2に在る=取込もれでない(under-merge)	
+EXISTS	tsuihousareta-cheat-fuyo-majutsushi-wa-kimama-na-sekando-life-o-ouka-suru	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。	seed4	0	standard	通常版	月刊少年マガジン	17	MID	9784065411179	2025-10	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。 : 俺は武器だけじゃなく、あらゆるものに『強化ポイント』を付与できるし、俺の意思でいつでも効果を解除できるけど、残った人たち大丈夫? 17	業務用餅/六志麻, あさ	講談社					o	9784065	12	9784065378045	2024-11-08	22	9784065448977	2026-10-08	講談社	1	候補ISBNが既に本番/種2に在る=取込もれでない(under-merge)	
+EXISTS	tsuihousareta-cheat-fuyo-majutsushi-wa-kimama-na-sekando-life-o-ouka-suru	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。	seed4	0	standard	通常版	月刊少年マガジン	18	MID	9784065414347	2025-11	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。 : 俺は武器だけじゃなく、あらゆるものに『強化ポイント』を付与できるし、俺の意思でいつでも効果を解除できるけど、残った人たち大丈夫? 18	業務用餅/六志麻, あさ	講談社					o	9784065	12	9784065378045	2024-11-08	22	9784065448977	2026-10-08	講談社	1	候補ISBNが既に本番/種2に在る=取込もれでない(under-merge)	
+EXISTS	tsuihousareta-cheat-fuyo-majutsushi-wa-kimama-na-sekando-life-o-ouka-suru	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。	seed4	0	standard	通常版	月刊少年マガジン	19	MID	9784065423127	2026-02	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。 : 俺は武器だけじゃなく、あらゆるものに『強化ポイント』を付与できるし、俺の意思でいつでも効果を解除できるけど、残った人たち大丈夫? 19	業務用餅/六志麻, あさ	講談社					o	9784065	12	9784065378045	2024-11-08	22	9784065448977	2026-10-08	講談社	1	候補ISBNが既に本番/種2に在る=取込もれでない(under-merge)	
+EXISTS	tsuihousareta-cheat-fuyo-majutsushi-wa-kimama-na-sekando-life-o-ouka-suru	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。	seed4	0	standard	通常版	月刊少年マガジン	20	MID	9784065434352	2026-05	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。 : 俺は武器だけじゃなく、あらゆるものに『強化ポイント』を付与できるし、俺の意思でいつでも効果を解除できるけど、残った人たち大丈夫? 20	業務用餅/六志麻, あさ	講談社					o	9784065	12	9784065378045	2024-11-08	22	9784065448977	2026-10-08	講談社	1	候補ISBNが既に本番/種2に在る=取込もれでない(under-merge)	
+EXISTS	tsuihousareta-cheat-fuyo-majutsushi-wa-kimama-na-sekando-life-o-ouka-suru	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。	seed4	0	standard	通常版	月刊少年マガジン	21	MID	9784065444580	2026-08	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。 : 俺は武器だけじゃなく、あらゆるものに『強化ポイント』を付与できるし、俺の意思でいつでも効果を解除できるけど、残った人たち大丈夫? 21	業務用餅/六志麻, あさ	講談社					o	9784065	12	9784065378045	2024-11-08	22	9784065448977	2026-10-08	講談社	1	候補ISBNが既に本番/種2に在る=取込もれでない(under-merge)	
 NOHIT	16-nen-kimi-o-omou-to-konnani-ookiku	16年、君を想うとこんなに大きく…♡	seed4	0	standard	通常版	Bunkasha comics	1	LEAD										o	9784821				2	9784821155613	2023-04	ぶんか社	0	NDLにも該当巻なし	
 NOHIT	aan-kremlin-iq200-no-soap-story	あぁん・クレムリン　IQ200のソープ・ストーリー	seed4	0	standard	通常版	SPコミックス	2	MID										o	9784845	1	9784845813889	1996-05	3	9784845813629	1997-02	リイド社	0	NDLにも該当巻なし	
 NOHIT	aan-kremlin-iq200-no-soap-story	あぁん・クレムリン　IQ200のソープ・ストーリー	seed4	0	standard	通常版	SPコミックス	4	MID										o	9784845	3	9784845813629	1997-02	5	9784845813902	1997-11	リイド社	0	NDLにも該当巻なし	
@@ -52,14 +68,12 @@ NOHIT	b-boy	b-Boy	seed4	0	standard	通常版	Seventeen Comics	20	MID										o	
 NOHIT	baka-to-test-to-shoukanjuu-supinauto-sore-ga-bokura-no-nichijou	バカとテストと召喚獣→spinout! それが僕らの日常。	seed4	0	standard	通常版	ファミ通クリアコミックス	1	LEAD										o	9784047				4	9784047273733	2011-07-27	角川グループパブリッシング	0	NDLにも該当巻なし	
 NOHIT	baka-to-test-to-shoukanjuu-supinauto-sore-ga-bokura-no-nichijou	バカとテストと召喚獣→spinout! それが僕らの日常。	seed4	0	standard	通常版	ファミ通クリアコミックス	2	LEAD										o	9784047				4	9784047273733	2011-07-27	角川グループパブリッシング	0	NDLにも該当巻なし	
 NOHIT	baka-to-test-to-shoukanjuu-supinauto-sore-ga-bokura-no-nichijou	バカとテストと召喚獣→spinout! それが僕らの日常。	seed4	0	standard	通常版	ファミ通クリアコミックス	3	LEAD										o	9784047				4	9784047273733	2011-07-27	角川グループパブリッシング	0	NDLにも該当巻なし	
-NOHIT	batsutsu	バツッ!!	seed4	0	standard	通常版	JOUR COMICS	1	LEAD										o	9784575				2	9784575331967	1994-10	双葉社	0	NDLにも該当巻なし	
 NOHIT	big-rival	ビッグライバル	seed4	0	standard	通常版	ジャンプ・コミックス	2	MID										o	9784088	1	9784088511993	1987-08-15	3		1988-12-11	集英社	0	NDLにも該当巻なし	
 NOHIT	biiparu-kozou-no-autodoa-kyouhon	ビーパル小僧のアウトドア教本	seed4	0	standard	通常版		1	LEAD										o	9784093				2	9784093660020	1984-10	小学館	0	NDLにも該当巻なし	
-NOHIT	blue-flight	ブルーフライト	seed4	0	standard	通常版	ベツコミフラワーコミックススペシャル	4	MID										o	9784098	3	9784098730612	2025-07-21	5	9784098734078	2026-09-25	小学館	0	NDLにも該当巻なし	
-NOHIT	boku-to-senpai-no-tekken-kousai	僕と先輩の鉄拳交際	seed4	0	standard	通常版	MFコミックス	1	LEAD										o	9784040				2	9784840150965	2013-07-27	KADOKAWA	0	NDLにも該当巻なし	
+NOHIT	blue-flight	ブルーフライト	seed4	0	standard	通常版	ベツコミフラワーコミックススペシャル	4	MID										o	9784098	3	9784098730612	2025-07-21	5	9784098734078	2026-09-05	小学館	0	NDLにも該当巻なし	
 NOHIT	bokutachi-no-kichijouji-koimonogatari	ぼくたちの吉祥寺恋物語	seed4	0	standard	通常版	ラキッシュ・コミックス	5	MID										o	9784887	4		1995-01	6		1995-12	冬水社	0	NDLにも該当巻なし	
-NOHIT	bolt-and-nut	ボルト＆ナット	canon:volumes	0	standard	通常版	Neko mook	2	MID										o	9784777	1	9784873665344	1999-02	4	9784873665153	1998-04	ネコ・パブリッシング	0	NDLにも該当巻なし	
-NOHIT	bolt-and-nut	ボルト＆ナット	canon:volumes	0	standard	通常版	Neko mook	3	MID										o	9784777	1	9784873665344	1999-02	4	9784873665153	1998-04	ネコ・パブリッシング	0	NDLにも該当巻なし	
+NOHIT	bolt-and-nut	ボルト＆ナット	canon:volumes	0	standard	通常版	Neko mook	1	LEAD										o	9784777				2	9784777001866	2004-08	ネコ・パブリッシング	0	NDLにも該当巻なし	
+NOHIT	bolt-and-nut	ボルト＆ナット	canon:volumes	0	standard	通常版	Neko mook	3	MID										o	9784777	2	9784777001866	2004-08	4	9784873665153	1998-04	ネコ・パブリッシング	0	NDLにも該当巻なし	
 NOHIT	bolts-and-nuts-prologue	BOLTS AND NUTS!Prologue	seed4	0	standard	通常版	Neko mook	1	LEAD										o	9784777				20	9784777013715	2013-01-30	ネコ・パブリッシング	0	NDLにも該当巻なし	
 NOHIT	bolts-and-nuts-prologue	BOLTS AND NUTS!Prologue	seed4	0	standard	通常版	Neko mook	2	LEAD										o	9784777				20	9784777013715	2013-01-30	ネコ・パブリッシング	0	NDLにも該当巻なし	
 NOHIT	bolts-and-nuts-prologue	BOLTS AND NUTS!Prologue	seed4	0	standard	通常版	Neko mook	3	LEAD										o	9784777				20	9784777013715	2013-01-30	ネコ・パブリッシング	0	NDLにも該当巻なし	
@@ -97,7 +111,6 @@ NOHIT	captain-harlock-jigen-koukai	キャプテンハーロック	seed4	0	standa
 NOHIT	captain-harlock-jigen-koukai	キャプテンハーロック	seed4	0	standard	通常版	チャンピオンREDコミックス	5	LEAD										o	9784253				8	9784253237284	2018-04	秋田書店	0	NDLにも該当巻なし	
 NOHIT	captain-harlock-jigen-koukai	キャプテンハーロック	seed4	0	standard	通常版	チャンピオンREDコミックス	6	LEAD										o	9784253				8	9784253237284	2018-04	秋田書店	0	NDLにも該当巻なし	
 NOHIT	captain-harlock-jigen-koukai	キャプテンハーロック	seed4	0	standard	通常版	チャンピオンREDコミックス	7	LEAD										o	9784253				8	9784253237284	2018-04	秋田書店	0	NDLにも該当巻なし	
-NOHIT	cherry-yuusha-to-sei-naru-tsurugi	チェリー勇者とせいなる剣	seed4	0	standard	通常版	SHŌNEN CHAMPION COMICS	9	MID										o	9784253	8	9784253014007	2026-06-03	10	9784253020664	2026-11-06	秋田書店	0	NDLにも該当巻なし	
 NOHIT	chou-ten-chan	超てんちゃん!	seed4	0	standard	通常版	MFC	1	LEAD										o	9784046				2	9784046827012	2023-08-23	KADOKAWA	0	NDLにも該当巻なし	
 NOHIT	chuchu-hunter	Chu❤chuハンター	seed4	0	standard	通常版	マンサンコミックス	1	LEAD										o	9784408				2	9784408164236	1998-01	実業之日本社	0	NDLにも該当巻なし	
 NOHIT	collar-me	Collar me	seed4	0	standard	通常版	ディアプラスコミックス	1	LEAD										o	9784403				2	9784403668333	2022-09-01	新書館	0	NDLにも該当巻なし	
@@ -120,7 +133,6 @@ NOHIT	comic-shin-3-goku-musou-san-battle-iryuujon	コミック真・三國無双
 NOHIT	comic-shin-3-goku-musou-san-battle-iryuujon	コミック真・三國無双3バトルイリュージョン	seed4	0	standard	通常版	Koei game comics	4	LEAD										o	9784775				7	9784775802076	2004-08-03	光栄	0	NDLにも該当巻なし	
 NOHIT	comic-shin-3-goku-musou-san-battle-iryuujon	コミック真・三國無双3バトルイリュージョン	seed4	0	standard	通常版	Koei game comics	5	LEAD										o	9784775				7	9784775802076	2004-08-03	光栄	0	NDLにも該当巻なし	
 NOHIT	comic-shin-3-goku-musou-san-battle-iryuujon	コミック真・三國無双3バトルイリュージョン	seed4	0	standard	通常版	Koei game comics	6	LEAD										o	9784775				7	9784775802076	2004-08-03	光栄	0	NDLにも該当巻なし	
-NOHIT	comic-shin-genjitsu	Comic新現実	seed4	0	standard	通常版		1	LEAD										o	9784048				2	9784048537889	2004-11-29	角川書店	0	NDLにも該当巻なし	
 NOHIT	crash-junky-spirit	Crash junky × spirit	seed4	0	standard	通常版	Gust comic	1	LEAD										o	9784756				2	9784756704924	1998-02-10	桜桃書房	0	NDLにも該当巻なし	
 NOHIT	crescent-2	CRESCENT	seed4	0	standard	通常版	マイコミックスパートナー	2	MID										o	9784885	1	9784885702211	1988-04	3	9784885702297	1988-08	東京三世社	0	NDLにも該当巻なし	
 NOHIT	crescent-2	CRESCENT	seed4	0	standard	通常版	マイコミックスパートナー	4	MID										o	9784885	3	9784885702297	1988-08	5	9784885702341	1989-01	東京三世社	0	NDLにも該当巻なし	
@@ -151,7 +163,6 @@ NOHIT	crew-1994	Crew 1994	seed4	0	standard	通常版	マイコミックスパー
 NOHIT	crew-1994	Crew 1994	seed4	0	standard	通常版	マイコミックスパートナー	5	MID										o	9784885	1	9784885703706	1994-01-15	7	9784885703829	1994-07	東京三世社	0	NDLにも該当巻なし	
 NOHIT	crew-1994	Crew 1994	seed4	0	standard	通常版	マイコミックスパートナー	6	MID										o	9784885	1	9784885703706	1994-01-15	7	9784885703829	1994-07	東京三世社	0	NDLにも該当巻なし	
 NOHIT	crew-1994	Crew 1994	seed4	0	standard	通常版	マイコミックスパートナー	8	MID										o	9784885	7	9784885703829	1994-07	9	9784885703867	1994-09	東京三世社	0	NDLにも該当巻なし	
-NOHIT	dai-chouhen-doraemon-1984	大長編ドラエもん	seed4	0	standard	通常版	てんとう虫コミックス	1	LEAD										o	9784091				2	9784091590640	1984-03-25	小学館	0	NDLにも該当巻なし	
 NOHIT	daiki-no-baka-h-special	大紀のバカHスペシャル	seed4	0	standard	通常版	マイウェイコミックス	1	LEAD										o	9784861				2	9784861350290	2004-03	マイウェイ出版	0	NDLにも該当巻なし	
 NOHIT	daiki-no-baka-h-special	大紀のバカHスペシャル	seed4	0	standard	通常版	マイウェイコミックス	3	MID										o	9784861	2	9784861350290	2004-03	10	9784861352010	2006-02	マイウェイ出版	0	NDLにも該当巻なし	
 NOHIT	daiki-no-baka-h-special	大紀のバカHスペシャル	seed4	0	standard	通常版	マイウェイコミックス	4	MID										o	9784861	2	9784861350290	2004-03	10	9784861352010	2006-02	マイウェイ出版	0	NDLにも該当巻なし	
@@ -172,7 +183,6 @@ NOHIT	daiki-no-baka-h-special	大紀のバカHスペシャル	seed4	0	standard	�
 NOHIT	daiki-no-baka-h-special	大紀のバカHスペシャル	seed4	0	standard	通常版	マイウェイコミックス	20	MID										o	9784861	10	9784861352010	2006-02	22	9784861354809	2008-09	マイウェイ出版	0	NDLにも該当巻なし	
 NOHIT	daiki-no-baka-h-special	大紀のバカHスペシャル	seed4	0	standard	通常版	マイウェイコミックス	21	MID										o	9784861	10	9784861352010	2006-02	22	9784861354809	2008-09	マイウェイ出版	0	NDLにも該当巻なし	
 NOHIT	dainiji-chousen-sensou-yugio	第二次朝鮮戦争ユギオ	seed4	0	standard	通常版	Goma books	1	LEAD										o	9784814				2	9784814918843	2019-01	ゴマブックス	0	NDLにも該当巻なし	
-NOHIT	dfk	DFK	seed4	0	standard	通常版	てんとう虫コロコロコミックス	1	LEAD										o	9784091				2	9784091411969	2010-12-29	小学館	0	NDLにも該当巻なし	
 NOHIT	doctor-hankotsui	ドクター反骨医	seed4	0	standard	通常版	ゴラク・コミックス	11	MID										o	9784537	10	9784537036862	1991-05	12	9784537037036	1991-09	日本文芸社	0	NDLにも該当巻なし	
 NOHIT	dorabeesu-doraemon-super-baseball-gaiden	ドラベース ドラえもん超野球外伝	seed4	0	standard	通常版	コロコロコミックス	1	LEAD										o	9784091				12	9784091402790	2007-01-26	小学館	0	NDLにも該当巻なし	
 NOHIT	dorabeesu-doraemon-super-baseball-gaiden	ドラベース ドラえもん超野球外伝	seed4	0	standard	通常版	コロコロコミックス	2	LEAD										o	9784091				12	9784091402790	2007-01-26	小学館	0	NDLにも該当巻なし	
@@ -205,7 +215,6 @@ NOHIT	doughnuts-books	Doughnuts books	seed4	0	standard	通常版	アクション
 NOHIT	doughnuts-books	Doughnuts books	seed4	0	standard	通常版	アクションコミックス	30	MID										o	9784575	29	9784575960334	1994-08	32		1991-05-14	双葉社	0	NDLにも該当巻なし	
 NOHIT	doughnuts-books	Doughnuts books	seed4	0	standard	通常版	アクションコミックス	31	MID										o	9784575	29	9784575960334	1994-08	32		1991-05-14	双葉社	0	NDLにも該当巻なし	
 NOHIT	doughnuts-books	Doughnuts books	seed4	0	standard	通常版	アクションコミックス	33	MID										o	9784575	32		1991-05-14	34	9784575960587	2000-10	双葉社	0	NDLにも該当巻なし	
-NOHIT	dr-nekoyanagita-no-kagakuteki-seishun	Dr.猫柳田の科学的青春	seed4	0	standard	通常版		2	MID										o	9784344	1	9784344801424	2002-10	3	9784344802575	2003-06	幻冬舎	0	NDLにも該当巻なし	
 NOHIT	elysion	エリュシオン	seed4	0	standard	通常版	ガールズコレクション	2	MID										o	9784344	1	9784344818248	2009-11	5	9784344825802	2012-08	幻冬舎	0	NDLにも該当巻なし	
 NOHIT	elysion	エリュシオン	seed4	0	standard	通常版	ガールズコレクション	3	MID										o	9784344	1	9784344818248	2009-11	5	9784344825802	2012-08	幻冬舎	0	NDLにも該当巻なし	
 NOHIT	elysion	エリュシオン	seed4	0	standard	通常版	ガールズコレクション	4	MID										o	9784344	1	9784344818248	2009-11	5	9784344825802	2012-08	幻冬舎	0	NDLにも該当巻なし	
@@ -225,7 +234,6 @@ NOHIT	football-taka-amerikan-football-comics	フットボール鷹―American fo
 NOHIT	fuuhai-ni-kike	風牌に訊け	seed4	0	standard	通常版	カルトコミックス	2	MID										o	9784773	1		1988-03	3		1988-06	笠倉出版社	0	NDLにも該当巻なし	
 NOHIT	gakken-manga-sekai-no-rekishi	学研まんが 世界の歴史	seed4	0	standard	通常版		4	MID										o	9784051	3	9784051061982	1992-10	6	9784051062019	1992-11	学習研究社	0	NDLにも該当巻なし	
 NOHIT	gakken-manga-sekai-no-rekishi	学研まんが 世界の歴史	seed4	0	standard	通常版		5	MID										o	9784051	3	9784051061982	1992-10	6	9784051062019	1992-11	学習研究社	0	NDLにも該当巻なし	
-NOHIT	gakken-manga-sekai-no-rekishi	学研まんが 世界の歴史	seed4	0	standard	通常版		9	MID										o	9784051	8	9784051062033	1993-04	10	9784051062057	1993-07	学習研究社	0	NDLにも該当巻なし	
 NOHIT	gakkou-kachinukisen-jikken-taiketsu-2016	学校勝ちぬき戦 実験対決	seed4	0	standard	通常版	かがくるBOOK	1	LEAD										o	9784023				21	9784023314399	2015-09-30	朝日新聞出版	0	NDLにも該当巻なし	
 NOHIT	gakkou-kachinukisen-jikken-taiketsu-2016	学校勝ちぬき戦 実験対決	seed4	0	standard	通常版	かがくるBOOK	2	LEAD										o	9784023				21	9784023314399	2015-09-30	朝日新聞出版	0	NDLにも該当巻なし	
 NOHIT	gakkou-kachinukisen-jikken-taiketsu-2016	学校勝ちぬき戦 実験対決	seed4	0	standard	通常版	かがくるBOOK	3	LEAD										o	9784023				21	9784023314399	2015-09-30	朝日新聞出版	0	NDLにも該当巻なし	
@@ -261,15 +269,10 @@ NOHIT	gensou-labyrinth	幻想ラビリンス	seed4	0	standard	通常版	Eyes com
 NOHIT	gensou-tairiku	幻想大陸	seed4	0	standard	通常版	ギャグ王コミックス	3	MID										o	9784870	2	9784870256255	1996-07-12	6	9784870252561	1998-04	エニックス	0	NDLにも該当巻なし	
 NOHIT	gensou-tairiku	幻想大陸	seed4	0	standard	通常版	ギャグ王コミックス	4	MID										o	9784870	2	9784870256255	1996-07-12	6	9784870252561	1998-04	エニックス	0	NDLにも該当巻なし	
 NOHIT	gensou-tairiku	幻想大陸	seed4	0	standard	通常版	ギャグ王コミックス	5	MID										o	9784870	2	9784870256255	1996-07-12	6	9784870252561	1998-04	エニックス	0	NDLにも該当巻なし	
-NOHIT	ginga-tetsudou-999-andoromedahen	銀河鉄道999アンドロメダ編	seed4	0	standard	通常版		1	LEAD										o	9784778				5	9784778033422	2023-11	小学館クリエイティブ	0	NDLにも該当巻なし	
-NOHIT	ginga-tetsudou-999-andoromedahen	銀河鉄道999アンドロメダ編	seed4	0	standard	通常版		2	LEAD										o	9784778				5	9784778033422	2023-11	小学館クリエイティブ	0	NDLにも該当巻なし	
-NOHIT	ginga-tetsudou-999-andoromedahen	銀河鉄道999アンドロメダ編	seed4	0	standard	通常版		3	LEAD										o	9784778				5	9784778033422	2023-11	小学館クリエイティブ	0	NDLにも該当巻なし	
-NOHIT	ginga-tetsudou-999-andoromedahen	銀河鉄道999アンドロメダ編	seed4	0	standard	通常版		4	LEAD										o	9784778				5	9784778033422	2023-11	小学館クリエイティブ	0	NDLにも該当巻なし	
 NOHIT	gororo-mamonogatari	ゴロロ mamonogatari	seed4	0	standard	通常版	コロコロコミックス	1	LEAD										o	9784091				4	9784091413628	2011-11-02	小学館	0	NDLにも該当巻なし	
 NOHIT	gororo-mamonogatari	ゴロロ mamonogatari	seed4	0	standard	通常版	コロコロコミックス	2	LEAD										o	9784091				4	9784091413628	2011-11-02	小学館	0	NDLにも該当巻なし	
 NOHIT	gororo-mamonogatari	ゴロロ mamonogatari	seed4	0	standard	通常版	コロコロコミックス	3	LEAD										o	9784091				4	9784091413628	2011-11-02	小学館	0	NDLにも該当巻なし	
 NOHIT	goshujin-sama-no-oshioki	ご主人様のおしおき?	seed4	0	standard	通常版	Missy comics	2	MID										o	9784776	1	9784776731559	2011-09	3	9784776748021	2018-10	宙出版	0	NDLにも該当巻なし	
-NOHIT	grand-vacances	グラン・バカン	seed4	0	standard	通常版	ジャンプ・コミックス	1	LEAD										o	9784088				2	9784088732695	2002-06-09	集英社	0	NDLにも該当巻なし	
 NOHIT	guruguru-kakumei	ぐるぐる革命	seed4	0	standard	通常版		7	MID										o	9784860	6	9784860022068	2006-03	9	9784860021115	2004-08	ノアール出版	0	NDLにも該当巻なし	
 NOHIT	guruguru-kakumei	ぐるぐる革命	seed4	0	standard	通常版		8	MID										o	9784860	6	9784860022068	2006-03	9	9784860021115	2004-08	ノアール出版	0	NDLにも該当巻なし	
 NOHIT	guruguru-shoukougun	ぐるぐる症候群	seed4	0	standard	通常版		1	LEAD										o	9784860				8	9784860020309	2001-11	ノアール出版	0	NDLにも該当巻なし	
@@ -306,12 +309,6 @@ NOHIT	hontoni-atta-kowai-hanashi	ほんとにあった怖い話	seed4	0	standard
 NOHIT	hontoni-atta-kowai-hanashi	ほんとにあった怖い話	seed4	0	standard	通常版	ほんとにあった怖い話コミックス	25	MID										o	9784257	24		1993-03-20	26	9784257985396	1994-07-20	朝日ソノラマ	0	NDLにも該当巻なし	
 NOHIT	hontoni-atta-noroi-no-video-comic	ほんとにあった!呪いのビデオcomic	seed4	0	standard	通常版	古川コミックス	1	LEAD										o	9784892				3	9784892363528	2006-02	古川書房	0	NDLにも該当巻なし	
 NOHIT	hontoni-atta-noroi-no-video-comic	ほんとにあった!呪いのビデオcomic	seed4	0	standard	通常版	古川コミックス	2	LEAD										o	9784892				3	9784892363528	2006-02	古川書房	0	NDLにも該当巻なし	
-NOHIT	hontou-ni-atta-nama-maji-giretsu-byouin-esupii	本当にあった〔○生〕マジギレッ病院SP	seed4	0	standard	通常版	まんがタイムmy pal comics	1	LEAD										o	9784832				2	9784832266063	2008-02	芳文社	0	NDLにも該当巻なし	
-NOHIT	hop-suteppushou-selection	ホップ☆ステップ賞SELECTION	seed4	0	standard	通常版	ジャンプ・コミックス	2	MID										o	9784088	1	9784088711119	1988-03	6	9784088711164	1991-04-15	集英社	0	NDLにも該当巻なし	
-NOHIT	hop-suteppushou-selection	ホップ☆ステップ賞SELECTION	seed4	0	standard	通常版	ジャンプ・コミックス	3	MID										o	9784088	1	9784088711119	1988-03	6	9784088711164	1991-04-15	集英社	0	NDLにも該当巻なし	
-NOHIT	hop-suteppushou-selection	ホップ☆ステップ賞SELECTION	seed4	0	standard	通常版	ジャンプ・コミックス	4	MID										o	9784088	1	9784088711119	1988-03	6	9784088711164	1991-04-15	集英社	0	NDLにも該当巻なし	
-NOHIT	hop-suteppushou-selection	ホップ☆ステップ賞SELECTION	seed4	0	standard	通常版	ジャンプ・コミックス	5	MID										o	9784088	1	9784088711119	1988-03	6	9784088711164	1991-04-15	集英社	0	NDLにも該当巻なし	
-NOHIT	hop-suteppushou-selection	ホップ☆ステップ賞SELECTION	seed4	0	standard	通常版	ジャンプ・コミックス	10	MID										o	9784088	9	9784088711195	1992-09-09	11	9784088711218	1993-09-15	集英社	0	NDLにも該当巻なし	
 NOHIT	horror-occult-kyousaku-daizenshuu	ホラーオカルト競作大全集	seed4	0	standard	通常版	マイコミックスパートナー	2	MID										o	9784885	1	9784885702013	1987-06-10	6		1987-12-10	東京三世社	0	NDLにも該当巻なし	
 NOHIT	horror-occult-kyousaku-daizenshuu	ホラーオカルト競作大全集	seed4	0	standard	通常版	マイコミックスパートナー	3	MID										o	9784885	1	9784885702013	1987-06-10	6		1987-12-10	東京三世社	0	NDLにも該当巻なし	
 NOHIT	horror-occult-kyousaku-daizenshuu	ホラーオカルト競作大全集	seed4	0	standard	通常版	マイコミックスパートナー	4	MID										o	9784885	1	9784885702013	1987-06-10	6		1987-12-10	東京三世社	0	NDLにも該当巻なし	
@@ -326,12 +323,10 @@ NOHIT	houkago-pedal	放課後ペダル	seed4	0	standard	通常版	SHŌNEN CHAMPI
 NOHIT	hyouman	豹マン	seed4	0	standard	通常版	サンコミックス	2	MID										o	9784775	1		1981-06-15	3	9784775910276	2005-04-04	パンローリング	0	NDLにも該当巻なし	
 NOHIT	image	イマージュ	seed4	0	standard	通常版	白夜コミックス	14	MID										o	9784893	13	9784893673961	1994-05	16	9784893674357	1994-11	白夜書房	0	NDLにも該当巻なし	
 NOHIT	image	イマージュ	seed4	0	standard	通常版	白夜コミックス	15	MID										o	9784893	13	9784893673961	1994-05	16	9784893674357	1994-11	白夜書房	0	NDLにも該当巻なし	
+NOHIT	inoz	INOZ	seed4	0	standard	通常版	ビッグコミックス	2	MID										o	9784098	1	9784098627936	2024-06	3	9784098641192	2026-09-30	小学館	0	NDLにも該当巻なし	
 NOHIT	inukko-club	犬っこ倶楽部	seed4	0	standard	通常版	スコラLC	2	MID										o	9784796	1	9784796287944	1997-04-16	5	9784796288651	1998-04-16	スコラ	0	NDLにも該当巻なし	
 NOHIT	inukko-club	犬っこ倶楽部	seed4	0	standard	通常版	スコラLC	3	MID										o	9784796	1	9784796287944	1997-04-16	5	9784796288651	1998-04-16	スコラ	0	NDLにも該当巻なし	
-NOHIT	isshokenmei-hajime-hajime-kun	いっしょけんめいハジメくん	canon:extra[2]	3	shinsoban	集英社版	集英社版	13	MID										o	9784088	12	9784088612522		14	9784088612546		集英社	0	NDLにも該当巻なし	
 NOHIT	isshokenmei-hajime-hajime-kun	いっしょけんめいハジメくん	canon:extra[0]	1	shinsoban	ヤングジャンプ・コミックス	ヤングジャンプ・コミックス	14	MID										o	9784088	13	9784088612539	1984-09-25	15	9784088612553	1985-03-25	集英社	0	NDLにも該当巻なし	
-NOHIT	isshokenmei-hajime-hajime-kun	いっしょけんめいハジメくん	canon:extra[2]	3	shinsoban	集英社版	集英社版	15	MID										o	9784088	14	9784088612546		17	9784088612577		集英社	0	NDLにも該当巻なし	
-NOHIT	isshokenmei-hajime-hajime-kun	いっしょけんめいハジメくん	canon:extra[2]	3	shinsoban	集英社版	集英社版	16	MID										o	9784088	14	9784088612546		17	9784088612577		集英社	0	NDLにも該当巻なし	
 NOHIT	itadakimasu-uekan-2015	いただきます	seed4	0	standard	通常版	A.L.C. DX	12	MID										o	9784253	2	9784253159432	2016-06-16	51	9784253159906	2018-06	秋田書店	0	NDLにも該当巻なし	
 NOHIT	itadakimasu-uekan-2015	いただきます	seed4	0	standard	通常版	A.L.C. DX	13	MID										o	9784253	2	9784253159432	2016-06-16	51	9784253159906	2018-06	秋田書店	0	NDLにも該当巻なし	
 NOHIT	itadakimasu-uekan-2015	いただきます	seed4	0	standard	通常版	A.L.C. DX	14	MID										o	9784253	2	9784253159432	2016-06-16	51	9784253159906	2018-06	秋田書店	0	NDLにも該当巻なし	
@@ -409,10 +404,7 @@ NOHIT	kantai-collection-kancolle-comic-a-ra-carte-kai	艦隊これくしょん-�
 NOHIT	kantai-collection-kancolle-comic-a-ra-carte-kai	艦隊これくしょん-艦これ-コミックアラカルト改	seed4	0	standard	通常版	単行本コミックス	17	LEAD										o	9784041				20	9784041085080	2019-08-24	KADOKAWA	0	NDLにも該当巻なし	
 NOHIT	kantai-collection-kancolle-comic-a-ra-carte-kai	艦隊これくしょん-艦これ-コミックアラカルト改	seed4	0	standard	通常版	単行本コミックス	18	LEAD										o	9784041				20	9784041085080	2019-08-24	KADOKAWA	0	NDLにも該当巻なし	
 NOHIT	kantai-collection-kancolle-comic-a-ra-carte-kai	艦隊これくしょん-艦これ-コミックアラカルト改	seed4	0	standard	通常版	単行本コミックス	19	LEAD										o	9784041				20	9784041085080	2019-08-24	KADOKAWA	0	NDLにも該当巻なし	
-NOHIT	karabuki-shitene	からぶき♥してね	seed4	0	standard	通常版	ACTION COMICS	1	LEAD										o	9784575				2	9784575943658	2012-11-12	双葉社	0	NDLにも該当巻なし	
-NOHIT	karutteto	かるってと	seed4	0	standard	通常版	ヤングジャンプ・コミックス・スペシャル	1	LEAD										o	9784088				2	9784088750620	1991-09-19	集英社	0	NDLにも該当巻なし	
 NOHIT	kasei-yakiyoku	華星夜曲	seed4	0	standard	通常版	ヒットコミックス	1	LEAD										o	9784785				2	9784785945039	1985-05-15	少年画報社	0	NDLにも該当巻なし	
-NOHIT	kasumigaseki-furiimeeson	霞ヶ関フリーメーソン	seed4	0	standard	通常版		1	LEAD										o	9784870				2	9784870311787		飛鳥新社	0	NDLにも該当巻なし	
 NOHIT	kasuribana	掏摸花	canon:extra[0]	1	shinsoban	けいせい出版版	けいせい出版版	1	LEAD										o	9784874				2	9784874443811	1988-10	けいせい出版	0	NDLにも該当巻なし	
 NOHIT	katakoi-kekkon	片恋結婚	seed4	0	standard	通常版	Bunkasha comics	1	LEAD										o	9784821				2	9784821139996	2020-12	ぶんか社	0	NDLにも該当巻なし	
 NOHIT	kazenowatokinowasunanowa	風の輪・時の和・砂の環	seed4	0	standard	通常版	Wings comics	2	MID										o	9784403	1	9784403610523	1984-04-10	6	9784048526012	1996-02-11	新書館	0	NDLにも該当巻なし	
@@ -432,16 +424,12 @@ NOHIT	kibaken	牙拳	seed4	0	standard	通常版	芳文社コミックス	9	MID		
 NOHIT	kiken-na-chouai	危険な寵愛	seed4	0	standard	通常版	Missy comics	1	LEAD										o	9784776				2	9784776754237	2023-03	宙出版	0	NDLにも該当巻なし	
 NOHIT	kikou-kiden-hiwou-senki	機巧奇伝ヒヲウ戦記	seed4	0	standard	通常版	マガジンZKC	1	LEAD										o	9784063				2	9784063490329	2000-10-23	講談社	0	NDLにも該当巻なし	
 NOHIT	kiraware-reijou-wa-gin-no-ouji-ni-amayakasareru	嫌われ令嬢は銀の王子に甘やかされる	seed4	0	standard	通常版	Missy comics. YLC DX collection	1	LEAD										o	9784776				2	9784776755586	2025-12-08	宙出版	0	NDLにも該当巻なし	
-NOHIT	kirikiritei-no-buraun-sensei	きりきり亭のぶら雲先生	overrides	0	standard	通常版	バーズコミックス	3	MID										o	9784344	2	9784796297479	1998-11-16	6	9784344800304	2002-02-23	幻冬舎	0	NDLにも該当巻なし	
-NOHIT	kirikiritei-no-buraun-sensei	きりきり亭のぶら雲先生	overrides	0	standard	通常版	バーズコミックス	4	MID										o	9784344	2	9784796297479	1998-11-16	6	9784344800304	2002-02-23	幻冬舎	0	NDLにも該当巻なし	
-NOHIT	kirikiritei-no-buraun-sensei	きりきり亭のぶら雲先生	overrides	0	standard	通常版	バーズコミックス	5	MID										o	9784344	2	9784796297479	1998-11-16	6	9784344800304	2002-02-23	幻冬舎	0	NDLにも該当巻なし	
 NOHIT	kizuato	痕	seed4	0	standard	通常版	電撃コミックス	1	LEAD										o	9784048				2	9784048864886	2012-03-27	KADOKAWA	0	NDLにも該当巻なし	
 NOHIT	kodomo-kagaku-gijutsu-hakusho	子ども科学技術白書	seed4	0	standard	通常版		3	MID										o	9784171	2	9784171964019	2000-12-25	8	9784171964040	2007-03-30	大蔵省印刷局	0	NDLにも該当巻なし	
 NOHIT	kodomo-kagaku-gijutsu-hakusho	子ども科学技術白書	seed4	0	standard	通常版		4	MID										o	9784171	2	9784171964019	2000-12-25	8	9784171964040	2007-03-30	大蔵省印刷局	0	NDLにも該当巻なし	
 NOHIT	kodomo-kagaku-gijutsu-hakusho	子ども科学技術白書	seed4	0	standard	通常版		5	MID										o	9784171	2	9784171964019	2000-12-25	8	9784171964040	2007-03-30	大蔵省印刷局	0	NDLにも該当巻なし	
 NOHIT	kodomo-kagaku-gijutsu-hakusho	子ども科学技術白書	seed4	0	standard	通常版		6	MID										o	9784171	2	9784171964019	2000-12-25	8	9784171964040	2007-03-30	大蔵省印刷局	0	NDLにも該当巻なし	
 NOHIT	kodomo-kagaku-gijutsu-hakusho	子ども科学技術白書	seed4	0	standard	通常版		7	MID										o	9784171	2	9784171964019	2000-12-25	8	9784171964040	2007-03-30	大蔵省印刷局	0	NDLにも該当巻なし	
-NOHIT	koukoukyoushimonogatari	高校教師物語	seed4	0	standard	通常版	TSUKASA-COMICS	1	LEAD										o	9784887				2	9784887250727	1995-12-25	司書房	0	NDLにも該当巻なし	
 NOHIT	kounai-shasei-sutoresu-furiiku	校内写生＆ストレスフリーク	seed4	0	standard	通常版		1	LEAD										o	9784915				3	9784915858260		シュベール出版	0	NDLにも該当巻なし	
 NOHIT	kounai-shasei-sutoresu-furiiku	校内写生＆ストレスフリーク	seed4	0	standard	通常版		2	LEAD										o	9784915				3	9784915858260		シュベール出版	0	NDLにも該当巻なし	
 NOHIT	koyoi-omae-to	今宵おまえと	seed4	0	standard	通常版	Hertz series	1	LEAD										o	9784813				2	9784813053439	2012-01	大洋図書	0	NDLにも該当巻なし	
@@ -462,7 +450,6 @@ NOHIT	lemon-kids	レモンキッズ	seed4	0	standard	通常版		4	MID										o
 NOHIT	lemon-kids	レモンキッズ	seed4	0	standard	通常版		8	MID										o	9784870	7	9784870422575	1990-08	11	9784870422612	1990-12-25	あまとりあ社	0	NDLにも該当巻なし	
 NOHIT	lemon-kids	レモンキッズ	seed4	0	standard	通常版		9	MID										o	9784870	7	9784870422575	1990-08	11	9784870422612	1990-12-25	あまとりあ社	0	NDLにも該当巻なし	
 NOHIT	lemon-kids	レモンキッズ	seed4	0	standard	通常版		10	MID										o	9784870	7	9784870422575	1990-08	11	9784870422612	1990-12-25	あまとりあ社	0	NDLにも該当巻なし	
-NOHIT	let-s-go-nirvana	Let's go nirvana	seed4	0	standard	通常版	Bunch comics	1	LEAD										o	9784107				2	9784107728111	2025-04-12	新潮社	0	NDLにも該当巻なし	
 NOHIT	linkman	リンクマン	seed4	0	standard	通常版	Bunch comics	1	LEAD										o	9784107				2	9784107724403	2021-11-09	新潮社	0	NDLにも該当巻なし	
 NOHIT	love-neko	ラブ・ネコ	seed4	0	standard	通常版	まんがタイムmy pal comics	2	LEAD										o	9784832				4	9784832267282	2009-04	芳文社	0	NDLにも該当巻なし	
 NOHIT	love-neko	ラブ・ネコ	seed4	0	standard	通常版	まんがタイムmy pal comics	3	LEAD										o	9784832				4	9784832267282	2009-04	芳文社	0	NDLにも該当巻なし	
@@ -536,12 +523,6 @@ NOHIT	manga-grimm-douwa	まんがグリム童話	seed4	0	standard	通常版	ま�
 NOHIT	manga-heiki-saibaa-comics	漫画兵器サイバーコミックス	seed4	0	standard	通常版		1	LEAD										o	9784891				4	9784891893644	1988-11	バンダイ	0	NDLにも該当巻なし	
 NOHIT	manga-heiki-saibaa-comics	漫画兵器サイバーコミックス	seed4	0	standard	通常版		2	LEAD										o	9784891				4	9784891893644	1988-11	バンダイ	0	NDLにも該当巻なし	
 NOHIT	manga-heiki-saibaa-comics	漫画兵器サイバーコミックス	seed4	0	standard	通常版		3	LEAD										o	9784891				4	9784891893644	1988-11	バンダイ	0	NDLにも該当巻なし	
-NOHIT	manga-houritsu-no-nukeana	マンガ法律の抜け穴	seed4	0	standard	通常版		4	MID										o	9784426	3	9784426270001	1997-06	5	9784426289003	1998-04	自由国民社	0	NDLにも該当巻なし	
-NOHIT	manga-houritsu-no-nukeana	マンガ法律の抜け穴	seed4	0	standard	通常版		9	MID										o	9784426	8	9784426289027	2000-02-15	12			自由国民社	0	NDLにも該当巻なし	
-NOHIT	manga-houritsu-no-nukeana	マンガ法律の抜け穴	seed4	0	standard	通常版		10	MID										o	9784426	8	9784426289027	2000-02-15	12			自由国民社	0	NDLにも該当巻なし	
-NOHIT	manga-houritsu-no-nukeana	マンガ法律の抜け穴	seed4	0	standard	通常版		11	MID										o	9784426	8	9784426289027	2000-02-15	12			自由国民社	0	NDLにも該当巻なし	
-NOHIT	manga-project-ekkusu-chousenshatachi	まんがプロジェクトX挑戦者たち	seed4	0	standard	通常版		9	MID										o	9784776	8	9784776790846	2004-12-31	11	9784776791508	2005-06-03	宙出版	0	NDLにも該当巻なし	
-NOHIT	manga-project-ekkusu-chousenshatachi	まんがプロジェクトX挑戦者たち	seed4	0	standard	通常版		10	MID										o	9784776	8	9784776790846	2004-12-31	11	9784776791508	2005-06-03	宙出版	0	NDLにも該当巻なし	
 NOHIT	manga-time-mini	まんがタイムmini	seed4	0	standard	通常版	MANGA TIME MYPAL COMICS	1	LEAD										o	9784832				5	9784832262607	2002-08	芳文社	0	NDLにも該当巻なし	
 NOHIT	manga-time-mini	まんがタイムmini	seed4	0	standard	通常版	MANGA TIME MYPAL COMICS	2	LEAD										o	9784832				5	9784832262607	2002-08	芳文社	0	NDLにも該当巻なし	
 NOHIT	manga-time-mini	まんがタイムmini	seed4	0	standard	通常版	MANGA TIME MYPAL COMICS	3	LEAD										o	9784832				5	9784832262607	2002-08	芳文社	0	NDLにも該当巻なし	
@@ -561,7 +542,6 @@ NOHIT	matenrou	摩天楼	seed4	0	standard	通常版		9	MID										o	9784575	8	
 NOHIT	mayonaka-no-raburetaa	真夜中のラブレター	seed4	0	standard	通常版		1	LEAD										o	9784391				2	9784391903904	1989-12-14	主婦と生活社	0	NDLにも該当巻なし	
 NOHIT	megami	女神	seed4	0	standard	通常版	講談社コミックスなかよし	2	MID										o	9784061	1	9784061788152	1995-09-06	3			講談社	0	NDLにも該当巻なし	
 NOHIT	megami	女神	seed4	0	standard	通常版	講談社コミックスなかよし	4	MID										o	9784061	3			5			講談社	0	NDLにも該当巻なし	
-NOHIT	megurikuruharu	めぐりくるはる	seed4	0	standard	通常版	ワニマガジン・コミックス	1	LEAD										o	9784898				2	9784898293737	1999-03-05	ワニマガジン	0	NDLにも該当巻なし	
 NOHIT	menkuiegurekeibu	面くいエグレ警部	seed4	0	bunkobon	文庫版	秋田漫画文庫	2	MID										o	9784253	1		1982-05-20	3	9784253016858	1983-09	秋田書店	0	NDLにも該当巻なし	
 NOHIT	mezase-mangaka-tezuka-akatsuka-show-jushou-sakuhinshuu	めざせ漫画家!手塚・赤塚賞受賞作品集	seed4	0	standard	通常版	集英社	3	MID										o	9784088	2	9784088583020	1988-09	4	9784088583044	1989-09-15	集英社	0	NDLにも該当巻なし	
 NOHIT	mezase-mangaka-tezuka-akatsuka-show-jushou-sakuhinshuu	めざせ漫画家!手塚・赤塚賞受賞作品集	seed4	0	standard	通常版	集英社	6	MID										o	9784088	5	9784088583051	1990-03	7	9784088583075	1991-01	集英社	0	NDLにも該当巻なし	
@@ -701,37 +681,6 @@ NOHIT	mobile-suit-z-gundam	機動戦士Zガンダム	seed4	0	standard	通常版	
 NOHIT	mobile-suit-z-gundam	機動戦士Zガンダム	seed4	0	standard	通常版	講談社コミックスボンボン	8	MID										o	9784073	3	9784073013518	1994-06	11		1986-10-30	メディアワークス	0	NDLにも該当巻なし	
 NOHIT	mobile-suit-z-gundam	機動戦士Zガンダム	seed4	0	standard	通常版	講談社コミックスボンボン	9	MID										o	9784073	3	9784073013518	1994-06	11		1986-10-30	メディアワークス	0	NDLにも該当巻なし	
 NOHIT	mobile-suit-z-gundam	機動戦士Zガンダム	seed4	0	standard	通常版	講談社コミックスボンボン	10	MID										o	9784073	3	9784073013518	1994-06	11		1986-10-30	メディアワークス	0	NDLにも該当巻なし	
-NOHIT	mobile-suit-zeta-gundam-difain-char-azunaburu-aka-no-bunsuirei	機動戦士ΖガンダムDefineシャア・アズナブル赤の分水嶺	seed4	0	standard	通常版	角川コミックス・エース	1	LEAD										o	9784041				13	9784041065426	2018-03-24	KADOKAWA	0	NDLにも該当巻なし	
-NOHIT	mobile-suit-zeta-gundam-difain-char-azunaburu-aka-no-bunsuirei	機動戦士ΖガンダムDefineシャア・アズナブル赤の分水嶺	seed4	0	standard	通常版	角川コミックス・エース	2	LEAD										o	9784041				13	9784041065426	2018-03-24	KADOKAWA	0	NDLにも該当巻なし	
-NOHIT	mobile-suit-zeta-gundam-difain-char-azunaburu-aka-no-bunsuirei	機動戦士ΖガンダムDefineシャア・アズナブル赤の分水嶺	seed4	0	standard	通常版	角川コミックス・エース	3	LEAD										o	9784041				13	9784041065426	2018-03-24	KADOKAWA	0	NDLにも該当巻なし	
-NOHIT	mobile-suit-zeta-gundam-difain-char-azunaburu-aka-no-bunsuirei	機動戦士ΖガンダムDefineシャア・アズナブル赤の分水嶺	seed4	0	standard	通常版	角川コミックス・エース	4	LEAD										o	9784041				13	9784041065426	2018-03-24	KADOKAWA	0	NDLにも該当巻なし	
-NOHIT	mobile-suit-zeta-gundam-difain-char-azunaburu-aka-no-bunsuirei	機動戦士ΖガンダムDefineシャア・アズナブル赤の分水嶺	seed4	0	standard	通常版	角川コミックス・エース	5	LEAD										o	9784041				13	9784041065426	2018-03-24	KADOKAWA	0	NDLにも該当巻なし	
-NOHIT	mobile-suit-zeta-gundam-difain-char-azunaburu-aka-no-bunsuirei	機動戦士ΖガンダムDefineシャア・アズナブル赤の分水嶺	seed4	0	standard	通常版	角川コミックス・エース	6	LEAD										o	9784041				13	9784041065426	2018-03-24	KADOKAWA	0	NDLにも該当巻なし	
-NOHIT	mobile-suit-zeta-gundam-difain-char-azunaburu-aka-no-bunsuirei	機動戦士ΖガンダムDefineシャア・アズナブル赤の分水嶺	seed4	0	standard	通常版	角川コミックス・エース	7	LEAD										o	9784041				13	9784041065426	2018-03-24	KADOKAWA	0	NDLにも該当巻なし	
-NOHIT	mobile-suit-zeta-gundam-difain-char-azunaburu-aka-no-bunsuirei	機動戦士ΖガンダムDefineシャア・アズナブル赤の分水嶺	seed4	0	standard	通常版	角川コミックス・エース	8	LEAD										o	9784041				13	9784041065426	2018-03-24	KADOKAWA	0	NDLにも該当巻なし	
-NOHIT	mobile-suit-zeta-gundam-difain-char-azunaburu-aka-no-bunsuirei	機動戦士ΖガンダムDefineシャア・アズナブル赤の分水嶺	seed4	0	standard	通常版	角川コミックス・エース	9	LEAD										o	9784041				13	9784041065426	2018-03-24	KADOKAWA	0	NDLにも該当巻なし	
-NOHIT	mobile-suit-zeta-gundam-difain-char-azunaburu-aka-no-bunsuirei	機動戦士ΖガンダムDefineシャア・アズナブル赤の分水嶺	seed4	0	standard	通常版	角川コミックス・エース	10	LEAD										o	9784041				13	9784041065426	2018-03-24	KADOKAWA	0	NDLにも該当巻なし	
-NOHIT	mobile-suit-zeta-gundam-difain-char-azunaburu-aka-no-bunsuirei	機動戦士ΖガンダムDefineシャア・アズナブル赤の分水嶺	seed4	0	standard	通常版	角川コミックス・エース	11	LEAD										o	9784041				13	9784041065426	2018-03-24	KADOKAWA	0	NDLにも該当巻なし	
-NOHIT	mobile-suit-zeta-gundam-difain-char-azunaburu-aka-no-bunsuirei	機動戦士ΖガンダムDefineシャア・アズナブル赤の分水嶺	seed4	0	standard	通常版	角川コミックス・エース	12	LEAD										o	9784041				13	9784041065426	2018-03-24	KADOKAWA	0	NDLにも該当巻なし	
-NOHIT	mobile-suit-zeta-gundam-difain-char-azunaburu-guripusu-seneki	機動戦士ΖガンダムDefineシャア・アズナブルグリプス戦役	seed4	0	standard	通常版	角川コミックス・エース	1	LEAD										o	9784041				20	9784041148426	2024-02-24	KADOKAWA	0	NDLにも該当巻なし	
-NOHIT	mobile-suit-zeta-gundam-difain-char-azunaburu-guripusu-seneki	機動戦士ΖガンダムDefineシャア・アズナブルグリプス戦役	seed4	0	standard	通常版	角川コミックス・エース	2	LEAD										o	9784041				20	9784041148426	2024-02-24	KADOKAWA	0	NDLにも該当巻なし	
-NOHIT	mobile-suit-zeta-gundam-difain-char-azunaburu-guripusu-seneki	機動戦士ΖガンダムDefineシャア・アズナブルグリプス戦役	seed4	0	standard	通常版	角川コミックス・エース	3	LEAD										o	9784041				20	9784041148426	2024-02-24	KADOKAWA	0	NDLにも該当巻なし	
-NOHIT	mobile-suit-zeta-gundam-difain-char-azunaburu-guripusu-seneki	機動戦士ΖガンダムDefineシャア・アズナブルグリプス戦役	seed4	0	standard	通常版	角川コミックス・エース	4	LEAD										o	9784041				20	9784041148426	2024-02-24	KADOKAWA	0	NDLにも該当巻なし	
-NOHIT	mobile-suit-zeta-gundam-difain-char-azunaburu-guripusu-seneki	機動戦士ΖガンダムDefineシャア・アズナブルグリプス戦役	seed4	0	standard	通常版	角川コミックス・エース	5	LEAD										o	9784041				20	9784041148426	2024-02-24	KADOKAWA	0	NDLにも該当巻なし	
-NOHIT	mobile-suit-zeta-gundam-difain-char-azunaburu-guripusu-seneki	機動戦士ΖガンダムDefineシャア・アズナブルグリプス戦役	seed4	0	standard	通常版	角川コミックス・エース	6	LEAD										o	9784041				20	9784041148426	2024-02-24	KADOKAWA	0	NDLにも該当巻なし	
-NOHIT	mobile-suit-zeta-gundam-difain-char-azunaburu-guripusu-seneki	機動戦士ΖガンダムDefineシャア・アズナブルグリプス戦役	seed4	0	standard	通常版	角川コミックス・エース	7	LEAD										o	9784041				20	9784041148426	2024-02-24	KADOKAWA	0	NDLにも該当巻なし	
-NOHIT	mobile-suit-zeta-gundam-difain-char-azunaburu-guripusu-seneki	機動戦士ΖガンダムDefineシャア・アズナブルグリプス戦役	seed4	0	standard	通常版	角川コミックス・エース	8	LEAD										o	9784041				20	9784041148426	2024-02-24	KADOKAWA	0	NDLにも該当巻なし	
-NOHIT	mobile-suit-zeta-gundam-difain-char-azunaburu-guripusu-seneki	機動戦士ΖガンダムDefineシャア・アズナブルグリプス戦役	seed4	0	standard	通常版	角川コミックス・エース	9	LEAD										o	9784041				20	9784041148426	2024-02-24	KADOKAWA	0	NDLにも該当巻なし	
-NOHIT	mobile-suit-zeta-gundam-difain-char-azunaburu-guripusu-seneki	機動戦士ΖガンダムDefineシャア・アズナブルグリプス戦役	seed4	0	standard	通常版	角川コミックス・エース	10	LEAD										o	9784041				20	9784041148426	2024-02-24	KADOKAWA	0	NDLにも該当巻なし	
-NOHIT	mobile-suit-zeta-gundam-difain-char-azunaburu-guripusu-seneki	機動戦士ΖガンダムDefineシャア・アズナブルグリプス戦役	seed4	0	standard	通常版	角川コミックス・エース	11	LEAD										o	9784041				20	9784041148426	2024-02-24	KADOKAWA	0	NDLにも該当巻なし	
-NOHIT	mobile-suit-zeta-gundam-difain-char-azunaburu-guripusu-seneki	機動戦士ΖガンダムDefineシャア・アズナブルグリプス戦役	seed4	0	standard	通常版	角川コミックス・エース	12	LEAD										o	9784041				20	9784041148426	2024-02-24	KADOKAWA	0	NDLにも該当巻なし	
-NOHIT	mobile-suit-zeta-gundam-difain-char-azunaburu-guripusu-seneki	機動戦士ΖガンダムDefineシャア・アズナブルグリプス戦役	seed4	0	standard	通常版	角川コミックス・エース	13	LEAD										o	9784041				20	9784041148426	2024-02-24	KADOKAWA	0	NDLにも該当巻なし	
-NOHIT	mobile-suit-zeta-gundam-difain-char-azunaburu-guripusu-seneki	機動戦士ΖガンダムDefineシャア・アズナブルグリプス戦役	seed4	0	standard	通常版	角川コミックス・エース	14	LEAD										o	9784041				20	9784041148426	2024-02-24	KADOKAWA	0	NDLにも該当巻なし	
-NOHIT	mobile-suit-zeta-gundam-difain-char-azunaburu-guripusu-seneki	機動戦士ΖガンダムDefineシャア・アズナブルグリプス戦役	seed4	0	standard	通常版	角川コミックス・エース	15	LEAD										o	9784041				20	9784041148426	2024-02-24	KADOKAWA	0	NDLにも該当巻なし	
-NOHIT	mobile-suit-zeta-gundam-difain-char-azunaburu-guripusu-seneki	機動戦士ΖガンダムDefineシャア・アズナブルグリプス戦役	seed4	0	standard	通常版	角川コミックス・エース	16	LEAD										o	9784041				20	9784041148426	2024-02-24	KADOKAWA	0	NDLにも該当巻なし	
-NOHIT	mobile-suit-zeta-gundam-difain-char-azunaburu-guripusu-seneki	機動戦士ΖガンダムDefineシャア・アズナブルグリプス戦役	seed4	0	standard	通常版	角川コミックス・エース	17	LEAD										o	9784041				20	9784041148426	2024-02-24	KADOKAWA	0	NDLにも該当巻なし	
-NOHIT	mobile-suit-zeta-gundam-difain-char-azunaburu-guripusu-seneki	機動戦士ΖガンダムDefineシャア・アズナブルグリプス戦役	seed4	0	standard	通常版	角川コミックス・エース	18	LEAD										o	9784041				20	9784041148426	2024-02-24	KADOKAWA	0	NDLにも該当巻なし	
-NOHIT	mobile-suit-zeta-gundam-difain-char-azunaburu-guripusu-seneki	機動戦士ΖガンダムDefineシャア・アズナブルグリプス戦役	seed4	0	standard	通常版	角川コミックス・エース	19	LEAD										o	9784041				20	9784041148426	2024-02-24	KADOKAWA	0	NDLにも該当巻なし	
 NOHIT	momopan-clover-2012	MOMOPAN	seed4	0	standard	通常版	ムーグコミックスアンソロジー	1	LEAD										o	9784862				25	9784862973382	2012-06-28	ジーウォーク	0	NDLにも該当巻なし	
 NOHIT	momopan-clover-2012	MOMOPAN	seed4	0	standard	通常版	ムーグコミックスアンソロジー	2	LEAD										o	9784862				25	9784862973382	2012-06-28	ジーウォーク	0	NDLにも該当巻なし	
 NOHIT	momopan-clover-2012	MOMOPAN	seed4	0	standard	通常版	ムーグコミックスアンソロジー	3	LEAD										o	9784862				25	9784862973382	2012-06-28	ジーウォーク	0	NDLにも該当巻なし	
@@ -776,7 +725,6 @@ NOHIT	nanoda-tensai-bakabon-no-oyaji	なのだ!?天才バカボンのおやじ	s
 NOHIT	nanoda-tensai-bakabon-no-oyaji	なのだ!?天才バカボンのおやじ	seed4	0	standard	通常版		6	LEAD										o	9784921				9	9784921068400	1999-12	ソフトガレージ	0	NDLにも該当巻なし	
 NOHIT	nanoda-tensai-bakabon-no-oyaji	なのだ!?天才バカボンのおやじ	seed4	0	standard	通常版		7	LEAD										o	9784921				9	9784921068400	1999-12	ソフトガレージ	0	NDLにも該当巻なし	
 NOHIT	nanoda-tensai-bakabon-no-oyaji	なのだ!?天才バカボンのおやじ	seed4	0	standard	通常版		8	LEAD										o	9784921				9	9784921068400	1999-12	ソフトガレージ	0	NDLにも該当巻なし	
-NOHIT	nee-piyo-chan	ねぇ、ぴよちゃん	seed4	0	standard	通常版		11	MID										o	9784801	10	9784801939165	2024-03-21	12	9784801946057	2025-09-22	竹書房	0	NDLにも該当巻なし	
 NOHIT	neko-banashi	ねこばなし	seed4	0	standard	通常版	Tsukasa comics	1	LEAD										o	9784812				3	9784812816097	2007-04	司書房	0	NDLにも該当巻なし	
 NOHIT	neko-banashi	ねこばなし	seed4	0	standard	通常版	Tsukasa comics	2	LEAD										o	9784812				3	9784812816097	2007-04	司書房	0	NDLにも該当巻なし	
 NOHIT	neko-punch	ねこぱんち	seed4	0	standard	通常版	MAY'S BESTS	1	LEAD										o	9784785				10	9784785927943	2007-07	少年画報社	0	NDLにも該当巻なし	
@@ -791,10 +739,8 @@ NOHIT	neko-punch	ねこぱんち	seed4	0	standard	通常版	MAY'S BESTS	9	LEAD		
 NOHIT	neko-punch	ねこぱんち	seed4	0	standard	通常版	MAY'S BESTS	11	MID										o	9784785	10	9784785927943	2007-07	17	9784785928971	2008-02	少年画報社	0	NDLにも該当巻なし	
 NOHIT	neko-punch	ねこぱんち	seed4	0	standard	通常版	MAY'S BESTS	12	MID										o	9784785	10	9784785927943	2007-07	17	9784785928971	2008-02	少年画報社	0	NDLにも該当巻なし	
 NOHIT	neko-punch	ねこぱんち	seed4	0	standard	通常版	MAY'S BESTS	13	MID										o	9784785	10	9784785927943	2007-07	17	9784785928971	2008-02	少年画報社	0	NDLにも該当巻なし	
-NOHIT	neko-punch	ねこぱんち	seed4	0	standard	通常版	MAY'S BESTS	14	MID										o	9784785	10	9784785927943	2007-07	17	9784785928971	2008-02	少年画報社	0	NDLにも該当巻なし	
 NOHIT	neko-punch	ねこぱんち	seed4	0	standard	通常版	MAY'S BESTS	15	MID										o	9784785	10	9784785927943	2007-07	17	9784785928971	2008-02	少年画報社	0	NDLにも該当巻なし	
 NOHIT	neko-punch	ねこぱんち	seed4	0	standard	通常版	MAY'S BESTS	16	MID										o	9784785	10	9784785927943	2007-07	17	9784785928971	2008-02	少年画報社	0	NDLにも該当巻なし	
-NOHIT	neko-punch	ねこぱんち	seed4	0	standard	通常版	MAY'S BESTS	18	MID										o	9784785	17	9784785928971	2008-02	23	9784785929947	2008-07-14	少年画報社	0	NDLにも該当巻なし	
 NOHIT	neko-punch	ねこぱんち	seed4	0	standard	通常版	MAY'S BESTS	19	MID										o	9784785	17	9784785928971	2008-02	23	9784785929947	2008-07-14	少年画報社	0	NDLにも該当巻なし	
 NOHIT	neko-punch	ねこぱんち	seed4	0	standard	通常版	MAY'S BESTS	20	MID										o	9784785	17	9784785928971	2008-02	23	9784785929947	2008-07-14	少年画報社	0	NDLにも該当巻なし	
 NOHIT	neko-punch	ねこぱんち	seed4	0	standard	通常版	MAY'S BESTS	21	MID										o	9784785	17	9784785928971	2008-02	23	9784785929947	2008-07-14	少年画報社	0	NDLにも該当巻なし	
@@ -804,7 +750,6 @@ NOHIT	neko-punch	ねこぱんち	seed4	0	standard	通常版	MAY'S BESTS	25	MID		
 NOHIT	neko-punch	ねこぱんち	seed4	0	standard	通常版	MAY'S BESTS	26	MID										o	9784785	23	9784785929947	2008-07-14	30	9784785930899	2009-01-13	少年画報社	0	NDLにも該当巻なし	
 NOHIT	neko-punch	ねこぱんち	seed4	0	standard	通常版	MAY'S BESTS	27	MID										o	9784785	23	9784785929947	2008-07-14	30	9784785930899	2009-01-13	少年画報社	0	NDLにも該当巻なし	
 NOHIT	neko-punch	ねこぱんち	seed4	0	standard	通常版	MAY'S BESTS	28	MID										o	9784785	23	9784785929947	2008-07-14	30	9784785930899	2009-01-13	少年画報社	0	NDLにも該当巻なし	
-NOHIT	neko-punch	ねこぱんち	seed4	0	standard	通常版	MAY'S BESTS	29	MID										o	9784785	23	9784785929947	2008-07-14	30	9784785930899	2009-01-13	少年画報社	0	NDLにも該当巻なし	
 NOHIT	netchuu-kobo-chan	熱中!コボちゃん	seed4	0	standard	通常版	まんがタイムmy pal comics	10	MID										o	9784832	9	9784832258655	2022-04-21	11	9784832258990	2023-04-24	芳文社	0	NDLにも該当巻なし	
 NOHIT	ningen-no-jouken	人間の條件	seed4	0	standard	通常版		1	LEAD										o	9784794				2	9784794503152	1988-05	草土文化	0	NDLにも該当巻なし	
 NOHIT	ningen-no-jouken	人間の條件	seed4	0	standard	通常版		3	MID										o	9784794	2	9784794503152	1988-05	4	9784794503176	1988	草土文化	0	NDLにも該当巻なし	
@@ -830,7 +775,6 @@ NOHIT	noroi-no-shoutaijou	呪いの招待状	seed4	0	standard	通常版	スコ�
 NOHIT	noroi-no-shoutaijou	呪いの招待状	seed4	0	standard	通常版	スコラLC	6	MID										o	9784796	3	9784796288255	1997-09-16	9	9784821181056	2004-09-17	スコラ	0	NDLにも該当巻なし	
 NOHIT	noroi-no-shoutaijou	呪いの招待状	seed4	0	standard	通常版	スコラLC	7	MID										o	9784796	3	9784796288255	1997-09-16	9	9784821181056	2004-09-17	スコラ	0	NDLにも該当巻なし	
 NOHIT	noroi-no-shoutaijou	呪いの招待状	seed4	0	standard	通常版	スコラLC	8	MID										o	9784796	3	9784796288255	1997-09-16	9	9784821181056	2004-09-17	スコラ	0	NDLにも該当巻なし	
-NOHIT	oku-sama-hi-no-youjin	奥様火の用心!	seed4	0	standard	通常版	アクションコミックス	1	LEAD										o	9784575				2	9784575934649	1996-09	双葉社	0	NDLにも該当巻なし	
 NOHIT	onape	オナぺ	seed4	0	standard	通常版	ガールズポップコレクション	1	LEAD										o	9784790				2	9784790122586	2009-07	松文館	0	NDLにも該当巻なし	
 NOHIT	onape	オナぺ	seed4	0	standard	通常版	ガールズポップコレクション	3	MID										o	9784790	2	9784790122586	2009-07	5	9784790122906	2009-10	松文館	0	NDLにも該当巻なし	
 NOHIT	onape	オナぺ	seed4	0	standard	通常版	ガールズポップコレクション	4	MID										o	9784790	2	9784790122586	2009-07	5	9784790122906	2009-10	松文館	0	NDLにも該当巻なし	
@@ -921,14 +865,6 @@ NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚�
 NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	seed4	0	standard	通常版	白夜コミックス	75	MID										o	9784861	4	9784861912153	2006-11-22	77	9784861917769	2011-06	白夜書房	0	NDLにも該当巻なし	
 NOHIT	osaka-itemae-surottaa-manmai-kun	大阪いてまえスロッター万枚くん	seed4	0	standard	通常版	白夜コミックス	76	MID										o	9784861	4	9784861912153	2006-11-22	77	9784861917769	2011-06	白夜書房	0	NDLにも該当巻なし	
 NOHIT	pachikko-bojou	パチっ子慕情	seed4	0	standard	通常版	ゴラク・コミックス	2	MID										o	9784537	1		1982-05	3		1982-10	日本文芸社	0	NDLにも該当巻なし	
-NOHIT	pachisuro-de-atta-zenbu-umai-hanashi-zetto	パチスロであった全部旨い話Z	seed4	0	standard	通常版	GW comics	1	LEAD										o	9784865				9	9784865350562	2014-01	ガイドワークス	0	NDLにも該当巻なし	
-NOHIT	pachisuro-de-atta-zenbu-umai-hanashi-zetto	パチスロであった全部旨い話Z	seed4	0	standard	通常版	GW comics	2	LEAD										o	9784865				9	9784865350562	2014-01	ガイドワークス	0	NDLにも該当巻なし	
-NOHIT	pachisuro-de-atta-zenbu-umai-hanashi-zetto	パチスロであった全部旨い話Z	seed4	0	standard	通常版	GW comics	3	LEAD										o	9784865				9	9784865350562	2014-01	ガイドワークス	0	NDLにも該当巻なし	
-NOHIT	pachisuro-de-atta-zenbu-umai-hanashi-zetto	パチスロであった全部旨い話Z	seed4	0	standard	通常版	GW comics	4	LEAD										o	9784865				9	9784865350562	2014-01	ガイドワークス	0	NDLにも該当巻なし	
-NOHIT	pachisuro-de-atta-zenbu-umai-hanashi-zetto	パチスロであった全部旨い話Z	seed4	0	standard	通常版	GW comics	5	LEAD										o	9784865				9	9784865350562	2014-01	ガイドワークス	0	NDLにも該当巻なし	
-NOHIT	pachisuro-de-atta-zenbu-umai-hanashi-zetto	パチスロであった全部旨い話Z	seed4	0	standard	通常版	GW comics	6	LEAD										o	9784865				9	9784865350562	2014-01	ガイドワークス	0	NDLにも該当巻なし	
-NOHIT	pachisuro-de-atta-zenbu-umai-hanashi-zetto	パチスロであった全部旨い話Z	seed4	0	standard	通常版	GW comics	7	LEAD										o	9784865				9	9784865350562	2014-01	ガイドワークス	0	NDLにも該当巻なし	
-NOHIT	pachisuro-de-atta-zenbu-umai-hanashi-zetto	パチスロであった全部旨い話Z	seed4	0	standard	通常版	GW comics	8	LEAD										o	9784865				9	9784865350562	2014-01	ガイドワークス	0	NDLにも該当巻なし	
 NOHIT	pachisuro-yancha-bugi	パチスロやんちゃブギ	seed4	0	standard	通常版	ドンキーコミックス	3	MID										o	9784915	2	9784915450341	2000-11-15	5	9784915450471	2002-10-30	綜合図書	0	NDLにも該当巻なし	
 NOHIT	pachisuro-yancha-bugi	パチスロやんちゃブギ	seed4	0	standard	通常版	ドンキーコミックス	4	MID										o	9784915	2	9784915450341	2000-11-15	5	9784915450471	2002-10-30	綜合図書	0	NDLにも該当巻なし	
 NOHIT	pachisuro-yancha-bugi	パチスロやんちゃブギ	seed4	0	standard	通常版	ドンキーコミックス	7	MID										o	9784915	6	9784915450556	2003-05-30	8	9784915450662	2004-06-30	綜合図書	0	NDLにも該当巻なし	
@@ -940,7 +876,6 @@ NOHIT	pachisuro-yancha-bugi	パチスロやんちゃブギ	seed4	0	standard	通�
 NOHIT	pachisuro-yancha-gaiden	パチスロやんちゃ外伝	seed4	0	standard	通常版	ドンキーコミックスシリーズ	3	MID										o	9784915	2	9784915450488	2003-01	4	9784915450716	2004-11-29	綜合図書	0	NDLにも該当巻なし	
 NOHIT	pachisuro-yancha-gaiden	パチスロやんちゃ外伝	seed4	0	standard	通常版	ドンキーコミックスシリーズ	5	MID										o	9784915	4	9784915450716	2004-11-29	7	9784862980335	2008-12	綜合図書	0	NDLにも該当巻なし	
 NOHIT	pachisuro-yancha-gaiden	パチスロやんちゃ外伝	seed4	0	standard	通常版	ドンキーコミックスシリーズ	6	MID										o	9784915	4	9784915450716	2004-11-29	7	9784862980335	2008-12	綜合図書	0	NDLにも該当巻なし	
-NOHIT	pakupaku-desuwa-tsuihousareta-sareta-ojousama	〈パクパクですわ〉追放されたお嬢様の『モンスターを食べるほど強くなる』スキルは、1食で1レベルアップする前代未聞の最強スキルでした。3日で人類最強になりましたわ～!	seed4	0	standard	通常版	シリウスKC	1	LEAD										o	9784065				2	9784065341544	2024-01-09	講談社	0	NDLにも該当巻なし	
 NOHIT	palm	パーム	seed4	0	standard	通常版	Wings comics	1	LEAD										o	9784403				40	9784403622571	2018-03	新書館	0	NDLにも該当巻なし	
 NOHIT	palm	パーム	seed4	0	standard	通常版	Wings comics	2	LEAD										o	9784403				40	9784403622571	2018-03	新書館	0	NDLにも該当巻なし	
 NOHIT	palm	パーム	seed4	0	standard	通常版	Wings comics	3	LEAD										o	9784403				40	9784403622571	2018-03	新書館	0	NDLにも該当巻なし	
@@ -980,7 +915,6 @@ NOHIT	palm	パーム	seed4	0	standard	通常版	Wings comics	36	LEAD										o	
 NOHIT	palm	パーム	seed4	0	standard	通常版	Wings comics	37	LEAD										o	9784403				40	9784403622571	2018-03	新書館	0	NDLにも該当巻なし	
 NOHIT	palm	パーム	seed4	0	standard	通常版	Wings comics	38	LEAD										o	9784403				40	9784403622571	2018-03	新書館	0	NDLにも該当巻なし	
 NOHIT	palm	パーム	seed4	0	standard	通常版	Wings comics	39	LEAD										o	9784403				40	9784403622571	2018-03	新書館	0	NDLにも該当巻なし	
-NOHIT	papa-no-kokoro	パパのココロ	seed4	0	standard	通常版		1	LEAD										o	9784574				2	9784574000819	1998-04	婦人生活社	0	NDLにも該当巻なし	
 NOHIT	perfect-angel-lip	Perfectエンジェルリップ	seed4	0	standard	通常版	バーガーSCスペシャル	1	LEAD										o	9784796				2	9784796243902	1996-09-28	スコラ	0	NDLにも該当巻なし	
 NOHIT	perfect-angel-lip	Perfectエンジェルリップ	seed4	0	standard	通常版	バーガーSCスペシャル	3	MID										o	9784796	2	9784796243902	1996-09-28	4	9784796244008	1996-11-29	スコラ	0	NDLにも該当巻なし	
 NOHIT	pet-boy-s	Pet-boy's	seed4	0	standard	通常版	Tsukasa comics	1	LEAD										o	9784812				2	9784812800980	1997-12	司書房	0	NDLにも該当巻なし	
@@ -1049,7 +983,16 @@ NOHIT	saibaa-comics	サイバーコミックス	seed4	0	standard	通常版		12	M
 NOHIT	saishinban-heisei-tensai-bakabon	最新版平成天才バカボン	seed4	0	standard	通常版	ワイドKCボンボン	1	LEAD										o	9784090				2	9784090017650		小学館	0	NDLにも該当巻なし	
 NOHIT	saitsuyo-akuyaku-reijou-nikki	さいつよ☆悪役令嬢日記	seed4	0	standard	通常版		1	LEAD										o	9784866				2	9784866454344	2025-08-01	銀河書籍	0	NDLにも該当巻なし	
 NOHIT	sakuranbomonogatari	桜桃物語	seed4	0	standard	通常版	BLKC	16	MID										o	9784061	15	9784061755055	1989-12-06	17	9784061755116	1992-01-09	講談社	0	NDLにも該当巻なし	
+NOHIT	seijo-yuusha-party-kara-kaikosareta-node-guild-o-tsukuttara-attohoomu-na-saikyou-guild-ni	聖女、勇者パーティーから解雇されたのでギルドを作ったらアットホームな最強ギルドに育ちました。	seed4	0	standard	通常版	コロナ・コミックス	4	MID										o	9784866	3	9784866998091	2023-04	5	9784868542537	2027-01-10	TOブックス	0	NDLにも該当巻なし	
 NOHIT	sekai-no-meisaku-opera	世界の名作オペラ	seed4	0	standard	通常版		9	MID										o	9784880	8	9784880238753	2005-02	10	9784880238777	2005-03-20	ティーケイシー出版	0	NDLにも該当巻なし	
+NOHIT	sekai-saikyou-no-majo-hajimemashita	世界最強の魔女、始めました	seed4	0	standard	通常版	月刊少年マガジン	6	MID										o	9784065	5	9784065360897	2024-08-07	14	9784065448229	2026-10-08	講談社	0	NDLにも該当巻なし	
+NOHIT	sekai-saikyou-no-majo-hajimemashita	世界最強の魔女、始めました	seed4	0	standard	通常版	月刊少年マガジン	7	MID										o	9784065	5	9784065360897	2024-08-07	14	9784065448229	2026-10-08	講談社	0	NDLにも該当巻なし	
+NOHIT	sekai-saikyou-no-majo-hajimemashita	世界最強の魔女、始めました	seed4	0	standard	通常版	月刊少年マガジン	8	MID										o	9784065	5	9784065360897	2024-08-07	14	9784065448229	2026-10-08	講談社	0	NDLにも該当巻なし	
+NOHIT	sekai-saikyou-no-majo-hajimemashita	世界最強の魔女、始めました	seed4	0	standard	通常版	月刊少年マガジン	9	MID										o	9784065	5	9784065360897	2024-08-07	14	9784065448229	2026-10-08	講談社	0	NDLにも該当巻なし	
+NOHIT	sekai-saikyou-no-majo-hajimemashita	世界最強の魔女、始めました	seed4	0	standard	通常版	月刊少年マガジン	10	MID										o	9784065	5	9784065360897	2024-08-07	14	9784065448229	2026-10-08	講談社	0	NDLにも該当巻なし	
+NOHIT	sekai-saikyou-no-majo-hajimemashita	世界最強の魔女、始めました	seed4	0	standard	通常版	月刊少年マガジン	11	MID										o	9784065	5	9784065360897	2024-08-07	14	9784065448229	2026-10-08	講談社	0	NDLにも該当巻なし	
+NOHIT	sekai-saikyou-no-majo-hajimemashita	世界最強の魔女、始めました	seed4	0	standard	通常版	月刊少年マガジン	12	MID										o	9784065	5	9784065360897	2024-08-07	14	9784065448229	2026-10-08	講談社	0	NDLにも該当巻なし	
+NOHIT	sekai-saikyou-no-majo-hajimemashita	世界最強の魔女、始めました	seed4	0	standard	通常版	月刊少年マガジン	13	MID										o	9784065	5	9784065360897	2024-08-07	14	9784065448229	2026-10-08	講談社	0	NDLにも該当巻なし	
 NOHIT	senri-no-michi-mo-dai-sanshou	千里の道も 第三章	seed4	0	standard	通常版	ゴルフダイジェストコミックス	12	MID										o	9784772	11	9784772850629	2006-06	13	9784772810715	2006-12	ゴルフダイジェスト社	0	NDLにも該当巻なし	
 NOHIT	shakaikamanganihonnonbiriryokou	社会科まんが日本のんびり旅行	seed4	0	standard	通常版		1	LEAD										o	9784378				4	9784378041049	1984-01	さ・え・ら書房	0	NDLにも該当巻なし	
 NOHIT	shakaikamanganihonnonbiriryokou	社会科まんが日本のんびり旅行	seed4	0	standard	通常版		2	LEAD										o	9784378				4	9784378041049	1984-01	さ・え・ら書房	0	NDLにも該当巻なし	
@@ -1072,6 +1015,7 @@ NOHIT	shin-agatte-nanbo-taichiyo-nakuna	新上ってなンボ!!太一よ泣く�
 NOHIT	shin-agatte-nanbo-taichiyo-nakuna	新上ってなンボ!!太一よ泣くな	canon:volumes	0	standard	通常版	劇画キングシリーズ	29	MID										o	9784883	21	9784883154890	1998-08	31	9784883155705	2002-04	小池書院	0	NDLにも該当巻なし	
 NOHIT	shin-agatte-nanbo-taichiyo-nakuna	新上ってなンボ!!太一よ泣くな	canon:volumes	0	standard	通常版	劇画キングシリーズ	30	MID										o	9784883	21	9784883154890	1998-08	31	9784883155705	2002-04	小池書院	0	NDLにも該当巻なし	
 NOHIT	shin-agatte-nanbo-taichiyo-nakuna	新上ってなンボ!!太一よ泣くな	canon:volumes	0	standard	通常版	劇画キングシリーズ	32	MID										o	9784883	31	9784883155705	2002-04	33	9784883158065	2003-03	小池書院	0	NDLにも該当巻なし	
+NOHIT	shin-mimibukuro-kaidan-hyakumonogatari	新耳袋 怪談百物語	seed4	0	standard	通常版	ホームコミックス	1	LEAD										o	9784834				2	9784834231960	2013-07-19	ホーム社	0	NDLにも該当巻なし	
 NOHIT	shinshin-agatte-nanbo-taichi-yo-nakuna	新々上ってなンボ!!太一よ泣くな	seed4	0	standard	通常版	キングシリーズ	1	LEAD										o	9784862				4			小池書院	0	NDLにも該当巻なし	
 NOHIT	shinshin-agatte-nanbo-taichi-yo-nakuna	新々上ってなンボ!!太一よ泣くな	seed4	0	standard	通常版	キングシリーズ	2	LEAD										o	9784862				4			小池書院	0	NDLにも該当巻なし	
 NOHIT	shinshin-agatte-nanbo-taichi-yo-nakuna	新々上ってなンボ!!太一よ泣くな	seed4	0	standard	通常版	キングシリーズ	3	LEAD										o	9784862				4			小池書院	0	NDLにも該当巻なし	
@@ -1093,7 +1037,6 @@ NOHIT	shintouki	神統記	seed4	0	standard	通常版	PASH!COMICS	7	LEAD									
 NOHIT	shintouki	神統記	seed4	0	standard	通常版	PASH!COMICS	8	LEAD										o	9784391				11	9784391162301	2024-04-05	主婦と生活社	0	NDLにも該当巻なし	
 NOHIT	shintouki	神統記	seed4	0	standard	通常版	PASH!COMICS	9	LEAD										o	9784391				11	9784391162301	2024-04-05	主婦と生活社	0	NDLにも該当巻なし	
 NOHIT	shintouki	神統記	seed4	0	standard	通常版	PASH!COMICS	10	LEAD										o	9784391				11	9784391162301	2024-04-05	主婦と生活社	0	NDLにも該当巻なし	
-NOHIT	shinuhodo-kisu-shite	死ぬほどKISSして	seed4	0	standard	通常版	SPコミックス	1	LEAD										o	9784845				2	9784845809073	1993-11	リイド社	0	NDLにも該当巻なし	
 NOHIT	shisaku-nansensu-senshuu	思索ナンセンス選集	seed4	0	standard	通常版		1	LEAD										o	9784783				2	9784783510901	1983-11	思索社	0	NDLにも該当巻なし	
 NOHIT	shisaku-nansensu-senshuu	思索ナンセンス選集	seed4	0	standard	通常版		3	MID										o	9784783	2	9784783510901	1983-11	4	9784783510925	1984-06	思索社	0	NDLにも該当巻なし	
 NOHIT	shisaku-nansensu-senshuu	思索ナンセンス選集	seed4	0	standard	通常版		6	MID										o	9784783	5	9784783510932	1984-09	7	9784783510956	1984-12	思索社	0	NDLにも該当巻なし	
@@ -1130,7 +1073,6 @@ NOHIT	shounan-bousouzoku	湘南暴走族	seed4	0	standard	通常版	ヤングキ
 NOHIT	shounan-bousouzoku	湘南暴走族	seed4	0	standard	通常版	ヤングキングAnimeコミックス	2	LEAD										o	9784785				5	9784785946296	1989-06-15	少年画報社	0	NDLにも該当巻なし	
 NOHIT	shounan-bousouzoku	湘南暴走族	seed4	0	standard	通常版	ヤングキングAnimeコミックス	3	LEAD										o	9784785				5	9784785946296	1989-06-15	少年画報社	0	NDLにも該当巻なし	
 NOHIT	shounan-bousouzoku	湘南暴走族	seed4	0	standard	通常版	ヤングキングAnimeコミックス	4	LEAD										o	9784785				5	9784785946296	1989-06-15	少年画報社	0	NDLにも該当巻なし	
-NOHIT	shounangurafutei	湘南グラフティ	seed4	0	standard	通常版	YOUNGKING COMICS	1	LEAD										o	9784785				2	9784785910921	1989-01-15	少年画報社	0	NDLにも該当巻なし	
 NOHIT	shousetsu-fajji	小説FUDGE	seed4	0	standard	通常版		1	LEAD										o	9784756				2	9784756700261	1994-10-15	桜桃書房	0	NDLにも該当巻なし	
 NOHIT	shousetsu-fajji	小説FUDGE	seed4	0	standard	通常版		6	MID										o	9784756	5	9784756709431	1995-10-15	8	9784756709899	1996-04	桜桃書房	0	NDLにも該当巻なし	
 NOHIT	shousetsu-fajji	小説FUDGE	seed4	0	standard	通常版		7	MID										o	9784756	5	9784756709431	1995-10-15	8	9784756709899	1996-04	桜桃書房	0	NDLにも該当巻なし	
@@ -1145,15 +1087,11 @@ NOHIT	soorujaa	葬流者	canon:extra[2]	3	shinsoban	King series	King series	2	MI
 NOHIT	sora-made-itchau	空までイっちゃう	seed4	0	standard	通常版	恋愛MAX COMICS	1	LEAD										o	9784253				2	9784253137904	2022-01-14	秋田書店	0	NDLにも該当巻なし	
 NOHIT	sora-no-ue-no-aren	空の上のアレン	seed4	0	standard	通常版	マイコミックス	3	MID										o	9784885	2	9784885706165	1992-08	4	9784885706639	1995-07	東京三世社	0	NDLにも該当巻なし	
 NOHIT	supeshiyaru-banguutara-mama	スペシャル版 ぐうたらママ	seed4	0	standard	通常版	ジェッツコミックス	1	LEAD										o	9784592				2	9784592760221	1983-04-27	白泉社	0	NDLにも該当巻なし	
-NOHIT	supooshon-kid	スポーションKID	seed4	0	standard	通常版		1	LEAD										o	9784061				2	9784061020986	1988-01-16	講談社	0	NDLにも該当巻なし	
-NOHIT	suteki-na-kekkon	すてきな結婚	seed4	0	bunkobon	文庫版	双葉文庫名作シリーズ	1	LEAD										o	9784575				3	9784575722963	2001-02	双葉社	0	NDLにも該当巻なし	
-NOHIT	suteki-na-kekkon	すてきな結婚	seed4	0	bunkobon	文庫版	双葉文庫名作シリーズ	2	LEAD										o	9784575				3	9784575722963	2001-02	双葉社	0	NDLにも該当巻なし	
-NOHIT	takamari-shisuu-esukareeshon	たかまり指数エスカレーション	seed4	0	standard	通常版	プレイボーイコミックス	1	LEAD										o	9784088				2	9784088570860	1984-01-25	集英社	0	NDLにも該当巻なし	
-NOHIT	tanimura-hitoshi-no-bakuretsu-tabiuchi-special	谷村ひとしの爆裂旅打ちスペシャル	seed4	0	standard	通常版	Nichibun comics	1	LEAD										o	9784537				2	9784537101331	2002-11-10	日本文芸社	0	NDLにも該当巻なし	
 NOHIT	tatoeba-haha-ga	たとえば母が	seed4	0	standard	通常版	ACTION COMICS	5	MID										o	9784575	4	9784575832914	2006-10	6	9784575834710	2008-03	双葉社	0	NDLにも該当巻なし	
 NOHIT	teiaazu-tou-tiara	ティアーズ・トゥ・ティアラ	seed4	0	standard	通常版	MFコミックス	1	LEAD										o	9784840				2	9784840129572	2009-12-22	メディアファクトリー	0	NDLにも該当巻なし	
 NOHIT	the-combat	ザ・コンバット	seed4	0	standard	通常版	デュオ・セレクション・オリジナル	2	MID										o	9784257	1	9784257900757	1986-01	3	9784257900856	1986-11	朝日ソノラマ	0	NDLにも該当巻なし	
 NOHIT	the-mad-pachi-slot-brother-s	THE MAD PACHI-SLOT BROTHER'S	seed4	0	standard	通常版	白夜コミックス	2	MID										o	9784893	1	9784893676801	2000-11-21	3	9784893677419	2001-12	白夜書房	0	NDLにも該当巻なし	
+NOHIT	tinker-bell	ティンカー・ベル	seed4	0	standard	通常版	サンコミックス	2	MID										o	9784257	1	9784257913252	1975-05-10	3	9784041178102	2026-10-28	朝日ソノラマ	0	NDLにも該当巻なし	
 NOHIT	tokusen-kobo-chan	特選コボちゃん	seed4	0	standard	通常版	まんがタイム my pal comics	15	MID										o	9784832	14	9784832264984	2006-11-12	16	9784832265240	2007-02-26	芳文社	0	NDLにも該当巻なし	
 NOHIT	tokusen-ol-shinkaron	特選OL進化論	seed4	0	standard	通常版		2	MID										o	9784063	1	9784063645408	2003-12	35	9784063645446	2003-12	講談社	0	NDLにも該当巻なし	
 NOHIT	tokusen-ol-shinkaron	特選OL進化論	seed4	0	standard	通常版		3	MID										o	9784063	1	9784063645408	2003-12	35	9784063645446	2003-12	講談社	0	NDLにも該当巻なし	
@@ -1188,7 +1126,6 @@ NOHIT	tokusen-ol-shinkaron	特選OL進化論	seed4	0	standard	通常版		31	MID	
 NOHIT	tokusen-ol-shinkaron	特選OL進化論	seed4	0	standard	通常版		32	MID										o	9784063	1	9784063645408	2003-12	35	9784063645446	2003-12	講談社	0	NDLにも該当巻なし	
 NOHIT	tokusen-ol-shinkaron	特選OL進化論	seed4	0	standard	通常版		33	MID										o	9784063	1	9784063645408	2003-12	35	9784063645446	2003-12	講談社	0	NDLにも該当巻なし	
 NOHIT	tokusen-ol-shinkaron	特選OL進化論	seed4	0	standard	通常版		34	MID										o	9784063	1	9784063645408	2003-12	35	9784063645446	2003-12	講談社	0	NDLにも該当巻なし	
-NOHIT	tousei-gensou-hakubutsushi	当世幻想博物誌	seed4	0	standard	通常版	IDコミックス	1	LEAD										o	9784758				2	9784758055864	2011-03	一迅社	0	NDLにも該当巻なし	
 NOHIT	transistor-teaset-denki-gairozu	トランジスタティーセット	seed4	0	standard	通常版	Kirara menu	1	LEAD										o	9784832				5	9784832240810	2011-11	芳文社	0	NDLにも該当巻なし	
 NOHIT	transistor-teaset-denki-gairozu	トランジスタティーセット	seed4	0	standard	通常版	Kirara menu	2	LEAD										o	9784832				5	9784832240810	2011-11	芳文社	0	NDLにも該当巻なし	
 NOHIT	transistor-teaset-denki-gairozu	トランジスタティーセット	seed4	0	standard	通常版	Kirara menu	3	LEAD										o	9784832				5	9784832240810	2011-11	芳文社	0	NDLにも該当巻なし	
@@ -1204,12 +1141,55 @@ NOHIT	wani-bunsho	ワニ分署	canon:extra[1]	2	shinsoban	スーパー・プレ�
 NOHIT	wani-bunsho	ワニ分署	canon:extra[1]	2	shinsoban	スーパー・プレイボーイ・コミックス	スーパー・プレイボーイ・コミックス	7	MID										o	9784088	1	9784088572017	1986-10	8	9784088572086	1988-02	集英社	0	NDLにも該当巻なし	
 NOHIT	wani-bunsho	ワニ分署	canon:extra[1]	2	shinsoban	スーパー・プレイボーイ・コミックス	スーパー・プレイボーイ・コミックス	9	MID										o	9784088	8	9784088572086	1988-02	10	9784088572109	1988-08	集英社	0	NDLにも該当巻なし	
 NOHIT	watashi-no-ojou-sama	わたしのお嬢様	seed4	0	standard	通常版	タツミコミックス	1	LEAD										o	9784777				2	9784777805310	2008-05	辰巳出版	0	NDLにも該当巻なし	
+NOHIT	wild-7-1969	ワイルド7 1969	seed4	0	deluxe	通常版(1987)	徳間書店	6	MID										o	9784197	5	9784197875405	1987-02-28	8	9784197875436	1987-03-20		0	NDLにも該当巻なし	
+NOHIT	wild-7-1969	ワイルド7 1969	seed4	0	deluxe	通常版(1987)	徳間書店	7	MID										o	9784197	5	9784197875405	1987-02-28	8	9784197875436	1987-03-20		0	NDLにも該当巻なし	
+NOHIT	wild-7-1969	ワイルド7 1969	seed4	0	deluxe	通常版(1987)	徳間書店	9	MID										o	9784197	8	9784197875436	1987-03-20	10	9784197875542	1987-05-18		0	NDLにも該当巻なし	
+NOHIT	wild-7-1969	ワイルド7 1969	seed4	0	deluxe	通常版(1987)	徳間書店	13	MID										o	9784197	12	9784197875641	1987-05-15	18	9784197875924	1987-08-13		0	NDLにも該当巻なし	
+NOHIT	wild-7-1969	ワイルド7 1969	seed4	0	deluxe	通常版(1987)	徳間書店	14	MID										o	9784197	12	9784197875641	1987-05-15	18	9784197875924	1987-08-13		0	NDLにも該当巻なし	
+NOHIT	wild-7-1969	ワイルド7 1969	seed4	0	deluxe	通常版(1987)	徳間書店	15	MID										o	9784197	12	9784197875641	1987-05-15	18	9784197875924	1987-08-13		0	NDLにも該当巻なし	
+NOHIT	wild-7-1969	ワイルド7 1969	seed4	0	deluxe	通常版(1987)	徳間書店	16	MID										o	9784197	12	9784197875641	1987-05-15	18	9784197875924	1987-08-13		0	NDLにも該当巻なし	
+NOHIT	wild-7-1969	ワイルド7 1969	seed4	0	deluxe	通常版(1987)	徳間書店	17	MID										o	9784197	12	9784197875641	1987-05-15	18	9784197875924	1987-08-13		0	NDLにも該当巻なし	
+NOHIT	wild-7-1969	ワイルド7 1969	seed4	0	deluxe	通常版(1987)	徳間書店	21	MID										o	9784197	20	9784197876037	1987-09-14	24	9784197876235	1987-11-14		0	NDLにも該当巻なし	
+NOHIT	wild-7-1969	ワイルド7 1969	seed4	0	deluxe	通常版(1987)	徳間書店	22	MID										o	9784197	20	9784197876037	1987-09-14	24	9784197876235	1987-11-14		0	NDLにも該当巻なし	
+NOHIT	wild-7-1969	ワイルド7 1969	seed4	0	deluxe	通常版(1987)	徳間書店	23	MID										o	9784197	20	9784197876037	1987-09-14	24	9784197876235	1987-11-14		0	NDLにも該当巻なし	
+NOHIT	wild-7-1970-71	ワイルド7 1970-71	seed4	0	deluxe	通常版(1987)	徳間書店	6	MID										o	9784197	5	9784197875405	1987-02-28	8	9784197875436	1987-03-20		0	NDLにも該当巻なし	
+NOHIT	wild-7-1970-71	ワイルド7 1970-71	seed4	0	deluxe	通常版(1987)	徳間書店	7	MID										o	9784197	5	9784197875405	1987-02-28	8	9784197875436	1987-03-20		0	NDLにも該当巻なし	
+NOHIT	wild-7-1970-71	ワイルド7 1970-71	seed4	0	deluxe	通常版(1987)	徳間書店	9	MID										o	9784197	8	9784197875436	1987-03-20	10	9784197875542	1987-05-18		0	NDLにも該当巻なし	
+NOHIT	wild-7-1970-71	ワイルド7 1970-71	seed4	0	deluxe	通常版(1987)	徳間書店	13	MID										o	9784197	12	9784197875641	1987-05-15	18	9784197875924	1987-08-13		0	NDLにも該当巻なし	
+NOHIT	wild-7-1970-71	ワイルド7 1970-71	seed4	0	deluxe	通常版(1987)	徳間書店	14	MID										o	9784197	12	9784197875641	1987-05-15	18	9784197875924	1987-08-13		0	NDLにも該当巻なし	
+NOHIT	wild-7-1970-71	ワイルド7 1970-71	seed4	0	deluxe	通常版(1987)	徳間書店	15	MID										o	9784197	12	9784197875641	1987-05-15	18	9784197875924	1987-08-13		0	NDLにも該当巻なし	
+NOHIT	wild-7-1970-71	ワイルド7 1970-71	seed4	0	deluxe	通常版(1987)	徳間書店	16	MID										o	9784197	12	9784197875641	1987-05-15	18	9784197875924	1987-08-13		0	NDLにも該当巻なし	
+NOHIT	wild-7-1970-71	ワイルド7 1970-71	seed4	0	deluxe	通常版(1987)	徳間書店	17	MID										o	9784197	12	9784197875641	1987-05-15	18	9784197875924	1987-08-13		0	NDLにも該当巻なし	
+NOHIT	wild-7-1970-71	ワイルド7 1970-71	seed4	0	deluxe	通常版(1987)	徳間書店	21	MID										o	9784197	20	9784197876037	1987-09-14	24	9784197876235	1987-11-14		0	NDLにも該当巻なし	
+NOHIT	wild-7-1970-71	ワイルド7 1970-71	seed4	0	deluxe	通常版(1987)	徳間書店	22	MID										o	9784197	20	9784197876037	1987-09-14	24	9784197876235	1987-11-14		0	NDLにも該当巻なし	
+NOHIT	wild-7-1970-71	ワイルド7 1970-71	seed4	0	deluxe	通常版(1987)	徳間書店	23	MID										o	9784197	20	9784197876037	1987-09-14	24	9784197876235	1987-11-14		0	NDLにも該当巻なし	
+NOHIT	wild-7-1972	ワイルド7 1972	seed4	0	deluxe	通常版(1987)	徳間書店	6	MID										o	9784197	5	9784197875405	1987-02-28	8	9784197875436	1987-03-20		0	NDLにも該当巻なし	
+NOHIT	wild-7-1972	ワイルド7 1972	seed4	0	deluxe	通常版(1987)	徳間書店	7	MID										o	9784197	5	9784197875405	1987-02-28	8	9784197875436	1987-03-20		0	NDLにも該当巻なし	
+NOHIT	wild-7-1972	ワイルド7 1972	seed4	0	deluxe	通常版(1987)	徳間書店	9	MID										o	9784197	8	9784197875436	1987-03-20	10	9784197875542	1987-05-18		0	NDLにも該当巻なし	
+NOHIT	wild-7-1972	ワイルド7 1972	seed4	0	deluxe	通常版(1987)	徳間書店	13	MID										o	9784197	12	9784197875641	1987-05-15	18	9784197875924	1987-08-13		0	NDLにも該当巻なし	
+NOHIT	wild-7-1972	ワイルド7 1972	seed4	0	deluxe	通常版(1987)	徳間書店	14	MID										o	9784197	12	9784197875641	1987-05-15	18	9784197875924	1987-08-13		0	NDLにも該当巻なし	
+NOHIT	wild-7-1972	ワイルド7 1972	seed4	0	deluxe	通常版(1987)	徳間書店	15	MID										o	9784197	12	9784197875641	1987-05-15	18	9784197875924	1987-08-13		0	NDLにも該当巻なし	
+NOHIT	wild-7-1972	ワイルド7 1972	seed4	0	deluxe	通常版(1987)	徳間書店	16	MID										o	9784197	12	9784197875641	1987-05-15	18	9784197875924	1987-08-13		0	NDLにも該当巻なし	
+NOHIT	wild-7-1972	ワイルド7 1972	seed4	0	deluxe	通常版(1987)	徳間書店	17	MID										o	9784197	12	9784197875641	1987-05-15	18	9784197875924	1987-08-13		0	NDLにも該当巻なし	
+NOHIT	wild-7-1972	ワイルド7 1972	seed4	0	deluxe	通常版(1987)	徳間書店	21	MID										o	9784197	20	9784197876037	1987-09-14	24	9784197876235	1987-11-14		0	NDLにも該当巻なし	
+NOHIT	wild-7-1972	ワイルド7 1972	seed4	0	deluxe	通常版(1987)	徳間書店	22	MID										o	9784197	20	9784197876037	1987-09-14	24	9784197876235	1987-11-14		0	NDLにも該当巻なし	
+NOHIT	wild-7-1972	ワイルド7 1972	seed4	0	deluxe	通常版(1987)	徳間書店	23	MID										o	9784197	20	9784197876037	1987-09-14	24	9784197876235	1987-11-14		0	NDLにも該当巻なし	
+NOHIT	wild-7-1973-74	ワイルド7 1973-74	seed4	0	deluxe	通常版(1987)	徳間書店	6	MID										o	9784197	5	9784197875405	1987-02-28	8	9784197875436	1987-03-20		0	NDLにも該当巻なし	
+NOHIT	wild-7-1973-74	ワイルド7 1973-74	seed4	0	deluxe	通常版(1987)	徳間書店	7	MID										o	9784197	5	9784197875405	1987-02-28	8	9784197875436	1987-03-20		0	NDLにも該当巻なし	
+NOHIT	wild-7-1973-74	ワイルド7 1973-74	seed4	0	deluxe	通常版(1987)	徳間書店	9	MID										o	9784197	8	9784197875436	1987-03-20	10	9784197875542	1987-05-18		0	NDLにも該当巻なし	
+NOHIT	wild-7-1973-74	ワイルド7 1973-74	seed4	0	deluxe	通常版(1987)	徳間書店	13	MID										o	9784197	12	9784197875641	1987-05-15	18	9784197875924	1987-08-13		0	NDLにも該当巻なし	
+NOHIT	wild-7-1973-74	ワイルド7 1973-74	seed4	0	deluxe	通常版(1987)	徳間書店	14	MID										o	9784197	12	9784197875641	1987-05-15	18	9784197875924	1987-08-13		0	NDLにも該当巻なし	
+NOHIT	wild-7-1973-74	ワイルド7 1973-74	seed4	0	deluxe	通常版(1987)	徳間書店	15	MID										o	9784197	12	9784197875641	1987-05-15	18	9784197875924	1987-08-13		0	NDLにも該当巻なし	
+NOHIT	wild-7-1973-74	ワイルド7 1973-74	seed4	0	deluxe	通常版(1987)	徳間書店	16	MID										o	9784197	12	9784197875641	1987-05-15	18	9784197875924	1987-08-13		0	NDLにも該当巻なし	
+NOHIT	wild-7-1973-74	ワイルド7 1973-74	seed4	0	deluxe	通常版(1987)	徳間書店	17	MID										o	9784197	12	9784197875641	1987-05-15	18	9784197875924	1987-08-13		0	NDLにも該当巻なし	
+NOHIT	wild-7-1973-74	ワイルド7 1973-74	seed4	0	deluxe	通常版(1987)	徳間書店	21	MID										o	9784197	20	9784197876037	1987-09-14	24	9784197876235	1987-11-14		0	NDLにも該当巻なし	
+NOHIT	wild-7-1973-74	ワイルド7 1973-74	seed4	0	deluxe	通常版(1987)	徳間書店	22	MID										o	9784197	20	9784197876037	1987-09-14	24	9784197876235	1987-11-14		0	NDLにも該当巻なし	
+NOHIT	wild-7-1973-74	ワイルド7 1973-74	seed4	0	deluxe	通常版(1987)	徳間書店	23	MID										o	9784197	20	9784197876037	1987-09-14	24	9784197876235	1987-11-14		0	NDLにも該当巻なし	
 NOHIT	yamamoto-fuutarou-kun	山本風太郎くん	seed4	0	standard	通常版	廣済堂コミックス	1	LEAD										o	9784331				2	9784331250846	1986-06	廣済堂出版	0	NDLにも該当巻なし	
 NOHIT	yume-ha-taafu-o-kakemeguru	夢はターフを駆けめぐる	seed4	0	standard	通常版		1	LEAD										o	9784877				2	9784877190972	1994-04-15	光栄	0	NDLにも該当巻なし	
 NOHIT	yuri-shoujo	百合少女	seed4	0	standard	通常版	Kyun comics	2	MID										o	9784774	1	9784774730233	2009-11	3	9784774730356	2010-11	コスミック出版	0	NDLにも該当巻なし	
 NOHIT	yuru-days	ゆるデイズ	seed4	0	standard	通常版	Bamboo comics	1	LEAD										o	9784801				2	9784801983724	2024-07-17	竹書房	0	NDLにも該当巻なし	
 NOHIT	yuujin-brand	遊人ブランド	seed4	0	standard	通常版	劇画キングシリーズ	1	LEAD										o	9784883				2		1990-07-20	スタジオ・シップ	0	NDLにも該当巻なし	
-NOHIT	zakoken-maruchou	ざこ検〔○潮〕	canon:volumes	0	standard	通常版	ビッグコミックス	4	MID										o	9784091	3	9784091861535		5	9784091861559	2002-08	小学館	0	NDLにも該当巻なし	
 NOHIT	zebra	ゼブラ	seed4	0	standard	通常版	SPコミックス	1	LEAD										o	9784845				7	9784845804009	1991-02	リイド社	0	NDLにも該当巻なし	
 NOHIT	zebra	ゼブラ	seed4	0	standard	通常版	SPコミックス	2	LEAD										o	9784845				7	9784845804009	1991-02	リイド社	0	NDLにも該当巻なし	
 NOHIT	zebra	ゼブラ	seed4	0	standard	通常版	SPコミックス	3	LEAD										o	9784845				7	9784845804009	1991-02	リイド社	0	NDLにも該当巻なし	
@@ -1217,5 +1197,4 @@ NOHIT	zebra	ゼブラ	seed4	0	standard	通常版	SPコミックス	4	LEAD							
 NOHIT	zebra	ゼブラ	seed4	0	standard	通常版	SPコミックス	5	LEAD										o	9784845				7	9784845804009	1991-02	リイド社	0	NDLにも該当巻なし	
 NOHIT	zebra	ゼブラ	seed4	0	standard	通常版	SPコミックス	6	LEAD										o	9784845				7	9784845804009	1991-02	リイド社	0	NDLにも該当巻なし	
 NOHIT	zeruda-no-densetsu-4-koma-manga-gekijou	ゼルダの伝説 4コママンガ劇場	seed4	0	standard	通常版	ゲーム4コママンガシリーズ	1	LEAD										o	9784870				2	9784870257078	1993-02	エニックス	0	NDLにも該当巻なし	
-NOHIT	zettai-reido	絶対麗奴	seed4	0	standard	通常版	Kousai comics = 光彩コミックス	1	LEAD										o	9784877				2	9784905965572	1998-06-15	光彩書房	0	NDLにも該当巻なし	
-NOHIT	zoku-kanaike-no-hitobito	続 金井家の人々	seed4	0	standard	通常版		1	LEAD										o	9784821				2	9784821197460	1999-05	ぶんか社	0	NDLにも該当巻なし	
+NOHIT	zettai-reido	絶対麗奴	seed4	0	standard	通常版	光彩コミックス	1	LEAD										o	9784877				2	9784905965572	1998-06-15	光彩書房	0	NDLにも該当巻なし	
