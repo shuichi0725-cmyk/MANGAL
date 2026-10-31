@@ -8,6 +8,11 @@
 
 中身 = {公開slug: [[巻番号, 書影(楽天は接頭辞を落とした短縮形), 発売日], ...]}。
 巻 = その作品で整数の巻番号が最も多い版(=一覧索引の max_edition_volumes と同じ数え方)の巻。
+  ★書影が無い巻は、同じ版の別の刷(versions = 初版カバー/新装版カバー 等)の同じ巻番号の書影と発売日で補う
+    (2026-10-31 ユーザ報告=うる星やつら: 版の巻 = 書影0の「初版カバー(1980-87)」で、本棚の番号タイルが34巻とも書影なし。
+    作品頁は書影の揃った「新装版カバー(2006-08)」を先に出している)。 巻数が並ぶ版どうしは補った後の書影が多い方。
+    ★巻の数え方(どの巻番号が並ぶか)は変えない = 本棚の番号タイル(一覧索引の max_edition_volumes)と揃える。
+    (刷を別の版に割る作品頁の数え方にすると、6巻の作品が4巻になる等ずれた = 2026-10-31 実測6作)
 使い方: python scripts/_build-vol-covers.py <mangaDir> <outDir>
   テスト環境: preview CI が .preview-data/manga → public で作る(git には入れない)。
   本番(2026-10-31 本棚の本番化で配線): 週次 step1 の vol-covers が data/manga.v2 → data で作る(git には入れない)。
@@ -47,6 +52,18 @@ def int_vols(vs):
     return [v for v in vs or [] if isinstance(v.get("number"), int)]
 
 
+def version_covers(e):
+    """その版の別の刷(versions)の書影: 巻番号 → (書影, 発売日)。 刷は古い順に並ぶ = 先に見つかった刷を採る。"""
+    out = {}
+    for x in e.get("versions") or []:
+        if not isinstance(x, dict):
+            continue
+        for v in int_vols(x.get("volumes")):
+            if v.get("cover_url"):
+                out.setdefault(v["number"], (v["cover_url"], v.get("release_date")))
+    return out
+
+
 def main():
     src, out = sys.argv[1], sys.argv[2]
     shards = [dict() for _ in range(SHARDS)]
@@ -55,11 +72,13 @@ def main():
         d = yaml.load(open(fp, encoding="utf-8"), Loader=L)
         if not isinstance(d, dict) or not d.get("slug"):
             continue
-        best = None
+        best, best_key, alt = None, None, {}
         for e in d.get("editions") or []:
             vs = int_vols(e.get("volumes"))
-            if best is None or len(vs) > len(best):
-                best = vs
+            vc = version_covers(e)
+            key = (len(vs), sum(1 for v in vs if v.get("cover_url") or v["number"] in vc))  # 巻数 → 補った後の書影の数
+            if best is None or key > best_key:
+                best, best_key, alt = vs, key, vc
         if not best:
             continue
         seen, rows = set(), []
@@ -67,7 +86,11 @@ def main():
             if v["number"] in seen:
                 continue
             seen.add(v["number"])
-            rows.append([v["number"], slim(v.get("cover_url")), v.get("release_date")])
+            if v.get("cover_url") or v["number"] not in alt:
+                rows.append([v["number"], slim(v.get("cover_url")), v.get("release_date")])
+            else:  # 書影は別の刷から = 発売日もその刷の物(絵と日付を食い違わせない)
+                c, rd = alt[v["number"]]
+                rows.append([v["number"], slim(c), rd or v.get("release_date")])
         slug = str(d["slug"])
         shards[fnv1a(slug) % SHARDS][slug] = rows
         n_works += 1

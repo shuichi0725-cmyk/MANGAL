@@ -76,6 +76,36 @@ def s3_client(env):
                         aws_secret_access_key=env["R2_SECRET_ACCESS_KEY"])
 
 
+def vc_changes(manifest):
+    """本棚の巻の書影(data/vc 64本)のうち本番(manifest)と中身が違う分。 data/vc が無い = None(週次 step1 の vol-covers 未実行)。"""
+    if not all(os.path.exists(os.path.join(ROOT, "data", n)) for n in VC_FILES):
+        return None
+    total = sum(os.path.getsize(os.path.join(ROOT, "data", n)) for n in VC_FILES)
+    if total < VC_MIN_BYTES:
+        print(f"★abort: data/vc が計 {total/1048576:.1f}MB = テスト環境の抜粋疑い(本番は約14.7MB)"); sys.exit(3)
+    return [n for n in VC_FILES
+            if manifest.get(n, "")[:20] != hashlib.sha256(open(os.path.join(ROOT, "data", n), "rb").read()).hexdigest()[:20]]
+
+
+def purge_paths(env, paths):
+    """edge cache purge(10/batch・UA必須)。 戻り値 = (purged, 失敗batch数)。 token 無し = (0, -1)。"""
+    token = env.get("R2_PURGE_TOKEN", "")
+    if not token:
+        return 0, -1
+    import time as _t
+    purged, pfail = 0, 0
+    for i in range(0, len(paths), 10):
+        try:
+            req = urllib.request.Request(f"{WORKER}/api/purge", method="POST",
+                                         data=json.dumps({"paths": paths[i:i + 10], "token": token}).encode(),
+                                         headers={"content-type": "application/json", "User-Agent": "Mozilla/5.0"})
+            purged += json.load(urllib.request.urlopen(req, timeout=60)).get("purged", 0)
+        except Exception:
+            pfail += 1
+        _t.sleep(0.3)
+    return purged, pfail
+
+
 CT = {".html": "text/html; charset=utf-8", ".txt": "text/plain; charset=utf-8",
       ".json": "application/json"}
 
@@ -199,7 +229,29 @@ def main():
         globals()["_CUR_PM"] = cur
         globals()["_CUR_SLUGS"] = cur_slugs
     if not stems and not dropped:
-        print("差分なし(marker以降 data/manga.v2 に変更がない)。")
+        # ★頁に変更が無くても、本棚の巻の書影(vc/)だけ作り直した時はそれだけ送る(2026-10-31: 刷の書影で補う修正を出す口)
+        vcp = vc_changes(manifest) or []
+        if not vcp:
+            print("差分なし(marker以降 data/manga.v2 に変更がない)。")
+            return
+        print(f"頁の差分なし・巻の書影 vc/ だけ変更 {len(vcp)}/{len(VC_FILES)}本 → それだけ送る")
+        if a.dry:
+            return
+        env = load_env()
+        s3 = s3_client(env)
+        for name in vcp:
+            body = open(os.path.join(ROOT, "data", name), "rb").read()
+            s3.put_object(Bucket=BUCKET, Key=name, Body=body, ContentType=CT[".json"])
+            manifest[name] = hashlib.sha256(body).hexdigest()[:20]
+        json.dump(manifest, open(MANIFEST, "w", encoding="utf-8"))
+        print(f"PUT {len(vcp)} (巻の書影のみ) / manifest更新(marker は頁の基準なので触らない)")
+        try:
+            import _r2_ops_ledger as _rl
+            _rl.record(len(vcp), 0, "diff-deploy-vc")
+        except Exception:
+            pass
+        purged, pfail = purge_paths(env, [f"/{n}" for n in vcp])
+        print("purge token未設定 → 旧キャッシュは最長1日残る" if pfail < 0 else f"cache purge: {len(vcp)}パス / purged {purged} / 失敗batch {pfail}")
         return
     print(f"対象: 更新{len(stems)} / 削除{len(dropped)}")
     if a.dry:
@@ -330,20 +382,13 @@ def main():
         puts.append((name, src))
     # ★本棚の巻の書影(vc/ 64本・2026-10-31)= data/vc の中身が本番と違う分だけ PUT(作るのは週次 step1 の vol-covers。
     #   データ週の週次はこのルートで配るため必須)。 data/vc が無い = 週次 step1 未実行 → 今回は送らない(本番の vc はそのまま)
-    vc_put = []
-    if all(os.path.exists(os.path.join(ROOT, "data", n)) for n in VC_FILES):
-        _vc_total = sum(os.path.getsize(os.path.join(ROOT, "data", n)) for n in VC_FILES)
-        if _vc_total < VC_MIN_BYTES:
-            print(f"★abort: data/vc が計 {_vc_total/1048576:.1f}MB = テスト環境の抜粋疑い(本番は約14.7MB)"); sys.exit(3)
-        for name in VC_FILES:
-            src = os.path.join(ROOT, "data", name)
-            if manifest.get(name, "")[:20] == hashlib.sha256(open(src, "rb").read()).hexdigest()[:20]:
-                continue
-            puts.append((name, src))
-            vc_put.append(name)
-        print(f"巻の書影 vc/: 変更 {len(vc_put)}/{len(VC_FILES)}本")
-    else:
+    vc_put = vc_changes(manifest)
+    if vc_put is None:
+        vc_put = []
         print("  ※ data/vc が無い(週次 step1 の vol-covers 未実行)→ 巻の書影は今回送らない")
+    else:
+        puts += [(n, os.path.join(ROOT, "data", n)) for n in vc_put]
+        print(f"巻の書影 vc/: 変更 {len(vc_put)}/{len(VC_FILES)}本")
     for key, lp in puts:
         ext = os.path.splitext(key)[1]
         body = open(lp, "rb").read()
