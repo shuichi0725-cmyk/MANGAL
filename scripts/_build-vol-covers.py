@@ -13,6 +13,10 @@
     作品頁は書影の揃った「新装版カバー(2006-08)」を先に出している)。 巻数が並ぶ版どうしは補った後の書影が多い方。
     ★巻の数え方(どの巻番号が並ぶか)は変えない = 本棚の番号タイル(一覧索引の max_edition_volumes)と揃える。
     (刷を別の版に割る作品頁の数え方にすると、6巻の作品が4巻になる等ずれた = 2026-10-31 実測6作)
+  ★版ごと(2026-10-31 本棚 A+1 = 同じ作品の別の版を別々にしまえる): 表示ブロックが2つ以上の作品は、同じ1本の
+    "~e" に {公開slug: {版ラベル: 巻}} も持つ。 版ラベル・版の割り方は作品頁の displayBlocks と同じ
+    (刷の ISBN が互いに重ならない時は「版ラベル 刷ラベル」で刷ごとに別。 重なる刷は書影だけ補う)。
+    旧JS は sh[slug] しか読まないので、同じファイルの別キーなら壊れない。
 使い方: python scripts/_build-vol-covers.py <mangaDir> <outDir>
   テスト環境: preview CI が .preview-data/manga → public で作る(git には入れない)。
   本番(2026-10-31 本棚の本番化で配線): 週次 step1 の vol-covers が data/manga.v2 → data で作る(git には入れない)。
@@ -64,10 +68,39 @@ def version_covers(e):
     return out
 
 
+def rows_of(vols, alt):
+    """巻 → [[巻番号, 書影, 発売日], ...](番号順・重複番号は先の1冊)。 書影の無い巻は alt(別の刷)の書影+発売日で補う。"""
+    seen, rows = set(), []
+    for v in sorted(int_vols(vols), key=lambda x: x["number"]):
+        if v["number"] in seen:
+            continue
+        seen.add(v["number"])
+        if v.get("cover_url") or v["number"] not in alt:
+            rows.append([v["number"], slim(v.get("cover_url")), v.get("release_date")])
+        else:  # 書影は別の刷から = 発売日もその刷の物(絵と日付を食い違わせない)
+            c, rd = alt[v["number"]]
+            rows.append([v["number"], slim(c), rd or v.get("release_date")])
+    return rows
+
+
+def display_blocks(editions):
+    """作品頁の表示ブロック(components/VolumeRow.tsx displayBlocks)と同じ割り方と名前 → [(版ラベル, 巻, 補う書影)]。"""
+    out = []
+    for e in editions or []:
+        vers = [x for x in (e.get("versions") or []) if isinstance(x, dict)]
+        if len(vers) > 1:
+            sets = [{v.get("isbn13") for v in (x.get("volumes") or []) if v.get("isbn13")} for x in vers]
+            if all(not (sets[i] & sets[j]) for i in range(len(sets)) for j in range(len(sets)) if i != j):
+                out.extend((f"{e.get('label')} {x.get('label')}", x.get("volumes") or [], {}) for x in vers)
+                continue
+        out.append((str(e.get("label")), e.get("volumes") or [], version_covers(e)))
+    return out
+
+
 def main():
     src, out = sys.argv[1], sys.argv[2]
     shards = [dict() for _ in range(SHARDS)]
-    n_works = n_vols = 0
+    n_works = n_vols = n_multi = 0
     for fp in glob.glob(os.path.join(src, "*.yml")):
         d = yaml.load(open(fp, encoding="utf-8"), Loader=L)
         if not isinstance(d, dict) or not d.get("slug"):
@@ -81,20 +114,21 @@ def main():
                 best, best_key, alt = vs, key, vc
         if not best:
             continue
-        seen, rows = set(), []
-        for v in sorted(best, key=lambda x: x["number"]):
-            if v["number"] in seen:
-                continue
-            seen.add(v["number"])
-            if v.get("cover_url") or v["number"] not in alt:
-                rows.append([v["number"], slim(v.get("cover_url")), v.get("release_date")])
-            else:  # 書影は別の刷から = 発売日もその刷の物(絵と日付を食い違わせない)
-                c, rd = alt[v["number"]]
-                rows.append([v["number"], slim(c), rd or v.get("release_date")])
+        rows = rows_of(best, alt)
         slug = str(d["slug"])
-        shards[fnv1a(slug) % SHARDS][slug] = rows
+        sh = shards[fnv1a(slug) % SHARDS]
+        sh[slug] = rows
         n_works += 1
         n_vols += len(rows)
+        # 版ごと(表示ブロックが2つ以上の作品だけ)。 同じ名前の版が2つあれば先の版(作品頁の「しまう」も名前で引く)
+        eds = {}
+        for label, vols, valt in display_blocks(d.get("editions")):
+            r = rows_of(vols, valt)
+            if r:
+                eds.setdefault(label, r)
+        if len(eds) > 1:
+            sh.setdefault("~e", {})[slug] = eds
+            n_multi += 1
     od = os.path.join(out, "vc")
     os.makedirs(od, exist_ok=True)
     size = 0
@@ -103,7 +137,7 @@ def main():
         with open(p, "w", encoding="utf-8") as f:
             json.dump(sh, f, ensure_ascii=False, separators=(",", ":"), sort_keys=True)
         size += os.path.getsize(p)
-    print(f"巻の書影索引: {n_works}作 / {n_vols}巻 → {od} ({SHARDS}本・計 {size/1e6:.2f}MB)")
+    print(f"巻の書影索引: {n_works}作 / {n_vols}巻 / 版ごと {n_multi}作 → {od} ({SHARDS}本・計 {size/1e6:.2f}MB)")
 
 
 if __name__ == "__main__":

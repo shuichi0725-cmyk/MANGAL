@@ -1,7 +1,30 @@
-/* 作品頁の「しまう」ボタン(マイ本棚・プレビュー専用)。本番ビルドには入らない(components/ShelveButton.tsx 参照)。
+/* 作品頁の「しまう」ボタン(マイ本棚・2026-10-31 本番にも出す)。 components/ShelveButton.tsx 参照。
  * ★Tailwind の新しいクラスを書かずにここへ置く = 本番の共通CSSを1バイトも変えないため。 */
 .shelve-panel { border-radius: var(--radius-card); }
 .shelve-select { max-width: 16rem; font-size: 16px; } /* 16px = iOS が選択時に拡大しない */
 @media (min-width: 640px) {
   .shelve-select { font-size: 13px; }
 }
+
+/* ── 版が2つ以上の作品: この作品の本棚(しまった版の一覧)= 2026-10-31 ユーザ裁定 A ── */
+.shelve-list { margin: 6px 0 0; padding: 0; list-style: none; }
+.shelve-item { border-bottom: 1px solid var(--color-line); padding: 7px 0; }
+.shelve-item:last-child { border-bottom: 0; }
+.shelve-line { display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; gap: 9px; align-items: center; }
+.shelve-thumb { display: block; width: 30px; height: 43px; object-fit: cover; background: #fff; }
+.shelve-thumb.is-empty { background: transparent; border: 1px solid var(--color-line); }
+.shelve-line-body { display: flex; min-width: 0; flex-direction: column; gap: 2px; }
+.shelve-line-t { font-size: 12.5px; font-weight: 700; line-height: 1.3; overflow-wrap: anywhere; }
+.shelve-line-s { font-size: 11px; color: color-mix(in srgb, var(--color-ink) 60%, transparent); }
+.shelve-line-s b { color: var(--color-accent); font-weight: 700; }
+.shelve-mini {
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 11px;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--color-ink) 75%, transparent);
+}
+.shelve-item .shelve-form { margin: 8px 0 2px 39px; }
+.shelve-add { margin-top: 10px; font-size: 12px; font-weight: 700; color: var(--color-accent); }
+.shelve-add + .shelve-form { margin-top: 8px; }

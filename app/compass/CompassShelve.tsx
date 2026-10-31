@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { MangaListItem } from "@/lib/schema";
-import { SHELVES, type ShelfId, putItem, removeItem } from "@/lib/myShelf";
+import { SHELVES, type ShelfId, type ShelfItem, itemKey, putItem, removeItem } from "@/lib/myShelf";
 import { useMyShelf } from "@/lib/useMyShelf";
 
 /** 本棚のアイコン(ヘッダーの「本棚」と同じ絵柄 = components/GlobalNav.tsx の NAV_SVG.本棚)。 */
@@ -25,10 +25,17 @@ export function ShelfIcon({ size = 14 }: { size?: number }) {
  * 押すとシートの中に 3つの棚(もってる/気になる/ほしい)が並び、選ぶと閉じる。
  * しまった後はボタンが「✓ 気になる」のように棚の名前へ変わり、もう一度押すと棚の変更と取り出し。
  * ★もってるは「既刊まで」で入れる(巻数は本棚で直せる)。 題名・書影の控えは羅針盤が持つ索引の値をそのまま使う。
+ * ★羅針盤は版を知らない(索引に版が無い)= 入れるのは版ラベル無しの1冊。 作品頁で版ごとにしまってある時は
+ *   その中の1冊(版ラベル無しがあればそれ)を出して変える・ボタンに「＋N版」(2026-10-31 本棚 A+1)。
  */
+function mineOf(items: ShelfItem[], slug: string): { mine: ShelfItem | undefined; count: number } {
+  const all = items.filter((x) => x.slug === slug);
+  return { mine: all.find((x) => !x.edition) ?? all[0], count: all.length };
+}
+
 export function CompassShelveButton({ open, onToggle, slug }: { open: boolean; onToggle: () => void; slug: string }) {
   const { items, ready } = useMyShelf();
-  const mine = ready ? items.find((x) => x.slug === slug) : undefined;
+  const { mine, count } = ready ? mineOf(items, slug) : { mine: undefined, count: 0 };
   const label = mine ? SHELVES.find((s) => s.id === mine.shelf)!.label : null;
   return (
     <button
@@ -43,6 +50,7 @@ export function CompassShelveButton({ open, onToggle, slug }: { open: boolean; o
         <span>
           ✓ {label}
           {mine.shelf === "own" ? `・${mine.owned ?? 0}巻まで` : ""}
+          {count > 1 ? ` ＋${count - 1}版` : ""}
         </span>
       ) : (
         <span>しまう</span>
@@ -53,7 +61,7 @@ export function CompassShelveButton({ open, onToggle, slug }: { open: boolean; o
 
 export function CompassShelvePanel({ item, onDone }: { item: MangaListItem; onDone: (msg: string) => void }) {
   const { items, ready, update } = useMyShelf();
-  const mine = ready ? items.find((x) => x.slug === item.slug) : undefined;
+  const { mine } = ready ? mineOf(items, item.slug) : { mine: undefined };
   const [confirm, setConfirm] = useState(false);
   const put = (shelf: ShelfId) => {
     const total = item.max_edition_volumes || 0;
@@ -65,6 +73,8 @@ export function CompassShelvePanel({ item, onDone }: { item: MangaListItem; onDo
         shelf,
         // もってるは既刊まで(既に「もってる」なら今の巻数を保つ)
         owned: shelf === "own" ? (mine?.shelf === "own" ? mine.owned : total) : undefined,
+        // 作品頁で版ごとにしまった1冊を変える時はその版のまま
+        edition: mine?.edition ? { label: mine.edition, total: mine.editionTotal ?? 0 } : null,
       }),
     );
     const name = SHELVES.find((s) => s.id === shelf)!.label;
@@ -75,7 +85,7 @@ export function CompassShelvePanel({ item, onDone }: { item: MangaListItem; onDo
       setConfirm(true);
       return;
     }
-    update((s) => removeItem(s, item.slug));
+    if (mine) update((s) => removeItem(s, itemKey(mine)));
     onDone("本棚から取り出しました");
   };
   return (

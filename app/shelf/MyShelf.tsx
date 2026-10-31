@@ -14,6 +14,7 @@ import {
   countByShelf,
   decodeShelf,
   importShelf,
+  itemKey,
   moveItem,
   ownedNote,
   plaqueStats,
@@ -27,6 +28,7 @@ import {
 import type { MangaListItem } from "@/lib/schema";
 import { ensureFullIndex, isFullIndexLoaded, useMangaIndex } from "@/lib/useMangaIndex";
 import { useMyShelf } from "@/lib/useMyShelf";
+import { loadEditionFacts } from "@/lib/volCovers";
 import BuyLinks from "./BuyLinks";
 import VolPeek from "./VolPeek";
 
@@ -96,7 +98,10 @@ type CardData = {
   m: MangaListItem | undefined;
   lost: boolean;
   note: OwnedNote | null;
+  /** 版ごとにしまった1冊: その版の今の巻数と1巻の書影(巻の書影データから引けた時) */
+  live: EditionFacts | undefined;
 };
+type EditionFacts = { total: number; cover: string | null };
 
 /** 1巻の書影を正面向きで1枚(44×64)。無ければ背に題名。★同じ書影を背表紙として並べる表現は使わない(ユーザ裁定) */
 function Cover({ src, title }: { src: string | null; title: string }) {
@@ -179,7 +184,7 @@ function pickProps(n: number, onPick?: (n: number) => void) {
   };
 }
 
-/** 棚の1段 = 1作品。左に1巻の書影、右に題名・所持状況・番号タイル(ほしい/気になるは巻数と状態+キャッチ)。 */
+/** 棚の1段 = 1作品(版ごとにしまった時は1つの版)。左に1巻の書影、右に題名・版・所持状況・番号タイル(ほしい/気になるは巻数と状態+キャッチ)。 */
 function Row({
   d,
   onMenu,
@@ -195,9 +200,10 @@ function Row({
   onBought: () => void;
   readOnly: boolean;
 }) {
-  const { item, m, lost, note } = d;
+  const { item, m, lost, note, live } = d;
   const title = m?.title ?? (item.title || item.slug);
-  const cover = m?.cover ?? item.cover;
+  // 版ごとにしまった1冊はその版の1巻の書影(2026-10-31 本棚 A+1)
+  const cover = live?.cover ?? m?.cover ?? item.cover;
   const author = m?.authors[0]?.name;
   const press = useLongPress(onMenu);
   const [vol, setVol] = useState<number | null>(null); // 書影を開いている巻(番号タイルを押した)
@@ -207,6 +213,7 @@ function Row({
       <Cover src={cover} title={title} />
       <span className="shelf-c3-body">
         <span className="shelf-c3-title">{title}</span>
+        {item.edition && <span className="shelf-c3-ed">{item.edition}</span>}
         {lost ? (
           <span className="shelf-c3-sub">この作品は見つからなくなりました</span>
         ) : note ? (
@@ -223,7 +230,9 @@ function Row({
           m && (
             <>
               <span className="shelf-c3-sub">
-                {m.max_edition_volumes ? `全${m.max_edition_volumes}巻・` : ""}
+                {(live?.total ?? (item.edition ? item.editionTotal : null) ?? m.max_edition_volumes)
+                  ? `全${live?.total ?? (item.edition ? item.editionTotal : null) ?? m.max_edition_volumes}巻・`
+                  : ""}
                 {STATUS_LABEL[m.status] ?? ""}
               </span>
               {m.catch && <span className="shelf-c3-catch">{m.catch}</span>}
@@ -270,6 +279,7 @@ function Row({
       {vol !== null && !lost && (
         <VolPeek
           slug={item.slug}
+          edition={item.edition}
           title={title}
           author={author}
           n={vol}
@@ -345,6 +355,7 @@ function Sheet({
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
             <p className="text-[15px] font-bold leading-snug">{title}</p>
+            {item.edition && <p className="mt-0.5 text-[11.5px] font-semibold text-[var(--color-accent)]">{item.edition}</p>}
             {m && (
               <p className="mt-0.5 text-[11px] text-ink/55">
                 {STATUS_LABEL[m.status]}
@@ -441,9 +452,9 @@ function Case({
   id: ShelfId;
   cards: CardData[];
   readOnly: boolean;
-  onMenu: (slug: string) => void;
-  onOwned: (slug: string, n: number) => void;
-  onBought: (slug: string) => void;
+  onMenu: (key: string) => void;
+  onOwned: (key: string, n: number) => void;
+  onBought: (key: string) => void;
 }) {
   const def = SHELVES.find((s) => s.id === id)!;
   return (
@@ -454,16 +465,19 @@ function Case({
       ) : (
         <>
           <ul className="shelf-c3-rows">
-            {cards.map((c) => (
-              <Row
-                key={c.item.slug}
-                d={c}
-                readOnly={readOnly}
-                onMenu={() => onMenu(c.item.slug)}
-                onOwned={(n) => onOwned(c.item.slug, n)}
-                onBought={() => onBought(c.item.slug)}
-              />
-            ))}
+            {cards.map((c) => {
+              const k = itemKey(c.item);
+              return (
+                <Row
+                  key={k}
+                  d={c}
+                  readOnly={readOnly}
+                  onMenu={() => onMenu(k)}
+                  onOwned={(n) => onOwned(k, n)}
+                  onBought={() => onBought(k)}
+                />
+              );
+            })}
           </ul>
           <p className="shelf-c3-pr">[PR] 店舗リンクにはアフィリエイト広告を含みます</p>
         </>
@@ -561,6 +575,26 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
 
   const viewing = shared !== null;
   const shown = viewing ? shared : items;
+
+  // ★版ごとにしまった1冊(版ラベル付き)は、その版の今の巻数と1巻の書影を巻の書影データ(lib/volCovers)から引く
+  //   (2026-10-31 本棚 A+1)。 引けるまでは登録時点の巻数・索引の書影で出す(引けない = 版の名前が変わった等もそのまま)。
+  const [edFacts, setEdFacts] = useState<Map<string, EditionFacts>>(new Map());
+  const edAsked = useRef(new Set<string>());
+  useEffect(() => {
+    const todo = shown.filter((x) => x.edition && !edAsked.current.has(itemKey(x)));
+    if (!todo.length) return;
+    for (const x of todo) edAsked.current.add(itemKey(x)); // 1冊につき1回(書影データは1本ずつ端末のメモリに残る)
+    Promise.all(todo.map(async (x) => [itemKey(x), await loadEditionFacts(x.slug, x.edition!)] as const)).then((got) => {
+      if (!got.some(([, f]) => f)) return;
+      setEdFacts((prev) => {
+        const next = new Map(prev);
+        for (const [k, f] of got) if (f) next.set(k, f);
+        return next;
+      });
+    });
+  }, [shown]);
+  const liveOf = (x: ShelfItem) => (x.edition ? edFacts.get(itemKey(x)) : undefined);
+
   const factsOf = (slug: string): IndexFacts | null => {
     const m = bySlug.get(slug);
     return m ? { max_edition_volumes: m.max_edition_volumes, status: m.status } : null;
@@ -570,29 +604,40 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
       .filter((x) => x.shelf === id)
       .map((item) => {
         const m = bySlug.get(item.slug);
+        const live = liveOf(item);
         return {
           item,
           m,
           lost: !m && (viewing ? full : lost.has(item.slug)),
-          note: id === "own" ? ownedNote(item, factsOf(item.slug)) : null,
+          note: id === "own" ? ownedNote(item, factsOf(item.slug), live?.total) : null,
+          live,
         };
       });
     const rank = (c: CardData) => (c.note && (c.note.kind === "behind" || c.note.kind === "complete-behind") ? 0 : 1);
-    return cards.sort((a, b) => rank(a) - rank(b) || b.item.updatedAt - a.item.updatedAt);
+    cards.sort((a, b) => rank(a) - rank(b) || b.item.updatedAt - a.item.updatedAt);
+    // 同じ作品の別の版は隣どうしに(先に来た版の位置へ寄せる・版どうしの順は上の並びのまま)
+    const groups = new Map<string, CardData[]>();
+    for (const c of cards) {
+      const g = groups.get(c.item.slug);
+      if (g) g.push(c);
+      else groups.set(c.item.slug, [c]);
+    }
+    return [...groups.values()].flat();
   };
 
   const titleOf = (slug: string) => bySlug.get(slug)?.title || items.find((x) => x.slug === slug)?.title || slug;
-  // U1: 書影欄の「ここ(N巻)まで持ってる」
-  const ownTo = (slug: string, n: number) => {
+  const slugOfKey = (key: string) => items.find((x) => itemKey(x) === key)?.slug ?? key;
+  // U1: 書影欄の「ここ(N巻)まで持ってる」。 key = itemKey(版ごとにしまった1冊を区別する)
+  const ownTo = (key: string, n: number) => {
     const before = items;
-    update((x) => setOwned(x, slug, n));
-    setToast({ text: `${titleOf(slug)} を ${n}巻まで持ってる にしました`, undo: before });
+    update((x) => setOwned(x, key, n));
+    setToast({ text: `${titleOf(slugOfKey(key))} を ${n}巻まで持ってる にしました`, undo: before });
   };
   // U2: ほしい・気になる →「もってる・1巻まで」
-  const boughtFirst = (slug: string) => {
+  const boughtFirst = (key: string) => {
     const before = items;
-    update((x) => setOwned(moveItem(x, slug, "own"), slug, 1));
-    setToast({ text: `${titleOf(slug)} を もってる(1巻まで)へ移しました`, undo: before });
+    update((x) => setOwned(moveItem(x, key, "own"), key, 1));
+    setToast({ text: `${titleOf(slugOfKey(key))} を もってる(1巻まで)へ移しました`, undo: before });
   };
 
   const leaveShared = (msg?: string) => {
@@ -649,7 +694,7 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
     window.scrollTo({ top: 0 });
   };
 
-  const menuCard = menu ? cardsOf(shown.find((x) => x.slug === menu)?.shelf ?? "own").find((c) => c.item.slug === menu) : undefined;
+  const menuCard = menu ? cardsOf(shown.find((x) => itemKey(x) === menu)?.shelf ?? "own").find((c) => itemKey(c.item) === menu) : undefined;
   const counts = countByShelf(shown);
 
   if (!ready) return <p className="mt-8 text-center text-sm text-ink/55">本棚を開いています…</p>;
@@ -687,7 +732,7 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
       )}
       {!full && <p className="mt-3 text-[11px] text-ink/45">作品データを読み込み中… 巻数と続きの巻は揃い次第出ます</p>}
 
-      <Plaque stats={plaqueStats(shown, factsOf)} />
+      <Plaque stats={plaqueStats(shown, factsOf, (x) => liveOf(x)?.total)} />
       <div className="shelf-c3-tabs" role="tablist" aria-label="棚">
         {TAB_ORDER.map((id) => (
           <button key={id} type="button" role="tab" aria-selected={tab === id} onClick={() => chooseTab(id)} className="shelf-c3-tab">
@@ -781,10 +826,10 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
           d={menuCard}
           genreName={genreName}
           onClose={() => setMenu(null)}
-          onMove={(s) => update((x) => moveItem(x, menuCard.item.slug, s))}
-          onOwned={(n) => update((x) => setOwned(x, menuCard.item.slug, n))}
+          onMove={(s) => update((x) => moveItem(x, itemKey(menuCard.item), s))}
+          onOwned={(n) => update((x) => setOwned(x, itemKey(menuCard.item), n))}
           onRemove={() => {
-            update((x) => removeItem(x, menuCard.item.slug));
+            update((x) => removeItem(x, itemKey(menuCard.item)));
             setMenu(null);
           }}
         />

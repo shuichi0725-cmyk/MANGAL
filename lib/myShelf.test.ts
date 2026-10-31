@@ -1,11 +1,13 @@
 import { describe, expect, it } from "vitest";
 import {
   type ShelfItem,
+  LEGACY_STORAGE_KEY,
   STORAGE_KEY,
   countByShelf,
   decodeShelf,
   encodeShelf,
   importShelf,
+  itemKey,
   loadShelf,
   mergeSameSlug,
   moveItem,
@@ -66,6 +68,16 @@ describe("保存・読み出し(端末)", () => {
     expect(loadShelf(null)).toEqual([]);
   });
 
+  it("v2 が無ければ旧 v1 の棚を引き継ぐ・書くのは v2 だけ(旧JSの頁が v1 を書き戻しても版ごとの棚は潰れない)", () => {
+    const v1 = JSON.stringify({ v: 1, items: [item({ slug: "a", shelf: "own", owned: 4 })] });
+    const st = memStore({ [LEGACY_STORAGE_KEY]: v1 });
+    expect(loadShelf(st).map((x) => [x.slug, x.owned])).toEqual([["a", 4]]);
+    const two = [item({ slug: "a", shelf: "own", owned: 4 }), item({ slug: "a", shelf: "wish", edition: "文庫版", editionTotal: 18 })];
+    expect(saveShelf(st, two)).toBe(true);
+    expect(st.raw.get(LEGACY_STORAGE_KEY)).toBe(v1); // v1 は触らない
+    expect(loadShelf(st)).toHaveLength(2); // v2 があれば v2
+  });
+
   it("形の崩れた行は捨て、もってる以外の巻数・負の巻数は整える", () => {
     const out = normalizeItems(
       {
@@ -103,10 +115,33 @@ describe("棚の操作", () => {
 
   it("版を選んだ登録は版ラベルと登録時点の既刊を持ち、棚移動しても消えない", () => {
     let s = putItem([], { slug: "a", title: "A", cover: null, shelf: "own", owned: 3, edition: { label: "文庫版", total: 8 } }, T0);
-    s = moveItem(s, "a", "wish", T0 + 1);
-    expect(s[0]).toMatchObject({ edition: "文庫版", editionTotal: 8 });
-    s = putItem(s, { slug: "a", title: "A", cover: null, shelf: "own", owned: 1, edition: null }, T0 + 2);
-    expect(s[0].edition).toBeUndefined();
+    const k = itemKey({ slug: "a", edition: "文庫版" });
+    s = moveItem(s, k, "wish", T0 + 1);
+    expect(s).toHaveLength(1);
+    expect(s[0]).toMatchObject({ shelf: "wish", edition: "文庫版", editionTotal: 8 });
+  });
+
+  it("同じ作品の別の版は別々の1冊(棚も巻数も別・取り出しもその版だけ)= 2026-10-31 A+1", () => {
+    const shinso = { label: "少年サンデーコミックス 新装版カバー(2006-08)", total: 34 };
+    const bunko = { label: "文庫版", total: 18 };
+    let s = putItem([], { slug: "urusei", title: "", cover: null, shelf: "own", owned: 34, edition: shinso }, T0);
+    s = putItem(s, { slug: "urusei", title: "", cover: null, shelf: "wish", edition: bunko }, T0 + 1);
+    expect(s.map((x) => [x.edition, x.shelf, x.owned])).toEqual([
+      ["文庫版", "wish", undefined],
+      [shinso.label, "own", 34],
+    ]);
+    const kb = itemKey({ slug: "urusei", edition: "文庫版" });
+    const ks = itemKey({ slug: "urusei", edition: shinso.label });
+    expect(kb).not.toBe(ks);
+    s = setOwned(moveItem(s, kb, "own", T0 + 2), kb, 12, T0 + 3);
+    expect(s.find((x) => itemKey(x) === kb)).toMatchObject({ shelf: "own", owned: 12 });
+    expect(s.find((x) => itemKey(x) === ks)).toMatchObject({ owned: 34 }); // もう一方は変わらない
+    // 版ラベル無しの1冊(羅針盤から・版が1つの作品)も別の1冊
+    s = putItem(s, { slug: "urusei", title: "", cover: null, shelf: "curious" }, T0 + 4);
+    expect(s).toHaveLength(3);
+    expect(itemKey(s[0])).toBe("urusei");
+    expect(removeItem(s, kb).map((x) => x.edition)).toEqual([undefined, shinso.label]);
+    expect(removeItem(s, "urusei")).toHaveLength(2); // slug だけ = 版ラベル無しの1冊だけ
   });
 });
 
@@ -133,6 +168,20 @@ describe("同じ slug の統合(改名・重複頁の統合)", () => {
   it("旧 slug を新 slug へ付け替えると、既にある新 slug と1つにまとまる", () => {
     const s = [item({ slug: "old", shelf: "own", owned: 12 }), item({ slug: "new", shelf: "own", owned: 3 })];
     expect(renameSlug(s, "old", "new")).toEqual([expect.objectContaining({ slug: "new", owned: 12 })]);
+  });
+
+  it("版が違えばまとめない・付け替えは全部の版ごと", () => {
+    const s = [
+      item({ slug: "old", shelf: "own", owned: 12, edition: "文庫版", editionTotal: 18 }),
+      item({ slug: "old", shelf: "wish" }),
+      item({ slug: "new", shelf: "own", owned: 3, edition: "文庫版", editionTotal: 18 }),
+    ];
+    expect(mergeSameSlug(s)).toHaveLength(3);
+    const out = renameSlug(s, "old", "new");
+    expect(out.map((x) => [x.slug, x.edition, x.shelf, x.owned])).toEqual([
+      ["new", "文庫版", "own", 12],
+      ["new", undefined, "wish", undefined],
+    ]);
   });
 });
 
@@ -185,6 +234,12 @@ describe("もってるの札", () => {
     expect(n).toMatchObject({ kind: "caught-up", total: 8, fixedEdition: true });
   });
 
+  it("版の今の巻数(巻の書影データから)が引けたらそれで比べる = 新刊が出たら続きが出る", () => {
+    const n = ownedNote({ owned: 8, editionTotal: 8 }, ongoing(30), 10);
+    expect(n).toMatchObject({ kind: "behind", total: 10, next: [9, 10], fixedEdition: false });
+    expect(ownedNote({ owned: 8, editionTotal: 8 }, ongoing(30), null)).toMatchObject({ total: 8, fixedEdition: true });
+  });
+
   it("索引に無い(見つからない)作品は巻数だけ", () => {
     expect(ownedNote({ owned: 5 }, null)).toMatchObject({ kind: "unknown", text: "5巻まで所持" });
     expect(ownedNote({ owned: 0 }, ongoing(3)).text).toBe("1巻はまだ → 1〜3巻が出ています");
@@ -196,6 +251,7 @@ describe("棚のURL(書き出し→取り込み)", () => {
     item({ slug: "a", shelf: "own", owned: 10, updatedAt: T0 }),
     item({ slug: "b", shelf: "curious", updatedAt: T0 }),
     item({ slug: "c", shelf: "own", owned: 2, edition: "文庫版", editionTotal: 8, updatedAt: T0 }),
+    item({ slug: "c", shelf: "wish", edition: "愛蔵版", editionTotal: 5, updatedAt: T0 }),
   ];
 
   it("書き出した文字列・URL から同じ棚に戻る(題名・書影は載せない)", () => {
@@ -205,6 +261,7 @@ describe("棚のURL(書き出し→取り込み)", () => {
       ["a", "own", 10, undefined, undefined],
       ["b", "curious", undefined, undefined, undefined],
       ["c", "own", 2, "文庫版", 8],
+      ["c", "wish", undefined, "愛蔵版", 5],
     ]);
     expect(back.every((x) => x.title === "" && x.cover === null)).toBe(true);
     const url = shelfShareUrl("https://mangal-preview.pages.dev", mine);
@@ -222,9 +279,9 @@ describe("棚のURL(書き出し→取り込み)", () => {
   it("合流 = 両方を合わせ、同じ作品は統合規則(もってる優先・巻は大きい方)", () => {
     const incoming = [item({ slug: "a", shelf: "own", owned: 12, title: "" }), item({ slug: "z", shelf: "wish", title: "" })];
     const out = importShelf(mine, incoming, "merge");
-    expect(out.map((x) => x.slug)).toEqual(["a", "b", "c", "z"]);
+    expect(out.map((x) => x.slug)).toEqual(["a", "b", "c", "c", "z"]);
     expect(out[0]).toMatchObject({ owned: 12, title: "a" }); // 手元の題名の控えは残る
-    expect(countByShelf(out)).toEqual({ own: 2, curious: 1, wish: 1 });
+    expect(countByShelf(out)).toEqual({ own: 2, curious: 1, wish: 2 });
   });
 
   it("上書き = 持ってきた棚だけ(手元にあった題名の控えは引き継ぐ)", () => {
@@ -314,5 +371,12 @@ describe("銘板の数字", () => {
       (slug) => facts[slug] ?? null,
     );
     expect(s).toEqual({ ownedVolumes: 10 + 13 + 8 + 18 + 9 + 5, nextVolumes: 4, caughtUpWorks: 3 });
+  });
+
+  it("版ごとの1冊は版の今の巻数で数える(liveTotalOf)", () => {
+    const items = [item({ slug: "c", shelf: "own", owned: 8, edition: "文庫版", editionTotal: 8 })];
+    const facts = () => ({ max_edition_volumes: 30, status: "ongoing" as const });
+    expect(plaqueStats(items, facts)).toMatchObject({ nextVolumes: 0, caughtUpWorks: 1 });
+    expect(plaqueStats(items, facts, () => 10)).toMatchObject({ nextVolumes: 2, caughtUpWorks: 0 });
   });
 });

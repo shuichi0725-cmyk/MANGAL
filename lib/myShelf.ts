@@ -2,8 +2,9 @@
  * マイ本棚(もってる/気になる/ほしい)の中身と操作 = 純関数だけ(React/DOM 無し・テストで押さえる)。
  * 依頼書 = docs/cloud-briefs/my-shelf.md(2026-09-28 ユーザ裁定)。
  *
- * ★単位は作品。「もってる」だけ「1巻から連続で持っている最後の巻」を整数1つで持つ
- *   (1〜6, 8, 9巻所持 → 6。8・9巻は記録しない割り切り)。
+ * ★単位は「作品×版」(2026-10-31 ユーザ裁定 A+1: 同じ作品の別の版を別々にしまえる)。 識別 = itemKey(slug+版ラベル)。
+ *   版が1つしかない作品・版を選ばずにしまった分は版ラベル無し(= slug だけが識別)。
+ *   「もってる」だけ「1巻から連続で持っている最後の巻」を整数1つで持つ(1〜6, 8, 9巻所持 → 6。8・9巻は記録しない割り切り)。
  * ★保存先 = 端末(localStorage)+ 棚のURL。ログイン・サーバ保存は無い(個人情報ゼロ方針)。
  * ★表示の材料(書影・題名・巻数・状態)は一覧索引(useMangaIndex)から引く。ここに保存する題名/書影は
  *   「作品が見つからなくなった時」に出すための控え。
@@ -25,15 +26,18 @@ export type ShelfItem = {
   shelf: ShelfId;
   /** もってるの時だけ: 1巻から連続で持っている最後の巻(0 = まだ1巻が無い) */
   owned?: number;
-  /** 版を選んで登録した時だけ: 版ラベル */
+  /** 版を選んで登録した時だけ: 版ラベル(作品頁の表示ブロックの名前 = components/VolumeRow.tsx displayBlocks)。識別の一部 */
   edition?: string;
-  /** 版を選んで登録した時だけ: 登録時点のその版の既刊(索引の巻数とは比べない) */
+  /** 版を選んで登録した時だけ: 登録時点のその版の既刊。 本棚は巻の書影データ(lib/volCovers)からその版の今の巻数を引けたらそちらで比べる */
   editionTotal?: number;
   addedAt: number;
   updatedAt: number;
 };
 
-export const STORAGE_KEY = "mangal:shelf:v1";
+// ★v2(2026-10-31): 同じ作品を版ごとに別々に持つ形。 旧 v1 は「同じ slug は1つ」に畳む = 古いJSの頁が v1 を読んで
+//   書き戻すと版ごとの棚が潰れるので、名前を変えて分ける(v2 が無い時だけ v1 を読んで引き継ぐ)。
+export const STORAGE_KEY = "mangal:shelf:v2";
+export const LEGACY_STORAGE_KEY = "mangal:shelf:v1";
 /** 巻数の上限(入力の暴走よけ。最長のこち亀でも200巻台) */
 const MAX_VOL = 9999;
 
@@ -69,14 +73,19 @@ function cleanItem(raw: unknown, now: number): ShelfItem | null {
   if (item.shelf === "own") item.owned = toInt(r.owned) ?? 0;
   const edition = typeof r.edition === "string" ? r.edition.trim() : "";
   const editionTotal = toInt(r.editionTotal);
-  if (edition && editionTotal) {
+  if (edition) {
     item.edition = edition;
-    item.editionTotal = editionTotal;
+    if (editionTotal) item.editionTotal = editionTotal;
   }
   return item;
 }
 
-/** 読み込んだ値(JSON)→ 棚。形の崩れた行は捨て、同じ slug は1つにまとめる。 */
+/** 棚の1冊の識別 = slug + 版ラベル(版ラベルが無ければ slug そのもの)。 */
+export function itemKey(x: { slug: string; edition?: string | null }): string {
+  return x.edition ? `${x.slug}\u0000${x.edition}` : x.slug;
+}
+
+/** 読み込んだ値(JSON)→ 棚。形の崩れた行は捨て、同じ作品×版は1つにまとめる。 */
 export function normalizeItems(raw: unknown, now = Date.now()): ShelfItem[] {
   const arr = Array.isArray(raw) ? raw : raw && typeof raw === "object" ? (raw as { items?: unknown }).items : null;
   if (!Array.isArray(arr)) return [];
@@ -85,13 +94,13 @@ export function normalizeItems(raw: unknown, now = Date.now()): ShelfItem[] {
     const it = cleanItem(r, now);
     if (it) out.push(it);
   }
-  return mergeSameSlug(out);
+  return mergeSameKey(out);
 }
 
-/** 端末から読む。保存できない環境(プライベートモード・容量超過・無効化)は黙って空の棚。 */
+/** 端末から読む。保存できない環境(プライベートモード・容量超過・無効化)は黙って空の棚。 v2 が無ければ v1 を引き継ぐ。 */
 export function loadShelf(store: ReadStore | null | undefined): ShelfItem[] {
   try {
-    const s = store?.getItem(STORAGE_KEY);
+    const s = store?.getItem(STORAGE_KEY) ?? store?.getItem(LEGACY_STORAGE_KEY);
     return s ? normalizeItems(JSON.parse(s)) : [];
   } catch {
     return [];
@@ -102,7 +111,7 @@ export function loadShelf(store: ReadStore | null | undefined): ShelfItem[] {
 export function saveShelf(store: WriteStore | null | undefined, items: ShelfItem[]): boolean {
   try {
     if (!store) return false;
-    store.setItem(STORAGE_KEY, JSON.stringify({ v: 1, items }));
+    store.setItem(STORAGE_KEY, JSON.stringify({ v: 2, items }));
     return true;
   } catch {
     return false;
@@ -110,23 +119,24 @@ export function saveShelf(store: WriteStore | null | undefined, items: ShelfItem
 }
 
 /**
- * 同じ slug をまとめる(= 改名・重複頁の統合で2つが同じ slug になった時)。
+ * 同じ作品×版をまとめる(= 改名・重複頁の統合で2つが同じ slug になった時・棚の合流)。 版が違えば別の1冊のまま。
  * ★どれかが「もってる」なら結果も「もってる」、owned は大きい方(持っている事実を失わない)。
- *   それ以外は後から更新した方の棚。題名・書影・版は後から更新した方。登録日は古い方、更新日は新しい方。
+ *   それ以外は後から更新した方の棚。題名・書影・版の既刊は後から更新した方。登録日は古い方、更新日は新しい方。
  */
-export function mergeSameSlug(items: ShelfItem[]): ShelfItem[] {
+export function mergeSameKey(items: ShelfItem[]): ShelfItem[] {
   const order: string[] = [];
   const groups = new Map<string, ShelfItem[]>();
   for (const it of items) {
-    let g = groups.get(it.slug);
+    const k = itemKey(it);
+    let g = groups.get(k);
     if (!g) {
-      groups.set(it.slug, (g = []));
-      order.push(it.slug);
+      groups.set(k, (g = []));
+      order.push(k);
     }
     g.push(it);
   }
-  return order.map((slug) => {
-    const g = groups.get(slug)!;
+  return order.map((k) => {
+    const g = groups.get(k)!;
     if (g.length === 1) return g[0];
     const latest = g.reduce((a, b) => (b.updatedAt > a.updatedAt ? b : a));
     const owns = g.filter((x) => x.shelf === "own");
@@ -138,11 +148,6 @@ export function mergeSameSlug(items: ShelfItem[]): ShelfItem[] {
     if (owns.length) {
       merged.shelf = "own";
       merged.owned = Math.max(...owns.map((x) => x.owned ?? 0));
-      const ed = owns.find((x) => x.edition) ?? latest;
-      if (ed.edition && ed.editionTotal) {
-        merged.edition = ed.edition;
-        merged.editionTotal = ed.editionTotal;
-      }
     }
     if (!merged.title) merged.title = g.find((x) => x.title)?.title ?? "";
     if (!merged.cover) merged.cover = g.find((x) => x.cover)?.cover ?? null;
@@ -150,19 +155,23 @@ export function mergeSameSlug(items: ShelfItem[]): ShelfItem[] {
   });
 }
 
+/** 旧名(同じ slug を1つにまとめていた頃)。 今は作品×版でまとめる。 */
+export const mergeSameSlug = mergeSameKey;
+
 export type PutInput = {
   slug: string;
   title: string;
   cover: string | null;
   shelf: ShelfId;
   owned?: number;
-  /** 版を選んだ時だけ(label と登録時点の既刊) */
+  /** 版を選んだ時だけ(label と登録時点の既刊)。 無し(null/省略) = 版ラベル無しの1冊 */
   edition?: { label: string; total: number } | null;
 };
 
-/** しまう/棚を移す/巻数を変える(= 同じ slug があれば上書き・登録日は保つ)。新規は先頭に置く。 */
+/** しまう/棚を移す/巻数を変える(= 同じ作品×版があれば上書き・登録日は保つ)。新規は先頭に置く。 */
 export function putItem(items: ShelfItem[], input: PutInput, now = Date.now()): ShelfItem[] {
-  const prev = items.find((x) => x.slug === input.slug);
+  const key = itemKey({ slug: input.slug, edition: input.edition?.label });
+  const prev = items.find((x) => itemKey(x) === key);
   const next: ShelfItem = {
     slug: input.slug,
     title: input.title || prev?.title || "",
@@ -172,30 +181,34 @@ export function putItem(items: ShelfItem[], input: PutInput, now = Date.now()): 
     updatedAt: now,
   };
   if (input.shelf === "own") next.owned = toInt(input.owned) ?? prev?.owned ?? 0;
-  const ed = input.edition === undefined ? (prev?.edition ? { label: prev.edition, total: prev.editionTotal! } : null) : input.edition;
-  if (ed && ed.label && ed.total > 0) {
+  const ed = input.edition;
+  if (ed && ed.label) {
     next.edition = ed.label;
-    next.editionTotal = toInt(ed.total);
+    const t = toInt(ed.total);
+    if (t) next.editionTotal = t;
+    else if (prev?.editionTotal) next.editionTotal = prev.editionTotal;
   }
-  return prev ? items.map((x) => (x.slug === input.slug ? next : x)) : [next, ...items];
+  return prev ? items.map((x) => (itemKey(x) === key ? next : x)) : [next, ...items];
 }
 
-/** 棚だけ移す(もってるへ移したら owned は前の値 or 0)。 */
-export function moveItem(items: ShelfItem[], slug: string, shelf: ShelfId, now = Date.now()): ShelfItem[] {
-  const prev = items.find((x) => x.slug === slug);
+const editionOf = (x: ShelfItem) => (x.edition ? { label: x.edition, total: x.editionTotal ?? 0 } : null);
+
+/** 棚だけ移す(もってるへ移したら owned は前の値 or 0)。 key = itemKey(版ラベルの無い1冊は slug そのもの)。 */
+export function moveItem(items: ShelfItem[], key: string, shelf: ShelfId, now = Date.now()): ShelfItem[] {
+  const prev = items.find((x) => itemKey(x) === key);
   if (!prev) return items;
-  return putItem(items, { ...prev, shelf, owned: prev.owned, edition: undefined }, now);
+  return putItem(items, { ...prev, shelf, owned: prev.owned, edition: editionOf(prev) }, now);
 }
 
-export function setOwned(items: ShelfItem[], slug: string, owned: number, now = Date.now()): ShelfItem[] {
-  const prev = items.find((x) => x.slug === slug);
+export function setOwned(items: ShelfItem[], key: string, owned: number, now = Date.now()): ShelfItem[] {
+  const prev = items.find((x) => itemKey(x) === key);
   if (!prev || prev.shelf !== "own") return items;
-  return putItem(items, { ...prev, owned, edition: undefined }, now);
+  return putItem(items, { ...prev, owned, edition: editionOf(prev) }, now);
 }
 
-/** 取り出す(= 消すのは本人だけ。自動では消さない)。 */
-export function removeItem(items: ShelfItem[], slug: string): ShelfItem[] {
-  return items.filter((x) => x.slug !== slug);
+/** 取り出す(= 消すのは本人だけ。自動では消さない)。 key = itemKey。 */
+export function removeItem(items: ShelfItem[], key: string): ShelfItem[] {
+  return items.filter((x) => itemKey(x) !== key);
 }
 
 // ─── slug の解決(改名・統合で変わる) ─────────────────────────────
@@ -235,10 +248,10 @@ export async function resolveMovedSlug(slug: string, fetchFinal: FetchFinal): Pr
   }
 }
 
-/** slug を付け替える(同じ slug が既にあれば1つにまとめる)。 */
+/** slug を付け替える(全部の版ごと。同じ作品×版が既にあれば1つにまとめる)。 */
 export function renameSlug(items: ShelfItem[], from: string, to: string): ShelfItem[] {
   if (from === to) return items;
-  return mergeSameSlug(items.map((x) => (x.slug === from ? { ...x, slug: to } : x)));
+  return mergeSameKey(items.map((x) => (x.slug === from ? { ...x, slug: to } : x)));
 }
 
 // ─── もってるの札 ─────────────────────────────────────────────
@@ -267,15 +280,21 @@ function volRange(from: number, to: number): string {
 }
 
 /**
- * 「もってる」の札の1行。既刊 = 版を選んだ作品は登録時点の値、それ以外は索引の最大単一版の巻数。
+ * 「もってる」の札の1行。既刊 = liveTotal(版の今の巻数 = 巻の書影データから引けた時)→ 版を選んだ作品は登録時点の値 →
+ * それ以外は索引の最大単一版の巻数。 fixedEdition = 登録時点の値で比べた(新刊が出ても増えない)時だけ true。
  *   未達&連載中 → 「10巻まで所持 → 11・12巻が出ています」
  *   揃い&連載中 → 「最新刊まで揃っています」 / 揃い&完結 → 「全巻揃っています」
  *   未達&完結 → 「完結済み・あと2冊で全巻」
  */
-export function ownedNote(item: Pick<ShelfItem, "owned" | "editionTotal">, facts: IndexFacts | null): OwnedNote {
+export function ownedNote(
+  item: Pick<ShelfItem, "owned" | "editionTotal">,
+  facts: IndexFacts | null,
+  liveTotal?: number | null,
+): OwnedNote {
   const owned = item.owned ?? 0;
-  const fixedEdition = !!item.editionTotal;
-  const total = item.editionTotal ?? (facts && facts.max_edition_volumes > 0 ? facts.max_edition_volumes : null);
+  const live = liveTotal && liveTotal > 0 ? liveTotal : null;
+  const fixedEdition = !live && !!item.editionTotal;
+  const total = live ?? item.editionTotal ?? (facts && facts.max_edition_volumes > 0 ? facts.max_edition_volumes : null);
   const had = owned > 0 ? `${owned}巻まで所持` : "1巻はまだ";
   if (total === null) return { kind: "unknown", text: owned > 0 ? had : "巻数の記録なし", next: [], total, fixedEdition };
   const completed = facts?.status === "completed";
@@ -343,12 +362,16 @@ export type PlaqueStats = {
 };
 
 /** 真鍮の銘板の3つの数字。既刊は札と同じ規則(ownedNote)で数える = 札の文言と数字が食い違わない。 */
-export function plaqueStats(items: ShelfItem[], factsOf: (slug: string) => IndexFacts | null): PlaqueStats {
+export function plaqueStats(
+  items: ShelfItem[],
+  factsOf: (slug: string) => IndexFacts | null,
+  liveTotalOf?: (x: ShelfItem) => number | null | undefined,
+): PlaqueStats {
   const s: PlaqueStats = { ownedVolumes: 0, nextVolumes: 0, caughtUpWorks: 0 };
   for (const x of items) {
     if (x.shelf !== "own") continue;
     s.ownedVolumes += x.owned ?? 0;
-    const note = ownedNote(x, factsOf(x.slug));
+    const note = ownedNote(x, factsOf(x.slug), liveTotalOf?.(x));
     s.nextVolumes += note.next.length;
     if (note.kind === "complete" || note.kind === "caught-up") s.caughtUpWorks++;
   }
@@ -441,7 +464,7 @@ export type ImportMode = "overwrite" | "merge";
 export function importShelf(current: ShelfItem[], incoming: ShelfItem[], mode: ImportMode): ShelfItem[] {
   if (mode === "overwrite") {
     const keep = new Map(current.map((x) => [x.slug, x]));
-    return mergeSameSlug(
+    return mergeSameKey(
       incoming.map((x) => ({
         ...x,
         title: x.title || keep.get(x.slug)?.title || "",
@@ -449,7 +472,7 @@ export function importShelf(current: ShelfItem[], incoming: ShelfItem[], mode: I
       })),
     );
   }
-  return mergeSameSlug([...current, ...incoming]);
+  return mergeSameKey([...current, ...incoming]);
 }
 
 /** 棚ごとの冊数(取り込み確認の表示用)。 */

@@ -125,6 +125,18 @@
   line-height: 1.35;
 }
 .shelf-c3-note { color: var(--shelf-dim); font-size: 11.5px; line-height: 1.4; }
+/* 版ごとにしまった1冊の版の名前(2026-10-31 ユーザ裁定 A+1 = 版ごとに別の札)。 題名の下に真鍮の細い枠 */
+.shelf-c3-ed {
+  align-self: flex-start;
+  max-width: 100%;
+  padding: 1px 6px;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  font-size: 10.5px;
+  font-weight: 700;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
 .shelf-c3-note.is-alert { color: var(--shelf-coral); font-weight: 700; }
 .shelf-c3-sub { color: var(--shelf-dim); font-size: 11px; }
 .shelf-c3-catch {

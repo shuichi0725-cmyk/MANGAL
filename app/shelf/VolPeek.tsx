@@ -16,6 +16,7 @@ const fmt = (d: string | null) => (d ? `${d.replace(/-/g, "/")} 発売` : "");
 
 export default function VolPeek({
   slug,
+  edition,
   title,
   author,
   n,
@@ -25,6 +26,8 @@ export default function VolPeek({
   onClose,
 }: {
   slug: string;
+  /** 版ごとにしまった1冊の版ラベル(その版の書影を出す・2026-10-31 本棚 A+1) */
+  edition?: string;
   title: string;
   author?: string;
   n: number;
@@ -38,11 +41,11 @@ export default function VolPeek({
   const [full, setFull] = useState(false);
   useEffect(() => {
     let live = true;
-    loadVolCovers(slug).then((v) => live && setVols(v));
+    loadVolCovers(slug, edition).then((v) => live && setVols(v));
     return () => {
       live = false;
     };
-  }, [slug]);
+  }, [slug, edition]);
   if (vols === undefined) return <div className="shelf-vp shelf-vp-msg">書影を読み込み中…</div>;
   if (!vols || !vols.length)
     return (
