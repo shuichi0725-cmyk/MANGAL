@@ -26,7 +26,8 @@ metadata:
 3. 終わったら `--remote-debugging-port=933*` の msedge を Stop-Process。
 
 ## 手元で羅針盤を「全件の索引」で動かす
-- `public/prod-idx/` に `data/manga-list-cols.v1.json`・`manga-list-head.json`・`manga-catch-index.json` を写し、`NEXT_PUBLIC_PREVIEW_FEATURES=1 npx next dev -p 3123`。
+- `public/prod-idx/` に `data/manga-list-cols.v1.json`・`manga-list-head.json`・`manga-catch-index.json` を写し、`MANGAL_DATA_DIR=.preview-data npx next dev -p 3123`。
+  ★テスト環境の機能(PREVIEW)は **MANGAL_DATA_DIR=.preview-data でだけ入る**(next.config.ts が NEXT_PUBLIC_PREVIEW_FEATURES を上書きで決める)。 `NEXT_PUBLIC_PREVIEW_FEATURES=1` を付けても無効(2026-10-31 実踏 = 本番の形で立ち上がり2分の作り直し)。 詳細 [[local_ui_verify_dev_edge_cdp]]
 - ★**後で必ず `public/prod-idx/` を消す**(gitignore だが、残すと次の週次の next export が out/ に入れて 30MB が本番 R2 に上がる)。
 - ★それでも手元の「全件」は preview の抜粋(public/manga-list-index.json = 1,229件)になる = `?from=<slug>` が抜粋に無い本だと**乱数の本で始まる**。
   本番の不具合と取り違えない(2026-10-15 に一度「?from が効かない」と誤診して直しかけ、元に戻した)。 `from` には抜粋にある本を使う。
