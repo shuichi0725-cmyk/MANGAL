@@ -84,6 +84,12 @@ def ndl_issued(isbn: str):
                 raise
             print("  429 → %ds待って再試行" % _wait, flush=True)
             time.sleep(_wait)
+        except (TimeoutError, urllib.error.URLError, ConnectionError) as e:
+            # ★2026-10-31: NDLの読み取りタイムアウトで traceback 停止(20/38件目)。429と同じく待って再試行
+            if _wait is None:
+                raise
+            print("  NDL応答なし(%s) → %ds待って再試行" % (type(e).__name__, _wait), flush=True)
+            time.sleep(_wait)
     out = []
     for rd in ET.fromstring(x).iter("{http://www.loc.gov/zing/srw/}recordData"):
         try:
@@ -206,7 +212,10 @@ def main():
         todo = sorted({r[I["isbn13"]] for r in cand} - set(ndl))
         print("NDL照会 %d 件 (キャッシュ %d)" % (len(todo), len(ndl)))
         for n, isbn in enumerate(todo, 1):
-            ndl[isbn] = ndl_issued(isbn)          # ★例外は握り潰さない = 否定記録を作らない
+            try:
+                ndl[isbn] = ndl_issued(isbn)      # ★失敗は記録しない = 否定記録を作らない(キーが無ければ「NDL未照会」で保留)
+            except Exception as e:
+                print("  照会失敗 %s (%s) = 保留に回す" % (isbn, type(e).__name__), flush=True)
             if n % 20 == 0:
                 json.dump(ndl, io.open(NDL_CACHE, "w", encoding="utf-8"), ensure_ascii=False)
                 print("  ndl %d/%d" % (n, len(todo)))

@@ -168,7 +168,9 @@ def split_title(raw):
             matched = "mid_bare"
         else:
             # A0. 末尾 括弧付き(N)/第N巻/N巻 = 英字末尾でも常に巻数(RX(1)/Returns(1)型 2026-07-07)。
-            m = re.search(r"^(.*?)(?:[\s　]*[（(]\s*(\d{1,3})\s*[)）]|[\s　]*第\s*(\d{1,3})\s*巻|[\s　]*(\d{1,3})\s*巻)[\s　]*(?:[（(]完[)）])?$", t)
+            # ★末尾「[N]」(2026-10-31 ジャックジャンヌ FOLIAGE [2] が vol=None の新作1巻になった)。中身が数字だけの角括弧に限る
+            #   (Fate/stay night [Heaven's Feel] 型の題の一部は数字でないので当たらない)
+            m = re.search(r"^(.*?)(?:[\s　]*[（(]\s*(\d{1,3})\s*[)）]|[\s　]*第\s*(\d{1,3})\s*巻|[\s　]*(\d{1,3})\s*巻|[\s　]*[\[［]\s*(\d{1,3})\s*[\]］])[\s　]*(?:[（(]完[)）])?$", t)
             if m and m.group(1).strip():
                 n = next((g for g in m.groups()[1:] if g and g.strip().isdigit()), None)
                 if n is not None:
