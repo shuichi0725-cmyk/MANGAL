@@ -1,6 +1,6 @@
 ---
 name: preorder_page_bypasses_mainline_class
-description: 【型・総論】予約頁(preorder-pages)は種2本流を通らない=本流に足した機構が1つずつ落ちる。既知10件(9=AniList は2026-10-20に実装・10=著者の役割は未対応)。新しい充填を足したら予約合流ループにも足す
+description: 【型・総論】予約頁(preorder-pages)は種2本流を通らない=本流に足した機構が1つずつ落ちる。既知11件(9=AniList は2026-10-20に実装・10=著者の役割は未対応・11=slug-overridesは効かない→改名は手順で)。新しい充填を足したら予約合流ループにも足す
 metadata:
   node_type: memory
   type: project
@@ -34,6 +34,8 @@ metadata:
 ★#6 の実測: seed に文章が在るのに **何度 promote しても出ない** 頁が213頁358巻。
 検証は `bff`(seed 4件が 8/16 から在る)= 修正前は `promote --only` を回しても
 description 0件・**バイト数すら不変**。 修正後 4件入り 1467→1998バイト。
+
+| 11 | **slug-overrides.yml**= 予約頁には効かない(書いても slug が変わらず reflect も黙って通る)。★予約頁の改名手順(2026-10-31 kimi-ni-dake-haato-be-to→heart-beat / kuro-no-jiiku→sieg で実施): ①`_preorder-rename-draft.py old=new`(preview/drafts/kana-pending)②`git mv data/seeds/preorder-pages/old.yml new.yml`+中の `slug`/`title_romaji` を書換 ③`data/slug-aliases.yml` に `old: new` ④`_reflect-targeted.py --drop old --only new`(旧manga.v2削除+索引+_redirects 301)⑤changelog に op=preorder_page_rename | **2026-10-31** |
 
 **How to apply:**
 - ★**本流に充填を足したら、同じ規則を予約合流ループにも足す**。 規則の型は2つだけ:

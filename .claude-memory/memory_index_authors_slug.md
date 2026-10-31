@@ -38,3 +38,4 @@ metadata:
 - [作者が別人に化ける(典拠ID8桁切り)=promoteが本のクレジットで分け直す](ndla_8digit_author_merge.md)
 - [⏳著者QIDが別人(3/40)](author_qid_wrong_person.md)
 - [著者QID是正は確認不要](feedback_author_qid_fix_no_confirm.md)
+- [AniList補完が同名別人を入れる(sora/三月ソラ)](anilist_author_fill_same_name_conflation.md)
