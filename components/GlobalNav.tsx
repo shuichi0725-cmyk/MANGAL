@@ -34,7 +34,7 @@ const NAV_SVG: Record<string, { d: string; circle?: [number, number, number] }> 
   //   (同じ概念に別の絵を当てると、同じ行き先だと分からなくなる)。矩形は subpath で表現。
   アニメ化: { d: "M3 5h18v14H3zM7 5v14M17 5v14M3 9h4M3 15h4M17 9h4M17 15h4" },
   使い方: { d: "M12 5c-2-1.6-5-1.6-8-.6V19c3-1 6-1 8 .6 2-1.6 5-1.6 8-.6V4.4c-3-1-6-1-8 .6zM12 5v14" },
-  // 羅針盤 /compass(2026-10-03 本番化) / 本棚 /shelf = テスト環境だけ(NEXT_PUBLIC_PREVIEW_FEATURES。2026-09-30「書庫」→「本棚」に統一)
+  // 羅針盤 /compass(2026-10-03 本番化) / 本棚 /shelf(2026-09-30「書庫」→「本棚」に統一・2026-10-31 本番にも出す)
   羅針盤: { d: "M15.5 8.5l-2 5-5 2 2-5z", circle: [12, 12, 8.5] },
   本棚: { d: "M4 4h4v16H4zM9 7h4v13H9zM14.2 6.3l3.8-1 3.3 12.6-3.8 1zM3 20h18" },
 };
@@ -62,7 +62,7 @@ const RIGHT_FIXED: Array<[string, string]> = [
   ["新刊", "/shinkan"],
 ];
 const RIGHT_TAIL: Array<[string, string]> = [["使い方", "/about"]];
-/** テスト環境だけの項目(本番ビルドでは定数 false で刈り取られる=本番の木は従来どおり)。 */
+/** テスト環境か(本番ビルドでは定数 false)。 */
 const PREVIEW = process.env.NEXT_PUBLIC_PREVIEW_FEATURES === "1";
 /** ★テスト環境では羅針盤へ頁を丸ごと読み直すリンク(<a>)で入る: テスト環境の羅針盤は索引の読み先を本番の全件(/prod-idx)に
  *   変えるが、索引の module キャッシュは全頁共有 = サイト内遷移で入るとテスト環境の抜粋を持ち込む。
@@ -80,13 +80,13 @@ export default function GlobalNav({ animeNow, animeNext }: { animeNow: string; a
   useEffect(() => {
     if (animeNext && seasonReached(animeNext)) setSeason(animeNext);
   }, [animeNext]);
-  // ★検索の右に羅針盤(2026-09-29 ユーザ指示・2026-10-03 本番化)。 使い方の左の本棚はテスト環境だけ
+  // ★検索の右に羅針盤(2026-09-29 ユーザ指示・2026-10-03 本番化)。 使い方の左に本棚(2026-10-31 本番にも出す)
   const RIGHT: Array<[string, string]> = [
     RIGHT_FIXED[0],
     ["羅針盤", "/compass"],
     ...RIGHT_FIXED.slice(1),
     ["アニメ化", `/anime/${season}`],
-    ...(PREVIEW ? ([["本棚", "/shelf"]] as Array<[string, string]>) : []),
+    ["本棚", "/shelf"],
     ...RIGHT_TAIL,
   ];
   const isHome = pathname === "/";

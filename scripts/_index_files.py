@@ -37,6 +37,16 @@ INDEX_FILES = (
     COLUMNAR,
 )
 
+# ★本棚の「番号タイルを押すと書影」= 作品ごとの巻の書影(64分割 vc/NN.json・2026-10-31 本番化)。
+#   生成 = scripts/_build-vol-covers.py(週次 step1 の vol-covers が data/vc/ へ作る。git には入れない)。
+#   分割数は lib/volCovers.ts の vcShard と必ず同じ。
+#   ★INDEX_FILES とは別に持つ: INDEX_FILES は差分反映の部分ビルドの入力にもコピーされる(ビルドに要らない64本を混ぜない)。
+#   配る所 = r2-sync(data/vc で out/vc を上書き)/ 差分反映(中身が変わった分だけ PUT)/ 機能蒸留(除外)/ 週次finalize(purge)。
+VC_SHARDS = 64
+VC_FILES = tuple(f"vc/{i:02d}.json" for i in range(VC_SHARDS))
+# 本番 約14.7MB(2026-10-31 69,867作) / テスト環境の抜粋 約0.3MB。 これ未満 = 抜粋を本番へ焼こうとしている
+VC_MIN_BYTES = 5 * 1048576
+
 # 番号化する列(値= "name\tkana" 文字列の配列)。著者は約7万行に対して2.4万種類しかない。
 DICT_COLS = ("authors", "original_authors")
 

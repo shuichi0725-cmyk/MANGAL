@@ -188,6 +188,7 @@ python scripts/_weekly-finalize.py
 ## ★成功判定 (= 完了主張の前にこの数字を全部言えること)
 - preflight exit 0 / out/manga ≈ **132k files**(≥120kがfinalize下限) / R2 PUT数(全量=レイアウト週・少数=データ週)
 - smoke **PASS 10/10**(FAIL 0) / 索引 **25MB級**(5MB未満=preview索引化事故)
+- 本棚の巻の書影 = r2-sync ログ `本番 巻の書影 overlay: vc/ 64本 (約14MB)`(データ週は差分反映の `巻の書影 vc/: 変更 N/64本`)。作るのは step1 の vol-covers(2026-10-31 本棚の本番化)
 - marker `note=週次蒸留` + pages-manifest 初期化ログ
 - どれかが言えない=完了していない(finalizeがexit 0を返すまで完了報告禁止)
 

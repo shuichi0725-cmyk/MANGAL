@@ -23,11 +23,9 @@ import authorQidHide from "@/data/author-qid-hide.json";
 const AUTHOR_QID_HIDE = new Set<string>(authorQidHide as string[]);
 import { jaGenre, jaTag } from "@/lib/anilist-i18n";
 
-// ★プレビュー専用「しまう」ボタン(マイ本棚 docs/cloud-briefs/my-shelf.md)。本番は next.config.ts が
-//   NEXT_PUBLIC_PREVIEW_FEATURES="0" を定数で埋めるので、この require ごと webpack が刈り取る
-//   = 本番の作品頁(6.6万頁)の HTML/RSC/JS は1バイトも変わらない(静的 import にすると頁チャンクに混ざる)。
-const ShelveButton: typeof import("@/components/ShelveButton").default | null =
-  process.env.NEXT_PUBLIC_PREVIEW_FEATURES === "1" ? require("@/components/ShelveButton").default : null;
+// ★「しまう」ボタン(マイ本棚 docs/cloud-briefs/my-shelf.md)。 2026-10-31 本番にも出す
+//   (旧 = プレビュー専用で、本番は require ごと刈り取っていた)。
+import ShelveButton from "@/components/ShelveButton";
 // ★「題名の背景の帯」(選んでいる巻の書影の網点・2026-09-30 ユーザ裁定 案1)。 2026-10-04 ユーザ指示で本番にも出す
 //   (旧 = 上の「しまう」と同じくプレビュー専用で刈り取っていた)。
 
@@ -568,19 +566,12 @@ export default async function MangaDetailPage({
           {/* 共有(X/LINE/OS共有) = 説明の直後(2026-07-12 ユーザ指定位置)。
               ★2026-09-15 関連作品を巻セクションの下へ移した後も**共有はここに据え置き**(ユーザ裁定):
               共有は本題(巻)に触れる前でも押される導線で、深い位置に下げると押されなくなるため。 */}
-          {/* ★本番は ShelveButton=null → shareButtons だけ(= 従来と同じ木。null の子も増やさない) */}
-          {ShelveButton ? (
-            <>
-              {shareButtons}
-              <ShelveButton
-                slug={manga.slug}
-                editions={displayBlocks(manga.editions).map((e) => ({ label: e.label, total: shelfVolCount(e.volumes) }))}
-                maxTotal={Math.max(0, ...manga.editions.map((e) => shelfVolCount(e.volumes)))}
-              />
-            </>
-          ) : (
-            shareButtons
-          )}
+          {shareButtons}
+          <ShelveButton
+            slug={manga.slug}
+            editions={displayBlocks(manga.editions).map((e) => ({ label: e.label, total: shelfVolCount(e.volumes) }))}
+            maxTotal={Math.max(0, ...manga.editions.map((e) => shelfVolCount(e.volumes)))}
+          />
 
           {/* 電子カラー版帯=表示停止のまま(2026-08-02 ユーザ裁定「勝手につけられた」)。
               2026-08-12 ホームのカラー版コーナー新設で color-editions.json を再充填したため、

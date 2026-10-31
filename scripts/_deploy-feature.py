@@ -91,6 +91,8 @@ def excluded(key: str) -> bool:
         return True
     if key in IDX or key.startswith("sitemap"):
         return True
+    if key.startswith("vc/"):   # 本棚の巻の書影(2026-10-31)= 週次/差分反映が data/vc から配る
+        return True
     return False
 
 

@@ -9,6 +9,7 @@ Disallow: /manga-list-cols
 Disallow: /calendar/
 Disallow: /shinkan/*.json$
 Disallow: /data/
+Disallow: /vc/
 # ★絞り込みのクエリURLはクロール不要(2026-09-18)。実測:
 #   作品頁69,352枚が張る /browse?… は のべ116,648本・**ユニーク8,319URL**
 #   (author 6,333 / originalAuthor 846 / publisher 690 / theme 413 / yearMin 24 / magazine 8 / demographic 5)。

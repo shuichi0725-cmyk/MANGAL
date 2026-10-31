@@ -57,10 +57,10 @@ CHUNK = 10000            # 1 POST の上限(仕様)
 MAX_PER_DRAIN = 10000    # 1回の drain で送る上限(超過分は pending に残して次回。 黙って捨てない)
 UA = "Mozilla/5.0 (compatible; MANGAL-deploy/1.0; +https://mangal-db.com/about)"
 
-# 送らない頁: 開発用の面(sitemap にも載せていない)・404・placeholder
+# 送らない頁: 開発用の面(sitemap にも載せていない)・404・placeholder・本棚(noindex・中身は端末ごと。2026-10-31)
 EXCLUDE_RE = re.compile(
     r"^(home-design-\d+|nav-lab|nav-pack|obi-design|search-proto|tab-design|adult-triage|"
-    r"audit-date-order|column-sample|404)$"
+    r"audit-date-order|column-sample|404|shelf)$"
 )
 
 

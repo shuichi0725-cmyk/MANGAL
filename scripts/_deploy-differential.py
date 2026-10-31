@@ -45,6 +45,7 @@ WORKER = "https://mangal-db.com"  # 2026-07-04 カスタムドメイン開通(wo
 CODE_SCOPE = ["app/manga", "app/layout.tsx", "app/globals.css", "components", "lib",
               "next.config.ts", "package.json", "tailwind.config.ts"]
 from _index_files import INDEX_FILES, ensure_columnar  # 索引一覧の単一ソース(2026-09-23)
+from _index_files import VC_FILES, VC_MIN_BYTES  # 本棚の巻の書影 vc/ 64本(2026-10-31)
 IDX = INDEX_FILES
 MASTERS = ("demographics.yml", "genres.yml", "magazines.yml", "publisher-aliases.yml",
            "publishers.yml", "slug-aliases.yml") + IDX
@@ -327,12 +328,28 @@ def main():
         if os.path.getsize(src) < 5 * 1048576 and name == "manga-list-index.json":
             print("★abort: 一覧索引<5MB = subset疑い"); sys.exit(3)
         puts.append((name, src))
+    # ★本棚の巻の書影(vc/ 64本・2026-10-31)= data/vc の中身が本番と違う分だけ PUT(作るのは週次 step1 の vol-covers。
+    #   データ週の週次はこのルートで配るため必須)。 data/vc が無い = 週次 step1 未実行 → 今回は送らない(本番の vc はそのまま)
+    vc_put = []
+    if all(os.path.exists(os.path.join(ROOT, "data", n)) for n in VC_FILES):
+        _vc_total = sum(os.path.getsize(os.path.join(ROOT, "data", n)) for n in VC_FILES)
+        if _vc_total < VC_MIN_BYTES:
+            print(f"★abort: data/vc が計 {_vc_total/1048576:.1f}MB = テスト環境の抜粋疑い(本番は約14.7MB)"); sys.exit(3)
+        for name in VC_FILES:
+            src = os.path.join(ROOT, "data", name)
+            if manifest.get(name, "")[:20] == hashlib.sha256(open(src, "rb").read()).hexdigest()[:20]:
+                continue
+            puts.append((name, src))
+            vc_put.append(name)
+        print(f"巻の書影 vc/: 変更 {len(vc_put)}/{len(VC_FILES)}本")
+    else:
+        print("  ※ data/vc が無い(週次 step1 の vol-covers 未実行)→ 巻の書影は今回送らない")
     for key, lp in puts:
         ext = os.path.splitext(key)[1]
         body = open(lp, "rb").read()
         s3.put_object(Bucket=BUCKET, Key=key, Body=body, ContentType=CT.get(ext, "application/octet-stream"))
         manifest[key] = hashlib.sha256(body).hexdigest()[:20]
-    print(f"PUT {len(puts)} (頁{len(inner)}×2 + 索引3)")
+    print(f"PUT {len(puts)} (頁{len(inner)}×2 + 索引{len(IDX)} + 巻の書影{len(vc_put)})")
     try:
         import _r2_ops_ledger as _rl
         _rl.record(len(puts), 0, "diff-deploy")
@@ -403,7 +420,7 @@ def main():
     purge_failed = set()   # ★purge できなかった頁は IndexNow に流さない(旧HTMLを掴ませないため)
     if token:
         paths = page_urls + \
-                [f"/{n}" for n in IDX] + [f"/{k}" for k in json_synced] + (["/"] if a.weekly_json else [])
+                [f"/{n}" for n in IDX] + [f"/{k}" for k in vc_put] + [f"/{k}" for k in json_synced] + (["/"] if a.weekly_json else [])
         # ★10/batch(実測: ≤10成功/≥50はworker CPU上限500)。UA必須(無し=CF 403)。失敗は致命でない(≤1日で自然失効)
         import time as _t
         purged, pfail = 0, 0

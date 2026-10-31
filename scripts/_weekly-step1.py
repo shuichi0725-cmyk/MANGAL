@@ -72,6 +72,8 @@ STEPS = [
      "左レール用マスタJSON(publishers+magazines 48.6KB を全頁RSCから外す受け皿。★2026-09-09新設)"),
     ("list-index",        ["_build-list-index.py", "data/manga.v2", "data"],
      "本番索引(~10分。★生成物stepの最後=上の変更を焼き込む。索引から導出するstepだけこの後)"),
+    ("vol-covers",        ["_build-vol-covers.py", "data/manga.v2", "data"],
+     "本棚の巻の書影索引 data/vc/ 64本(~1分・2026-10-31 本棚の本番化。r2-sync/差分反映が配る。★list-index と同じく頁の最終形から作る)"),
     ("titles-pages",      ["_gen-titles-pages.py"],
      "題名索引ハブJSON(/titles 50音×200件頁+sitemapの単一ソース。★索引から導出=list-indexの後)"),
     ("anime-season-view", ["_build-anime-season-view.py"],

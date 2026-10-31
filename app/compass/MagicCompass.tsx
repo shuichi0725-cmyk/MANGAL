@@ -2188,8 +2188,8 @@ export default function MagicCompass({
         <div className="cp-sheet-body">
           <div className="cp-sheet-head">
             <div className="cp-sheet-t">{sheetItem?.title ?? "羅針盤"}</div>
-            {/* ★「しまう」= 本棚へ入れる。 本棚はまだテスト環境のみなので、本番では出さない(2026-10-03 ユーザ裁定) */}
-            {PREVIEW && sheetItem && (
+            {/* ★「しまう」= 本棚へ入れる(2026-10-03 はテスト環境だけ → 2026-10-31 本棚と一緒に本番にも出す) */}
+            {sheetItem && (
               <CompassShelveButton
                 slug={sheetItem.slug}
                 open={shelveFor === sheetItem.slug}
@@ -2235,7 +2235,7 @@ export default function MagicCompass({
               );
             })()}
           </div>
-          {PREVIEW && sheetItem && shelveFor === sheetItem.slug ? (
+          {sheetItem && shelveFor === sheetItem.slug ? (
             <CompassShelvePanel
               item={sheetItem}
               onDone={(m) => {

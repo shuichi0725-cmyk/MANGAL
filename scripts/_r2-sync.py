@@ -103,6 +103,21 @@ def main():
     # guard: 一覧索引が小さすぎる(<5MB)= preview subset を焼こうとしている
     if os.path.getsize(os.path.join(OUT, "manga-list-index.json")) < 5 * 1048576:
         print("★abort: manga-list-index.json が 5MB 未満 = preview subset 疑い。data/ の生成元を確認。"); sys.exit(3)
+    # ★本棚の巻の書影(vc/NN.json 64本・2026-10-31)も同じ理由で data/vc の本番版で必ず上書きする
+    #   (public/vc はテスト環境用。 無いまま --prune すると本番の vc/ が消えて本棚のタイルが書影なしになる)
+    from _index_files import VC_FILES, VC_MIN_BYTES
+    _vc_total = 0
+    for name in VC_FILES:
+        src = os.path.join(ROOT, "data", name)
+        if not os.path.exists(src):
+            print(f"★abort: 本番の巻の書影索引が無い data/{name} (= python scripts/_build-vol-covers.py data/manga.v2 data。週次は step1 の vol-covers)"); sys.exit(3)
+        dst = os.path.join(OUT, name)
+        os.makedirs(os.path.dirname(dst), exist_ok=True)
+        shutil.copyfile(src, dst)
+        _vc_total += os.path.getsize(src)
+    if _vc_total < VC_MIN_BYTES:
+        print(f"★abort: data/vc が計 {_vc_total/1048576:.1f}MB = テスト環境の抜粋疑い(本番は約14.7MB)。生成元を確認。"); sys.exit(3)
+    print(f"  本番 巻の書影 overlay: vc/ {len(VC_FILES)}本 ({_vc_total/1048576:.1f}MB)")
     # --- 本番カレンダー overlay は廃止 (2026-09-14) ---
     #   ホームの CalendarView / TimeMachine を撤去し、サイト上に /calendar/*.json を
     #   読む所が無くなったため out/calendar を作らない。data/calendar 自体は残す

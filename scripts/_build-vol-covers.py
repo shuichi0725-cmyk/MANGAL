@@ -10,7 +10,8 @@
 巻 = その作品で整数の巻番号が最も多い版(=一覧索引の max_edition_volumes と同じ数え方)の巻。
 使い方: python scripts/_build-vol-covers.py <mangaDir> <outDir>
   テスト環境: preview CI が .preview-data/manga → public で作る(git には入れない)。
-  ★本番はまだ配線していない(本棚がテスト環境専用のため)。 本番化する時は週次の索引生成と r2-sync に足す。
+  本番(2026-10-31 本棚の本番化で配線): 週次 step1 の vol-covers が data/manga.v2 → data で作る(git には入れない)。
+    配るのは r2-sync(out/vc を data/vc で上書き)と差分反映(中身が変わった分だけ PUT)。 一覧 = scripts/_index_files.py の VC_FILES。
 """
 import glob, json, os, re, sys
 

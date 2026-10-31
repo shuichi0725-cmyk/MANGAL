@@ -57,15 +57,15 @@ const FIND: Tile[] = [
   { icon: "author", label: "著者一覧(50音)", href: "/authors" },
 ];
 
-/** テスト環境だけの項目(本番ビルドでは定数 false で刈り取られる=本番のメニューは従来どおり)。 */
+/** テスト環境か(本番ビルドでは定数 false)。 */
 const PREVIEW = process.env.NEXT_PUBLIC_PREVIEW_FEATURES === "1";
-// ★2列タイルで「ホームの下に羅針盤・その右に本棚」(2026-09-29 ユーザ指示)。 羅針盤は 2026-10-03 本番化、本棚はテスト環境だけ。
+// ★2列タイルで「ホームの下に羅針盤・その右に本棚」(2026-09-29 ユーザ指示)。 羅針盤は 2026-10-03 本番化、本棚は 2026-10-31 本番にも出す。
 //   テスト環境の羅針盤は頁を丸ごと読み直す <a> で入る(索引の読み先を本番の全件へ変えるため。GlobalNav と同じ理由)。
 const FIND_VIEW: Tile[] = [
   FIND[0],
   FIND[1],
   { icon: "compass", label: "羅針盤", href: "/compass", reload: PREVIEW },
-  ...(PREVIEW ? [{ icon: "shelves", label: "本棚", href: "/shelf" }] : []),
+  { icon: "shelves", label: "本棚", href: "/shelf" },
   ...FIND.slice(2),
 ];
 

@@ -5,7 +5,7 @@ import { useEffect, useId, useState } from "react";
 import { SHELVES, type ShelfId, putItem, removeItem } from "@/lib/myShelf";
 import { useMyShelf } from "@/lib/useMyShelf";
 // ★見た目の追加は専用CSSへ(Tailwind の新しいクラスを書くと、頁にならないファイルからも拾われて
-//   本番の共通CSSが変わる=全頁のHTMLが変わる。この import は本番では require ごと刈り取られる)
+//   本番の共通CSSが変わる=全頁のHTMLが変わる)
 import "./shelve-button.css";
 
 /** 版の選択肢(作品頁の巻一覧と同じ並び=先頭が既定)。total = その版の巻数(小数の番外編は数えない)。 */
@@ -19,9 +19,8 @@ type Props = {
 };
 
 /**
- * 作品頁の「しまう」ボタン(マイ本棚・プレビュー専用)。依頼書 = docs/cloud-briefs/my-shelf.md。
- * ★本番には出ない: next.config.ts が NEXT_PUBLIC_PREVIEW_FEATURES を定数で埋め、作品頁側の
- *   `=== "1" ? require(...) : null` で require ごと刈り取られる。ここの return null は二重の門。
+ * 作品頁の「しまう」ボタン(マイ本棚)。依頼書 = docs/cloud-briefs/my-shelf.md。
+ * 2026-10-31 本番にも出す(旧 = プレビュー専用で、作品頁側の require ごと刈り取り+ここで return null の二重の門)。
  * ★索引(useMangaIndex)は読まない = 作品頁は全6.6万頁。材料は頁が既に持っている版だけ。
  * ★題名・書影は受け取らない(2026-09-29 ユーザ裁定「折衷案」): client 部品の props は全項目が
  *   HTML 内の埋め込みと .txt の2か所に書かれる = 7万頁×約0.5KB。控えの題名・書影は本棚の頁が
@@ -29,7 +28,6 @@ type Props = {
  *   残る弱点 = しまってから本棚を一度も開かないうちに作品が掲載から外れると、控えが slug だけになる。
  */
 export default function ShelveButton(props: Props) {
-  if (process.env.NEXT_PUBLIC_PREVIEW_FEATURES !== "1") return null;
   return <ShelvePanel {...props} />;
 }
 

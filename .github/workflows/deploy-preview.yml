@@ -72,7 +72,7 @@ jobs:
           python3 scripts/_index_files.py ensure .preview-data
           cp .preview-data/manga-list-cols.v1.json public/manga-list-cols.v1.json
           # ★本棚の「番号タイルを押すと書影」= 作品ごとの巻の書影(64分割 public/vc/NN.json・2026-10-04)。
-          #   テスト環境の作品データから作る(git には入れない)。 本番は本棚の本番化の時に週次へ配線する。
+          #   テスト環境の作品データから作る(git には入れない)。 本番は週次 step1 の vol-covers が data/vc に作る(2026-10-31)。
           python3 -c "import yaml" 2>/dev/null || python3 -m pip install --quiet pyyaml
           python3 scripts/_build-vol-covers.py .preview-data/manga public
           echo "preview index entries:"; node -e "console.log('list', require('./public/manga-list-index.json').d.length)"
