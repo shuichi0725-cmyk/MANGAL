@@ -27,7 +27,7 @@
 - [記憶とskillの棲み分け](feedback_memory_vs_skill_policy.md)
 - [★本番デプロイはトリガー待ち](feedback_production_deploy_gate.md)
 - [★価格の静的表示禁止](feedback_no_static_prices.md)
-- [★週次=「週次蒸留して」のみ](feedback_weekly_distill_exact_trigger_only.md)
+- [★本番3ルート=トリガー語のみ・「本番に出して」=出せる状態に](feedback_weekly_distill_exact_trigger_only.md)
 - [1件のバグ=型と疑う](feedback_one_bug_means_a_class.md)
 - [検出器の件数≠仕事量](feedback_raw_count_is_not_worklist.md)
 - [★seed追記の「: 」はquote](seed_yaml_colon_quoting.md)
