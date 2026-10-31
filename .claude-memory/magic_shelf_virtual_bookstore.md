@@ -143,3 +143,8 @@ metadata:
   → 均等割り(329=24×7+23×7)・方位盤は16回まで全部/それ超は12個の窓を回す・外側の細い輪=全体(押すと飛ぶ)・31回以上は速く回すと×10。
 - 実装: compass.ts `roundOrder/roundRanges/roundItems/swapDelays/SWAP_*`(テスト)・`RoundDial.tsx`・MagicCompass の showRound/nextRound・
   入れ替わり = 出ていく本 `.swo-*`(ghost)/入る本 `.sw-*`(spawn)。 出し方の名前の toast はテスト環境だけ。 ★本番化はユーザ裁定待ち(ROUNDS を true)。
+
+## 2026-10-31 本棚を本番向けに切替(次の週次で公開・807f9c0a87)
+- 止め6か所を外し、巻の書影 vc/ を週次 step1(vol-covers)+r2-sync/差分反映へ配線。 詳細と公開後の確認 = [[inflight_state_2026_09_01]] 末尾。
+- 羅針盤のテスト専用で残るもの: prod-idx 読み・網点/出し方のトースト・MIX/SPLIT 系の旧案(THREADS 等は本番化済み)。
+
