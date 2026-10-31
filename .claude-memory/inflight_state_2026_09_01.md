@@ -242,3 +242,8 @@ IndexNow は 298 URL 受理(削除分の通知)。鍵ファイルも本番に載
   公開後の確認: 本番HTMLに `<meta name="googlebot" content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"/>`、実験頁(noindex)は従来どおり noindex のまま。
 - バスルームのぺペン 分野 shoujo→seinen(データのみ=差分反映 or 週次)。
 - 作品頁 JSON-LD に sameAs(作品Wikidata QID+AniList・b647e885f)= 同じく次の週次で公開。
+
+## ★2026-10-31 羅針盤の「回」+方位盤 = テスト環境だけ(ed92531c2・`ROUNDS = PREVIEW`)
+- 引き直す→「次を見る →」+方位盤 ◎(回して回を選ぶ・入れ替わりの出し方は毎回くじ)。 本番は「↻ 引き直す」のまま。
+- ★本番化は**ユーザ裁定待ち**(テスト環境で触ってもらってから)。 出す = MagicCompass.tsx の `ROUNDS` を true → 次の週次(羅針盤チャンクだけ変わる)。
+  次の週次はコードが変わるが ROUNDS=false の間は本番の見た目・動きは不変。 経緯 = [[magic_shelf_virtual_bookstore]]。
