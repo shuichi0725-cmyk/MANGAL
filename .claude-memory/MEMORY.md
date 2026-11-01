@@ -55,6 +55,7 @@
 - [★全件ものは流し切ってから見直す](feedback_run_to_end_then_review.md)
 - [★Amazonリンク=エラー回避>ブラウザ](kindle_link_browser_not_app.md)
 - [★仏BD翻訳は載せない](scope_bd_translation_not_listed.md)
+- [★非掲載はnon-manga-drop.ymlへ(tsvは未結線)](amecomi_drop_tsv_not_wired.md)
 ## 全体構造・台帳
 - [seeds pyramid=全体構造](project_architecture_seeds.md)
 - [★統合台帳](intake_manifest_ledger_live.md)

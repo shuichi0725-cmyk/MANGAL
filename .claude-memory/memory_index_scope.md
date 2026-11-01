@@ -25,3 +25,4 @@ metadata:
 - [⏳コンビニ掃引(裁定待ち3)](konbini_sweep_2026_08_state.md)
 - [NDL漫画判定=NDC726.1](ndl_manga_filter_ndc726.md)
 - [★仏BD翻訳は載せない](scope_bd_translation_not_listed.md)
+- [★非掲載はnon-manga-drop.ymlへ(tsvは未結線)](amecomi_drop_tsv_not_wired.md)
