@@ -25,7 +25,7 @@ usage:
 種別 = wiki / 公式(official) / 考察(analysis) / ネタバレ(spoiler)
 役割 = 物語(story) / 作風(style) / 人物(people) / 主題(theme) / 展開(plot = ネタバレ印) / タグ(tags = 他サイトのタグ一覧)
 """
-import argparse, datetime, hashlib, json, os, re, shutil, sys, unicodedata
+import argparse, datetime, hashlib, json, os, re, shutil, sys, time, unicodedata
 import urllib.error, urllib.parse, urllib.request
 
 sys.stdout.reconfigure(encoding="utf-8")
@@ -477,13 +477,20 @@ def anilist_call(ids):
     req = urllib.request.Request("https://graphql.anilist.co",
                                  data=json.dumps({"query": ANI_Q, "variables": {"ids": ids}}).encode(),
                                  headers={"User-Agent": UA, "Content-Type": "application/json", "Accept": "application/json"})
-    try:
-        with urllib.request.urlopen(req, timeout=40) as r:
-            return json.loads(r.read())["data"]["Page"]["media"]
-    except urllib.error.HTTPError as e:
-        stop(f"AniList が HTTP {e.code}")
-    except Exception as e:
-        stop(f"AniList に届かない({type(e).__name__})")
+    # ★429 は1分ごとに戻る上限 = 待って3回まで取り直す(2026-11-02: Web材料の200作の回が 429 3連続で99作目で止まった)
+    for k in range(4):
+        try:
+            with urllib.request.urlopen(req, timeout=40) as r:
+                return json.loads(r.read())["data"]["Page"]["media"]
+        except urllib.error.HTTPError as e:
+            if e.code == 429 and k < 3:
+                wait = min(120, max(10, int(e.headers.get("Retry-After") or 0) or 65)) + 2
+                print(f"  AniList が HTTP 429 → {wait}秒待って取り直す({k + 1}/3)", flush=True)
+                time.sleep(wait)
+                continue
+            stop(f"AniList が HTTP {e.code}")
+        except Exception as e:
+            stop(f"AniList に届かない({type(e).__name__})")
 
 
 def anilist_family(card):
