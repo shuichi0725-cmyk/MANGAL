@@ -61,6 +61,7 @@ import {
   SWAP_ORDERS,
   SWAP_FX,
   SWAP_ORDER_NAME,
+  DUST_LAYOUT_NAME,
   SWAP_FX_NAME,
   type SwapOrder,
   type SwapFx,
@@ -652,6 +653,14 @@ export default function MagicCompass({
     toneRef.current?.setCover(curItem.cover);
   }, [cur, curItem]);
 
+  // ★星屑の並べ方(冊数ごとのくじ・2026-11-01)の名前も見比べ用 = テスト環境だけ。 回の出し方と1つの札にまとめる
+  const swapMsg = useRef("");
+  useEffect(() => {
+    if (!PREVIEW || !spread?.layout) return;
+    const msg = `並べ方: ${DUST_LAYOUT_NAME[spread.layout]}(${spread.P.length}冊)`;
+    showToast(swapMsg.current ? `${swapMsg.current} / ${msg}` : msg);
+    swapMsg.current = "";
+  }, [spread, showToast]);
   // ── 回(ROUNDS): k 回目を描く。 commit = 今の回にする(見た印)/ origin = 舞台の座標で指の位置(波紋の中心) ──
   //   出し方(どこから順に × どうめくれるか)は毎回くじ。 出ていく本の順番はいまの星屑の位置で、入ってくる本は nodes で決める
   const showRound = useCallback(
@@ -671,7 +680,7 @@ export default function MagicCompass({
         swapRef.current = { order, fx, dir, origin, out: new Map(spread ? spread.P.map((p, i) => [p.slug, outD[i]]) : []) };
         setDrawn({ key: rounds.key, items: roundItems(rounds.order, rounds.ranges, kk) });
         // 出し方の名前は見比べ用 = テスト環境だけ(網点の出方と同じ)
-        if (PREVIEW && o.announce) showToast(`出し方: ${SWAP_ORDER_NAME[order]} × ${SWAP_FX_NAME[fx]}`);
+        if (PREVIEW && o.announce) swapMsg.current = `出し方: ${SWAP_ORDER_NAME[order]} × ${SWAP_FX_NAME[fx]}`;
       }
       setSel(null);
       setRounds((r) =>

@@ -17,6 +17,9 @@ import {
   resolveSpread,
   rng,
   spreadPositions,
+  dustLayouts,
+  dustBaseW,
+  type DustLayout,
   stageGeom,
   stageGeomWide,
   ringPoints,
@@ -1173,5 +1176,50 @@ describe("回(2026-10-31) = 広げた糸を24冊ずつ順番に・均等割り",
     expect(bw[0]).toBeLessThan(bw[1]);
     // 1冊だけ = ずれ 0
     expect(swapDelays("left", [{ x: 1, y: 1 }], c, 1, c)).toEqual([0]);
+  });
+});
+
+describe("星屑 = 冊数で大きさ・並べ方はくじ(2026-11-01)", () => {
+  const geoms = [
+    stageGeom(360, 504),
+    stageGeom(390, 560),
+    stageGeom(412, 620),
+    stageGeomWide(1000, 700, { k: 1.4, ew: 120, eh: 170, lh: 22 }),
+  ];
+  const mk = (n: number, tag: string) => Array.from({ length: n }, (_, i) => ({ slug: `${tag}${i}`, year: 2000 }));
+  const meanW = (P: { w: number }[]) => P.reduce((a, p) => a + p.w, 0) / P.length;
+
+  it("1〜24冊: 全部出る・重ならない・舞台からはみ出さない・中央の本と重ならない", () => {
+    for (const g of geoms)
+      for (let n = 1; n <= 24; n++)
+        for (const tag of ["a", "b", "c", "d", "e", "f"]) {
+          const r = spreadPositions("elem", mk(n, tag), "dust", g, 2000, `elem:x${tag}`);
+          const at = `${g.W}x${g.H} n=${n} ${tag} ${r.layout}`;
+          expect(r.P, at).toHaveLength(n);
+          for (const p of [...r.P, r.center]) {
+            expect(p.x - p.w / 2 >= 0 && p.x + p.w / 2 <= g.W, at).toBe(true);
+            expect(p.y - p.h / 2 >= g.top && p.y + p.h / 2 <= g.H - g.bottom, at).toBe(true);
+            for (const q of [...r.P, r.center])
+              if (p !== q) expect(Math.abs(p.x - q.x) < (p.w + q.w) / 2 && Math.abs(p.y - q.y) < (p.h + q.h) / 2, at).toBe(false);
+          }
+        }
+  });
+
+  it("少ないほど大きい(24冊の時は旧と同じ 44 から)", () => {
+    expect(dustBaseW(24)).toBe(44);
+    expect(dustBaseW(6)).toBeGreaterThan(80);
+    for (const g of geoms.slice(0, 3)) {
+      const w = (n: number) => meanW(spreadPositions("elem", mk(n, "a"), "dust", g, 2000, "elem:x").P);
+      expect(w(3)).toBeGreaterThan(w(12));
+      expect(w(12)).toBeGreaterThan(w(24));
+    }
+  });
+
+  it("同じ冊数でも種で並べ方が変わる(使える並べ方が全部出る)", () => {
+    for (const n of [2, 5, 10, 24]) {
+      const seen = new Set<DustLayout | undefined>();
+      for (let i = 0; i < 80; i++) seen.add(spreadPositions("elem", mk(n, `s${i}-`), "dust", geoms[1], 2000, "elem:x").layout);
+      expect([...seen].sort(), `n=${n}`).toEqual([...dustLayouts(n)].sort());
+    }
   });
 });

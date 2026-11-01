@@ -1091,6 +1091,8 @@ export type SpreadResult = {
   center: Box;
   ticks?: { year: number; x: number }[];
   axisY?: number;
+  /** 星屑の並べ方(くじの結果) */
+  layout?: DustLayout;
 };
 
 // ★2026-09-29 ユーザ「全体的に画像を大きく」= 約1.25倍(旧 34×48 / 30×42 / 26×36・中央 60×84)
@@ -1196,51 +1198,9 @@ export function spreadPositions(
   }
 
   if (spread === "dust") {
-    const r = rng(seedKey);
-    const bands = [
-      [90, 132],
-      [132, 170],
-      [170, 215],
-    ];
-    const yMin = top + 4;
-    const yMax = H - bottom - 6;
-    const SX = geom.sx ?? 1;
-    const SY = geom.sy ?? 1;
-    items.forEach((it, i) => {
-      const b = i < 8 ? 0 : i < 16 ? 1 : 2;
-      const w = SZ[b][0] * K;
-      const h = SZ[b][1] * K;
-      for (let tries = 0; tries < 300; tries++) {
-        const a = r() * Math.PI * 2;
-        const rr = bands[b][0] + r() * (bands[b][1] - bands[b][0]);
-        const px = CX + rr * 0.82 * SX * Math.cos(a);
-        const py = CY + rr * 1.12 * SY * Math.sin(a);
-        if (
-          px - w / 2 < 4 ||
-          px + w / 2 > W - 4 ||
-          py - h / 2 < yMin ||
-          py + h / 2 > yMax
-        )
-          continue;
-        if (
-          P.some(
-            (q) =>
-              Math.abs(q.x - px) < (q.w + w) / 2 + 4 &&
-              Math.abs(q.y - py) < (q.h + h) / 2 + 4,
-          )
-        )
-          continue;
-        // 中央の本(60×84)とも重ねない
-        if (
-          Math.abs(px - CX) < (midCenter.w + w) / 2 + 4 &&
-          Math.abs(py - CY) < (midCenter.h + h) / 2 + 4
-        )
-          continue;
-        P.push({ slug: it.slug, x: px, y: py, w, h });
-        break;
-      }
-    });
-    return { P, center: midCenter };
+    // ★種に先頭の本も混ぜる = 同じ糸でも回ごとに並べ方が変わる
+    const d = dustLayout(items, geom, midCenter, `${seedKey}|${items.length}|${items[0]?.slug ?? ""}`);
+    return { P: d.P, center: midCenter, layout: d.layout };
   }
 
   // 年表: 横軸 = year_started(左が古い)・同じ列は下から積む(下ほど近い)
@@ -1283,6 +1243,188 @@ export function spreadPositions(
     for (let y = lo; y <= hi; y += step) ticks.push({ year: y, x: X(y) });
   }
   return { P, center, ticks, axisY };
+}
+
+// ───────────────────────── 星屑の並べ方(冊数で大きさ・並べ方はくじ) ─────────────────────────
+// ★2026-11-01 ユーザ「出る数によって大きさを変えたい・少ない時はなるべく大きく・枚数ごとに何パターンか作ってランダムに」
+//   大きさ = 24冊の時の大きさ(44×62 / 38×54 / 33×46)を基準に、冊数が減るほど √(24/冊数) 倍(= 書影の総面積を一定)。
+//   上限 DUST_MAX_W。 並べ方はその冊数で使えるものからくじ → 入らなければ少しずつ縮めて入るまで試す。
+
+export type DustLayout = "scatter" | "ring" | "rings2" | "spiral" | "tiles" | "rows";
+export const DUST_LAYOUT_NAME: Record<DustLayout, string> = {
+  scatter: "ちらし",
+  ring: "輪",
+  rings2: "二重の輪",
+  spiral: "うず",
+  tiles: "敷きつめ",
+  rows: "上下の段",
+};
+/** 1冊でも書影の幅はここまで(中央の本 72 の約1.3倍) */
+export const DUST_MAX_W = 96;
+/** 縮めるのはここまで(これ以下は入る分だけ出す = 旧の星屑と同じ) */
+const DUST_MIN_W = 26;
+
+/** その冊数で使える並べ方。 */
+export function dustLayouts(n: number): DustLayout[] {
+  if (n <= 0) return [];
+  const L: DustLayout[] = ["scatter"];
+  if (n <= 16) L.push("ring");
+  if (n >= 3) L.push("spiral");
+  if (n >= 4) L.push("tiles");
+  if (n >= 8) L.push("rings2");
+  if (n <= 8) L.push("rows");
+  return L;
+}
+
+/** その冊数での一番大きい書影の幅(縮める前・倍率 k は掛けない)。 */
+export function dustBaseW(n: number): number {
+  return Math.min(DUST_MAX_W, SZ[0][0] * Math.sqrt(UNIT_MAX / Math.max(1, n)));
+}
+
+function dustLayout(
+  items: readonly { slug: string }[],
+  geom: Geom,
+  center: Box,
+  seed: string,
+): { P: SpreadResult["P"]; layout?: DustLayout } {
+  const n = items.length;
+  if (!n) return { P: [] };
+  const { W, H, CX, CY, top, bottom } = geom;
+  const K = geom.k ?? 1;
+  const r = rng(seed);
+  const choices = dustLayouts(n);
+  const layout = choices[Math.floor(r() * choices.length)];
+  const yMin = top + 4;
+  const yMax = H - bottom - 6;
+  // 近い順の3段(24冊なら 8/8/8 = 旧と同じ)
+  const tier = (i: number) => (i < n / 3 ? 0 : i < (2 * n) / 3 ? 1 : 2);
+  const ratio = (t: number) => SZ[t][0] / SZ[0][0];
+  const aspect = (t: number) => SZ[t][1] / SZ[t][0];
+
+  const attempt = (lay: DustLayout, w0: number): SpreadResult["P"] => {
+    const P: SpreadResult["P"] = [];
+    const gap = Math.max(4, w0 * 0.08);
+    const free = (x: number, y: number, w: number, h: number) =>
+      x - w / 2 >= 4 &&
+      x + w / 2 <= W - 4 &&
+      y - h / 2 >= yMin &&
+      y + h / 2 <= yMax &&
+      !(Math.abs(x - CX) < (center.w + w) / 2 + gap && Math.abs(y - CY) < (center.h + h) / 2 + gap) &&
+      !P.some((q) => Math.abs(q.x - x) < (q.w + w) / 2 + gap && Math.abs(q.y - y) < (q.h + h) / 2 + gap);
+    // 楕円の座標(u,v ∈ -1..1)→ 舞台。 半径 1 = 書影が舞台の端にちょうど触れる所
+    const at = (u: number, v: number, w: number, h: number) => ({
+      x: CX + u * (Math.min(CX, W - CX) - 4 - w / 2),
+      y: CY + v * (v < 0 ? CY - yMin - h / 2 : yMax - CY - h / 2),
+    });
+    const put = (i: number, x: number, y: number, w: number, h: number) => {
+      if (!free(x, y, w, h)) return false;
+      P.push({ slug: items[i].slug, x, y, w, h });
+      return true;
+    };
+    // 揃える並べ方は全部同じ大きさ(3段の平均)
+    const uw = w0 * 0.88;
+    const uh = uw * aspect(1);
+
+    if (lay === "scatter") {
+      const bands = [
+        [0.45, 0.72],
+        [0.6, 0.88],
+        [0.75, 1],
+      ];
+      for (let i = 0; i < n; i++) {
+        const t = tier(i);
+        const w = w0 * ratio(t);
+        const h = w * aspect(t);
+        for (let k = 0; k < 300; k++) {
+          const a = r() * Math.PI * 2;
+          const rr = bands[t][0] + r() * (bands[t][1] - bands[t][0]);
+          const p = at(rr * Math.cos(a), rr * Math.sin(a), w, h);
+          if (put(i, p.x, p.y, w, h)) break;
+        }
+      }
+    } else if (lay === "ring" || lay === "rings2") {
+      const rot = r() * Math.PI * 2;
+      const inner = lay === "rings2" ? Math.round(n * 0.4) : 0;
+      for (let i = 0; i < n; i++) {
+        const isIn = i < inner;
+        const m = isIn ? inner : n - inner;
+        const j = isIn ? i : i - inner;
+        const w = lay === "rings2" ? w0 * (isIn ? 1 : ratio(2)) : uw;
+        const h = w * aspect(isIn ? 0 : lay === "rings2" ? 2 : 1);
+        const a = rot + (2 * Math.PI * (j + (isIn ? 0 : 0.5))) / m;
+        const rr = isIn ? 0.58 : 1;
+        const p = at(rr * Math.cos(a), rr * Math.sin(a), w, h);
+        put(i, p.x, p.y, w, h);
+      }
+    } else if (lay === "spiral") {
+      // ひまわりの種の並び(黄金角)= 近い本ほど内側・外の端まで均一
+      const rot = r() * Math.PI * 2;
+      const dir = r() < 0.5 ? 1 : -1;
+      for (let i = 0; i < n; i++) {
+        const t = tier(i);
+        const w = w0 * ratio(t);
+        const h = w * aspect(t);
+        const a = rot + dir * i * 2.399963;
+        const rr = 0.42 + 0.58 * Math.sqrt((i + 0.5) / n);
+        const p = at(rr * Math.cos(a), rr * Math.sin(a), w, h);
+        put(i, p.x, p.y, w, h);
+      }
+    } else if (lay === "tiles") {
+      // 升目に敷く。 升目の間隔は舞台いっぱいに広がるよう、入る範囲で一番広く取る
+      const ph = r() < 0.5 ? 0 : 0.5;
+      const jit = Array.from({ length: 400 }, () => r() * 0.02);
+      for (let sp = 2.4; sp >= 1; sp -= 0.05) {
+        const px = (uw + gap) * sp;
+        const py = (uh + gap) * sp;
+        const cells: { x: number; y: number; d: number }[] = [];
+        const nx = Math.ceil(W / px) + 1;
+        const ny = Math.ceil(H / py) + 1;
+        for (let a = -nx; a <= nx; a++)
+          for (let b = -ny; b <= ny; b++) {
+            const x = CX + (a + ph) * px;
+            const y = CY + b * py;
+            if (!free(x, y, uw, uh)) continue;
+            const ax = Math.min(CX, W - CX);
+            const ay = b < 0 ? CY - yMin : yMax - CY;
+            const d = ((x - CX) / ax) ** 2 + ((y - CY) / ay) ** 2;
+            cells.push({ x, y, d: d + jit[cells.length % jit.length] });
+          }
+        if (cells.length < n) continue;
+        cells.sort((p, q) => p.d - q.d);
+        for (let i = 0; i < n; i++) put(i, cells[i].x, cells[i].y, uw, uh);
+        break;
+      }
+    } else {
+      // 上下の段: 中央の本の上と下に横一列ずつ(上の段が多いか下の段が多いかはくじ)
+      const upFirst = r() < 0.5;
+      const nUp = upFirst ? Math.ceil(n / 2) : Math.floor(n / 2);
+      const rows: [number, number][] = [
+        [0, nUp],
+        [nUp, n],
+      ];
+      rows.forEach(([s, e], ri) => {
+        const m = e - s;
+        if (!m) return;
+        const lo = ri === 0 ? yMin + uh / 2 : CY + center.h / 2 + gap + uh / 2;
+        const hi = ri === 0 ? CY - center.h / 2 - gap - uh / 2 : yMax - uh / 2;
+        if (lo > hi) return;
+        const y = (lo + hi) / 2;
+        for (let k = 0; k < m; k++) put(s + k, (W * (k + 0.5)) / m, y, uw, uh);
+      });
+    }
+    return P;
+  };
+
+  // 大きいほうから縮めて、全部入った大きさで決める(入らなければ散らしに切り替えて同じことをする)
+  let best: SpreadResult["P"] = [];
+  for (const lay of layout === "scatter" ? [layout] : [layout, "scatter" as const]) {
+    for (let w0 = dustBaseW(n) * K; w0 >= DUST_MIN_W * K; w0 *= 0.93) {
+      const P = attempt(lay, w0);
+      if (P.length === n) return { P, layout: lay };
+      if (P.length > best.length) best = P;
+    }
+  }
+  return { P: best, layout: "scatter" };
 }
 
 // ───────────────────────── 網点の出方 ─────────────────────────
