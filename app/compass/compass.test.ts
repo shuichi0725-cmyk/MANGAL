@@ -17,8 +17,6 @@ import {
   resolveSpread,
   rng,
   spreadPositions,
-  dustLayouts,
-  type DustLayout,
   stageGeom,
   stageGeomWide,
   ringPoints,
@@ -1178,7 +1176,7 @@ describe("回(2026-10-31) = 広げた糸を24冊ずつ順番に・均等割り",
   });
 });
 
-describe("星屑 = 冊数で大きさ・並べ方はくじ(2026-11-01)", () => {
+describe("星屑 = 冊数で大きさ・置き場所はくじ(2026-11-01)", () => {
   const geoms = [
     stageGeom(360, 504),
     stageGeom(390, 560),
@@ -1193,7 +1191,7 @@ describe("星屑 = 冊数で大きさ・並べ方はくじ(2026-11-01)", () => {
       for (let n = 1; n <= 24; n++)
         for (const tag of ["a", "b", "c", "d", "e", "f"]) {
           const r = spreadPositions("elem", mk(n, tag), "dust", g, 2000, `elem:x${tag}`);
-          const at = `${g.W}x${g.H} n=${n} ${tag} ${r.layout}`;
+          const at = `${g.W}x${g.H} n=${n} ${tag}`;
           expect(r.P, at).toHaveLength(n);
           for (const p of [...r.P, r.center]) {
             expect(p.x - p.w / 2 >= 0 && p.x + p.w / 2 <= g.W, at).toBe(true);
@@ -1218,12 +1216,11 @@ describe("星屑 = 冊数で大きさ・並べ方はくじ(2026-11-01)", () => {
     }
   });
 
-  it("同じ冊数でも種で並べ方が変わる(少ない時は使える並べ方が全部出る・24冊でも2種以上)", () => {
+  it("同じ冊数でも種(回)が変われば置き場所が変わる", () => {
     for (const n of [2, 5, 10, 24]) {
-      const seen = new Set<DustLayout | undefined>();
-      for (let i = 0; i < 80; i++) seen.add(spreadPositions("elem", mk(n, `s${i}-`), "dust", geoms[1], 2000, "elem:x").layout);
-      if (n <= 10) expect([...seen].sort(), `n=${n}`).toEqual([...dustLayouts(n)].sort());
-      else expect(seen.size, `n=${n}`).toBeGreaterThanOrEqual(2);
+      const a = spreadPositions("elem", mk(n, "a"), "dust", geoms[1], 2000, "elem:x").P;
+      const b = spreadPositions("elem", mk(n, "b"), "dust", geoms[1], 2000, "elem:x").P;
+      expect(a.map((p) => [Math.round(p.x), Math.round(p.y)]), `n=${n}`).not.toEqual(b.map((p) => [Math.round(p.x), Math.round(p.y)]));
     }
   });
 });

@@ -1091,8 +1091,6 @@ export type SpreadResult = {
   center: Box;
   ticks?: { year: number; x: number }[];
   axisY?: number;
-  /** 星屑の並べ方(くじの結果) */
-  layout?: DustLayout;
 };
 
 // ★2026-09-29 ユーザ「全体的に画像を大きく」= 約1.25倍(旧 34×48 / 30×42 / 26×36・中央 60×84)
@@ -1199,8 +1197,7 @@ export function spreadPositions(
 
   if (spread === "dust") {
     // ★種に先頭の本も混ぜる = 同じ糸でも回ごとに並べ方が変わる
-    const d = dustLayout(items, geom, midCenter, `${seedKey}|${items.length}|${items[0]?.slug ?? ""}`);
-    return { P: d.P, center: midCenter, layout: d.layout };
+    return { P: dustLayout(items, geom, midCenter, `${seedKey}|${items.length}|${items[0]?.slug ?? ""}`), center: midCenter };
   }
 
   // 年表: 横軸 = year_started(左が古い)・同じ列は下から積む(下ほど近い)
@@ -1245,48 +1242,25 @@ export function spreadPositions(
   return { P, center, ticks, axisY };
 }
 
-// ───────────────────────── 星屑の並べ方(冊数で大きさ・並べ方はくじ) ─────────────────────────
-// ★2026-11-01 ユーザ「出る数によって大きさを変えたい・少ない時はなるべく大きく・枚数ごとに何パターンか作ってランダムに」
-//   大きさ = その画面・その冊数・その並べ方で「全部入るいちばん大きい大きさ」(上限 DUST_MAX_W・下限は旧の 44)。
-//   並べ方はその冊数で使えるものからくじ → 旧の大きさでも入らない並べ方なら、ほかの並べ方に替える。
+// ───────────────────────── 星屑(冊数で大きさ・置き場所はくじ) ─────────────────────────
+// ★2026-11-01 ユーザ「出る数によって大きさを変えたい・少ない時はなるべく大きく」→「ちらしだけでランダムに」。
+//   大きさ = その画面・その冊数で「全部入るいちばん大きい大きさ」(上限 DUST_MAX_W・下限は旧の 44 = 旧より小さくしない)。
+//   置き場所は種のくじ(種に回の先頭の本を混ぜる = 回ごとに変わる)。
 
-export type DustLayout = "scatter" | "ring" | "rings2" | "spiral" | "tiles" | "rows";
-export const DUST_LAYOUT_NAME: Record<DustLayout, string> = {
-  scatter: "ちらし",
-  ring: "輪",
-  rings2: "二重の輪",
-  spiral: "うず",
-  tiles: "敷きつめ",
-  rows: "上下の段",
-};
 /** 1冊でも書影の幅はここまで(中央の本 72 の約1.3倍) */
 export const DUST_MAX_W = 96;
-
-/** その冊数で使える並べ方。 */
-export function dustLayouts(n: number): DustLayout[] {
-  if (n <= 0) return [];
-  const L: DustLayout[] = ["scatter"];
-  if (n <= 16) L.push("ring");
-  if (n >= 3) L.push("spiral");
-  if (n >= 4) L.push("tiles");
-  if (n >= 8) L.push("rings2");
-  if (n <= 8) L.push("rows");
-  return L;
-}
 
 function dustLayout(
   items: readonly { slug: string }[],
   geom: Geom,
   center: Box,
   seed: string,
-): { P: SpreadResult["P"]; layout?: DustLayout } {
+): SpreadResult["P"] {
   const n = items.length;
-  if (!n) return { P: [] };
+  if (!n) return [];
   const { W, H, CX, CY, top, bottom } = geom;
   const K = geom.k ?? 1;
   const r = rng(seed);
-  const choices = dustLayouts(n);
-  const layout = choices[Math.floor(r() * choices.length)];
   const yMin = top + 4;
   const yMax = H - bottom - 6;
   // 近い順の3段(24冊なら 8/8/8 = 旧と同じ)
@@ -1294,7 +1268,7 @@ function dustLayout(
   const ratio = (t: number) => SZ[t][0] / SZ[0][0];
   const aspect = (t: number) => SZ[t][1] / SZ[t][0];
 
-  const attempt = (lay: DustLayout, w0: number): SpreadResult["P"] => {
+  const attempt = (w0: number): SpreadResult["P"] => {
     const P: SpreadResult["P"] = [];
     const gap = Math.max(4, w0 * 0.08);
     const free = (x: number, y: number, w: number, h: number) =>
@@ -1309,153 +1283,68 @@ function dustLayout(
       x: CX + u * (Math.min(CX, W - CX) - 4 - w / 2),
       y: CY + v * (v < 0 ? CY - yMin - h / 2 : yMax - CY - h / 2),
     });
-    const put = (i: number, x: number, y: number, w: number, h: number) => {
-      if (!free(x, y, w, h)) return false;
-      P.push({ slug: items[i].slug, x, y, w, h });
-      return true;
-    };
-    // 揃える並べ方は全部同じ大きさ(= 一番近い段の大きさ。 旧の一番大きい書影より小さくしない)
-    const uw = w0;
-    const uh = uw * aspect(0);
-
-    if (lay === "scatter") {
-      // ★「いちばん空いている所」に置く(候補を何点か引き、ほかの本から一番遠い点を選ぶ)= 適当に置くより詰まって大きく入る。
-      //   近い本は内側の帯から探し、帯で見つからなければ全体から探す
-      const bands = [
-        [0.42, 0.72],
-        [0.58, 0.88],
-        [0.72, 1],
-      ];
-      for (let i = 0; i < n; i++) {
-        const t = tier(i);
-        const w = w0 * ratio(t);
-        const h = w * aspect(t);
-        let pick: { x: number; y: number } | null = null;
-        let far = -1;
-        let found = 0;
-        for (let k = 0; k < 500 && found < 24; k++) {
-          const [lo, hi] = k < 250 ? bands[t] : [0.3, 1];
-          const a = r() * Math.PI * 2;
-          const rr = lo + r() * (hi - lo);
-          const p = at(rr * Math.cos(a), rr * Math.sin(a), w, h);
-          if (!free(p.x, p.y, w, h)) continue;
-          found++;
-          let d = Infinity;
-          for (const q of P) d = Math.min(d, Math.hypot(q.x - p.x, q.y - p.y));
-          if (d > far) {
-            far = d;
-            pick = p;
-          }
+    // ★「いちばん空いている所」に置く(候補を何点か引き、ほかの本から一番遠い点を選ぶ)= 適当に置くより詰まって大きく入る。
+    //   近い本は内側の帯から探し、帯で見つからなければ全体から探す
+    const bands = [
+      [0.42, 0.72],
+      [0.58, 0.88],
+      [0.72, 1],
+    ];
+    for (let i = 0; i < n; i++) {
+      const t = tier(i);
+      const w = w0 * ratio(t);
+      const h = w * aspect(t);
+      let pick: { x: number; y: number } | null = null;
+      let far = -1;
+      let found = 0;
+      for (let k = 0; k < 500 && found < 24; k++) {
+        const [lo, hi] = k < 250 ? bands[t] : [0.3, 1];
+        const a = r() * Math.PI * 2;
+        const rr = lo + r() * (hi - lo);
+        const p = at(rr * Math.cos(a), rr * Math.sin(a), w, h);
+        if (!free(p.x, p.y, w, h)) continue;
+        found++;
+        let d = Infinity;
+        for (const q of P) d = Math.min(d, Math.hypot(q.x - p.x, q.y - p.y));
+        if (d > far) {
+          far = d;
+          pick = p;
         }
-        if (pick) put(i, pick.x, pick.y, w, h);
       }
-    } else if (lay === "ring" || lay === "rings2") {
-      const rot = r() * Math.PI * 2;
-      const inner = lay === "rings2" ? Math.round(n * 0.4) : 0;
-      for (let i = 0; i < n; i++) {
-        const isIn = i < inner;
-        const m = isIn ? inner : n - inner;
-        const j = isIn ? i : i - inner;
-        const w = lay === "rings2" ? w0 * (isIn ? 1 : ratio(2)) : uw;
-        const h = w * aspect(isIn ? 0 : lay === "rings2" ? 2 : 1);
-        const a = rot + (2 * Math.PI * (j + (isIn ? 0 : 0.5))) / m;
-        const rr = isIn ? 0.58 : 1;
-        const p = at(rr * Math.cos(a), rr * Math.sin(a), w, h);
-        put(i, p.x, p.y, w, h);
-      }
-    } else if (lay === "spiral") {
-      // ひまわりの種の並び(黄金角)= 近い本ほど内側・外の端まで均一
-      const rot = r() * Math.PI * 2;
-      const dir = r() < 0.5 ? 1 : -1;
-      for (let i = 0; i < n; i++) {
-        const t = tier(i);
-        const w = w0 * ratio(t);
-        const h = w * aspect(t);
-        const a = rot + dir * i * 2.399963;
-        const rr = 0.42 + 0.58 * Math.sqrt((i + 0.5) / n);
-        const p = at(rr * Math.cos(a), rr * Math.sin(a), w, h);
-        put(i, p.x, p.y, w, h);
-      }
-    } else if (lay === "tiles") {
-      // 升目に敷く。 升目の間隔は舞台いっぱいに広がるよう、入る範囲で一番広く取る
-      const ph = r() < 0.5 ? 0 : 0.5;
-      const jit = Array.from({ length: 400 }, () => r() * 0.02);
-      for (let sp = 2.4; sp >= 1; sp -= 0.05) {
-        const px = (uw + gap) * sp;
-        const py = (uh + gap) * sp;
-        const cells: { x: number; y: number; d: number }[] = [];
-        const nx = Math.ceil(W / px) + 1;
-        const ny = Math.ceil(H / py) + 1;
-        for (let a = -nx; a <= nx; a++)
-          for (let b = -ny; b <= ny; b++) {
-            const x = CX + (a + ph) * px;
-            const y = CY + b * py;
-            if (!free(x, y, uw, uh)) continue;
-            const ax = Math.min(CX, W - CX);
-            const ay = b < 0 ? CY - yMin : yMax - CY;
-            const d = ((x - CX) / ax) ** 2 + ((y - CY) / ay) ** 2;
-            cells.push({ x, y, d: d + jit[cells.length % jit.length] });
-          }
-        if (cells.length < n) continue;
-        cells.sort((p, q) => p.d - q.d);
-        for (let i = 0; i < n; i++) put(i, cells[i].x, cells[i].y, uw, uh);
-        break;
-      }
-    } else {
-      // 上下の段: 中央の本の上と下に横一列ずつ(上の段が多いか下の段が多いかはくじ)
-      const upFirst = r() < 0.5;
-      const nUp = upFirst ? Math.ceil(n / 2) : Math.floor(n / 2);
-      const rows: [number, number][] = [
-        [0, nUp],
-        [nUp, n],
-      ];
-      rows.forEach(([s, e], ri) => {
-        const m = e - s;
-        if (!m) return;
-        const lo = ri === 0 ? yMin + uh / 2 : CY + center.h / 2 + gap + uh / 2;
-        const hi = ri === 0 ? CY - center.h / 2 - gap - uh / 2 : yMax - uh / 2;
-        if (lo > hi) return;
-        const y = (lo + hi) / 2;
-        for (let k = 0; k < m; k++) put(s + k, (W * (k + 0.5)) / m, y, uw, uh);
-      });
+      if (pick) P.push({ slug: items[i].slug, x: pick.x, y: pick.y, w, h });
     }
     return P;
   };
-
-  // ★全部入るいちばん大きい大きさを探す(2026-11-01 ユーザ指摘「最初より小さくなった」)。
-  //   旧の大きさ(44)より小さくはしない = その並べ方が旧の大きさで入らなければ、ほかの並べ方に替える。
-  //   どれも入らない時だけ旧と同じ星屑(入る分だけ出す)。
+  // 全部入る大きさを、まず上限で試し、だめなら旧の大きさとの間を二分探索(くじなので各大きさ2回まで試す)
   const full = (P: SpreadResult["P"]) => P.length === n;
+  const tryAt = (w0: number) => {
+    const P = attempt(w0);
+    return full(P) ? P : attempt(w0);
+  };
   const lo = SZ[0][0] * K;
   const hi = Math.max(lo, DUST_MAX_W * K);
-  const rest = choices.filter((c) => c !== layout);
-  for (let i = rest.length - 1; i > 0; i--) {
-    const j = Math.floor(r() * (i + 1));
-    [rest[i], rest[j]] = [rest[j], rest[i]];
-  }
-  for (const lay of [layout, ...rest]) {
-    let good = attempt(lay, lo);
-    if (!full(good)) continue;
-    const top = attempt(lay, hi);
-    if (full(top)) return { P: top, layout: lay };
-    let a = lo;
-    let b = hi;
-    for (let it = 0; it < 7; it++) {
-      const m = (a + b) / 2;
-      const P = attempt(lay, m);
-      if (full(P)) {
-        a = m;
-        good = P;
-      } else b = m;
+  const topP = tryAt(hi);
+  if (full(topP)) return topP;
+  let good = tryAt(lo);
+  if (!full(good)) {
+    // 旧の大きさでも入らない(狭い画面に24冊)= 旧と同じく入る分だけ出す
+    for (let k = 0; k < 4 && !full(good); k++) {
+      const P = attempt(lo);
+      if (P.length > good.length) good = P;
     }
-    return { P: good, layout: lay };
+    return good;
   }
-  let best: SpreadResult["P"] = [];
-  for (let k = 0; k < 4 && !full(best); k++) {
-    const P = attempt("scatter", lo);
-    if (P.length > best.length) best = P;
+  let a = lo;
+  let b = hi;
+  for (let it = 0; it < 7; it++) {
+    const m = (a + b) / 2;
+    const P = tryAt(m);
+    if (full(P)) {
+      a = m;
+      good = P;
+    } else b = m;
   }
-  return { P: best, layout: "scatter" };
+  return good;
 }
 
 // ───────────────────────── 網点の出方 ─────────────────────────
