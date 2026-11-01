@@ -1,6 +1,6 @@
 slug	title	reason	dropped_at
 # アメコミ(Marvel/DC等の米国コミック)=掲載対象外(ユーザ裁定2026-06-20)。manhwa/manhuaは対象だがアメコミは除外。
-# ★promote再生成防止: 次回promote時はこれらのseries_keyをnon-manga-drop.ymlに昇格要(follow-up)。
+# ★promote再生成防止: このファイルは promote が読まない。 2026-11-02 garfield/x-men/x-men-1994/x-men-1994-4 の series_key を non-manga-drop.yml へ昇格済み(10/20 フルpromoteで復活していた)。 新しく足す時も non-manga-drop.yml へ。
 x-men	X-MEN	Marvel翻訳(Hickman/ヴィレッジブックス2022-23+メディアワークス1995)	2026-06-20
 x-men-1994	X-MEN	竹書房1994 和製X-MENアンソロ(ヒグチヒロシ/やすえこーじ)=X-MEN(Marvel IP)	2026-06-20
 x-men-1994-3	X-MEN	竹書房1994 和製X-MENアンソロ(中原れい)	2026-06-20
