@@ -2,8 +2,13 @@ slug: 81-bunch-no-inu
 canonical_label: 通常版
 canonical_publisher: スコラ
 canonical_imprint: あおばコミックス
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 / 巻抜け見直し 2026-11-01(ユーザGO「1進めて」): 80番地の犬(6)9784796287203 が6巻に・81番地の犬(6)9784873171661 が80番地の犬の頁に入れ違っていた(楽天題で確認)。スコラ1〜3→あおば出版4〜6 の1本の刊行なので1タブに。80番地の犬(6)は 80-bunch-no-inu へ(edition-overrides)'
 volumes:
+- number: 1
+  release_date: null
+- number: 2
+  isbn13: '9784796288590'
+  release_date: null
 - number: 3
   isbn13: '9784796288880'
   release_date: null
@@ -13,17 +18,6 @@ volumes:
 - number: 5
   isbn13: '9784873171296'
   release_date: null
-extra_editions:
-- type: shinsoban
-  label: スコラレディースコミック
-  imprint: スコラレディースコミック
-  publisher: スコラ
-  volumes:
-  - number: 1
-    release_date: null
-  - number: 2
-    isbn13: '9784796288590'
-    release_date: null
-  - number: 6
-    isbn13: '9784796287203'
-    release_date: null
+- number: 6
+  isbn13: '9784873171661'
+  release_date: '2000-09-16'

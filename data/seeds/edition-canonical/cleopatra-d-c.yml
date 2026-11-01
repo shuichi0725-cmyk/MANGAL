@@ -4,23 +4,17 @@ canonical_publisher: 講談社
 canonical_imprint: バーガーKC
 suppress_types:
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 / 巻抜け見直し 2026-11-01(ユーザGO「1進めて」): 講談社バーガーKCは1〜3巻で終わりスコラへ移籍。KCタブに入っていたスコラISBN(4-7962)の6・8巻をバーガーSCタブへ移し SC 1〜8 を揃えた'
 volumes:
 - number: 1
   isbn13: '9784063046021'
-  release_date: '1987-08'
+  release_date: 1987-08
 - number: 2
   isbn13: '9784063046106'
-  release_date: '1987-11'
+  release_date: 1987-11
 - number: 3
   isbn13: '9784063046236'
-  release_date: '1988-06'
-- number: 6
-  isbn13: '9784796240444'
-  release_date: '1990-05-16'
-- number: 8
-  isbn13: '9784796241007'
-  release_date: '1991-03-16'
+  release_date: 1988-06
 extra_editions:
 - type: bunkobon
   label: スコラ漫画文庫シリーズ
@@ -29,22 +23,22 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784796204262'
-    release_date: '1997-02'
+    release_date: 1997-02
   - number: 2
     isbn13: '9784796204309'
-    release_date: '1997-03'
+    release_date: 1997-03
   - number: 3
     isbn13: '9784796204361'
-    release_date: '1997-04'
+    release_date: 1997-04
   - number: 4
     isbn13: '9784796204408'
-    release_date: '1997-05'
+    release_date: 1997-05
   - number: 5
     isbn13: '9784796204439'
-    release_date: '1997-06'
+    release_date: 1997-06
   - number: 6
     isbn13: '9784796204484'
-    release_date: '1997-07'
+    release_date: 1997-07
 - type: bunkobon
   label: MF文庫
   imprint: MF文庫
@@ -52,22 +46,22 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784840100434'
-    release_date: '2000-03'
+    release_date: 2000-03
   - number: 2
     isbn13: '9784840100441'
-    release_date: '2000-03'
+    release_date: 2000-03
   - number: 3
     isbn13: '9784840100564'
-    release_date: '2000-04'
+    release_date: 2000-04
   - number: 4
     isbn13: '9784840100571'
-    release_date: '2000-04'
+    release_date: 2000-04
   - number: 5
     isbn13: '9784840100717'
-    release_date: '2000-05'
+    release_date: 2000-05
   - number: 6
     isbn13: '9784840100724'
-    release_date: '2000-05'
+    release_date: 2000-05
 - type: shinsoban
   label: バーガーSC
   imprint: バーガーSC
@@ -88,9 +82,15 @@ extra_editions:
   - number: 5
     isbn13: '9784796240062'
     release_date: '1989-09-16'
+  - number: 6
+    isbn13: '9784796240444'
+    release_date: '1990-05-16'
   - number: 7
     isbn13: '9784796240673'
     release_date: '1990-09-14'
+  - number: 8
+    isbn13: '9784796241007'
+    release_date: '1991-03-16'
 - type: shinsoban
   label: バーガーSCスペシャル
   imprint: バーガーSCスペシャル
@@ -101,13 +101,13 @@ extra_editions:
     release_date: null
   - number: 2
     isbn13: '9784796243117'
-    release_date: '1995-01'
+    release_date: 1995-01
   - number: 3
     isbn13: '9784796243155'
-    release_date: '1995-02'
+    release_date: 1995-02
   - number: 4
     isbn13: '9784796243209'
-    release_date: '1995-03'
+    release_date: 1995-03
   - number: 5
     isbn13: '9784796243254'
-    release_date: '1995-04'
+    release_date: 1995-04

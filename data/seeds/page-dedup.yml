@@ -4172,3 +4172,68 @@ dedup:
   title: 新耳袋 怪談百物語
   isbns: 0
   note: '巻抜け見直し 2026-11-01: 重複頁: 『新耳袋 怪談百物語』頁の3冊はすべて 新耳袋 頁に同じISBNで載っている(2026-08-05 に統合を決めたが page-dedup が無くフルpromoteで復活していた)'
+- drop: doughnuts-books
+  canonical: doughnuts-books-ishii-hisaichi-senshuu
+  title: 'Doughnuts books'
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01(判断要21): いしいひさいち選集(ドーナツブックス)が1〜15巻と16〜34巻の2頁に割れていた。楽天『いしいひさいち選集(1)〜(39)』双葉社アクションコミックス ISBN 連番'
+- drop: goddess
+  canonical: gaddesu-megami-no-ketsumyaku
+  title: 'ガッデス'
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01(判断要21): 塩崎雄二『ガッデス〜女神の血脈〜』少年画報社 YKコミックス 1〜3巻(2010-12〜2013-06)+新装版 GODEATH 上下(2016)。同qid'
+- drop: kaina
+  canonical: kaina-surugajou-gozen-jiai
+  title: '腕'
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01(判断要21): 森秀樹/南條範夫『腕〜駿河城御前試合〜』リイド社 SPコミックス 1〜4巻(2011-06〜2012-11)。同qid'
+- drop: kandou-ou-rendetsu
+  canonical: kandouou-rendetsu
+  title: '感動王列伝'
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01(判断要21): 根岸康雄『感動王列伝』小学館 少年サンデーコミックス 1〜3巻(1998-05〜07・ISBN 254115/122/139 連番)。巻ごとに作画者が違うため種2で3つのqidに割れていた'
+- drop: zoku-kizudarake-no-tenshitachi
+  canonical: kizudarake-no-tenshitachi
+  title: '続 傷だらけの天使たち'
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01(判断要21): 喜国雅彦『傷だらけの天使たち』YSC 1〜3巻。2巻の題が『続』(楽天題『傷だらけの天使たち 2』・ISBN 780782/799/805 連番)。文庫も正・続・完結篇'
+- drop: bikkuriman-omoshirorando
+  canonical: bikkuriman-omoshiro-land
+  title: 'ビックリマン おもしろランド'
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01(判断要21): 秋田書店 Movieコミックス 1〜15巻(ISBN 9784253099295〜9431 連番)。題の空白の有無で2頁に'
+- drop: ura-aka-otoko-wa-dakaretai-seme-sama-no-1-ni-xx-saretai
+  canonical: ura-aka-otoko-wa-dakaretai-seme-sama-no-1-ni-saretai
+  title: '裏アカ男子は抱かれたい攻め様No.1にXXされたい'
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01(判断要21): あさひ ジュネットコミックス 上(9784910582375)下(9784910582382)。××/XX の表記ゆれで2頁に'
+- drop: ramen-daisuki-koizumi-san-narumi-2014
+  canonical: ramen-daisuki-koizumi-san
+  title: 'ラーメン大好き小泉さん'
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01(判断要21): 鳴見なる『ラーメン大好き小泉さん』竹書房 Bamboo comics 1〜11巻(2014〜2023)の後 秋田書店へ移籍(SHŌNEN CHAMPION COMICS で1巻から再刊+12巻〜)。2頁に割れ、秋田版12・13巻が巻抜けに見えていた。版は source 単位で2タブに分ける(連載中なので頁は固定しない)'
+- drop: mata-onna-no-hashorimichi
+  canonical: onna-no-hashorimichi
+  title: '女のはしょり道(続刊)'
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01(判断要21): ユーザ裁定「一つにまとめて」: 伊藤理佐『女のはしょり道』シリーズ6冊(同qid Q3433097)が題ごとに6頁。1頁に統合し刊行順1〜6'
+- drop: mitabi-onna-no-hashorimichi
+  canonical: onna-no-hashorimichi
+  title: '女のはしょり道(続刊)'
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01(判断要21): ユーザ裁定「一つにまとめて」: 伊藤理佐『女のはしょり道』シリーズ6冊(同qid Q3433097)が題ごとに6頁。1頁に統合し刊行順1〜6'
+- drop: soredemo-onna-no-hashorimichi
+  canonical: onna-no-hashorimichi
+  title: '女のはしょり道(続刊)'
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01(判断要21): ユーザ裁定「一つにまとめて」: 伊藤理佐『女のはしょり道』シリーズ6冊(同qid Q3433097)が題ごとに6頁。1頁に統合し刊行順1〜6'
+- drop: kekkyoku-onna-no-hashori-michi
+  canonical: onna-no-hashorimichi
+  title: '女のはしょり道(続刊)'
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01(判断要21): ユーザ裁定「一つにまとめて」: 伊藤理佐『女のはしょり道』シリーズ6冊(同qid Q3433097)が題ごとに6頁。1頁に統合し刊行順1〜6'
+- drop: nanda-kanda-de-onna-no-hashori-michi
+  canonical: onna-no-hashorimichi
+  title: '女のはしょり道(続刊)'
+  isbns: 0
+  note: '巻抜け見直し 2026-11-01(判断要21): ユーザ裁定「一つにまとめて」: 伊藤理佐『女のはしょり道』シリーズ6冊(同qid Q3433097)が題ごとに6頁。1頁に統合し刊行順1〜6'

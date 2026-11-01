@@ -3041,3 +3041,41 @@
   - qid:Q11523124|name:グランプリ天国
   - qid:Q11523124|name:グランプリ天国クラシック
   note: '頁分裂の統合 2026-11-01(巻抜け見直し): 村山文夫『グランプリ天国』三栄 NEWS MOOK 1〜7巻(同qid)。7巻だけ種2題『F1速報グランプリ天国』。残す頁=guranpuri-tengoku / 吸収=f1-sokuhou-guranpuri-tengoku'
+- merge_keys:
+  - 'qid:Q2290191|name:ガッデス 女神の血脈'
+  - 'qid:Q2290191|name:ガッデス'
+  note: '頁分裂の統合 2026-11-01(巻抜け見直し 判断要21): 塩崎雄二『ガッデス〜女神の血脈〜』少年画報社 YKコミックス 1〜3巻(2010-12〜2013-06)+新装版 GODEATH 上下(2016)。同qid。残す頁=gaddesu-megami-no-ketsumyaku / 吸収=goddess'
+- merge_keys:
+  - 'qid:Q3135258|name:腕 駿河城御前試合'
+  - 'qid:Q3135258|name:腕'
+  note: '頁分裂の統合 2026-11-01(巻抜け見直し 判断要21): 森秀樹/南條範夫『腕〜駿河城御前試合〜』リイド社 SPコミックス 1〜4巻(2011-06〜2012-11)。同qid。残す頁=kaina-surugajou-gozen-jiai / 吸収=kaina'
+- merge_keys:
+  - 'qid:Q11500183|name:感動王列伝'
+  - 'qid:Q4348970|name:感動王列伝'
+  - 'qid:Q1135131|name:感動王列伝'
+  note: '頁分裂の統合 2026-11-01(巻抜け見直し 判断要21): 根岸康雄『感動王列伝』小学館 少年サンデーコミックス 1〜3巻(1998-05〜07・ISBN 254115/122/139 連番)。巻ごとに作画者が違うため種2で3つのqidに割れていた。残す頁=kandouou-rendetsu / 吸収=kandou-ou-rendetsu'
+- merge_keys:
+  - 'qid:Q6782340|name:傷だらけの天使たち'
+  - 'qid:Q6782340|name:続 傷だらけの天使たち'
+  note: '頁分裂の統合 2026-11-01(巻抜け見直し 判断要21): 喜国雅彦『傷だらけの天使たち』YSC 1〜3巻。2巻の題が『続』(楽天題『傷だらけの天使たち 2』・ISBN 780782/799/805 連番)。文庫も正・続・完結篇。残す頁=kizudarake-no-tenshitachi / 吸収=zoku-kizudarake-no-tenshitachi'
+- merge_keys:
+  - 'name:企画者104|name:ビックリマンおもしろランド'
+  - 'name:企画者104|name:ビックリマン おもしろランド'
+  note: '頁分裂の統合 2026-11-01(巻抜け見直し 判断要21): 秋田書店 Movieコミックス 1〜15巻(ISBN 9784253099295〜9431 連番)。題の空白の有無で2頁に。残す頁=bikkuriman-omoshiro-land / 吸収=bikkuriman-omoshirorando'
+- merge_keys:
+  - 'qid:Q11511606|name:裏アカ男子は抱かれたい攻め様No. 1に××されたい'
+  - 'qid:Q11511606|name:裏アカ男子は抱かれたい攻め様No.1にXXされたい'
+  note: '頁分裂の統合 2026-11-01(巻抜け見直し 判断要21): あさひ ジュネットコミックス 上(9784910582375)下(9784910582382)。××/XX の表記ゆれで2頁に。残す頁=ura-aka-otoko-wa-dakaretai-seme-sama-no-1-ni-saretai / 吸収=ura-aka-otoko-wa-dakaretai-seme-sama-no-1-ni-xx-saretai'
+- merge_keys:
+  - 'name:なるみなる|name:ラーメン大好き小泉さん'
+  - 'qid:Q11675407|name:ラーメン大好き小泉さん'
+  separate_editions: true
+  note: '頁分裂の統合 2026-11-01(巻抜け見直し 判断要21): 鳴見なる『ラーメン大好き小泉さん』竹書房 Bamboo comics 1〜11巻(2014〜2023)の後 秋田書店へ移籍(SHŌNEN CHAMPION COMICS で1巻から再刊+12巻〜)。2頁に割れ、秋田版12・13巻が巻抜けに見えていた。版は source 単位で2タブに分ける(連載中なので頁は固定しない)。残す頁=ramen-daisuki-koizumi-san / 吸収=ramen-daisuki-koizumi-san-narumi'
+- merge_keys:
+  - 'qid:Q3433097|name:女のはしょり道'
+  - 'qid:Q3433097|name:また!女のはしょり道'
+  - 'qid:Q3433097|name:みたび!女のはしょり道'
+  - 'qid:Q3433097|name:それでも!女のはしょり道'
+  - 'qid:Q3433097|name:けっきょく!女のはしょり道'
+  - 'qid:Q3433097|name:なんだかんだで!女のはしょり道'
+  note: '頁分裂の統合 2026-11-01(巻抜け見直し 判断要21): ユーザ裁定「一つにまとめて」: 伊藤理佐『女のはしょり道』シリーズ6冊(同qid Q3433097)が題ごとに6頁。1頁に統合し刊行順1〜6。残す頁=onna-no-hashorimichi / 吸収=mata-onna-no-hashorimichi,mitabi-onna-no-hashorimichi,soredemo-onna-no-hashorimichi,kekkyoku-onna-no-hashori-michi,nanda-kanda-de-onna-no-hashori-michi'

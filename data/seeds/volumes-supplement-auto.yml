@@ -52751,3 +52751,29 @@ volumes:
   source: volgap-fill-user-provided
   added_at: '2026-11-01'
   note: 巻抜け充填 slug=tatoeba-haha-ga 版[0]通常版 結線=版単位 gate=2026-11-01 ユーザ提示ISBN。楽天・NDL・MADB・openBD に5巻単体の記録なし。裏付け=ISBN検査数字OK・双葉社4575・4巻832914<833973<6巻834710・楽天『たとえば母が 全6巻セット』。発売日2007-08-28・191頁・『全6巻中第5巻』= ユーザ提示の Amazon 商品情報(2026-11-01)
+- series_keys:
+  - qid:Q11343199|name:学研まんが 世界の歴史
+  qid: null
+  number: 4
+  isbn13: '9784051061999'
+  release_date: 1992-05
+  pages: null
+  publisher: 学研
+  edition_type: standard
+  title_display: 学研まんが世界の歴史(第4巻)
+  source: volgap-fill-rakuten-live
+  added_at: '2026-11-01'
+  note: '巻抜け充填 slug=gakken-manga-sekai-no-rekishi 版[0]通常版 結線=版単位 gate=2026-11-01 巻抜け見直し 判断要21(ユーザGO「1進めて」): ISBN 1968/1975/1982/1999/2002/2019 連番・頁の発売日自体が刷の日付で前後している(9巻1992-05)'
+- series_keys:
+  - qid:Q11343199|name:学研まんが 世界の歴史
+  qid: null
+  number: 5
+  isbn13: '9784051062002'
+  release_date: 1993-02
+  pages: null
+  publisher: 学研
+  edition_type: standard
+  title_display: 学研まんが世界の歴史(第5巻)
+  source: volgap-fill-rakuten-live
+  added_at: '2026-11-01'
+  note: 巻抜け充填 slug=gakken-manga-sekai-no-rekishi 版[0]通常版 結線=版単位 gate=2026-11-01 巻抜け見直し 判断要21(ユーザGO「1進めて」)
