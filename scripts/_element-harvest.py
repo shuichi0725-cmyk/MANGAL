@@ -33,7 +33,10 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 import _rate_gate, _site_gate  # noqa: E402
 
-VERSION = "v0.6"  # v0.6(2026-10-30): 同定の照合先に同定済みの資料(Wikipedia等)を足し、Haikuに見せる / 段落に「全体/一編」の印 / 百科の検索にマンガペディア / 短い題は著者名を足して検索 / JSで中身が取れない売り場を外す
+VERSION = "v0.7"  # v0.7(2026-11-02): 薄い/0字の118作の検死から4点 = ①Wikipedia を「(漫画)」→題→検索APIの順で引き、題と著者名が本文に在る記事だけ採る(龍→「竜」等の別記事を拾っていた)
+#   ②同じ作品の別名(頁の別名・版名を外した題・読み括弧を外した題・Wikipedia の記事名)でも同定する。 1字の題は著者名が在れば「要確認」に
+#   ③手元の材料(楽天の巻紹介=原文・巻説明・AniList あらすじ和訳)を出所「手元」として機械で採る ④何度試しても1回も取れないサイトは検索結果から先に外す
+# v0.6(2026-10-30): 同定の照合先に同定済みの資料(Wikipedia等)を足し、Haikuに見せる / 段落に「全体/一編」の印 / 百科の検索にマンガペディア / 短い題は著者名を足して検索 / JSで中身が取れない売り場を外す
 # v0.5: v0.5: 関連作の票は「本筋」のエントリだけ引き継ぐ(登録者の少ないエントリ・おまけ映像は使わない)/ rebundle  # v0.2: 折り返し行をつなぐ/タグ一覧を機械で採る/全文を見せて読んでから指す/公式の検索語
 # v0.3(2026-10-09): 出所を英字(A,B,C…)に=検索結果の番号との取り違え防止 / 取れなかった頁は取得数に数えない / 壊れた検索URLを直す
 # v0.4(2026-10-09): 自動運転(auto)= 道具が Haiku を土台なしで1回ずつ呼ぶ / AniList のネタバレ印を「何件中何件」で持つ
@@ -411,8 +414,12 @@ def build_card(stem):
     ov = (_search_titles().get(stem) or {})
     orig_extra = [str(x) for x in (ov.get("authors_add") or [])]
     page_title, title = title, str(ov.get("title") or title)
+    aliases = [str(x) for x in (d.get("synonyms") or [])] + [str(o.get("name")) for o in (d.get("other_names") or []) if isinstance(o, dict) and o.get("name")]
+    if isinstance(alt, dict):
+        aliases += [str(v) for v in alt.values() if isinstance(v, str)]
+    aliases += [x for x in (strip_edition(page_title), strip_edition(title), strip_reading(page_title), strip_reading(title)) if x]
     return {
-        "stem": stem, "slug": d.get("slug") or stem, "title": title, "base_title": base_title(title),
+        "stem": stem, "slug": d.get("slug") or stem, "title": title, "base_title": base_title(strip_edition(title) or title),
         **({"page_title": page_title} if title != page_title else {}),
         "title_kana": d.get("title_kana"), "title_en": alt.get("en") if isinstance(alt, dict) else None,
         "authors": names("authors"), "original_authors": names("original_authors") + [a for a in orig_extra if a not in names("original_authors")],
@@ -424,16 +431,38 @@ def build_card(stem):
         "synopsis": d.get("synopsis") or "", "catch": d.get("catch") or "",
         "volume_descriptions": [str(v.get("description")) for v in vols if v.get("description")][:30],
         "tags_on_page": [t.get("name") for t in (d.get("tags") or []) if isinstance(t, dict)],
+        "aliases": [a for a in dict.fromkeys(aliases) if len(norm(a)) >= 2 and norm(a) not in (norm(title), norm(page_title))],
     }
+
+
+# ★v0.7: 版名(完全版・文庫 等)を外した題 = 元の作品の材料がそのまま使える(ハヤテのごとく!完全版・こち亀文庫・極彩色東京卍リベンジャーズを「別作品」で捨てていた)
+EDITION_WORDS = r"(完全版|新装版|愛蔵版|文庫版|文庫|ワイド版|復刻版|カラー版|フルカラー版|極彩色|総天然色|豪華版|特装版|新書版)"
+
+
+def strip_edition(t):
+    t = unicodedata.normalize("NFKC", str(t or "")).strip()
+    b = re.sub(r"\s+", " ", re.sub(EDITION_WORDS, " ", t)).strip(" -‐―—~〜・")
+    return b if b != t and len(norm(b)) >= 2 else None
+
+
+def strip_reading(t):
+    """読み括弧を外した題: 「頭文字(イニシャル)D」→「頭文字D」。"""
+    t = unicodedata.normalize("NFKC", str(t or "")).strip()
+    b = re.sub(r"\([ァ-ヶーぁ-ゖ・ ]+\)", "", t).strip()
+    return b if b != t and len(norm(b)) >= 2 else None
 
 
 def identity(card, text):
     """題と著者名が頁に出るか(機械検査)。 OK=両方 / 要確認=題だけ / 別作品の疑い=題なし"""
     T = norm(text)
-    ts = [t for t in dict.fromkeys([norm(card["title"]), norm(card["base_title"]), norm(card.get("title_en"))]) if len(t) >= 2]
+    ts = [t for t in dict.fromkeys([norm(card["title"]), norm(card["base_title"]), norm(card.get("title_en"))]
+                                   + [norm(x) for x in card.get("aliases") or []]) if len(t) >= 2]
     au = [a for a in dict.fromkeys(card["authors"] + card["original_authors"]) if len(norm(a)) >= 2]
     t_hit = any(t in T for t in ts)
     a_hit = [a for a in au if norm(a) in T]
+    # ★v0.7: 1字の題(龍・S)は題で照合できない = 字が在り著者名も在れば「要確認」(同じ作品だと示す語句の検査に回す)。 旧 = 必ず「別作品の疑い」
+    if not t_hit and a_hit and len(norm(card["base_title"])) == 1 and norm(card["base_title"]) in T:
+        return {"verdict": "要確認", "authors_hit": a_hit}
     return {"verdict": "OK" if (t_hit and a_hit) else "要確認" if t_hit else "別作品の疑い", "authors_hit": a_hit}
 
 
@@ -602,21 +631,95 @@ def wiki_get(title):
             "categories": [c["title"].split(":", 1)[-1] for c in pg.get("categories") or []]}
 
 
+def _wiki_api(params):
+    from _wiki_host import cooldown_check, cooldown_set
+    cooldown_check()
+    _rate_gate.wait("wiki", 1.2)
+    req = urllib.request.Request("https://ja.wikipedia.org/w/api.php?" + urllib.parse.urlencode({"action": "query", "format": "json", **params}),
+                                 headers={"User-Agent": UA})
+    try:
+        with urllib.request.urlopen(req, timeout=40) as r:
+            return json.loads(r.read())
+    except urllib.error.HTTPError as e:
+        if e.code in (429, 503):
+            cooldown_set(60, by="element-harvest")
+        stop(f"Wikipedia が HTTP {e.code}")
+    except Exception as e:
+        stop(f"Wikipedia に届かない({type(e).__name__})")
+
+
+def wiki_search(q):
+    """Wikipedia の検索API(記事名の候補)。"""
+    d = _wiki_api({"list": "search", "srsearch": q, "srlimit": 5, "srnamespace": 0})
+    return [x["title"] for x in (d.get("query") or {}).get("search") or []]
+
+
+def wiki_links(title):
+    """記事から張られたリンク先の記事名(作者の記事 → 作品の記事を辿るため)。"""
+    d = _wiki_api({"titles": title, "redirects": 1, "prop": "links", "plnamespace": 0, "pllimit": "max"})
+    pg = next(iter(((d.get("query") or {}).get("pages") or {}).values()), None) or {}
+    return [x["title"] for x in pg.get("links") or []]
+
+
 def wiki_auto(st):
+    """★v0.7: 記事名が題と重なり、本文に題(または別名)と著者名が在る記事だけ採る。 引く順 = 「題 (漫画)」→ 題 → 別名 →
+    作者の記事のリンク(村上もとか → 龍-RON-)→ 検索API。
+    旧 = 題そのままの記事を先に引き、別の記事でも採っていた(龍→「竜」/ S→ラテン文字 / 白い風→コンサート記事。 薄い118作のうち17作)。"""
     card = st["card"]
-    b = card["base_title"]
-    cands = list(dict.fromkeys([card["title"], b, b.rstrip("。.!！?？ "), b.rstrip("。.!！?？ ") + " (漫画)"]))
-    for t in cands:
+    b = card["base_title"].rstrip("。.!！?？ ")
+    nb = norm(b)
+    au = (card["authors"] or card["original_authors"] or [""])[0]
+    cands = list(dict.fromkeys([b + " (漫画)", card["title"], card["base_title"], b] + list(card.get("aliases") or [])[:3]))
+    tried, seen = [], set()
+
+    def related(t):
+        """記事名(括弧の注記を外す)が題と重なるか: 題で始まる(龍 → 龍-RON-)か、題に含まれる(極彩色東京卍リベンジャーズ → 東京卍リベンジャーズ)。
+        雑誌・作者の記事は題と著者名を両方含むので、同定だけでは通ってしまう(カーテン・コール → 「BE・LOVE」/ こち亀文庫 → 「超こち亀」)。"""
+        n0 = norm(re.sub(r"\s*\([^)]*\)$", "", t))
+        if not n0:
+            return False
+        if len(nb) <= 2 and n0 == nb and not re.search(r"\((漫画|マンガ|コミック)", t):
+            return False  # 1〜2字の題(S)の素の記事は文字・語の記事(S → ラテン文字)
+        # 題で始まる時は、題の直後が区切り(龍-RON- / S -最後の警官-)の時だけ(こち亀文庫 → 「こち亀30周年企画」を弾く)
+        r0 = unicodedata.normalize("NFKC", re.sub(r"\s*\([^)]*\)$", "", t)).strip()
+        raws = {unicodedata.normalize("NFKC", x).strip() for x in [card["title"], card["base_title"], b] + list(card.get("aliases") or []) if x}
+        if any(n0 == norm(x) or (len(n0) >= 2 and n0 in norm(x)) for x in raws):
+            return True
+        return any(r0.startswith(x) and len(r0) > len(x) and r0[len(x)] in " -‐―—~〜:：・「『(（" for x in raws)
+
+    def attempt(t):
+        tried.append(t)
         w = wiki_get(t)
-        if not w:
-            continue
+        if not w or w["title"] in seen:
+            return False
+        seen.add(w["title"])
+        if not related(w["title"]):
+            return False
+        idt = identity(card, w["title"] + "\n" + w["text"])
+        if not (idt["verdict"] == "OK" or (idt["verdict"] == "要確認" and idt["authors_hit"])):
+            return False
         s, paras = register_text(st, "wiki", "auto", "https://ja.wikipedia.org/wiki/" + urllib.parse.quote(w["title"]),
                                  "Wikipedia「%s」" % w["title"], w["text"])
-        st["wiki"] = {"title": w["title"], "source": s["id"], "categories": w["categories"], "identity": s["identity"]["verdict"]}
-        if s["identity"]["verdict"] == "OK":
-            wiki_autopick(st, s, paras)
-        return
-    st["wiki"] = {"title": None, "source": None, "categories": [], "identity": "記事なし", "tried": cands}
+        st["wiki"] = {"title": w["title"], "source": s["id"], "categories": w["categories"], "identity": "OK"}
+        nm = re.sub(r"\s*\((漫画|マンガ|コミック)[^)]*\)$", "", w["title"]).strip()
+        if norm(nm) not in {norm(card["title"]), nb} | {norm(x) for x in card.get("aliases") or []} and len(norm(nm)) >= 2:
+            card.setdefault("aliases", []).append(nm)  # 記事名(龍-RON- 等)も同じ作品の名前として以後の同定に使う
+        wiki_autopick(st, s, paras)
+        return True
+
+    for t in cands:
+        if attempt(t):
+            return
+    # 作者の記事から作品の記事へ(検索APIは短い題に弱い: 「龍 漫画 村上もとか」で 龍-RON- が出ない)
+    for a in list(dict.fromkeys(card["authors"] + card["original_authors"]))[:2]:
+        for t in [x for x in wiki_links(a) if related(x)][:3]:
+            if t not in tried and attempt(t):
+                return
+    for q in dict.fromkeys([f"{b} 漫画 {au}".strip(), f"{b} {au}".strip()]):
+        for t in wiki_search(q)[:3]:
+            if t not in tried and related(t) and attempt(t):
+                return
+    st["wiki"] = {"title": None, "source": None, "categories": [], "identity": "記事なし", "tried": tried}
 
 
 def wiki_autopick(st, s, paras):
@@ -633,6 +736,108 @@ def wiki_autopick(st, s, paras):
             got.add(as_)
     if not ({"物語", "作風"} & got) and sec.get("(冒頭)"):  # 節の無い短い記事は冒頭が全部
         add_pick(st, s, paras, sec["(冒頭)"], "作風", auto=True, cap=600, label="冒頭")
+
+
+# ───────── ★v0.7 手元の材料(楽天の巻紹介・巻説明・AniList あらすじ和訳) ─────────
+# 薄い118作のうち74作は手元に材料が在るのに使っていなかった(龍=楽天の巻紹介 約1.2万字・Web 0字)。
+# 頁の ISBN / slug / anilist_id で引くので同定は要らない(OK 扱い)。 種別は「公式」(版元の紹介文)= Web の公式検索を省ける。
+# 楽天の紹介文は1巻から順に(ネタバレを避ける)、各巻の「▼第N話」の目次は落とす。 巻説明は楽天が無い巻だけ。
+LOCAL_CAP = {"rakuten": 2500, "voldesc": 1500, "anilist_ja": 1200}
+
+
+def _card_volumes(stem):
+    import yaml
+    try:
+        from yaml import CSafeLoader as Ld
+    except ImportError:
+        from yaml import SafeLoader as Ld
+    with open(os.path.join(ROOT, "data", "manga.v2", stem + ".yml"), encoding="utf-8") as f:
+        d = yaml.load(f, Loader=Ld) or {}
+    out = {}
+    for e in d.get("editions") or []:
+        vs = list(e.get("volumes") or [])
+        for ver in e.get("versions") or []:
+            vs += ver.get("volumes") or []
+        for v in vs:
+            if v.get("isbn13") and isinstance(v.get("number"), (int, float)):
+                out.setdefault(v["isbn13"], v["number"])
+    return out
+
+
+def _clean_caption(t):
+    lines = []
+    for ln in str(t or "").replace("\r", "").split("\n"):
+        ln = ln.strip()
+        if not ln or ln.startswith("▼") or re.match(r"^[【\[]?(収録|目次|内容紹介)?[】\]]?\s*第\d+話", ln):
+            continue
+        if re.search(r"電子版|紙版|配信|特典|ご注意|※", ln) and len(ln) < 120:
+            continue
+        lines.append(ln)
+    return lines
+
+
+def local_material(st):
+    stem, card = st["stem"], st["card"]
+    vols = _card_volumes(stem)  # isbn → 巻番号
+    got = []
+    # 楽天の巻紹介(原文)
+    import gzip
+    caps = {}
+    p = os.path.join(ROOT, "data", "seeds", "rakuten-captions.jsonl.gz")
+    if vols and os.path.exists(p):
+        with gzip.open(p, "rt", encoding="utf-8") as f:
+            for line in f:
+                o = json.loads(line)
+                if o.get("isbn") in vols and o.get("caption"):
+                    caps.setdefault(vols[o["isbn"]], o["caption"])
+    lines, seen = [], set()
+    for n in sorted(caps):
+        for ln in _clean_caption(caps[n]):
+            if ln not in seen:
+                seen.add(ln)
+                lines.append(f"{n}巻 {ln}" if not lines or not lines[-1].startswith(f"{n}巻 ") else ln)
+    if lines:
+        got.append(("rakuten", "楽天の巻紹介(1巻から順)", lines, sorted(caps)))
+    # 巻説明(楽天が無い巻だけ)
+    p = os.path.join(ROOT, "data", "seeds", "volume-desc-ja.jsonl")
+    if os.path.exists(p):
+        vd = {}
+        with open(p, encoding="utf-8") as f:
+            for line in f:
+                if f'"{card["slug"]}"' not in line and f'"{stem}"' not in line:
+                    continue
+                o = json.loads(line)
+                if o.get("slug") in (card["slug"], stem) and o.get("vol") not in caps and o.get("desc"):
+                    vd.setdefault(o["vol"], o["desc"])
+        if vd:
+            got.append(("voldesc", "巻説明(楽天の紹介文から作った要約・楽天の無い巻)", [f"{n}巻 {vd[n]}" for n in sorted(vd, key=lambda x: (not isinstance(x, (int, float)), x))], sorted(vd, key=str)))
+    # AniList あらすじの和訳
+    aid = str(card.get("anilist_id") or "")
+    p = os.path.join(ROOT, "data", "seeds", "synopsis-ja.json")
+    if aid and os.path.exists(p):
+        with open(p, encoding="utf-8") as f:
+            sj = json.load(f)
+        if sj.get(aid):
+            got.append(("anilist_ja", "AniList のあらすじ(英語)の和訳", [ln.strip() for ln in str(sj[aid]).split("\n") if ln.strip()], None))
+    for key, label, ls, vlist in got:
+        sid = len(st["sources"]) + 1
+        d = wdir(stem)
+        for sub in ("raw", "paras"):
+            os.makedirs(os.path.join(d, sub), exist_ok=True)
+        text = "\n".join(ls)
+        paras = [{"h": 0, "t": ln} for ln in ls]
+        with open(os.path.join(d, "raw", f"{sid}.txt"), "w", encoding="utf-8") as f:
+            f.write(text)
+        with open(os.path.join(d, "paras", f"{sid}.json"), "w", encoding="utf-8") as f:
+            json.dump(paras, f, ensure_ascii=False)
+        s = {"id": sid, "kind": "公式", "origin": "local", "url": f"local:{key}", "final_url": f"local:{key}", "title": label,
+             "domain": f"手元:{key}", "status": "fetched", "why": "", "identity": {"verdict": "OK", "authors_hit": [], "local": True},
+             "chars": len(text), "sha1": hashlib.sha1(text.encode("utf-8")).hexdigest(), "paras": len(paras), "ref": None, "at": now(),
+             "skip": None, **({"volumes": vlist} if vlist else {})}
+        st["sources"].append(s)
+        if not add_pick(st, s, paras, list(range(1, len(paras) + 1)), "物語", auto=True, cap=LOCAL_CAP[key], label=label):
+            s["skip"] = "薄い"  # 未判断のまま残すと Haiku の判断に回ってしまう
+    st["local"] = [k for k, *_ in got]
 
 
 # ───────── 取得と採用 ─────────
@@ -879,6 +1084,9 @@ def cmd_open(a):
     if st["wiki"] is None:
         wiki_auto(st)
         save(st)
+    if st.get("local") is None:  # ★v0.7 手元の材料
+        local_material(st)
+        save(st)
     ani = st["anilist"]
     grp = {}
     for e in ani["entries"]:
@@ -899,6 +1107,36 @@ def cmd_open(a):
     hint(st)
 
 
+_DEAD = None
+
+
+def dead_domains():
+    """★v0.7: 台帳(収集の全回)で、そのサイトの直近20回(5回以上)に1回も取れていないサイト。 検索結果を Haiku に見せる前に外す
+    (LINEマンガ 141回・講談社 124回・cmoa 246回… が毎回選ばれては断られ、取得の枠を食っていた)。
+    ★通算でなく直近で見る: cmoa は 10/9 まで15回とも取れ、その後 246回とも robots.txt が 503 = 通算の率では外れない。"""
+    global _DEAD
+    if _DEAD is None:
+        rows = []
+        for lp in dict.fromkeys([LEDGER, os.path.join(ROOT, "data", "element-harvest", "ledger.jsonl")]):
+            if not os.path.exists(lp):
+                continue
+            with open(lp, encoding="utf-8") as f:
+                for line in f:
+                    try:
+                        o = json.loads(line)
+                    except ValueError:
+                        continue
+                    for x in o.get("sources") or []:
+                        h = x.get("domain") or ""
+                        if h and x.get("origin") not in ("auto", "local") and not h.startswith("手元:"):
+                            rows.append((o.get("at") or "", h, x.get("status") == "fetched"))
+        recent = {}
+        for _, h, ok in sorted(rows, key=lambda r: r[0]):
+            recent.setdefault(h, []).append(ok)
+        _DEAD = {h: len(v) for h, v in recent.items() if len(v[-20:]) >= 5 and not any(v[-20:])}
+    return _DEAD
+
+
 def unusable(st, url):
     """この検索結果を開けない理由(開けるなら空文字)。 可否の正本は取得時の _site_gate。 ここは一覧に印を付けるための早見。"""
     host = _site_gate.host_of(url)
@@ -910,6 +1148,8 @@ def unusable(st, url):
         return "robots"
     if any(x["domain"] == host and x["status"] == "empty" for x in st["sources"]):
         return "今回は空"
+    if host in dead_domains():
+        return "毎回取れない"
     return ""
 
 
@@ -1230,7 +1470,9 @@ PICK_SCHEMA = {"type": "object", "required": ["skip", "same", "picks"], "propert
 def card_text(c):
     return (f"題: {c['title']} / 著者: {'・'.join(c['authors']) or '-'} / 原作: {'・'.join(c['original_authors']) or '-'}"
             f" / 版元: {c.get('publisher') or '-'} {c.get('imprint') or ''} / 掲載誌: {c.get('magazine') or '-'}"
-            f" / {c.get('year_started') or '?'}年〜 / 全{c['volumes']}巻\nあらすじ(こちらのデータ): {c['synopsis'] or c['catch'] or '(なし)'}")
+            f" / {c.get('year_started') or '?'}年〜 / 全{c['volumes']}巻"
+            + (f"\n同じ作品の別名(この名前の頁も同じ作品): {' / '.join((c.get('aliases') or [])[:6])}" if c.get("aliases") else "")
+            + f"\nあらすじ(こちらのデータ): {c['synopsis'] or c['catch'] or '(なし)'}")
 
 
 def ask_model(st, prompt, schema, model):
