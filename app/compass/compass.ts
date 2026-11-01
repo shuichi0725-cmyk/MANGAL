@@ -1247,8 +1247,8 @@ export function spreadPositions(
 
 // ───────────────────────── 星屑の並べ方(冊数で大きさ・並べ方はくじ) ─────────────────────────
 // ★2026-11-01 ユーザ「出る数によって大きさを変えたい・少ない時はなるべく大きく・枚数ごとに何パターンか作ってランダムに」
-//   大きさ = 24冊の時の大きさ(44×62 / 38×54 / 33×46)を基準に、冊数が減るほど √(24/冊数) 倍(= 書影の総面積を一定)。
-//   上限 DUST_MAX_W。 並べ方はその冊数で使えるものからくじ → 入らなければ少しずつ縮めて入るまで試す。
+//   大きさ = その画面・その冊数・その並べ方で「全部入るいちばん大きい大きさ」(上限 DUST_MAX_W・下限は旧の 44)。
+//   並べ方はその冊数で使えるものからくじ → 旧の大きさでも入らない並べ方なら、ほかの並べ方に替える。
 
 export type DustLayout = "scatter" | "ring" | "rings2" | "spiral" | "tiles" | "rows";
 export const DUST_LAYOUT_NAME: Record<DustLayout, string> = {
@@ -1261,8 +1261,6 @@ export const DUST_LAYOUT_NAME: Record<DustLayout, string> = {
 };
 /** 1冊でも書影の幅はここまで(中央の本 72 の約1.3倍) */
 export const DUST_MAX_W = 96;
-/** 縮めるのはここまで(これ以下は入る分だけ出す = 旧の星屑と同じ) */
-const DUST_MIN_W = 26;
 
 /** その冊数で使える並べ方。 */
 export function dustLayouts(n: number): DustLayout[] {
@@ -1274,11 +1272,6 @@ export function dustLayouts(n: number): DustLayout[] {
   if (n >= 8) L.push("rings2");
   if (n <= 8) L.push("rows");
   return L;
-}
-
-/** その冊数での一番大きい書影の幅(縮める前・倍率 k は掛けない)。 */
-export function dustBaseW(n: number): number {
-  return Math.min(DUST_MAX_W, SZ[0][0] * Math.sqrt(UNIT_MAX / Math.max(1, n)));
 }
 
 function dustLayout(
@@ -1321,26 +1314,40 @@ function dustLayout(
       P.push({ slug: items[i].slug, x, y, w, h });
       return true;
     };
-    // 揃える並べ方は全部同じ大きさ(3段の平均)
-    const uw = w0 * 0.88;
-    const uh = uw * aspect(1);
+    // 揃える並べ方は全部同じ大きさ(= 一番近い段の大きさ。 旧の一番大きい書影より小さくしない)
+    const uw = w0;
+    const uh = uw * aspect(0);
 
     if (lay === "scatter") {
+      // ★「いちばん空いている所」に置く(候補を何点か引き、ほかの本から一番遠い点を選ぶ)= 適当に置くより詰まって大きく入る。
+      //   近い本は内側の帯から探し、帯で見つからなければ全体から探す
       const bands = [
-        [0.45, 0.72],
-        [0.6, 0.88],
-        [0.75, 1],
+        [0.42, 0.72],
+        [0.58, 0.88],
+        [0.72, 1],
       ];
       for (let i = 0; i < n; i++) {
         const t = tier(i);
         const w = w0 * ratio(t);
         const h = w * aspect(t);
-        for (let k = 0; k < 300; k++) {
+        let pick: { x: number; y: number } | null = null;
+        let far = -1;
+        let found = 0;
+        for (let k = 0; k < 500 && found < 24; k++) {
+          const [lo, hi] = k < 250 ? bands[t] : [0.3, 1];
           const a = r() * Math.PI * 2;
-          const rr = bands[t][0] + r() * (bands[t][1] - bands[t][0]);
+          const rr = lo + r() * (hi - lo);
           const p = at(rr * Math.cos(a), rr * Math.sin(a), w, h);
-          if (put(i, p.x, p.y, w, h)) break;
+          if (!free(p.x, p.y, w, h)) continue;
+          found++;
+          let d = Infinity;
+          for (const q of P) d = Math.min(d, Math.hypot(q.x - p.x, q.y - p.y));
+          if (d > far) {
+            far = d;
+            pick = p;
+          }
         }
+        if (pick) put(i, pick.x, pick.y, w, h);
       }
     } else if (lay === "ring" || lay === "rings2") {
       const rot = r() * Math.PI * 2;
@@ -1415,14 +1422,38 @@ function dustLayout(
     return P;
   };
 
-  // 大きいほうから縮めて、全部入った大きさで決める(入らなければ散らしに切り替えて同じことをする)
-  let best: SpreadResult["P"] = [];
-  for (const lay of layout === "scatter" ? [layout] : [layout, "scatter" as const]) {
-    for (let w0 = dustBaseW(n) * K; w0 >= DUST_MIN_W * K; w0 *= 0.93) {
-      const P = attempt(lay, w0);
-      if (P.length === n) return { P, layout: lay };
-      if (P.length > best.length) best = P;
+  // ★全部入るいちばん大きい大きさを探す(2026-11-01 ユーザ指摘「最初より小さくなった」)。
+  //   旧の大きさ(44)より小さくはしない = その並べ方が旧の大きさで入らなければ、ほかの並べ方に替える。
+  //   どれも入らない時だけ旧と同じ星屑(入る分だけ出す)。
+  const full = (P: SpreadResult["P"]) => P.length === n;
+  const lo = SZ[0][0] * K;
+  const hi = Math.max(lo, DUST_MAX_W * K);
+  const rest = choices.filter((c) => c !== layout);
+  for (let i = rest.length - 1; i > 0; i--) {
+    const j = Math.floor(r() * (i + 1));
+    [rest[i], rest[j]] = [rest[j], rest[i]];
+  }
+  for (const lay of [layout, ...rest]) {
+    let good = attempt(lay, lo);
+    if (!full(good)) continue;
+    const top = attempt(lay, hi);
+    if (full(top)) return { P: top, layout: lay };
+    let a = lo;
+    let b = hi;
+    for (let it = 0; it < 7; it++) {
+      const m = (a + b) / 2;
+      const P = attempt(lay, m);
+      if (full(P)) {
+        a = m;
+        good = P;
+      } else b = m;
     }
+    return { P: good, layout: lay };
+  }
+  let best: SpreadResult["P"] = [];
+  for (let k = 0; k < 4 && !full(best); k++) {
+    const P = attempt("scatter", lo);
+    if (P.length > best.length) best = P;
   }
   return { P: best, layout: "scatter" };
 }

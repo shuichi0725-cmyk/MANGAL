@@ -18,7 +18,6 @@ import {
   rng,
   spreadPositions,
   dustLayouts,
-  dustBaseW,
   type DustLayout,
   stageGeom,
   stageGeomWide,
@@ -1205,9 +1204,13 @@ describe("星屑 = 冊数で大きさ・並べ方はくじ(2026-11-01)", () => {
         }
   });
 
-  it("少ないほど大きい(24冊の時は旧と同じ 44 から)", () => {
-    expect(dustBaseW(24)).toBe(44);
-    expect(dustBaseW(6)).toBeGreaterThan(80);
+  it("少ないほど大きい・どの冊数でも旧の大きさ(一番近い段 44)より小さくならない", () => {
+    for (const g of geoms)
+      for (let n = 1; n <= 24; n++)
+        for (const tag of ["a", "b", "c"]) {
+          const P = spreadPositions("elem", mk(n, tag), "dust", g, 2000, `elem:${tag}`).P;
+          expect(Math.max(...P.map((p) => p.w)), `${g.W}x${g.H} n=${n}`).toBeGreaterThanOrEqual(44 * (g.k ?? 1) - 0.01);
+        }
     for (const g of geoms.slice(0, 3)) {
       const w = (n: number) => meanW(spreadPositions("elem", mk(n, "a"), "dust", g, 2000, "elem:x").P);
       expect(w(3)).toBeGreaterThan(w(12));
@@ -1215,11 +1218,12 @@ describe("星屑 = 冊数で大きさ・並べ方はくじ(2026-11-01)", () => {
     }
   });
 
-  it("同じ冊数でも種で並べ方が変わる(使える並べ方が全部出る)", () => {
+  it("同じ冊数でも種で並べ方が変わる(少ない時は使える並べ方が全部出る・24冊でも2種以上)", () => {
     for (const n of [2, 5, 10, 24]) {
       const seen = new Set<DustLayout | undefined>();
       for (let i = 0; i < 80; i++) seen.add(spreadPositions("elem", mk(n, `s${i}-`), "dust", geoms[1], 2000, "elem:x").layout);
-      expect([...seen].sort(), `n=${n}`).toEqual([...dustLayouts(n)].sort());
+      if (n <= 10) expect([...seen].sort(), `n=${n}`).toEqual([...dustLayouts(n)].sort());
+      else expect(seen.size, `n=${n}`).toBeGreaterThanOrEqual(2);
     }
   });
 });
