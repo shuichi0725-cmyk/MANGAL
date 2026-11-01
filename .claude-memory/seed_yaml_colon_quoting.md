@@ -23,3 +23,9 @@ YAML seed(volumes-supplement / volume-exclude / edition-canonical 等)へ文字�
 ★**seed を dump で書き戻す道具を作る/使う時は、ヘッダー保全と件数検算をセットにする**。
 同族の罠: 全置換する `--build` 系は既存分を落とす([[cover_tooling_traps_2026_09]] の covers 14,909件)。
 
+
+## ★2026-11-01 再発 + JSON seed の書式
+- 再発: volume-exclude の reason に『ぽっかぽか : ちいさな絵本』(題の「 : 」)をそのまま書いて YAML 破損。追記直後の `yaml.safe_load` 検証で止まり、反映前に直した(実害なし)。
+  ★**題名・NDLの書名をそのまま値にする時が一番踏む**(「題 : 副題」形式)。
+- `data/seeds/edition-overrides.json` は **`json.dumps(ensure_ascii=False, indent=1)` + 末尾改行**。indent=2 で書き戻すと全体が書式差分になり**8万行の diff**になった(中身は同じ)。
+  `_volgap-apply-fill.py` は書き戻し前に元の書式と一致するか assert している = 自作の書き込みも同じ書式で。
