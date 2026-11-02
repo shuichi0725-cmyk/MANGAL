@@ -40,10 +40,11 @@ function Svg({ k, className = "h-5 w-5" }: { k: string; className?: string }) {
       viewBox="0 0 24 24"
       aria-hidden="true"
       className={className}
-      style={{ stroke: "var(--color-accent)", fill: "none", strokeWidth: 1.9 }}
+      // ★羅針盤だけ赤+針が揺れる(2026-11-02 ユーザ裁定・app/globals.css の .compass-needle)
+      style={{ stroke: k === "compass" ? "var(--color-compass)" : "var(--color-accent)", fill: "none", strokeWidth: 1.9 }}
     >
       {p.c && <circle cx={p.c[0]} cy={p.c[1]} r={p.c[2]} />}
-      <path d={p.d} />
+      <path d={p.d} className={k === "compass" ? "compass-needle" : undefined} />
     </svg>
   );
 }

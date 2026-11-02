@@ -43,9 +43,10 @@ function NavSvg({ label }: { label: string }) {
   const s = NAV_SVG[label];
   if (!s) return null;
   return (
-    <svg viewBox="0 0 24 24" className="h-[18px] w-[18px]" style={{ stroke: "var(--color-accent)", fill: "none", strokeWidth: 1.9 }}>
+    // ★羅針盤だけ赤+針が揺れる(2026-11-02 ユーザ裁定・app/globals.css の .compass-needle)
+    <svg viewBox="0 0 24 24" className="h-[18px] w-[18px]" style={{ stroke: label === "羅針盤" ? "var(--color-compass)" : "var(--color-accent)", fill: "none", strokeWidth: 1.9 }}>
       {s.circle && <circle cx={s.circle[0]} cy={s.circle[1]} r={s.circle[2]} />}
-      <path d={s.d} />
+      <path d={s.d} className={label === "羅針盤" ? "compass-needle" : undefined} />
     </svg>
   );
 }

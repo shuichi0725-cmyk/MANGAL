@@ -527,13 +527,14 @@ export default async function MangaDetailPage({
             tail={
               genreKeys.length > 0 ? (
                 <>
-                  {/* ★2026-09-30 ユーザ指示: 文言「同じジャンルの漫画を探す →」→「同ジャンル検索 →」 */}
+                  {/* ★2026-09-30 ユーザ指示: 文言「同じジャンルの漫画を探す →」→「同ジャンル検索 →」。
+                      ★2026-11-02 ユーザ指示: 矢印を外して「同ジャンル検索」(右の羅針盤を目立たせる) */}
                   <Link
                     href={`/browse?genre=${genreKeys.map(encodeURIComponent).join(",")}`}
                     rel="nofollow"
                     className="spring-press inline-flex items-center rounded-[var(--radius-tag)] px-3 py-1.5 text-[12px] font-bold bg-[var(--color-accent)] text-white"
                   >
-                    同ジャンル検索 →
+                    同ジャンル検索
                   </Link>
                   {/* ★右に羅針盤マーク(この作品から羅針盤を開く)。 2026-10-03 ユーザ裁定で本番にも出す(旧=テスト環境のみ) */}
                   <CompassLink slug={manga.slug} title={manga.title} />

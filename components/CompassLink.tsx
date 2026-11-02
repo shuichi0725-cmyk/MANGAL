@@ -13,6 +13,7 @@ export default function CompassLink({
   title: string;
 }) {
   // ★2026-10-05 ユーザ裁定(見本 案3・マークは今のまま): 同ジャンル検索と間を空けて縦線で区切る = 別のボタンに見せる
+  // ★2026-11-02 ユーザ裁定(見本 D案4): 赤(--color-compass)+針が揺れる(.compass-needle・app/globals.css)
   return (
     <>
       <span
@@ -34,9 +35,9 @@ export default function CompassLink({
         style={{
           marginLeft: 12,
           padding: "5px 9px",
-          border: "2px solid var(--color-accent)",
+          border: "2px solid var(--color-compass)",
           borderRadius: "var(--radius-tag)",
-          color: "var(--color-accent)",
+          color: "var(--color-compass)",
           verticalAlign: "middle",
         }}
       >
@@ -48,7 +49,7 @@ export default function CompassLink({
           style={{ stroke: "currentColor", fill: "none", strokeWidth: 1.9 }}
         >
           <circle cx={12} cy={12} r={8.5} />
-          <path d="M15.5 8.5l-2 5-5 2 2-5z" />
+          <path className="compass-needle" d="M15.5 8.5l-2 5-5 2 2-5z" />
         </svg>
       </a>
     </>

@@ -317,3 +317,20 @@ input[type="search"]::-webkit-search-decoration {
 @keyframes d3-blink { 0%, 55% { opacity: 1; } 56%, 100% { opacity: 0; } }
 .d3-blink { animation: d3-blink 1.1s step-end infinite; }
 .theme-d3 input.d3-plain { background-color: transparent !important; border: none !important; }
+
+/* ★羅針盤のマーク(2026-11-02 ユーザ裁定「4赤で・全箇所動かして」= 見本 D案4)。
+   作品頁のボタン(components/CompassLink.tsx)・ヘッダー(GlobalNav)・≡メニュー(SiteMenu)の羅針盤だけ赤にして、
+   針だけを左右にゆっくり揺らす(押されない=何のボタンか分からない対策。 他のマークはライムのまま)。 */
+:root { --color-compass: #ff5a5a; }
+.compass-needle {
+  transform-box: view-box;
+  transform-origin: 12px 12px;
+  animation: compass-sway 3.2s ease-in-out infinite;
+}
+@keyframes compass-sway {
+  0%, 100% { transform: rotate(-28deg); }
+  50% { transform: rotate(32deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .compass-needle { animation: none; }
+}
