@@ -226,6 +226,10 @@ export class Halftone {
       const dw = iw * s;
       const dh = ih * s;
       const [ox, oy] = this.offset(layer.role);
+      // ★書影の下に白を敷く(2026-11-02): 楽天の .gif 書影は透過付きPNGで返る = 透けた所が網点の穴になり崩れる。
+      //   書影 img の bg-white と同じ対策(memory cover_transparent_gif_dark_bg)。 不透明な書影には影響しない
+      octx.fillStyle = "#fff";
+      octx.fillRect((this.w - dw) / 2 + ox, (this.h - dh) / 2 + oy, dw, dh);
       octx.drawImage(img, (this.w - dw) / 2 + ox, (this.h - dh) / 2 + oy, dw, dh);
       octx.globalCompositeOperation = "destination-in";
       octx.fill(isNew ? pathNew : pathOld);
