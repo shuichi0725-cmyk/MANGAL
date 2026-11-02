@@ -179,19 +179,20 @@ def report(days, script):
     print("※requests≠訪問者(1頁=複数ファイル・クロール支配)。人気ページ/訪問者はWeb Analytics未設置=取れない。")
 
 
-def web(days):
-    """Web Analytics(RUM=ビーコン計測): 訪問者/人気ページ/国/流入元。"""
+def web(days, path=None):
+    """Web Analytics(RUM=ビーコン計測): 訪問者/人気ページ/国/流入元。 path=前方一致で絞る(例 /compass)。"""
     geq = (datetime.date.today() - datetime.timedelta(days=days - 1)).isoformat()
     grp = "rumPageloadEventsAdaptiveGroups"
+    pf = f', requestPath_like: "{path}%"' if path else ""
     q = ("query($acct: String!, $geq: Date!, $site: string!) {"
          " viewer { accounts(filter: {accountTag: $acct}) {"
-         f" daily: {grp}(limit: 400, filter: {{date_geq: $geq, siteTag: $site}}, orderBy: [date_ASC])"
+         f" daily: {grp}(limit: 400, filter: {{date_geq: $geq, siteTag: $site{pf}}}, orderBy: [date_ASC])"
          " { count sum { visits } dimensions { date } }"
-         f" pages: {grp}(limit: 15, filter: {{date_geq: $geq, siteTag: $site}}, orderBy: [count_DESC])"
+         f" pages: {grp}(limit: 15, filter: {{date_geq: $geq, siteTag: $site{pf}}}, orderBy: [count_DESC])"
          " { count sum { visits } dimensions { requestPath } }"
-         f" geo: {grp}(limit: 8, filter: {{date_geq: $geq, siteTag: $site}}, orderBy: [count_DESC])"
+         f" geo: {grp}(limit: 8, filter: {{date_geq: $geq, siteTag: $site{pf}}}, orderBy: [count_DESC])"
          " { count dimensions { countryName } }"
-         f" ref: {grp}(limit: 8, filter: {{date_geq: $geq, siteTag: $site}}, orderBy: [count_DESC])"
+         f" ref: {grp}(limit: 8, filter: {{date_geq: $geq, siteTag: $site{pf}}}, orderBy: [count_DESC])"
          " { count dimensions { refererHost } }"
          " } } }")
     d = _api("https://api.cloudflare.com/client/v4/graphql",
@@ -201,7 +202,7 @@ def web(days):
     a = d["data"]["viewer"]["accounts"][0]
     tv = sum(r["sum"]["visits"] for r in a["daily"])
     tc = sum(r["count"] for r in a["daily"])
-    print(f"Web Analytics (mangal-db.com) / 直近{days}日 = 閲覧 {tc:,} / 訪問 {tv:,}")
+    print(f"Web Analytics (mangal-db.com{path or ''}) / 直近{days}日 = 閲覧 {tc:,} / 訪問 {tv:,}")
     print(f"\n{'date':<12}{'閲覧':>7}{'訪問':>7}")
     # ★訪問が普段(中央値)の5倍を超えた日に印(2026-10-03: 10/01 の訪問1,229 は古いChrome固定の自動化ブラウザだった。
     #   ビーコン計測もJSを実行する bot は数えてしまう)。 印の日は `bots --date <日>` で名乗りを見る。
@@ -385,6 +386,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("cmd", choices=["verify", "report", "web", "bots", "paths"])
     ap.add_argument("--days", type=int, default=7)
+    ap.add_argument("--path", default=None, help="web用: このパスで前方一致に絞る(例 /compass)")
     ap.add_argument("--script", default=DEFAULT_SCRIPT)
     ap.add_argument("--date", default=None, help="bots/paths用: YYYY-MM-DD (paths既定=昨日)")
     ap.add_argument("--bot", default="Googlebot,bingbot,OAI-SearchBot",
@@ -393,7 +395,7 @@ def main():
     if a.cmd == "verify":
         verify()
     elif a.cmd == "web":
-        web(a.days)
+        web(a.days, a.path)
     elif a.cmd == "bots":
         bots(a.date)
     elif a.cmd == "paths":
