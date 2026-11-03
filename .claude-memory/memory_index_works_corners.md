@@ -27,3 +27,4 @@ metadata:
 - [作品頁の基本情報+あらすじ=コマ割り](manga_page_facts_d3.md)
 - [アンゴルモア=続編の博多編が同じ版に同番号で同居→分離](angolmois_hakata_split.md)
 - [⏳羅針盤の隠し要素v1(近さにだけ使う・番号だけのファイル)](compass_hidden_elements.md)
+- [使い方ページ/guide=写真はUI変更で古くなる](usage_guide_page.md)
