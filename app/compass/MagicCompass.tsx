@@ -627,6 +627,27 @@ export default function MagicCompass({
     if (toastTimer.current) clearTimeout(toastTimer.current);
     toastTimer.current = setTimeout(() => setToast((t) => (t ? { ...t, msg: "" } : t)), 1300);
   }, []);
+  // 共有 = いまの中心の本から始まる羅針盤(本番の公開URL。 テスト環境でも本番の頁を渡す = 詳細と同じ)
+  const shareCompass = useCallback(async () => {
+    if (!cur) return;
+    const url = `https://mangal-db.com/compass?from=${encodeURIComponent(cur)}`;
+    const title = lookup(cur)?.title;
+    const text = title ? `『${title}』から羅針盤で次の一冊を探す - MANGAL` : "羅針盤で次の一冊を探す - MANGAL";
+    if (typeof navigator !== "undefined" && navigator.share) {
+      try {
+        await navigator.share({ title: text, url });
+      } catch {
+        // キャンセル等は何もしない
+      }
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(url);
+      showToast("リンクをコピーしました");
+    } catch {
+      showToast("コピーできませんでした");
+    }
+  }, [cur, lookup, showToast]);
   useEffect(() => {
     const cv = canvasRef.current;
     if (!cv) return;
@@ -1323,9 +1344,17 @@ export default function MagicCompass({
           </button>
         ))}
       </div>
-      {/* ★案D(2026-09-30): 旅を保存は旅の操作なので旅路の段の右端(上の列は糸5つ) */}
-      <button type="button" className="cp-save" onClick={() => showToast("旅の保存は準備中です")}>
-        旅を保存
+      {/* ★共有(2026-11-03 ユーザ裁定「旅を保存は無くそう・共有ボタンは作れない?」): 旅を保存(準備中のまま)をやめて同じ場所に共有。
+          共有するのは「いまの中心の本から始まる羅針盤」= /compass?from=<slug>(作品頁の羅針盤ボタンと同じ入口)。
+          スマホ = OS の共有シート / 非対応(PC等) = URLをコピーして一言 */}
+      <button type="button" className="cp-save" disabled={!cur} onClick={shareCompass}>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="18" cy="5" r="2.5" />
+          <circle cx="6" cy="12" r="2.5" />
+          <circle cx="18" cy="19" r="2.5" />
+          <path d="M8.2 10.9l7.6-4.4M8.2 13.1l7.6 4.4" />
+        </svg>
+        共有
       </button>
 
       {/* 2. 旅路 */}

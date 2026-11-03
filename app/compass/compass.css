@@ -138,6 +138,21 @@
   color: #e6ecf0;
   background: #070a0ecc;
   cursor: pointer;
+  /* 共有(2026-11-03): 共有の印+文字 */
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.cp-save svg {
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+.cp-save:disabled {
+  opacity: 0.4;
+  cursor: default;
 }
 
 /* ── 2. 旅路 ── */
