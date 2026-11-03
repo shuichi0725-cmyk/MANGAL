@@ -157,6 +157,24 @@ const LOADING_MIN_MS = 1000;
 /** seed = その中央の周りの本のくじの種(戻った時・詳細から戻った時に同じ顔ぶれを出す) */
 type Step = { slug: string; kind: ThreadKind | null; seed?: string };
 const newSeed = () => Math.random().toString(36).slice(2, 10);
+/** 共有する旅路(2026-11-03 ユーザ「長くても良いので旅路ごとにして」)= ?trail=slug,slug:kind,…(先頭は糸なし)。
+ *  長すぎる旅は最後の TRAIL_MAX 冊だけ(URLの長さの上限対策) */
+const TRAIL_MAX = 40;
+const TRAIL_KINDS = new Set<string>(["author", "mag", "year", "elem", "genre", "back"]);
+const formatTrail = (path: Step[]) =>
+  path
+    .slice(-TRAIL_MAX)
+    .map((p, i) => (i && p.kind ? `${encodeURIComponent(p.slug)}:${p.kind}` : encodeURIComponent(p.slug)))
+    .join(",");
+const parseTrail = (raw: string | null): { slug: string; kind: ThreadKind | null }[] =>
+  (raw ?? "")
+    .split(",")
+    .slice(-TRAIL_MAX)
+    .map((part) => {
+      const [slug, kind] = part.split(":");
+      return { slug: slug.trim(), kind: kind && TRAIL_KINDS.has(kind) ? (kind as ThreadKind) : ("back" as ThreadKind) };
+    })
+    .filter((t) => t.slug);
 /** 詳細(作品頁)へ飛ぶ直前に旅の状態を書く = OS の戻るで帰ってきた時に復元する(2026-09-30 ユーザ要望) */
 const RESUME_KEY = "mangal:compass:resume:v1";
 type RoundsMemo = { key: string; seed: string; k: number; seen: number[] };
@@ -452,7 +470,23 @@ export default function MagicCompass({
       /* 読めなければ普通に始める */
     }
     const full = isFullIndexLoaded();
-    const from = new URLSearchParams(window.location.search).get("from");
+    const qs = new URLSearchParams(window.location.search);
+    // 共有された旅路(?trail=a,b:author,c:elem = 通った本と、その本へ進んだ糸)。 全部の本が引けたらその旅路から始める
+    const trail = parseTrail(qs.get("trail"));
+    if (trail.length) {
+      const has = new Set(index.map((m) => m.slug));
+      if (trail.every((t) => has.has(t.slug))) {
+        setPath(trail.map((t, i) => ({ slug: t.slug, kind: i ? t.kind : null, seed: newSeed() })));
+        return;
+      }
+      if (!full) return; // 先頭100件に無い本がある = 全件を待つ
+      const ok = trail.filter((t) => has.has(t.slug));
+      if (ok.length) {
+        setPath(ok.map((t, i) => ({ slug: t.slug, kind: i ? t.kind : null, seed: newSeed() })));
+        return;
+      }
+    }
+    const from = qs.get("from");
     if (from) {
       if (index.some((m) => m.slug === from)) {
         setPath([{ slug: from, kind: null, seed: newSeed() }]);
@@ -630,7 +664,7 @@ export default function MagicCompass({
   // 共有 = いまの中心の本から始まる羅針盤(本番の公開URL。 テスト環境でも本番の頁を渡す = 詳細と同じ)
   const shareCompass = useCallback(async () => {
     if (!cur) return;
-    const url = `https://mangal-db.com/compass?from=${encodeURIComponent(cur)}`;
+    const url = `https://mangal-db.com/compass?from=${encodeURIComponent(cur)}&trail=${formatTrail(path)}`;
     const title = lookup(cur)?.title;
     const text = title ? `『${title}』から羅針盤で次の一冊を探す - MANGAL` : "羅針盤で次の一冊を探す - MANGAL";
     if (typeof navigator !== "undefined" && navigator.share) {
@@ -647,7 +681,7 @@ export default function MagicCompass({
     } catch {
       showToast("コピーできませんでした");
     }
-  }, [cur, lookup, showToast]);
+  }, [cur, path, lookup, showToast]);
   useEffect(() => {
     const cv = canvasRef.current;
     if (!cv) return;
@@ -1345,7 +1379,7 @@ export default function MagicCompass({
         ))}
       </div>
       {/* ★共有(2026-11-03 ユーザ裁定「旅を保存は無くそう・共有ボタンは作れない?」): 旅を保存(準備中のまま)をやめて同じ場所に共有。
-          共有するのは「いまの中心の本から始まる羅針盤」= /compass?from=<slug>(作品頁の羅針盤ボタンと同じ入口)。
+          共有するのは旅路ごと = /compass?from=<中心>&trail=<通った本>(受け取った人の左上に同じ旅路が並ぶ。 from は trail を読めない時の入口)。
           スマホ = OS の共有シート / 非対応(PC等) = URLをコピーして一言 */}
       <button type="button" className="cp-save" disabled={!cur} onClick={shareCompass}>
         <svg viewBox="0 0 24 24" aria-hidden="true">
