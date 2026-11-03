@@ -273,3 +273,34 @@ weekly-asahi:
   name: 週刊朝日
   publisher: asahi-shimbun
   demographic: seinen
+
+# ★2026-11-04 連載誌の是正(忘却バッテリー=少年ジャンプ+ のユーザ報告から)で追加。 Web/ジャンプ系列誌が無く、
+#   種3のAI埋めが集英社の少年漫画をまとめて週刊少年ジャンプにしていた。 根拠= ja.wikipedia 各誌の掲載作品一覧。
+shonen-jump-plus:
+  name: 少年ジャンプ+
+  publisher: shueisha
+  demographic: shounen
+jump-sq:
+  name: ジャンプSQ
+  publisher: shueisha
+  demographic: shounen
+monthly-shonen-jump:
+  name: 月刊少年ジャンプ
+  publisher: shueisha
+  demographic: shounen
+saikyo-jump:
+  name: 最強ジャンプ
+  publisher: shueisha
+  demographic: kodomo
+v-jump:
+  name: Vジャンプ
+  publisher: shueisha
+  demographic: shounen
+fresh-jump:
+  name: フレッシュジャンプ
+  publisher: shueisha
+  demographic: shounen
+tonari-no-young-jump:
+  name: となりのヤングジャンプ
+  publisher: shueisha
+  demographic: seinen
