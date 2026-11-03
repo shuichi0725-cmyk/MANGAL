@@ -11,7 +11,7 @@ import VolumeRow, { displayBlocks } from "@/components/VolumeRow";
 import ArtBookCard from "@/components/ArtBookCard";
 import Badge from "@/components/ui/Badge";
 import MangaFacts, { MangaSynopsis } from "@/components/MangaFacts";
-import { yearStatusLabel } from "@/lib/format";
+import { kanaSameAsTitle, yearStatusLabel } from "@/lib/format";
 import { buildOnlyMangaSlugs, loadAllManga, loadTagI18n, loadWameiTags } from "@/lib/loadData";
 import { coverUrl } from "@/lib/schema";
 import { EDITION_LABELS } from "@/lib/edition";
@@ -408,10 +408,15 @@ export default async function MangaDetailPage({
           <p className="text-base text-ink/75 mt-1 min-h-[1.5rem]">
             {manga.subtitle ?? " "}
           </p>
-          <p className="text-sm text-ink/60 mt-1">
-            {manga.title_kana}
-            {manga.subtitle_kana ? ` : ${manga.subtitle_kana}` : ""}
-          </p>
+          {/* ★ヨミが題名をカナにしただけの時は出さない(2026-11-04: 「ベルセルク」の下に「ベルセルク」)。
+              副題のヨミが別に在る時は従来どおり行ごと出す。 */}
+          {!(kanaSameAsTitle(manga.title, manga.title_kana) &&
+            (!manga.subtitle_kana || kanaSameAsTitle(manga.subtitle, manga.subtitle_kana))) && (
+            <p className="text-sm text-ink/60 mt-1">
+              {manga.title_kana}
+              {manga.subtitle_kana ? ` : ${manga.subtitle_kana}` : ""}
+            </p>
+          )}
 
           {otherNames ? (
             <>

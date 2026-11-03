@@ -1,6 +1,5 @@
 import SiteFooter from "@/components/SiteFooter";
 import type { Metadata } from "next";
-import Link from "next/link";
 import "./globals.css";
 import ScrollTopButton from "@/components/ScrollTopButton";
 import GlobalDragScroll from "@/components/GlobalDragScroll";
@@ -72,24 +71,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <PageShell rail={<FilterRail masters={masters} />}>{children}</PageShell>
           <SiteFooter />
         </main>
-        <footer className="border-t border-[var(--color-line)] mt-12 py-8 text-center text-xs text-ink/50 space-y-3">
-          <nav className="flex justify-center gap-4">
-            <Link href="/about" className="hover:text-ink">
-              About
-            </Link>
-            <span aria-hidden="true">·</span>
-            <Link href="/privacy" className="hover:text-ink">
-              プライバシー
-            </Link>
-            <span aria-hidden="true">·</span>
-            <Link href="/terms" className="hover:text-ink">
-              利用規約
-            </Link>
-          </nav>
-          <p>
-            当サイトの商品リンクは Amazon.co.jp 等の外部サイトへ遷移します。
-          </p>
-        </footer>
+        {/* ★旧フッター(About・プライバシー・利用規約+外部遷移の注記)は撤去(2026-11-04)。
+            SiteFooter の下に2段目として残っており、プライバシー/利用規約が全頁で2回出ていた。
+            /about は SiteFooter の「使い方」から、規約類は SiteFooter の最下段から到達できる。 */}
         <ScrollTopButton />
         {/* ValueCommerce LinkSwitch (2026-08-05): BookLive等の提携広告主への素リンクを
             クリック時に自動でアフィリエイトリンクへ変換する。個別リンク加工不要

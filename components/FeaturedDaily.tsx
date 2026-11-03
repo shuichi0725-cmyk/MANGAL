@@ -48,12 +48,17 @@ export default function FeaturedDaily({ slot = 0 }: { slot?: number }) {
   if (mine.length === 0) return null;
   const date = jstDateStr();
   const isFirst = offset === 0;
+  // ★分かれて出る日は見出しに案内人の名前を入れる(2026-11-04): 日替わり分散(上の PATTERNS)で
+  //   「📖 今日の一冊」が同じ見出しのまま最大3回並び、初見では重複に見えた。
+  //   3人まとめて1つの日([3])は見出しが1回なので従来どおり。
+  const names = [...new Set(mine.map((p) => personaName(p.persona)))];
+  const who = pattern.length > 1 && names.length > 0 ? (names.length === 2 ? `${names[0]}と${names[1]}` : names.join("・")) : "";
   return (
     <section className="mt-4 px-4">
       <div className="rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-3.5 shadow-sm">
         <div className="flex items-baseline justify-between">
           <h2 className={`${DOT_HEADING} text-[14px] font-extrabold`}>
-            📖 今日の一冊
+            📖 {who ? `${who}の今日の一冊` : "今日の一冊"}
             {isFirst && <span className="ml-1.5 text-[10px] font-semibold text-ink/45">{date}・毎日更新</span>}
           </h2>
           <Link href="/sansedai-archive" className="text-[11px] font-semibold text-[var(--color-accent)]">

@@ -63,6 +63,20 @@ const RIGHT_FIXED: Array<[string, string]> = [
   ["新刊", "/shinkan"],
 ];
 const RIGHT_TAIL: Array<[string, string]> = [["使い方", "/about"]];
+/** ★いま居る面(2026-11-04): どの頁でもアイコンが同じ見た目で、現在地が分からなかった。
+ *  ラベル → その面のパス(配下も含む)。 アニメ化は季ごとの頁(/anime/<季>)、使い方は /about と /guide。 */
+const ACTIVE_PATHS: Record<string, string[]> = {
+  検索: ["/browse"],
+  羅針盤: ["/compass"],
+  新刊: ["/shinkan"],
+  アニメ化: ["/anime"],
+  本棚: ["/shelf"],
+  使い方: ["/about", "/guide"],
+};
+function isCurrent(label: string, pathname: string): boolean {
+  if (label === "ホーム") return pathname === "/";
+  return (ACTIVE_PATHS[label] ?? []).some((p) => pathname === p || pathname.startsWith(`${p}/`));
+}
 /** テスト環境か(本番ビルドでは定数 false)。 */
 const PREVIEW = process.env.NEXT_PUBLIC_PREVIEW_FEATURES === "1";
 /** ★テスト環境では羅針盤へ頁を丸ごと読み直すリンク(<a>)で入る: テスト環境の羅針盤は索引の読み先を本番の全件(/prod-idx)に
@@ -91,7 +105,19 @@ export default function GlobalNav({ animeNow, animeNext }: { animeNow: string; a
     ...RIGHT_TAIL,
   ];
   const isHome = pathname === "/";
-  const cell = "spring-press flex flex-col items-center gap-0.5 active:scale-90";
+  const cell = "spring-press relative flex flex-col items-center gap-0.5 active:scale-90";
+  // ★いま居る面だけ文字をアクセント色+太字にし、下に短い線を引く(2026-11-04)。
+  //   静的書き出しでも usePathname は頁ごとのパスで描画される = 配信HTMLの時点で現在地が付く。
+  const here = (label: string) => isCurrent(label, pathname ?? "");
+  const body = (label: string) => (
+    <>
+      <NavSvg label={label} />
+      <span className={`text-[9px] ${here(label) ? "font-bold text-[var(--color-accent)]" : "text-ink/55"}`}>{label}</span>
+      {here(label) && (
+        <span aria-hidden="true" className="absolute -bottom-1.5 left-1/2 h-[2px] w-6 -translate-x-1/2 bg-[var(--color-accent)]" />
+      )}
+    </>
+  );
   const frame = isHome
     ? "border-b-[3px] border-[var(--color-accent)] bg-[var(--color-paper)]"
     : "border-b border-[var(--color-line)] bg-[var(--color-surface)]";
@@ -99,22 +125,19 @@ export default function GlobalNav({ animeNow, animeNext }: { animeNow: string; a
     <div className={frame}>
       <div className="mx-auto flex w-full max-w-6xl items-center px-4 py-1.5">
         {/* 左固定 = ホーム(ロゴは共通ヘッダーに一本化済み) */}
-        <Link href="/" aria-label="ホーム" className={cell}>
-          <NavSvg label="ホーム" />
-          <span className="text-[9px] text-ink/55">ホーム</span>
+        <Link href="/" aria-label="ホーム" aria-current={here("ホーム") ? "page" : undefined} className={cell}>
+          {body("ホーム")}
         </Link>
         {/* 右寄せクラスタ(≡メニューは共通ヘッダー右端。この行は「使い方」が右端) */}
         <div className="ml-auto flex items-center gap-3.5">
           {RIGHT.map(([label, href]) =>
             PREVIEW && FULL_RELOAD.has(href) ? (
-              <a key={label} href={href} aria-label={label} className={cell}>
-                <NavSvg label={label} />
-                <span className="text-[9px] text-ink/55">{label}</span>
+              <a key={label} href={href} aria-label={label} aria-current={here(label) ? "page" : undefined} className={cell}>
+                {body(label)}
               </a>
             ) : (
-              <Link key={label} href={href} aria-label={label} className={cell}>
-                <NavSvg label={label} />
-                <span className="text-[9px] text-ink/55">{label}</span>
+              <Link key={label} href={href} aria-label={label} aria-current={here(label) ? "page" : undefined} className={cell}>
+                {body(label)}
               </Link>
             ),
           )}

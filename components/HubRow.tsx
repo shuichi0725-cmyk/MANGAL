@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { authorKeyFor } from "@/lib/authors";
+import { creditNames, kanaSameAsTitle } from "@/lib/format";
 import { hubHrefIfExists, magazineName, publisherName, type HubKind } from "@/lib/hubs";
 import type { MangaListItem } from "@/lib/schema";
 
@@ -16,26 +17,31 @@ export default function HubRow({ m, omit }: { m: MangaListItem; omit?: HubKind }
       ? { name: magazineName(m.magazine), href: hubHrefIfExists("magazine", m.magazine) }
       : null;
   const pub = omit !== "publisher" && m.publisher ? publisherName(m.publisher) : null;
+  const credits = creditNames(m);
   return (
     <li className="border-b border-[var(--color-line)] py-2">
       <Link href={`/manga/${m.slug}`} className="text-[14px] font-bold hover:text-[var(--color-accent)]">
         {m.title}
       </Link>
-      {m.title_kana && <span className="ml-2 text-[10.5px] text-ink/40">{m.title_kana}</span>}
+      {/* ★ヨミが題名をカナにしただけの時は出さない(2026-11-04・作品頁と同じ規則) */}
+      {m.title_kana && !kanaSameAsTitle(m.title, m.title_kana) && (
+        <span className="ml-2 text-[10.5px] text-ink/40">{m.title_kana}</span>
+      )}
       <p className="mt-0.5 flex flex-wrap gap-x-2 text-[11.5px] text-ink/55">
-        {m.authors.length > 0 && (
+        {/* ★原作者も出す(2026-11-04)= 原作者 → 作画 の順(creditNames) */}
+        {credits.length > 0 && (
           <span>
-            {m.authors.map((a, i) => {
-              const k = authorKeyFor(a.name);
+            {credits.map((name, i) => {
+              const k = authorKeyFor(name);
               return (
-                <span key={`${a.name}-${i}`}>
+                <span key={`${name}-${i}`}>
                   {i > 0 && "・"}
                   {k ? (
                     <Link href={`/author/${k}`} className="hover:text-ink">
-                      {a.name}
+                      {name}
                     </Link>
                   ) : (
-                    a.name
+                    name
                   )}
                 </span>
               );

@@ -53,6 +53,9 @@ export default function SiteFooter() {
         書影は楽天ブックスの商品情報を利用しています。
       </p>
       <p className="mt-1.5 leading-relaxed">[PR] 店舗リンクにはアフィリエイト広告を含みます。</p>
+      {/* ★Amazonアソシエイト運営規約が求める定型文(2026-11-04)。 アソシエイト開設(2026-07-29)以降も
+          サイト上に一度も出ていなかった。 全頁に載るフッターに置く。 */}
+      <p className="mt-1 leading-relaxed">Amazonのアソシエイトとして、MANGALは適格販売により収入を得ています。</p>
       <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1">
         <Link href="/contact" className="hover:text-ink">お問い合わせ</Link>
         <Link href="/terms" className="hover:text-ink">利用規約</Link>

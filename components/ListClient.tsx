@@ -28,6 +28,7 @@ function activeCount(s: FilterState): number {
 }
 import type { ListBundle } from "@/lib/schema";
 import { SORTS, sortRows, volCount, latestDate, type SortId } from "@/lib/listSort";
+import { creditNames } from "@/lib/format";
 import { isFullIndexLoaded } from "@/lib/useMangaIndex";
 import { useFilterPanelData } from "@/lib/useFilterPanelData";
 
@@ -327,7 +328,8 @@ export default function ListClient({ data }: { data: ListBundle }) {
                 </td>
                 <td className={`${isPreview ? "" : "max-w-[120px] "}border-b border-[var(--color-line)]/60 px-2 py-1.5 text-ink/75`}>
                   <div className="max-w-full overflow-x-auto whitespace-nowrap" style={{ scrollbarWidth: "none" }}>
-                    {m.authors.map((a) => a.name).join("・")}
+                    {/* ★原作者も出す(2026-11-04)= 原作者 → 作画 の順 */}
+                    {creditNames(m).join("・")}
                   </div>
                 </td>
                 <td className="border-b border-[var(--color-line)]/60 px-2 py-1.5 text-right tabular-nums">{volCount(m)}</td>

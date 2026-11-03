@@ -2,6 +2,7 @@ import Link from "next/link";
 import CoverImage from "@/components/CoverImage";
 import MarqueeTitle from "@/components/MarqueeTitle";
 import { authorKeyFor } from "@/lib/authors";
+import { creditNames } from "@/lib/format";
 import type { MangaListItem } from "@/lib/schema";
 
 /** ジャンル面/下位面の書影グリッド(server)。 元は app/genre/[key] 内蔵だったものを共有化(2026-09-04)。
@@ -32,17 +33,18 @@ export default function GenreGrid({ items, limit = 120 }: { items: MangaListItem
               <MarqueeTitle text={m.title} className="mt-1 text-[12px] leading-snug text-ink/85 group-hover:text-[var(--color-accent)]" />
             </Link>
             <p className="truncate text-[10px] text-ink/50">
-              {m.authors.map((a, i) => {
-                const k = authorKeyFor(a.name);
+              {/* ★原作者も出す(2026-11-04)= 原作者 → 作画 の順(creditNames) */}
+              {creditNames(m).map((name, i) => {
+                const k = authorKeyFor(name);
                 return (
-                  <span key={`${a.name}-${i}`}>
+                  <span key={`${name}-${i}`}>
                     {i > 0 && "・"}
                     {k ? (
                       <Link href={`/author/${k}`} className="hover:text-ink">
-                        {a.name}
+                        {name}
                       </Link>
                     ) : (
-                      a.name
+                      name
                     )}
                   </span>
                 );

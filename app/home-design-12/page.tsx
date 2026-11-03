@@ -53,9 +53,10 @@ export default function Design12() {
   const longest = [...manga].sort((a, b) => volCount(b) - volCount(a))[0];
   const totalBooks = manga.reduce((s, m) => s + m.editions.reduce((x, e) => x + e.volumes.length, 0), 0);
   const oldest = [...manga].filter((m) => m.year_started).sort((a, b) => a.year_started - b.year_started)[0];
+  // ★「登録は N 作品、漫画本は合計 M 冊」は外した(2026-11-04): ヒーロー直下と同じ数字が
+  //   ホームに3回出ていた(ヒーロー・カテゴリ下の帯・この欄)。数字はヒーローの1回に寄せる。
   const trivia = [
     longest && `収録最長は『${longest.title}』の 全${volCount(longest)}巻。1日1冊でも読破に${Math.ceil(volCount(longest) / 30)}ヶ月。`,
-    `登録は ${manga.length.toLocaleString()} 作品、漫画本は合計 ${totalBooks.toLocaleString()} 冊。`,
     oldest && `最も古い収録作は『${oldest.title}』(${oldest.year_started}年〜)。`,
   ].filter(Boolean) as string[];
 
@@ -137,36 +138,11 @@ export default function Design12() {
         </ul>
       </section>
 
-      {/* ここから下は案11と完全同一(コーナー順・データ・リンク不変) */}
-      {(() => {
-        const books = totalBooks;
-        // ★上のカテゴリタイルと同じ数を使う(2026-09-05 ユーザ報告「連載中の数に相違がある」)。
-        //   旧: ここだけ status !== "completed" で数えており、休載(hiatus=7作。ガラスの仮面/
-        //   HUNTER×HUNTER/NANA 等)を連載中に含めていた。結果、タイル 7,431 に対しこの帯が 7,438、
-        //   しかも両方のリンク先 /browse?status=ongoing は厳密一致で 7,431 を出す = 数がリンク先と
-        //   食い違っていた。定義を2か所に持たず nOn/nDone を共有する。
-        const ongoing = nOn;
-        const done = nDone;
-        const S = ({ href, label, n }: { href: string; label: string; n: number }) => (
-          <Link href={href} className="spring-press whitespace-nowrap">
-            <span className="text-ink/50">{label}</span>{" "}
-            <b className="tabular-nums text-ink/85">{n.toLocaleString()}</b>
-          </Link>
-        );
-        return (
-          <div className="flex items-center gap-x-3 overflow-x-auto px-4 py-2.5 text-[11px] leading-none">
-            <S href="/browse" label="作品" n={manga.length} />
-            <span className="text-ink/25">|</span>
-            <S href="/browse" label="漫画本" n={books} />
-            <span className="text-ink/25">|</span>
-            <S href="/browse?status=ongoing" label="連載中" n={ongoing} />
-            <span className="text-ink/25">|</span>
-            <S href="/browse?status=completed" label="完結" n={done} />
-            <span className="ml-auto shrink-0 text-[10px] text-ink/40">タップで絞り込み</span>
-          </div>
-        );
-      })()}
+      {/* ★カテゴリ直下の数字の帯(作品|漫画本|連載中|完結|タップで絞り込み)は撤去(2026-11-04)。
+          作品数・冊数はヒーロー、連載中・完結の数と行き先は上のタイルと同じで、スマホでは帯の右端
+          (「タップで絞り込み」)が切れていた。タイルの数は nOn/nDone のまま(2026-09-05 の数の食い違い是正は不変)。 */}
 
+      {/* ここから下は案11と完全同一(コーナー順・データ・リンク不変) */}
       <AnimeSeasonCorner />
       <DailyFeatureCorner />
 
