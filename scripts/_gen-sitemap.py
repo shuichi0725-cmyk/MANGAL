@@ -15,7 +15,7 @@ CHUNK = 40000
 idx = json.load(open(os.path.join(ROOT, "data", "manga-list-index.json"), encoding="utf-8"))
 f = idx["f"]; si = f.index("slug")
 slugs = [r[si] for r in idx["d"]]
-fixed = ["", "list", "browse", "about", "terms", "privacy", "contact",
+fixed = ["", "list", "browse", "about", "guide", "terms", "privacy", "contact",
          "column-ai-league", "sansedai-archive", "art-books",
          "tokushu", "rankings", "anime",  # ★2026-08-04 見直しで追加(日替わり特集ほか)
          "authors", "titles",  # ★2026-08-31 SEO(索引ハブ2本=クロール導線)

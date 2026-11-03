@@ -1381,6 +1381,11 @@ export default function MagicCompass({
       {/* ★共有(2026-11-03 ユーザ裁定「旅を保存は無くそう・共有ボタンは作れない?」): 旅を保存(準備中のまま)をやめて同じ場所に共有。
           共有するのは旅路ごと = /compass?from=<中心>&trail=<通った本>(受け取った人の左上に同じ旅路が並ぶ。 from は trail を読めない時の入口)。
           スマホ = OS の共有シート / 非対応(PC等) = URLをコピーして一言 */}
+      {/* ★使い方への入口 案A(2026-11-03 ユーザ裁定): 共有の左に「?」= 使い方の羅針盤の節(テスト環境でも <a> = 全頁読み込みで出る) */}
+      <div className="cp-tr">
+      <a className="cp-help" href="/guide#compass" aria-label="羅針盤の使い方">
+        ?
+      </a>
       <button type="button" className="cp-save" disabled={!cur} onClick={shareCompass}>
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <circle cx="18" cy="5" r="2.5" />
@@ -1390,6 +1395,7 @@ export default function MagicCompass({
         </svg>
         共有
       </button>
+      </div>
 
       {/* 2. 旅路 */}
       <div className="cp-hist" ref={histRef}>
@@ -2323,6 +2329,11 @@ export default function MagicCompass({
         (() => {
           const buy = amazonNameSearchUrls(sheetItem.title, sheetItem.authors?.[0]?.name, AMZ_TAG);
           return (
+            <>
+            {/* ★使い方への入口(2026-11-03 ユーザ裁定「Kindle・Amazonの対称・左側」): 札の上の縁の左に付箋 */}
+            <a className="cp-helptab" href="/guide#compass" style={{ bottom: sheetH }}>
+              🧭 使い方
+            </a>
             <div className="cp-buytabs" style={{ bottom: sheetH }}>
               <span className="cp-buytabs-pr">[PR]</span>
               <a className="cp-buytab k" href={buy.kindle} target="_blank" rel="noopener noreferrer sponsored">
@@ -2332,6 +2343,7 @@ export default function MagicCompass({
                 Amazon
               </a>
             </div>
+            </>
           );
         })()}
       {KOMA && komaOpen && curItem && (

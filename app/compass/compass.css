@@ -124,12 +124,32 @@
   opacity: 0.45;
   cursor: default;
 }
-.cp-save {
-  /* ★案D: 旅路の段(top 44・高さ56)の右端に重ねる。 旅路はその分だけ右に余白を取る */
+/* 右上の「?」(使い方)と共有を並べる箱。 ★案D: 旅路の段(top 44・高さ56)の右端に重ねる */
+.cp-tr {
   position: absolute;
   top: 58px;
   right: 10px;
   z-index: 6;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.cp-help {
+  width: 28px;
+  height: 28px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ffffff30;
+  border-radius: 50%;
+  color: #e6ecf0;
+  background: #070a0ecc;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.cp-save {
   flex: none;
   font-size: 10.5px;
   border: 1px solid #ffffff30;
@@ -883,9 +903,9 @@
   }
 }
 
-/* 旅路は右端の「旅を保存」の分だけ余白を取る(案D) */
+/* 旅路は右端の「?」+「共有」の分だけ余白を取る(案D) */
 .cp-hist {
-  padding-right: 92px !important;
+  padding-right: 120px !important;
 }
 /* 上の列 = 糸5つ(ジャンル追加・360px でも1列に収める) */
 .cp-top .cp-chip {
@@ -1092,7 +1112,25 @@
   background: #141414cc;
   padding: 1px 4px;
 }
-.cp-root.wide .cp-buytabs {
+/* 付箋の左 = 使い方(Kindle・Amazon と左右対称。 色は羅針盤の赤) */
+.cp-helptab {
+  position: absolute;
+  left: 12px;
+  z-index: 6;
+  font-size: 11.5px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #ff5a5a;
+  background: #141414e6;
+  border: 1px solid #ff5a5a;
+  border-bottom: none;
+  padding: 4px 10px 4px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: bottom 0.3s;
+}
+.cp-root.wide .cp-buytabs,
+.cp-root.wide .cp-helptab {
   display: none;
 }
 
@@ -1963,7 +2001,7 @@
 .cp-root.wide .cp-hist {
   right: var(--pw);
 }
-.cp-root.wide .cp-save {
+.cp-root.wide .cp-tr {
   right: calc(var(--pw) + 10px);
 }
 .cp-root.wide .cp-stage {

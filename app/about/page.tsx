@@ -20,6 +20,26 @@ export default function AboutPage() {
 
       <h1 className="mt-6 text-2xl md:text-3xl font-bold">MANGAL について</h1>
 
+      {/* ★使い方への入口(2026-11-03 ユーザ裁定): 検索・羅針盤のそれぞれの説明へ直接飛べる */}
+      <div className="mt-5 border border-[var(--color-line)] bg-[var(--color-surface)] px-4 py-3">
+        <p className="text-[11px] text-ink/60">はじめての方へ</p>
+        <Link href="/guide" className="mt-0.5 block text-base font-extrabold text-ink">
+          検索と羅針盤の使い方 <span className="text-[var(--color-accent)]">›</span>
+        </Link>
+        <div className="mt-2 flex gap-2">
+          <Link
+            href="/guide#search"
+            className="flex-1 border-2 border-[var(--color-accent)] py-1.5 text-center text-sm font-bold text-[var(--color-accent)]"
+          >
+            🔍 検索
+          </Link>
+          <Link href="/guide#compass" className="flex-1 border-2 border-[#ff5a5a] py-1.5 text-center text-sm font-bold text-[#ff5a5a]">
+            🧭 羅針盤
+          </Link>
+        </div>
+        <p className="mt-1.5 text-[11px] text-ink/60">写真と動く図で、フィルターや糸のたどり方を説明しています</p>
+      </div>
+
       <section className="mt-8 space-y-4 text-sm leading-relaxed text-ink/80">
         <h2 className="text-base font-semibold text-ink">サイトの目的</h2>
         <p>数ある漫画サイトの中から MANGAL を見つけていただき、ありがとうございます。</p>
@@ -53,6 +73,9 @@ export default function AboutPage() {
             <strong>作品ページ</strong> — 巻ごとの発売日・書影・版違い（文庫版・完全版など）・書店へのリンク
           </li>
         </ul>
+        <Link href="/guide" className="inline-block text-sm font-bold text-[var(--color-accent)]">
+          → くわしい使い方(写真つき)
+        </Link>
       </section>
 
       <section className="mt-8 space-y-4 text-sm leading-relaxed text-ink/80">

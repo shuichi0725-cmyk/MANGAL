@@ -312,6 +312,15 @@ export default function HomeClient({ data, summary }: Props) {
             )}
             。
           </p>
+          {/* ★使い方への入口 案B(2026-11-03 ユーザ裁定) */}
+          {!showArt && (
+            <a
+              href="/guide#search"
+              className="mt-2 inline-block border border-[var(--color-accent)] px-2.5 py-0.5 text-[13px] font-bold text-[var(--color-accent)]"
+            >
+              はじめての方へ:検索の使い方 ›
+            </a>
+          )}
         </div>
         {/* ★PC(lg以上)= 検索窓は左レールの1つに集約(2026-09-07 ユーザ①=3)。ここは出さない。
             ★モバイル(<1024px)= レールが出ないのでここが唯一の検索窓 → 必ず出す(2026-09-08 ユーザ報告
@@ -468,6 +477,12 @@ export default function HomeClient({ data, summary }: Props) {
       >
         ⚙ フィルターで絞り込む
       </button>
+      {/* ★使い方への入口 案A(2026-11-03 ユーザ裁定): フィルターの説明へ */}
+      <div className="lg:hidden mb-3 flex justify-end">
+        <a href="/guide#filter" className="border-b border-dashed border-[var(--color-accent)] text-[13px] font-bold text-[var(--color-accent)]">
+          ？ フィルターの使い方 ›
+        </a>
+      </div>
       {/* ★フィルタ有効時のみ: その場でリセット(2026-07-22 ユーザ要望=パネルを開かず解除。
           空状態キャッシュに当たるので即時に既定表示へ戻る) */}
       {hasActiveFilters && (
