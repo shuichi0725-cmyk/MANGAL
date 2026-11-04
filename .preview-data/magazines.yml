@@ -304,3 +304,106 @@ tonari-no-young-jump:
   name: となりのヤングジャンプ
   publisher: shueisha
   demographic: seinen
+
+# ★2026-11-04 連載誌の MADB 是正で追加(ユーザ裁定「2たして。3たてて」= 10頁以上の誌を足す・増刊は別の誌)。
+#   根拠= MADB 雑誌掲載履歴(cm106+目次108+各号102)/単行本の初出欄 × ja.wikipedia 作品記事。 読者層= ja.wikipedia の誌の分類。
+bessatsu-corocoro-comic:
+  name: 別冊コロコロコミック
+  publisher: shogakukan
+  demographic: kodomo
+bessatsu-friend:
+  name: 別冊フレンド
+  publisher: kodansha
+  demographic: shoujo
+bessatsu-hana-to-yume:
+  name: 別冊花とゆめ
+  publisher: hakusensha
+  demographic: shoujo
+chuchu:
+  name: ChuChu
+  publisher: shogakukan
+  demographic: shoujo
+ciao-deluxe:
+  name: ちゃおデラックス
+  publisher: shogakukan
+  demographic: shoujo
+club-sunday:
+  name: クラブサンデー
+  publisher: shogakukan
+  demographic: shounen
+cookie:
+  name: Cookie
+  publisher: shueisha
+  demographic: shoujo
+corocoro-comic:
+  name: 月刊コロコロコミック
+  publisher: shogakukan
+  demographic: kodomo
+corocoro-ichiban:
+  name: コロコロイチバン!
+  publisher: shogakukan
+  demographic: kodomo
+deluxe-margaret:
+  name: デラックスマーガレット
+  publisher: shueisha
+  demographic: shoujo
+garo:
+  name: 月刊漫画ガロ
+  publisher: seirindo
+  demographic: seinen
+gessan:
+  name: ゲッサン
+  publisher: shogakukan
+  demographic: shounen
+grand-jump-premium:
+  name: グランドジャンプPREMIUM
+  publisher: shueisha
+  demographic: seinen
+gundam-ace:
+  name: ガンダムエース
+  publisher: kadokawa
+  demographic: shounen
+jump-sq-19:
+  name: ジャンプSQ.19
+  publisher: shueisha
+  demographic: shounen
+lala-dx:
+  name: LaLa DX
+  publisher: hakusensha
+  demographic: shoujo
+magazine-special:
+  name: マガジンSPECIAL
+  publisher: kodansha
+  demographic: shounen
+monthly-princess:
+  name: 月刊プリンセス
+  publisher: akita
+  demographic: shoujo
+monthly-shonen-rival:
+  name: 月刊少年ライバル
+  publisher: kodansha
+  demographic: shounen
+monthly-shonen-sirius:
+  name: 月刊少年シリウス
+  publisher: kodansha
+  demographic: shounen
+nakayoshi-lovely:
+  name: なかよしラブリー
+  publisher: kodansha
+  demographic: shoujo
+princess-gold:
+  name: プリンセスGOLD
+  publisher: akita
+  demographic: shoujo
+the-hana-to-yume:
+  name: ザ花とゆめ
+  publisher: hakusensha
+  demographic: shoujo
+the-margaret:
+  name: ザ マーガレット
+  publisher: shueisha
+  demographic: shoujo
+weekly-comic-bunch:
+  name: 週刊コミックバンチ
+  publisher: shinchosha
+  demographic: seinen
