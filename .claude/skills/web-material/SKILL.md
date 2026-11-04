@@ -32,6 +32,7 @@ description: 「Web材料集めて [N]」「Web材料続けて」「Web材料判
   3. 終わったら: 案の数・失敗・費用・**見える要素が4語以上になる作品の数**・目立つ語(例えや宣伝文句から来た語が無いか、`work/<stem>/assign/assign-proposal.md` の根拠を数件抜き取って見る)を報告。
 - **「Web材料続けて」** = 同じ(道具が器に在る作品を飛ばすので、続きから始まる)。
 - **語彙(`data/seeds/wamei-tags.yml`)や付与の決まりを変えた後** = `python scripts/_web-material.py rebuild [--stems a,b]`(判定済み全作の付与案を、保存済みの答えから作り直す。**モデルを呼ばない・0円・約30秒**。案が変わった作品だけ器の judges に「作り直し」を足す)。★効くのは、モデルが元の答えに自分で挙げていた語だけ。語彙に足した語が材料に在ってもモデルが見ていなければ「判定が返らなかった候補」に出る = 拾うなら `judge --stems … --redo`。
+- **2回目の判定**(★ユーザの Go が要る) = `python scripts/_web-material.py second --stems a,b [--parallel 3]`(1作 約$0.01・約1分・並列3)。判定済みの作品に2回目を回して1回目と合わせる。**1回目で表が0語の頁 = 2回判定+lift**(見直しと同じ `_element-review.agree`: 2回とも芯・芯+在る=芯 / 片方だけ芯=在る / 表0なので「2回とも在る」「片方が芯でもう片方は挙げず」を3語まで表へ)。**語がある頁 = 1回目のまま**で、語彙に足した語など1回目が見ていない候補の判定だけ2回目から足す(今ある語をゆらさない)。生の答えは `work/<stem>/assign/assign-answer.run1.json` / `run2.json` に残り、合わせ方を変えても `rebuild` でモデルを呼ばずに効く。止めても済んだ作品は飛ばして続きから。
 - **「Web材料止めて」** = CommandLine に `_web-material|_element-harvest|_element-assign` を含むプロセスを `taskkill /T /F` で全部止める(止め残すと2本並走する)。途中の作品は次回やり直し。
 - 1作だけ集め直す = `run --stems <stem> --redo`(前の回は消えず、回ごとに残る)。中身を見る = `show <stem> --text`。
 

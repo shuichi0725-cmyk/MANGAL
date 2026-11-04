@@ -10,6 +10,7 @@
   python scripts/_web-material.py judge --n 20           # 器の材料から付与案を作る(Haiku・案だけ = 頁に書かない。 まだ案の無い作品を巻数順に)
   python scripts/_web-material.py judge --stems a,b [--redo]
   python scripts/_web-material.py rebuild [--stems a,b]  # 語彙(wamei-tags.yml)や付与の決まりを変えた後、判定済みの案を保存済みの答えから作り直す(モデルを呼ばない・0円)
+  python scripts/_web-material.py second --stems a,b [--parallel 3] [--redo]  # 2回目の判定を回して1回目と合わせる(0語の頁は2回判定+lift / 語がある頁は語彙に足した語の判定だけ足す)
 
 ★器はこのPCのローカルだけ(ユーザ裁定 2026-10-29「非公開、ローカルだけでよい」)= git に入れない。
   置き場 .cache\\web-material\\(C のリポジトリ内・git 管理外。 ユーザ裁定 2026-10-29「DはつかわないでCでよい」)
@@ -250,14 +251,63 @@ def cmd_judge(a):
     print(f"== 終わり: 案 {ok} / 失敗 {len(fails)} / ${cost:.3f} ==", flush=True)
 
 
+def _mod(name):
+    sp = importlib.util.spec_from_file_location(name.strip("_").replace("-", "_"), os.path.join(ROOT, "scripts", name + ".py"))
+    m = importlib.util.module_from_spec(sp)
+    sp.loader.exec_module(m)
+    return m
+
+
+def _mods():
+    os.environ["EH_ROOT"] = WORK  # _element-assign.py の置き場(import より前に決める)
+    sys.path.insert(0, os.path.join(ROOT, "scripts"))
+    return _mod("_element-assign"), _mod("_element-review")
+
+
+def _merge(ea, rv, V, raw, mode):
+    """生の答え(1回 or 2回)→ (合わせた答え, 2回とも芯の語の集合, lift の語)。 モデルを呼ばずに何度でも作り直せる(rebuild もここを通る)。
+    mode=agree(1回目で表が0語だった頁): _element-review.agree = 2回とも芯・芯+在る=芯 / 片方だけ芯=在る / 表0なので lift(2回とも「在る」・片方が芯でもう片方は挙げず を3語まで表へ)
+    mode=fill (語がある頁): 1回目のまま。 2回目は、1回目が見ていない候補(語彙に足した語)の判定だけ使う = 今ある語をゆらさない
+    どちらも、1回目が見ていない候補は2回目の判定をそのまま入れる(agree は judged に2回目だけの語を入れないため)。"""
+    if len(raw) < 2:
+        return raw[0], None, None
+    a1, a2 = raw[0], raw[1]
+    if mode == "agree":
+        ans, both, agreed = rv.agree(a1, a2, V)
+    else:
+        ans, both, agreed = {g: list(a1.get(g) or []) for g in ("judged", "added", "new_words")}, None, None
+    canon = lambda w: V["alias"].get(ea.bare(w), ea.bare(w))  # noqa: E731
+    seen = {canon(x.get("word")) for g in ("judged", "added", "new_words") for x in (a1.get(g) or []) if isinstance(x, dict)}
+    for x in a2.get("judged") or []:
+        if isinstance(x, dict) and canon(x.get("word")) not in seen:
+            ans["judged"].append(dict(x))
+    return ans, both, agreed
+
+
+def _record(stem, ea, rows, use_cost, extra):
+    """器の judges に1行足す(直前と同じ案なら足さない)。 → (足したか, 表に出す案, 直前の行)"""
+    core = [e["word"] for e in rows if e.get("cls") == "表"]
+    sub = [e["word"] for e in rows if e.get("cls") == "隠し"]
+    new = [e["word"] for e in rows if e["vocab"] == "新しい語"]
+    s = load_store(stem)
+    last = s["judges"][-1]
+    if (core, sub, new) == (last.get("core"), last.get("sub"), last.get("new")):
+        return False, core, last
+    s["judges"].append({"at": now(), "model": extra.pop("model", last.get("model")), "version": ea.VERSION, "material_at": s["runs"][-1]["collected_at"],
+                        "core": core, "sub": sub, "new": new, "cost_usd": use_cost, **extra})
+    tmp = store_path(stem) + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(s, f, ensure_ascii=False, indent=1)
+    os.replace(tmp, store_path(stem))
+    return True, core, last
+
+
 def cmd_rebuild(a):
     """語彙(wamei-tags.yml)や付与の決まりを変えた後、判定済みの作品の付与案を作り直す。 保存済みの答え(work/<stem>/assign/assign-answer.json)を
     検査し直すだけ = モデルを呼ばない・0円。 案が変わった作品だけ、器の judges に「作り直し」を足す。 頁には書かない。
-    ★語彙に足した語は、元の答えにモデルが自分で挙げていた語(新しい語)にだけ効く。 モデルが見ていなかった語は「判定が返らなかった候補」に出る(判定し直すなら judge --redo)。"""
-    os.environ["EH_ROOT"] = WORK  # _element-assign.py の置き場(import より前に決める)
-    sp = importlib.util.spec_from_file_location("ea", os.path.join(ROOT, "scripts", "_element-assign.py"))
-    ea = importlib.util.module_from_spec(sp)
-    sp.loader.exec_module(ea)
+    2回判定した作品(second)は、残してある2回の生の答えから同じ合わせ方で作り直す。
+    ★語彙に足した語は、元の答えにモデルが自分で挙げていた語(新しい語)にだけ効く。 モデルが見ていなかった語は「判定が返らなかった候補」に出る(判定し直すなら second)。"""
+    ea, rv = _mods()
     V = ea.load_vocab()
     names = a.stems.split(",") if a.stems else sorted(os.path.basename(p)[:-5] for p in glob.glob(os.path.join(STORE, "*.json")))
     todo = [s for s in names if s and judged(s)]
@@ -274,25 +324,112 @@ def cmd_rebuild(a):
         m = ea.load_material(stem)
         cands = ea.find_candidates(m, V)
         use = d.get("use") or {"model": "(保存済みの答え)"}
-        _, rows, _, _, _ = ea.make_proposal(stem, m, V, cands, d.get("answer", d), use)
-        core = [e["word"] for e in rows if e.get("cls") == "表"]
-        sub = [e["word"] for e in rows if e.get("cls") == "隠し"]
-        new = [e["word"] for e in rows if e["vocab"] == "新しい語"]
-        s = load_store(stem)
-        last = s["judges"][-1]
-        if (core, sub, new) == (last.get("core"), last.get("sub"), last.get("new")):
+        ans, both, agreed = _merge(ea, rv, V, d.get("raw") or [d.get("answer", d)], d.get("mode"))
+        _, rows, _, _, _ = ea.make_proposal(stem, m, V, cands, ans, use, not_spoiler=both or (), lift=agreed or ())
+        did, core, last = _record(stem, ea, rows, 0, {"rebuild": True, "model": use.get("model")})
+        if not did:
             continue
-        s["judges"].append({"at": now(), "model": use.get("model"), "version": ea.VERSION, "material_at": s["runs"][-1]["collected_at"],
-                            "core": core, "sub": sub, "new": new, "cost_usd": 0, "rebuild": True})
-        tmp = store_path(stem) + ".tmp"
-        with open(tmp, "w", encoding="utf-8") as f:
-            json.dump(s, f, ensure_ascii=False, indent=1)
-        os.replace(tmp, store_path(stem))
         changed += 1
         add = [w for w in core if w not in (last.get("core") or [])]
         gone = [w for w in (last.get("core") or []) if w not in core]
         print(f"  {stem}: 表に出す案 {len(last.get('core') or [])}→{len(core)}" + (f" 増 {'・'.join(add)}" if add else "") + (f" 減 {'・'.join(gone)}" if gone else ""), flush=True)
     print(f"== 終わり: 案が変わった {changed}作 / 変わらず {len(todo) - changed - skipped}作 / 飛ばした {skipped}作 ==", flush=True)
+
+
+def cmd_second(a):
+    """2回目の判定を回して、1回目と合わせる(頁には書かない)。
+    ・1回目で表が0語だった頁 = 2回判定+lift(_element-review.agree)。 見直し(手元の材料)と同じ合わせ方
+    ・語がある頁 = 1回目のまま、語彙に足した語など1回目が見ていない候補の判定だけ2回目から足す
+    生の答えは work/<stem>/assign/assign-answer.run1.json / run2.json に残る(合わせ方を変えても rebuild でモデルを呼ばずに効く)。
+    並列で回し、3作続けて失敗したら止める。 途中で止めても、2回目が済んだ作品は飛ばして続きから。"""
+    import concurrent.futures
+    ea, rv = _mods()
+    import _lean_claude
+    V = ea.load_vocab()
+    todo = [s for s in a.stems.split(",") if s and judged(s)]
+    print(f"== 2回目の判定 {len(todo)}作 / {JUDGE_MODEL} / 並列 {a.parallel} / 語彙 {len(V['display'])}語 ==", flush=True)
+    started, ok, fails, streak, cost = now(), 0, [], 0, 0.0
+    jobs, ready = [], []
+    for stem in todo:
+        d = os.path.join(WORK, stem, "assign")
+        cur, p1, p2 = (os.path.join(d, n) for n in ("assign-answer.json", "assign-answer.run1.json", "assign-answer.run2.json"))
+        if not os.path.exists(p1):
+            if not os.path.exists(cur):
+                fails.append({"stem": stem, "why": "1回目の答えが無い"})
+                print(f"  ✖ {stem}: 1回目の答えが無い", flush=True)
+                continue
+            shutil.copyfile(cur, p1)  # 1回目の生の答えを守る(この後 assign-answer.json は合わせた答えで置き換わる)
+        with open(p1, encoding="utf-8") as f:
+            r1 = json.load(f)
+        with open(cur, encoding="utf-8") as f:
+            mode = json.load(f).get("mode")
+        if not mode:
+            mode = "fill" if (load_store(stem)["judges"][-1].get("core")) else "agree"
+        m = ea.load_material(stem)
+        cands = ea.find_candidates(m, V)
+        job = {"stem": stem, "m": m, "cands": cands, "r1": r1, "p2": p2, "mode": mode}
+        if os.path.exists(p2) and not a.redo:
+            with open(p2, encoding="utf-8") as f:
+                job["r2"] = json.load(f)
+            ready.append(job)
+        else:
+            job["prompt"] = ea.build_prompt(m, V, cands)
+            jobs.append(job)
+
+    def ask(job):
+        ans, use = _lean_claude.ask(job["prompt"], ea.SCHEMA, JUDGE_MODEL, system="あなたは漫画データベースの分類の助手。指示された JSON の形だけで答える。")
+        return {"use": use, "answer": ans, "at": now(), "vocab": len(V["display"])}
+
+    def settle(job):
+        nonlocal ok, cost
+        stem, r1, r2 = job["stem"], job["r1"], job["r2"]
+        u1, u2 = r1.get("use") or {}, r2.get("use") or {}
+        use = {"model": f"{u2.get('model') or JUDGE_MODEL} x2", "sec": round((u1.get("sec") or 0) + (u2.get("sec") or 0), 1), "in": (u1.get("in") or 0) + (u2.get("in") or 0),
+               "out": (u1.get("out") or 0) + (u2.get("out") or 0), "cost_usd": round((u1.get("cost_usd") or 0) + (u2.get("cost_usd") or 0), 6)}
+        raw = [r1.get("answer", r1), r2["answer"]]
+        ans, both, agreed = _merge(ea, rv, V, raw, job["mode"])
+        _, rows, ok_rows, bad, missing = ea.make_proposal(stem, job["m"], V, job["cands"], ans, use, not_spoiler=both or (), lift=agreed or ())
+        with open(os.path.join(WORK, stem, "assign", "assign-answer.json"), "w", encoding="utf-8") as f:
+            json.dump({"use": use, "answer": ans, "raw": raw, "mode": job["mode"]}, f, ensure_ascii=False, indent=1)
+        lifted = [e["word"] for e in rows if e.get("lift")]
+        did, core, last = _record(stem, ea, rows, u2.get("cost_usd") or 0, {"second": True, "mode": job["mode"], "lifted": lifted, "model": use["model"]})
+        with open(JUDGE_LEDGER, "a", encoding="utf-8") as f:
+            f.write(json.dumps({"at": now(), "stem": stem, "title": job["m"]["card"]["title"], "version": ea.VERSION, **u2, "core": core,
+                                "sub": [e["word"] for e in rows if e.get("cls") == "隠し"], "new": [e["word"] for e in rows if e["vocab"] == "新しい語"],
+                                "not": sum(1 for x in ok_rows if x["tier"] == "違う"), "rejected": len(bad), "missing": len(missing), "second": True}, ensure_ascii=False) + "\n")
+        ok += 1
+        cost += u2.get("cost_usd") or 0
+        add = [w for w in core if w not in (last.get("core") or [])]
+        gone = [w for w in (last.get("core") or []) if w not in core]
+        print(f"[{ok + len(fails)}/{len(todo)}] {stem} ✔ {job['mode']} 表に出す案 {len(last.get('core') or [])}→{len(core)}" + (f" 増 {'・'.join(add)}" if add else "")
+              + (f" 減 {'・'.join(gone)}" if gone else "") + (f" (lift {'・'.join(lifted)})" if lifted else ""), flush=True)
+
+    for job in ready:  # 2回目が済んでいる作品は合わせ直すだけ
+        settle(job)
+    if jobs:
+        with concurrent.futures.ThreadPoolExecutor(a.parallel) as ex:
+            futs = {ex.submit(ask, j): j for j in jobs}
+            for fu in concurrent.futures.as_completed(futs):
+                job = futs[fu]
+                try:
+                    r2 = fu.result()
+                except Exception as e:  # LeanError・時間切れなど
+                    fails.append({"stem": job["stem"], "why": str(e)[:200]})
+                    streak += 1
+                    print(f"[{ok + len(fails)}/{len(todo)}] {job['stem']} ✖ {str(e)[:120]}", flush=True)
+                    if streak >= 3:
+                        print("✖ 3作続けて失敗 → 止める(モデルの不調。 様子を見てから同じコマンドで続きから)", flush=True)
+                        for f2 in futs:
+                            f2.cancel()
+                        break
+                    continue
+                streak = 0
+                with open(job["p2"], "w", encoding="utf-8") as f:
+                    json.dump(r2, f, ensure_ascii=False, indent=1)
+                job["r2"] = r2
+                settle(job)
+    log_run({"at": started, "ended": now(), "kind": "second", "version": VERSION, "model": JUDGE_MODEL, "asked": len(todo), "ok": ok, "fails": fails, "cost_usd": round(cost, 4)})
+    print(f"== 終わり: 合わせた {ok} / 失敗 {len(fails)} / ${cost:.3f} ==", flush=True)
 
 
 def cmd_import(a):
@@ -368,5 +505,6 @@ if __name__ == "__main__":
     p = sp.add_parser("status"); p.set_defaults(f=cmd_status)
     p = sp.add_parser("judge"); p.add_argument("--n", type=int, default=20); p.add_argument("--stems"); p.add_argument("--redo", action="store_true"); p.set_defaults(f=cmd_judge)
     p = sp.add_parser("rebuild"); p.add_argument("--stems"); p.set_defaults(f=cmd_rebuild)
+    p = sp.add_parser("second"); p.add_argument("--stems", required=True); p.add_argument("--parallel", type=int, default=3); p.add_argument("--redo", action="store_true"); p.set_defaults(f=cmd_second)
     a = ap.parse_args()
     a.f(a)
