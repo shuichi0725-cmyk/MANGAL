@@ -12154,3 +12154,1214 @@ corrections:
     source: madb
     evidence: 'MADB(1.2.21) 初出:["shojo-comic", true, "ずっと好きだったくせに 2010-01-31: 初出：「Sho-Comi」2009021～023"]。旧値 空(種3のAI埋め)'
     added_at: '2026-11-04'
+  # ★2026-11-04 第2弾(正しい誌がマスタに無かった頁)。 誌の設定= scripts/magazine-verify/new_mags_2.py
+  21-g:
+    magazine: young-jump-mankaku
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["週刊ヤングジャンプ増刊・漫革", true, "21-G 2007-07-09: 初出：「週刊ヤングジャンプ増刊・漫革」「月刊少年ジャンプ」"]。旧値 weekly-shonen-jump(種3のAI埋め)'
+    added_at: '2026-11-04'
+  3gatsu-no-dai2-button:
+    magazine: ribon-special
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["冬休み大増刊号りぼんスペシャル", true, "3月の第2ボタン 2010-03-20: 初出：「冬休み大増刊号りぼんスペシャル」2009、「冬の大増刊号りぼんスペシャル」2010、「りぼん冬休みおたのしみゾウカンゴウ」200"]。りぼんスペシャルの号(冬休み大増刊号)。旧値 ribon(種3のAI埋め)'
+    added_at: '2026-11-04'
+  7-nin-no-bukiya-nanabun-no-1:
+    magazine: dragon-age-pure
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ドラゴンエイジPure", true, "七人の武器屋1/7 2007-12-09: 初出：「ドラゴンエイジPure」003～006"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  7gatsu-no-mahoutsukai:
+    magazine: lala-special
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ララスペシャル", true, "7月の魔法使い 2009-01-10: 初出：「ララスペシャル」「ララDX」"]。旧値 hana-to-yume(種3のAI埋め)'
+    added_at: '2026-11-04'
+  ai-esu:
+    magazine: comic-alive
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["コミックアライブ", true, "あいえすっ! 1 2011-09-30: 初出:「コミックアライブ」201102～10"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  andromalius:
+    magazine: comic-gene
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["月刊コミックジーン", true, "アンドロマリウス 1 2013-03-31: 初出:「月刊コミックジーン」2012年11月号～2013年2月号"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  ani-san-to-boku:
+    magazine: melody
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["メロディ", true, "兄さんと僕 2011-09: 初出:「メロディ」200808～201104"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  are-nochi-kareshi:
+    magazine: sho-comi-zokan
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["Sho-Comi増刊", true, "アレ←のち彼氏 2012-12-01: 初出:「Sho-Comi増刊」2011年12月15日号、2012年2月14日号、4月15日号、6月15日号"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  arina-no-tane:
+    magazine: cobalt
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["Cobalt", true, "有菜の種 2012-01-18: 初出:「Cobalt」2008年9月号、2009年5月号～2011年11月号"]。旧値 ribon(種3のAI埋め)'
+    added_at: '2026-11-04'
+  arukasaru-oujou-2008:
+    magazine: bessatsu-princess
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["別冊プリンセス・プリンセスGOLD", true, "アルカサル-王城-外伝 1 2008-12-30: 初出：「別冊プリンセス・プリンセスGOLD」"]。初出「別冊プリンセス・プリンセスGOLD」の先頭=別冊プリンセス。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  asahi-gohan:
+    magazine: leed-cafe
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["リイドカフェ", true, "あさひごはん 1 2015-01: 初出: 「リイドカフェ」2014.4～2014.11掲載"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  awajima-hyakkei:
+    magazine: pokopoko
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["ぼこぼこ", true, "淡島百景 1 2015-04-27: 初出: 第1話、第2話、第4話、第5話－web連載空間「ぼこぼこ」（2011年～2015年）, 第3話－「マンガ・エロティクス・エフ」vol."] / ja.wikipedia「淡島百景」[[ぽこぽこ]]→[[Ohta Web Comic]]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  battle-spirits-brave:
+    magazine: kerokero-ace
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ケロケロエース", true, "バトルスピリッツブレイヴ 1 2011-02-26: 初出:「ケロケロエース」201011～201102"]。旧値 shonen-ace(種3のAI埋め)'
+    added_at: '2026-11-04'
+  battle-spirits-shounen-toppa-bashin:
+    magazine: kerokero-ace
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["ケロケロエース", true, "バトルスピリッツ 少年突破バシン 1 2008-11-26: 初出：「ケロケロエース」200809～11"] / ja.wikipedia「バトルスピリッツ 少年突破バシン」[[ケロケロエース]]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  binetsu-hatsunetsu:
+    magazine: sho-comi-zokan
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["Sho-Comi増刊", true, "微熱×発熱 2013-03-31: 初出:「Sho-Comi増刊」2010年12月15日号、2011年2月14日号、6月15日号、2012年4月15日号、12月15日号"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  bisutoro-onsen-patalliro:
+    magazine: silky
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["シルキー", true, "ビストロ温泉パタリロ! 2008-01-25: 初出：「シルキー」200606～12 200702～10（隔月刊）"]。旧値 hana-to-yume(種3のAI埋め)'
+    added_at: '2026-11-04'
+  boku-no-karada-wa-tsuu-out:
+    magazine: business-jump
+    source: manual
+    evidence: 'MADB(1.2.21) 目次:["grand-jump", 94, 1.0, {"グランドジャンプ": 94}] / ja.wikipedia「ぼくの体はツーアウト」[[ビジネスジャンプ]]<br/>→[[グランドジャンプ]]。Wiki=ビジネスジャンプ→グランドジャンプ。 初出誌=ビジネスジャンプ。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  boku-no-lily:
+    magazine: ribon-special
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["りぼんスペシャル", true, "ぼくのリリィ 2009-12-20: 初出：「りぼんスペシャル」2008"]。旧値 ribon(種3のAI埋め)'
+    added_at: '2026-11-04'
+  boku-to-ojii-chan-to-mahou-no-tou:
+    magazine: comic-kai
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["コミック怪", true, "僕とおじいちゃんと魔法の塔 1 2012-02-24: 初出:「コミック怪」Vol.13(2011年1月)～Vol.15(2011年7月)"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  boys-girl:
+    magazine: betsucomi
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["Betsucomi", true, "ボーイズ・ガール 1 2009-10-31: 初出：「Betsucomi」200905～201007"]。ベツコミ の表記ゆれ。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  bungaku-shoujo-to-oishii-hanashi:
+    magazine: asuka
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["Asuka", true, "文学少女と美味しい噺 1 2010-01-26: 初出：「Asuka」200909、10、「ビーンズエース」2009017～019"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  card-fight-vangaado-0-start-setto:
+    magazine: kerokero-ace
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ケロケロエース", true, "カードファイト!!ヴァンガード0スタートセット 2013-01-26: 初出:「ケロケロエース」2011年1月号"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  cha-no-namida:
+    magazine: eden
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["Yahoo!コミック無料マガジンEDEN", true, "茶の涙 1 2010-07: 初出: Yahoo!コミック無料マガジンEDEN 2009年9月18日～12月11日配信分"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  chou-jikuu-yousai-macross-za-first:
+    magazine: macross-ace
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["マクロスエース", true, "超時空要塞マクロスTHE FIRST vol.1 2009-11-10: 初出：「マクロスエース」2009001,002"] / ja.wikipedia「超時空要塞マクロス THE FIRST」[[マクロスエース]]<br />[[ニュータイプエース]]<br />[[コミックNewtype]]<br />[[サイコミ]]。旧値 shonen-ace(種3のAI埋め)'
+    added_at: '2026-11-04'
+  coffee-cantata:
+    magazine: dengeki-maoh
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["電撃マオウ", true, "コーヒーカンタータ 1 2017-05: 初出: 『電撃マオウ』2017年1月号～5月号"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  crows-zero-tsuu-suzuran-housen:
+    magazine: bessatsu-shonen-champion
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["別冊少年チャンピオン", true, "クローズZEROⅡ 鈴蘭×鳳仙 1 2013-01-20: 初出:「別冊少年チャンピオン」2012年7月号～10月号"]。旧値 champion(種3のAI埋め)'
+    added_at: '2026-11-04'
+  daikaijuu-battle-ultra-adventure:
+    magazine: kerokero-ace
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ケロケロエース", true, "大怪獣バトルウルトラアドベンチャー 1 2008-09-26: 初出：「ケロケロエース」200701～200804"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  daisuki-mizusawa:
+    magazine: ribon-original
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["りぼんオリジナル", true, "大好き! 2007-02-20: 初出：「りぼんオリジナル」200508,10,200602"]。旧値 ribon(種3のAI埋め)'
+    added_at: '2026-11-04'
+  dandara-gohan:
+    magazine: aria
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ARIA pixivコミック", true, "だんだらごはん 1 2017-01: 初出: ARIA pixivコミック2016年6月～11月掲載"]。初出「ARIA」「pixivコミック」の先頭=ARIA。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  dark-act:
+    magazine: jump-sq-web
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ジャンプSQ.公式HP", true, "ダークアクト 2012-03-07: 初出:「ジャンプSQ.公式HP」2011年9/3更新分～2012年2/3更新分、「ジャンプSQ.LaB 」Vol.002"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  datte-suki-nandamon:
+    magazine: sho-comi-zokan
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["Sho-Comi増刊", true, "だって好きなんだもん☆ 2008-12-29: 初出：「Sho-Comi増刊」200806,08,12"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  deep-green:
+    magazine: michao
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["MiChao!（ミチャオ）", true, "ディープグリーン v.1 2008-04-11: 初出：Webコミック「MiChao!（ミチャオ）」"] / ja.wikipedia「ディープグリーン」[[MiChao!]]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  demodori-kaseifu-patalliro:
+    magazine: silky
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["シルキー", true, "出もどり家政夫パタリロ! 1 2009-11-10: 初出：「シルキー」200802～12,200902～08"]。旧値 hana-to-yume(種3のAI埋め)'
+    added_at: '2026-11-04'
+  densetsu-no-yuusha-no-densetsu:
+    magazine: dragon-age
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["月刊ドラゴンエイジ", true, "伝説の勇者の伝説 1 2009-03-09: 初出：「月刊ドラゴンエイジ」200808～11"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  devilman-g:
+    magazine: champion-red
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 目次:["champion", 1, 1.0, {"週刊少年チャンピオン": 1}]; 初出:["チャンピオンRED", true, "デビルマンG vol.1 2012-10-05: 初出:「チャンピオンRED」2012年5月号～9月号"] / ja.wikipedia「デビルマンG」[[チャンピオンRED]]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  dokusai-gurimuwaaru:
+    magazine: comic-gene
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["コミックジーン", true, "独裁グリムワール 1 2011-11-30: 初出:「コミックジーン」201107～11"] / ja.wikipedia「独裁グリムワール」[[月刊コミックジーン]]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  donburi-iinchou:
+    magazine: web-comic-action
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["WEBコミックアクション", true, "どんぶり委員長 1 2015-07: 初出: 「WEBコミックアクション」2014年10/24、11/28、12/26、2015年1/30、2/27、3/27、4/24、5/29配"] / ja.wikipedia「どんぶり委員長」[[WEBコミックアクション]]。旧値 manga-action(種3のAI埋め)'
+    added_at: '2026-11-04'
+  dorami-chan:
+    magazine: shogakukan-book
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["小学館 BOOK", true, "ドラミちゃん 2007-08-06: 初出：「小学館 BOOK」「小学生ブック」「小学三年生」"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  dot-invader:
+    magazine: jump-sq-19
+    source: madb
+    evidence: 'MADB(1.2.21) 目次:["jump-sq", 1, 1.0, {"ジャンプSQ.": 1}]; 初出:["ジャンプスクエア19", true, "ドットインベーダー 1 2011-10: 初出:「ジャンプスクエア19」20100620、20110319～0919"]。ジャンプSQ.19 の表記ゆれ。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  double-gun-rock-rider:
+    magazine: magazine-great
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["月刊少年マガジン増刊 マガジンGREAT", true, "ダブルガンロックライダー 1 2007-04-17: 初出：「月刊少年マガジン増刊 マガジンGREAT」200609～200701"]。マガジンGREAT の表記ゆれ。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  dream-buster:
+    magazine: comic-ryu
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["月刊COMICリュウ", true, "ドリームバスター 01 2007-11-01: 初出：「月刊COMICリュウ」200611～200704"] / ja.wikipedia「ドリームバスター」[[月刊COMICリュウ]]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  duel-masters-haouden-gachi:
+    magazine: corocoro-g
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["コロコロG", true, "デュエル・マスターズ覇王伝ガチ!! 第1巻 2011-11-02: 初出:「コロコロG」2010年夏号～2011年夏号"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  esper-mami:
+    magazine: manga-kun
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["マンガくん", true, "エスパー魔美 1 2009-08-30: 初出：「マンガくん」「マンガくんコミックス」「月刊コロコロコミック」"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  eureka-seven-ao-save-a-prayer:
+    magazine: newtype-ace
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ニュータイプエース", true, "エウレカセブンAO Save A Prayer 1 2012-07-10: 初出:「ニュータイプエース」2012年Vol.6～Vol.10"]。旧値 shonen-ace(種3のAI埋め)'
+    added_at: '2026-11-04'
+  fai-brain-kami-no-puzzle:
+    magazine: newtype-ace
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ニュータイプエース", true, "ファイ・ブレイン～神のパズル 1 2012-04-10: 初出:「ニュータイプエース」2011年Vol.3～2012年Vol.7"]。旧値 shonen-ace(種3のAI埋め)'
+    added_at: '2026-11-04'
+  fake-tanabe:
+    magazine: shonen-sunday-r
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["週刊少年サンデーR増刊", true, "フェイク! 2011-08: 初出:「週刊少年サンデーR増刊」2002年11月号、「少年サンデー超増刊」2003年1月号、4月号「ゲッサン」2009年6月号、「2000年(第47"]。旧値 weekly-shonen-sunday(種3のAI埋め)'
+    added_at: '2026-11-04'
+  final-fantasy-11-2010:
+    magazine: comic-vanatsu
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["コミックヴァナ通", true, "ファイナルファンタジーⅪ 1 2010-05-27: 初出：「コミックヴァナ通」2008001～200900 『ファイナルファンタジーⅪ』をプレイしたすべての人へ…。新米冒険者アル"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  fire-king:
+    magazine: michao
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["MiChao!（ミチャオ）", true, "ファイアキング 1 2008-10-23: 初出：Webコミック「MiChao!（ミチャオ）」200705～09"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  fujiko-studio-assistant-nikki-maicching-mangadou:
+    magazine: hontou-ni-atta-yukai-na-hanashi
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["本当にあった愉快な話", true, "藤子スタジオアシスタント日記まいっちんぐマンガ道 2015-07-07: 初出:「本当にあった愉快な話」2013年7月号～2015年7月号連載の「まいっちんぐマンガ道」に描きおろ"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  fukkatsu-dai-san-yakyuubu:
+    magazine: michao
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["MiChao!（ミチャオ）", true, "復活!!第三野球部 1 2007-10-23: 初出：Webコミック「MiChao!（ミチャオ）」"]。旧値 weekly-shonen-magazine(種3のAI埋め)'
+    added_at: '2026-11-04'
+  full-metal-panic-another:
+    magazine: newtype-ace
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["ニュータイプエース", true, "フルメタル・パニック!アナザー 1 2012-03-26: 初出:「ニュータイプエース」2011年Vol.2～2012年Vol.6"] / ja.wikipedia「フルメタル・パニック! アナザー」[[ニュータイプエース]]<br />→[[角川ニコニコエース]]。旧値 shonen-ace(種3のAI埋め)'
+    added_at: '2026-11-04'
+  fushigi-no-hanazono:
+    magazine: ribon-special
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["りぼんスペシャル", true, "不思議の花園 2008-11-19: 初出：「りぼんスペシャル 」2007,2008"]。旧値 ribon(種3のAI埋め)'
+    added_at: '2026-11-04'
+  fushigi-tsuushin-toilet-no-hanako-san:
+    magazine: comic-bunbun
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["月刊プレコミックブンブン", true, "ふしぎ通信 トイレの花子さん 1 2008-07-10: 初出：「月刊プレコミックブンブン」200801～04"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  fuusui-no-kokatorisu:
+    magazine: magazine-great
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["月刊少年マガジン増刊GREAT", true, "封嘴のコカトリス 1 2009-04-17: 初出：「月刊少年マガジン増刊GREAT」200805～09"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  gakkou-saien-okeraba:
+    magazine: magazine-great
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["月刊少年マガジン増刊GREAT", true, "学校菜園おけらば 1 2008-05-16: 初出：「月刊少年マガジン増刊GREAT」200701～09（隔月刊）"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  ganbaride-battle-ride-masters:
+    magazine: tele-manga-heroes
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["テレまんがヒーローズ", true, "ガンバライドバトルライドマスターズ 2009-12-17: 初出：「テレまんがヒーローズ」200909"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  gente:
+    magazine: manga-erotics-f
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["マンガ・エロティクス・エフ", true, "Gente 1 2007-09: 初出: 『マンガ・エロティクス・エフ』2006年Vol.41～2007年Vol.45"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  gogo-tamagotchi:
+    magazine: youchien
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["幼稚園", true, "GO GO!たまごっち 1 2010-03-03: 初出：「幼稚園」「ぷっちぐみ」「たまごっちファン」「たまとも育成ブック」「小学一年生」「小学二年生」「小学三年生」「バンダイ た"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  gohan-no-jikanwari:
+    magazine: itan-web-comic
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ITAN WEB COMIC", true, "ごはんの時間割 1 2014-07: 初出: ITAN WEB COMIC"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  gohan-tsukurisugiko-to-kanshokukei-otoko:
+    magazine: denshi-birz
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["デンシバーズ", true, "ご飯つくりすぎ子と完食系男子 1 2016-11: 発売: 幻冬舎. 初出: 「デンシバーズ」2016年13号～19号、描き下ろし"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  gomen-soredemo-kimi-ga-suki:
+    magazine: sho-comi-zokan
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["Sho-Comi増刊", true, "ごめん、それでもキミが好き 2010-07-31: 初出:「Sho-Comi増刊」2010年2月14日号"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  good-morning-kiss:
+    magazine: cookie-box
+    source: manual
+    evidence: 'MADB(1.2.21) 初出:["クッキー", true, "グッドモーニング・キス 1 2007-05-20: 初出：「クッキー」2006初夏・秋・2007新春"] / ja.wikipedia「グッドモーニング・コール」[[Cookie (雑誌)#Cookie BOX|Cookie BOX]]<br />[[Cookie (雑誌)|Cookie]]。Wiki=Cookie BOX(Cookieの増刊)→Cookie / MADB初出=「クッキー」2006初夏・秋・2007新春(季刊=Cookie BOX)。 増刊は別の誌=マスタに無い。旧値 ribon(種3のAI埋め)'
+    added_at: '2026-11-04'
+  gooru-getter-yuuto:
+    magazine: shogaku-ninensei
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["小学二年生", true, "ゴールゲッター 勇斗 2008-03-04: 初出：「小学二年生」200704～200803"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  gyakuten-honey:
+    magazine: lala-special
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ララスペシャル", true, "逆転ハニー 第1巻 2009-11-10: 初出：「ララスペシャル」「ララDX」"]。旧値 hana-to-yume(種3のAI埋め)'
+    added_at: '2026-11-04'
+  hajime-no-shokutaku:
+    magazine: melody
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["メロディ", true, "一の食卓 1 2015-03: 初出: 『メロディ』2014年8月号～12月号"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  hajimete-o-anata-to:
+    magazine: sho-comi-zokan
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["Sho-Comi増刊", true, "初めてをあなたと 2011-10: 初出:「Sho-Comi増刊」20091015他"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  hakenmeshi:
+    magazine: office-you
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["office YOU", true, "ハケンめし 1 2016-07: 初出: 『office YOU』2013年9月号、11月号、2014年2月号、9月号、2015年3月号、9月号、2016年3月号"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  hana-no-na-o-shiranai:
+    magazine: petit-princess
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["プチプリンセス", true, "花の名を知らない 2013-01-30: 初出:「プチプリンセス」2003年10月5日号、2004年8月1日号、10月5日号、2005年2月5日号 「ミステリーボニータ」2004"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  hatsukoi-no-itazura:
+    magazine: sho-comi-zokan
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["Sho-Comi増刊", true, "初恋の悪戯 2011-06: 初出:「Sho-Comi増刊」20110415、「Sho-Comi」2011002、2007023～2008001"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  hayate-no-gotoku-no-mae:
+    magazine: shonen-sunday-r
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["週刊少年サンデーR", true, "ハヤテのごとく!の前 2010-08-23: 初出：「週刊少年サンデーR」200211「週刊少年サンデー超増刊」200307～11"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  hazunde-papamokko:
+    magazine: asahi-shogakusei-shimbun
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["朝日小学生新聞", true, "はずんで!パパモッコ 1 2013-12-15: 初出:「朝日小学生新聞」2012年1月4日～31日、3月1日～3月31日"] / ja.wikipedia「はずんで! パパモッコ」[[朝日小学生新聞]]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  henkei-henkei-toransufoomaa:
+    magazine: comic-bunbun
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["月刊プレコミックブンブン", true, "変形!ヘンケイ!トランスフォーマー 1 2009-05-15: 初出：「月刊プレコミックブンブン」200811～200904"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  hokusai-to-meshi:
+    magazine: samurai-ace
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["サムライエース", true, "ホクサイと飯 2013-10: 初出: 増刊『サムライエース』Vol.1～8"] / ja.wikipedia「ホクサイと飯さえあれば」[[サムライエース]]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  hontou-ni-atta-kowai-hanashi:
+    magazine: ciao-deluxe-horror
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ちゃおデラックスホラー", true, "本当にあった怖い話 2010-05-03: 初出：「ちゃおデラックスホラー」2009、「ちゃおデラックス」2009年夏の超大増刊号"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  hoobare-soushoku-joshi:
+    magazine: manga-time-kirara-forward
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["まんがタイムきららフォワード", true, "ほおばれ!草食女子 1 2016-06: 初出: 『まんがタイムきららフォワード』2015年8月号～12月号、2016年2月号～7月号、描き下ろし"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  hoshi-no-canvas:
+    magazine: ribon-special
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["りぼんスペシャル", true, "星のキャンバス 2008-11-19: 初出：「りぼんスペシャル」2008"]。旧値 ribon(種3のAI埋め)'
+    added_at: '2026-11-04'
+  hoshi-o-ou-kodomo:
+    magazine: comic-flapper
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["コミックフラッパー", true, "星を追う子ども 1 2011-07-31: 初出:「コミックフラッパー」2011年6月号～2011年8月号"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  houkago-sensei-to-koi-ni-ochiru:
+    magazine: sho-comi-zokan
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["Sho-Comi増刊", true, "放課後、先生と恋に堕ちる 2010-05-31: 初出：「Sho-Comi増刊」20091215ほか"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  ichinensei-miiko-chan:
+    magazine: shogaku-ichinensei
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["小学一年生", true, "いちねんせい!みい子ちゃん 2012-03-06: 初出:「小学一年生」"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  ijimerarekko:
+    magazine: sho-comi-zokan
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["Sho-Comi増刊", true, "いじめられっ娘 2011-08: 初出:「Sho-Comi増刊」20110214、描き下ろし、「Sho-Comi」2010023、2011006、2011010、2009011"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  ikoku-meiro-no-kurowaaze:
+    magazine: dragon-age-pure
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["ドラゴンエイジPure", true, "異国迷路のクロワーゼ 1 2007-12-09: 初出：「ドラゴンエイジPure」2007002～004,006"] / ja.wikipedia「異国迷路のクロワーゼ」[[ドラゴンエイジピュア|ドラゴンエイジPure]]<br />[[月刊ドラゴンエイジ]]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  imasara-nostradamus:
+    magazine: comic-gene
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["月刊コミックジーン", true, "いまさらノストラダムス 1 2013-03-31: 初出:「月刊コミックジーン」2012年11月号～2013年3月号"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  inazuma-eleven-special:
+    magazine: shogaku-sannensei
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["小学三年生", true, "イナズマイレブン SPECIAL 1 2010-08-02: 初出：「小学三年生」200904～09「小学四年生」201007,08"]。旧値 ciao(種3のAI埋め)'
+    added_at: '2026-11-04'
+  iro-kaneru:
+    magazine: melody
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["メロディ", true, "色兼ネル 第1巻 2012-05-10: 初出:「メロディ」2011年8・10・12月号、2012年2月号"]。旧値 hana-to-yume(種3のAI埋め)'
+    added_at: '2026-11-04'
+  isekai-shokudou:
+    magazine: young-gangan
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["ヤングガンガン", true, "異世界食堂 1 2017-06: 初出: 『ヤングガンガン』2016年No.23～2017年No.01、No.03～No.05"] / ja.wikipedia「異世界食堂」[[ヤングガンガン]]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  isshokenmei-ni-gohan-maruyama:
+    magazine: zero-sum-online
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ゼロサムオンライン", true, "いっしょにごはん。 1 2011-11: 初出: 「ゼロサムオンライン」2011年5月10日～9月9日"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  isshokenmei-ni-sugar-bunnies:
+    magazine: pucchigumi
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ぷっちぐみ", true, "いっしょにシュガーバニーズ 1 2009-12-30: 初出：「ぷっちぐみ」"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  itadakimasu-uekan:
+    magazine: for-mrs
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["フォアミセス", true, "いただきます 2015-04: 初出: 『フォアミセス』2014年8月号、12月号、2015年2月号"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  jewel-pet-twinkle:
+    magazine: shogaku-ichinensei
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["小学一年生", true, "ジュエルペットてぃんくる☆ 1 2010-08-02: 初出：「小学一年生」「小学二年生」「ぷっちぐみ」「ぷっちぐみ増刊 ジュエルペットファン」vol.2"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  jigoku-no-meikyuu:
+    magazine: ciao-deluxe-horror
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ちゃおデラックスホラー", true, "地獄の迷宮 2011-08: 初出:「ちゃおデラックスホラー」201101、描き下ろし、200907"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  jigokudou-reikai-tsuushin:
+    magazine: good-afternoon
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["good!アフタヌーン", true, "地獄堂霊界通信 1 2010-02-05: 初出：「good!アフタヌーン」2008001,2009002～004"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  jingi-naki-kaseifu-patalliro:
+    magazine: silky
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["シルキー", true, "仁義なき家政夫パタリロ! 2011-05-10: 初出:「シルキー」200910、12、201002、04、06、08、10、201102、04"]。旧値 hana-to-yume(種3のAI埋め)'
+    added_at: '2026-11-04'
+  johnny:
+    magazine: asuka
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ASUKA", true, "ジョニー 2008-01-25: 初出：「ASUKA」「CIEL」「コミック ピアニッシモ」"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  kaiketsu-zorori-no-hadaka-no-ou-sama:
+    magazine: comic-bunbun
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["月刊プレコミックブンブン", true, "コミック版 かいけつゾロリのはだかの王さま 2008-01-10: 初出：「月刊プレコミックブンブン」200701～06"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  kamen-rider-2011:
+    magazine: tv-land
+    source: manual
+    evidence: 'MADB(1.2.21) 初出:["テレビランド", true, "仮面ライダー 第1巻 2011-07-15: 初出:「テレビランド」197810～197904"]。この版(2011)の初出=テレビランド1978-79(MADB)。 Wikiは石ノ森版(ぼくらマガジン)の記事。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  kamen-rider-kesshisen-7nin-rider:
+    magazine: tv-magazine
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["テレビマガジン8月号増刊人気まんが7大ヒーロー大行進ジャンボ号", true, "仮面ライダー決死戦7人ライダー 2012-08-15: 初出:「テレビマガジン8月号増刊人気まんが7大ヒーロー大行進ジャンボ号」1975年8月「月刊テレビマガジン」1975年4～"]。一度きりの増刊号。 連載の本体=月刊テレビマガジン1975年4月〜。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  kanra-karabee:
+    magazine: manga-shonen
+    source: madb
+    evidence: 'MADB(1.2.21) 目次:["漫画少年", 42, 0.98, {"漫画少年": 42, "漫画少年増刊": 1}]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  katabira-no-mai:
+    magazine: bessatsu-princess
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["別冊プリンセス", true, "帷子の舞 2012-04-30: 初出:「別冊プリンセス」1993年13号、1994年15号、「月刊プリンセス」1995年8月号、「ミステリーDX増刊」1997年歴史ロマンDX秋"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  kaze-no-kishi-show:
+    magazine: shogaku-gonensei
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["小学五年生", true, "風の棋士ショウ 1 2008-11-02: 初出：「小学五年生」「小学六年生」"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  kemono-renairon:
+    magazine: shojo-comic-zokan
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["少女コミック増刊", true, "ケモノ恋愛論 2009-04-29: 初出：「少女コミック増刊」"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  keroro-gunsou-tokubetsu-kunren-sengoku-ransutaa-daibatoru:
+    magazine: kerokero-ace
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ケロケロエース", true, "ケロロ軍曹特別訓練☆戦国ラン星大バトル! 2008-03-05: 初出：「ケロケロエース」001～004"]。旧値 shonen-ace(種3のAI埋め)'
+    added_at: '2026-11-04'
+  kiss-no-jijou:
+    magazine: amie
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["Amie", true, "Kissの事情 2011-07: 初出:「Amie」"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  kitto-motto-suki-ni-naru:
+    magazine: sho-comi-zokan
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["Sho-Comi増刊", true, "きっと、もっと、好きになる。 2011-12-31: 初出:「Sho-Comi増刊」2011年8月15日号、10月15日号、4月15日号、「少女コミック増刊」2003年4月15日"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  kizaki-shounen-no-horoniga-kissa-junrei:
+    magazine: kurage-bunch
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["くらげバンチ", true, "木崎少年のほろにが喫茶巡礼 1 2016-12: 初出: くらげバンチ2016年4月～10月"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  komikkuban-kaiketsu-zorori-no-arajin-to-mahou-no-lamp:
+    magazine: comic-bunbun
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["月刊プレコミックブンブン", true, "コミック版 かいけつゾロリのアラジンと魔法のランプ 2008-07-10: 初出：「月刊プレコミックブンブン」200707～12"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  komikkuban-kaiketsu-zorori-no-jack-to-mamenoki:
+    magazine: comic-bunbun
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["月刊プレコミックブンブン", true, "コミック版 かいけつゾロリのジャックと豆の木 2008-12-10: 初出：「月刊プレコミックブンブン」200801～06"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  komikkuban-kaiketsu-zorori-no-nemuri-no-mori-no-hime:
+    magazine: comic-bunbun
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["月刊プレコミックブンブン", true, "コミック版 かいけつゾロリの眠りの森の姫 2009-07-01: 初出：「月刊プレコミックブンブン」「月刊コミックブンブン」"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  koshoku-robot:
+    magazine: girls-jump
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["Girls Jump", true, "孤食ロボット 1 2014-06: 初出: 『Girls Jump』2012年3月1日号、『ジャンプ改』2013年3月号、8月号、12月号、2014年2月号、4月号、6月号"] / ja.wikipedia「孤食ロボット」[[スーパージャンプ#増刊号|ガールズジャンプ]]<br />[[ジャンプ改]]<br />[[Cookie (雑誌)|Cookie]]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  kouhai-ee-no-kokuhaku:
+    magazine: betsuma-sister
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["別冊マーガレットsister", true, "後輩Aの告白 2012-04-30: 初出:別冊マーガレット2011年9月増刊号「別冊マーガレットsister」、「デラックスマーガレット」2010年7月号、「ザマーガレット」2"]。旧値 margaret(種3のAI埋め)'
+    added_at: '2026-11-04'
+  koukyou-shihen-eureka-seven-new-order:
+    magazine: comptiq
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["コンプティーク", true, "交響詩篇エウレカセブンニュー・オーダー 1 2013-01-26: 初出:「コンプティーク」l2012年7～11月号、"]。旧値 shonen-ace(種3のAI埋め)'
+    added_at: '2026-11-04'
+  kuroyuri-no-kishi:
+    magazine: flowers-rinka
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["flowers増刊 凛花", true, "黒百合の騎士 2009-12-15: 初出：「flowers増刊 凛花」200805、200906～08"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  kurukuru-gooma:
+    magazine: shogaku-yonensei
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["小学四年生", true, "くるくるゴーマ!! 2010-05-03: 初出：「小学四年生」200804～200903「小学三年生」200904～201003"]。旧値 ciao(種3のAI埋め)'
+    added_at: '2026-11-04'
+  lilo-and-stitch:
+    magazine: shogaku-ichinensei
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["小学一年生", true, "リロ アンド スティッチ 2009-06-24: 初出：「小学一年生」「小学二年生」「ぷっちぐみ」"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  live-on-car-dliver-kakeru:
+    magazine: comic-bunbun
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["月刊プレコミックブンブン", true, "ライブオンCARDLIVER翔 1 2008-10-15: 初出：「月刊プレコミックブンブン」200710～200801"] / ja.wikipedia「ライブオン CARDLIVER 翔」[[月刊コミックブンブン]]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  lolicon-fenikkusu:
+    magazine: dragon-age
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["月刊ドラゴンエイジ", true, "ロリコンフェニックス 1 2007-02-01: 初出：「月刊ドラゴンエイジ」200606～11"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  love-skill:
+    magazine: ribon-special
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["りぼんスペシャルキュート", true, "恋愛スキル 2012-09-19: 初出:「りぼんスペシャルキュート」2012年春の大増刊号「りぼんスペシャルレモン」2011年夏の大増刊号、「りぼんスペシャルオレンジ」2011"]。りぼんスペシャルの号の名(キュート/レモン/オレンジ)。旧値 ribon(種3のAI埋め)'
+    added_at: '2026-11-04'
+  mahou-shoujo-of-ji-end:
+    magazine: bessatsu-shonen-champion
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 目次:["champion", 1, 1.0, {"週刊少年チャンピオン": 1}]; 初出:["別冊少年チャンピオン", true, "魔法少女・オブ・ジ・エンド 1 2013-01-20: 初出:「別冊少年チャンピオン」2012年7月号～10月号"] / ja.wikipedia「魔法少女・オブ・ジ・エンド」[[別冊少年チャンピオン]]。旧値 champion(種3のAI埋め)'
+    added_at: '2026-11-04'
+  mahoutsukai-no-pan:
+    magazine: office-you
+    source: manual
+    evidence: 'MADB(1.2.21) 初出:["まほうつかいのパン", true, "まほうつかいのパン 1 2015-05: 初出: 「まほうつかいのパン」『office YOU』2014年2月号～4月号、6月号、「ぼくたちの秘密基地」『office YOU』20"] / ja.wikipedia「まほうつかいのパン」[[オフィスユー]]。Wiki・MADBとも office YOU(MADBの初出欄は題を先に書いている)。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  majokko-tsukune-chan:
+    magazine: young-magazine-uppers
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["ヤングマガジンアッパーズ", true, "魔女っ娘つくねちゃん よせあつめ 2007-10-23: 初出：「ヤングマガジンアッパーズ」2003008,009,011～014,016,017,019～023 2004004"] / ja.wikipedia「魔女っ娘つくねちゃん」[[ヤングマガジンアッパーズ]]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  mameshiba-puchitsu:
+    magazine: pucchigumi
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ぷっちぐみ", true, "豆しばぷちっ! 2012-04-02: 初出:「ぷっちぐみ」「小学四年生」"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  manga-no-ma:
+    magazine: ribon-special
+    source: madb
+    evidence: 'MADB(1.2.21) 目次:["ribon", 1, 1.0, {"りぼん": 1}]; 初出:["りぼんスペシャル", true, "マンガのマ 2009-07-20: 初出：「りぼんスペシャル 」「りぼん」"]。旧値 ribon(種3のAI埋め)'
+    added_at: '2026-11-04'
+  mayonaka-roriita:
+    magazine: sho-comi-zokan
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["Sho-Comi増刊", true, "真夜中♡ロリータ 2011-11-30: 初出:「Sho-Comi増刊」2011年2月14日号、4月15日号、6月15日号、8月15日号「Sho-Comi」2011015"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  medamayaki-no-kimi-itsu-tsubusu:
+    magazine: comic-beam
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["月刊コミックビーム", true, "目玉焼きの黄身いつつぶす? 1 2013-06: 初出: 『月刊コミックビーム』2012年10月号～2013年4月号掲載"] / ja.wikipedia「目玉焼きの黄身 いつつぶす?」[[コミックビーム]]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  meiguru:
+    magazine: shonen-sirius-web
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["月刊少年シリウスオフィシャルサイト", true, "めいぐる 1 2009-03-23: 初出：「月刊少年シリウスオフィシャルサイト」「月刊少年シリウス」"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  merumo-chan:
+    magazine: comic-ryu
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["COMICリュウ", true, "メルモちゃん 1 2011-04-01: 初出:「COMICリュウ」2009年11月号、2010年10月号～12月号、2011年1月号～3月号"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  meshineko:
+    magazine: niconico-seiga
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ニコニコ静画", true, "めしねこ 1 2017-02: 作品初出: ニコニコ静画2016年5月～11月"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  metarikku-colors:
+    magazine: ribon-special
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["冬休み大増刊号りぼんスペシャル", true, "メタリック・カラーズ 2010-04-20: 初出：「冬休み大増刊号りぼんスペシャル」2009「春の大増刊号りぼんスペシャル」2009「夏の大増刊号りぼんスペシャルダイヤ」200"]。りぼんスペシャルの号(冬休み大増刊号)。旧値 ribon(種3のAI埋め)'
+    added_at: '2026-11-04'
+  meteor-san-strike-desu:
+    magazine: magazine-eno
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["マガジンイーノ", true, "メテオさんストライクです! 1 2010-04-16: 初出：「マガジンイーノ」（月刊少年マガジン増刊）200909～201003"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  mini-yonku-reesaa-kakeru:
+    magazine: shogaku-sannensei
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["小学三年生", true, "ミニ四駆レーサーカケル 第1巻 2008-08-02: 初出：「小学三年生」「小学五年生」"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  miracle-mimika:
+    magazine: pucchigumi
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["ぷっちぐみ", true, "味楽る!ミミカ 1 2007-06-02: 初出：「ぷっちぐみ」「小学二年生」"] / ja.wikipedia「味楽る!ミミカ」[[ぷっちぐみ]]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  miraizer-ban:
+    magazine: monthly-manga-shonen
+    source: madb
+    evidence: 'MADB(1.2.21) 目次:["月刊マンガ少年", 24, 1.0, {"月刊マンガ少年": 24}]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  mitsugetsu-2007:
+    magazine: melody
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["メロディ", true, "蜜月 2007-03-10: 初出：「メロディ」200610,12,200702"]。旧値 hana-to-yume(種3のAI埋め)'
+    added_at: '2026-11-04'
+  mizutama-fabric:
+    magazine: lala-special
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ララスペシャル", true, "水玉ファブリック 2007-01-10: 初出：「ララスペシャル」「ララDX」"]。旧値 hana-to-yume(種3のAI埋め)'
+    added_at: '2026-11-04'
+  mobile-00-gundam-00:
+    magazine: kerokero-ace
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["ケロケロエース", true, "機動戦士ガンダム00 1 2008-03-26: 初出：「ケロケロエース」001～003"] / ja.wikipedia「機動戦士ガンダム00」[[ケロケロエース]]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  mobile-suit-gundam-00-2nd-season:
+    magazine: kerokero-ace
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ケロケロエース", true, "機動戦士ガンダム00 2nd.season 1 2009-02-26: 初出：「ケロケロエース」2008012～2009014"]。旧値 shonen-ace(種3のAI埋め)'
+    added_at: '2026-11-04'
+  mobile-suit-gundam-age-second-evolution:
+    magazine: newtype-ace
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ニュータイプエース", true, "機動戦士ガンダムAGE Second Evolution 1 2012-03-26: 初出:「ニュータイプエース」2012年Vol.4-Vol.7"]。旧値 shonen-ace(種3のAI埋め)'
+    added_at: '2026-11-04'
+  mobile-suit-gundam-msv-senki-jonii-raiden:
+    magazine: gundam-magazine
+    source: manual
+    evidence: 'MADB(1.2.21) 初出:["comic-bonbon", true, "機動戦士ガンダムMSV戦記ジョニー・ライデン 2007-11-16: 初出：「コミックボンボン」200611 200710,11"] / ja.wikipedia「機動戦士ガンダムMSV戦記 ジョニー・ライデン」[[ガンダムマガジン]]<br />[[コミックボンボン]]。Wiki=ガンダムマガジン→コミックボンボン。 初出誌=ガンダムマガジン。旧値 shonen-ace(種3のAI埋め)'
+    added_at: '2026-11-04'
+  mobile-suit-gundam-thunderbolt:
+    magazine: big-comic-superior
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["ビッグコミックスペリオール", true, "機動戦士ガンダムサンダーボルト 1 2012-11-04: 初出:「ビッグコミックスペリオール」2012年8～11号、13～15号、17～18号"] / ja.wikipedia「機動戦士ガンダム サンダーボルト」[[ビッグコミックスペリオール]]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  momiiro:
+    magazine: silky
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["シルキー", true, "紅絹彩色 2012-06-10: 初出:「シルキー」2009年12月号、2011年4月号、2012年4月号"]。旧値 hana-to-yume(種3のAI埋め)'
+    added_at: '2026-11-04'
+  mousou-cinderella:
+    magazine: ribon-special
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["りぼんスペシャル", true, "妄想シンデレラ 2009-12-20: 初出：「りぼんスペシャル」2009"]。旧値 ribon(種3のAI埋め)'
+    added_at: '2026-11-04'
+  mugi-no-wakusei:
+    magazine: feel-young
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["FEEL YOUNG", true, "麦の惑星 1 2016-05: 初出: 『FEEL YOUNG』2015年7-9,11,12月号,2016年2,3月号掲載作品に加筆・修正"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  mune-ga-naru-noha-kimi-no-sei:
+    magazine: betsucomi
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["ベツコミ", true, "胸が鳴るのは君のせい 1 2013-07-01: 初出:「ベツコミ」2012年11月号～2013年3月号"] / ja.wikipedia「胸が鳴るのは君のせい」[[ベツコミ]]。旧値 ribon(種3のAI埋め)'
+    added_at: '2026-11-04'
+  naisho-no-tsubomi-mebae:
+    magazine: shogaku-sannensei
+    source: manual
+    evidence: 'MADB(1.2.21) 初出:["小学三年生", true, "ないしょのつぼみ -めばえ- 2007-08-02: 初出：「小学三年生」200603～「小学四年生」200702"] / ja.wikipedia「ないしょのつぼみ」（1-3期）[[小学館の学年別学習雑誌|小学四年生]]→[[小学館の学年別学習雑誌|小学五年生]]<br />（0期）[[小学館の学年別学習雑誌|小学三年生]]→小学四年生<br />（4-6期）小学五年生 <br />。Wiki・MADBとも 小学三年生→小学四年生(学年誌)。 今の「ちゃお」は誤り。旧値 ciao(種3のAI埋め)'
+    added_at: '2026-11-04'
+  natsu-no-kakera:
+    magazine: lala-special
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ララスペシャル", true, "夏のかけら 2010-03-10: 初出：「ララスペシャル」200608、「ララDX」200701、05、200505、200411"]。旧値 hana-to-yume(種3のAI埋め)'
+    added_at: '2026-11-04'
+  nazca:
+    magazine: monthly-manga-shonen
+    source: madb
+    evidence: 'MADB(1.2.21) 目次:["月刊マンガ少年", 12, 1.0, {"月刊マンガ少年": 12}]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  nazo-no-karakuri-yashiki:
+    magazine: shonen-kobunsha
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["少年", true, "なぞのからくり屋敷 2012-07-01: 初出:「少年」1956年7月号別冊ふろく「痛快漫画ブック」、「野球少年」1958年1月号～3月号ふろく"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  neko-man-tan:
+    magazine: manga-neko-no-shippo
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["まんが ねこのしっぽ", true, "ねこまんたん 2008-06: 奥付より 2008年6月30日発行 初出「まんが ねこのしっぽ」（小社刊）2005年7月号～2007年7月号"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  nerawareta-gakuen:
+    magazine: newtype-ace
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ニュータイプエース", true, "ねらわれた学園 1 2012-11-10: 初出:「ニュータイプエース」2012年VOL.12～VOL.14"]。旧値 shonen-ace(種3のAI埋め)'
+    added_at: '2026-11-04'
+  nina-to-usagi-to-mahou-no-sensha:
+    magazine: super-dash-and-go
+    source: manual
+    evidence: 'MADB(1.2.21) 目次:["jump-sq", 5, 1.0, {"ジャンプSQ.": 5}] / ja.wikipedia「ニーナとうさぎと魔法の戦車」[[スーパーダッシュ&ゴー!]]。Wiki本文=漫画版はスーパーダッシュ&ゴー!(2011-2013)。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  nintama-rantarou:
+    magazine: comic-bunbun
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["月刊プレコミックブンブン", true, "忍たま乱太郎 2007-10: 初出：「月刊プレコミックブンブン」200705～10"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  nohara-hiroshi-hirumeshi-no-ryuugi:
+    magazine: manga-town
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["月刊まんがタウン", true, "野原ひろし昼メシの流儀 1 2016-10: 初出: 『月刊まんがタウン』2016年1月号～9月号"] / ja.wikipedia「野原ひろし 昼メシの流儀」[[まんがタウン]]<br />→まんがクレヨンしんちゃん.com。旧値 manga-action(種3のAI埋め)'
+    added_at: '2026-11-04'
+  noroi-no-wara-doll:
+    magazine: ciao-deluxe-horror
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ちゃおデラックスホラー", true, "呪いの藁人形 2012-09-05: 初出:「ちゃおデラックスホラー」2011年1月号増刊、7月号増刊、2012年1月号増刊"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  norowareta-shinrei-game:
+    magazine: mobile-flower
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["モバフラ", true, "呪われた心霊ゲーム 2008-12-31: 初出：「モバフラ」「ちゃおデラックス」"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  nousankyuu:
+    magazine: young-jump-mankaku
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["週刊ヤングジャンプ増刊 漫革", true, "脳酸球 2009-07-23: 初出：「週刊ヤングジャンプ増刊 漫革」「週刊ヤングジャンプ」「コミックマーブル」"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  nyukusu-no-ran-tan:
+    magazine: comic-ran
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["月刊コミック乱", true, "ニュクスの角灯 1 2016-02: 初出：月刊コミック乱2015年5月号～11月号"] / ja.wikipedia「ニュクスの角灯」[[コミック乱]]、[[トーチweb]]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  ochibi-san:
+    magazine: asahi-shimbun
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["朝日新聞", true, "オチビサン 1巻 2008-08-30: 初出：「朝日新聞」2007年4月1日、2008年～3月30日"] / ja.wikipedia「オチビサン」[[朝日新聞]]<br />[[AERA]]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  ojikoi:
+    magazine: hana-to-yume-online
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["花とゆめonline", true, "おじ恋 2013-01-25: 初出:「花とゆめonline」2012年4月1日、4月20日、6月1日、7月20日、8月31日、11月2日、12月7日公開"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  omamori-himari:
+    magazine: dragon-age
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["月刊ドラゴンエイジ", true, "おまもりひまり 1 2007-02-01: 初出：「月刊ドラゴンエイジ」200607～12"] / ja.wikipedia「おまもりひまり」[[月刊ドラゴンエイジ]]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  omotase-shimashita:
+    magazine: comic-at-bunch
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["月刊コミック＠バンチ", true, "おもたせしました。 1 2017-04: 初出: 『月刊コミック＠バンチ』2016年5月号～2017年2月号、「くらげバンチ」2017年2月・4月更新"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  oshiire-ojou-san:
+    magazine: ciao-deluxe-horror
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ちゃおデラックスホラー", true, "押し入れおじょうさん 1 2009-10-06: 初出：「ちゃおデラックスホラー」2009"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  otogi-moyou-ayanishiki-futatabi:
+    magazine: melody
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["メロディ", true, "お伽もよう綾にしき ふたたび 1 2010-09-10: 初出：「メロディ」200908、10、12,201002、04"]。旧値 lala(種3のAI埋め)'
+    added_at: '2026-11-04'
+  otome-no-omocha-asami:
+    magazine: mobile-flower
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["モバイルフラワー", true, "乙女のオモチャ 2009-03-31: 初出：「モバイルフラワー」200810"]。モバフラ=モバイルフラワー(同じ誌)。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  otsuberu-to-zou-kenjuu-kouenrin:
+    magazine: shimbun-akahata
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["しんぶん赤旗", true, "オツベルと象 虔十公園林 2015-07-21: 初出:「しんぶん赤旗」日曜版に連載 「オツベルと象」2014年4月27日号～7月6日号 「虔十公園林」2014年2月9日号～4月"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  otsukiai-shimasen-ka:
+    magazine: ciao-deluxe-horror
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ちゃおデラックスホラー", true, "お憑きあいしませんか 2011-05: 初出:「ちゃおデラックスホラー」"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  ozawa-satoru-mishuuroku-tanpenshuu:
+    magazine: weekly-shonen-sunday-zokan
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["週刊少年サンデー増刊", true, "小沢さとる未収録短編集 2012-08-03: 初出:「週刊少年サンデー増刊」「冒険王」「週刊少年キング」「少年画報」「別冊冒険王」「まんが王」「デラックス少年サンデー」"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  papa-patalliro:
+    magazine: silky
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["シルキー", true, "パパ!?パタリロ! 2013-01-10: 初出:「シルキー」2011年6、8、10、12月号、2012年2、4、6、8、10、12月号"]。旧値 hana-to-yume(種3のAI埋め)'
+    added_at: '2026-11-04'
+  papa-to-oyaji-no-uchi-gohan:
+    magazine: comic-at-bunch
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["月刊コミック＠バンチ", true, "パパと親父のウチご飯 1 2014-12: 初出: 『月刊コミック＠バンチ』2014年6月号～10月号"] / ja.wikipedia「パパと親父のウチご飯」[[月刊コミック@バンチ]]<br />月刊コミックバンチ。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  paradise-pirates:
+    magazine: melody
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["メロディ", true, "パラダイスパイレーツ 第1巻 2012-05-10: 初出:「メロディ」2011年10・12月号、2012年2・4月号"]。旧値 hana-to-yume(種3のAI埋め)'
+    added_at: '2026-11-04'
+  piashie:
+    magazine: comico
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["comico", true, "ピアシェ 1 2015-09: 初出: comico(NHN playArt株式会社) http://www.comico.jp"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  pocket-monsters-diamond-and-pearl:
+    magazine: shogaku-ninensei
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["小学二年生", true, "ポケットモンスター ダイヤモンドパール 1 2008-07-02: 初出：「小学二年生」200611～200712"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  pok-mon-try-adventure:
+    magazine: shogaku-ninensei
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["小学二年生", true, "ポケモントライアドベンチャー 1 2010-07-03: 初出：「小学二年生」「小学三年生」"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  present-wa-shinju:
+    magazine: lala-special
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ララスペシャル", true, "プレゼントは真珠 1 2010-06-10: 初出：「ララスペシャル」200810増刊、200904増刊、「ララDX」201001,03,05"]。旧値 hana-to-yume(種3のAI埋め)'
+    added_at: '2026-11-04'
+  puriritsu-rirupuritsu:
+    magazine: pucchigumi
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ぷっちぐみ", true, "ぷりりっ!リルぷりっ 1 2012-01-01: 初出:「ぷっちぐみ」「小学三年生」「ちゃお」"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  pyuabibi:
+    magazine: pucchigumi
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ぷっちぐみ", true, "ぴゅあびび! 2010-12-01: 初出：「ぷっちぐみ」200911～201011"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  razuberii-mix:
+    magazine: magazine-great
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["月刊少年マガジン増刊GREAT", true, "らずべりぃMix 1 2008-04-17: 初出：「月刊少年マガジン増刊GREAT」2007,07,09,11 200801"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  rental-magica:
+    magazine: asuka
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["Asuka", true, "レンタルマギカ 1 2007-05-17: 初出：「Asuka」200608～11,200701,02"] / ja.wikipedia「レンタルマギカ」[[月刊Asuka]]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  romangarizero:
+    magazine: shojo-teikoku
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["少女帝国", true, "浪漫狩り―ZERO― 2007-06-15: 初出：「少女帝国」"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  rorimeshi:
+    magazine: leed-cafe
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["リイドカフェ", true, "ろりめし 2017-02: 初出: 『リイドカフェ』2014年11月～2016年12月掲載作品"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  runway-wars:
+    magazine: cheese
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["Cheese!", true, "ランウェイ☆WARS 1 2011-08: 初出:「Cheese!」201106～09"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  sachi-no-otera-gohan:
+    magazine: elegance-eve
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["エレガンスイブ", true, "サチのお寺ごはん 1 2015-11: 初出: 『エレガンスイブ』2015年4月号～9月号"] / ja.wikipedia「サチのお寺ごはん」[[Eleganceイブ]]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  saikyou-help:
+    magazine: sho-comi-zokan
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["Sho-Comi増刊", true, "最強HELP××× 1 2009-05-31: 初出：「Sho-Comi増刊」200806,08"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  saipiito:
+    magazine: bokura
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ぼくら", true, "サイピート 2012-06-02: 初出:「ぼくら」1965年7月号～1966年4月号"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  saishuu-loop:
+    magazine: ribon-special
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["りぼんスペシャル", true, "最終ループ 2010-12-20: 初出：「りぼんスペシャル」2010夏の大増刊号レモン、ハート、「りぼん」201006、"]。旧値 ribon(種3のAI埋め)'
+    added_at: '2026-11-04'
+  sakura-sakura:
+    magazine: bessatsu-shonen-champion
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 目次:["champion", 1, 1.0, {"週刊少年チャンピオン": 1}]; 初出:["別冊少年チャンピオン", true, "サクラサクラ 1 2013-02-20: 初出:「別冊少年チャンピオン」2012年7月号～11月号"] / ja.wikipedia「サクラサクラ」[[別冊少年チャンピオン]]。旧値 champion(種3のAI埋め)'
+    added_at: '2026-11-04'
+  satoyama-gochisou-sketch:
+    magazine: at-vitamin
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["@vitamin", true, "里山ごちそうスケッチ 1 2016-01: 初出: @vitamin 2015年7月～12月配信分"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  seifuku-nuidara:
+    magazine: champion-red
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["チャンピオンRED", true, "制服ぬいだら♪ 1 2008-08-22: 初出：「チャンピオンRED」200211～200304"] / ja.wikipedia「制服ぬいだら♪」[[チャンピオンRED]]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  seifuku-zukan:
+    magazine: melody
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["メロディ", true, "制服図鑑 2011-12-10: 初出:「メロディ」200708、201006、201108、10「LaLaDX」200505、描き下ろし"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  seiken-kotonoha:
+    magazine: magazine-great
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["マガジンGREAT", true, "聖剣コトノハ 1 2008-10-23: 初出：「マガジンGREAT」200711,200801,05"]。マガジンGREAT の表記ゆれ。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  seimaden-1984:
+    magazine: monthly-manga-shonen
+    source: madb
+    evidence: 'MADB(1.2.21) 目次:["月刊マンガ少年", 29, 1.0, {"月刊マンガ少年": 29}]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  seishun-surura:
+    magazine: ribon-original
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["りぼんオリジナル", true, "青春するら!? 2007-03-20: 初出：「りぼんオリジナル」「りぼん」"]。旧値 ribon(種3のAI埋め)'
+    added_at: '2026-11-04'
+  shakugan-no-shana-x-eternal-song-harukanaru-uta:
+    magazine: dengeki-maoh
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["電撃【マ】王", true, "灼眼のシャナX Eternal song―遥かなる歌― 1 2009-01-27: 初出：「電撃【マ】王」「電撃黒【マ】王」"]。電撃マオウ の表記ゆれ。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  shiawase-no-hinata-shokudou:
+    magazine: josei-seven
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["女性セブン", true, "しあわせのひなた食堂 2016-07: 初出: 『女性セブン』2015年12月3日号～2016年6月23日号"]。旧値 big-comic(種3のAI埋め)'
+    added_at: '2026-11-04'
+  shihou-yuugi:
+    magazine: akamaru-jump
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["週刊少年ジャンプ増刊赤マルシャンプ", true, "四方遊戯 2008-09-09: 初出：「週刊少年ジャンプ増刊赤マルシャンプ」「週刊少年ジャンプ」"]。MADBの誤字(赤マルシャンプ=赤マルジャンプ)。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  shikotama:
+    magazine: bessatsu-shonen-champion
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["別冊少年チャンピオン", true, "しこたま 1 2013-02-20: 初出:「別冊少年チャンピオン」2012年8月号～12月号"] / ja.wikipedia「しこたま」[[別冊少年チャンピオン]]。旧値 champion(種3のAI埋め)'
+    added_at: '2026-11-04'
+  shimokita-naanaaizumu:
+    magazine: monthly-manga-shonen
+    source: madb
+    evidence: 'MADB(1.2.21) 目次:["月刊マンガ少年", 13, 1.0, {"月刊マンガ少年": 13}]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  shinigami-hime-no-saikon-baraen-no-tokei-koushaku:
+    magazine: hana-to-yume-online
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["花とゆめonline", true, "死神姫の再婚 薔薇園の時計公爵 1 2012-12-25: 初出:「花とゆめonline」2012年4月1日、5月25日、7月20日、9月21日、11月9日公開、「花とゆめ」201"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  shinseiki-evangerion-gakuen-datenroku:
+    magazine: asuka
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["Asuka", true, "新世紀エヴァンゲリオン 学園堕天録 1 2008-03-26: 初出：「Asuka」200710～1"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  shinuhodo-kowai-hanashi:
+    magazine: ciao-deluxe-horror
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ちゃおデラックスホラー", true, "死ぬほどこわい話 2013-04-06: 初出:「ちゃおデラックスホラー」2012年1月号増刊、7月号増刊、11月号増刊"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  shussei-to-sokai-soshite-sengo:
+    magazine: shogaku-yonensei
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["小学四年生", true, "出征と疎開そして戦後 2017-03: 『ドラえもん』より「白ゆりのような女の子」初出:「小学四年生」(小学館)1970年6月号、「ゴッドファーザーの息子」初出:「別冊少年ジャン"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  shuuen-no-shiori:
+    magazine: comic-gene
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["月刊コミックジーン", true, "終焉ノ栞 1 2013-03-31: 初出:「月刊コミックジーン」2013年1月号～3月号"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  slayers-evolution-r:
+    magazine: dragon-age
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["月刊ドラゴンエイジ", true, "スレイヤーズEVOLUTION-R 2009-06-09: 初出：「月刊ドラゴンエイジ」200901～05"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  slayers-light-magic:
+    magazine: kerokero-ace
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ケロケロエース", true, "スレイヤーズ ライト・マジック 1 2009-01-26: 初出：「ケロケロエース」200809～200901"]。旧値 shonen-ace(種3のAI埋め)'
+    added_at: '2026-11-04'
+  slayers-revolution:
+    magazine: dragon-age
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["月刊ドラゴンエイジ", true, "スレイヤーズREVOLUTION 2008-12-09: 初出：「月刊ドラゴンエイジ」200806～11"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  soodowaarudo-peraperaazu:
+    magazine: dragon-age-pure
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ドラゴンエイジPure", true, "ソード・ワールド ぺらぺらーず 2007-12-09: 初出：「ドラゴンエイジPure」003～005,007"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  sore-ike-momotarou-dentetsu:
+    magazine: kerokero-ace
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ケロケロエース", true, "それいけ!桃太郎電鉄 1 2008-11-26: 初出：「ケロケロエース」2007001～2008005"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  soshite-gonin-ga-inaku-naru:
+    magazine: faust
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ファウスト", true, "そして五人がいなくなる 2008-01-07: 初出：「ファウスト」04,05,06（加筆訂正有り）"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  souda-tabehoudai-ikou:
+    magazine: feel-young
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["フィール・ヤング", true, "そうだ、食べ放題いこう。 2015-05: 初出: 『フィール・ヤング』2014年3～8月号、10～12月号、2015年1、2月号に加筆・修正"]。FEEL YOUNG の表記ゆれ。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  soukai-genyuu-den:
+    magazine: hana-to-yume-online
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["花とゆめonline", true, "双界幻幽伝 1 2013-01-25: 初出:「花とゆめonline」2012年4月1日、5月11日、6月22日、8月10日、9月28日公開、「花とゆめ」2012年11号、描きおろ"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  spica:
+    magazine: shosetsu-june
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["小説JUNE", true, "スピカ 2011-07: 初出:「小説JUNE」2000118、「flowers」200210、「Be Street」2000002、2001007、「JUNK!BOY」2000"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  stitch:
+    magazine: shogaku-ichinensei
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["小学一年生", true, "スティッチ 2009-12-30: 初出：「小学一年生」「小学二年生」「ぷっちぐみ」"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  super-heroes:
+    magazine: tele-manga-heroes
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["テレまんがヒーローズ", true, "スーパーヒーローズ 1 2009-02-06: 初出：テレビマガジン増刊「テレまんがヒーローズ」200804,09"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  sweet-poolside:
+    magazine: weekly-young-magazine
+    source: manual
+    evidence: 'MADB(1.2.21) 初出:["bessatsu-shonen-magazine", true, "スイートプールサイド 2011-08-09: 初出:「別冊少年マガジン」201105～08、「別冊ヤングマガジン」20031225"] / ja.wikipedia「スイートプールサイド」[[週刊ヤングマガジン]]<br />[[別冊少年マガジン]]。Wiki=週刊ヤングマガジン→別冊少年マガジン。 初出誌=YM(2004読切)・本連載=別マガ(2011)。既存の週刊ヤングマガジン。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  tabasa-no-bouken:
+    magazine: comic-alive
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["コミックアライブ", true, "タバサの冒険 1 2008-03-31: 初出：「コミックアライブ」200712～200804"] / ja.wikipedia「ゼロの使い魔」月刊コミックアライブ。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  tableau-gate:
+    magazine: asuka-fantasy-dx
+    source: manual
+    evidence: 'MADB(1.2.21) 初出:["プリンセスGOLD", true, "タブロウ・ゲート 1 ／ Ⅰ 2008-01-15: 初出：「プリンセスGOLD」200706,09,10"] / ja.wikipedia「タブロウ・ゲート」[[月刊ASUKAファンタジーDX]]<br />月刊少女帝国<br />[[プリンセスGOLD]]<br />[[月刊プリンセス]]。Wiki=ASUKAファンタジーDX→少女帝国→プリンセスGOLD→プリンセス。 初出誌=ASUKAファンタジーDX。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  tamako-teishoku:
+    magazine: jour
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["JOURすてきな主婦たち", true, "たまこ定食 1 2015-09: 初出: 『JOURすてきな主婦たち』2015年4月号、5月号、7月号、8月号"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  tenka:
+    magazine: comic-gene
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["コミックジーン", true, "てんか! 1 2012-01-31: 初出:「コミックジーン」2011年7月号～2012年1月号"] / ja.wikipedia「てんか!」[[月刊コミックジーン]]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  tenkuu-shinpan:
+    magazine: manga-box
+    source: manual
+    evidence: 'MADB(1.2.21) 目次:["weekly-shonen-magazine", 10, 1.0, {"週刊少年マガジン": 10}] / ja.wikipedia「天空侵犯」[[マンガボックス]]。Wiki=マンガボックス(MADBの週刊少年マガジン10回は出張掲載)。旧値 bessatsu-shonen-magazine(種3のAI埋め)'
+    added_at: '2026-11-04'
+  tenmatenpei:
+    magazine: shonen-gaho
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["少年画報", true, "天馬天平 1 2010-12-01: 初出：「少年画報」1957年6月号～12月号"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  tenori-manmosu-no-mou-chan:
+    magazine: michao
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["MiChao!（ミチャオ）", true, "手乗りマンモスのモウちゃん 1 2009-01-23: 初出：Webコミック「MiChao!（ミチャオ）」"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  tera-e:
+    magazine: monthly-manga-shonen
+    source: madb
+    evidence: 'MADB(1.2.21) 目次:["月刊マンガ少年", 28, 1.0, {"月刊マンガ少年": 28}]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  time-killers:
+    magazine: akamaru-jump
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["赤マルジャンプ", true, "time killers 2011-10: 初出:「赤マルジャンプ」2000夏号、2001春号、「季刊エス」2002001～2004006、「ジャンプスクエアセカンド」20080"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  toilet-no-hanako-san:
+    magazine: ciao-deluxe-horror
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ちゃおデラックスホラー", true, "トイレの花子さん 1 2009-12-30: 初出：「ちゃおデラックスホラー」2009"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  tokechauyo-senpai:
+    magazine: mobile-flower
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["モバフラ", true, "とけちゃうよ、センパイ。 2011-05: 初出:「モバフラ」20110405、20100825、20101020、20110210、20110420"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  tomoyo-after:
+    magazine: dragon-age-pure
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ドラゴンエイジPure", true, "智代アフター 2007-12-09: 初出：「ドラゴンエイジPure」004～007"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  tonton-wanko-baggu:
+    magazine: shogaku-ichinensei
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["小学一年生", true, "とんとん♪わんこバッグ 2009-12-02: 初出：「小学一年生」「小学二年生」「小学三年生」「ぷっちぐみ」"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  tsubaki:
+    magazine: nemesis
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["NEMESIS(講談社)", true, "ツバキ 1 2011-04: 初出:「NEMESIS(講談社)」2010年No.2、2011年No.3「ホラーM(ぶんか社)」2010年4月号、6月号、8月号"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  tsuki-tsuki:
+    magazine: comic-alive
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["コミックアライブ", true, "つきツキ! 1 2011-11-30: 初出:「コミックアライブ」2011年8～12月号"] / ja.wikipedia「つきツキ!」[[月刊コミックアライブ]]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  uchuu-no-ou:
+    magazine: shogaku-gonensei
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["小学五年生", true, "うちゅうの王 2008-06-02: 初出：「小学五年生」200704～200803"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  uchuu-senkan-yamato-2199:
+    magazine: newtype-ace
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["ニュータイプエース", true, "宇宙戦艦ヤマト2199 1 2012-07-10: 初出:「ニュータイプエース」2012年 Vol.7-10"] / ja.wikipedia「宇宙戦艦ヤマト2199」[[ニュータイプエース]]<br/>[[角川ニコニコエース]]。旧値 shonen-ace(種3のAI埋め)'
+    added_at: '2026-11-04'
+  ufo-robo-grendizer:
+    magazine: tv-magazine
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["テレビマガジン", true, "UFOロボグレンダイザー 2012-04-05: 初出:「テレビマガジン」1975年9月号～1977年3月号"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  vampire-crisis:
+    magazine: mobile-flower
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["モバフラ", true, "バンパイアクライシス 2009-04-29: 初出：「モバフラ」20080405,0905,20090120"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  wagamama-fasshon-girls-mode-rui-style:
+    magazine: pucchigumi
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["ぷっちぐみ", true, "わがままファッション ガールズモード 2009-12-30: 初出：「ぷっちぐみ」200903～11"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  watashi-o-toraeru-ai-no-wana:
+    magazine: sho-comi-zokan
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["Sho-Comi増刊", true, "私を捕らえる愛の罠 2012-05-30: 初出:「Sho-Comi増刊」2011年12月15日号、6月15日号、2012年2月14日号、「Sho-Comi」2011年18号別冊"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  yamanashi-hikari-no-suashi:
+    magazine: shimbun-akahata
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["しんぶん赤旗", true, "やまなし ひかりの素足 2015-07-21: 初出:「しんぶん赤旗」日曜版に連載 「やまなし」2013年12月29日号・2014年1月5日合併号～2月2日号 「ひかりの素足」2"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  yonmai-no-kuin:
+    magazine: shojo-book
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["少女ブック", true, "四枚の女王 1 2010-02-24: 初出：「少女ブック」196001～07 横山光輝の原点がここにある! 幻の初期作品を完全復刻。少女編第1集は、『少女ブック』昭和35年1月号"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  youkai-no-shiikuin-san:
+    magazine: kurage-bunch
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["くらげバンチ", true, "妖怪の飼育員さん 1 2015-12: 初出：くらげバンチ2015年3月～11月, 月刊コミック＠バンチ2016年1月号"] / ja.wikipedia「妖怪の飼育員さん」[[くらげバンチ]]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  yuuboo:
+    magazine: mainichi-kodomo-shimbun
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["毎日こどもしんぶん", true, "Uボー 2010-11-30: 初出：「毎日こどもしんぶん」（1976～1979年） 藤子・F・不二雄が描いたまんがを収録した大全集。『毎日こどもしんぶん』（1976年3月27日"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  yuuyake-banchiyou:
+    magazine: boukenou
+    source: manual
+    evidence: 'MADB(1.2.21) 目次:["champion", 23, 1.0, {"少年チャンピオン": 23}] / ja.wikipedia「夕やけ番長」[[冒険王 (漫画雑誌)|冒険王]]、[[週刊少年チャンピオン]]。Wiki=冒険王→週刊少年チャンピオン。 初出誌=冒険王。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  yuzu-bentou:
+    magazine: young-gangan-big
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["増刊ヤングガンガンビッグ", true, "ゆずべんとう vol. 1 2013-07: 初出: 増刊ヤングガンガンビッグ2011Vol.o2、月刊ビックガンガン2012Vol.05～Vol.08"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  zero-no-tsukaima:
+    magazine: comic-alive
+    source: madb+wiki-verified
+    evidence: 'MADB(1.2.21) 初出:["コミックアライブ", true, "ゼロの使い魔 1 2006-12-31: 初出:「コミックアライブ」200608～200701"] / ja.wikipedia「ゼロの使い魔」[[月刊コミックアライブ]]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  zero-no-tsukaima-chevalier:
+    magazine: comic-alive
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["コミックアライブ", true, "ゼロの使い魔シュヴァリエ 1 2010-08-31: 初出：「コミックアライブ」201003～05、07～09"]。旧値 空(種3のAI埋め)'
+    added_at: '2026-11-04'
+  zoku-manga-no-ma:
+    magazine: ribon-special
+    source: madb
+    evidence: 'MADB(1.2.21) 初出:["りぼんスペシャル", true, "続 マンガのマ 2010-06-20: 初出：「りぼんスペシャル」2009夏の大増刊号りぼんスペシャルハート、ダイヤ、2010冬の大増刊号りぼんスペシャル、2010春の大増刊号り"]。旧値 ribon(種3のAI埋め)'
+    added_at: '2026-11-04'

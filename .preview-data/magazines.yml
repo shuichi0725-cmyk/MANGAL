@@ -407,3 +407,446 @@ weekly-comic-bunch:
   name: 週刊コミックバンチ
   publisher: shinchosha
   demographic: seinen
+
+# ★2026-11-04 第2弾(ユーザ「残り約130誌を足して60頁と194頁を直して」)。 根拠= MADB 雑誌掲載履歴/単行本の初出欄 × ja.wikipedia。
+#   読者層= ja.wikipedia の誌の分類(無い時は頁の多数)。 子ども向けは児童。 設定の正本= scripts/magazine-verify/new_mags_2.py
+akamaru-jump:
+  name: 赤マルジャンプ
+  publisher: shueisha
+  demographic: shounen
+amie:
+  name: Amie
+  publisher: kodansha
+  demographic: shoujo
+asahi-shimbun:
+  name: 朝日新聞
+  publisher: asahi-shimbun
+  demographic: seinen
+asahi-shogakusei-shimbun:
+  name: 朝日小学生新聞
+  publisher: asahigakuseishinbunsha
+  demographic: kodomo
+asuka:
+  name: 月刊Asuka
+  publisher: kadokawa
+  demographic: shoujo
+asuka-fantasy-dx:
+  name: 月刊ASUKAファンタジーDX
+  publisher: kadokawa
+  demographic: shoujo
+at-vitamin:
+  name: '@vitamin'
+  publisher: kadokawa
+  demographic: seinen
+bessatsu-princess:
+  name: 別冊プリンセス
+  publisher: akita
+  demographic: shoujo
+bessatsu-shonen-champion:
+  name: 別冊少年チャンピオン
+  publisher: akita
+  demographic: shounen
+betsucomi:
+  name: ベツコミ
+  publisher: shogakukan
+  demographic: shoujo
+betsuma-sister:
+  name: 別冊マーガレットsister
+  publisher: shueisha
+  demographic: shoujo
+big-comic-superior:
+  name: ビッグコミックスペリオール
+  publisher: shogakukan
+  demographic: seinen
+bokura:
+  name: ぼくら
+  publisher: kodansha
+  demographic: shounen
+boukenou:
+  name: 冒険王
+  publisher: akita
+  demographic: shounen
+business-jump:
+  name: ビジネスジャンプ
+  publisher: shueisha
+  demographic: seinen
+champion-red:
+  name: チャンピオンRED
+  publisher: akita
+  demographic: seinen
+cheese:
+  name: Cheese!
+  publisher: shogakukan
+  demographic: shoujo
+ciao-deluxe-horror:
+  name: ちゃおデラックスホラー
+  publisher: shogakukan
+  demographic: shoujo
+cobalt:
+  name: Cobalt
+  publisher: shueisha
+  demographic: shoujo
+comic-alive:
+  name: 月刊コミックアライブ
+  publisher: mediafactory
+  demographic: shounen
+comic-at-bunch:
+  name: 月刊コミック@バンチ
+  publisher: shinchosha
+  demographic: seinen
+comic-beam:
+  name: コミックビーム
+  publisher: enterbrain
+  demographic: seinen
+comic-bunbun:
+  name: 月刊コミックブンブン
+  publisher: poplar
+  demographic: kodomo
+comic-flapper:
+  name: コミックフラッパー
+  publisher: mediafactory
+  demographic: seinen
+comic-gene:
+  name: 月刊コミックジーン
+  publisher: mediafactory
+  demographic: josei
+comic-kai:
+  name: コミック怪
+  publisher: kadokawa
+  demographic: seinen
+comic-ran:
+  name: コミック乱
+  publisher: leed
+  demographic: seinen
+comic-ryu:
+  name: 月刊COMICリュウ
+  publisher: tokuma
+  demographic: seinen
+comic-vanatsu:
+  name: コミックヴァナ通
+  publisher: enterbrain
+  demographic: seinen
+comico:
+  name: comico
+  publisher: nhn-comico
+  demographic: seinen
+comptiq:
+  name: コンプティーク
+  publisher: kadokawa
+  demographic: shounen
+cookie-box:
+  name: Cookie BOX
+  publisher: shueisha
+  demographic: shoujo
+corocoro-g:
+  name: コロコロG
+  publisher: shogakukan
+  demographic: kodomo
+dengeki-maoh:
+  name: 電撃マオウ
+  publisher: kadokawa
+  demographic: seinen
+denshi-birz:
+  name: デンシバーズ
+  publisher: gentosha
+  demographic: seinen
+dragon-age:
+  name: 月刊ドラゴンエイジ
+  publisher: kadokawa
+  demographic: shounen
+dragon-age-pure:
+  name: ドラゴンエイジPure
+  publisher: kadokawa
+  demographic: shounen
+eden:
+  name: Yahoo!コミック無料マガジンEDEN
+  publisher: mag-garden
+  demographic: seinen
+elegance-eve:
+  name: Eleganceイブ
+  publisher: akita
+  demographic: josei
+faust:
+  name: ファウスト
+  publisher: kodansha
+  demographic: seinen
+feel-young:
+  name: FEEL YOUNG
+  publisher: shodensha
+  demographic: josei
+flowers-rinka:
+  name: flowers増刊 凛花
+  publisher: shogakukan
+  demographic: shoujo
+for-mrs:
+  name: フォアミセス
+  publisher: akita
+  demographic: josei
+girls-jump:
+  name: ガールズジャンプ
+  publisher: shueisha
+  demographic: josei
+good-afternoon:
+  name: good!アフタヌーン
+  publisher: kodansha
+  demographic: seinen
+gundam-magazine:
+  name: ガンダムマガジン
+  publisher: kodansha
+  demographic: shounen
+hana-to-yume-online:
+  name: 花とゆめonline
+  publisher: hakusensha
+  demographic: shoujo
+hontou-ni-atta-yukai-na-hanashi:
+  name: 本当にあった愉快な話
+  publisher: takeshobo
+  demographic: josei
+itan-web-comic:
+  name: ITAN WEB COMIC
+  publisher: kodansha
+  demographic: seinen
+josei-seven:
+  name: 女性セブン
+  publisher: shogakukan
+  demographic: josei
+jour:
+  name: JOURすてきな主婦たち
+  publisher: futabasha
+  demographic: josei
+jump-sq-web:
+  name: ジャンプSQ.公式HP
+  publisher: shueisha
+  demographic: shounen
+kerokero-ace:
+  name: ケロケロエース
+  publisher: kadokawa
+  demographic: kodomo
+kurage-bunch:
+  name: くらげバンチ
+  publisher: shinchosha
+  demographic: seinen
+lala-special:
+  name: ララスペシャル
+  publisher: hakusensha
+  demographic: shoujo
+leed-cafe:
+  name: リイドカフェ
+  publisher: leed
+  demographic: seinen
+macross-ace:
+  name: マクロスエース
+  publisher: kadokawa
+  demographic: shounen
+magazine-eno:
+  name: マガジンイーノ
+  publisher: kodansha
+  demographic: shounen
+magazine-great:
+  name: マガジンGREAT
+  publisher: kodansha
+  demographic: shounen
+mainichi-kodomo-shimbun:
+  name: 毎日こどもしんぶん
+  publisher: mainichishinbunsha
+  demographic: kodomo
+manga-box:
+  name: マンガボックス
+  publisher: kodansha
+  demographic: shounen
+manga-erotics-f:
+  name: マンガ・エロティクス・エフ
+  publisher: ohta-shuppan
+  demographic: seinen
+manga-kun:
+  name: マンガくん
+  publisher: shogakukan
+  demographic: shounen
+manga-neko-no-shippo:
+  name: まんが ねこのしっぽ
+  publisher: nihon-shuppansha
+  demographic: josei
+manga-shonen:
+  name: 漫画少年
+  publisher: 
+  demographic: shounen
+manga-time-kirara-forward:
+  name: まんがタイムきららフォワード
+  publisher: houbunsha
+  demographic: seinen
+manga-town:
+  name: まんがタウン
+  publisher: futabasha
+  demographic: seinen
+melody:
+  name: メロディ
+  publisher: hakusensha
+  demographic: shoujo
+michao:
+  name: MiChao!
+  publisher: kodansha
+  demographic: shoujo
+mobile-flower:
+  name: モバフラ
+  publisher: shogakukan
+  demographic: shoujo
+monthly-manga-shonen:
+  name: 月刊マンガ少年
+  publisher: asahi-sonorama
+  demographic: shounen
+nemesis:
+  name: NEMESIS
+  publisher: kodansha
+  demographic: seinen
+newtype-ace:
+  name: ニュータイプエース
+  publisher: kadokawa
+  demographic: seinen
+niconico-seiga:
+  name: ニコニコ静画
+  publisher: 
+  demographic: shounen
+office-you:
+  name: office YOU
+  publisher: shueisha
+  demographic: josei
+petit-princess:
+  name: プチプリンセス
+  publisher: akita
+  demographic: shoujo
+pokopoko:
+  name: ぽこぽこ
+  publisher: ohta-shuppan
+  demographic: seinen
+pucchigumi:
+  name: ぷっちぐみ
+  publisher: shogakukan
+  demographic: kodomo
+ribon-original:
+  name: りぼんオリジナル
+  publisher: shueisha
+  demographic: shoujo
+ribon-special:
+  name: りぼんスペシャル
+  publisher: shueisha
+  demographic: shoujo
+samurai-ace:
+  name: サムライエース
+  publisher: kadokawa
+  demographic: seinen
+shimbun-akahata:
+  name: しんぶん赤旗
+  publisher: 
+  demographic: seinen
+sho-comi-zokan:
+  name: Sho-Comi増刊
+  publisher: shogakukan
+  demographic: shoujo
+shogaku-gonensei:
+  name: 小学五年生
+  publisher: shogakukan
+  demographic: kodomo
+shogaku-ichinensei:
+  name: 小学一年生
+  publisher: shogakukan
+  demographic: kodomo
+shogaku-ninensei:
+  name: 小学二年生
+  publisher: shogakukan
+  demographic: kodomo
+shogaku-sannensei:
+  name: 小学三年生
+  publisher: shogakukan
+  demographic: kodomo
+shogaku-yonensei:
+  name: 小学四年生
+  publisher: shogakukan
+  demographic: kodomo
+shogakukan-book:
+  name: 小学館BOOK
+  publisher: shogakukan
+  demographic: kodomo
+shojo-book:
+  name: 少女ブック
+  publisher: shueisha
+  demographic: shoujo
+shojo-comic-zokan:
+  name: 少女コミック増刊
+  publisher: shogakukan
+  demographic: shoujo
+shojo-teikoku:
+  name: 月刊少女帝国
+  publisher: kadokawa
+  demographic: shoujo
+shonen-gaho:
+  name: 少年画報
+  publisher: shonen-gahosha
+  demographic: shounen
+shonen-kobunsha:
+  name: 少年
+  publisher: kobunsha
+  demographic: shounen
+shonen-sirius-web:
+  name: 月刊少年シリウスオフィシャルサイト
+  publisher: kodansha
+  demographic: shounen
+shonen-sunday-r:
+  name: 週刊少年サンデーR
+  publisher: shogakukan
+  demographic: shounen
+shosetsu-june:
+  name: 小説JUNE
+  publisher: san-shuppan
+  demographic: josei
+silky:
+  name: シルキー
+  publisher: hakusensha
+  demographic: josei
+super-dash-and-go:
+  name: スーパーダッシュ&ゴー!
+  publisher: shueisha
+  demographic: shounen
+tele-manga-heroes:
+  name: テレまんがヒーローズ
+  publisher: kodansha
+  demographic: kodomo
+tv-land:
+  name: テレビランド
+  publisher: tokuma
+  demographic: kodomo
+tv-magazine:
+  name: テレビマガジン
+  publisher: kodansha
+  demographic: kodomo
+web-comic-action:
+  name: WEBコミックアクション
+  publisher: futabasha
+  demographic: seinen
+weekly-shonen-sunday-zokan:
+  name: 週刊少年サンデー増刊
+  publisher: shogakukan
+  demographic: shounen
+youchien:
+  name: 幼稚園
+  publisher: shogakukan
+  demographic: kodomo
+young-gangan:
+  name: ヤングガンガン
+  publisher: square-enix
+  demographic: seinen
+young-gangan-big:
+  name: 増刊ヤングガンガンビッグ
+  publisher: square-enix
+  demographic: seinen
+young-jump-mankaku:
+  name: 週刊ヤングジャンプ増刊 漫革
+  publisher: shueisha
+  demographic: seinen
+young-magazine-uppers:
+  name: ヤングマガジンアッパーズ
+  publisher: kodansha
+  demographic: seinen
+zero-sum-online:
+  name: ゼロサムオンライン
+  publisher: ichijinsha
+  demographic: josei
