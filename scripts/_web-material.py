@@ -11,6 +11,7 @@
   python scripts/_web-material.py judge --stems a,b [--redo]
   python scripts/_web-material.py rebuild [--stems a,b]  # 語彙(wamei-tags.yml)や付与の決まりを変えた後、判定済みの案を保存済みの答えから作り直す(モデルを呼ばない・0円)
   python scripts/_web-material.py second --stems a,b [--parallel 3] [--redo]  # 2回目の判定を回して1回目と合わせる(0語の頁は2回判定+lift / 語がある頁は語彙に足した語の判定だけ足す)
+  python scripts/_web-material.py apply --stems a,b [--go "<Goの発話>"]  # 付与案を seed へ書く(★ユーザの Go が要る。 --go が無ければ件数だけ数えて何も書かない。 頁には書かない = 反映は別。 足すだけ)
 
 ★器はこのPCのローカルだけ(ユーザ裁定 2026-10-29「非公開、ローカルだけでよい」)= git に入れない。
   置き場 .cache\\web-material\\(C のリポジトリ内・git 管理外。 ユーザ裁定 2026-10-29「DはつかわないでCでよい」)
@@ -432,6 +433,134 @@ def cmd_second(a):
     print(f"== 終わり: 合わせた {ok} / 失敗 {len(fails)} / ${cost:.3f} ==", flush=True)
 
 
+def _applied_stems():
+    """seed へ付与済みの頁(element-assign-changelog.jsonl に「element-assign apply」の行が在る頁)"""
+    p = os.path.join(ROOT, "data", "seeds", "element-assign-changelog.jsonl")
+    out = set()
+    if os.path.exists(p):
+        with open(p, encoding="utf-8") as f:
+            for ln in f:
+                if ln.strip():
+                    d = json.loads(ln)
+                    if d.get("op") == "element-assign apply":
+                        out.add(d.get("slug"))
+    return out
+
+
+def cmd_apply(a):
+    """器の付与案を本番の seed へ書く(★ユーザの Go が要る。 --go が無ければ件数だけ数えて何も書かない)。 頁(manga.v2)・索引は触らない = 頁への反映は別(_reflect-targeted.py)。
+    1作ずつ _element-assign.py apply に任せる(同じ計算 plan_apply): 要素 → tags-enrich-2425.json / ジャンル → genre-append.yml / 隠し要素 → element-hidden.json / 記録 → element-assign-changelog.jsonl。
+    ★足すだけ: 要素・ジャンルは今あるものを消さない。 隠し要素(羅針盤の近さにだけ使う)も「付与案の鍵 + 今ある鍵」にして置き換えない(今回表に上がった語は鍵から外す)。
+    書く前に4つの seed を丸ごと .cache/web-material-apply-bak-<時刻>/ に退避する。 済んだ作品は「既に付与案どおり」で飛ぶ = 止めても同じコマンドで続きから。"""
+    import collections, contextlib, io, re
+    import yaml
+    ea, _ = _mods()
+    V = ea.load_vocab()
+    ea.load_vocab = lambda: V  # 作品ごとに語彙を読み直さない
+    S = os.path.join(ROOT, "data", "seeds")
+    seeds = [os.path.join(S, n) for n in ("tags-enrich-2425.json", "genre-append.yml", "element-hidden.json", "element-assign-changelog.jsonl")]
+    todo = [s for s in a.stems.split(",") if s]
+    go = (a.go or "").strip()
+
+    def hidden_now(pub):
+        if not os.path.exists(ea.HIDDEN_SEED):
+            return []
+        with open(ea.HIDDEN_SEED, encoding="utf-8") as f:
+            return list((json.load(f).get(pub) or {}).get("keys") or [])
+
+    if not go:  # 試運転 = 数えるだけ
+        with open(seeds[0], encoding="utf-8") as f:
+            tags = json.load(f)
+        gdone = collections.defaultdict(set)
+        with open(seeds[1], encoding="utf-8") as f:
+            for e in (yaml.safe_load(f) or {}).get("additions") or []:
+                gdone[e.get("slug")].update(e.get("add") or [])
+        n = collections.Counter()
+        add_w, gen_w, blocked_all, missing = collections.Counter(), collections.Counter(), [], []
+        for stem in todo:
+            pj = os.path.join(WORK, stem, "assign", "assign-proposal.json")
+            page = os.path.join(ROOT, "data", "manga.v2", stem + ".yml")
+            if not os.path.exists(pj) or not os.path.exists(page):
+                missing.append(stem)
+                continue
+            with open(pj, encoding="utf-8") as f:
+                prop = json.load(f)
+            with open(page, encoding="utf-8") as f:
+                ptags = (yaml.load(f, Loader=getattr(yaml, "CSafeLoader", yaml.SafeLoader)) or {}).get("tags") or []
+            names, blocked, _h, _k = ea.plan_apply(prop, V, ptags)
+            if blocked:
+                blocked_all.append((stem, blocked))
+            before = list(tags.get(stem) or [])
+            new = [x for x in names if x not in before]
+            gadd = [g for g in prop.get("genres_add") or [] if g in V["genres"] and g not in (prop.get("genres_now") or []) and g not in gdone[stem]]
+            n["頁"] += 1
+            n["要素を足す頁"] += bool(new)
+            n["足す語"] += len(new)
+            n["ジャンルを足す頁"] += bool(gadd)
+            add_w.update(V["tag_ja"].get(x) or x for x in new)
+            gen_w.update(gadd)
+        print(f"== 付与(試運転・何も書かない) {len(todo)}作 ==")
+        print(" / ".join(f"{k} {v:,}" for k, v in n.items()) + f" / 付与案か頁が無い {len(missing)}")
+        print("足す語の多い順:", "・".join(f"{w}{c}" for w, c in add_w.most_common(30)))
+        print("足すジャンル:", "・".join(f"{V['genres'].get(g, g)}{c}" for g, c in gen_w.most_common()) or "なし")
+        for stem, b in blocked_all:
+            print(f"  ✖ 語彙に無くて足せない語: {stem} {'・'.join(b)}")
+        for stem in missing:
+            print(f"  ✖ 付与案か頁が無い: {stem}")
+        print('★書くには --go "<ユーザのGo発話>"(本番の seed に書く。 頁への反映は別)')
+        return
+
+    # 隠し要素は置き換えず、今ある鍵を残す(足すだけ。 _element-assign.py の hidden_keys を、この実行の間だけ差し替える)
+    orig, cur = ea.hidden_keys, {}
+
+    def keep_hidden(prop):
+        new = orig(prop)
+        shown = set()
+        for e in prop["rows"]:
+            if e.get("cls") == "表":
+                shown.add(e["word"])
+                if (e.get("ani") or {}).get("en"):
+                    shown.add("ani:" + e["ani"]["en"])
+        return new + [k for k in cur.get("old", []) if k not in new and k not in shown]
+
+    ea.hidden_keys = keep_hidden
+    started = now()
+    bak = os.path.join(ROOT, ".cache", f"web-material-apply-bak-{datetime.datetime.now():%Y%m%d-%H%M%S}")
+    os.makedirs(bak, exist_ok=True)
+    for p in seeds:
+        shutil.copyfile(p, os.path.join(bak, os.path.basename(p)))
+    rel = os.path.relpath(bak, ROOT).replace("\\", "/")
+    print(f"== 付与 {len(todo)}作 / 退避 {rel} / 頁・索引は触らない ==", flush=True)
+    wrote = noop = 0
+    added = gen = 0
+    fails = []
+    for i, stem in enumerate(todo, 1):
+        cur["old"] = hidden_now(ea.load_material(stem)["card"]["slug"])
+        buf = io.StringIO()
+        try:
+            with contextlib.redirect_stdout(buf):
+                ea.cmd_apply(argparse.Namespace(stem=stem, go=go))
+        except SystemExit:
+            fails.append({"stem": stem, "why": buf.getvalue().strip()[-300:]})
+            print(f"[{i}/{len(todo)}] {stem} ✖ {buf.getvalue().strip()[-200:]}", flush=True)
+            print("✖ 止める(直さずに流し直さない。 済んだ作品は同じコマンドで飛ばして続きから)", flush=True)
+            break
+        out = buf.getvalue()
+        if "既に付与案どおり" in out:
+            noop += 1
+            continue
+        wrote += 1
+        m1, m2 = re.search(r"要素 \+(\d+): (.*)", out), re.search(r"ジャンル \+(\d+): (.*)", out)
+        added += int(m1.group(1)) if m1 else 0
+        gen += int(m2.group(1)) if m2 else 0
+        print(f"[{i}/{len(todo)}] {stem} ✔ 要素 +{m1.group(1) if m1 else 0}" + (f": {m1.group(2)}" if m1 and m1.group(1) != "0" else "")
+              + (f" / ジャンル +{m2.group(1)}: {m2.group(2)}" if m2 and m2.group(1) != "0" else ""), flush=True)
+    ea.hidden_keys = orig
+    log_run({"at": started, "ended": now(), "kind": "apply", "version": VERSION, "asked": len(todo), "ok": wrote, "noop": noop, "fails": fails, "go": go, "backup": rel})
+    print(f"== 終わり: 書いた {wrote}作(要素 +{added}語・ジャンル +{gen}) / 既に付与案どおり {noop}作 / 止まった {len(fails)}作 ==", flush=True)
+    print("次: 頁への反映は別(「反映して」= _reflect-targeted.py)。 羅針盤の配布ファイル = python scripts/_build-compass-hidden.py(反映と一緒に commit)", flush=True)
+
+
 def cmd_import(a):
     n = 0
     for stp in sorted(glob.glob(os.path.join(a.root, "*", "state.json"))):
@@ -487,13 +616,14 @@ def cmd_status(a):
     print(f"対象(巻数{MIN_VOLS}以上・見える要素{MAX_ELEMS}以下) {n_all:,}頁 / うちファイル名=公開slug {len(tg):,}頁")
     print(f"器に在る {len(done):,}作(材料0字 {zero})・材料 計{chars:,}字 / 器の全作品 {len(have):,}")
     nj = sum(1 for x in done if judged(x[0]))
-    print(f"付与案あり {nj:,}作(頁にはまだ書いていない)")
+    na = sum(1 for x in done if x[0] in _applied_stems())
+    print(f"付与案あり {nj:,}作 / うち seed へ付与済み {na:,}作(頁への反映は別)")
     nxt = [x for x in tg if x[0] not in have][:5]
     print("次: " + " / ".join(f"{t}({v}巻)" for _, t, v in nxt))
     if os.path.exists(RUNS):
         last = [json.loads(l) for l in open(RUNS, encoding="utf-8") if l.strip()][-2:]
         for o in last:
-            print(f"最後の{'付与案' if o.get('kind') == 'judge' else '収集'} {o['at']}〜{o['ended'][11:]} {o['ok']}/{o['asked']} 失敗 {len(o['fails'])}")
+            print(f"最後の{ {'judge': '付与案', 'second': '2回目', 'apply': '付与'}.get(o.get('kind'), '収集') } {o['at']}〜{o['ended'][11:]} {o['ok']}/{o['asked']} 失敗 {len(o['fails'])}")
 
 
 if __name__ == "__main__":
@@ -506,5 +636,6 @@ if __name__ == "__main__":
     p = sp.add_parser("judge"); p.add_argument("--n", type=int, default=20); p.add_argument("--stems"); p.add_argument("--redo", action="store_true"); p.set_defaults(f=cmd_judge)
     p = sp.add_parser("rebuild"); p.add_argument("--stems"); p.set_defaults(f=cmd_rebuild)
     p = sp.add_parser("second"); p.add_argument("--stems", required=True); p.add_argument("--parallel", type=int, default=3); p.add_argument("--redo", action="store_true"); p.set_defaults(f=cmd_second)
+    p = sp.add_parser("apply"); p.add_argument("--stems", required=True); p.add_argument("--go", default=""); p.set_defaults(f=cmd_apply)
     a = ap.parse_args()
     a.f(a)

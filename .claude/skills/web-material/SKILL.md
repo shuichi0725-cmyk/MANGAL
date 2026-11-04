@@ -1,6 +1,6 @@
 ---
 name: web-material
-description: 「Web材料集めて [N]」「Web材料続けて」「Web材料判定して [N]」「Web材料止めて」「Web材料どう?」=巻数5以上・見える要素3以下の頁を巻数の多い順に、HaikuがWebで集めた材料を漫画ごとの器(いつ・どこで・何を)へ貯める。集めるだけ(要素を付けない・本番に書かない・git に入れない)。道具がHaikuを土台なしで1回ずつ呼ぶ=1作 約2.5分・約$0.015。再開可
+description: 「Web材料集めて [N]」「Web材料続けて」「Web材料判定して [N]」「Web材料止めて」「Web材料どう?」=巻数5以上・見える要素3以下の頁を巻数の多い順に、HaikuがWebで集めた材料を漫画ごとの器(いつ・どこで・何を)へ貯める。集めるだけ(要素を付けない・本番に書かない・git に入れない)。道具がHaikuを土台なしで1回ずつ呼ぶ=1作 約2.5分・約$0.015。再開可。seed へ付与するのは apply(ユーザの Go の後・頁への反映は別)
 ---
 
 # Web材料 (= トリガー「Web材料集めて [N]」「Web材料続けて」「Web材料判定して [N]」「Web材料止めて」「Web材料どう?」)
@@ -11,7 +11,7 @@ description: 「Web材料集めて [N]」「Web材料続けて」「Web材料判
 - 対象 = 巻数5以上・見える要素(隠し以外)3以下の頁。**巻数の多い順**(ユーザ指定。人気順ではない)。
 - 道具 `scripts/_web-material.py` が `_element-harvest.py auto`(v0.6〜)を1作ずつ呼び、結果を器へ写す。
 - 器 = `.cache/web-material/`(store/<stem>.json・work/=取った頁の全文・runs.jsonl)。★**ローカルだけ・git に入れない・D ドライブを使わない**(ユーザ裁定)。
-- ★**集めるだけ**。要素・ジャンルを付けない。本番(manga.v2 / .preview-data / seed / 索引)に一切書かない。付与案は「Web材料判定して」(Haiku・案だけ)。
+- ★**集める・判定するは案だけ**。要素・ジャンルを付けない。本番(manga.v2 / .preview-data / seed / 索引)に書かない。付与案は「Web材料判定して」(Haiku・案だけ)。seed へ書くのは `apply`(ユーザの Go の後・下の手順)だけ。
 
 ## Haiku への命令の型 (= 2026-10-30 決定。命令文を変える時もこの型を守る)
 1. Haiku は**選ぶだけ**: 開く頁の番号 / 採る段落の番号+役割(物語/作風/人物/主題/展開)+scope(全体/一編)/ 使わない理由(決まった選択肢)/ 同じ作品だと示す語句。文章は書かせない(本文は道具が原文を写す)。
@@ -33,6 +33,7 @@ description: 「Web材料集めて [N]」「Web材料続けて」「Web材料判
 - **「Web材料続けて」** = 同じ(道具が器に在る作品を飛ばすので、続きから始まる)。
 - **語彙(`data/seeds/wamei-tags.yml`)や付与の決まりを変えた後** = `python scripts/_web-material.py rebuild [--stems a,b]`(判定済み全作の付与案を、保存済みの答えから作り直す。**モデルを呼ばない・0円・約30秒**。案が変わった作品だけ器の judges に「作り直し」を足す)。★効くのは、モデルが元の答えに自分で挙げていた語だけ。語彙に足した語が材料に在ってもモデルが見ていなければ「判定が返らなかった候補」に出る = 拾うなら `judge --stems … --redo`。
 - **2回目の判定**(★ユーザの Go が要る) = `python scripts/_web-material.py second --stems a,b [--parallel 3]`(1作 約$0.01・約1分・並列3)。判定済みの作品に2回目を回して1回目と合わせる。**1回目で表が0語の頁 = 2回判定+lift**(見直しと同じ `_element-review.agree`: 2回とも芯・芯+在る=芯 / 片方だけ芯=在る / 表0なので「2回とも在る」「片方が芯でもう片方は挙げず」を3語まで表へ)。**語がある頁 = 1回目のまま**で、語彙に足した語など1回目が見ていない候補の判定だけ2回目から足す(今ある語をゆらさない)。生の答えは `work/<stem>/assign/assign-answer.run1.json` / `run2.json` に残り、合わせ方を変えても `rebuild` でモデルを呼ばずに効く。止めても済んだ作品は飛ばして続きから。
+- **付与**(★ユーザの Go が要る) = `python scripts/_web-material.py apply --stems a,b [--go "<Goの発話の引用>"]`。**`--go` が無ければ試運転**(足す頁・語・ジャンルを数えて何も書かない)。`--go` があれば、4つの seed(`tags-enrich-2425.json` / `genre-append.yml` / `element-hidden.json` / `element-assign-changelog.jsonl`)を `.cache/web-material-apply-bak-<時刻>/` に退避してから、1作ずつ `_element-assign.py apply`(同じ計算 plan_apply)で書く。**足すだけ** = 要素・ジャンルは今あるものを消さず、隠し要素(羅針盤の鍵)も置き換えず今ある鍵を残す(今回表に上がった語だけ鍵から外す)。★**頁(manga.v2)・索引・テスト環境は触らない** = 頁に出るのは次の「反映して」(`_reflect-targeted.py --only <stem,…>`)。羅針盤の配布ファイル `public/data/compass-hidden.v1.json` は `_build-compass-hidden.py` で作り直して**反映と一緒に** commit(public/ の push はテスト環境の再ビルドを起こす)。済んだ作品は「既に付与案どおり」で飛ぶので止めても同じコマンドで続きから / 取り消し = 退避の4ファイルを戻す(各頁の前の状態は element-assign-changelog.jsonl の `before` にも在る)。`status` に「seed へ付与済み N作」。
 - **「Web材料止めて」** = CommandLine に `_web-material|_element-harvest|_element-assign` を含むプロセスを `taskkill /T /F` で全部止める(止め残すと2本並走する)。途中の作品は次回やり直し。
 - 1作だけ集め直す = `run --stems <stem> --redo`(前の回は消えず、回ごとに残る)。中身を見る = `show <stem> --text`。
 
