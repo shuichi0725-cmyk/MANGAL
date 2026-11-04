@@ -6104,11 +6104,6 @@ corrections:
     source: madb
     evidence: 'MADB(1.2.21) 初出:["デラックスマーガレット", true, "グッド・ハロー 2009-09-30: 初出：「デラックスマーガレット」200707,11,200803,200907"]。旧値 margaret(種3のAI埋め)'
     added_at: '2026-11-04'
-  good-morning-kiss:
-    magazine: cookie
-    source: madb+wiki-verified
-    evidence: 'MADB(1.2.21) 初出:["クッキー", true, "グッドモーニング・キス 1 2007-05-20: 初出：「クッキー」2006初夏・秋・2007新春"] / ja.wikipedia「グッドモーニング・コール」[[Cookie (雑誌)#Cookie BOX|Cookie BOX]]<br />[[Cookie (雑誌)|Cookie]]。旧値 ribon(種3のAI埋め)'
-    added_at: '2026-11-04'
   googoo-kochira-shiritsu-hanasaki-tantei-jimusho:
     magazine: weekly-comic-bunch
     source: madb
@@ -9120,9 +9115,9 @@ corrections:
     evidence: 'MADB(1.2.21) 初出:["shojo-comic", true, "生意気ダーリン 2012-12-01: 初出:「Sho-Comi」2012年2号、3・4合併号、18号 「Sho-Comi増刊」2012年2月14日号"]。旧値 空(種3のAI埋め)'
     added_at: '2026-11-04'
   namennayo:
-    magazine: corocoro-comic
-    source: madb+wiki-verified
-    evidence: 'MADB(1.2.21) 初出:["月刊コロコロコミック", true, "なめねこ又吉最強伝説 なめんなよ! 1 2007-02-25: 初出：「月刊コロコロコミック」「別冊コロコロコミック」"] / ja.wikipedia「〜なめねこ又吉最強伝説〜なめんなよ!」[[別冊コロコロコミック]]。旧値 ciao(種3のAI埋め)'
+    magazine: bessatsu-corocoro-comic
+    source: manual
+    evidence: Wiki=別冊コロコロコミック / MADB=月刊コロコロコミック。 Wikiを採る(旧値の「ちゃお」は誤り)。 旧値 corocoro-comic(2026-11-04 の部分一致の誤り)を是正
     added_at: '2026-11-04'
   nami-no-manimani:
     magazine: garo
@@ -11635,9 +11630,9 @@ corrections:
     evidence: 'MADB(1.2.21) 初出:["別冊フレンド", true, "ウソツキチョコレート 1 2013-02-13: 初出:「別冊フレンド」"]。旧値 空(種3のAI埋め)'
     added_at: '2026-11-04'
   usotsuki-gokuoo-kun:
-    magazine: corocoro-comic
-    source: madb+wiki-verified
-    evidence: 'MADB(1.2.21) 初出:["月刊コロコロコミック", true, "ウソツキ!ゴクオーくん 第1巻 2012-05-02: 初出:「月刊コロコロコミック」2012年3月号、「別冊コロコロコミック」2011年6月号、10月号～2012年2月号"] / ja.wikipedia「ウソツキ!ゴクオーくん」[[別冊コロコロコミック]]<br />[[月刊コロコロコミック]]。旧値 空(種3のAI埋め)'
+    magazine: bessatsu-corocoro-comic
+    source: manual
+    evidence: Wiki=別冊コロコロコミック→月刊コロコロコミック。 MADB初出欄も最古は別冊コロコロ2011年6月号。 初出誌=別冊コロコロ。 旧値 corocoro-comic(2026-11-04 の部分一致の誤り)を是正
     added_at: '2026-11-04'
   usotsuki-kusuriyubi:
     magazine: shojo-comic
