@@ -74,3 +74,8 @@ ja.wikipedia「スーパージャンプ」掲載作品一覧 **144作** × 本�
   表 = `docs/production-diagnostics/magazine-verify-2026-11-04.tsv`(本番未変更・適用はGo待ち)。
 - ★罠(次にやる時): ①**Infobox は作画者で合う欄だけ**(原作者だけ合う欄=別の漫画版: 伝説の勇者の伝説) ②題の部分一致は**区切りで挟まれる時だけ**(ホクサイと飯⊂ホクサイと飯さえあれば=別作) ③`[[スーパージャンプ#増刊号|ガールズジャンプ]]`=表示名が誌 ④MADB目次の誌は**その号が実際に属する誌**(週刊少年マガジンの本誌の号を確認。 増刊を親誌に数えてはいない)。 Wikiと割れるのは**移籍**(マガジンSPECIAL→本誌の我妻さん等)= 初出誌かどうかで決める ⑤MADB初出欄の「初出一覧あり」「[記載なし]」を誌名と誤読しない。
 - ★Wikipedia API は本文50件まとめ取りで**17回目に429**、 存在確認だけでも10回で再429(冷却60分×2)。 → **記事の有無は全題名ダンプ** `dumps.wikimedia.org/jawiki/latest/jawiki-latest-all-titles-in-ns0.gz`(16MB・`.cache/jawiki-dump/`、 空白→_ ・先頭英字は大文字)で手元判定し、 本文は在る分だけ10件ずつ3秒間隔。 MyAnimeList は robots.txt で Claude 名指し拒否=使わない(Jikan も不可)。
+
+## 2026-11-04 適用(ユーザ「2たして。3たてて」)
+- 段階 A・B・D の 1,646頁を magazine-corrections.yml へ(source = madb+wiki-verified / madb / manual)+ 雑誌マスタ25誌。 空欄 55,341→54,100。 道具 `scripts/magazine-verify/madb_apply.py`(表 TSV から組む)。
+- ★適用直前に見つけた誤り: 誌名の**部分一致**で「同じ誌」とみなしていた(別冊コロコロ⊃コロコロ・Cookie BOX⊃Cookie)= A に3頁混入 → `same()` を完全一致に直し、 `madb_apply_fix3.py` で後始末。 表記ゆれは canon/ALIAS で吸収し、 部分一致に頼らない。
+- 残りは [[inflight_state_2026_09_01]] の同日節。

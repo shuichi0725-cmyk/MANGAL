@@ -179,11 +179,6 @@ def ident(key_or_name):
 
 
 def same(a, b):
-    if not a or not b:
-        return False
-    if a == b:
-        return True
-    if a.startswith("?") and b.startswith("?"):
-        x, y = a[1:], b[1:]
-        return len(x) >= 4 and len(y) >= 4 and (x in y or y in x)
-    return False
+    """同じ誌か = ident の結果が完全一致の時だけ。 ★部分一致は使わない(2026-11-04 実踏: 「別冊コロコロコミック」⊃「コロコロコミック」、
+    「Cookie BOX」⊃「Cookie」= 別の誌(増刊)を同じ誌とみなして A=根拠2つ一致 に入れていた)。 表記ゆれは canon/ALIAS_CANON で吸収する。"""
+    return bool(a) and bool(b) and a == b
