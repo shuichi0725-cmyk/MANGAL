@@ -9,6 +9,7 @@
   python scripts/_web-material.py import <EH_ROOT>       # 別の置き場で集めた結果を器へ移す(試し30頁など)
   python scripts/_web-material.py judge --n 20           # 器の材料から付与案を作る(Haiku・案だけ = 頁に書かない。 まだ案の無い作品を巻数順に)
   python scripts/_web-material.py judge --stems a,b [--redo]
+  python scripts/_web-material.py rebuild [--stems a,b]  # 語彙(wamei-tags.yml)や付与の決まりを変えた後、判定済みの案を保存済みの答えから作り直す(モデルを呼ばない・0円)
 
 ★器はこのPCのローカルだけ(ユーザ裁定 2026-10-29「非公開、ローカルだけでよい」)= git に入れない。
   置き場 .cache\\web-material\\(C のリポジトリ内・git 管理外。 ユーザ裁定 2026-10-29「DはつかわないでCでよい」)
@@ -20,7 +21,7 @@
 ★順番 = 巻数5以上・見える要素3以下の頁を巻数の多い順(ユーザ指示 2026-10-29「巻数の多いものから」)。
 ★流し方の罠(2026-10-29 実踏): 子の標準入力は切る(DEVNULL。 継ぐと claude -p が固まる)/ 1作15分で打ち切り / 3作続けて失敗したら止める。
 """
-import argparse, datetime, glob, json, os, shutil, subprocess, sys, time
+import argparse, datetime, glob, importlib.util, json, os, shutil, subprocess, sys, time
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -249,6 +250,51 @@ def cmd_judge(a):
     print(f"== 終わり: 案 {ok} / 失敗 {len(fails)} / ${cost:.3f} ==", flush=True)
 
 
+def cmd_rebuild(a):
+    """語彙(wamei-tags.yml)や付与の決まりを変えた後、判定済みの作品の付与案を作り直す。 保存済みの答え(work/<stem>/assign/assign-answer.json)を
+    検査し直すだけ = モデルを呼ばない・0円。 案が変わった作品だけ、器の judges に「作り直し」を足す。 頁には書かない。
+    ★語彙に足した語は、元の答えにモデルが自分で挙げていた語(新しい語)にだけ効く。 モデルが見ていなかった語は「判定が返らなかった候補」に出る(判定し直すなら judge --redo)。"""
+    os.environ["EH_ROOT"] = WORK  # _element-assign.py の置き場(import より前に決める)
+    sp = importlib.util.spec_from_file_location("ea", os.path.join(ROOT, "scripts", "_element-assign.py"))
+    ea = importlib.util.module_from_spec(sp)
+    sp.loader.exec_module(ea)
+    V = ea.load_vocab()
+    names = a.stems.split(",") if a.stems else sorted(os.path.basename(p)[:-5] for p in glob.glob(os.path.join(STORE, "*.json")))
+    todo = [s for s in names if s and judged(s)]
+    print(f"== 付与案の作り直し {len(todo)}作 / 語彙 {len(V['display'])}語 / モデルは呼ばない ==", flush=True)
+    changed = skipped = 0
+    for stem in todo:
+        ap = os.path.join(WORK, stem, "assign", "assign-answer.json")
+        if not os.path.exists(ap):
+            skipped += 1
+            print(f"  飛ばす(保存済みの答えが無い): {stem}", flush=True)
+            continue
+        with open(ap, encoding="utf-8") as f:
+            d = json.load(f)
+        m = ea.load_material(stem)
+        cands = ea.find_candidates(m, V)
+        use = d.get("use") or {"model": "(保存済みの答え)"}
+        _, rows, _, _, _ = ea.make_proposal(stem, m, V, cands, d.get("answer", d), use)
+        core = [e["word"] for e in rows if e.get("cls") == "表"]
+        sub = [e["word"] for e in rows if e.get("cls") == "隠し"]
+        new = [e["word"] for e in rows if e["vocab"] == "新しい語"]
+        s = load_store(stem)
+        last = s["judges"][-1]
+        if (core, sub, new) == (last.get("core"), last.get("sub"), last.get("new")):
+            continue
+        s["judges"].append({"at": now(), "model": use.get("model"), "version": ea.VERSION, "material_at": s["runs"][-1]["collected_at"],
+                            "core": core, "sub": sub, "new": new, "cost_usd": 0, "rebuild": True})
+        tmp = store_path(stem) + ".tmp"
+        with open(tmp, "w", encoding="utf-8") as f:
+            json.dump(s, f, ensure_ascii=False, indent=1)
+        os.replace(tmp, store_path(stem))
+        changed += 1
+        add = [w for w in core if w not in (last.get("core") or [])]
+        gone = [w for w in (last.get("core") or []) if w not in core]
+        print(f"  {stem}: 表に出す案 {len(last.get('core') or [])}→{len(core)}" + (f" 増 {'・'.join(add)}" if add else "") + (f" 減 {'・'.join(gone)}" if gone else ""), flush=True)
+    print(f"== 終わり: 案が変わった {changed}作 / 変わらず {len(todo) - changed - skipped}作 / 飛ばした {skipped}作 ==", flush=True)
+
+
 def cmd_import(a):
     n = 0
     for stp in sorted(glob.glob(os.path.join(a.root, "*", "state.json"))):
@@ -321,5 +367,6 @@ if __name__ == "__main__":
     p = sp.add_parser("show"); p.add_argument("stem"); p.add_argument("--text", action="store_true"); p.set_defaults(f=cmd_show)
     p = sp.add_parser("status"); p.set_defaults(f=cmd_status)
     p = sp.add_parser("judge"); p.add_argument("--n", type=int, default=20); p.add_argument("--stems"); p.add_argument("--redo", action="store_true"); p.set_defaults(f=cmd_judge)
+    p = sp.add_parser("rebuild"); p.add_argument("--stems"); p.set_defaults(f=cmd_rebuild)
     a = ap.parse_args()
     a.f(a)
