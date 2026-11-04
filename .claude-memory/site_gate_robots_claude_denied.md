@@ -42,3 +42,7 @@ skill manba-distill には robots への言及が無い。**2026-10-08 にユー
 - wikidata.org / wikipedia の robots.txt は昔から `User-agent: * / Disallow: /w/`(=頁巡回クローラ向け)。門は `/w/api.php` も「robots不可」と返す。
 - Wikimedia は API の利用を UA 明示+節度ある間隔で公式に認めている。既存の道具(_fetch-work-qid.py=QLever / wiki-distill / external-enrich / _wiki_host の排他ロック+429冷却)は門を通さずこの作法で使っており正常。
 - ★「Wikidata は robots 不可で使えない」と言わない(10/22 にユーザへ誤って言った)。ただし新しく書く Wikimedia 取得も _wiki_host のロック/冷却と UA を必ず使う。
+
+## 2026-11-04 追記: MyAnimeList は不可
+- myanimelist.net = robots.txt が Claude を名指しで拒否(門の判定)。 MAL の連載誌欄(Serialization)は使わない。
+- api.jikan.moe(MAL の非公式API)= robots.txt に届かず「確かめられない」= 取らない。 ★MAL が拒んでいる情報を中継APIで取るのも筋が悪い。

@@ -31,3 +31,4 @@ metadata:
 - [土台なしでモデルを呼ぶ(7万→700トークン)](lean_headless_claude_call.md)
 - [Edge headless/CDPで撮って確かめる](headless_edge_capture_cdp.md)
 - [全体grepは裏で居座る](grep_whole_repo_lingers.md)
+- [Wikipedia API 429=全題名ダンプで回避](wikipedia_api_rate_limit.md)

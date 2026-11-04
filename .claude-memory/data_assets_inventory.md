@@ -5,6 +5,7 @@ metadata:
   node_type: memory
   type: reference
   originSessionId: b2aea090-84ca-49f7-ac76-8bc5d5c410db
+  modified: 2026-11-04T02:35:16.918Z
 ---
 
 MANGAL の全データ資産(実ファイル走査 2026-06-08)。 ★これが「何を持っていて何を作ったか」の台帳。 著者系は別途 [[author_data_map]] に詳細(私が忘れがちなため独立)。
@@ -12,7 +13,11 @@ MANGAL の全データ資産(実ファイル走査 2026-06-08)。 ★これが�
 ## 種1 = RAW MADB (`.cache/madb/`、 gitignore、 再DL可)
 - `metadata101.json`(660MB)/ `metadata101-clean.json`(479MB)= **巻(class:MangaBook 約398,605)**。 schema:isbn(10/13混在)/publisher/brand/numberOfPages/datePublished/**creator(ヨミja-hrkt付)**。
 - `metadata104.json`(179MB)= **シリーズmaster(★2024-11-25凍結)**。 著者役割[原作]/[漫画]はここのみ。 [[madb_cm104_frozen]]
-- `metadata105.json`= 雑誌master(凍結)。 `metadata103`= ? `metadata505`= 小。
+- `metadata105.json`= 雑誌master(5,753誌・凍結)。 `metadata103`= マンガその他(同人誌等 9,286)。 `metadata505`= 小。
+- ★**MADB の release は30ファイル**(cm101〜109・アニメ・ゲーム等)。 手元に無かった分を 2026-11-04 に `.cache/madb-extra/m10x/` へ取得(1.2.21):
+  **102=雑誌各号**(182,579号・`schema:isPartOf`=105の誌)/ **106=雑誌掲載履歴**(30,023 = 作品×連載)/ **108=目次**(453,705行 = 号×作品、 `ma:relatedCollectionOfManga`=106・`ma:relatedCollectionOfMagazine`=102の号)/ 109=所蔵(国会図書館等)。
+  → **作品の連載誌は 106←108→102→105 で引ける**(目次があるのは約40誌・昭和〜2010年代)。 cm101 の `schema:description` にも「初出：「誌名」号」が約1.1万冊。 ★「MADBに無い」と言う前に release の一覧(README の表)を見る(ユーザに「madbやndlには?」と聞かれて初めて見つけた)。 [[magazine_corrections_mechanism]]
+- jawiki の全題名ダンプ `.cache/jawiki-dump/jawiki-latest-all-titles-in-ns0.gz`(2026-11-04・248万題・リダイレクト込み)= 記事の有無を API を叩かず判定する用。 [[wikipedia_api_rate_limit]]
 - ★`metadata504.json`(44MB)= **作者master(74,982 Agent、 ヨミ21,140、 ma:ndla=NDL典拠IDリンク)**。 著者読みの本命源。 [[author_data_map]]
 - 入力CSV `data/seed/mangaka.csv`(6,751 curated)/ `mangaka-madb.csv`(42,115 MADB派生)。
 
