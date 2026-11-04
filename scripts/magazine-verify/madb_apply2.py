@@ -79,7 +79,8 @@ def main(write):
              "#   読者層= ja.wikipedia の誌の分類(無い時は頁の多数)。 子ども向けは児童。 設定の正本= scripts/magazine-verify/new_mags_2.py\n")
     for k in used:
         name, pub, demo = new[k]
-        block += f"{k}:\n  name: {yaml.safe_dump(name, allow_unicode=True).strip().removesuffix(chr(10) + '...')}\n  publisher: {pub}\n  demographic: {demo}\n"
+        # ★publisher は空でも '' と書く(lib/schema.ts MagazineSchema は z.string() = 空欄(null)だと next build が落ちる。 2026-11-04 実踏)
+        block += f"{k}:\n  name: {yaml.safe_dump(name, allow_unicode=True).strip().removesuffix(chr(10) + '...')}\n  publisher: {pub or chr(39) * 2}\n  demographic: {demo}\n"
     for p in (ROOT / "data" / "magazines.yml", ROOT / ".preview-data" / "magazines.yml"):
         txt = p.read_text(encoding="utf-8")
         p.write_text(txt + ("" if txt.endswith("\n") else "\n") + block, encoding="utf-8")

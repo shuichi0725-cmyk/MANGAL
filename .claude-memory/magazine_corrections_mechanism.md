@@ -85,3 +85,4 @@ ja.wikipedia「スーパージャンプ」掲載作品一覧 **144作** × 本�
 - ★MADBの誤字が誌名に出る: マーガーレット(=マーガレット)・週刊ヤングシャンプ・赤マルシャンプ・週刊少年シャンプ。 寄せる(MAP)。 号の名(りぼんスペシャルキュート/レモン)も親の誌へ寄せる。
 - ★誌でないもの(EXCLUDE): 単行本の題(神秘家水木しげる伝・新MS戦記)/ 増刊の一号(スレイヤーズ・レジェンド)/ 貸本選集(魔像別冊書下し選集2)/ 初出欄が「」/ 判別できない「別冊コミック」/ 複数増刊の短編集。
 - 雑誌の一覧頁は lib/hubs.ts の HUB_MIN.magazine=3 = 1〜2作の誌はマスタに足しても一覧頁は出来ない(作品頁の連載誌の表示だけ)。 → 小さい誌も気にせず足してよい。
+- ★**雑誌マスタの publisher は空でも `''` と書く**(2026-11-04 実踏): `publisher:`(値なし)= YAML の null → `lib/schema.ts` MagazineSchema の `z.string()` で落ち、 **テスト環境の next build が失敗**(本番の週次でも同じく落ちる)。 マスタを足したら push 前に `MANGAL_DATA_DIR=.preview-data FULL=1 npx tsx scripts/magazine-verify/check-masters.ts` と本番(`npx tsx …check-masters.ts`)を通す。
