@@ -354,6 +354,11 @@ export function allVolumes(manga: Manga): Volume[] {
 export function coverUrl(manga: Manga): string | null {
   const v1 = primaryVolume(manga);
   if (v1?.cover_url) return v1.cover_url;
+  // ★既定刷の1巻に書影が無ければ、同じ版の別刷(新装版カバー等)の1巻を先に見る
+  //   (2026-11-06 ユーザ報告=うる星やつら: 初版カバー34巻が書影ゼロで、点画・共有画像が復刻BOXになっていた)。
+  for (const ver of manga.editions[0]?.versions ?? []) {
+    if (ver.volumes[0]?.cover_url) return ver.volumes[0].cover_url;
+  }
   for (const v of allVolumes(manga)) {
     if (v.cover_url) return v.cover_url;
   }
