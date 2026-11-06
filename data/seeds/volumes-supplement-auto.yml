@@ -53855,7 +53855,7 @@ volumes:
   qid: null
   number: 20
   isbn13: '9784098640881'
-  release_date: '2026-12-28'
+  release_date: '2027-01-29'
   pages: null
   publisher: 小学館
   edition_type: standard
@@ -54860,3 +54860,55 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-11-06'
   note: 楽天予約ハーベスト① slug=yasashii-milk
+- series_keys:
+  - name:白狼|name:ルパン三世 異世界の姫君(ネイバーワールドプリンセス)
+  number: 21
+  isbn13: '9784253020008'
+  release_date: '2026-10-07'
+  publisher: 秋田書店
+  edition_type: standard
+  source: rakuten-preorder
+  added_at: '2026-11-06'
+  note: 日次蒸留2026-11-06 ex_mid保留から既存頁の続巻を確認(_exists --title) 楽天live
+- series_keys:
+  - name:白狼|name:ルパン三世 異世界の姫君(ネイバーワールドプリンセス)
+  number: 22
+  isbn13: '9784253021128'
+  release_date: '2027-01-07'
+  publisher: 秋田書店
+  edition_type: standard
+  source: rakuten-preorder
+  added_at: '2026-11-06'
+  note: 日次蒸留2026-11-06 ex_mid保留から既存頁の続巻を確認(_exists --title)
+- series_keys:
+  - qid:Q11280549|name:ブラック・ラグーンエダイニシャルステージ
+  - qid:Q1390701|name:ブラック・ラグーンエダイニシャルステージ
+  - qid:Q1390701|name:ブラック・ラグーンエダイニシャルステージ.
+  number: 10
+  isbn13: '9784091582560'
+  release_date: '2027-01-19'
+  publisher: 小学館
+  edition_type: standard
+  source: rakuten-preorder
+  added_at: '2026-11-06'
+  note: 日次蒸留2026-11-06 ex_mid保留から既存頁の続巻を確認(_exists --title)
+- series_keys:
+  - qid:Q1390701|name:ブラック・ラグーン掃除屋ソーヤー解体!ゴアゴア娘
+  number: 12
+  isbn13: '9784091582577'
+  release_date: '2027-01-19'
+  publisher: 小学館
+  edition_type: standard
+  source: rakuten-preorder
+  added_at: '2026-11-06'
+  note: 日次蒸留2026-11-06 ex_mid保留から既存頁の続巻を確認(_exists --title)
+- series_keys:
+  - name:奏舞音|name:最恐辺境伯に拾われました、小鳥〈=悪女?〉です
+  number: 2
+  isbn13: '9784046606525'
+  release_date: '2027-01-15'
+  publisher: KADOKAWA
+  edition_type: standard
+  source: rakuten-preorder
+  added_at: '2026-11-06'
+  note: 日次蒸留2026-11-06 ex_mid保留から既存頁の続巻を確認(_exists --title)
