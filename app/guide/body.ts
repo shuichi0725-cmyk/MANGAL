@@ -106,14 +106,52 @@ export const GUIDE_BODY = `
 </div>
 
 <div class="step">
-<h3><span class="num">3</span>糸を広げる</h3>
+<h3><span class="num">3</span>真ん中を押すと、その本の紹介</h3>
+<p>真ん中の本を押すと、その本の紹介が<b>漫画の1ページ(コマ割り)</b>になって重なります。題名・作者・キャッチ・巻数・ジャンル・要素がひと目でわかります。</p>
+<div class="stage k-anim"><span class="anim-label">ANIMATION</span>
+  <div class="k-path"><i style="background-image:url(https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9681/9784063259681.jpg?_ex=120x120)"></i><span style="color:#888;font-size:11px">旅路</span></div>
+  <div class="k-ring">
+    <div class="thr" style="width:120px;transform:rotate(-90deg);background:var(--accent)"></div>
+    <div class="thr" style="width:120px;transform:rotate(-30deg);background:var(--c-mag)"></div>
+    <div class="thr" style="width:120px;transform:rotate(30deg);background:var(--c-genre)"></div>
+    <div class="thr" style="width:120px;transform:rotate(90deg);background:var(--c-year)"></div>
+    <div class="thr" style="width:120px;transform:rotate(150deg);background:var(--c-theme)"></div>
+    <div class="thr" style="width:120px;transform:rotate(210deg);background:var(--c-author)"></div>
+    <div class="bk" style="top:calc(48% - 120px);background:linear-gradient(135deg,#d64,#fb5)"></div>
+    <div class="bk" style="left:calc(50% + 104px);top:calc(48% - 60px);background:linear-gradient(135deg,#2a8,#9e6)"></div>
+    <div class="bk" style="left:calc(50% + 104px);top:calc(48% + 60px);background:linear-gradient(135deg,#c73,#fc8)"></div>
+    <div class="bk" style="top:calc(48% + 120px);background:linear-gradient(135deg,#63c,#c9f)"></div>
+    <div class="bk" style="left:calc(50% - 104px);top:calc(48% + 60px);background:linear-gradient(135deg,#27c,#8cf)"></div>
+    <div class="bk" style="left:calc(50% - 104px);top:calc(48% - 60px);background:linear-gradient(135deg,#3b7be8,#9ad1f5)"></div>
+    <div class="bk k-center" style="background-image:url(https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9681/9784063259681.jpg?_ex=200x200)"></div>
+  </div>
+  <div class="k-hand"></div>
+  <div class="k-wrap"><div class="k-page">
+    <div class="ck ck-cov" style="--d:0s"><img src="https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9681/9784063259681.jpg?_ex=400x400" alt=""></div>
+    <div class="ck ck-title" style="--d:.15s"><div class="ck-t">のだめカンタービレ</div><div class="ck-kana">ノダメカンタービレ</div><div class="ck-auth">二ノ宮知子</div></div>
+    <div class="ck ck-say" style="--d:.3s"><div class="ck-bubble">指揮者を志すエリート音大生が出会ったのは、料理も片付けもできないのに類まれなピアノを奏でる風変わりな少女。凸凹コンビが奏でる音楽ラブコメ。</div></div>
+    <div class="ck ck-data" style="--d:.45s">
+      <div class="ck-row"><b class="ck-years">2002〜2010 完結</b><b class="ck-vols">全25巻</b><span class="ck-stamp">アニメ化</span></div>
+      <div class="ck-meta">講談社 ・ 女性</div>
+      <div class="ck-tags"><span class="ck-tag g">コメディ</span><span class="ck-tag g">ギャグ</span><span class="ck-tag g">音楽</span><span class="ck-tag g">恋愛</span><span class="ck-tag g">ラブコメ</span><span class="ck-tag g">日常</span><span class="ck-tag">ミュージカル</span><span class="ck-tag">言葉の壁</span><span class="ck-tag">成長物語</span><span class="ck-tag">オタク文化</span><span class="ck-tag">クラシック音楽</span><span class="ck-tag">大学</span><span class="ck-tag">ツンデレ</span></div>
+      <div class="ck-btns"><span class="dt">詳細 ›</span><span class="kd">Kindle</span><span class="az">Amazon</span><span class="cl">閉じる</span></div>
+    </div>
+  </div></div>
+  <div class="k-step"><span class="s1">① 真ん中の本を押す</span><span class="s2">② その本の紹介がコマ割りで出る</span><span class="s3">③「閉じる」か外を押すと輪にもどる</span></div>
+</div>
+<p class="cap">「詳細 ›」で作品ページへ。Kindle・Amazon で本を探せます。</p>
+<div class="tip">周りの本を選んでいる時に真ん中を押すと、紹介は出ずに選択が外れます。</div>
+</div>
+
+<div class="step">
+<h3><span class="num">4</span>糸を広げる</h3>
 <p>周りの本は「糸の入口」です。下の文字が糸の種類と名前、数字はその糸でつながる本の数。<b>作者・雑誌・年・似たジャンル・似た要素</b>の入口は、1回押すとその糸の本がまわりに一気に広がります。</p>
 <div class="shot"><img src="/guide/c3.jpg" width="640" height="982" loading="lazy" decoding="async" alt="糸を広げたところ"><div class="mark" style="left:1.9%;top:16.1%;width:13.2%;height:4.2%"><b>1</b></div><div class="mark" style="left:16.0%;top:16.1%;width:12.8%;height:4.2%"><b>2</b></div><div class="mark" style="left:29.7%;top:16.1%;width:17.0%;height:4.2%"><b>3</b></div><div class="mark" style="left:47.7%;top:16.1%;width:16.6%;height:4.2%"><b>4</b></div><div class="mark" style="left:65.2%;top:16.1%;width:10.6%;height:4.2%"><b>5</b></div></div>
 <p class="cap">広げた後の道具: ① ✕ 閉じる(輪にもどる) ② 年表(古い順にならべ直す) ③ ⚗ さらに絞る ④ 次を見る(続きの本) ⑤ ◎ 回(本が多い時は何回かに分けて見せる。押すと好きな回へ)</p>
 </div>
 
 <div class="step">
-<h3><span class="num">4</span>1冊選んで、もう1回で進む</h3>
+<h3><span class="num">5</span>1冊選んで、もう1回で進む</h3>
 <p>広がった本を1回押すと、下に紹介が出ます。気になったらもう1回押す(または「〈糸〉の糸で進む →」)と、その本が真ん中に来て、新しい糸が広がります。</p>
 <div class="shot"><img src="/guide/c8.jpg" width="640" height="1206" loading="lazy" decoding="async" alt="本を選んだところ"><div class="mark" style="left:32.1%;top:24.9%;width:36.3%;height:27.0%"><b>1</b></div><div class="mark" style="left:15.6%;top:96.0%;width:37.4%;height:3.1%"><b>2</b></div></div>
 <p class="cap">① 選んだ本が大きくなる ② ここを押しても進める</p>
@@ -155,7 +193,7 @@ export const GUIDE_BODY = `
 </div>
 
 <div class="step">
-<h3><span class="num">5</span>ジャンル・要素は「重ねて」広げる</h3>
+<h3><span class="num">6</span>ジャンル・要素は「重ねて」広げる</h3>
 <p><b>ジャンル</b>(橙)と<b>要素</b>(青)の入口だけは、押してもすぐには広がりません。押すと「選んだ」状態で光り、ほかのジャンル・要素を押すと条件が<b>重なり</b>ます。数字は重ねた時に残る本の数(→31)。真ん中の下に出るボタンで広げます。</p>
 <div class="shot"><img src="/guide/c2.jpg" width="640" height="744" loading="lazy" decoding="async" alt="ジャンルと要素を重ねたところ"><div class="mark" style="left:63.1%;top:10.5%;width:12.6%;height:15.2%"><b>1</b></div><div class="mark" style="left:12.3%;top:51.8%;width:12.6%;height:15.2%"><b>2</b></div><div class="mark" style="left:38.4%;top:62.8%;width:23.2%;height:8.6%"><b>3</b></div></div>
 <p class="cap">のだめカンタービレから ① ジャンル「音楽」 ② 要素「成長物語」を押して重ねたところ。③「成長物語 × 音楽 31冊を広げる」で、音楽ものの成長物語だけが広がる。選んだ入口をもう一度押しても広がります。</p>
@@ -163,14 +201,14 @@ export const GUIDE_BODY = `
 </div>
 
 <div class="step">
-<h3><span class="num">6</span>広げた後に「さらに絞る」</h3>
+<h3><span class="num">7</span>広げた後に「さらに絞る」</h3>
 <p>広げた本が多すぎる時は、上の「⚗ さらに絞る」。いま広げている本を、真ん中の本が持っているジャンル・要素でもう一段しぼれます。</p>
 <div class="shot"><img src="/guide/c5.jpg" width="640" height="306" loading="lazy" decoding="async" alt="さらに絞る"><div class="mark" style="left:2.3%;top:28.0%;width:16.0%;height:11.4%"><b>1</b></div><div class="mark" style="left:2.3%;top:50.8%;width:21.1%;height:11.4%"><b>2</b></div></div>
 <p class="cap">31冊から ① ジャンル「恋愛」なら18冊 ② 要素「ミュージカル」なら4冊。札を選んで下のボタンで絞る(何も選ばずに押すと絞りを外す)</p>
 </div>
 
 <div class="step">
-<h3><span class="num">7</span>「ほか ▸」と、ジャンルの組み替え</h3>
+<h3><span class="num">8</span>「ほか ▸」と、ジャンルの組み替え</h3>
 <p>輪に入りきらなかった要素・ジャンルは、下の「要素 ほか・ジャンル ほか ▸」にまとまっています。ここでも押して重ねられます。</p>
 <div class="shot"><img src="/guide/c6.jpg" width="640" height="367" loading="lazy" decoding="async" alt="ほかの糸の一覧"><div class="mark" style="left:2.3%;top:13.8%;width:95.3%;height:82.2%"><b>1</b></div><div class="mark" style="left:71.8%;top:56.9%;width:25.9%;height:6.7%"><b>2</b></div></div>
 <p class="cap">① 輪に出ていない要素とジャンル(押して重ねる) ② ジャンルを組み替える</p>
@@ -180,7 +218,7 @@ export const GUIDE_BODY = `
 </div>
 
 <div class="step">
-<h3><span class="num">8</span>戻る・送る</h3>
+<h3><span class="num">9</span>戻る・送る</h3>
 <p>左上の<b>旅路</b>の小さな本を押すと、その本まで戻れます。何もないところを押すと、ひとつ前の状態に戻ります。気に入った本は下の「詳細」で作品ページへ。</p>
 <div class="tip">右上の「共有」で、<b>たどってきた旅路ごと</b>友だちに送れます。受け取った人の画面にも同じ旅路がならび、最後の本から続きを旅できます。</div>
 </div>

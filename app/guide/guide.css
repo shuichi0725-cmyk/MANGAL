@@ -100,6 +100,49 @@
 .gd .recipe span{display:inline-block;border:1px solid var(--accent);color:var(--accent);padding:0 8px;margin-right:4px;font-size:12px}
 .gd .recipe span,.gd .recipe em{word-break:break-all}
 .gd .recipe em{font-style:normal;color:var(--sub);display:block;margin-top:2px}
+/* 羅針盤 手順3「真ん中を押すと、その本の紹介」(2026-11-06・見本どおり)。 コマの見た目は app/compass/compass.css の .ck を写したもの */
+.gd .k-anim{height:590px}
+.gd .k-ring{position:absolute;inset:0}
+.gd .k-ring .bk{background-size:cover}
+.gd .k-center{width:70px;height:98px;margin:-49px 0 0 -35px;z-index:2;background:#fff center/cover;animation:gd-kc 11s infinite}
+@keyframes gd-kc{0%,14%{transform:none}17%{transform:scale(.92)}20%,100%{transform:none}}
+.gd .k-hand{position:absolute;width:30px;height:30px;border-radius:50%;border:3px solid #fff;background:rgba(255,255,255,.3);box-shadow:0 0 0 2px #000,0 0 12px 2px #000;z-index:12;opacity:0;left:calc(50% - 15px);top:calc(48% - 15px);--cx:58px;--cy:205px;animation:gd-kh 11s infinite}
+@keyframes gd-kh{0%,6%{opacity:0;transform:translate(50px,70px)}12%{opacity:1;transform:none}16%{transform:scale(.75)}19%{transform:none;opacity:1}23%{opacity:0;transform:none}
+  70%{opacity:0;transform:translate(var(--cx),var(--cy))}74%{opacity:1;transform:translate(var(--cx),var(--cy))}78%{transform:translate(var(--cx),var(--cy)) scale(.75)}81%{opacity:1;transform:translate(var(--cx),var(--cy))}85%,100%{opacity:0;transform:translate(var(--cx),var(--cy))}}
+.gd .k-wrap{position:absolute;left:0;right:0;top:44px;bottom:30px;z-index:9;background:#000000b3;padding:8px;opacity:0;animation:gd-kw 11s infinite}
+@keyframes gd-kw{0%,19%{opacity:0}22%,82%{opacity:1}86%,100%{opacity:0}}
+.gd .k-page{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:7px;background:#f4f1e8;color:#111;box-shadow:0 16px 40px #000;animation:gd-kp 11s infinite}
+@keyframes gd-kp{0%,19%{transform:translateY(18px) scale(.94)}23%,100%{transform:none}}
+.gd .ck{position:relative;border:2.5px solid #111;background:#fff;overflow:hidden;min-width:0;opacity:0;animation:gd-ck 11s infinite;animation-delay:var(--d)}
+@keyframes gd-ck{0%,21%{opacity:0;transform:translateY(14px) rotate(-1.5deg) scale(.95)}25%,100%{opacity:1;transform:none}}
+.gd .ck-cov{grid-row:1/3;aspect-ratio:5/7;align-self:start}
+.gd .ck-cov img{width:100%;height:100%;object-fit:cover;display:block}
+.gd .ck-title{display:flex;flex-direction:column;justify-content:center;padding:8px 7px;background:radial-gradient(circle,#0000002e 1px,transparent 1.4px) 0 0/5px 5px,#fff}
+.gd .ck-t{font-weight:900;line-height:1.08;font-size:21px;transform:rotate(-4deg);transform-origin:left center;-webkit-text-stroke:.4px #111}
+.gd .ck-kana{font-size:9.5px;color:#444;margin-top:5px}
+.gd .ck-auth{font-size:11px;font-weight:700;margin-top:4px}
+.gd .ck-say{display:grid;place-items:center;padding:7px 5px;background:radial-gradient(circle,#0000001f 1px,transparent 1.4px) 0 0/4px 4px,#fff}
+.gd .ck-bubble{position:relative;background:#fff;border:2px solid #111;border-radius:50%/40%;padding:10px 12px;line-height:1.45;text-align:center;font-weight:700;font-size:10px}
+.gd .ck-data{grid-column:1/3;padding:8px 9px 10px}
+.gd .ck-row{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px}
+.gd .ck-years{font-size:15px;font-weight:900}.gd .ck-vols{font-size:13px;font-weight:900}
+.gd .ck-stamp{margin-left:auto;border:2px solid #c8281e;color:#c8281e;font-weight:900;font-size:11px;padding:0 6px;border-radius:4px;transform:rotate(-8deg)}
+.gd .ck-meta{font-size:11.5px;font-weight:700;color:#333;margin-top:2px}
+.gd .ck-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:7px}
+.gd .ck-tag{font-size:10.5px;font-weight:700;border:1.5px solid #111;border-radius:10px;padding:0 7px;background:#fff;line-height:1.6}
+.gd .ck-tag.g{background:#111;color:#f4f1e8}
+.gd .ck-btns{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:9px}
+.gd .ck-btns span{border:2.5px solid #111;font-weight:900;font-size:12px;padding:2px 11px;box-shadow:3px 3px 0 #111;line-height:1.6}
+.gd .ck-btns .dt{background:#d9f843;color:#111}.gd .ck-btns .kd{background:#3b82f6;color:#fff}.gd .ck-btns .az{background:#e69500;color:#fff}
+.gd .ck-btns .cl{border:0;box-shadow:none;color:#555;font-weight:400;text-decoration:underline;font-size:11.5px}
+.gd .k-step{position:absolute;left:10px;right:10px;bottom:8px;height:20px;font-size:11px;color:#ddd;z-index:11}
+.gd .k-step span{position:absolute;left:0;bottom:0;white-space:nowrap;opacity:0;background:#000c;padding:2px 8px}
+.gd .k-step .s1{animation:gd-ks1 11s infinite}.gd .k-step .s2{animation:gd-ks2 11s infinite}.gd .k-step .s3{animation:gd-ks3 11s infinite}
+@keyframes gd-ks1{0%,3%{opacity:0}6%,19%{opacity:1}21%,100%{opacity:0}}
+@keyframes gd-ks2{0%,26%{opacity:0}29%,66%{opacity:1}68%,100%{opacity:0}}
+@keyframes gd-ks3{0%,68%{opacity:0}71%,86%{opacity:1}88%,100%{opacity:0}}
+.gd .k-path{position:absolute;left:10px;top:10px;display:flex;gap:6px;align-items:center;z-index:3}
+.gd .k-path i{display:block;width:22px;height:30px;border:1px solid #fff;background:#fff center/cover}
 @media (prefers-reduced-motion: reduce){.gd,.gd *{animation:none!important}}
 .gd .cta{display:block;margin:18px 0 8px;padding:12px 0;text-align:center;font-weight:800;font-size:15px;text-decoration:none;border:2px solid var(--accent);color:#0d0d0d;background:var(--accent)}
 .gd .cta.cp{border-color:var(--compass);background:var(--compass);color:#fff}
