@@ -31,3 +31,9 @@ Cloudflare の `_redirects` は連鎖を辿らない。
 ## ★2026-10-22 追記: 再生成は反映が自動で回す
 - `_reflect-targeted.py` が毎回 `_gen-redirects.py` を呼ぶ(~1秒・冪等)。手でやるのは **slug-aliases.yml の追記と、既存の連鎖の張り替え(上の1)だけ**。
 - 契機: 10/20 の drop 6件が alias だけ入って `_redirects` 未再生成のまま → 10/22 週次 preflight が「リダイレクト衛生 形状NG」で停止。
+
+## ★2026-11-07 追記: 後継の無い drop は「張り替え」でなく alias 行の**削除**
+- 非掲載 drop(アンソロジー20頁 5978f72cda・アメコミ4頁 f2c60259f0・すてきな結婚 fdd9fa1617、11/1〜2)で、
+  その頁を**行き先にしていた古い alias 32件**が残り、次の週次 preflight が「リダイレクト衛生 死に転送32」で停止した。
+- 行き先が無い(=掲載外)ので張り替え先も無い → その alias 行を消す(backup + `audit-fix-changelog.jsonl` op=alias_hygiene_sweep)→ `_gen-redirects.py`。
+- ★非掲載 drop をする時は、drop と同時に `slug-aliases.yml` を**右辺で**検索して消しておく(週次で止まらないように)。

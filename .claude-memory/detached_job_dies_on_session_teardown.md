@@ -29,3 +29,13 @@ Invoke-CimMethod -ClassName Win32_Process -MethodName Create -Arguments @{
 WMI プロバイダ(WmiPrvSE)の子として起きるので、こちらのセッションが落ちても生き残る。
 同日の再ビルド(2.5分コンパイル→41分で完走・EXIT=0)とR2同期はこの方式で通した。
 ★監視の Monitor はセッション側なので一緒に死ぬ = **ジョブが生きていても監視は張り直す**。
+
+## ★2026-11-07 追記: 待ちの罠2つ(週次で実踏)
+1. **前週の `.exit` が残っていて即「完了」と誤報**: `until [ -f .cache/weekly-build.exit ]` の待ちを
+   WMI起動の直後に張ったら、ps1 が先頭で `.exit` を消す**前**に前週のファイル(EXIT=0)を拾って即終了した。
+   → `.exit` は**起動コマンドの前に自分で消す**(ps1 任せにしない)。`.exit` の時刻が起動より新しいかも見る。
+2. **待ちの shell がメモリ逼迫で Claude Code に kill される**: ビルド中(15ワーカー・node 32本)は
+   31.4GB 中の空きが約3GBまで落ちる。セッションが idle だと Claude Code が裏の shell を止める
+   (note=「勝手に再開するな」)。★**WMI起動のビルド本体は無傷で完走した**=止まるのは見張りだけ。
+   → kill 通知が来たら `.exit` と node 本数で状態を見て、ユーザに告げてから見張りを張り直す。
+   繰り返すなら next.config の `experimental.cpus` を8前後に下げる案(ユーザ未裁定)。
