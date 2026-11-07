@@ -100,3 +100,10 @@ ja.wikipedia「スーパージャンプ」掲載作品一覧 **144作** × 本�
 - 手元の既存本文も使った: 素材ハーベスト(QIDリンク 3,478)・Wiki蒸留(.cache/wiki-sweep 10,861)。 判定の精度 = MADB と両方ある頁で 手元分94%・ダンプ分88% 一致(割れの大半は移籍・別名不足)。
 - 結果(全69,903頁): Wikiまで調べて根拠なし 空欄47,751 / 値あり7,935、 空欄だが根拠あり 3,101(マスタに在る誌=埋められる)、 マスタに無い誌の根拠 2,998頁、 **食い違い 1,533(ほぼ全部 AI埋めの誤り: ちゃお↔コロコロ・ビッグコミック↔スピリッツ・月刊少年エース↔コンプエース等)**。
 - ★**雑誌マスタに主要誌が無い**: イブニング74頁・月刊少年チャンピオン51・きららMAX49・Kiss45・裏サンデー43・ヤングチャンピオン41・ヤングキング40・デザート36 … 計1,110誌 = `docs/production-diagnostics/magazine-ledger-missing-mags.tsv`。 マスタ追加・埋める・直すは**Go待ち**(本番の連載誌が変わる)。
+
+## 2026-11-07 適用(ユーザ「順番はまかせる」= 4項目すべてGo)
+- ① 雑誌マスタ **+293誌(209→502)** = `scripts/magazine-verify/mag_master_3.py`(plan→apply)。 誌の ja.wikipedia 記事(本文ダンプ+索引で1記事ずつ)で 雑誌か/出版社/読者層 を確認、 キー=Wikidata英語名(QLever)→英文誌名→ヘボン、 人が直す表 KEY/ALIAS_OVERRIDE/ALIAS_HOLD/DEMO_OVERRIDE を道具内に。 別名82 = `data/seeds/magazine-evidence/aliases.yml`(resolve が読む)。 計画表 `docs/production-diagnostics/magazine-master-plan-2026-11-07.tsv`(HOLD 905誌=記事なし564・雑誌でない122・増刊が親誌へ転送53・Web版/姉妹誌51 等)。
+  ★罠: 誌の Infobox は「**基礎情報 雑誌**」(Infobox 雑誌 ではない)。 Web誌は Infobox Website の「運営者」。 **転送先が親誌の記事 = 改名とは限らない**(水曜日のシリウス・ヤンマガWeb・たのしい三年生→一年生 等は別の誌)= 転送で別名にするのは人が1件ずつ。 電子書籍ストア(シーモア・ピッコマ・めちゃコミ)は誌として足さない。 `.preview-data/magazines.yml` も同じにする(本番と同一ファイル)。 本番 `FULL=1 check-masters` は SRC(data/manga)を読むので全頁skipが正常=無視。
+- ②〜④ `scripts/magazine-verify/ledger_apply.py`(plan→apply)= **埋め3,952・直し1,194・11/4照合誤り6 = 5,152頁**を magazine-corrections.yml(7,817件に)へ → `_reflect-targeted --only-file` で反映・push(22c91967cc)。 本番索引で5,152/5,152 一致を確認。 条件 = 強い根拠が1誌にそろう+誌と頁の出版社が合う(KADOKAWA系など同系列は同じ扱い)+今の誌が副次の記載に無い+楽天が別誌でない+Wiki一覧だけでない。 **HOLD 1,580**(Wiki一覧だけ434・割れる403・出版社不一致375・既に上書き282・今の誌も記載70・楽天別誌16)は計画表 `magazine-ledger-apply-2026-11-07.tsv` に理由つき。
+- ★副作用: 再生成した頁のうち **109頁の公開slugが変わった**(6/11 承認のslug適用で alias 表に旧→新が既に在った105 + slug-overrides の魔法科4)= 古いslugのまま頁が残っていたのが揃っただけ。 魔法科4頁は alias が無い/誤り(2017-2→無印→steeplechase に飛ぶ)だったので slug-aliases.yml を直し _gen-redirects 済(683eb00d99)。 ★大量 targeted 反映の前に「slug変更検知」が出る頁を見る(alias 表と突き合わせる)。
+- 本番R2へは次の週次(または差分反映)で出る。 是正後: 一致1つ7,621/2つ以上3,304、 空欄・根拠あり879(マスタに無い誌1,268)、 食い違い333。
