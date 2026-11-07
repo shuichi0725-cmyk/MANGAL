@@ -12,6 +12,7 @@ metadata:
 
 - [★Driveはcodeのみ](gdrive_code_folder_only.md)
 - [★Dドライブは使わない(置き場はC:)](feedback_no_d_drive.md)
+- [★私の週1バックアップ(D:\claude-backup)](self_backup_weekly.md)
 - [D:外付け認識外れ](d_drive_external_flaky.md)
 - [M5_Ultra=ファイルサーバー](m5ultra_file_server_setup.md)
 - [SMB共有レベル許可](smb_share_level_readonly_gotcha.md)

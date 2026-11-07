@@ -137,6 +137,7 @@
 - [★外部サイトは門を通す](site_gate_robots_claude_denied.md)
 - [★Dドライブは使わない(置き場はC:)](feedback_no_d_drive.md)
 - [★Wikipediaは手元ダンプ(_wiki_local.py)](wiki_local_dump.md)
+- [★私の週1バックアップ(D:\claude-backup)](self_backup_weekly.md)
 ## 分野別索引(全件)
 - [蒸留・取込(月次/週次/日次・MADB・予約harvest・種4)・23件](memory_index_distill.md)
 - [掲載範囲(非漫画・コンビニ版・画集・アンソロ・分冊)・17件](memory_index_scope.md)
