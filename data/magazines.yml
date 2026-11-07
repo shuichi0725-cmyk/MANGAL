@@ -850,3 +850,1176 @@ zero-sum-online:
   name: ゼロサムオンライン
   publisher: ichijinsha
   demographic: josei
+# ---- 第3弾 2026-11-07: 根拠台帳に出る誌を ja.wikipedia の誌の記事で確認して追加(scripts/magazine-verify/mag_master_3.py)
+ace-momogumi:
+  name: 'エース桃組'
+  publisher: 'kadokawa'
+  demographic: shounen
+ace-next:
+  name: '月刊エースネクスト'
+  publisher: 'kadokawa'
+  demographic: shounen
+ace-tokunou:
+  name: 'エース特濃'
+  publisher: 'kadokawa'
+  demographic: seinen
+action-pizazz:
+  name: 'アクションピザッツ'
+  publisher: 'futabasha'
+  demographic: seinen
+action-pizazz-dx:
+  name: 'アクションピザッツDX'
+  publisher: 'futabasha'
+  demographic: seinen
+action-pizazz-sp:
+  name: 'アクションピザッツSP'
+  publisher: 'futabasha'
+  demographic: seinen
+aera:
+  name: 'AERA'
+  publisher: 'asahi-shimbun'
+  demographic: josei
+afternoon-season-zokan:
+  name: 'アフタヌーンシーズン増刊'
+  publisher: 'kodansha'
+  demographic: seinen
+altima-ace:
+  name: 'アルティマエース'
+  publisher: 'kadokawa'
+  demographic: shoujo
+an-an:
+  name: 'An・an'
+  publisher: 'magazine-house'
+  demographic: seinen
+animage:
+  name: 'アニメージュ'
+  publisher: 'tokuma'
+  demographic: seinen
+asahi-journal:
+  name: '朝日ジャーナル'
+  publisher: 'asahi-shimbun'
+  demographic: seinen
+b-s-log-comic:
+  name: 'B''s-LOG COMIC'
+  publisher: 'kadokawa'
+  demographic: josei
+babybook:
+  name: 'ベビーブック'
+  publisher: 'shogakukan'
+  demographic: kodomo
+beans-ace:
+  name: 'ビーンズエース'
+  publisher: 'kadokawa'
+  demographic: shoujo
+bessatsu-manga-goraku:
+  name: '別冊漫画ゴラク'
+  publisher: 'nihon-bungeisha'
+  demographic: seinen
+bessatsu-shonen-sunday:
+  name: '別冊少年サンデー'
+  publisher: 'shogakukan'
+  demographic: shounen
+bessatsu-viva-princess:
+  name: '別冊ビバプリンセス'
+  publisher: 'akita'
+  demographic: shoujo
+bessatsu-young-champion:
+  name: '別冊ヤングチャンピオン'
+  publisher: 'akita'
+  demographic: seinen
+beth:
+  name: 'Beth'
+  publisher: 'kodansha'
+  demographic: josei
+big-comic-original-zokan:
+  name: 'ビッグコミックオリジナル増刊'
+  publisher: 'shogakukan'
+  demographic: seinen
+big-comic-zokan:
+  name: 'ビッグコミック増刊号'
+  publisher: 'shogakukan'
+  demographic: seinen
+big-gold:
+  name: 'ビッグゴールド'
+  publisher: 'shogakukan'
+  demographic: seinen
+bouquet:
+  name: 'ぶ〜け'
+  publisher: 'shueisha'
+  demographic: shoujo
+boy-s-life:
+  name: 'ボーイズライフ'
+  publisher: 'shogakukan'
+  demographic: shounen
+champion-cross:
+  name: 'チャンピオンクロス'
+  publisher: 'akita'
+  demographic: shounen
+champion-red-ichigo:
+  name: 'チャンピオンRED いちご'
+  publisher: 'akita'
+  demographic: seinen
+champion-tap:
+  name: 'Champion タップ!'
+  publisher: 'akita'
+  demographic: seinen
+cocohana:
+  name: 'Cocohana'
+  publisher: 'shueisha'
+  demographic: josei
+coji-coji:
+  name: 'コジコジ'
+  publisher: 'sony-magazines'
+  demographic: shoujo
+comic-blade-brownie:
+  name: 'コミックブレイドBROWNIE'
+  publisher: 'mag-garden'
+  demographic: seinen
+comic-blade-zebel:
+  name: 'コミックブレイドZEBEL'
+  publisher: 'mag-garden'
+  demographic: shoujo
+comic-candoll:
+  name: 'Comicキャンドール'
+  publisher: 'jitsugyo-no-nihon'
+  demographic: seinen
+comic-charge:
+  name: 'コミックチャージ'
+  publisher: 'kadokawa'
+  demographic: seinen
+comic-comp:
+  name: '月刊コミックコンプ'
+  publisher: 'kadokawa'
+  demographic: shounen
+comic-crimson:
+  name: 'COMIC Crimson'
+  publisher: 'sobisha'
+  demographic: shoujo
+comic-cune:
+  name: 'コミックキューン'
+  publisher: 'kadokawa'
+  demographic: seinen
+comic-days:
+  name: 'コミックDAYS'
+  publisher: 'kodansha'
+  demographic: seinen
+comic-dengeki-daioh-g:
+  name: 'コミック電撃だいおうじ'
+  publisher: 'kadokawa'
+  demographic: shounen
+comic-essay-gekijo:
+  name: 'コミックエッセイ劇場'
+  publisher: 'mediafactory'
+  demographic: josei
+comic-fantasy:
+  name: 'コミックFantasy'
+  publisher: 'kaiseisha'
+  demographic: shoujo
+comic-fuz:
+  name: 'COMIC FUZ'
+  publisher: 'houbunsha'
+  demographic: seinen
+comic-ganma:
+  name: 'コミックガンマ'
+  publisher: 'takeshobo'
+  demographic: shounen
+comic-gear:
+  name: 'コミックギア'
+  publisher: 'houbunsha'
+  demographic: shoujo
+comic-gotta:
+  name: 'コミックGOTTA'
+  publisher: 'shogakukan'
+  demographic: shounen
+comic-growl:
+  name: 'コミックグロウル'
+  publisher: 'bushiroad-works'
+  demographic: shoujo
+comic-gum:
+  name: 'コミックガム'
+  publisher: 'wani-books'
+  demographic: seinen
+comic-heaven:
+  name: 'コミックヘヴン'
+  publisher: 'nihon-bungeisha'
+  demographic: seinen
+comic-high:
+  name: 'コミックハイ!'
+  publisher: 'futabasha'
+  demographic: seinen
+comic-junk:
+  name: 'COMICジャンク'
+  publisher: 'aoba-shuppan'
+  demographic: seinen
+comic-lo:
+  name: 'コミックエルオー'
+  publisher: 'akaneshinsha'
+  demographic: seinen
+comic-meteor:
+  name: 'COMIC メテオ'
+  publisher: 'flex-comix'
+  demographic: seinen
+comic-moe:
+  name: 'コミック・モエ'
+  publisher: 'kaiseisha'
+  demographic: seinen
+comic-newtype:
+  name: 'コミックNewtype'
+  publisher: 'kadokawa'
+  demographic: seinen
+comic-nora:
+  name: '月刊コミックNORA'
+  publisher: 'gakken-2'
+  demographic: shounen
+comic-nostradamus:
+  name: 'コミック・ノストラダムス'
+  publisher: 'shodensha'
+  demographic: seinen
+comic-nova:
+  name: 'コミックノヴァ'
+  publisher: 'hifumi-shobo'
+  demographic: seinen
+comic-polaris:
+  name: 'COMIC ポラリス'
+  publisher: 'flex-comix'
+  demographic: shoujo
+comic-pool:
+  name: 'Comic POOL'
+  publisher: 'ichijinsha'
+  demographic: shoujo
+comic-ran-twins:
+  name: 'コミック乱ツインズ'
+  publisher: 'leed'
+  demographic: seinen
+comic-ran-twins-sengoku-busho-retsuden:
+  name: 'コミック乱ツインズ 戦国武将列伝'
+  publisher: 'leed'
+  demographic: seinen
+comic-seed:
+  name: 'COMIC SEED!'
+  publisher: 'penginshobou'
+  demographic: seinen
+comic-sumomo:
+  name: 'COMICすもも'
+  publisher: 'futabasha'
+  demographic: seinen
+comic-tom:
+  name: 'コミックトム'
+  publisher: 'ushio-shuppan'
+  demographic: shounen
+comic-valkyrie:
+  name: 'コミックヴァルキリー'
+  publisher: 'kill-time-communication'
+  demographic: seinen
+comic-yuri-hime:
+  name: 'コミック百合姫'
+  publisher: 'ichijinsha'
+  demographic: shoujo
+comic-zenon:
+  name: '月刊コミックゼノン'
+  publisher: 'coamix'
+  demographic: seinen
+comic-zero-sum-zokan-ward:
+  name: 'コミックZERO-SUM増刊WARD'
+  publisher: 'ichijinsha'
+  demographic: josei
+comicgamest:
+  name: 'コミックゲーメスト'
+  publisher: 'shinseisha-game'
+  demographic: shounen
+comp-hs:
+  name: 'コンプH''s'
+  publisher: 'kadokawa'
+  demographic: seinen
+corocoro-aniki:
+  name: 'コロコロアニキ'
+  publisher: 'shogakukan'
+  demographic: seinen
+cutie:
+  name: 'CUTiE'
+  publisher: 'takarajimasha'
+  demographic: josei
+cutie-comic:
+  name: 'CUTiE Comic'
+  publisher: 'takarajimasha'
+  demographic: shoujo
+cycomics:
+  name: 'サイコミ'
+  publisher: 'cygames'
+  demographic: seinen
+dengeki-animaga:
+  name: '電撃アニマガ'
+  publisher: 'ascii-media-works'
+  demographic: shounen
+dengeki-black-maoh:
+  name: '電撃黒マ王'
+  publisher: 'ascii-media-works'
+  demographic: seinen
+dengeki-bunko-magazine:
+  name: '電撃文庫MAGAZINE'
+  publisher: 'kadokawa'
+  demographic: shounen
+dengeki-comic-gao:
+  name: '月刊電撃コミックガオ!'
+  publisher: 'ascii-media-works'
+  demographic: shounen
+dengeki-comic-japan:
+  name: '電撃コミック ジャパン'
+  publisher: 'ascii-media-works'
+  demographic: seinen
+dengeki-daioh-genesis:
+  name: '電撃大王ジェネシス'
+  publisher: 'ascii-media-works'
+  demographic: seinen
+dengeki-g-s-comic:
+  name: '電撃G''sコミック'
+  publisher: 'kadokawa'
+  demographic: seinen
+dengeki-g-s-festival-comic:
+  name: '電撃G''s Festival! COMIC'
+  publisher: 'kadokawa'
+  demographic: shounen
+dengeki-g-s-magazine:
+  name: '電撃G''s magazine'
+  publisher: 'kadokawa'
+  demographic: shounen
+dengeki-games:
+  name: '電撃ゲームス'
+  publisher: 'ascii-media-works'
+  demographic: seinen
+dengeki-hime:
+  name: 'DENGEKI HIME'
+  publisher: 'ascii-media-works'
+  demographic: seinen
+dengeki-hobby-magazine:
+  name: '電撃ホビーマガジン'
+  publisher: 'ascii-media-works'
+  demographic: shounen
+dengeki-moeo:
+  name: '電撃萌王'
+  publisher: 'ascii-media-works'
+  demographic: seinen
+dengeki-playstation:
+  name: '電撃PlayStation'
+  publisher: 'kadokawa-game-linkage'
+  demographic: shounen
+dengeki-teioh:
+  name: '電撃帝王'
+  publisher: 'ascii-media-works'
+  demographic: seinen
+desir-sp:
+  name: 'デジールSP'
+  publisher: 'akita'
+  demographic: josei
+dos-v-power-report:
+  name: 'DOS/V POWER REPORT'
+  publisher: 'inpuresu'
+  demographic: seinen
+dragon-jr:
+  name: '月刊ドラゴンジュニア'
+  publisher: 'fujimi-shobo'
+  demographic: shounen
+dragon-magazine:
+  name: 'ドラゴンマガジン'
+  publisher: 'kadokawa'
+  demographic: seinen
+evening:
+  name: 'イブニング'
+  publisher: 'kodansha'
+  demographic: seinen
+famicom-hisshoubon:
+  name: 'ファミコン必勝本'
+  publisher: 'takarajimasha'
+  demographic: seinen
+family-computer-magazine:
+  name: 'ファミリーコンピュータMagazine'
+  publisher: 'tokumashotenintaamedia'
+  demographic: shounen
+famitsu:
+  name: 'ファミ通'
+  publisher: 'kadokawa-game-linkage'
+  demographic: seinen
+famitsu-bros:
+  name: 'ファミ通ブロス'
+  publisher: 'enterbrain'
+  demographic: kodomo
+famitsu-comic-clear:
+  name: 'コミッククリア'
+  publisher: 'kadokawa'
+  demographic: seinen
+febri:
+  name: 'Febri'
+  publisher: 'ichijinsha'
+  demographic: shounen
+flowers:
+  name: '月刊フラワーズ'
+  publisher: 'shogakukan'
+  demographic: shoujo
+gamest:
+  name: 'ゲーメスト'
+  publisher: 'shinseisha-game'
+  demographic: shounen
+gangan-ixa:
+  name: 'ガンガン戦-IXA-'
+  publisher: 'square-enix'
+  demographic: shounen
+gangan-pixiv:
+  name: 'ガンガンpixiv'
+  publisher: 'square-enix'
+  demographic: seinen
+gangan-yg:
+  name: 'ガンガンYG'
+  publisher: 'square-enix'
+  demographic: seinen
+gemaga:
+  name: 'ゲーマガ'
+  publisher: 'sb-creative'
+  demographic: seinen
+gene-line:
+  name: 'ジーンLINE'
+  publisher: 'kadokawa'
+  demographic: shoujo
+gene-pixiv:
+  name: 'ジーンピクシブ'
+  publisher: 'kadokawa'
+  demographic: seinen
+go-go-bunch:
+  name: 'ゴーゴーバンチ'
+  publisher: 'shinchosha'
+  demographic: seinen
+goraku-web:
+  name: 'ゴラクうぇぶ!'
+  publisher: 'nihon-bungeisha'
+  demographic: seinen
+goro:
+  name: 'GORO'
+  publisher: 'shogakukan'
+  demographic: seinen
+guts-pon:
+  name: 'ガッツポン'
+  publisher: 'koike-shoin'
+  demographic: seinen
+hana-to-yume-bunkei-shojo:
+  name: '花とゆめ 文系少女'
+  publisher: 'hakusensha'
+  demographic: shoujo
+harta:
+  name: 'ハルタ'
+  publisher: 'enterbrain'
+  demographic: seinen
+hatsu-kisu:
+  name: 'ハツキス'
+  publisher: 'kodansha'
+  demographic: josei
+heibon-punch:
+  name: '平凡パンチ'
+  publisher: 'magazine-house'
+  demographic: seinen
+hero-cross-line:
+  name: 'ヒーロークロスライン'
+  publisher: 'kodansha'
+  demographic: seinen
+honto-ni-atta-waraeru-hanashi:
+  name: '本当にあった笑える話'
+  publisher: 'bunkasha'
+  demographic: shoujo
+honto-ni-kowai-douwa:
+  name: 'ほんとうに怖い童話'
+  publisher: 'bunkasha'
+  demographic: shoujo
+horror-m:
+  name: 'ホラーM'
+  publisher: 'bunkasha'
+  demographic: seinen
+ichi-raki:
+  name: 'いち*ラキ'
+  publisher: 'tousuisha'
+  demographic: shoujo
+in-pocket:
+  name: 'IN★POCKET'
+  publisher: 'kodansha'
+  demographic: seinen
+itan:
+  name: 'ITAN'
+  publisher: 'kodansha'
+  demographic: josei
+japanism:
+  name: 'ジャパニズム'
+  publisher: 'seirindo'
+  demographic: seinen
+jogakusei-no-tomo:
+  name: '女学生の友'
+  publisher: 'shogakukan'
+  demographic: shoujo
+josei-jishin:
+  name: '女性自身'
+  publisher: 'kobunsha'
+  demographic: josei
+jump-kai:
+  name: 'ジャンプ改'
+  publisher: 'shueisha'
+  demographic: seinen
+jump-live:
+  name: 'ジャンプLIVE'
+  publisher: 'shueisha'
+  demographic: shounen
+kadocomi:
+  name: 'カドコミ'
+  publisher: 'kadokawa'
+  demographic: shounen
+keroro-land:
+  name: 'ケロロランド'
+  publisher: 'kadokawa'
+  demographic: kodomo
+kikan-s:
+  name: '季刊エス'
+  publisher: 'pie-international'
+  demographic: shounen
+kindai-mahjong:
+  name: '近代麻雀'
+  publisher: 'takeshobo'
+  demographic: seinen
+kiss-plus:
+  name: 'Kiss PLUS'
+  publisher: 'kodansha'
+  demographic: josei
+le-noel:
+  name: 'ル・ノエル'
+  publisher: 'ozora-shuppan'
+  demographic: shoujo
+leed-comic:
+  name: 'リイドコミック'
+  publisher: 'leed'
+  demographic: seinen
+lemon-people:
+  name: 'レモンピープル'
+  publisher: 'kubo-shoten'
+  demographic: josei
+magazine-be-boy:
+  name: 'MAGAZINE BE×BOY'
+  publisher: 'libre'
+  demographic: josei
+magazine-z:
+  name: '月刊マガジンZ'
+  publisher: 'kodansha'
+  demographic: seinen
+magcomi:
+  name: 'MAGCOMI'
+  publisher: 'mag-garden'
+  demographic: shounen
+magi-cu:
+  name: 'マジキュー'
+  publisher: 'enterbrain'
+  demographic: seinen
+manga-4-koma-palette:
+  name: 'まんが4コマぱれっと'
+  publisher: 'ichijinsha'
+  demographic: seinen
+manga-allman:
+  name: 'MANGAオールマン'
+  publisher: 'shueisha'
+  demographic: seinen
+manga-club:
+  name: 'まんがくらぶ'
+  publisher: 'takeshobo'
+  demographic: seinen
+manga-cross:
+  name: 'マンガクロス'
+  publisher: 'akita'
+  demographic: seinen
+manga-goccha:
+  name: 'マンガごっちゃ'
+  publisher: 'micro-magazine'
+  demographic: seinen
+manga-goraku-nexter:
+  name: '漫画ゴラクネクスター'
+  publisher: 'nihon-bungeisha'
+  demographic: seinen
+manga-home:
+  name: 'まんがホーム'
+  publisher: 'houbunsha'
+  demographic: seinen
+manga-jitsuwa-knuckles:
+  name: '漫画実話ナックルズ'
+  publisher: 'mirionshuppan'
+  demographic: seinen
+manga-life:
+  name: 'まんがライフ'
+  publisher: 'takeshobo'
+  demographic: seinen
+manga-life-momo:
+  name: 'まんがライフMOMO'
+  publisher: 'takeshobo'
+  demographic: seinen
+manga-life-original:
+  name: 'まんがライフオリジナル'
+  publisher: 'takeshobo'
+  demographic: seinen
+manga-life-storia:
+  name: 'まんがライフSTORIA'
+  publisher: 'takeshobo'
+  demographic: seinen
+manga-life-storia-dash:
+  name: 'ストーリアダッシュ'
+  publisher: 'takeshobo'
+  demographic: seinen
+manga-life-win:
+  name: 'まんがライフWIN'
+  publisher: 'takeshobo'
+  demographic: seinen
+manga-one:
+  name: 'マンガワン'
+  publisher: 'shogakukan'
+  demographic: seinen
+manga-ou:
+  name: 'まんが王'
+  publisher: 'akita'
+  demographic: kodomo
+manga-palette-lite:
+  name: 'まんがぱれっとLite'
+  publisher: 'ichijinsha'
+  demographic: seinen
+manga-park:
+  name: 'マンガPark'
+  publisher: 'hakusensha'
+  demographic: shounen
+manga-time:
+  name: 'まんがタイム'
+  publisher: 'houbunsha'
+  demographic: seinen
+manga-time-jumbo:
+  name: 'まんがタイムジャンボ'
+  publisher: 'houbunsha'
+  demographic: seinen
+manga-time-kirara-carat:
+  name: 'まんがタイムきららキャラット'
+  publisher: 'houbunsha'
+  demographic: seinen
+manga-time-kirara-max:
+  name: 'まんがタイムきららMAX'
+  publisher: 'houbunsha'
+  demographic: seinen
+manga-time-kirara-miracle:
+  name: 'まんがタイムきららミラク'
+  publisher: 'houbunsha'
+  demographic: seinen
+manga-time-lovely:
+  name: 'まんがタイムラブリー'
+  publisher: 'houbunsha'
+  demographic: shoujo
+manga-time-original:
+  name: 'まんがタイムオリジナル'
+  publisher: 'houbunsha'
+  demographic: seinen
+manga-time-special:
+  name: 'まんがタイムスペシャル'
+  publisher: 'houbunsha'
+  demographic: seinen
+manga-town-original:
+  name: 'まんがタウンオリジナル'
+  publisher: 'futabasha'
+  demographic: josei
+manga-up:
+  name: 'マンガUP!'
+  publisher: 'square-enix'
+  demographic: shounen
+megami-magazine:
+  name: 'メガミマガジン'
+  publisher: 'gakken-2'
+  demographic: seinen
+men-s-young:
+  name: 'メンズヤング'
+  publisher: 'futabasha'
+  demographic: seinen
+miracle-jump:
+  name: 'ミラクルジャンプ'
+  publisher: 'shueisha'
+  demographic: seinen
+model-graphix:
+  name: 'モデルグラフィックス'
+  publisher: 'dainippon-kaiga'
+  demographic: seinen
+moeyon:
+  name: 'もえよん'
+  publisher: 'futabasha'
+  demographic: seinen
+mokei-joho:
+  name: '模型情報'
+  publisher: 'bandai'
+  demographic: shounen
+monthly-animal-house:
+  name: '月刊アニマルハウス'
+  publisher: 'hakusensha'
+  demographic: seinen
+monthly-big-comic-spirits:
+  name: '月刊!スピリッツ'
+  publisher: 'shogakukan'
+  demographic: seinen
+monthly-birz:
+  name: '月刊バーズ'
+  publisher: 'scola'
+  demographic: seinen
+monthly-bushiroad:
+  name: '月刊ブシロード'
+  publisher: 'kadokawa'
+  demographic: shounen
+monthly-comic-avarus:
+  name: '月刊コミックアヴァルス'
+  publisher: 'mag-garden'
+  demographic: josei
+monthly-comic-bunch:
+  name: '月刊コミックバンチ'
+  publisher: 'shinchosha'
+  demographic: seinen
+monthly-comic-dragon:
+  name: '月刊コミックドラゴン'
+  publisher: 'fujimi-shobo'
+  demographic: shounen
+monthly-comic-earth-star:
+  name: 'コミック アース・スター'
+  publisher: 'earth-star'
+  demographic: shounen
+monthly-comic-rush:
+  name: '月刊コミックラッシュ'
+  publisher: 'jive'
+  demographic: shounen
+monthly-comic-zero-sum:
+  name: '月刊コミックZERO-SUM'
+  publisher: 'ichijinsha'
+  demographic: josei
+monthly-comicomi:
+  name: '月刊コミコミ'
+  publisher: 'hakusensha'
+  demographic: shounen
+monthly-fang:
+  name: '月刊少年ファング'
+  publisher: 'leed'
+  demographic: shounen
+monthly-hero-s:
+  name: '月刊ヒーローズ'
+  publisher: 'shogakukan-creative'
+  demographic: seinen
+monthly-ikki:
+  name: '月刊IKKI'
+  publisher: 'shogakukan'
+  demographic: seinen
+monthly-kissca:
+  name: '月刊キスカ'
+  publisher: 'takeshobo'
+  demographic: seinen
+monthly-morning-two:
+  name: '月刊モーニングtwo'
+  publisher: 'kodansha'
+  demographic: seinen
+monthly-shonen-blood:
+  name: '月刊少年ブラッド'
+  publisher: 'sb-creative'
+  demographic: shounen
+monthly-shonen-champion:
+  name: '月刊少年チャンピオン'
+  publisher: 'akita'
+  demographic: shounen
+monthly-shonen-comic:
+  name: '月刊少年コミック'
+  publisher: 'shonen-gahosha'
+  demographic: shounen
+monthly-shonen-gag-oh:
+  name: '月刊少年ギャグ王'
+  publisher: 'square-enix'
+  demographic: shounen
+monthly-shonen-magazine-plus:
+  name: '月刊少年マガジン+'
+  publisher: 'kodansha'
+  demographic: shounen
+monthly-stencil:
+  name: '月刊ステンシル'
+  publisher: 'square-enix'
+  demographic: shoujo
+monthly-young-jump:
+  name: '月刊ヤングジャンプ'
+  publisher: 'shueisha'
+  demographic: seinen
+motto:
+  name: 'もっと!'
+  publisher: 'akita'
+  demographic: josei
+mr-magazine:
+  name: 'ミスターマガジン'
+  publisher: 'kodansha'
+  demographic: seinen
+ms-saga:
+  name: 'MS SAGA'
+  publisher: 'bandai'
+  demographic: shounen
+mugenkan:
+  name: '夢幻館'
+  publisher: 'asahi-sonorama'
+  demographic: josei
+mystery-bonita:
+  name: 'ミステリーボニータ'
+  publisher: 'akita'
+  demographic: shoujo
+mystery-dx:
+  name: 'ミステリーDX'
+  publisher: 'kadokawa'
+  demographic: shoujo
+mystery-sara:
+  name: 'ミステリーサラ'
+  publisher: 'seisensha'
+  demographic: josei
+neko-panch:
+  name: 'ねこぱんち'
+  publisher: 'shonen-gahosha'
+  demographic: shoujo
+nemuki:
+  name: 'ネムキ'
+  publisher: 'asahi-shimbun'
+  demographic: shoujo
+nemuki-plus:
+  name: 'Nemuki+'
+  publisher: 'asahi-shimbun'
+  demographic: shoujo
+newtype:
+  name: '月刊ニュータイプ'
+  publisher: 'kadokawa'
+  demographic: seinen
+nyantype:
+  name: '娘TYPE'
+  publisher: 'kadokawa'
+  demographic: shounen
+oh-super-jump:
+  name: 'オースーパージャンプ'
+  publisher: 'shueisha'
+  demographic: seinen
+ohta-web-comic:
+  name: 'Ohta Web Comic'
+  publisher: 'ohta-shuppan'
+  demographic: josei
+pachipuro-7:
+  name: 'パチプロ7'
+  publisher: 'tatsumi'
+  demographic: seinen
+petit-comic:
+  name: 'プチコミック'
+  publisher: 'shogakukan'
+  demographic: josei
+petit-flower:
+  name: 'プチフラワー'
+  publisher: 'shogakukan'
+  demographic: shoujo
+petit-seven:
+  name: 'プチセブン'
+  publisher: 'shogakukan'
+  demographic: shoujo
+play-comic:
+  name: 'プレイコミック'
+  publisher: 'akita'
+  demographic: seinen
+pokemon-wonderland:
+  name: 'ポケモンワンダーランド'
+  publisher: 'shogakukan'
+  demographic: kodomo
+popcorn:
+  name: 'ポップコーン'
+  publisher: 'kobunsha'
+  demographic: seinen
+popeye:
+  name: 'POPEYE'
+  publisher: 'magazine-house'
+  demographic: seinen
+pyon-pyon:
+  name: 'ぴょんぴょん'
+  publisher: 'shogakukan'
+  demographic: kodomo
+rakuen-le-paradis:
+  name: '楽園 Le Paradis'
+  publisher: 'hakusensha'
+  demographic: seinen
+rpg-magazine:
+  name: 'RPGマガジン'
+  publisher: 'hobby-japan'
+  demographic: seinen
+s-f-magazine:
+  name: 'S-Fマガジン'
+  publisher: 'hayakawa'
+  demographic: seinen
+seventeen:
+  name: 'Seventeen'
+  publisher: 'shueisha'
+  demographic: shoujo
+shincho-45:
+  name: '新潮45'
+  publisher: 'shinchosha'
+  demographic: seinen
+shojo-club:
+  name: '少女クラブ'
+  publisher: 'kodansha'
+  demographic: shoujo
+shojo-friend:
+  name: '少女フレンド'
+  publisher: 'kodansha'
+  demographic: shoujo
+shoku-man:
+  name: '食漫'
+  publisher: 'nihon-bungeisha'
+  demographic: seinen
+shonen-ace-plus:
+  name: '少年エースplus'
+  publisher: 'kadokawa'
+  demographic: shounen
+shonen-big-comic:
+  name: '少年ビッグコミック'
+  publisher: 'shogakukan'
+  demographic: shounen
+shonen-book:
+  name: '少年ブック'
+  publisher: 'shueisha'
+  demographic: shounen
+shonen-captain:
+  name: '月刊少年キャプテン'
+  publisher: 'tokuma'
+  demographic: shounen
+shonen-ou:
+  name: '少年王'
+  publisher: 'kobunsha'
+  demographic: shounen
+shosetsu-gendai:
+  name: '小説現代'
+  publisher: 'kodansha'
+  demographic: seinen
+shosetsu-shincho:
+  name: '小説新潮'
+  publisher: 'shinchosha'
+  demographic: seinen
+shosetsu-yasei-jidai:
+  name: '小説 野性時代'
+  publisher: 'kadokawa'
+  demographic: seinen
+shukan-bunshun:
+  name: '週刊文春'
+  publisher: 'bungei-shunju'
+  demographic: seinen
+shukan-gendai:
+  name: '週刊現代'
+  publisher: 'kodansha'
+  demographic: seinen
+shukan-hoseki:
+  name: '週刊宝石'
+  publisher: 'kobunsha'
+  demographic: seinen
+shukan-jitsuwa:
+  name: '週刊実話'
+  publisher: 'nipponjaanarushuppan'
+  demographic: seinen
+shukan-post:
+  name: '週刊ポスト'
+  publisher: 'shogakukan'
+  demographic: seinen
+shukan-taishu:
+  name: '週刊大衆'
+  publisher: 'futabasha'
+  demographic: seinen
+spa:
+  name: 'SPA!'
+  publisher: 'fusosha'
+  demographic: seinen
+sunday-mainichi:
+  name: 'サンデー毎日'
+  publisher: 'mainichi'
+  demographic: seinen
+sunday-webry:
+  name: 'サンデーうぇぶり'
+  publisher: 'shogakukan'
+  demographic: shounen
+super-action:
+  name: '月刊スーパーアクション'
+  publisher: 'futabasha'
+  demographic: seinen
+super-robot-magazine:
+  name: 'スーパーロボットマガジン'
+  publisher: 'futabasha'
+  demographic: shounen
+suspension-mystery:
+  name: 'サスペリアミステリー'
+  publisher: 'akita'
+  demographic: shoujo
+tales-of-magazine:
+  name: 'テイルズ オブ マガジン'
+  publisher: 'kadokawa'
+  demographic: seinen
+tanoshii-ichinensei:
+  name: 'たのしい一年生'
+  publisher: 'kodansha'
+  demographic: kodomo
+tasogare-shokudou:
+  name: 'たそがれ食堂'
+  publisher: 'gentosha-comics'
+  demographic: seinen
+tech-gian:
+  name: 'TECH GIAN'
+  publisher: 'kadokawa'
+  demographic: seinen
+televi-kun:
+  name: 'てれびくん'
+  publisher: 'shogakukan'
+  demographic: kodomo
+the-beans:
+  name: 'ザ・ビーンズ'
+  publisher: 'kadokawa'
+  demographic: shoujo
+the-liberty:
+  name: 'ザ・リバティ'
+  publisher: 'koufukunokagakushuppan'
+  demographic: seinen
+tv-bros:
+  name: 'テレビブロス'
+  publisher: 'toukyounyuusutsuushinsha'
+  demographic: seinen
+unpoko:
+  name: 'ウンポコ'
+  publisher: 'shinshokan'
+  demographic: shoujo
+ura-sunday:
+  name: '裏サンデー'
+  publisher: 'shogakukan'
+  demographic: seinen
+vitaman:
+  name: 'ビタマン'
+  publisher: 'takeshobo'
+  demographic: seinen
+waai:
+  name: 'わぁい!'
+  publisher: 'ichijinsha'
+  demographic: seinen
+washizumu:
+  name: 'わしズム'
+  publisher: 'gentosha'
+  demographic: seinen
+web-action:
+  name: 'Webアクション'
+  publisher: 'futabasha'
+  demographic: shounen
+web-comic-zenyon:
+  name: 'ゼノン編集部'
+  publisher: 'coamix'
+  demographic: seinen
+webtoon:
+  name: 'LINE WEBTOON'
+  publisher: 'nhn-comico'
+  demographic: josei
+weekly-ascii:
+  name: '週刊アスキー'
+  publisher: 'ascii-media-works'
+  demographic: seinen
+weekly-bokura-magazine:
+  name: '週刊ぼくらマガジン'
+  publisher: 'kodansha'
+  demographic: shounen
+weekly-manga-times:
+  name: '週刊漫画TIMES'
+  publisher: 'houbunsha'
+  demographic: seinen
+weekly-myojo:
+  name: '週刊明星'
+  publisher: 'shueisha'
+  demographic: shoujo
+weekly-playboy:
+  name: '週刊プレイボーイ'
+  publisher: 'shueisha'
+  demographic: seinen
+weekly-shonen-action:
+  name: '週刊少年アクション'
+  publisher: 'futabasha'
+  demographic: shounen
+wings:
+  name: 'ウィングス'
+  publisher: 'shinshokan'
+  demographic: josei
+yawaraka-spirits:
+  name: 'やわらかスピリッツ'
+  publisher: 'shogakukan'
+  demographic: seinen
+yomiuri-weekly:
+  name: '読売ウイークリー'
+  publisher: 'yomiurishinbunsha'
+  demographic: seinen
+yomyom:
+  name: 'Yom yom'
+  publisher: 'shinchosha'
+  demographic: josei
+young-animal-arashi:
+  name: 'ヤングアニマル嵐'
+  publisher: 'hakusensha'
+  demographic: seinen
+young-animal-island:
+  name: 'ヤングアニマルあいらんど'
+  publisher: 'hakusensha'
+  demographic: seinen
+young-animal-zero:
+  name: 'ヤングアニマルZERO'
+  publisher: 'hakusensha'
+  demographic: seinen
+young-captain:
+  name: 'ヤング・キャプテン'
+  publisher: 'tokuma'
+  demographic: seinen
+young-champion:
+  name: 'ヤングチャンピオン'
+  publisher: 'akita'
+  demographic: seinen
+young-champion-retsu:
+  name: 'ヤングチャンピオン烈'
+  publisher: 'akita'
+  demographic: seinen
+young-comic:
+  name: 'ヤングコミック'
+  publisher: 'shonen-gahosha'
+  demographic: seinen
+young-dragon-age:
+  name: 'ヤングドラゴンエイジ'
+  publisher: 'kadokawa'
+  demographic: seinen
+young-king:
+  name: 'ヤングキング'
+  publisher: 'shonen-gahosha'
+  demographic: seinen
+young-king-bessatsu-kingdom:
+  name: 'ヤングキング別冊キングダム'
+  publisher: 'shonen-gahosha'
+  demographic: seinen
+young-king-bull:
+  name: 'ヤングキングBULL'
+  publisher: 'shonen-gahosha'
+  demographic: seinen
+young-king-ours-gh:
+  name: '月刊ヤングキングアワーズGH'
+  publisher: 'shonen-gahosha'
+  demographic: seinen
+young-lady:
+  name: 'ヤングレディ'
+  publisher: 'kodansha'
+  demographic: seinen
+young-magazine-the-3rd:
+  name: 'ヤングマガジンサード'
+  publisher: 'kodansha'
+  demographic: seinen
+young-rose:
+  name: 'ヤングロゼ'
+  publisher: 'kadokawa'
+  demographic: josei
+yuri-shimai:
+  name: '百合姉妹'
+  publisher: 'magazine-magazine'
+  demographic: shoujo
+zipper:
+  name: 'Zipper'
+  publisher: 'shodensha'
+  demographic: josei
+zipper-comic:
+  name: 'Zipper comic'
+  publisher: 'shodensha'
+  demographic: shoujo
+zokan-flowers:
+  name: '増刊flowers'
+  publisher: 'shogakukan'
+  demographic: josei

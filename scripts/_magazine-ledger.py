@@ -95,6 +95,10 @@ def build_resolver():
                 cand[nrm(n)].add(k)
     for n, k in EXTRA.items():
         cand[nrm(n)].add(k)
+    ap = os.path.join(EV, "aliases.yml")             # 雑誌マスタ第3弾(mag_master_3.py)が Wikipedia の誌の記事で確かめた別名
+    if os.path.exists(ap):
+        for n, k in (load_yaml(ap) or {}).items():
+            cand[nrm(str(n))].add(k)
     table = {}
     amb = {}
     for n, ks in cand.items():
@@ -952,6 +956,41 @@ def clean_hits(hs):
     return out
 
 
+def evidence_of(slug, src):
+    """1頁の根拠を数える(表の「状態」と是正の判定が同じ数え方を使う)。
+    strong = 強い根拠の誌 → それを言うソースの数 / by_src = 誌 → ソース名 / secondary = 主でない記載(移籍先・出張掲載・2番目に多い初出)
+    weak = 楽天説明の誌 / cells = 表のソース列の文字。"""
+    strong, weak, by_src, secondary = Counter(), Counter(), defaultdict(list), set()
+    cells, unchecked, checked_any, wiki_checked, last = {}, [], False, False, ""
+    for key, col, is_strong in SOURCES:
+        rec = src[key][0].get(slug)
+        if rec is None:
+            cells[col] = ""
+            unchecked.append(col)
+            continue
+        at, hs = rec
+        checked_any = True
+        last = max(last, at)
+        if key.startswith("wiki-"):
+            wiki_checked = True
+        hs = clean_hits(hs)
+        if not hs:
+            cells[col] = f"なし({at})"
+            continue
+        use = [h for h in hs if h.get("main")] if key == "madb-mokuji" else [h for h in hs if not h.get("sub")]
+        if key == "madb-shoshutsu":
+            use = hs[:1] if len(hs) == 1 or hs[0]["n"] > hs[1]["n"] else [h for h in hs if h["n"] == hs[0]["n"]]
+        used = {h["mag"] for h in use}
+        for m in used:
+            (strong if is_strong else weak)[m] += 1
+            if is_strong:
+                by_src[m].append(key)
+        secondary |= {h["mag"] for h in hs} - used
+        cells[col] = " / ".join(f'{magname(h["mag"])}×{h["n"]}' for h in hs[:4]) + f"({at})"
+    return {"strong": strong, "weak": weak, "by_src": by_src, "secondary": secondary, "cells": cells, "unchecked": unchecked,
+            "checked_any": checked_any, "wiki_checked": wiki_checked, "last": last}
+
+
 def build():
     pages = load_pages()
     _, roles = page_files()
@@ -968,29 +1007,9 @@ def build():
         for n, r in ppl:
             by[ROLE.get(r, "その他" if r else "役割不明")].append(n if r in ROLE or not r else f"{n}({r})")
         cur = p["mag"]
-        strong, weak = Counter(), Counter()
-        cells, unchecked, checked_any, wiki_checked, last = {}, [], False, False, ""
-        for key, col, is_strong in SOURCES:
-            rec = src[key][0].get(slug)
-            if rec is None:
-                cells[col] = ""
-                unchecked.append(col)
-                continue
-            at, hs = rec
-            checked_any = True
-            last = max(last, at)
-            if key.startswith("wiki-"):
-                wiki_checked = True
-            hs = clean_hits(hs)
-            if not hs:
-                cells[col] = f"なし({at})"
-                continue
-            use = [h for h in hs if h.get("main")] if key == "madb-mokuji" else [h for h in hs if not h.get("sub")]
-            if key == "madb-shoshutsu":
-                use = hs[:1] if len(hs) == 1 or hs[0]["n"] > hs[1]["n"] else [h for h in hs if h["n"] == hs[0]["n"]]
-            for h in {h["mag"]: h for h in use}.values():
-                (strong if is_strong else weak)[h["mag"]] += 1
-            cells[col] = " / ".join(f'{magname(h["mag"])}×{h["n"]}' for h in hs[:4]) + f"({at})"
+        E = evidence_of(slug, src)
+        strong, weak, cells, unchecked = E["strong"], E["weak"], E["cells"], E["unchecked"]
+        checked_any, wiki_checked, last = E["checked_any"], E["wiki_checked"], E["last"]
         ev = set(strong)
         manual = src["manual"][0].get(slug)
         if manual and manual[1] and manual[1][0]["mag"] == cur:

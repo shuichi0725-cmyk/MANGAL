@@ -1,0 +1,1282 @@
+# 雑誌マスタ第3弾の計画(2026-11-07)。 NEW=足す / ALIAS=既存誌(または同じ記事の誌)の別名 / HOLD=足さない。 正本は mag_master_3.py が作る
+decision	name	pages	key	master_name	article	pub_name	pub	demo	demo_how	en	key_how	why	slugs
+ALIAS	別冊少女コミック	14	betsucomi		ベツコミ	小学館	shogakukan	shoujo	分類:少女漫画雑誌			既存の誌の記事(ベツコミ)	ame-no-oto-ga-kikoeru hagio-moto hana-no-bijohime joker-he kaze-hikaru-1997
+ALIAS	モーニング・ツー	10	monthly-morning-two	月刊モーニングtwo	月刊モーニングtwo	講談社	kodansha	seinen	分類:青年漫画雑誌	Monthly Morning Two	Wikidata英語名	同じ記事(月刊モーニングtwo)の別表記 → monthly-morning-two	baito-no-koomei-kun coppers hanaori-san-wa-tensei-shitemo-kenka-ga-shitai henzemi hitori-de-shinitai
+ALIAS	コミックバーガー	8	monthly-birz	月刊バーズ	月刊バーズ	スコラ	scola	seinen	分類:青年漫画雑誌	Comic Birz	英文誌名	同じ記事(月刊バーズ)の別表記 → monthly-birz	cleopatra-d-c cosmos-rakuenki goku high-school-agent hitsuji-no-uta
+ALIAS	月刊コミックZERO-SUM	6	monthly-comic-zero-sum	月刊コミックZERO-SUM	月刊コミックZERO-SUM	一迅社	ichijinsha	josei	分類:女性漫画雑誌	Monthly Comic Zero Sum	Wikidata英語名	同じ記事(月刊コミックZERO-SUM)の別表記 → monthly-comic-zero-sum	futsutsukana-akujo-dewa-gozaimasuga getup-getlive haru-no-noroi hypnosis-mic kamisakka-murasakishikibu-no-arienai-hibi
+ALIAS	別冊少女フレンド	5	bessatsu-friend		別冊フレンド	講談社	kodansha	shoujo	分類:少女漫画雑誌			既存の誌の記事(別冊フレンド)	magical-note oboreru-knife sento-buraun-no-douwa sukuuru-days yume-hitoyo
+ALIAS	ドラゴンエイジピュア	5	dragon-age-pure	ドラゴンエイジピュア	ドラゴンエイジピュア	富士見書房	fujimi-shobo	shounen	分類:少年漫画雑誌			人が確かめた別名(改名・表記ゆれ)	7-nin-no-bukiya-nanabun-no-1 kirakira-miike makenkitsu room-room-no-1301 seitokai-no-ichizon
+ALIAS	comic B's-LOG	5	b-s-log-comic	B's-LOG COMIC	B's-LOG COMIC	KADOKAWA	kadokawa	josei	分類:女性漫画雑誌	B's Log Comic	Wikidata英語名	同じ記事(B's-LOG COMIC)の別表記 → b-s-log-comic	ame-nochi-hare kanuchi otometeki-koi-kakumei-rabu-rebo rh-plus silkroad-shounen-yuuto
+ALIAS	週刊少年サンデー増刊号	4	weekly-shonen-sunday-zokan		週刊少年サンデーS	小学館	shogakukan	shounen	分類:少年漫画雑誌			人が確かめた別名(改名・表記ゆれ)	chance kyou-kara-ore-wa spriggan yoban-saado
+ALIAS	COMICメテオ	4	comic-meteor	COMIC メテオ	COMIC メテオ	フレックスコミックス	flex-comix			Comic Meteor	Wikidata英語名	同じ記事(COMIC メテオ)の別表記 → comic-meteor	dekoboko-majo-no-oyako-jijou idrunk omaera-zenin-mendokusai rikei-ga-koi-ni-ochita-node-shoumei-shite-mita
+ALIAS	月刊ヤングキングアワーズGH	4	young-king-ours-gh	月刊ヤングキングアワーズGH	月刊ヤングキングアワーズGH	少年画報社	shonen-gahosha	seinen	分類:青年漫画雑誌	Young King OURs GH	手で決めた	同じ記事(月刊ヤングキングアワーズGH)の別表記 → young-king-ours-gh	akuyaku-reijou-tensei-oji-san dam-manga madoi-no-reiko obokoi-majo-wa-majiwaritai
+ALIAS	月刊サンデーGENE-X	4	monthly-sunday-gx		月刊サンデージェネックス	小学館	shogakukan	seinen	分類:青年漫画雑誌			既存の誌の記事(月刊サンデージェネックス)	binbou-shimai-monogatari girls-saurus-dx mel-kano nemureru-hoshi
+ALIAS	ゼノン編集部	4	web-comic-zenyon	ゼノン編集部	ゼノン編集部	コアミックス	coamix			Web Comic Zenyon	Wikidata英語名	同じ記事(ゼノン編集部)の別表記 → web-comic-zenyon	19banme-no-karte hokuto-no-ken-seikimatsu-drama-satsueiden shounen-o-kau touken-ranbu-2025
+ALIAS	電撃コミックガオ!	4	dengeki-comic-gao	月刊電撃コミックガオ!	月刊電撃コミックガオ!	メディアワークス	ascii-media-works	shounen	分類:少年漫画雑誌		手で決めた	同じ記事(月刊電撃コミックガオ!)の別表記 → dengeki-comic-gao	anima blue-drop dears haunted-junction
+ALIAS	オフィスユー	3	office-you	オフィスユー	オフィスユー	集英社	shueisha	josei	分類:女性漫画雑誌			人が確かめた別名(改名・表記ゆれ)	mahoutsukai-no-pan oishii-ginza tonari-no-otoko-wa-yoku-taberu
+ALIAS	月刊flowers	3	flowers	月刊フラワーズ	月刊フラワーズ	小学館	shogakukan	shoujo	分類:少女漫画雑誌	Flowers	Wikidata英語名	同じ記事(月刊フラワーズ)の別表記 → flowers	ashi-san fushigi-yuugi-byakko-senki kin-no-kuni-mizu-no-kuni
+ALIAS	WEBコミックハイ!	3	web-comic-action		WEBコミックアクション	双葉社	futabasha					既存の誌の記事(WEBコミックアクション)	jigokuren-love-in-za-hell onii-chan-no-koto-nanka-zenzen-suki-janai-ndakarane seishun-forget
+ALIAS	スピリッツ増刊IKKI	3	monthly-ikki	月刊IKKI	月刊IKKI	小学館	shogakukan	seinen	分類:青年漫画雑誌	Monthly Ikki	Wikidata英語名	同じ記事(月刊IKKI)の別表記 → monthly-ikki	noramimi sexy-voice-and-robo tetsuko-no-tabi
+ALIAS	電撃「マ）王	3	dengeki-maoh		電撃マオウ	メディアワークス	ascii-media-works	seinen	分類:青年漫画雑誌			既存の誌の記事(電撃マオウ)	greed-packet-unlimited makai-senki-disgaea-2 ookami-to-koushinryou
+ALIAS	月刊ファンタジーDX	3	asuka-fantasy-dx		月刊ASUKAファンタジーDX	角川書店	kadokawa	shoujo	分類:少女漫画雑誌			既存の誌の記事(月刊ASUKAファンタジーDX)	itten-shikai iyashi-no-ha orisuruuto-no-gin-no-koeda
+ALIAS	FlexComixフレア	3	comic-polaris	COMIC ポラリス	COMIC ポラリス	フレックスコミックス	flex-comix	shoujo	分類:少女漫画雑誌	Comic Polaris	Wikidata英語名	同じ記事(COMIC ポラリス)の別表記 → comic-polaris	garnet-cradle-gekkou-no-aria seinen-no-tame-no-dokusho-club sougihime
+ALIAS	別冊マガジン	2	bessatsu-shonen-magazine		別冊少年マガジン	講談社	kodansha	shounen	分類:少年漫画雑誌			既存の誌の記事(別冊少年マガジン)	aku-no-hana-2010 wizardry-zeo
+ALIAS	増刊ヤングガンガン	2	big-gangan		月刊ビッグガンガン	スクウェア・エニックス	square-enix	seinen	分類:青年漫画雑誌			既存の誌の記事(月刊ビッグガンガン)	bamboo-blade-b servant-x-service
+ALIAS	少年サンデー超増刊	2	shonen-sunday-super		週刊少年サンデーS	小学館	shogakukan	shounen	分類:少年漫画雑誌			既存の誌の記事(週刊少年サンデーS)	fake-tanabe yaoyorotsu
+ALIAS	別冊少年ジャンプ	2	monthly-shonen-jump		月刊少年ジャンプ	集英社	shueisha	shounen	分類:少年漫画雑誌			既存の誌の記事(月刊少年ジャンプ)	mazinger-z shussei-to-sokai-soshite-sengo
+ALIAS	希望の友	2	comic-tom	コミックトム	コミックトム	潮出版社	ushio-shuppan	shounen	分類:少年漫画雑誌	Comic Tom	Wikidata英語名	同じ記事(コミックトム)の別表記 → comic-tom	sangokushi tezuka-osamu-space-adventure-short-stories
+ALIAS	ニコニコ漫画	2	niconico-seiga		ニコニコ静画	ドワンゴ						既存の誌の記事(ニコニコ静画)	senyuu slime-seijo
+ALIAS	ジャンプ+	2	shonen-jump-plus		少年ジャンプ+	集英社	shueisha	shounen	分類:少年漫画雑誌			既存の誌の記事(少年ジャンプ+)	psycho-pass-3 psycho-pass-3-first-inspector
+ALIAS	COMIC HIGH	2	comic-high	コミックハイ!	コミックハイ!	双葉社	futabasha	seinen	分類:青年漫画雑誌		手で決めた	同じ記事(コミックハイ!)の別表記 → comic-high	hitohira kodomo-no-jikan
+ALIAS	コミックコンプ	2	comic-comp	月刊コミックコンプ	月刊コミックコンプ	角川書店	kadokawa	shounen	分類:少年漫画雑誌	Conp Comics	手で決めた	同じ記事(月刊コミックコンプ)の別表記 → comic-comp	bakuretsu-hunter chou-kaguya-hime
+ALIAS	月刊コミックバーズ	2	monthly-birz	月刊バーズ	月刊バーズ	スコラ	scola	seinen	分類:青年漫画雑誌	Comic Birz	英文誌名	同じ記事(月刊バーズ)の別表記 → monthly-birz	futari-beya kanojo-no-karera-rs
+ALIAS	月刊マガジンビーボーイ	2	magazine-be-boy	MAGAZINE BE×BOY	MAGAZINE BE×BOY	リブレ	libre	josei	分類:女性漫画雑誌	Magazine Be × Boy	Wikidata英語名	同じ記事(MAGAZINE BE×BOY)の別表記 → magazine-be-boy	40-made-ni-shitai-10-no-koto cosmetic-playlover
+ALIAS	夢幻館	2	mugenkan	夢幻館	夢幻館	朝日ソノラマ	asahi-sonorama	josei	分類:女性漫画雑誌	Mugenkan	Wikidata英語名	同じ記事(夢幻館)の別表記 → mugenkan	ouji-no-yuugana-seikatsu-kari shin-petshop-of-horrors
+ALIAS	モーニング新マグナム増刊	2	evening	イブニング	イブニング	講談社	kodansha	seinen	分類:青年漫画雑誌	Evening	Wikidata英語名	同じ記事(イブニング)の別表記 → evening	satorare tsurugi-no-mai-iwaaki
+ALIAS	眠れぬ夜の奇妙な話	2	nemuki	ネムキ	ネムキ	朝日新聞出版	asahi-shimbun	shoujo	分類:少女漫画雑誌	Nemuki	Wikidata英語名	同じ記事(ネムキ)の別表記 → nemuki	mugen-gaiden uryuudou-yumebanashi
+ALIAS	月刊コミックブレイドアヴァルス	2	monthly-comic-avarus	月刊コミックアヴァルス	月刊コミックアヴァルス	マッグガーデン	mag-garden	josei	分類:女性漫画雑誌	Monthly Comic Avarus	英文誌名	同じ記事(月刊コミックアヴァルス)の別表記 → monthly-comic-avarus	heart-no-kuni-no-alice heart-no-kuni-no-alice-my-fanatic-rabbit
+ALIAS	月刊マガジン	1	monthly-shonen-magazine		月刊少年マガジン	講談社	kodansha	shounen	分類:少年漫画雑誌			既存の誌の記事(月刊少年マガジン)	mobile-00-gundam-daburuoo-sekando-season
+ALIAS	ヤングアニマル増刊あいらんど	1	young-animal-island	ヤングアニマルあいらんど	ヤングアニマルあいらんど	白泉社	hakusensha	seinen	分類:青年漫画雑誌	Young Animal Island	Wikidata英語名	同じ記事(ヤングアニマルあいらんど)の別表記 → young-animal-island	mou-sukoshi-ganbarimashou
+ALIAS	ビバプリンセス	1	bessatsu-viva-princess	別冊ビバプリンセス	別冊ビバプリンセス	秋田書店	akita	shoujo	分類:少女漫画雑誌	Bessatsu Viva Princess	Wikidata英語名	同じ記事(別冊ビバプリンセス)の別表記 → bessatsu-viva-princess	nakayama-seika-selection
+ALIAS	電撃魔王	1	dengeki-maoh		電撃マオウ	メディアワークス	ascii-media-works	seinen	分類:青年漫画雑誌			既存の誌の記事(電撃マオウ)	ookami-to-koushinryou
+ALIAS	電撃マ王	1	dengeki-maoh		電撃マオウ	メディアワークス	ascii-media-works	seinen	分類:青年漫画雑誌			既存の誌の記事(電撃マオウ)	ookami-to-koushinryou
+ALIAS	ファンタジーDX	1	asuka-fantasy-dx		月刊ASUKAファンタジーDX	角川書店	kadokawa	shoujo	分類:少女漫画雑誌			既存の誌の記事(月刊ASUKAファンタジーDX)	tableau-gate-0
+ALIAS	おもしろブック	1	shonen-book	少年ブック	少年ブック	集英社	shueisha	shounen	分類:少年漫画雑誌	Shōnen Book	Wikidata英語名	同じ記事(少年ブック)の別表記 → shonen-book	tezuka-osamu-space-adventure-short-stories
+ALIAS	ジャンプ＋	1	shonen-jump-plus		少年ジャンプ+	集英社	shueisha	shounen	分類:少年漫画雑誌			既存の誌の記事(少年ジャンプ+)	rocking-you
+ALIAS	ファミコン通信	1	famitsu	ファミ通	ファミ通	KADOKAWA Game Linkage	kadokawa-game-linkage			Famitsu	Wikidata英語名	同じ記事(ファミ通)の別表記 → famitsu	shiawase-no-katachi
+ALIAS	月刊バーズ	1	monthly-birz	月刊バーズ	月刊バーズ	スコラ	scola	seinen	分類:青年漫画雑誌	Comic Birz	英文誌名	同じ記事(月刊バーズ)の別表記 → monthly-birz	konohana-ki-tan
+ALIAS	いち*ラキ	1	ichi-raki	いち*ラキ	いち*ラキ	冬水社	tousuisha	shoujo	分類:少女漫画雑誌		ヘボン式	同じ記事(いち*ラキ)の別表記 → ichi-raki	umi-no-kishidan
+ALIAS	COMIC GUM	1	comic-gum	コミックガム	コミックガム	ワニブックス	wani-books	seinen	分類:青年漫画雑誌	Comic Gum	Wikidata英語名	同じ記事(コミックガム)の別表記 → comic-gum	tsukuyomi
+ALIAS	月刊モーニング・ツー	1	monthly-morning-two	月刊モーニングtwo	月刊モーニングtwo	講談社	kodansha	seinen	分類:青年漫画雑誌	Monthly Morning Two	Wikidata英語名	同じ記事(月刊モーニングtwo)の別表記 → monthly-morning-two	sensei-no-shiroi-uso
+ALIAS	マンガ・エロティクスF	1	manga-erotics-f		マンガ・エロティクス・エフ	太田出版	ohta-shuppan					既存の誌の記事(マンガ・エロティクス・エフ)	kakutoshi-no-yume
+ALIAS	月刊COMIC GUM	1	comic-gum	コミックガム	コミックガム	ワニブックス	wani-books	seinen	分類:青年漫画雑誌	Comic Gum	Wikidata英語名	同じ記事(コミックガム)の別表記 → comic-gum	megami-kouhosei
+ALIAS	月刊コミックバーガー	1	monthly-birz	月刊バーズ	月刊バーズ	スコラ	scola	seinen	分類:青年漫画雑誌	Comic Birz	英文誌名	同じ記事(月刊バーズ)の別表記 → monthly-birz	bio-hunter
+ALIAS	チャンピオンREDいちご	1	champion-red-ichigo	チャンピオンRED いちご	チャンピオンRED いちご	秋田書店	akita	seinen	分類:青年漫画雑誌	Champion Red Ichigo	Wikidata英語名	同じ記事(チャンピオンRED いちご)の別表記 → champion-red-ichigo	dainihon-samurai-girl
+ALIAS	コミックビーズログ エアレイド	1	b-s-log-comic	B's-LOG COMIC	B's-LOG COMIC	KADOKAWA	kadokawa	josei	分類:女性漫画雑誌	B's Log Comic	Wikidata英語名	同じ記事(B's-LOG COMIC)の別表記 → b-s-log-comic	dress-na-boku-ga-yangotonaki-katagata-no-katei-kyoushi-sama-na-ken
+ALIAS	少年キャプテン	1	shonen-captain	月刊少年キャプテン	月刊少年キャプテン	徳間書店	tokuma	shounen	分類:少年漫画雑誌	Shōnen Captain	Wikidata英語名	同じ記事(月刊少年キャプテン)の別表記 → shonen-captain	elan
+ALIAS	月刊電撃コミックGAO！	1	dengeki-comic-gao	月刊電撃コミックガオ!	月刊電撃コミックガオ!	メディアワークス	ascii-media-works	shounen	分類:少年漫画雑誌		手で決めた	同じ記事(月刊電撃コミックガオ!)の別表記 → dengeki-comic-gao	ginga-sengoku-gunyuuden-rai-2004
+ALIAS	ビッグコミック増刊	1	big-comic-zokan	ビッグコミック増刊号	ビッグコミック増刊号	小学館	shogakukan	seinen	分類:青年漫画雑誌		手で決めた	同じ記事(ビッグコミック増刊号)の別表記 → big-comic-zokan	hotel-tantei-doll
+ALIAS	モーニングtwo	1	monthly-morning-two	月刊モーニングtwo	月刊モーニングtwo	講談社	kodansha	seinen	分類:青年漫画雑誌	Monthly Morning Two	Wikidata英語名	同じ記事(月刊モーニングtwo)の別表記 → monthly-morning-two	kutsu-no-muku-mama
+ALIAS	月刊コミックリュウ	1	comic-ryu		月刊COMICリュウ	徳間書店	tokuma	seinen	分類:青年漫画雑誌			既存の誌の記事(月刊COMICリュウ)	kyouryuu-no-kaikata
+ALIAS	少女倶楽部	1	shojo-club	少女クラブ	少女クラブ	講談社	kodansha			Shōjo Club	Wikidata英語名	同じ記事(少女クラブ)の別表記 → shojo-club	nakayoshi-techiyou
+ALIAS	少年マガジンスペシャル	1	magazine-special		マガジンSPECIAL	講談社	kodansha	shounen	分類:少年漫画雑誌			既存の誌の記事(マガジンSPECIAL)	neppuu-kids
+ALIAS	増刊少年サンデー	1	weekly-shonen-sunday-zokan		週刊少年サンデーS	小学館	shogakukan	shounen	分類:少年漫画雑誌			人が確かめた別名(改名・表記ゆれ)	sasuga-no-sarutobi
+ALIAS	コミックRUSH	1	monthly-comic-rush	月刊コミックラッシュ	月刊コミックラッシュ	ジャイブ	jive	shounen	分類:少年漫画雑誌	Comic Rush	英文誌名	同じ記事(月刊コミックラッシュ)の別表記 → monthly-comic-rush	sekai-seifuku-monogatari
+ALIAS	リイド・コミック	1	leed-comic	リイドコミック	リイドコミック	リイド社	leed	seinen	分類:青年漫画雑誌	LEED Comic	Wikidata英語名	同じ記事(リイドコミック)の別表記 → leed-comic	shakuou
+ALIAS	コミックラッシュ	1	monthly-comic-rush	月刊コミックラッシュ	月刊コミックラッシュ	ジャイブ	jive	shounen	分類:少年漫画雑誌	Comic Rush	英文誌名	同じ記事(月刊コミックラッシュ)の別表記 → monthly-comic-rush	shinkirou-teikoku
+ALIAS	月刊少年ワールド	1	comic-tom	コミックトム	コミックトム	潮出版社	ushio-shuppan	shounen	分類:少年漫画雑誌	Comic Tom	Wikidata英語名	同じ記事(コミックトム)の別表記 → comic-tom	t-patrol-bon
+ALIAS	ViVa PRINCESS	1	bessatsu-viva-princess	別冊ビバプリンセス	別冊ビバプリンセス	秋田書店	akita	shoujo	分類:少女漫画雑誌	Bessatsu Viva Princess	Wikidata英語名	同じ記事(別冊ビバプリンセス)の別表記 → bessatsu-viva-princess	yami-no-silhouette
+ALIAS	月刊スピリッツ	1	monthly-big-comic-spirits	月刊!スピリッツ	月刊!スピリッツ	小学館	shogakukan	seinen	分類:青年漫画雑誌		英文誌名	同じ記事(月刊!スピリッツ)の別表記 → monthly-big-comic-spirits	zettai-seito-kaichou-ookumaneko-san
+ALIAS	月刊ふぁんデラ	1	asuka-fantasy-dx		月刊ASUKAファンタジーDX	角川書店	kadokawa	shoujo	分類:少女漫画雑誌			既存の誌の記事(月刊ASUKAファンタジーDX)	albaria-no-otome
+ALIAS	月刊ファミ通Bros.	1	famitsu-bros	ファミ通ブロス	ファミ通ブロス	エンターブレイン	enterbrain	kodomo	分類:児童・幼年漫画雑誌		手で決めた	同じ記事(ファミ通ブロス)の別表記 → famitsu-bros	seiken-densetsu-legend-of-mana
+ALIAS	月刊電撃コミックガオ！	1	dengeki-comic-gao	月刊電撃コミックガオ!	月刊電撃コミックガオ!	メディアワークス	ascii-media-works	shounen	分類:少年漫画雑誌		手で決めた	同じ記事(月刊電撃コミックガオ!)の別表記 → dengeki-comic-gao	toradora
+ALIAS	Oh!スーパージャンプ	1	oh-super-jump	オースーパージャンプ	オースーパージャンプ	集英社	shueisha	seinen	分類:青年漫画雑誌	Oh SUPER JUMP	Wikidata英語名	同じ記事(オースーパージャンプ)の別表記 → oh-super-jump	kimi-to-boku-no-ashiato
+ALIAS	ゼロサムWARD	1	comic-zero-sum-zokan-ward	コミックZERO-SUM増刊WARD	コミックZERO-SUM増刊WARD	一迅社	ichijinsha	josei	分類:女性漫画雑誌	Comic Zero-Sum Zōkan Ward	Wikidata英語名	同じ記事(コミックZERO-SUM増刊WARD)の別表記 → comic-zero-sum-zokan-ward	crimson-enpaia
+ALIAS	ココハナ	1	cocohana	Cocohana	Cocohana	集英社	shueisha	josei	分類:女性漫画雑誌	Cocohana	英文誌名	同じ記事(Cocohana)の別表記 → cocohana	omukae-shibuya-kun
+ALIAS	NAVER WEBTOON	1	webtoon	LINE WEBTOON	LINE WEBTOON	NHN comico	nhn-comico			Webtoon	Wikidata英語名	同じ記事(LINE WEBTOON)の別表記 → webtoon	gaiken-shijou-shugi
+ALIAS	コミックアース・スター	1	monthly-comic-earth-star	コミック アース・スター	コミック アース・スター	アース・スター エンターテイメント	earth-star	shounen	分類:少年漫画雑誌	Comic Earth Star	英文誌名	同じ記事(コミック アース・スター)の別表記 → monthly-comic-earth-star	tensei-shitara-dragon-no-tamago-datta
+ALIAS	電撃PlayStation	1	dengeki-playstation	電撃PlayStation	電撃PlayStation	KADOKAWA Game Linkage	kadokawa-game-linkage			Dengeki PlayStation	Wikidata英語名	同じ記事(電撃PlayStation)の別表記 → dengeki-playstation	girls-und-panzer-saishuushou-keizoku-koukou-harapeko-shokujidou
+ALIAS	月刊チャンピオン	1	monthly-shonen-champion	月刊少年チャンピオン	月刊少年チャンピオン	秋田書店	akita	shounen	分類:少年漫画雑誌	Monthly Shōnen Champion	英文誌名	同じ記事(月刊少年チャンピオン)の別表記 → monthly-shonen-champion	hai-ando-roo-za-worst-housen-gakuen-nisshi
+ALIAS	Webゴラク	1	goraku-web	ゴラクうぇぶ!	ゴラクうぇぶ!	日本文芸社	nihon-bungeisha				手で決めた	同じ記事(ゴラクうぇぶ!)の別表記 → goraku-web	ojou-sama-kara-hajimeru-kekkon-seikatsu
+ALIAS	増刊flowers	1	zokan-flowers	増刊flowers	増刊flowers	小学館	shogakukan	josei	分類:女性漫画雑誌	Zōkan flowers	Wikidata英語名	同じ記事(増刊flowers)の別表記 → zokan-flowers	angel-trumpet-after-stories
+ALIAS	nemuki+	1	nemuki-plus	Nemuki+	Nemuki+	朝日新聞出版	asahi-shimbun	shoujo	分類:少女漫画雑誌	Nemuki+	Wikidata英語名	同じ記事(Nemuki+)の別表記 → nemuki-plus	dokuhime-no-hitsugi
+ALIAS	少年エースPlus	1	shonen-ace-plus	少年エースplus	少年エースplus	KADOKAWA	kadokawa				手で決めた	同じ記事(少年エースplus)の別表記 → shonen-ace-plus	ore-no-imouto-ga-konna-ni-kawaii-wake-ga-nai-ayase-if
+ALIAS	マガポケ	1	manga-pocket		週刊少年マガジン	講談社	kodansha	shounen	分類:少年漫画雑誌			人が確かめた別名(改名・表記ゆれ)	road59-shinjidai-ninkyou-tokku-shoujo-to-chi-no-sakazuki
+HOLD	Kiss	45			キス							雑誌の記事でない	babysitter-gin barairo-no-seisen bokura-ga-koi-o-shita-nowa easy-writer gin-no-supuun
+HOLD	デザート	36			デザート							雑誌の記事でない	3d-kanojo amakunai-karera-no-nichijou-wa bakuten boku-to-kimi-no-taisetsu-na-hanashi boys-este
+HOLD	Twitter	30			Twitter							雑誌の記事でない	100-nichigo-ni-shinu-wani arknights-operators atasha-kawashiri-kodama-dayo boroboro-no-elf-san-o-shiawase-ni-suru-kusuriuri-san damedoru-to-sekai-1-dake-no-fun
+HOLD	週刊少年ジャンプ増刊	27										記事なし	100-100paasento bastard beelzebub black-clover boku-no-hero-academia
+HOLD	水曜日のシリウス	21	monthly-shonen-sirius		月刊少年シリウス	講談社	kodansha	shounen	分類:少年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	bishoujo-ni-natta-kedo-netoge-haijin-yattemasu bokutachi-no-rimeiku dekiru-neko-wa-kyou-mo-yuuutsu final-request hazure-skill-kinomi-master
+HOLD	ジャンプスクエアセカンド	19			ジャンプスクエア	集英社	shueisha	shounen	分類:少年漫画雑誌			増刊・号の名が親誌の記事(ジャンプスクエア)へ転送 = 親誌に寄せない	ao-no-exorcist binbougami-ga dr-rurru genkaku-pikaso gyagu-manga-hiyori
+HOLD	ファミ通コミッククリア	19			コミッククリア	KADOKAWA	kadokawa					増刊・号の名が親誌の記事(コミッククリア)へ転送 = 親誌に寄せない	baka-to-test-to-shoukanjuu-spinout bateren-xx chaos-head-rabu-chuchu cross-x-regalia danganronpa-kibou-no-gakuen-to-zetsubou-no-koukousei
+HOLD	YOU	19			You							曖昧さ回避	asuko-march dame-na-watashi-ni-koi-shite-kudasai deka-wanko fukuyadou-honpo-ni gokusen
+HOLD	コミックシーモア	19	comic-solmare	コミックシーモア	コミックシーモア	NTTソルマーレ		shoujo	頁の多数 {'shoujo': 8, 'josei': 7, 'shounen': 2}	Comic Solmare	Wikidata英語名	出版社が決まらない(NTTソルマーレ) = 電子書籍ストア・小説サイト・社がマスタに無い	batsuichi-futari-wa-mitei-na-kankei batsuichi-ga-moteru-nante-kiitemasen debu-to-love-to-ayamachi-to fukushokushi-ruchia-wa-akiramenai haikei-mishiranu-danna-sama-rikon-shite-itadakimasu
+HOLD	WEBコミックガンマぷらす	17			コミックガンマ	竹書房	takeshobo	shounen	分類:少年漫画雑誌			増刊・号の名が親誌の記事(コミックガンマ)へ転送 = 親誌に寄せない	bocchi-tenseiki boku-no-heya-ga-dungeon-no-kyuukeijo-ni-natteshimatta-ken-houkago-no-isekai-boukenbu cheat-yakushi-no-slow-life dai-3-ouji-wa-surooraifu-o-go-goshomou hitojichi-seikatsu-kara-hajimeru-slow-life
+HOLD	ComicFesta	16	comicfesta	ComicFesta	ComicFesta			josei	頁の多数 {'josei': 9, 'shoujo': 5, 'shounen': 2}	ComicFesta	Wikidata英語名	出版社が決まらない() = 電子書籍ストア・小説サイト・社がマスタに無い	15-sai-kyou-kara-dousei-hajimemasu 25-sai-no-joshikousei harem-camp kurogyaru-ni-natta-kara-shinyuu-to-yatte-mita kyojinzoku-no-hanayome
+HOLD	GANMA!	16	ganma	GANMA!	GANMA!	コミスマ		seinen	頁の多数 {'seinen': 8, 'shounen': 4, 'shoujo': 3}		英文誌名	出版社が決まらない(コミスマ) = 電子書籍ストア・小説サイト・社がマスタに無い	botchama-wa-kyou-mo-ijirareru catulus-syndrome chou-yo-hana-yo-shimabukuro circle-crash debiruchi
+HOLD	アルファポリス	16	alphapolis	アルファポリス	アルファポリス			shounen	頁の多数 {'shounen': 7, 'shoujo': 5, 'seinen': 3}	AlphaPolis	Wikidata英語名	出版社が決まらない() = 電子書籍ストア・小説サイト・社がマスタに無い	daitesuryou-koubouki isekai-de-cafe-o-kaiten-shimashita isekai-tensei-soudouki izakaya-bottakuri izure-saikyou-no-renkinjutsushi
+HOLD	ハルタ	15			ハルタ							曖昧さ回避	aoi-horusu-no-hitomi circus-no-musume-olga dungeon-meshi fushigi-no-kuni-no-bird hokuhokusei-ni-kumo-to-yuke
+HOLD	ジャンプNEXT!	14			週刊少年ジャンプの増刊号	集英社	shueisha	shounen	分類:少年漫画雑誌			一覧の記事(週刊少年ジャンプの増刊号) = 1つの誌でない	ansatsu-kyoushitsu beelzebub genzonkodai-seibutsushi-pakkii haikyuu koisome-momiji
+HOLD	ヤンマガWeb	14	weekly-young-magazine		週刊ヤングマガジン	講談社	kodansha	seinen	分類:青年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	gokuchuu hajirau-kimi-ga-mitainda hitozuma-no-kuchibiru-wa-kan-chuuhai-no-aji-ga-shite kanojo-no-tomodachi kimi-ga-kantoku
+HOLD	少年ジャンプNEXT!	13			週刊少年ジャンプの増刊号	集英社	shueisha	shounen	分類:少年漫画雑誌			一覧の記事(週刊少年ジャンプの増刊号) = 1つの誌でない	chounouryokusha-saiki-kusuo-no-nan dois-sol hokenshitsu-no-shinigami kikaibanashi-hanasaka-ikkyuu kurogane-ikezawa
+HOLD	コーラス	12			コーラス							曖昧さ回避	bonclair-showguts career-kogitsune-kin-no-machi higepiyo loveholic nikoniko-nikki
+HOLD	月刊コミックフラッパー	11			コミックフラッパー	KADOKAWA	kadokawa	seinen	分類:青年漫画雑誌			増刊・号の名が親誌の記事(コミックフラッパー)へ転送 = 親誌に寄せない	akuyaku-reijou-ni-tensei-shita-hazu-ga-marii-antoinette-deshita dance-in-the-vampire-bund girls-ando-panzer-senshadou-no-susume girls-und-panzer-gekijouban-variante hatsujouji-made-ato-1-jikan
+HOLD	FlexComixブラッド	11	flexcomix-blood	FlexComixブラッド	FlexComixブラッド	2007年		seinen	頁の多数 {'seinen': 6, 'shounen': 4, 'shoujo': 2}	FlexComix Blood	Wikidata英語名	出版社が決まらない(2007年) = 電子書籍ストア・小説サイト・社がマスタに無い	haiyore-super-nyaruko-chan-time hatarake-moto-renjaa maid-deka maps-next-sheet meganena-kanojo
+HOLD	ピッコマ	10	piccoma	ピッコマ	ピッコマ			seinen	頁の多数 {'seinen': 6, 'shoujo': 3, 'shounen': 1}	Piccoma	Wikidata英語名	出版社が決まらない() = 電子書籍ストア・小説サイト・社がマスタに無い	akuyaku-reijou-koukyuu-monogatari-oukoku-gekidouhen aru-hi-ohime-sama-ni-natte-shimatta-ken-ni-tsuite doreiku-gang-age fukushuu-no-dokko fukushuu-no-dokko-riwaindo
+HOLD	mimi	10			Mimi							曖昧さ回避	aishisuginakute-yokatta asaki-yume-mishi deatta-koro-no-kimi-de-ite gaburin kimi-no-te-ga-sasayaiteiru
+HOLD	シルフ	10			シルフ							雑誌の記事でない	dear-girl-stories-hibiki dear-girl-stories-hizuki durarara-3way-standoff-alley durarara-relay kakumeiki-valvrave-uragiri-no-rakuin
+HOLD	コミックファイア	10			HJコミックス							雑誌の記事でない	buchigire-reijou-wa-houfuku-o-chikaimashita hyakuren-no-haou-to-seiyaku-no-valkyria infinite-dendrogram maou-no-ore-ga-dorei-elf-o-yome-ni-shitandaga-dou-medereba-ii meitou-isekai-no-yu-kaitakuki
+HOLD	月刊コミックガーデン	9	comic-blade		月刊コミックブレイド	マッグガーデン	mag-garden	shounen	分類:少年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	dragon-ie-o-kau hametsu-no-oukoku joker-game-the-animation kohaku-no-yume-de-yoimashou koutetsujou-no-kabaneri
+HOLD	月刊ウィングス	9			ウィングス (雑誌)	新書館	shinshokan	josei	分類:女性漫画雑誌			増刊・号の名が親誌の記事(ウィングス (雑誌))へ転送 = 親誌に寄せない	earthian gakuen-benriya genji oka-no-ue-no-banbiina princess-princess
+HOLD	ドラドラしゃーぷ＃	9										記事なし	dark-summoner-to-dekite-iru douyara-watashi-no-karada-wa-kanzen-muteki-no-youdesune girigiri-saegiru-katagiri-san isekai-tensei-dungeon-master-onsen-dungeon-o-tsukuru itoko-no-ko
+HOLD	近代麻雀オリジナル	9			近代麻雀	竹書房	takeshobo					増刊・号の名が親誌の記事(近代麻雀)へ転送 = 親誌に寄せない	atsuize-pen-chan haou-densetsu-lion mudazumo-naki-kaikaku mudazumo-naki-kaikaku-princess-of-zipang mukoubuchi
+HOLD	めちゃコミック	8	mecha-comic	めちゃコミック	めちゃコミック	ウェブコミック配信サイト		josei	頁の多数 {'josei': 7}	Mecha Comic	Wikidata英語名	出版社が決まらない(ウェブコミック配信サイト) = 電子書籍ストア・小説サイト・社がマスタに無い	mikon-sagi-watashi-no-shiranai-kare-no-kao mochiron-isharyou-seikyuu-itashimasu real-fuuzokujou-nikki rinko-san-wa-shite-mitai risukii-fukushuu-wa-tsumi-no-aji
+HOLD	週刊少女フレンド	8			少女フレンド	講談社	kodansha	shoujo	分類:少女漫画雑誌			増刊・号の名が親誌の記事(少女フレンド)へ転送 = 親誌に寄せない	akanbo-shoujo aran-iyan-naito haikara-san-ga-tooru mahiro-taiken mon-cheri-coco
+HOLD	WEBコミックガンマ	8			コミックガンマ	竹書房	takeshobo	shounen	分類:少年漫画雑誌			増刊・号の名が親誌の記事(コミックガンマ)へ転送 = 親誌に寄せない	31-banme-no-yuuri boku-no-heya-ga-dungeon-no-kyuukeijo-ni-natte-shimatta-ken dorukara kichikujima rengoku-joshi
+HOLD	エイジプレミアム	8	dragon-age		月刊ドラゴンエイジ	角川書店	kadokawa	shounen	分類:少年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	12beast death-march-kara-hajimaru-isekai-kyousoukyoku god-eater-the-summer-wars mondaijitachi-ga-isekai-kara-kuru-soudesuyo-zetto oda-nobuna-no-yabou-hime-sama-to-isshokenmei
+HOLD	姉系プチコミック	8			プチコミック	小学館	shogakukan	josei	分類:女性漫画雑誌			増刊・号の名が親誌の記事(プチコミック)へ転送 = 親誌に寄せない	boku-dake-no-butterfly kamakura-keshiya-yamiemaki mawata-no-ori mito-no-otsubone sexy-tanaka-san
+HOLD	comicコロナ	8										記事なし	akuyaku-reijou-desu-kouryaku-taishou-no-yousu-ga-ijou-sugiru-attomaaku-comic botsuraku-yotei-no-kizoku-dakedo-hima-datta-kara-mahou-o-kiwamete-mita-comic dekisokonai-to-yobareta-motoeiyuu-wa-jikka-kara-tsuihousareta-node-sukikatte-ni-ikiru-koto-ni-shita kaketa-tsuki-no-merusedesu-kyuuketsuki-no-kizoku-ni-tensei-shitakedo-suteraresou-nanode-dungeon-o mizu-zokusei-no-mahoutsukai-comic
+HOLD	月刊少年マガジン増刊 マガジンGREAT	7										記事なし	budasei double-gun-rock-rider raiseiden-jupitaa-oo-ee red-eyes reijuuki
+HOLD	りぼんスペシャルオレンジ	7										記事なし	chocomimi hana-ni-arashi-2011 love-skill marimo-no-hana omoide-konpeitou
+HOLD	ディアプラス	7	dear-plus	ディアプラス	ディアプラス			josei	頁の多数 {'josei': 5, 'shoujo': 3, 'seinen': 1}	Dear+	Wikidata英語名	出版社が決まらない() = 電子書籍ストア・小説サイト・社がマスタに無い	ameiro-paradox chotto-matou-yo-harutora-kun seito-kaichou-ni-chuukoku tatakau-sebasu-chan ten-count
+HOLD	pixiv	7			Pixiv							雑誌の記事でない	bougyoryoku-zero-no-yome everyday-host fuzoroi-no-renri koi-to-yobu-niwa-kimochiwarui oji-san-to-marshmallow
+HOLD	モバMAN	7			モバMAN							雑誌の記事でない	bugs-land gakuen-kageki jesus-sajin-kouro momoiro-heiki-spin no-zo-ki-a-na
+HOLD	週刊マーガレット	7			マーガレット (雑誌)	集英社	shueisha	shoujo	分類:少女漫画雑誌			増刊・号の名が親誌の記事(マーガレット (雑誌))へ転送 = 親誌に寄せない	hoshi-e-iku-fune kirara-seijin-outou-seyo koi-suru-onnatachi mimosa-kan-de-tsukamaete nanatsu-no-erudorado
+HOLD	ウィングス	7			ウィングス							曖昧さ回避	aozora-no-tamago dragon-fist fujouri-zakkaten-unreal koran-tan-gou-no-koukai mahoutsukai-no-musume-ni-arazu
+HOLD	小学六年生	6		小学館の学年別学習雑誌	小学館の学年別学習雑誌	小学館	shogakukan	kodomo	分類:日本の児童雑誌			学年誌の総称の記事 = 1つの誌でない(各学年誌は既存)	doubutsu-no-mori-hohinda-mura-dayori go-go-tamatama-tamagotchi kai-no-tabidachi kaze-no-kishi-show pocket-monsters-special
+HOLD	CIEL	6			CIEL							雑誌の記事でない	back-stage johnny love-stage sakendeyaruze sekaiichi-hatsukoi
+HOLD	少年マガジンR	6	monthly-shonen-magazine		月刊少年マガジン	講談社	kodansha	shounen	分類:少年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	hoshi-to-tabisuru konda-teru-no-gouhou-recipe kyokou-suiri peach-boy-riverside shiroseijo-to-kurobokushi
+HOLD	pixivコミック	6			Pixiv							雑誌の記事でない	batsuichi-arasa-joshi-to-otoko-koukousei houkago-shounen-hanako-kun kanagawa-ni-sunderu-elf onideka senshun-kansoku
+HOLD	月刊ヤングチャンピオン烈	6			ヤングチャンピオン烈	秋田書店	akita	seinen	分類:青年漫画雑誌			増刊・号の名が親誌の記事(ヤングチャンピオン烈)へ転送 = 親誌に寄せない	houkago-teibou-nisshi imouto-android isekai-no-toire-de-dai-o-suru rabuyu schoolmate
+HOLD	コミックブレイドMASAMUNE	6	comic-blade-masamune	コミックブレイドMASAMUNE	コミックブレイドMASAMUNE			shounen	分類:少年漫画雑誌	Comic Blade Masamune	Wikidata英語名	出版社が決まらない() = 電子書籍ストア・小説サイト・社がマスタに無い	asatte-no-houkou erementar-gerad erementar-gerad-soukuu-no-senki monochrome-factor shirayuki-panimikusu
+HOLD	まんがくらぶオリジナル	6	manga-club-original	まんがくらぶオリジナル	まんがくらぶオリジナル			seinen	頁の多数 {'seinen': 4, 'shoujo': 2}	Manga Club Original	Wikidata英語名	出版社が決まらない() = 電子書籍ストア・小説サイト・社がマスタに無い	chii-chan-no-oshinagaki-hanjouki ito-okashi mahoroba-kissa mimori-rokku-on recorder-to-randoseru
+HOLD	ヒバナ	6			火花 (曖昧さ回避)							曖昧さ回避	aizen-furyuugeru aru-ahou-no-isshou dol-men-x shimanami-tasogare versailles-of-the-dead
+HOLD	小学館の学年別学習雑誌	6		小学館の学年別学習雑誌	小学館の学年別学習雑誌	小学館	shogakukan	kodomo	分類:日本の児童雑誌			学年誌の総称の記事 = 1つの誌でない(各学年誌は既存)	asari-chan inakappe-taishou meitantei-conan nonki-kun ra-seenu-no-hoshi
+HOLD	漫画ゴラクスペシャル	6		別冊漫画ゴラク	別冊漫画ゴラク	日本文芸社	nihon-bungeisha	seinen	分類:青年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	chocolatier-wa-sadistic hanashimeshi monkey-circle niji-no-hitosara sundome-jieitai
+HOLD	このマンガがすごい!WEB	6			このマンガがすごい!							雑誌の記事でない	isekai-izakaya-gen isekai-izakaya-nobu-eefa-to-makanai-oyatsu isekai-izakaya-nobu-shinobu-to-taishou-no-koto-gohan koohiiten-tareeran-no-file-kanojo-wa-kafeore-no-yume-o-miru mahou-shoujo-ikusei-keikaku-f2p
+HOLD	FlexComixネクスト	6	flexcomixnext	FlexComixネクスト	FlexComixネクスト	日本		seinen	頁の多数 {'seinen': 4, 'shoujo': 1, 'shounen': 1}	FlexComixNEXT	Wikidata英語名	出版社が決まらない(日本) = 電子書籍ストア・小説サイト・社がマスタに無い	kamu-kamu-vanilla klan oto-maho seikai-no-monshou young-gun-carnaval
+HOLD	コミック・ダンガン	6	comic-dangan	コミック・ダンガン	コミック・ダンガン	日本		shounen	頁の多数 {'shounen': 3, 'seinen': 3}	Comic Dangan	Wikidata英語名	出版社が決まらない(日本) = 電子書籍ストア・小説サイト・社がマスタに無い	boku-no-imouto-wa-kanji-ga-yomeru hagure-yuusha-no-esuteteika hyakka-ryouran-samurai-bride hyakka-ryouran-seven-supia ore-ga-heroine-o-tasukesugite-sekai-ga-little-apocalypse
+HOLD	flowers	5			フラワーズ							曖昧さ回避	7seeds angel-trumpet bareteruyo-janboriinu kaze-hikaru-1997 spica
+HOLD	ジャンプSQ.LaB	5										記事なし	boku-to-majo-no-jikan dark-act dot-invader hanimero motemushi-tar-kabuto-king
+HOLD	りぼんスペシャルレモン	5										記事なし	boku-wa-ookami chocomimi love-skill pokemen tubame-no-suu
+HOLD	きみとぼく	5			君と僕							曖昧さ回避	3d-boys coji-coji doll-wa-kotatsu-de-suiri-suru gravitation kojikoji
+HOLD	月刊コミックビーム	5			コミックビーム	アスキー	ascii-media-works	seinen	分類:青年漫画雑誌			増刊・号の名が親誌の記事(コミックビーム)へ転送 = 親誌に寄せない	areyo-hoshikuzu desuko evol famiresu-iko medamayaki-no-kimi-itsu-tsubusu
+HOLD	週刊少年キング	5			少年キング	少年画報社	shonen-gahosha	shounen	分類:少年漫画雑誌			増刊・号の名が親誌の記事(少年キング)へ転送 = 親誌に寄せない	cyborg-009 kyudo-shikon mangamichi ozawa-satoru-mishuuroku-tanpenshuu shounen-ninja-butai-gekkou
+HOLD	別冊ヤングマガジン	5	monthly-young-magazine		月刊ヤングマガジン	講談社	kodansha	seinen	分類:青年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	abangyarudo-yumeko bousou-shojo nature-jimon sengoku-gaiden-okehazama-senki sweet-poolside
+HOLD	グランドジャンプむちゃ	5	grand-jump-premium		グランドジャンプPREMIUM	集英社	shueisha	seinen	分類:青年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	bartender-6stp captain-2 isshokenmei-ni-kurashite-ii-desuka red-mudan seisai-gakuen
+HOLD	毎日新聞	5			毎日新聞							雑誌の記事でない	asatte-kun guutara-mama jungle-kurobee mainichi-kaa-san mappira-kun
+HOLD	X	5			X							雑誌の記事でない	chiikawa koala-enikki mahou-shoujo-horo-witch rinku-life-raburaibu tonari-no-neko-to-koishirazu
+HOLD	ジャンプGIGA	5			週刊少年ジャンプの増刊号	集英社	shueisha	shounen	分類:少年漫画雑誌			一覧の記事(週刊少年ジャンプの増刊号) = 1つの誌でない	kimi-o-shinryaku-seyo majo-no-moribito momiji-no-kisetsu-satosho oyakusoku-no-neverland shinigiwa
+HOLD	マンガMee	5										記事なし	kanpeki-waifu-ni-yoru-kanpeki-na-fukushuu-keikaku kimi-ga-shinu-made-ato-100-nichi kimi-to-koete-koi-ni-naru saretagawa-no-blue seishun-cinderella
+HOLD	コミプレ	5	hero-s-web	HERO'S Web	HERO'S Web	ウェブコミック配信サイト		seinen	頁の多数 {'seinen': 4, 'shounen': 3, 'josei': 2}		ヘボン式	出版社が決まらない(ウェブコミック配信サイト) = 電子書籍ストア・小説サイト・社がマスタに無い	hanabi-chan-wa-okuregachi hoshigarisugi-desho-inaba-san mobile-suit-gundam-flanagan-buun-senki omatsuri-piisu-denkiten tensui-no-sakunahime
+HOLD	Chara	5			Chara							曖昧さ回避	karubania-monogatari shiritsu-araiso-koutou-gakkou-seitokai-shikkoubu the-world utsukushii-otoko wild-adapter
+HOLD	まんがタイムファミリー	5	manga-time-family	まんがタイムファミリー	まんがタイムファミリー			seinen	頁の多数 {'seinen': 4, 'shoujo': 1}	Manga Time Family	Wikidata英語名	出版社が決まらない() = 電子書籍ストア・小説サイト・社がマスタに無い	gunshin-chan-to-yobanaide hikarishuppatsu-shinkou hiyokko-sister-no-ansoku kyoushi-sho-kun oshikake-tsuin-teeru
+HOLD	Renta!	5			パピレス							雑誌の記事でない	akuyaku-reijou-koukyuu-monogatari dareka-kono-joukyou-o-setsumei-shite-kudasai hana-no-asukagumi-infinitei madoushi-wa-heibon-o-nozomu nenrei-seigen-tsuki-otomege-no-akuyaku-reijou-desu-katabutsu-kishi-sama-ga-yuushuu-sugite-aaru
+HOLD	ebookJapan	5										記事なし	kissa-koudou-to-jinkaku mikawa-beruno-to-ika-gorira-no-choujigen-joshikai mikawa-beruno-to-ika-gorira-no-manga-beauty mikawa-beruno-to-ika-gorira-no-mangameshi neko-to-hasukii-to-hamaji
+HOLD	読売新聞	5			読売新聞							雑誌の記事でない	kobo-chan neko-pitcher office-kenta pasoken-monita sanwari-kun
+HOLD	まんが王国	5			まんが王国							雑誌の記事でない	jk-haru-wa-isekai-de-shoufu-ni-natta kono-junai-wa-futei-desuka nukarumi-no-shokutaku nukitashi shiroi-suna-no-aquatope
+HOLD	コミックライド	5										記事なし	boushoku-no-beruseruku kenja-no-deshi-o-nanoru-kenja kenja-no-deshi-o-nanoru-kenja-2022 tensei-shitara-ken-deshita-another-wish tensei-shitara-slime-datta-ken-mamono-no-kuni-no-arukikata
+HOLD	コミックPASH!	5										記事なし	enoku-dainibutai-no-harapeko-ensei-gohan jimi-na-kensei-wa-soredemo-saikyou-desu kisakikyouiku-kara-nigetai-watashi konyaku-hakisareta-reijou-o-hirotta-ore-ga-ikenai-koto-o-oshiekomu teogonia
+HOLD	がうがうモンスター	5	manga-gau-gau	マンガがうがう	マンガがうがう			shounen	頁の多数 {'shounen': 7}	Manga Gau Gau	Wikidata英語名	出版社が決まらない() = 電子書籍ストア・小説サイト・社がマスタに無い	maougun-saikyou-no-majutsushi-wa-ningen-datta party-kara-tsuihousareta-sono-chiyushi-jitsu-wa-saikyou-ni-tsuki saikyou-onmyouji-no-isekai-tenseiki takarakuji-de-40-oku-atattandakedo-isekai-ni-ijuu-suru-marii-no-isuteria-shougyou-kaihatsuki tonari-no-seki-ni-natta-bishoujo-ga-horesaseyou-to-karakatte-kuru-ga-itsu-no-ma-nika-kaeriuchi-ni
+HOLD	マガジンドラゴン	4	weekly-shonen-magazine		週刊少年マガジン	講談社	kodansha	shounen	分類:少年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	ahiru-no-sora countrouble kitsune-no-yomeiri mou-shimasen-kara
+HOLD	花とゆめプラス	4										記事なし	asa-ga-mata-kuru-kara hakuji konbini-tenshi otona-no-kodomotachi
+HOLD	りぼんスペシャル スカイ	4										記事なし	choko-tan hiyokoi v-i-p zekkyou-gakkyuu
+HOLD	藤子不二雄ランド	4			藤子不二雄ランド							雑誌の記事でない	chinpui esper-mami ultra-b umi-no-ouji-2009
+HOLD	りぼんファンタジー	4			りぼん	集英社	shueisha	shoujo	分類:少女漫画雑誌			増刊・号の名が親誌の記事(りぼん)へ転送 = 親誌に寄せない	hal-makino hana-ni-arashi-2011 high-score tubame-no-suu
+HOLD	月刊少年ガンガン増刊フレッシュガンガン	4										記事なし	isoshime-nioka-sensei kimi-to-boku kiyomura-kun-to-suginokouji-kun-ro toaru-majutsu-no-index
+HOLD	ボニータ	4			ボニータ							曖昧さ回避	angel-wars crystal-dragon nakayama-seika-selection yumenosuke-rabu-land
+HOLD	エースアサルト	4	ace-assault	エースアサルト	エースアサルト			shounen	分類:少年漫画雑誌	Ace Assault	Wikidata英語名	出版社が決まらない() = 電子書籍ストア・小説サイト・社がマスタに無い	kamiyadori-no-nagi shangri-la-karasuma shinseiki-evangerion-ikari-shinji-ikusei-keikaku suzumiya-haruhi-no-yuuutsu
+HOLD	トーチweb	4	torch-web	トーチweb	トーチweb			seinen	頁の多数 {'seinen': 3, 'josei': 1}	Torch Web	Wikidata英語名	出版社が決まらない() = 電子書籍ストア・小説サイト・社がマスタに無い	jitenshaya-san-no-takahashi-kun kumoman nyukusu-no-ran-tan special
+HOLD	ウルトラジャンプエッグ	4	ultra-jump-egg	ウルトラジャンプエッグ	ウルトラジャンプエッグ			seinen	頁の多数 {'seinen': 3, 'shounen': 1}	Ultra Jump Egg	Wikidata英語名	出版社が決まらない() = 電子書籍ストア・小説サイト・社がマスタに無い	13club rakka-san-nurse saikyou-mahou-shoujo-akira tatakau-shisho-to-koisuru-bakudan
+HOLD	青騎士	4			青騎士							雑誌の記事でない	odekake-kozame onban-kikou pikkoriina tougeoni
+HOLD	週刊漫画サンデー	4			漫画サンデー	実業之日本社	jitsugyo-no-nihon	seinen	分類:青年漫画雑誌			増刊・号の名が親誌の記事(漫画サンデー)へ転送 = 親誌に寄せない	chougekiga-shoutoku-taishi gekiga-hitler joyuu kujira-damashii
+HOLD	最前線	4			最前線							雑誌の記事でない	akuyaku-reijou-no-yojouhan kara-no-kyoukai satoko-to-nada tsuki-no-sango
+HOLD	One more Kiss	4			ワン・モア・キス							曖昧さ回避	honya-no-mori-no-akari is kaiten-ginga shi-to-kanojo-to-boku-yukari
+HOLD	ちゃおプラス	4			ちゃお	小学館	shogakukan	kodomo	分類:児童・幼年漫画雑誌			増刊・号の名が親誌の記事(ちゃお)へ転送 = 親誌に寄せない	fushigi-na-neko-no-machi-meltier kami-sama-to-gisou-couple-hajimemashita nakimushi-oni-san-hiroimashita shoujo-manga-no-hero-ni-naritai-noni-heroine-atsukai-dekiaisareru-ore
+HOLD	comicブースト	4		月刊バーズ	月刊バーズ	スコラ	scola	seinen	分類:青年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	glass-heart gyokou-no-nikuko-chan kono-sekai-de-9banme-guraina-ore-isekaijin-no-kanshiyaku-9-karidasaremashita tada-no-mefure-desu
+HOLD	ヤンチャンWeb	4		ヤングチャンピオン	ヤングチャンピオン	秋田書店	akita	seinen	分類:青年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	aku-no-soshiki-no-kyuujin-koukoku koppa-maichiru-sono-koro-ni shuu-ni-ichido-classmate-o-kau-hanashi ze-shinkai-no-solaris
+HOLD	Chara Selection	4										記事なし	crimson-spell hone-made-aishite-takaguchi koi-o-suru-nara-nidome-ga-joutou pink-takaguchi
+HOLD	楽園	4			楽園							曖昧さ回避	binetsu-kuukan crescendo-de-susume paranoma terumina
+HOLD	Twitter上連載「ツイ4」	4										記事なし	doukyuusei-no-oshi-sakka-ni-yuri-mousou-ga-bareta-kekka mousou-telepathy shiawase-kanako-no-koroshiya-seikatsu tomo-chan-wa-onnanoko
+HOLD	月刊コミックガム	4			コミックガム	ワニブックス	wani-books	seinen	分類:青年漫画雑誌			増刊・号の名が親誌の記事(コミックガム)へ転送 = 親誌に寄せない	amaenaideyotsu amaenaideyotsu-ms koe-de-oshigoto ranobe-bu
+HOLD	ドラドラドラゴンエイジ	4	dragon-age		月刊ドラゴンエイジ	角川書店	kadokawa	shounen	分類:少年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	ishuzoku-reviewers tottemo-yasashii-amae-chan trinity-seven-san uzaki-chan-wa-asobitai
+HOLD	ネメシス	4			ネメシス							雑誌の記事でない	golosseum jaba-uokkii-1914 kyoaku-gakuen shotasen
+HOLD	Canna	4			Canna							雑誌の記事でない	hidamari-ga-kikoeru hidamari-ga-kikoeru-koufukuron hidamari-ga-kikoeru-limit hidamari-ga-kikoeru-shunka-shuutou
+HOLD	同人誌	4			同人誌							雑誌の記事でない	kizuna level-c sore-ga-seiyuu strike-uitchiizu-chiisaanya
+HOLD	エブリスタ	4	everystar	エブリスタ	エブリスタ			seinen	頁の多数 {'seinen': 4}	Everystar	Wikidata英語名	出版社が決まらない() = 電子書籍ストア・小説サイト・社がマスタに無い	liar mushoku-kyousei-shuuyoujo perfect-crime perfect-crime-extra
+HOLD	水曜日はまったりダッシュエックスコミック	4			ダッシュエックス文庫							雑誌の記事でない	guild-tsuihousareta-zatsuyougakari-no-gekokujou hai-spec-dayo-iona-chan mukuwarenakatta-murabito-ee-kizoku-ni-hirowarete-dekiai-dekiaisareru-ue-ni-jitsu-wa-motte-ita ore-wa-mada-honki-o-dashite-inai-dx
+HOLD	カカオページ	4	kakaopage	カカオページ	カカオページ			shoujo	頁の多数 {'shoujo': 3, 'shounen': 1}	KakaoPage	Wikidata英語名	出版社が決まらない() = 電子書籍ストア・小説サイト・社がマスタに無い	gekai-eriize kanojo-ga-koushakutei-ni-itta-wake kikansha-no-mahou-wa-tokubetsu-desu suterareta-kouhi
+HOLD	マンガドア	4										記事なし	azur-lane-smile-dish d4dj-the-prologue-of-peaky-p-key magic-meikaa romeria-senki
+HOLD	アライブ+	4	comic-alive		月刊コミックアライブ	メディアファクトリー	mediafactory	seinen	分類:青年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	class-de-2-banme-ni-kawaii-onnanoko-to-tomodachi-ni-natta doro-no-bunzai-de-watashi-dake-no-taisetsu-o-ubaou-danante futago-matomete-kanojo-ni-shinai hibi-wa-sugiredo-meshi-umashi
+HOLD	冬の大増刊号りぼんスペシャル	3										記事なし	3gatsu-no-dai2-button metarikku-colors zekkyou-gakkyuu
+HOLD	東京新聞	3			東京新聞							雑誌の記事でない	4koma-chibimarukochan honobono-kun kissa-anemone
+HOLD	月刊コミックボンボン	3										記事なし	akatsuka-fujio-ura-1000-peeji blazer-drive cyborg-kuro-chan-bangai-battle
+HOLD	りぼんファンタジー増刊号	3										記事なし	animal-yokochou chocomimi zekkyou-gakkyuu
+HOLD	りぼん春のチャレンジ!大増刊号	3										記事なし	animal-yokochou high-score momobuta
+HOLD	ヤングマガジン増刊海賊版	3										記事なし	3-3eyes blade sweet-sangokushi
+HOLD	週刊少年ジャンプ増刊ジャンプNEXT!	3										記事なし	chounouryokusha-saiki-kusuo-no-nan kagami-no-kuni-no-harisugawa kuroko-no-basket
+HOLD	りぼんスペシャル レモン	3										記事なし	high-score hime-chan-no-ribbon-colorful nagareboshi-lens
+HOLD	りぼんスペシャル ハッピー	3										記事なし	high-score hiyokoi v-i-p
+HOLD	夏の大増刊号りぼんスペシャルレモン	3										記事なし	hiyokoi marimo-no-hana stardust-wink
+HOLD	ジャンプスクエアWEB	3										記事なし	i-rebo magical-cooking-chaos-kitchen tsumi-ka-batsu
+HOLD	りぼんスペシャルスター	3										記事なし	perfect-rose tubame-no-suu yumeiro-pateishieeru
+HOLD	電撃hp	3	dengeki-hp	電撃hp	電撃hp			seinen	頁の多数 {'seinen': 2, 'shounen': 1}	Dengeki hp	Wikidata英語名	出版社が決まらない() = 電子書籍ストア・小説サイト・社がマスタに無い	boogiepop-wa-warawanai missing shakugan-no-shana
+HOLD	よいこ	3			よいこ							曖昧さ回避	jungle-kurobee shin-obake-no-qtarou umeboshi-denka
+HOLD	角川ニコニコエース	3		コミックNewtype	コミックNewtype	KADOKAWA	kadokawa					親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	full-metal-panic-another nobunaga-the-fool uchuu-senkan-yamato-2199
+HOLD	月刊YOU	3										記事なし	gunjou-ni-siren osomatsu-san tokkan
+HOLD	コミプレ-Comiplex-	3	hero-s-web	HERO'S Web	HERO'S Web	ウェブコミック配信サイト					ヘボン式	寄せ先(hero-s-web)を足さない	jiiteiiyuu-ikari-no-desu-yamada niwatori-fighter soranoya
+HOLD	pixivシルフ	3										記事なし	itoshi-no-kunitama studio-cabana tetsusabi-to-1000-karatto
+HOLD	コミック百合姫S	3	comic-yuri-hime-s	コミック百合姫S	コミック百合姫S			seinen	頁の多数 {'seinen': 2, 'josei': 1}	Comic Yuri Hime S	Wikidata英語名	出版社が決まらない() = 電子書籍ストア・小説サイト・社がマスタに無い	fuufu konohanatei-ki-tan yuru-yuri
+HOLD	週刊コロコロコミック	3	corocoro-comic		月刊コロコロコミック	小学館	shogakukan	kodomo	分類:児童・幼年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	honoo-no-toukyuujo-dodge-danko puniru-wa-kawaii-slime umamusume-pisupisu-supisupi-gorushi-chan
+HOLD	COMIC BULL	3										記事なし	aoku-somero damokuresu-no-golf dual-mound
+HOLD	comic tint	3										記事なし	honnou-switch kahogo-na-wakadanna-sama-no-amayakashi-kon suki-na-otoko-to-wakaretai
+HOLD	ナマイキッ!	3			竹書房							雑誌の記事でない	av-na-kanojo joriku netoraserare
+HOLD	るんるん	3			ルンルン							曖昧さ回避	code-name-wa-sailor-v jouzuna-yume-no-kanaekata tamete-misemashou
+HOLD	ビッグコミックオリジナル増刊号	3			ビッグコミックオリジナル増刊	小学館	shogakukan	seinen	分類:青年漫画雑誌			増刊・号の名が親誌の記事(ビッグコミックオリジナル増刊)へ転送 = 親誌に寄せない	ajisai-no-uta kango-joshu-no-nana-chan keaton-doubutsuki
+HOLD	オモコロ	3			バーグハンバーグバーグ							雑誌の記事でない	gal-isha-ayappe let-goo-kaikigumi seiri-chan
+HOLD	E★エブリスタ	3			エブリスタ							増刊・号の名が親誌の記事(エブリスタ)へ転送 = 親誌に寄せない	doreiku fukushuu-kyoushitsu gakuen-fuusa
+HOLD	gateau	3										記事なし	hitorijime-my-hero kimi-to-natsu-no-naka kimi-wa-natsu-no-naka
+HOLD	eヤングマガジン	3	weekly-young-magazine		週刊ヤングマガジン	講談社	kodansha	seinen	分類:青年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	3x3-eyes-genjuu-no-mori-no-sounansha 3x3-eyes-kiseki-no-yami-no-keiyakusha shokuryou-jinrui
+HOLD	サンケイ新聞	3			産経新聞							雑誌の記事でない	1000-nen-joou aoi-toriton umi-no-toriton
+HOLD	電撃4コマ	3			電撃4コマ							雑誌の記事でない	club-game-club higana-hannichi-gamebu-gurashi kazoku-game
+HOLD	なかぞう	3	nakayoshi		なかよし	講談社	kodansha	kodomo	分類:児童・幼年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	egao-no-signal maigo-no-dorufin natsuiro-no-guradeeshon
+HOLD	COMIC BRIDGE	3		カドコミ	カドコミ	KADOKAWA	kadokawa					親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	bentouya-san-no-omotenashi espresso-cola-jidou-hattatsu-shien-momo-no-ki-school kyoto-fukei-ayakashi-ka-no-file
+HOLD	ビーボーイP!	3		MAGAZINE BE×BOY	MAGAZINE BE×BOY	リブレ	libre	josei	分類:女性漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	fukou-kun-wa-kisusurushikanai kare-no-iru-seikatsu tashiro-kun-kimitte-yatsu-wa
+HOLD	週刊ファミ通	3			ファミ通	KADOKAWA Game Linkage	kadokawa-game-linkage					増刊・号の名が親誌の記事(ファミ通)へ転送 = 親誌に寄せない	boku-no-yuusha fukumitsu-shigeyuki-no-honobono-game-essei-manga kantai-collection-kancolle-miiro-no-alto-sax
+HOLD	コミックジャックポット	3										記事なし	hoshi-no-kazu-dake-dakishimete la-blue-girl power-bomb-theater
+HOLD	COMICアレ!	3			かつて刊行された日本の漫画雑誌一覧							一覧の記事(かつて刊行された日本の漫画雑誌一覧) = 1つの誌でない	kabeotoko mind-game-2004 red-kabura
+HOLD	ハロウィン	3			ハロウィン							雑誌の記事でない	karura-mau kinginka shi-kunshi
+HOLD	COMICリュエル	3										記事なし	kirio-fun-club neko-neko-nihonshi swing
+HOLD	プレミアCheese!	3			Cheese!	小学館	shogakukan	shoujo	分類:少女漫画雑誌			増刊・号の名が親誌の記事(Cheese!)へ転送 = 親誌に寄せない	coffee-ando-vanilla-black koi-to-dangan shanai-marriage-honey
+HOLD	クロフネ	3			クロフネ							雑誌の記事でない	dekinai-futari koukoku-kaisha-danshiryou-no-okazu-kun sensei-no-otoriyose
+HOLD	サスペリア	3			サスペリア							雑誌の記事でない	kyoufu-shinbun-tsuu midori-no-honoo shitarou-kun
+HOLD	みこすり半劇場	3	mikosuri-hangekijou	みこすり半劇場	みこすり半劇場			seinen	頁の多数 {'seinen': 2, 'josei': 1}		ヘボン式	出版社が決まらない() = 電子書籍ストア・小説サイト・社がマスタに無い	life-train shuningayuku tokumei-joshiana-namino-youko
+HOLD	ダ・ヴィンチWeb	3			ダ・ヴィンチ (雑誌)	KADOKAWA	kadokawa					増刊・号の名が親誌の記事(ダ・ヴィンチ (雑誌))へ転送 = 親誌に寄せない	aniki-no-tomodachi karrafuru-na-etsubburidei takara-kun-to-amagi-kun
+HOLD	ダ・ヴィンチ	3			ダ・ヴィンチ							曖昧さ回避	joze-to-tora-to-sakanatachi viri yoshinokita-koukou-tosho-iinkai
+HOLD	QuinRose携帯サイト	3										記事なし	clover-no-kuni-no-alice-kishi-no-kokoroe clover-no-kuni-no-alice-kuroi-tokage-to-nigai-aji clover-no-kuni-no-alice-shiro-usagi-to-tokei-jikake-no-wana
+HOLD	電撃コミック レグルス	3		カドコミ	カドコミ	KADOKAWA	kadokawa					親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	ano-hana-ga-saku-oka-de-kimi-to-mata-deaetara kouchuugun-shikan-boukensha-ni-naru yuushakei-ni-shosu
+HOLD	どこでもヤングチャンピオン	3										記事なし	katainaka-no-otsu-san-kensei-ni-naru kyochuu-sanmyaku mobu-kara-hajimaru-tansaku-eiyuu-tan
+HOLD	ドラドラふらっと♭	3	dragon-age		月刊ドラゴンエイジ	角川書店	kadokawa	shounen	分類:少年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	houmatsu-ni-kami-wa-madoromu mata-korosarete-shimatta-no-desune-tantei-sama tenkousaki-no-seiso-karen-na-bishoujo-ga-mukashi-otoko-to-omotte-isshokenmei-ni-asonda-osananajimi
+HOLD	月マガ基地	3	monthly-shonen-magazine		月刊少年マガジン	講談社	kodansha	shounen	分類:少年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	kizuguchi-to-houtai sekai-saikyou-no-majo-hajimemashita tsumi-to-batsu-no-spica
+HOLD	中日新聞	2			中日新聞							雑誌の記事でない	4koma-chibimarukochan yakeato-no-genki-kun
+HOLD	西日本新聞	2			西日本新聞							雑誌の記事でない	4koma-chibimarukochan ougon-no-trunk
+HOLD	りぼん夏休みびっくり大増刊号	2										記事なし	animal-yokochou high-score
+HOLD	ピアニッシモ	2			ピアニッシモ							曖昧さ回避	annatour-seiden the-manzai
+HOLD	別冊フレンド増刊	2										記事なし	boy-s-room guruguru-pon-chan-okawaritsu
+HOLD	月刊少年マガジンプラス	2										記事なし	capeta red-eyes
+HOLD	りぼんスペシャルダイヤ	2										記事なし	chocomimi zekkyou-gakkyuu
+HOLD	りぼんスペシャルハッピー	2										記事なし	choko-tan perfect-rose
+HOLD	りぼんスペシャル スター	2										記事なし	choko-tan v-i-p
+HOLD	春の大増刊号りぼんスペシャル	2										記事なし	crash metarikku-colors
+HOLD	GAGSpecial	2										記事なし	crazy-dai-amon-dou maison-de-penguin
+HOLD	別冊コロコロコミックSpecial	2			別冊コロコロコミック	小学館	shogakukan	kodomo	分類:児童・幼年漫画雑誌			増刊・号の名が親誌の記事(別冊コロコロコミック)へ転送 = 親誌に寄せない	dorabeesu-doraemon-super-baseball-gaiden keshikasu-kun
+HOLD	ゴーゴージャンプ	2										記事なし	gyagu-manga-hiyori muhyo-to-roojii-no-mahouritsu-soudan-jimusho
+HOLD	ComicCobalt	2										記事なし	hayou-no-ken hayou-no-tsurugi
+HOLD	りぼん冬休みチャレンジ!大増刊号	2										記事なし	high-score momobuta
+HOLD	りぼん夏休み超びっくり大増刊号	2										記事なし	high-score momobuta
+HOLD	りぼんスペシャル リアル	2										記事なし	high-score sekai-no-hate
+HOLD	人間交差点	2			人間交差点							雑誌の記事でない	hikiage-no-higeki shussei-to-sokai-soshite-sengo
+HOLD	メディファク☆モバイル!	2										記事なし	hyakka-ryouran-samurai-girls kami-no-mitsu
+HOLD	月刊少年マガジン増刊マガジン・イーノ	2										記事なし	iwato-ishitarou-no-reiseki-ki-tan razuberii-mix
+HOLD	ガンガンONELINE	2										記事なし	kimi-to-boku mahoujin-guruguru-gaiden-mai-yuuden-kitakita
+HOLD	週プレNEWS	2		週刊プレイボーイ	週刊プレイボーイ	集英社	shueisha					親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	kinnikuman za-choujin-sama
+HOLD	nicola	2			ニコラ							曖昧さ回避	love-zipper sayonara-demo-aishiteru
+HOLD	増刊ガンガンパワード	2										記事なし	megane-x-parfait shitateya-koubou
+HOLD	春の大増刊号 りぼんスペシャル	2										記事なし	momo stardust-wink
+HOLD	アオハル”bitter”	2										記事なし	mou-tamago-wa-korosanai tubame-no-suu
+HOLD	DUO	2			デュオ							曖昧さ回避	nakayama-seika-selection suponsaa-kara-hitokoto
+HOLD	花とゆめスターズ	2										記事なし	nibun-no-wan-ouji sarashi-asobi
+HOLD	りぼんスペシャルリアル	2										記事なし	omoide-konpeitou tubame-no-suu
+HOLD	なかよし9月号増刊なかよしラブリー	2										記事なし	otona-2-natsu-2 yumemiru-angel-blue
+HOLD	COM	2			COM							曖昧さ回避	hinotori tezuka-osamu-space-adventure-short-stories
+HOLD	りぼんスペシャルスカイ	2										記事なし	tubame-no-suu yumeiro-pateishieeru
+HOLD	ジャンプSQ.CROWN	2	jump-sq		ジャンプスクエア	集英社	shueisha	shounen	分類:少年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	karakuri-douji-uruteimo kekkai-sensen-back-2-back
+HOLD	新雑誌研究所	2	monthly-shonen-rival		月刊少年ライバル	講談社	kodansha	shounen	分類:少年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	apocalypse-no-toride hell-s-kitchen
+HOLD	月刊少年ジャンプオリジナル	2										記事なし	shocking-boy shocking-boy-original
+HOLD	サウス	2			サウス							曖昧さ回避	genjuu-bunsho tokyo-babylon
+HOLD	Souffle	2										記事なし	harimaware-koinu tenmaku-no-jaadugar
+HOLD	うろんなページ	2										記事なし	butaiura working
+HOLD	TYPE-MOONコミックエース	2										記事なし	fate-grand-order-from-lostbelt fate-grand-order-fujimaru-ritsuka-wa-wakaranai
+HOLD	COMIC MeDu	2										記事なし	corpo-a-corpo fukakai-na-boku-no-subete-o
+HOLD	WebComicアパンダ	2										記事なし	chiguhagu-trick doukyo-shite-iru-kensei-no-onna-shishou-ga-kawai-sugite-mainichi-shiawase-desu
+HOLD	bamB!	2										記事なし	bl-ero-mangaka-to-shoujo-mangaka-to-horror-mangaka-no-tadareta-nichijou zense-de-koroshita-aite-no-tantou-henshuu-ni-narimashita
+HOLD	CIEL Très Très	2										記事なし	ouji-sama-game super-lovers
+HOLD	GUSH	2										記事なし	koisuru-bou-kun sukiyanen-kedo-douyaroka
+HOLD	コミックGENKi	2		月刊ニュータイプ	月刊ニュータイプ	KADOKAWA	kadokawa					親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	20-mensou-ni-onegai gakuen-tokkei-duklyon
+HOLD	コミックガイア	2										記事なし	appleseed senjutsu-choukoukaku-orion
+HOLD	BE・BOY GOLD	2		MAGAZINE BE×BOY	MAGAZINE BE×BOY	リブレ	libre	josei	分類:女性漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	aru-hi-totsuzen-koi-ha-kuru hybrid-child
+HOLD	シェリプラス	2	dear-plus	ディアプラス	ディアプラス					Dear+	Wikidata英語名	寄せ先(dear-plus)を足さない	given yes-ka-noo-ka-hanbun-ka
+HOLD	ihr HertZ	2										記事なし	4gatsu-no-tokyo-wa saezuru-tori-wa-habatakanai
+HOLD	コミックタタン	2		ゼノン編集部	ゼノン編集部	コアミックス	coamix					親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	brutal-satsujin-keisatsukan-no-kokuhaku doom-satsujin-keisatsukan-no-danzairoku
+HOLD	drap	2										記事なし	ikoku-irokoi-roman-tan kirepapa
+HOLD	別冊パチスロパニック7	2			パチスロパニック7	白夜書房	byakuya-shobo					増刊・号の名が親誌の記事(パチスロパニック7)へ転送 = 親誌に寄せない	adoribu-ouji chou-adoribu-ouji
+HOLD	BABY!	2			BABY!							雑誌の記事でない	aka-chan-honbuchou hirake-koma-return
+HOLD	Webコミックゲッキン	2	web-comic-gekkin	Webコミックゲッキン	Webコミックゲッキン	バンダイビジュアル		shounen	頁の多数 {'shounen': 1, 'shoujo': 1}	Web Comic Gekkin	Wikidata英語名	出版社が決まらない(バンダイビジュアル) = 電子書籍ストア・小説サイト・社がマスタに無い	boku-no-chopin bukatsu-shoujo-yuu
+HOLD	恋するソワレ	2	koisuru-soiree	恋するソワレ	恋するソワレ	シーモアコミックス		josei	分類:女性漫画雑誌	Koisuru Soirée	Wikidata英語名	出版社が決まらない(シーモアコミックス) = 電子書籍ストア・小説サイト・社がマスタに無い	bokura-wa-koi-ga-heta-sugiru eikyuu-shimei-onegai-shimasu
+HOLD	マンガよもんが	2										記事なし	buchou-to-shachiku-no-koi-wa-modokashii mitsuya-sensei-no-keikakutekina-ezuke
+HOLD	ラザ	2			ラーザ							雑誌の記事でない	bunbuku-tanuki-no-teii-party bunbuku-teii-potto-plus
+HOLD	月刊ハロウィン	2										記事なし	dark-cat noroi-no-one-piece
+HOLD	Comic新現実	2			新現実							増刊・号の名が親誌の記事(新現実)へ転送 = 親誌に寄せない	dien-bien-phu octagonian
+HOLD	ヤングユー	2	young-you	ヤングユー	ヤングユー			josei	分類:女性漫画雑誌	Young You	Wikidata英語名	出版社が決まらない() = 電子書籍ストア・小説サイト・社がマスタに無い	do-da-dancin oishii-kankei
+HOLD	小学館の学習雑誌	2	shougakukan-no-gakushuu-zasshi	小学館の学習雑誌	小学館の学習雑誌			kodomo	頁の多数 {'kodomo': 1, 'shounen': 1}		ヘボン式	出版社が決まらない() = 電子書籍ストア・小説サイト・社がマスタに無い	doraemon doraemon-plus
+HOLD	WEBヒーローズ	2	hero-s-web	HERO'S Web	HERO'S Web	ウェブコミック配信サイト					ヘボン式	寄せ先(hero-s-web)を足さない	double-noda nigakute-amai-refrain
+HOLD	Web漫画アクション堂	2										記事なし	doujin-shoujo-jieibii iidabashi-no-futaba-chan
+HOLD	ミラコロコミック	2										記事なし	gamer-ga-youkai-taiji-yattemita unmei-no-makimodoshi
+HOLD	メヌエット	2			メヌエット							雑誌の記事でない	gin-no-jeek kodomotachi-wa-yoru-no-juunin
+HOLD	セリエミステリー	2										記事なし	hatshepsut honoo-no-mirage
+HOLD	ミスターバイクBG	2										記事なし	kirin kirin-the-happy-ridder-speedway
+HOLD	SFアニメディア	2		月刊コミックNORA	月刊コミックNORA	Gakken	gakken-2	shounen	分類:少年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	maps maps-shared-world
+HOLD	週刊アサヒ芸能	2			アサヒ芸能	徳間書店	tokuma					増刊・号の名が親誌の記事(アサヒ芸能)へ転送 = 親誌に寄せない	meshibana-deka-tachibana naniwa-sendou
+HOLD	コミックマスター	2	comic-master	コミックマスター	コミックマスター			shoujo	頁の多数 {'shoujo': 1, 'seinen': 1}	Comic Master	Wikidata英語名	出版社が決まらない() = 電子書籍ストア・小説サイト・社がマスタに無い	missing-gate sainome-hanjouki
+HOLD	COMICゴイチ	2										記事なし	modaeteyo-adam-kun yoasobi-gurashi
+HOLD	ネクストF	2	nextcomic-first	ネクストF	ネクストF	iOS		shoujo	頁の多数 {'shoujo': 2}	NextComic First	Wikidata英語名	出版社が決まらない(iOS) = 電子書籍ストア・小説サイト・社がマスタに無い	netsuai-prince netsuai-prince-oniichan-wa-kimi-ga-suki
+HOLD	グレープフルーツ	2			グレープフルーツ							雑誌の記事でない	nijishinden suiren-unga
+HOLD	GUST	2										記事なし	osakana-wa-ami-no-naka umi-ni-nemuru-hana
+HOLD	コミック・ガンボ	2	comic-gumbo	コミック・ガンボ	コミック・ガンボ	フリーペーパー		seinen	頁の多数 {'seinen': 1, 'shoujo': 1}	Comic GUMBO	Wikidata英語名	出版社が決まらない(フリーペーパー) = 電子書籍ストア・小説サイト・社がマスタに無い	paato-kaijin-valkyrie stage-girls
+HOLD	アフタヌーン・シーズン増刊	2										記事なし	rabuyan shadow-skill-okada1992
+HOLD	MAGxiv	2										記事なし	sayonara-rose-garden school-zone-ningiyau
+HOLD	ボーイズファン	2										記事なし	sei-no-gekiyaku sei-no-gekiyaku-aaru-ii-life
+HOLD	aisA（三和出版）	2										記事なし	seikimatsu-darling seikimatsu-darling-2006
+HOLD	つぼみwebコミック	2										記事なし	sentou-hawai sougou-tovarisch
+HOLD	月刊少女フレンド増刊・サスペンス&ホラー	2										記事なし	shi-to-kanojo-to-boku shi-to-kanojo-to-boku-meguru
+HOLD	コミックビーズログ キュン!	2										記事なし	shinigami-hime-no-saikon starry-sky
+HOLD	怪	2			怪							曖昧さ回避	shinpika-rendetsu youkai-daisensou
+HOLD	COMICフルール	2										記事なし	senpai-danjite-koi-dewa-burasshu-appu smoke-blue-no-ame-nochi-hare
+HOLD	COMIC熱帯	2										記事なし	arusu-no-kyojuu soba-gal-to-oji-san
+HOLD	ケータイ★まんが王国	2			まんが王国							雑誌の記事でない	toukyouto-kitaku-akabane uhyotsu-toukyouto-kitaku-akabane
+HOLD	マンガBANG!	2										記事なし	kekkon-yoteibi yuusha-no-haha-desu-maougun-no-kanbu-ni-narimashita
+HOLD	コミックBE!	2										記事なし	akuma-kun akuma-kun-seikimatsu-taisen
+HOLD	WINGS	2			ウィングス							曖昧さ回避	dotou-jamuka-no-daibouken joker-reboot
+HOLD	ビバ☆テイルズ オブ マガジン	2										記事なし	tales-of-gureisesu-f tales-of-xillia-side-jude
+HOLD	まんがタイムきらら☆マギカ	2		魔法少女まどか☆マギカの漫画作品	魔法少女まどか☆マギカの漫画作品	芳文社	houbunsha					作品の記事 = 誌でない	mahou-shoujo-madoka-magica tomoe-mami-no-heibonna-nichijou
+HOLD	エイジプレミアム（電子書籍）	2										記事なし	log-horizon log-horizon-nishikaze-no-ryodan
+HOLD	月刊コミック アース・スター	2			コミック アース・スター	アース・スター エンターテイメント	earth-star	shounen	分類:少年漫画雑誌			増刊・号の名が親誌の記事(コミック アース・スター)へ転送 = 親誌に寄せない	suisei-no-gargantia suisei-no-gargantia-meguru-kouro-haruka
+HOLD	LaLaメロディonline	2										記事なし	koi-nashi-ai-nashi nyanko-sensei-ga-iku
+HOLD	COMICコロナ	2										記事なし	dance-in-the-vampire-bund-age-of-scarlet-order teiamuun-teikoku-monogatari-dantoudai-kara-hajimaru-hime-no-tensei-gyakuten-story-attomaaku-comic
+HOLD	comic Berry's	2										記事なし	50kg-no-cinderella hajimemashite-konnichiwa-rikon-shite-kudasai
+HOLD	電撃ツイッターマガジン	2										記事なし	girls-ando-panzer-abantei-antsuio-koukou girls-f1st-gt
+HOLD	ハニーミルク	2										記事なし	tasogare-out-focus-long-take zanzou-suroomooshon
+HOLD	めちゃコミックオリジナル	2			めちゃコミックオリジナル							雑誌の記事でない	aoshima-kun-wa-ijiwaru iyashi-no-otonari-san-ni-wa-himitsu-ga-aru
+HOLD	PASH UP!	2										記事なし	kuma-kuma-kuma-bear-gaiden-yuna-no-yorimichi-techou kuma-kuma-kuma-bear-kyou-mo-kuma-kuma-hiyori
+HOLD	マンガがうがう	2	manga-gau-gau	マンガがうがう	マンガがうがう					Manga Gau Gau	Wikidata英語名	寄せ先(manga-gau-gau)を足さない	yuusha-party-ni-kawaii-ko-ga-ita-node-kokuhaku-shite-mita zatsuyou-fuyo-jutsushi-ga-jibun-no-saikyou-ni-kizuku-made
+HOLD	FLOS COMIC	2										記事なし	tefuda-ga-oome-no-victoria yowaki-makkusu-reijou-nanoni-ratsuwan-konyakusha-sama-no-kake-ni-notte-shimatta
+HOLD	文春オンライン	2			文春オンライン							雑誌の記事でない	shinu-made-bazuttero warui-nowa-anata-desu
+HOLD	コミックアルナ	2	comic-flapper		コミックフラッパー	KADOKAWA	kadokawa	seinen	分類:青年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	hiroyuki-isekai-demo-ronpa-de-musou-shimasu mahou-shoujo-no-majo-saiban
+HOLD	G'sチャンネル	2										記事なし	seishun-buta-yarou-wa-orusuban-imouto-no-yume-o-minai seishun-butayarou-wa-yumemiru-shoujo-no-yume-o-minai
+HOLD	コロナEX	2			TOブックス							雑誌の記事でない	honsuki-no-gekokujou-hanneroore-no-kizokuin-gonensei-koi-shitemitai koishita-hito-wa-imouto-no-kawari-ni-shindekure-to-itta-imouto-to-kekkon-shita-kataomoi-aite-ga
+HOLD	竹コミ!	2	take-komi	竹コミ!	竹コミ!			seinen	頁の多数 {'seinen': 2}		ヘボン式	出版社が決まらない() = 電子書籍ストア・小説サイト・社がマスタに無い	apocalypse-hotel-karikari hachigatsu-no-time-machine
+HOLD	りぼん冬休みおたのしみゾウカンゴウ	1										記事なし	3gatsu-no-dai2-button
+HOLD	北海道新聞	1			北海道新聞							雑誌の記事でない	4koma-chibimarukochan
+HOLD	北陸中日新聞	1			北陸中日新聞							雑誌の記事でない	4koma-chibimarukochan
+HOLD	河北新報	1			河北新報							雑誌の記事でない	4koma-chibimarukochan
+HOLD	神戸新聞	1			神戸新聞							雑誌の記事でない	4koma-chibimarukochan
+HOLD	中国新聞	1			中国新聞							雑誌の記事でない	4koma-chibimarukochan
+HOLD	徳島新聞	1			徳島新聞							雑誌の記事でない	4koma-chibimarukochan
+HOLD	新潟日報	1			新潟日報							雑誌の記事でない	4koma-chibimarukochan
+HOLD	日刊県民福井	1			日刊県民福井							雑誌の記事でない	4koma-chibimarukochan
+HOLD	日刊県民福井新聞	1										記事なし	4koma-chibimarukochan
+HOLD	ジャンプSQ.WEB	1										記事なし	agrippa
+HOLD	オール読み物	1										記事なし	akatsuka-fujio-ura-1000-peeji
+HOLD	赤旗日曜版	1										記事なし	akatsuka-fujio-ura-1000-peeji
+HOLD	少年少女新聞	1			少年少女新聞							雑誌の記事でない	akatsuka-fujio-ura-1000-peeji
+HOLD	高2コース	1										記事なし	akatsuka-fujio-ura-1000-peeji
+HOLD	アサヒ芸能臨時増刊号ギャグマン	1										記事なし	akatsuka-fujio-ura-1000-peeji
+HOLD	少年チャレンジ	1	shonen-challenge	少年チャレンジ	少年チャレンジ	学研ホールディングス		kodomo	分類:児童・幼年漫画雑誌	Shonen Challenge	Wikidata英語名	出版社が決まらない(学研ホールディングス) = 電子書籍ストア・小説サイト・社がマスタに無い	akatsuka-fujio-ura-1000-peeji
+HOLD	どっかんV	1	shonen-challenge	少年チャレンジ	少年チャレンジ	学研ホールディングス		kodomo	分類:児童・幼年漫画雑誌	Shonen Challenge	Wikidata英語名	寄せ先(shonen-challenge)を足さない	akatsuka-fujio-ura-1000-peeji
+HOLD	別冊フレンド増刊別フレ	1										記事なし	akb0048
+HOLD	真冬のイリュージョニスト	1										記事なし	akb0048-episode0
+HOLD	りぼん夏休みピカピカ増刊あみーご!	1										記事なし	animal-yokochou
+HOLD	りぼん冬休みピカピカ増刊あみーご!	1										記事なし	animal-yokochou
+HOLD	りぼん春休みピカピカ増刊あみーご!	1										記事なし	animal-yokochou
+HOLD	COMIC PIANISSIMO	1										記事なし	annatour-seiden
+HOLD	YSスペシャル	1	weekly-young-sunday		週刊ヤングサンデー	小学館	shogakukan	seinen	分類:青年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	aoi-honoo
+HOLD	なかよし12月号増刊 なかよしラブリー	1										記事なし	arisa
+HOLD	まるごとあさりちゃん	1										記事なし	asari-chan
+HOLD	バカテス	1			バカとテストと召喚獣							雑誌の記事でない	baka-to-test-to-shoukanjuu-ja
+HOLD	爆丸爆TECHの書	1										記事なし	bakutekku-bakugan
+HOLD	メタルファイトベイブレード全爆転ブレーダーズBOOK	1										記事なし	bakuten-denju-bureedaa-dj
+HOLD	SQ.LaB	1										記事なし	binbougami-ga
+HOLD	月刊少年チャンピオンRED	1										記事なし	black-jack-bj-x-bj
+HOLD	フレッシュガンガン	1	fresh-gangan	フレッシュガンガン	フレッシュガンガン			shounen	分類:少年漫画雑誌	Fresh GANGAN	Wikidata英語名	出版社が決まらない() = 電子書籍ストア・小説サイト・社がマスタに無い	blade-sangokushi
+HOLD	コカ・コーラ ハッピーティーンズクラブ	1										記事なし	bloody-monday-last-season
+HOLD	魔像別冊書下し選集2	1										記事なし	chidaruma-kenpou-fukushuu-tsunde-wa-kuzushi
+HOLD	魔像別冊平田弘史特集	1										記事なし	chidaruma-kenpou-fukushuu-tsunde-wa-kuzushi
+HOLD	りぼんスペシャルハート	1										記事なし	chocomimi
+HOLD	最強のGガンダム	1										記事なし	choukyuu-mobile-butouden-jii-gundam
+HOLD	富士山	1			富士山							雑誌の記事でない	coji-coji
+HOLD	夏の大増刊りぼんスペシャルダイヤ	1										記事なし	crash
+HOLD	誌より誤植部分を著者確認の上訂正	1										記事なし	dai-jigokujou-chidaruma-rikishi
+HOLD	劇場版メタルファイトベイブレードVS太陽 超灼熱ガイドBOOK	1										記事なし	daichouhen-duel-masters
+HOLD	デュエル・マスターズ エントリーデッキゼロBOOK	1										記事なし	daichouhen-duel-masters
+HOLD	THE WEB	1										記事なし	daisuki-ga-mushi-ha-tadashi-kun-no
+HOLD	テレビマガジン増刊	1										記事なし	deltora-quest
+HOLD	勇者の遺物	1										記事なし	densetsu-no-yuusha-no-densetsu
+HOLD	小学生ブック	1										記事なし	dorami-chan
+HOLD	デジコミ新潮コム・コム	1										記事なし	douwa-meikyuu
+HOLD	デュエル・マスターズ炎のキズナXXBOOK	1										記事なし	duel-masters-sx
+HOLD	デュエル・マスターズ ライジング・ダッシュ・デッキBOOK	1										記事なし	duel-masters-v
+HOLD	デュエル・マスターズ スタートダッシュデッキBOOK	1										記事なし	duel-masters-v
+HOLD	フラワーズ	1			フラワーズ							曖昧さ回避	elegy
+HOLD	TYPE-MOONエース	1			TYPE-MOON							雑誌の記事でない	emiya-san-no-kyou-no-gohan
+HOLD	週刊少年シャンプNEXT!	1										記事なし	enigma
+HOLD	週刊少年マガジン増刊マガジンドラゴン	1										記事なし	fairy-tail
+HOLD	週刊少年サンデーR増刊	1										記事なし	fake-tanabe
+HOLD	週刊少年ヤングサンデー	1										記事なし	fantasista-stella
+HOLD	ファイナルファンタジーⅪ	1			ファイナルファンタジーXI							雑誌の記事でない	final-fantasy-11-2010
+HOLD	まいっちんぐマンガ道	1			まいっちんぐマンガ道							雑誌の記事でない	fujiko-studio-assistant-nikki-maicching-mangadou
+HOLD	フルメタル・パニック!Σ4	1										記事なし	full-metal-panic-sigma
+HOLD	フルメタル・パニック!Σ2	1										記事なし	full-metal-panic-sigma
+HOLD	フルメタル・パニック!Σ6	1										記事なし	full-metal-panic-sigma
+HOLD	フルメタル・パニック!Σ13	1										記事なし	full-metal-panic-sigma
+HOLD	フルメタル・パニック!Σ1	1										記事なし	full-metal-panic-sigma
+HOLD	フルメタル・パニック!Σ3	1										記事なし	full-metal-panic-sigma
+HOLD	フルメタル・パニック!Σ5	1										記事なし	full-metal-panic-sigma
+HOLD	フルメタル・パニック!Σ7	1										記事なし	full-metal-panic-sigma
+HOLD	フルメタル・パニック!Σ8	1										記事なし	full-metal-panic-sigma
+HOLD	フルメタル・パニック!Σ11	1										記事なし	full-metal-panic-sigma
+HOLD	フルメタル・パニック!Σ12	1										記事なし	full-metal-panic-sigma
+HOLD	フルメタル・パニック!Σ14	1										記事なし	full-metal-panic-sigma
+HOLD	少女コミック特別増刊渡瀬悠宇パーフェクトワールドふしぎ遊戯	1										記事なし	fushigi-yuugi-genbu-kaiden
+HOLD	月刊電撃G’s magazine	1										記事なし	gakuen-kino
+HOLD	電撃G’ｓ　Festival！COMIC	1										記事なし	gakuen-kino
+HOLD	月刊電撃G'ｓ　magazine	1										記事なし	gakuen-kino
+HOLD	ジャンプスクエアH	1										記事なし	gekka-bijin-yamagishi
+HOLD	バンダイ夏カタログ	1										記事なし	go-go-tamatama-tamagotchi
+HOLD	バンダイちゃおフェス	1										記事なし	go-go-tamatama-tamagotchi
+HOLD	小学ニ年生	1										記事なし	go-go-tamatama-tamagotchi
+HOLD	たまごっちファン	1										記事なし	gogo-tamagotchi
+HOLD	たまとも育成ブック	1										記事なし	gogo-tamagotchi
+HOLD	バンダイ たまごっち公式HP	1										記事なし	gogo-tamagotchi
+HOLD	ソク読みサンデー	1	club-sunday		クラブサンデー	小学館	shogakukan					親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	golden-age
+HOLD	ガンダムゲームエース	1										記事なし	gundam-legacy
+HOLD	ジャンプスクエアLaB	1										記事なし	gyagu-manga-hiyori
+HOLD	ぶーけデラックス	1										記事なし	hashitanakute-gomen
+HOLD	WEBサンデー	1										記事なし	hayate-no-gotoku
+HOLD	ほしじぇね	1										記事なし	hayate-no-gotoku
+HOLD	りぼんスペシャル オレンジ	1										記事なし	high-score
+HOLD	りぼん春の超びっくり大増刊号	1										記事なし	high-score
+HOLD	アオハル“sweet”	1										記事なし	high-score
+HOLD	ひぐらしのなく頃に 鬼曝し編プレミアブック	1										記事なし	higurashi-no-naku-koro-ni-kai-utsutsukowashihen
+HOLD	家路1945?2003	1										記事なし	hikiage-no-higeki
+HOLD	幻の子どもたち	1										記事なし	hikiage-no-higeki
+HOLD	赤いリュックサック	1										記事なし	hikiage-no-higeki
+HOLD	海峡	1			海峡							雑誌の記事でない	hikiage-no-higeki
+HOLD	凍りの掌 シベリア抑留記	1										記事なし	hikiage-no-higeki
+HOLD	出征	1			徴兵制度							雑誌の記事でない	hikiage-no-higeki
+HOLD	凍りの掌 シベリア抑留 記憶の底の青春	1										記事なし	hikiage-no-higeki
+HOLD	二世部隊物語 最前線	1										記事なし	hikiage-no-higeki
+HOLD	流血の丘	1										記事なし	hikiage-no-higeki
+HOLD	別冊少年キング	1										記事なし	hikiage-no-higeki
+HOLD	夏の大増刊号りぼんスペシャルオレンジ	1										記事なし	hiyokoi
+HOLD	週刊少年ジャンプNEXT!	1										記事なし	hokenshitsu-no-shinigami
+HOLD	クッキーフレッシュ	1										記事なし	ichigo-to-anzu
+HOLD	ブーケデラックス	1										記事なし	ichigo-to-anzu
+HOLD	小学生だって恋したい?～めざせ★カレカノデビュー!!～	1										記事なし	ikemen-9
+HOLD	ぷっちぐみ増刊 ジュエルペットファン	1										記事なし	jewel-pet-twinkle
+HOLD	アオハル “bitter”	1										記事なし	jiyuuichi-bun-no-1
+HOLD	コミック ピアニッシモ	1										記事なし	johnny
+HOLD	青マルシャンプ	1										記事なし	k-o-sen
+HOLD	ソノシート	1			ソノシート							雑誌の記事でない	kaibutsu-kun-1988
+HOLD	コロコロコG	1										記事なし	kaitou-joker
+HOLD	テレビマガジン1月号増刊人気ヒーロージャンボ号	1										記事なし	kamen-rider-kesshisen-7nin-rider
+HOLD	ミステリーDX増刊	1										記事なし	katabira-no-mai
+HOLD	ジャンプスクエアマスターピース	1										記事なし	kekkai-sensen
+HOLD	ジャンプエスキューイチキュー	1										記事なし	kekkai-sensen
+HOLD	ケロケロA	1										記事なし	keroro-gunsou
+HOLD	月刊 少年チャンピオン	1										記事なし	kimiiro-focus
+HOLD	金色のキューピット	1										記事なし	kiniro-no-cupid
+HOLD	おはよう! ミーコ	1										記事なし	kiniro-no-cupid
+HOLD	ツライッ	1										記事なし	kobayashi-ga-kawaisugite-tsurai
+HOLD	別フレ2011	1										記事なし	konchiwa-hamuko
+HOLD	別フレ2012	1										記事なし	konchiwa-hamuko
+HOLD	別フレフロンティア	1										記事なし	konchiwa-hamuko
+HOLD	別冊マーガレット増刊 別冊マーガレットsister	1										記事なし	koukou-debut
+HOLD	別冊マーガレットとじこみふろく	1										記事なし	koukou-debut
+HOLD	ゴーゴー!ジャンプ	1										記事なし	kuroi-raburetaa
+HOLD	花とゆめプラチナ	1										記事なし	kyou-mo-ashita-mo
+HOLD	月刊少年シリウスウェブサイト	1										記事なし	kyou-no-mikado
+HOLD	白ララ	1										記事なし	last-game
+HOLD	別冊コミック	1										記事なし	layton-kyouju-to-mayoi-no-mori
+HOLD	ジャンプ the REVOLUTION	1										記事なし	luck-stealer
+HOLD	週刊少年ジャンプ増刊赤丸ジャンプ	1										記事なし	m-0
+HOLD	まほうつかいのパン	1			まほうつかいのパン							雑誌の記事でない	mahoutsukai-no-pan
+HOLD	ぼくたちの秘密基地	1										記事なし	mahoutsukai-no-pan
+HOLD	OPEN SESAME	1			オープンセサミ							曖昧さ回避	maria-x-maria
+HOLD	週刊少年ジャンプ+月刊少年ジャンプ特別編集増刊ゴー!ゴー!ジャンプ	1										記事なし	mazin-tantei-nougami-neuro
+HOLD	別冊冒険王映画テレビマガジン	1										記事なし	mazinger-z
+HOLD	ガンガンカスタム	1										記事なし	megalomania
+HOLD	COMICリュウWEB	1										記事なし	merumo-chan
+HOLD	メタルファイトベイブレードレジェンド4Dガイド	1										記事なし	metal-fight-beyblade
+HOLD	メタルファイトベイブレード最強ドラゴニス4Dガイド	1										記事なし	metal-fight-beyblade
+HOLD	夏の大増刊号りぼんスペシャルダイヤ	1										記事なし	metarikku-colors
+HOLD	カグヤ	1			かぐや (曖昧さ回避)							曖昧さ回避	miracle-chiroru-44kiro
+HOLD	ウェブマガジンウィングス	1			ウィングス (雑誌)	新書館	shinshokan	josei	分類:女性漫画雑誌			増刊・号の名が親誌の記事(ウィングス (雑誌))へ転送 = 親誌に寄せない	miracle-chiroru-44kiro
+HOLD	ガンダムエース増刊	1										記事なし	mobile-00-gundam-00
+HOLD	ニュータイプ増刊	1										記事なし	mobile-00-gundam-00
+HOLD	コミックボンボン増刊ガンダムマガジン	1										記事なし	mobile-suit-gundam-alive
+HOLD	ガンダムエーススペシャル	1										記事なし	mobile-suit-gundam-dai-08ms-shoutai-u-c-0079-alpha
+HOLD	Zガンダムエース	1			ガンダムエース	KADOKAWA	kadokawa	shounen	分類:少年漫画雑誌			増刊・号の名が親誌の記事(ガンダムエース)へ転送 = 親誌に寄せない	mobile-suit-gundam-shiidiiee-wakaki-suisei-no-shouzou
+HOLD	新MS戦記 機動戦士ガンダム短編集	1			新MS戦記 機動戦士ガンダム短編集							雑誌の記事でない	mobile-suit-gundam-tanpenshuu-shin-ms-senki
+HOLD	ガンダムUCエース	1										記事なし	mobile-suit-gundam-uc-testament
+HOLD	ガンダムユニコーンエース	1	gundam-ace		ガンダムエース	KADOKAWA	kadokawa	shounen	分類:少年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	mobile-suit-gundam-yuushii-bandeshine
+HOLD	りぼん秋のびっくり大増刊号	1										記事なし	momobuta
+HOLD	りぼん冬休みびっくり大増刊号	1										記事なし	momobuta
+HOLD	bianca	1										記事なし	mou-tamago-wa-korosanai
+HOLD	コミック戦国無頼	1										記事なし	muromachi-haru-no-ran-kurenai-no-ame
+HOLD	少年ガンガン増刊フレッシュガンガン	1										記事なし	nagasarete-airantou
+HOLD	妖精国の騎士	1			妖精国の騎士							雑誌の記事でない	nakayama-seika-selection
+HOLD	小六	1										記事なし	nanairo-jewel
+HOLD	月刊少年マガジンPLUS	1										記事なし	nanto-magoroku
+HOLD	痛快漫画ブック	1										記事なし	nazo-no-karakuri-yashiki
+HOLD	野球少年	1			少年野球							雑誌の記事でない	nazo-no-karakuri-yashiki
+HOLD	コミックボンボン増刊アブラカタブラ	1										記事なし	negima-neo
+HOLD	未収録短編集	1										記事なし	ninkuu-zero
+HOLD	ゴー!ゴー!ジャンプ	1			週刊少年ジャンプの増刊号	集英社	shueisha	shounen	分類:少年漫画雑誌			一覧の記事(週刊少年ジャンプの増刊号) = 1つの誌でない	nora
+HOLD	コミックマーブル	1	comic-marble	コミックマーブル	コミックマーブル			seinen	分類:青年漫画雑誌	Comic Marble	Wikidata英語名	出版社が決まらない() = 電子書籍ストア・小説サイト・社がマスタに無い	nousankyuu
+HOLD	ジャンプNEXT	1			週刊少年ジャンプの増刊号	集英社	shueisha	shounen	分類:少年漫画雑誌			一覧の記事(週刊少年ジャンプの増刊号) = 1つの誌でない	nurarihyon-no-mago
+HOLD	ヤングユーカラーズ	1			ヤングユー			josei	分類:女性漫画雑誌			増刊・号の名が親誌の記事(ヤングユー)へ転送 = 親誌に寄せない	onna-no-ko-no-shokutaku
+HOLD	オシャレファンブック	1										記事なし	oshare-majo-love-and-berry
+HOLD	なかよし12月号増刊なかよしラブリー	1										記事なし	otona-2-natsu-2
+HOLD	なかよし5月号増刊なかよしラブリー	1										記事なし	otona-2-natsu-2
+HOLD	オツベルと象	1			オツベルと象							雑誌の記事でない	otsuberu-to-zou-kenjuu-kouenrin
+HOLD	虔十公園林	1			虔十公園林							雑誌の記事でない	otsuberu-to-zou-kenjuu-kouenrin
+HOLD	別冊冒険王	1			冒険王 (漫画雑誌)	秋田書店	akita	kodomo	分類:児童・幼年漫画雑誌			増刊・号の名が親誌の記事(冒険王 (漫画雑誌))へ転送 = 親誌に寄せない	ozawa-satoru-mishuuroku-tanpenshuu
+HOLD	デラックス少年サンデー	1										記事なし	ozawa-satoru-mishuuroku-tanpenshuu
+HOLD	ペンギンの問題公式ファンBOOK	1										記事なし	penguin-no-mondai
+HOLD	ペンギンの問題新公式ファンBOOK	1										記事なし	penguin-no-mondai
+HOLD	ポケモンファン	1	pokemonfan	ポケモンファン	ポケモンファン			kodomo	分類:児童・幼年漫画雑誌		ヘボン式	出版社が決まらない() = 電子書籍ストア・小説サイト・社がマスタに無い	pocket-monsters-special
+HOLD	少年シャンプNEXT!	1										記事なし	psyren
+HOLD	月刊まんがライフ	1										記事なし	ramen-daisuki-koizumi-san
+HOLD	らぶねこ	1										記事なし	ranjudou-kusuri-honpo
+HOLD	最強Vジャンプフェスタ2012公式ガイドブック	1										記事なし	rokku-rii-no-seishun-furu-power-ninden
+HOLD	ジャンプ NEXT!	1										記事なし	saiki-kusuo-no-nan
+HOLD	攻略本ミリオンモンキーズ	1										記事なし	saru-gecchu
+HOLD	サルゲッチュ ミリオンモンキーズ 公式ガイドブック	1										記事なし	saru-gecchu
+HOLD	ジャンプスクエアWeb	1										記事なし	sekai-no-chuushin-de-taiyou-ni-hoeru
+HOLD	シリウス別冊・ネメシス	1										記事なし	seresuteiaru-crows
+HOLD	シリウス別冊・NEMESIS	1										記事なし	seresuteiaru-crows
+HOLD	月刊ショウネンシリウス	1										記事なし	seresuteiaru-crows
+HOLD	とらドラ!VS禁書目録	1										記事なし	shakugan-no-shana
+HOLD	電撃黒【マ】王	1										記事なし	shakugan-no-shana-x-eternal-song-harukanaru-uta
+HOLD	めばえ	1			めばえ							曖昧さ回避	shin-obake-no-qtarou
+HOLD	マミイ	1										記事なし	shin-obake-no-qtarou
+HOLD	幼児の知能絵本	1										記事なし	shin-obake-no-qtarou
+HOLD	スレイヤーズ・レジェンド	1										記事なし	shin-slayers-falces-no-sunadokei
+HOLD	神秘家水木しげる伝	1										記事なし	shinpika-mizuki-shigeru-den
+HOLD	元祖!浦安鉄筋家族ウィンター増刊	1										記事なし	shinryaku-ikamusume
+HOLD	週刊少年ジャンプ増刊GAG Special	1										記事なし	shinsetsu-boboboobo-boobobo
+HOLD	週刊少年ジャンプ・Vジャンプ共同編集増刊ジャンプヒーローズ	1										記事なし	shinsetsu-boboboobo-boobobo
+HOLD	Christmas物語	1										記事なし	shinshi-to-shukujo-to-shounen-to
+HOLD	アンティークRomantic	1										記事なし	shinshi-to-shukujo-to-shounen-to
+HOLD	PAST&HONEYMOON	1										記事なし	shinshi-to-shukujo-to-shounen-to
+HOLD	恋姫	1			恋姫							雑誌の記事でない	shinshi-to-shukujo-to-shounen-to
+HOLD	少年・探偵ブック	1										記事なし	shounen-typhoon
+HOLD	少年・スリラーブック	1										記事なし	shounen-typhoon
+HOLD	ゴッドファーザーの息子	1			ゴッドファーザーの息子							雑誌の記事でない	shussei-to-sokai-soshite-sengo
+HOLD	火垂るの墓	1			火垂るの墓							雑誌の記事でない	shussei-to-sokai-soshite-sengo
+HOLD	別冊週刊現代	1										記事なし	shussei-to-sokai-soshite-sengo
+HOLD	この世界の片隅に	1			この世界の片隅に							雑誌の記事でない	shussei-to-sokai-soshite-sengo
+HOLD	対馬丸	1			対馬丸							雑誌の記事でない	shussei-to-sokai-soshite-sengo
+HOLD	夕映えの丘に-そこも戦場だった-	1										記事なし	shussei-to-sokai-soshite-sengo
+HOLD	消えた国	1										記事なし	shussei-to-sokai-soshite-sengo
+HOLD	味いちもんめ	1			味いちもんめ							雑誌の記事でない	shussei-to-sokai-soshite-sengo
+HOLD	若竹煮	1			若竹煮							雑誌の記事でない	shussei-to-sokai-soshite-sengo
+HOLD	テツぼん	1			テツぼん							雑誌の記事でない	shussei-to-sokai-soshite-sengo
+HOLD	汽車ぽっぽ	1			汽車ポッポ							雑誌の記事でない	shussei-to-sokai-soshite-sengo
+HOLD	垣根の魔女	1										記事なし	shussei-to-sokai-soshite-sengo
+HOLD	御身大事に…	1										記事なし	shussei-to-sokai-soshite-sengo
+HOLD	Be Street	1										記事なし	spica
+HOLD	JUNK!BOY	1										記事なし	spica
+HOLD	熱風	1			熱風							曖昧さ回避	spica
+HOLD	中二時代	1										記事なし	spy-catcher-j3
+HOLD	少年ジャンプ NEXT!	1										記事なし	st-rs
+HOLD	冬の大増刊号 りぼんスペシャル	1										記事なし	stardust-wink
+HOLD	マーガレット別冊ふろく	1										記事なし	sugars
+HOLD	月刊少年エース4月号増刊 エースアサルト	1										記事なし	suzumiya-haruhi-no-yuuutsu
+HOLD	月刊少年エース12月号増刊 エースアサルト	1										記事なし	suzumiya-haruhi-no-yuuutsu
+HOLD	月刊少年エース8月号増刊 エースアサルト	1										記事なし	suzumiya-haruhi-no-yuuutsu
+HOLD	別冊あすか	1										記事なし	tableau-gate-0
+HOLD	たのしい三年生	1		たのしい一年生	たのしい一年生	講談社	kodansha	kodomo	分類:日本の児童雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	the-complete-works-of-fujikoffujio
+HOLD	ディズニーランド	1			ディズニーランド							雑誌の記事でない	the-complete-works-of-fujikoffujio
+HOLD	Comic PIANISSIMO	1										記事なし	the-manzai
+HOLD	別冊マーガレット5月号増刊 別冊マーガレットsister	1										記事なし	tora-to-ookami
+HOLD	ヒカルちゃん	1										記事なし	toyoda-minoru-tanpenshuu
+HOLD	交換日記	1			交換日記							雑誌の記事でない	toyoda-minoru-tanpenshuu
+HOLD	片桐くん	1										記事なし	toyoda-minoru-tanpenshuu
+HOLD	月刊少年	1										記事なし	tripeace
+HOLD	ホラーM(ぶんか社)	1										記事なし	tsubaki
+HOLD	釣りキチ三平平成版	1										記事なし	tsurikichi-sanpei-heiseiban
+HOLD	釣りキチ三平CLASSIC	1										記事なし	tsurikichi-sanpei-heiseiban
+HOLD	少年ブック・コミック ウルトラQ	1										記事なし	ultra-q-2011
+HOLD	小学館の絵本	1										記事なし	umeboshi-denka
+HOLD	花とゆめプラチナ増刊	1										記事なし	wasureyuki-no-furu-koro
+HOLD	やまなし	1			やまなし							雑誌の記事でない	yamanashi-hikari-no-suashi
+HOLD	ひかりの素足	1										記事なし	yamanashi-hikari-no-suashi
+HOLD	四枚の女王	1										記事なし	yonmai-no-kuin
+HOLD	昭和	1			昭和							雑誌の記事でない	yottsu-no-hanzai
+HOLD	なかよし5月号増刊 なかよしラブリー	1										記事なし	yumemiru-angel-blue
+HOLD	夏の大増刊号りぼんスペシャル オレンジ	1										記事なし	zekkyou-gakkyuu
+HOLD	リボンスペシャル	1										記事なし	zekkyou-gakkyuu
+HOLD	月刊リュウ	1										記事なし	genma-taisen
+HOLD	作者ホームページ	1										記事なし	daisuki-ga-mushi-ha-tadashi-kun-no
+HOLD	読解アヘン	1										記事なし	hori-san-to-miyamura-kun
+HOLD	小学一年生 - 小学六年生	1										記事なし	jungle-kurobee
+HOLD	小学二年生、小学三年生	1										記事なし	kaitou-pokemon-7
+HOLD	漫画行	1										記事なし	jikan-no-shihaisha
+HOLD	ジャンプSQ.RISE	1										記事なし	kekkai-sensen-beat-3-peat
+HOLD	COMIC ポルタ	1										記事なし	printernia-nippon
+HOLD	b-boyオメガバース Mercury	1										記事なし	kiraide-isasete
+HOLD	クレイジーマンガ	1										記事なし	youjo-shachoo
+HOLD	Racish	1										記事なし	g-defend
+HOLD	CIEL TresTres	1			CIEL (雑誌)	KADOKAWA	kadokawa					増刊・号の名が親誌の記事(CIEL (雑誌))へ転送 = 親誌に寄せない	junjou-romantica
+HOLD	デジタルマーガレット	1										記事なし	medetaku-sourou
+HOLD	comic B's-LOG キュン	1										記事なし	kyubizumu-love
+HOLD	コミックライドピクシブ	1										記事なし	kumichou-musume-to-sewagakari
+HOLD	ジャンプVS	1										記事なし	yoakemono
+HOLD	ジャンプVS（読切）	1										記事なし	stealth-symphony
+HOLD	アオブロ！	1										記事なし	kuro
+HOLD	中学初級コース	1										記事なし	manga-seibutsugaku
+HOLD	東京2020 PARALYMPIC JUMP パラリンピックジャンプ	1										記事なし	tafu-bangaihen-yawara-no-show
+HOLD	ガンガンBLiss	1										記事なし	shota-oni
+HOLD	はなまるきっず	1			はなまるきっず							雑誌の記事でない	hapipuri
+HOLD	CONTINUE	1			Continue							曖昧さ回避	strobe-light
+HOLD	COMICエトワール	1										記事なし	hanayome-miman-escape
+HOLD	Charles Mag	1										記事なし	sono-koi-jihanki-de-kaemasuka
+HOLD	よみタイ	1										記事なし	kami-sama-no-iru-ie-de-sodachimashita
+HOLD	Bバンチ	1										記事なし	quiz-seigi-no-sentaku
+HOLD	月刊コミックキューン	1			コミックキューン	KADOKAWA	kadokawa					増刊・号の名が親誌の記事(コミックキューン)へ転送 = 親誌に寄せない	gal-to-wotaku-wa-wakariaenai
+HOLD	夕刊フクニチ	1										記事なし	sazae-san
+HOLD	Pink	1			ピンク (曖昧さ回避)							曖昧さ回避	nanoni-chigira-kun-ga-amasugiru
+HOLD	NewType	1										記事なし	fushigi-no-kuni-no-miyuki-chan
+HOLD	アクションデラックス特別増刊」	1										記事なし	doumu
+HOLD	Kissカーニバル	1										記事なし	kimi-wa-pet
+HOLD	ファミ通.com	1			ファミ通	KADOKAWA Game Linkage	kadokawa-game-linkage					増刊・号の名が親誌の記事(ファミ通)へ転送 = 親誌に寄せない	chaser-game
+HOLD	オメガバースプロジェクト	1										記事なし	tadaima-okaeri
+HOLD	スペリオール・ダルパナ	1	big-comic-superior		ビッグコミックスペリオール	小学館	shogakukan	seinen	分類:青年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	root-route-of-odd-taxi
+HOLD	&Sofa	1	afternoon		月刊アフタヌーン	講談社	kodansha	seinen	分類:青年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	kimi-to-uchuu-o-aruku-tame-ni
+HOLD	BE×BOY	1										記事なし	kusatta-kyoushi-no-houteishiki
+HOLD	ジャックポット	1			ジャックポット							曖昧さ回避	toppuku-kyousoukyoku
+HOLD	コミックモーニング	1			モーニング (漫画雑誌)	講談社	kodansha	seinen	分類:青年漫画雑誌			増刊・号の名が親誌の記事(モーニング (漫画雑誌))へ転送 = 親誌に寄せない	genjuujiten
+HOLD	通販生活	1	tsuhan-seikatsu	通販生活	通販生活	日本		seinen	頁の多数 {'seinen': 1}	Tsuhan Seikatsu	Wikidata英語名	出版社が決まらない(日本) = 電子書籍ストア・小説サイト・社がマスタに無い	sanpomono
+HOLD	号外 on BLUE	1										記事なし	25ji-akasaka-de
+HOLD	BC DEEP	1										記事なし	oshi-kimono
+HOLD	コミックニコラ	1										記事なし	girl-crush
+HOLD	TLスクリーモ	1										記事なし	haramu-made-midare-ike
+HOLD	ハルタオルタ	1			ハルタ (漫画誌)	エンターブレイン	enterbrain	seinen	分類:青年漫画雑誌			増刊・号の名が親誌の記事(ハルタ (漫画誌))へ転送 = 親誌に寄せない	j-m
+HOLD	アナンガ・ランガ	1			アナンガ・ランガ							雑誌の記事でない	33-sai-dokushin-onnakishi-taichou
+HOLD	一迅プラス	1			一迅社							雑誌の記事でない	gal-maid-to-akuyaku-reijou
+HOLD	月刊LaLa	1			LaLa	白泉社	hakusensha	shoujo	分類:少女漫画雑誌			増刊・号の名が親誌の記事(LaLa)へ転送 = 親誌に寄せない	tasogare-city-graffiti
+HOLD	ヤンジャン！	1	weekly-young-jump		週刊ヤングジャンプ	集英社	shueisha	seinen	分類:青年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	mirai-no-musuko
+HOLD	comicタント	1										記事なし	jaa-anta-ga-tsukutte-miroyo
+HOLD	ヤンチャンweb	1		ヤングチャンピオン	ヤングチャンピオン	秋田書店	akita	seinen	分類:青年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	tensei-nihakobinin-no-isekai-kouryakuhou
+HOLD	月刊FALCOM MAGAZINE	1										記事なし	minna-atsumare-falcom-gakuen
+HOLD	ヤングアニマルDensi	1			ヤングアニマル	白泉社	hakusensha	seinen	分類:青年漫画雑誌			増刊・号の名が親誌の記事(ヤングアニマル)へ転送 = 親誌に寄せない	dragon-s-dogma-progress
+HOLD	モルモル亭	1										記事なし	kiitarou-shounen-no-youkai-enikki
+HOLD	乙女通信	1										記事なし	wakaba-girl
+HOLD	ベアーズクラブ	1	weekly-young-jump		週刊ヤングジャンプ	集英社	shueisha	seinen	分類:青年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	natsuki-crisis
+HOLD	E☆エブリスタ	1										記事なし	doku-mushi
+HOLD	少国民新聞・大阪版	1										記事なし	maa-chan-no-nikkichou
+HOLD	リュウ	1			リュウ							曖昧さ回避	arion
+HOLD	小説ウィングス	1										記事なし	adekan
+HOLD	Web★ブラッド	1	flexcomix-blood	FlexComixブラッド	FlexComixブラッド	2007年				FlexComix Blood	Wikidata英語名	寄せ先(flexcomix-blood)を足さない	hyakko
+HOLD	Pixiv	1			Pixiv							雑誌の記事でない	yarichin-bitchibu
+HOLD	スポーツ・アイ ESPN	1			スポーツ・アイ ESPN							雑誌の記事でない	buzzer-beater
+HOLD	コミックアルファ	1	comic-flapper		コミックフラッパー	KADOKAWA	kadokawa	seinen	分類:青年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	sukaruman
+HOLD	花音	1			花音							曖昧さ回避	kimi-ni-wa-katenai
+HOLD	レッドロード	1										記事なし	aoi-sekai-no-chuushin-de
+HOLD	マガジンZERO（vol.41 - vol.49）	1										記事なし	zone-00
+HOLD	エースダッシュ	1										記事なし	koutetsu-tenshi-kurumi
+HOLD	boon	1			ブーン							曖昧さ回避	tokyo-tribe-2
+HOLD	麗人	1			麗人							曖昧さ回避	10dance
+HOLD	作者ウェブサイト『[http://www.geocities.jp/himaruya/t.html キタユメ。]』	1										記事なし	hetaria
+HOLD	CUTiEcomic	1										記事なし	hachimitsu-to-clover
+HOLD	b-boy	1			Bボーイ							雑誌の記事でない	dakaretai-otoko-1i-1-odosareteimasu
+HOLD	週刊ビッグコミックスピリッツ増刊 Casual	1										記事なし	jigokusei-remina
+HOLD	CharaSelection	1										記事なし	yuuutsuna-asa
+HOLD	RuTiLe	1										記事なし	hana-ha-saku-ka
+HOLD	月刊シンバッド	1										記事なし	hoero-pen
+HOLD	花とゆめステップ増刊	1										記事なし	w-juliet
+HOLD	マンガハック	1										記事なし	ou-sama-rankingu
+HOLD	別冊フリテンくん	1										記事なし	obatalian
+HOLD	BookLive!	1	booklive	ブックライブ	ブックライブ			josei	頁の多数 {'josei': 1}	BookLive	Wikidata英語名	出版社が決まらない() = 電子書籍ストア・小説サイト・社がマスタに無い	onryou-oku-sama
+HOLD	週刊Dモーニング	1										記事なし	ase-to-sekken
+HOLD	週刊ビッグコミックスピリッツ増刊イッキ	1										記事なし	dorohedoro
+HOLD	コミックモーニングパーティー増刊	1										記事なし	arukuhito
+HOLD	モーニングオープン増刊	1										記事なし	kiseijuu
+HOLD	週刊ゴルフダイジェスト	1			ゴルフダイジェスト	ゴルフダイジェスト社	gorufudaijiesutosha					増刊・号の名が親誌の記事(ゴルフダイジェスト)へ転送 = 親誌に寄せない	ooi-tonbo
+HOLD	デジキス	1										記事なし	story-311
+HOLD	増刊アサヒ芸能	1										記事なし	69-min-police-69
+HOLD	漫画エロトピア	1	manga-erotopia	漫画エロトピア	漫画エロトピア			seinen	頁の多数 {'seinen': 1}		ヘボン式	出版社が決まらない() = 電子書籍ストア・小説サイト・社がマスタに無い	adventure-kid
+HOLD	Badi	1	badi	Badi	Badi			shoujo	頁の多数 {'shoujo': 1}	Badi	Wikidata英語名	出版社が決まらない() = 電子書籍ストア・小説サイト・社がマスタに無い	agurikko
+HOLD	サクラミステリー	1		ミステリーサラ	ミステリーサラ	青泉社	seisensha	josei	分類:女性漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	akarito-shirono-shinrei-yawa
+HOLD	まんがライフ女子部	1										記事なし	aki-wa-haru-to-gohan-o-tabetai
+HOLD	ウーマン劇場	1										記事なし	alice-doubutsu-byouin-shinsatsu-enikki
+HOLD	プリティ	1										記事なし	alice-in-wonderland
+HOLD	富士美出版	1			辰巳出版							雑誌の記事でない	alicia-y
+HOLD	コミックマスターEX	1			コミックマスター							増刊・号の名が親誌の記事(コミックマスター)へ転送 = 親誌に寄せない	apple-paradise
+HOLD	『週刊ヤングジャンプ』1998年46号	1										記事なし	arcana
+HOLD	ビーズログCHEEK	1										記事なし	asami-kun-wa-gachikoi-ja-nai
+HOLD	みこすり半劇場別館	1										記事なし	asoko-no-shohousen
+HOLD	BLスクリーモ	1										記事なし	ateuma-chara-no-kuseshite-supadari-ouji-ni-chouai-sarete-imasu
+HOLD	月刊オートバイ	1			オートバイ (雑誌)	モーターマガジン社	mootaamagajinsha					増刊・号の名が親誌の記事(オートバイ (雑誌))へ転送 = 親誌に寄せない	bike-gijinka-kinsho
+HOLD	モーニングパーティー増刊	1										記事なし	bikids
+HOLD	たのしい幼稚園	1			たのしい幼稚園							曖昧さ回避	biriken
+HOLD	ダンシング☆カンパニヰ	1										記事なし	boku-otariiman
+HOLD	ルチル	1			金紅石							雑誌の記事でない	bokura-no-shokutaku
+HOLD	鳥っこ倶楽部	1										記事なし	bunchou-sama-to-watashi
+HOLD	グランドチャンピオン	1			グランドチャンピオン							曖昧さ回避	buroiraa-oyaji-efuekkusu
+HOLD	YOUNG YOU	1	young-you	ヤングユー	ヤングユー			josei	分類:女性漫画雑誌	Young You	Wikidata英語名	寄せ先(young-you)を足さない	career-kogitsune-kin-no-mori
+HOLD	EYE-COM	1		週刊アスキー	週刊アスキー	アスキー	ascii-media-works					親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	chaos-damonne
+HOLD	COMICうさまん	1										記事なし	cheer-up
+HOLD	美しい十代	1			美しい十代							雑誌の記事でない	chiisana-koi-no-monogatari
+HOLD	マガジンZERO	1										記事なし	choujigen-yuukaku-katenrou
+HOLD	アイドルマスター シンデレラガールズ	1			アイドルマスター シンデレラガールズ							雑誌の記事でない	cinderella-girls-gekijou
+HOLD	バル・プリティ	1										記事なし	combination
+HOLD	ぶ～け	1										記事なし	dahlia-no-obi
+HOLD	Kiss Carnival	1										記事なし	daisy-luck
+HOLD	マトグロッソ	1										記事なし	dampier-no-oishii-bouken
+HOLD	Candle	1			キャンドル							曖昧さ回避	darkside-blues
+HOLD	作者ブログ「いっぱいかあさん」	1										記事なし	densetsu-no-okaa-san
+HOLD	月刊ドラゴンマガジン	1			ドラゴンマガジン	KADOKAWA	kadokawa					増刊・号の名が親誌の記事(ドラゴンマガジン)へ転送 = 親誌に寄せない	detatoko-princess
+HOLD	劇画村塾	1			劇画村塾							雑誌の記事でない	doctor-chichibuyama
+HOLD	コミックドルフィン	1										記事なし	dokutaa-moroo-no-lich-na-seikatsu
+HOLD	I'mチャンピオン	1										記事なし	dongame-submarine
+HOLD	日本経済新聞	1			日本経済新聞							雑誌の記事でない	doomo-kun
+HOLD	メロメロ	1										記事なし	double-mints
+HOLD	幻冬舎コミックバーズ	1										記事なし	dr-nekoyanagita-no-kagakuteki-seishun
+HOLD	コミックススピカ	1										記事なし	edomoiselle
+HOLD	Hug (雑誌)	1										記事なし	fushigi-wa-nani-de-dekiteiruka
+HOLD	ヤングアニマルWeb	1			ヤングアニマル	白泉社	hakusensha	seinen	分類:青年漫画雑誌			増刊・号の名が親誌の記事(ヤングアニマル)へ転送 = 親誌に寄せない	goumon-baito-kun-no-nichijou
+HOLD	クレヨンしんちゃん特集号	1										記事なし	haken-suit-yamada-noriko
+HOLD	Qpa	1										記事なし	happy-of-the-end
+HOLD	MAGAZINE BE × BOY	1										記事なし	haru-o-daiteita
+HOLD	高一Challenge	1										記事なし	haruka-refrain
+HOLD	ナマイキ	1			生意気							曖昧さ回避	hatsujou-kanojo-no-shuuchishin
+HOLD	ゆりひめ@ピクシブ	1		コミック百合姫	コミック百合姫	一迅社	ichijinsha					親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	hero-san-to-moto-onna-kanbu-san
+HOLD	cakes	1			Note (企業)							雑誌の記事でない	hidarikiki-no-eren-nifuni
+HOLD	月刊ヤングコミック	1										記事なし	himekuri
+HOLD	産経新聞	1			産経新聞							雑誌の記事でない	hina-chan-no-nichijou
+HOLD	月刊Dokiッ!	1										記事なし	hishoka-drop
+HOLD	マンガほっと	1										記事なし	hokuto-no-ken-kenougun-zakotachi-no-banka
+HOLD	&フラワー	1										記事なし	honmei-janakya-yokatta-no-ni
+HOLD	スピネル	1			スピネル							雑誌の記事でない	houga-purezen-joshikousei-houkichi-eiko-san
+HOLD	コミックアクア	1										記事なし	hyakunichi-no-bara
+HOLD	まんがシャレダ!!	1			ぶんか社							雑誌の記事でない	iikina-mondaze
+HOLD	まんがライフSTORIA’	1										記事なし	ijisanchi-wa-sunao-ni-narenai
+HOLD	MEDIA COMIX DYNE	1			MEDIA COMIX DYNE							雑誌の記事でない	ike-ike-bokura-no-v-gundam
+HOLD	コミックヴァルキリーWeb版	1										記事なし	isekai-kuimetsu-no-same
+HOLD	グランドジャンプめちゃ	1	grand-jump-premium		グランドジャンプPREMIUM	集英社	shueisha	seinen	分類:青年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	isshou-suki-tte-yutta-jan
+HOLD	Webスピカ	1										記事なし	itoshino-nina
+HOLD	アクションBROTHER	1										記事なし	jajji
+HOLD	Patsy	1										記事なし	jane
+HOLD	週刊パワァコミック	1										記事なし	joumon-shounen-yogi
+HOLD	戦国武将列伝	1			戦国武将列伝							雑誌の記事でない	kaina-surugajou-gozen-jiai
+HOLD	Beat's	1			マッグガーデン							雑誌の記事でない	kanmi-otoko
+HOLD	ヤンマガweb	1	weekly-young-magazine		週刊ヤングマガジン	講談社	kodansha	seinen	分類:青年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	karamizakari
+HOLD	ケータイ週アス	1										記事なし	kare-to-caret
+HOLD	月刊MAY	1										記事なし	kasei-yakiyoku
+HOLD	ヤングマガジン増刊赤BUTA	1										記事なし	kataribe
+HOLD	アヴァルス	1										記事なし	kenen
+HOLD	BE・LOVEペア	1										記事なし	kiko-chan-smile
+HOLD	別冊フレンドDX Juliet2003年1月号	1										記事なし	kimi-wa-boku-no-kagayakeru-hoshi
+HOLD	ミステリーJour	1										記事なし	kinpeibai-watanabe
+HOLD	アクションブラザー	1										記事なし	kitanai-yatsu
+HOLD	みんなのコミック	1										記事なし	kitsune-no-oyome-chan
+HOLD	月刊PANJA（第1巻第1話 - 第18話	1										記事なし	kodoku-no-gourmet
+HOLD	メロキス	1										記事なし	koi-o-suru-tsumori-wa-nakatta
+HOLD	奇想天外	1			奇想天外							曖昧さ回避	konchuu-koutei
+HOLD	SHURO	1										記事なし	konya-himitsu-no-kitchen-de
+HOLD	YOUNG HiP	1										記事なし	kotetsu-no-daibouken
+HOLD	BART3230	1										記事なし	koukenryoku-ouryou-sousakan-nakabou-rintarou
+HOLD	バトルマシーン	1										記事なし	koutetsu-no-kariudo
+HOLD	マンガくん・少年ビッグコミック	1										記事なし	kyudo-kun
+HOLD	NIGHTY Judy	1										記事なし	kyuuso-wa-cheese-no-yume-o-miru
+HOLD	Hot-Dog PRESS	1	hottodoggu-puresu	ホットドッグ・プレス	ホットドッグ・プレス			shounen	頁の多数 {'shounen': 1}		ヘボン式	出版社が決まらない() = 電子書籍ストア・小説サイト・社がマスタに無い	leon
+HOLD	いちばん好き	1										記事なし	lost-child-abe
+HOLD	近代麻雀ゴールド	1			近代麻雀	竹書房	takeshobo					増刊・号の名が親誌の記事(近代麻雀)へ転送 = 親誌に寄せない	maajan-hourouki-1990
+HOLD	漫画アクションファミリー増刊 クレヨンしんちゃん特集号	1	manga-town		まんがタウン	双葉社	futabasha					親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	machikado-hanadayori
+HOLD	E★エブリスタプレミアム	1										記事なし	majan
+HOLD	プチ・タンファン	1										記事なし	mama-loves-poyopoyo-saurus-ga-zaurus
+HOLD	メイ・ファミリア	1										記事なし	manekinekofudou-san
+HOLD	「Fate/Grand Order」公式サイト	1										記事なし	manga-de-wakaru-fate-grand-order
+HOLD	斬鬼	1										記事なし	matsukichi-den
+HOLD	月刊アフターヌーン	1										記事なし	midori-no-mokushiroku
+HOLD	しんぶん赤旗日曜版	1			しんぶん赤旗							雑誌の記事でない	miracle-dieter-miyuki
+HOLD	思い出食堂	1	omoide-shokudou	思い出食堂	思い出食堂			seinen	頁の多数 {'seinen': 1}		ヘボン式	出版社が決まらない() = 電子書籍ストア・小説サイト・社がマスタに無い	miyazawa-kenji-no-shokutaku
+HOLD	ヤングマガジン増刊エグザクタ	1			増刊エグザクタ	講談社	kodansha					増刊・号の名が親誌の記事(増刊エグザクタ)へ転送 = 親誌に寄せない	mizu-no-naka-no-tsuki-1998
+HOLD	カプ本	1										記事なし	monster-hunter-epic
+HOLD	月刊コミックトム	1										記事なし	mumenmoku-taikoubouden
+HOLD	クリア	1			クリア							曖昧さ回避	naraku-no-adu
+HOLD	サンデーGX創刊号	1										記事なし	neko-no-ou
+HOLD	BART	1			バート							曖昧さ回避	nihonkoku-shodai-daitouryou-sakuragi-kenichirou
+HOLD	コンプティーク/コンプエース	1										記事なし	ninja-slayer
+HOLD	月刊ファニー	1	gekkan-fanii	月刊ファニー	月刊ファニー	日本		shoujo	分類:少女漫画雑誌		ヘボン式	出版社が決まらない(日本) = 電子書籍ストア・小説サイト・社がマスタに無い	noibara-shouen
+HOLD	朝日新聞朝刊	1										記事なし	nono-chan
+HOLD	コミックエッセイ せるびぃ	1										記事なし	odawara-kankou-taishi-ni-nareru-kana
+HOLD	コミックマガジンリンクス	1										記事なし	okane-ga-nai
+HOLD	ぐるなび	1			ぐるなび							雑誌の記事でない	onna-kudokimeshi
+HOLD	少年エッジスタ	1										記事なし	oppabu
+HOLD	ROOMIE	1										記事なし	oshaie-sommelier-oshako
+HOLD	HAMAOTO・DX	1										記事なし	otoko-ga-otoko-o-aisuru-toki
+HOLD	ツイ4	1	sai-zen-sen	最前線	最前線 (星海社)	星海社		shoujo	頁の多数 {'shoujo': 1}	Sai-zen-sen	Wikidata英語名	出版社が決まらない(星海社) = 電子書籍ストア・小説サイト・社がマスタに無い	otome-otoko-ni-koisuru-otome
+HOLD	with online	1										記事なし	peanut-butter-sandwich
+HOLD	月刊コーラス	1										記事なし	pride
+HOLD	MOE	1			MOE							曖昧さ回避	rainy-doori-no-niji
+HOLD	ヤングマガジン増刊ダッシュ	1										記事なし	reishoku-sousakan
+HOLD	Tech総研	1			Tech総研							雑誌の記事でない	rikei-no-hitobito
+HOLD	『漫画ギャング』	1										記事なし	rindo-3
+HOLD	週刊SPA!	1			SPA!	扶桑社	fusosha					増刊・号の名が親誌の記事(SPA!)へ転送 = 親誌に寄せない	romance-boufuuiki
+HOLD	毎日小学生新聞	1			毎日小学生新聞							雑誌の記事でない	rongo-kun
+HOLD	別フレ増刊1987年ミステリー特別号	1										記事なし	ruuruu-wa-chiisana-tomodachi
+HOLD	マンガTOP	1										記事なし	sabusuku-kanojo
+HOLD	クロフネZERO	1										記事なし	samurai-sensei
+HOLD	ヤングマガジン海賊版	1										記事なし	samurider
+HOLD	G-men	1			Gメン							曖昧さ回避	sanba-no-karasu
+HOLD	月刊MAGAZINE BE×BOY	1										記事なし	sankakumado-no-sotogawa-wa-yoru
+HOLD	COMIC it	1										記事なし	saraba-yoki-hi
+HOLD	ミステリールージュvol.8	1										記事なし	sarasouju
+HOLD	近代漫画	1										記事なし	satomi-hakkenden-reboot
+HOLD	Monthly Kiss	1										記事なし	sekai-de-ichiban-yasashii-ongaku
+HOLD	デュオ	1			デュオ							曖昧さ回避	sen-no-hana
+HOLD	月刊プレイコミック	1										記事なし	senjou-roman-series
+HOLD	ギャルズライフ1979年6月号	1										記事なし	shigatsukaidan
+HOLD	みんなの食卓	1										記事なし	shii-chan-no-gochisou
+HOLD	月刊少年マガジンR	1										記事なし	shikkoku-no-ten
+HOLD	ダークネスな女たち	1										記事なし	shikyuu-love
+HOLD	朝日中学生ウイークリー	1			朝日中高生新聞							雑誌の記事でない	shin-chuugakusei-nikki
+HOLD	地上	1			地上							雑誌の記事でない	shin-oraga-mura
+HOLD	Cheese!増刊	1										記事なし	shinobazu-no
+HOLD	月刊サスペリア	1										記事なし	shinonomeryou-ki-tan
+HOLD	月刊シルフ	1										記事なし	shiroaritsutsu
+HOLD	comic marginal&h	1										記事なし	shitasaki-kara-koi
+HOLD	漫画エロス	1			岡野雄一							雑誌の記事でない	shoujo-tsubaki
+HOLD	ウイングス	1			ウイングス							雑誌の記事でない	shounen-mahoushi
+HOLD	ショタみみLOVE/少年愛の美学	1										記事なし	shounenmeidokuuro-kun
+HOLD	未発表	1										記事なし	shouri-no-hi-made
+HOLD	花曜日	1										記事なし	shuudoushi-falco
+HOLD	LOVEBITES	1			LOVEBITES							雑誌の記事でない	sono-keisatsukan-tokidoki-yajuu
+HOLD	BE・LOVEブライダル	1										記事なし	sora-eno-tegami
+HOLD	希望ライフ	1										記事なし	suikoden
+HOLD	コミックRouge	1										記事なし	sukui-sukuware
+HOLD	www.sumo-neko.com	1										記事なし	sumouneko
+HOLD	Webマガジン幻冬舎	1										記事なし	surumeika
+HOLD	FOD	1			FOD							曖昧さ回避	sweet-revenge
+HOLD	スレッド	1			スレッド							曖昧さ回避	taekwondoer-park
+HOLD	月刊ヤングオート	1										記事なし	taiman-buruusu
+HOLD	月姫コミックアンソロジー	1										記事なし	take-moon
+HOLD	くろふねピクシブ	1	kurofune	クロフネ	クロフネ (電子雑誌)			shoujo	頁の多数 {'shoujo': 1}		ヘボン式	出版社が決まらない() = 電子書籍ストア・小説サイト・社がマスタに無い	tanu-koi
+HOLD	mimi DX	1										記事なし	tenjounoniji
+HOLD	別冊近代麻雀	1			近代麻雀	竹書房	takeshobo					増刊・号の名が親誌の記事(近代麻雀)へ転送 = 親誌に寄せない	teppen-kuga
+HOLD	コミック劇画村塾	1			劇画村塾							雑誌の記事でない	third-girl
+HOLD	ねとらぼ	1			ITmedia							雑誌の記事でない	tsumasakiotoshi-to-watashi
+HOLD	特撮エース	1	tokusatsu-eesu	特撮エース	特撮エース			seinen	分類:青年漫画雑誌		ヘボン式	出版社が決まらない() = 電子書籍ストア・小説サイト・社がマスタに無い	ultraman-the-first
+HOLD	小学一年生-小学四年生	1										記事なし	umeboshi-denka
+HOLD	姉フレンド	1	bessatsu-friend		別冊フレンド	講談社	kodansha	shoujo	分類:少女漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	usokon
+HOLD	Dokiッ!	1										記事なし	virgin-naito
+HOLD	たのしい四年生	1		たのしい一年生	たのしい一年生	講談社	kodansha	kodomo	分類:日本の児童雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	waga-na-wa-ekkusu-kun
+HOLD	さぶ	1			さぶ							曖昧さ回避	wakasa-de-munmun
+HOLD	戦国アンソロジー	1										記事なし	warabe-no-kusa
+HOLD	月刊ボニータ	1										記事なし	yajikita-gakuen-douchuuki
+HOLD	comic新現実	1			新現実							増刊・号の名が親誌の記事(新現実)へ転送 = 親誌に寄せない	yakumo-hyakkai
+HOLD	さくらハーツ	1		コミックヘヴン	コミックヘヴン	日本文芸社	nihon-bungeisha	seinen	分類:青年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	yankee-quest
+HOLD	山賊UNDERGROUND	1										記事なし	yasagure-panda
+HOLD	まんが4コマぱれっとonline	1										記事なし	yashiki-wa-maid-no-tame-ni
+HOLD	Dモーニング	1			モーニング (漫画雑誌)	講談社	kodansha	seinen	分類:青年漫画雑誌			増刊・号の名が親誌の記事(モーニング (漫画雑誌))へ転送 = 親誌に寄せない	yawarakai-kachou-okita-souji
+HOLD	ズズズキュン！	1	zuzuzukyun	ズズズキュン!	ズズズキュン!	シーモアコミックス		seinen	分類:青年漫画雑誌		ヘボン式	出版社が決まらない(シーモアコミックス) = 電子書籍ストア・小説サイト・社がマスタに無い	yochishi
+HOLD	ファンロード	1	fanroad	ファンロード	ファンロード	日本		shoujo	頁の多数 {'shoujo': 1}	Fanroad	Wikidata英語名	出版社が決まらない(日本) = 電子書籍ストア・小説サイト・社がマスタに無い	yuuhi-romance
+HOLD	アルファポリス公式WEBサイト	1										記事なし	yuusha-gojo-kumiai-kouryuugata-keijiban
+HOLD	小学3年生	1			小学3年生							曖昧さ回避	zoids-batoraa-raiga
+HOLD	セブンティーン	1			セブンティーン							曖昧さ回避	banana-bread-no-pudding
+HOLD	SDクラブ	1			SDクラブ							雑誌の記事でない	karakuri-kengou-den-musashiroodo
+HOLD	トップラーン（全学年	1										記事なし	prince-demokin
+HOLD	電撃コミックGAO!	1										記事なし	silent-m-bius-klein
+HOLD	ジャンプオリジナル	1										記事なし	yami-kariudo-iden-d-no-kiseki
+HOLD	ひとみCCミステリー	1										記事なし	gehou-douji
+HOLD	ZERO	1			0 (曖昧さ回避)							曖昧さ回避	nullalive
+HOLD	THEデザート	1			デザート (雑誌)	講談社	kodansha	shoujo	分類:少女漫画雑誌			増刊・号の名が親誌の記事(デザート (雑誌))へ転送 = 親誌に寄せない	toki-no-kagayaki
+HOLD	ビジネスジャンプ増刊エクストラ	1										記事なし	uramiya-honpo
+HOLD	デザート2000年9月号増刊スペシャル1000夏号	1										記事なし	oppai-o-totta-kareshi
+HOLD	Be x Boy GOLD	1										記事なし	finder-series
+HOLD	MyBoy	1										記事なし	shin-seikimatsu-darling
+HOLD	月刊サスペリアミステリー	1										記事なし	shinjuku-shounen-tanteidan
+HOLD	AICコミックLOVE	1										記事なし	kachou-ouji-gaiden
+HOLD	マガジンZKC	1		月刊マガジンZ	月刊マガジンZ	講談社	kodansha	seinen	分類:青年漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	wolf-s-rain
+HOLD	ヤングキングアワーズ増刊アワーズガール	1										記事なし	kingyoya-koshoten-suitouchou
+HOLD	手塚治虫マガジン	1										記事なし	mazin-ou-garon
+HOLD	別冊コーラス	1		Cocohana	Cocohana	集英社	shueisha	josei	分類:女性漫画雑誌			親誌・姉妹誌の記事の1節 = 別の誌・増刊・Web版(人が確かめて寄せない)	heavenly-kiss
+HOLD	ミリタリー・クラシックス	1										記事なし	moeyo-sensha-gakkou
+HOLD	モーニングマグナム増刊	1										記事なし	chihiro
+HOLD	robot	1			ロボット							雑誌の記事でない	dragon-fly
+HOLD	FB Online	1			ファミ通文庫							雑誌の記事でない	kyouran-kazoku-nikki
+HOLD	近代麻雀増刊コミックマーブル	1										記事なし	hishoka-drop-mix
+HOLD	月刊ZERO-SUM	1										記事なし	are-you-alice
+HOLD	別フレ2010	1										記事なし	sheryl-kiss-in-the-galaxy
+HOLD	週2コミック! ゲッキン	1	shuu-2-komikku-gekkin	週2コミック! ゲッキン	週2コミック! ゲッキン	バンダイビジュアル		seinen	頁の多数 {'seinen': 1}		ヘボン式	出版社が決まらない(バンダイビジュアル) = 電子書籍ストア・小説サイト・社がマスタに無い	mazinkaiser-skl-versus
+HOLD	ミラクル☆トレイン公式サイト	1										記事なし	miracle-train
+HOLD	ウェブマガジン ウィングス	1										記事なし	shounen-sebasu-chan-no-shitsuji-shugyou
+HOLD	モバイルサイト・メディアファクモバイル	1										記事なし	hyakka-ryouran-samurai-girls
+HOLD	別冊ちょこドラ。	1										記事なし	roopure-world
+HOLD	エイトボール	1			エイトボール							雑誌の記事でない	ghost-world
+HOLD	別冊 ちょこドラ。	1										記事なし	high-school-dxd
+HOLD	パンドラ	1			パンドーラー							雑誌の記事でない	zerozaki-soushiki-no-ningen-shiken
+HOLD	別編・新約：	1										記事なし	mahou-shoujo-oriko-magica
+HOLD	comic B's-LOG エアレイド	1										記事なし	0-nousha-minato
+HOLD	自家製アプリ	1										記事なし	kodomo-deka-meme-tan
+HOLD	ねこきゅん!!	1										記事なし	neko-nanka-yondemo-konai
+HOLD	漫友	1										記事なし	choukakou
+HOLD	BLADE ONLINE	1										記事なし	rail-wars
+HOLD	エアレイド	1										記事なし	log-horizon-nyanta-hanchou-shiawase-no-recipe
+HOLD	歴史街道増刊 コミック大河	1										記事なし	saiga-rokuji-no-shiro
+HOLD	GA文庫マガジン	1										記事なし	nourin-yasei
+HOLD	ヤングキングGIRI	1										記事なし	donketsu-gaiden
+HOLD	comicスピカ	1										記事なし	variee-garden
+HOLD	時代活劇画伝―斬―	1										記事なし	donten-ni-warau-gaiden
+HOLD	時代活劇画伝―斬―ZAN	1										記事なし	rengoku-ni-warau
+HOLD	幻冬舎Plus	1										記事なし	nobushi-no-gourmet
+HOLD	GoGoバンチ	1										記事なし	gangsta-cursed-ep-marco-adriano
+HOLD	ゲーム内	1										記事なし	guraburutsu
+HOLD	Amazon Kindle	1			Amazon Kindle							雑誌の記事でない	jigokuren-death-life
+HOLD	MAGCOMI コミックブレイド	1										記事なし	gakuen-saikopasu
+HOLD	モアイ	1			モアイ							雑誌の記事でない	mainichi-karasuya-satoshi
+HOLD	プチコミック増刊	1										記事なし	shinya-no-damekoi-zukan
+HOLD	日刊ゲンダイ	1			日刊ゲンダイ							雑誌の記事でない	tokumei-kakarichou-tadano-hitoshi-final
+HOLD	ファルコムマガジン	1										記事なし	eiyuu-densetsu-sen-no-kiseki
+HOLD	このマンガがすごい！	1			このマンガがすごい!							雑誌の記事でない	hibike-yuufoniamu
+HOLD	コミックHJ文庫	1										記事なし	kou1-desu-ga-isekai-de-joushu-hajimemashita
+HOLD	電撃Girl'sStyle	1										記事なし	puchi-sutotsu
+HOLD	AneLaLa	1										記事なし	otona-no-kobayashi-kun
+HOLD	アメイジング・スパイダーマン	1			アメイジング・スパイダーマン							雑誌の記事でない	spider-verse
+HOLD	プレミアCheese！	1			Cheese!	小学館	shogakukan	shoujo	分類:少女漫画雑誌			増刊・号の名が親誌の記事(Cheese!)へ転送 = 親誌に寄せない	himitsu-no-hiroko-chan
+HOLD	集英社インターナショナル	1			集英社インターナショナル							雑誌の記事でない	konya-wa-konoji-de
+HOLD	竹書房	1			竹書房							雑誌の記事でない	onna-dakedo-josou-shite-kyabajou-shite-mita
+HOLD	拡散性ミリオンアーサーアプリ内	1										記事なし	jakusansei-million-arthur
+HOLD	新耳袋アトモス	1										記事なし	danshou-no-grimm
+HOLD	電ファミニコゲームマガジン マンガ劇場	1										記事なし	satsuten
+HOLD	ゲームマガジン	1										記事なし	higyaku-no-noel-chan
+HOLD	WEBコミックガム	1			コミックガム	ワニブックス	wani-books	seinen	分類:青年漫画雑誌			増刊・号の名が親誌の記事(コミックガム)へ転送 = 親誌に寄せない	ryuuka-mami-no-kiyuu
+HOLD	コミックビーム100	1										記事なし	chinchin-kemokemo
+HOLD	ヤングキングBLACK	1										記事なし	sonoda-no-uta
+HOLD	日更計画	1										記事なし	jikkenhin-kazoku
+HOLD	俺流！絶品めし	1										記事なし	shin-souta-no-houchou
+HOLD	アルファポリス公式WEB漫画	1										記事なし	sozai-saishuka-no-isekai-ryokouki
+HOLD	月刊のアクション	1										記事なし	choukadou-girls
+HOLD	HI!漫画	1										記事なし	chinkongai
+HOLD	Z	1			Z							雑誌の記事でない	yamikariudo-delta
+HOLD	テヅコミ	1										記事なし	hei-sei-nanairo-inko
+HOLD	公式Twitterアカウント	1										記事なし	azur-lane-bisoku-zenshintsu
+HOLD	韓国語	1			朝鮮語							雑誌の記事でない	ore-dake-level-appu-na-ken
+HOLD	ごはん日和	1										記事なし	hanjuku-familia
+HOLD	コミックマージナル	1										記事なし	fudanshi-shoukan
+HOLD	新漫画APP	1										記事なし	hyoujin
+HOLD	シーズン1：ラブライブ!スクールアイドル	1										記事なし	nijiyon
+HOLD	読売KODOMO新聞	1			読売KODOMO新聞							雑誌の記事でない	nekoneko-nihonshi-hero-ando-heroine-rendetsu
+HOLD	水曜日はまったり	1										記事なし	hatena-illusion
+HOLD	KoiYui	1										記事なし	koukan-uso-nikki
+HOLD	Pファンタピー	1										記事なし	youkai-gakkou-no-seito-hajimemashita
+HOLD	Baby	1			ベイビー							曖昧さ回避	shin-tan-kairou
+HOLD	コミックポルカ	1										記事なし	tensei-kizoku-no-isekai-boukenroku-sasaki
+HOLD	コミックトレイル	1										記事なし	sonna-kazoku-nara-sutechaeba
+HOLD	ちゃおpremier	1										記事なし	ore-sama-kingdom-derakkusu
+HOLD	Tapas（北米）	1										記事なし	saikyou-no-ou-sama-nidome-no-jinsei-wa-nani-o-suru
+HOLD	ウルトラジャンプ (UJ)（第43話まで）	1										記事なし	shuumatsu-no-harem-fantasia-gakuen
+HOLD	アリスギアマガジン	1										記事なし	taichou-san-to-akutoresu-ssu
+HOLD	COMICらぐちゅう	1										記事なし	zombie-no-afureta-sekai-de-ore-dake-ga-osowarenai
+HOLD	各電子書籍配信サイト	1										記事なし	heroine-tarumono
+HOLD	マンガTOP」	1										記事なし	touken-ranbu
+HOLD	COMIC BORDER	1										記事なし	yuusha-no-kuzu
+HOLD	GAコミック	1										記事なし	inori-no-kuni-no-ririeeru-majo-no-tabitabi-gaiden
+HOLD	各電子書店	1										記事なし	konjiki-no-gash-2
+HOLD	noicomi	1										記事なし	oni-no-hanayome
+HOLD	コミックガルド＋	1			コミックガルド							増刊・号の名が親誌の記事(コミックガルド)へ転送 = 親誌に寄せない	atashi-wa-seikan-kokka-no-eiyuu-kishi
+HOLD	コミックエッセイ せらびぃ	1										記事なし	anoyo-no-shinrei-kenkyuusho
+HOLD	Web連載＋単行本	1										記事なし	occult-isekai-banashi
+HOLD	グランドジャンプ増刊・キャプテン翼マガジン	1										記事なし	captain-tsubasa-boys-dream
+HOLD	現代ビジネス（ウェブサイト）	1										記事なし	nankai-trough-kyodai-jishin
+HOLD	コミックなにとぞ	1										記事なし	shinyuu-wa-akujo
+HOLD	&arche	1										記事なし	saioshi-no-gikei-o-mederu-tame-nagaiki-shimasu
+HOLD	エッセイささくれーる	1										記事なし	chou-ha-nakutomo-shokuyoku-ha-aru
+HOLD	ブラックショコラ	1										記事なし	mitsu-to-doku
+HOLD	コンプエース コミックネクスト	1										記事なし	kage-no-jitsuryokusha-ni-naritakute-master-of-garden-nanakage-rendetsu
+HOLD	LoveLive!Days	1										記事なし	link-like-love-live
+HOLD	MAGKAN	1										記事なし	kamaseinu-no-regalia
+HOLD	MANGAバル	1										記事なし	kyou-kara-hitman-rising
+HOLD	増刊コミック乱	1										記事なし	shikakenin-fujieda-baian
+HOLD	DMMブックス	1										記事なし	teikoku-kishin-vorukamion
+HOLD	ヤンチャンWEB	1										記事なし	kami-app-kuriminaru-hunter
+HOLD	第1巻：単行本描き下ろし	1										記事なし	disney-twisted-wonderland-the-comic-episode-of-scarabia
+HOLD	FWコミックスオルタ	1										記事なし	arafoo-kenja-no-isekai-seikatsu-nikki-zero-sword-and-sorceris-world
+HOLD	WEBTOON	1										記事なし	ereki-seed
+HOLD	ピッコマ（版）	1										記事なし	ore-dake-level-up-na-ken-gaiden
+NEW	イブニング	74	evening	イブニング	イブニング	講談社	kodansha	seinen	分類:青年漫画雑誌	Evening	Wikidata英語名		a-bout-surf aa-harimanada-gaiden-isao abanchurie adamas all-rounder-meguru
+NEW	月刊少年チャンピオン	55	monthly-shonen-champion	月刊少年チャンピオン	月刊少年チャンピオン	秋田書店	akita	shounen	分類:少年漫画雑誌	Monthly Shōnen Champion	英文誌名		asu-no-yoichi ayu-mayu bachi-bachi bmn-japan butou-senjutsuden-hiiro-to-nanashi
+NEW	まんがタイムきららMAX	49	manga-time-kirara-max	まんがタイムきららMAX	まんがタイムきららMAX	芳文社	houbunsha	seinen	頁の多数 {'seinen': 32, 'shoujo': 9, 'shounen': 6}	Manga Time Kirara Max	英文誌名		0-kara-hajimemashou akita-land-gothic bocchi-za-rock boku-no-seito-wa-vampire comic-girls
+NEW	裏サンデー	43	ura-sunday	裏サンデー	裏サンデー	小学館	shogakukan	seinen	頁の多数 {'seinen': 15, 'shounen': 15, 'shoujo': 8}	Ura Sunday	Wikidata英語名		ajuu-tan black-girls-talk chi-to-hai-no-joou choueki-339-nen criminale
+NEW	まんがタイムきららキャラット	42	manga-time-kirara-carat	まんがタイムきららキャラット	まんがタイムきららキャラット	芳文社	houbunsha	seinen	頁の多数 {'seinen': 26, 'shoujo': 9, 'shounen': 5}	Manga Time Kirara Carat	英文誌名		a-channel anima-yell at-home-romance bad-girl blend-s
+NEW	ヤングチャンピオン	41	young-champion	ヤングチャンピオン	ヤングチャンピオン	秋田書店	akita	seinen	分類:青年漫画雑誌	Young Champion	英文誌名		18rin alien-9 alien-9-emyureitaazu arakure-knight-remember-tomorrow babiru-2sei-za-ritaanaa
+NEW	ヤングキング	40	young-king	ヤングキング	ヤングキング	少年画報社	shonen-gahosha	seinen	分類:青年漫画雑誌	Young King	Wikidata英語名		aiki aiki-s aoba-jitenshaten arakure-knight arakure-knight-2008
+NEW	マンガUP!	37	manga-up	マンガUP!	マンガUP!	スクウェア・エニックス	square-enix	shounen	頁の多数 {'shounen': 21, 'seinen': 8, 'shoujo': 5}		ヘボン式		akuyaku-reijou-wa-dekiai-route-ni-hairimashita beru-pupee-no-supadari-konyaku chitose-kun-wa-ramunebin-no-naka choppiri-toshiue-demo-kanojo-ni-shitekuremasuka engage-kiss
+NEW	コミックDAYS	35	comic-days	コミックDAYS	コミックDAYS	講談社	kodansha	seinen	頁の多数 {'seinen': 20, 'shounen': 9, 'josei': 5}	Comic Days	Wikidata英語名		akai-ringo amayo-no-tsuki babylon bakarei-dogs-loser chicchai-shima-no-dekkai-girl
+NEW	週刊漫画TIMES	34	weekly-manga-times	週刊漫画TIMES	週刊漫画TIMES	芳文社	houbunsha	seinen	分類:青年漫画雑誌	Weekly Manga Times	Wikidata英語名		1800-yachiku-to-shoujo-no-1800nichi barista cafe-dream chabashira-club dokushin-apart-dokudami-sou
+NEW	コミック百合姫	32	comic-yuri-hime	コミック百合姫	コミック百合姫	一迅社	ichijinsha	shoujo	頁の多数 {'shoujo': 16, 'seinen': 12, 'josei': 3}	Comic Yuri Hime	Wikidata英語名		2dk-gpen-mezamashidokei android-wa-keiken-ninzuu-ni-hairimasu-ka asu-kimi-ni-aetara citrus futari-escape
+NEW	月刊コミックゼノン	31	comic-zenon	月刊コミックゼノン	月刊コミックゼノン	コアミックス	coamix	seinen	分類:青年漫画雑誌	Monthly Comic Zenon	英文誌名		ansangu-cinderella antagonist arte backstage chiruran-shinsengumi-requiem
+NEW	電撃G'sコミック	28	dengeki-g-s-comic	電撃G'sコミック	電撃G'sコミック	KADOKAWA	kadokawa	seinen	頁の多数 {'seinen': 14, 'shounen': 8, 'shoujo': 6}	Dengeki G's Comic	Wikidata英語名		aku-no-meshitsukai alternative-girls-first-step ane-naru-mono angel-beats-the-last-operation bandori-koma-bandoritsu
+NEW	月刊!スピリッツ	27	monthly-big-comic-spirits	月刊!スピリッツ	月刊!スピリッツ	小学館	shogakukan	seinen	分類:青年漫画雑誌		英文誌名		ageku-no-hate-no-canon bokura-no-captain bull-tackle chikyuu-sensou disu-komi
+NEW	マンガワン	27	manga-one	マンガワン	マンガワン	小学館	shogakukan	seinen	頁の多数 {'seinen': 11, 'shounen': 11, 'josei': 3}	Manga One	Wikidata英語名		ao-no-orchestra danberu-nankiro-moteru deatte-hitotsuki-de-zecchou-jorei-attomaaku-comic ensemble-stars-lady-foo-star good-night-world-end
+NEW	コミック アース・スター	26	monthly-comic-earth-star	コミック アース・スター	コミック アース・スター	アース・スター エンターテイメント	earth-star	shounen	分類:少年漫画雑誌	Comic Earth Star	英文誌名		chounin-ee-wa-akuyaku-reijou-o-doushitemo-sukuitai devil-survivor-2-show-your-free-will dounanotsu-koumoto-san koetama magical-chef-shoujo-shizuru
+NEW	ヤングアニマル嵐	25	young-animal-arashi	ヤングアニマル嵐	ヤングアニマル嵐	白泉社	hakusensha	seinen	分類:青年漫画雑誌	Young Animal Arashi	Wikidata英語名		all-i-need asobi-asobase bura-girl crack-hound ebigawachou-no-youkai-cafe
+NEW	プチコミック	24	petit-comic	プチコミック	プチコミック	小学館	shogakukan	josei	分類:女性漫画雑誌	Petit Comic	英文誌名		18-sai-niizuma-furin-shimasu aoi-tori-shoukougun bara-no-tameni chijou-no-seppun douse-mou-nigerarenai
+NEW	コミックZERO-SUM	24	monthly-comic-zero-sum	月刊コミックZERO-SUM	月刊コミックZERO-SUM	一迅社	ichijinsha	josei	分類:女性漫画雑誌	Monthly Comic Zero Sum	Wikidata英語名		07-ghost amatsuki c-sword-and-cornett corseltel-no-ryuujitsushi-monogatari dolls
+NEW	コミックNewtype	22	comic-newtype	コミックNewtype	コミックNewtype	KADOKAWA	kadokawa	seinen	頁の多数 {'seinen': 12, 'shounen': 8, 'shoujo': 1}	Comic Newtype	Wikidata英語名		aruma-chan-wa-kazoku-ni-naritai-zetto boku-no-kanojo-ga-majimesugiru-shojo-bitch-na-ken chou-jikuu-yousai-macross-za-first code-geass-fukkatsu-no-lelouch code-geass-hangyaku-no-lelouch-aaruii
+NEW	ミステリーボニータ	21	mystery-bonita	ミステリーボニータ	ミステリーボニータ	秋田書店	akita	shoujo	分類:少女漫画雑誌	Mystery Bonita	Wikidata英語名		9-banme-no-musashi 9-banme-no-musashi-ghost-and-gray 9-banme-no-musashi-mission-blue comic-hoshi-shinichi genjuu-no-seiza
+NEW	月刊マガジンZ	21	magazine-z	月刊マガジンZ	月刊マガジンZ	講談社	kodansha	seinen	分類:青年漫画雑誌	Magazine Z	Wikidata英語名		8-man-infinitei abenobashi-mahou-shoutengai ai-wa-kagerou boots-no-yamada-san chrono-eyes
+NEW	まんがライフオリジナル	21	manga-life-original	まんがライフオリジナル	まんがライフオリジナル	竹書房	takeshobo	seinen	頁の多数 {'seinen': 14, 'shoujo': 3, 'shounen': 2}	Manga Life Original	Wikidata英語名		12gatsu-umare-no-12-younen batsu-x-ichi cheat-tensei-neko-wa-yome-no-hiza-de-maruku-naritai chii-chan-no-oshinagaki chitose-getchu
+NEW	ストーリアダッシュ	20	manga-life-storia-dash	ストーリアダッシュ	ストーリアダッシュ	竹書房	takeshobo	seinen	頁の多数 {'seinen': 14, 'josei': 2, 'shounen': 2}	Manga Life Storia Dash	Wikidata英語名		apocalypse-hotel-pusupusu asmodeus-wa-akiramenai camera-senpai-to-sewayaki-jouzu-na-kouhai-chan daigaku-de-hajimete-koibito-ga-dekita-hito-no-hanashi dekisokonai-no-himegimi-tachi
+NEW	月刊モーニングtwo	20	monthly-morning-two	月刊モーニングtwo	月刊モーニングtwo	講談社	kodansha	seinen	分類:青年漫画雑誌	Monthly Morning Two	Wikidata英語名		all-out animeta ano-hito-no-i-niwa-boku-ga-tarinai devils-line futsutsukamono-no-ani-desu
+NEW	まんが4コマぱれっと	20	manga-4-koma-palette	まんが4コマぱれっと	まんが4コマぱれっと	一迅社	ichijinsha	seinen	頁の多数 {'seinen': 17, 'shounen': 2, 'shoujo': 1}	Manga 4-Koma Palette	Wikidata英語名		daitoshokan-no-hitsujikai-library-4-you danchigai fushigina-somera-chan-ootokuchuuru futsuu-no-joshikousei-ga-rokodoru-yattemita himuro-no-tenchi
+NEW	月刊電撃コミックガオ!	20	dengeki-comic-gao	月刊電撃コミックガオ!	月刊電撃コミックガオ!	メディアワークス	ascii-media-works	shounen	分類:少年漫画雑誌		手で決めた		bakuretsu-tenshi bokusatsu-tenshi-dokuro-chan dark-edge duan-surk eat-man
+NEW	近代麻雀	19	kindai-mahjong	近代麻雀	近代麻雀	竹書房	takeshobo	seinen	頁の多数 {'seinen': 15, 'shounen': 4}	Kindai Mahjong Original	手で決めた		akagi bird-black-maaketto bird-black-market bird-jankai-angel-vs-tensai-magician bird-saikyou-bainin-vs-tensai-magician
+NEW	サイコミ	19	cycomics	サイコミ	サイコミ	Cygames	cygames	seinen	頁の多数 {'seinen': 8, 'shounen': 4, 'josei': 3}	Cycomics	Wikidata英語名		anata-wa-watashi-ni-otosaretai asu-watashi-wa-dareka-no-kanojo chou-jikuu-yousai-macross-za-first fantasy-bishoujo-juniku-oji-san-to futari-monologue
+NEW	月刊フラワーズ	19	flowers	月刊フラワーズ	月刊フラワーズ	小学館	shogakukan	shoujo	分類:少女漫画雑誌	Flowers	Wikidata英語名		akatsuki-no-aria ane-no-kekkon furuginuya-monyouchou ice-forest ivu-no-nemuri
+NEW	電撃G's magazine	19	dengeki-g-s-magazine	電撃G's magazine	電撃G's magazine	KADOKAWA	kadokawa	shounen	頁の多数 {'shounen': 8, 'seinen': 7, 'shoujo': 4}	Dengeki G's Magazine	Wikidata英語名		angel-beats-heaven-s-door dai-toshokan-no-hitsujikai denpa-onna-to-seishun-otoko guilty-crown-dancing-endlaves ido-lising
+NEW	サンデーうぇぶり	18	sunday-webry	サンデーうぇぶり	サンデーうぇぶり	小学館	shogakukan	shounen	頁の多数 {'shounen': 7, 'seinen': 7, 'shoujo': 3}	Sunday Webry	Wikidata英語名		7-bunnonijuuni-plus-alpha adachi-tsutomu-monogatari aishiteru-game-o-owarasetai henjin-no-salad-bowl-comic hotel-inhumans
+NEW	Cocohana	18	cocohana	Cocohana	Cocohana	集英社	shueisha	josei	分類:女性漫画雑誌	Cocohana	英文誌名		ashi-girl bishoku-tantei-akechi-gorou bread-butter caramel-cinnamon-popcorn hyper-midi-nakajima-haruko
+NEW	B's-LOG COMIC	18	b-s-log-comic	B's-LOG COMIC	B's-LOG COMIC	KADOKAWA	kadokawa	josei	分類:女性漫画雑誌	B's Log Comic	Wikidata英語名		akuyaku-reijou-level-99 akuyaku-reijou-wa-oshi-ga-toutosugite-kyou-mo-shiawase akuyaku-reijou-wa-ringoku-no-outaishi-ni-dekiai-dekiaisareru albert-ke-no-reijou-wa-botsuraku-o-goshomou-desu kami-sama-no-goyounin
+NEW	コミックヴァルキリー	17	comic-valkyrie	コミックヴァルキリー	コミックヴァルキリー	キルタイムコミュニケーション	kill-time-communication	seinen	分類:青年漫画雑誌	Comic Valkyrie	Wikidata英語名		blangel freezing gaia-ki-tan gunner-queen hime-kishi-ga-classmate
+NEW	チャンピオンRED いちご	17	champion-red-ichigo	チャンピオンRED いちご	チャンピオンRED いちご	秋田書店	akita	seinen	分類:青年漫画雑誌	Champion Red Ichigo	Wikidata英語名		akisora cutie-honey-vs-devilman-lady grisaia-no-kajitsu-sanctuary-fellows idol-pretender kagakuna-yatsura
+NEW	まんがライフ	16	manga-life	まんがライフ	まんがライフ	竹書房	takeshobo	seinen	頁の多数 {'seinen': 10, 'shoujo': 3, 'josei': 2}	Manga Life	Wikidata英語名		bonobono damekko-doubutsu damonde-toyohashi-ga-sukitte-ittorujan doosuru-wanko doubutsu-no-oshaberi
+NEW	月刊IKKI	16	monthly-ikki	月刊IKKI	月刊IKKI	小学館	shogakukan	seinen	分類:青年漫画雑誌	Monthly Ikki	Wikidata英語名		bokura-no dosei-mansion freesia futagashira houkago-no-charisma
+NEW	ヤングチャンピオン烈	16	young-champion-retsu	ヤングチャンピオン烈	ヤングチャンピオン烈	秋田書店	akita	seinen	分類:青年漫画雑誌	Young Champion Retsu	Wikidata英語名		babylon-made-wa-nankounen bakuon chichi-chichi hajimete-no-sense kami-app-za-rabu-game
+NEW	月刊ヒーローズ	16	monthly-hero-s	月刊ヒーローズ	月刊ヒーローズ	小学館クリエイティブ	shogakukan-creative	seinen	分類:青年漫画雑誌	Monthly Hero's	英文誌名		atom-the-beginning gegokujou-monogatari gin-no-cerberus hero-company himenospia
+NEW	コミックガム	16	comic-gum	コミックガム	コミックガム	ワニブックス	wani-books	seinen	分類:青年漫画雑誌	Comic Gum	Wikidata英語名		ashiarai-yashiki-no-juunintachi elf-san-wa-yaserarenai embryon-road fight-ippatsu-juuden-chan grandeek
+NEW	月刊コミックラッシュ	16	monthly-comic-rush	月刊コミックラッシュ	月刊コミックラッシュ	ジャイブ	jive	shounen	分類:少年漫画雑誌	Comic Rush	英文誌名		aku-no-meshitsukai-2011 aoi-shiro clannad-2008-2 coyote-ragtime-show gakuen-happy-seven
+NEW	ジャンプ改	15	jump-kai	ジャンプ改	ジャンプ改	集英社	shueisha	seinen	分類:青年漫画雑誌	Jump X	手で決めた		87clockers hanzaiou-poponepo iinari-gohan inu-naki kageki-shoujo
+NEW	コミックハイ!	15	comic-high	コミックハイ!	コミックハイ!	双葉社	futabasha	seinen	分類:青年漫画雑誌		手で決めた		aitama banjou-no-tsumi-to-batsu choukadou-girl-6-bunnoichi chuu-bura girl-friends
+NEW	まんがくらぶ	14	manga-club	まんがくらぶ	まんがくらぶ	竹書房	takeshobo	seinen	頁の多数 {'seinen': 7, 'shoujo': 5, 'josei': 1}	Manga Club	Wikidata英語名		bonobono datenshi-no-jijou eden-no-tohoku kuroneko-no-ekichou-san love-kanjou-no-marude-nai-osananajimi-manga
+NEW	プレイコミック	14	play-comic	プレイコミック	プレイコミック	秋田書店	akita	seinen	分類:青年漫画雑誌	Play Comic	Wikidata英語名		gun-frontier himiko-murao houdou-gang-absurd ishi-no-kioku kaerazaru-toki-no-monogatari
+NEW	コミック電撃だいおうじ	14	comic-dengeki-daioh-g	コミック電撃だいおうじ	コミック電撃だいおうじ	KADOKAWA	kadokawa	shounen	分類:少年漫画雑誌	Dengeki Daioh G	英文誌名		asonde-manga-no-onii-san gabriel-dropout hitoribocchi-no-marumaru-seikatsu itsuka-hataraku-onii-san kimiko-wa-zanzou-o-ice
+NEW	コミックバーズ	14	monthly-birz	月刊バーズ	月刊バーズ	スコラ	scola	seinen	分類:青年漫画雑誌	Comic Birz	英文誌名		akatsukiyami-no-vorufu arakure-neverland dai-tokyo-toibokkusu kanojo-no-hitorigurashi kodoku-experiment
+NEW	別冊漫画ゴラク	14	bessatsu-manga-goraku	別冊漫画ゴラク	別冊漫画ゴラク	日本文芸社	nihon-bungeisha	seinen	分類:青年漫画雑誌	Bessatsu Manga Goraku	Wikidata英語名		gokushoku-king hadaka-no-kusuriyubi hagure-idol-jigokuhen hakkenshi houchou-mushuku
+NEW	少年エースplus	14	shonen-ace-plus	少年エースplus	少年エースplus	KADOKAWA	kadokawa	shounen	頁の多数 {'shounen': 7, 'seinen': 6, 'shoujo': 1}		手で決めた		class-no-daikirai-na-joshi-to-kekkon-suru-koto-ni-natta hige-o-soru-soshite-joshikousei-o-hirou-each-stories imouto-seikatsu inkya-no-boku-ni-batsugame-de-kokuhaku-shitekita-hazu-no-gal-ga-doumitemo-boku-ni-betabore-desu isekai-teni-jiraitsuki
+NEW	ビーンズエース	13	beans-ace	ビーンズエース	ビーンズエース	角川書店	kadokawa	shoujo	分類:少女漫画雑誌	Beans Ace	Wikidata英語名		baito-de-wizard bara-no-maria bungaku-shoujo-to-oishii-hanashi chrome-breaker chrome-no-regios
+NEW	Fellows!	13	harta	ハルタ	ハルタ (漫画誌)	エンターブレイン	enterbrain	seinen	分類:青年漫画雑誌	Harta	英文誌名		fuurai-shimai hakumei-to-mikochi hina-matsuri jizeru-aran kenzen-robo-daimidaler
+NEW	カドコミ	13	kadocomi	カドコミ	カドコミ	KADOKAWA	kadokawa	shounen	頁の多数 {'shounen': 5, 'seinen': 5, 'josei': 2}	KadoComi	Wikidata英語名		arasa-ga-vtuber-ni-natta-hanashi dare-ga-yuusha-o-koroshitaka doumo-suki-na-hito-ni-horegusuri-o-irai-sareta-majo-desu isekai-oji-san lycoris-recoil-rikorekuto
+NEW	月刊キスカ	13	monthly-kissca	月刊キスカ	月刊キスカ	竹書房	takeshobo	seinen	頁の多数 {'seinen': 4, 'shounen': 4, 'josei': 3}	Monthly KiSSCA	英文誌名		baiyakuzumi-no-megami-sama joshikousei-to-seishokusha-san joshiryoku-koujou-katsudou-kiroku kemono-na-watashi-to-yoimasenka kisei-juui-suzune
+NEW	少年ビッグコミック	12	shonen-big-comic	少年ビッグコミック	少年ビッグコミック	小学館	shogakukan	shounen	分類:少年漫画雑誌	Shōnen Big Comic	Wikidata英語名		ai-ga-yuku area-88 esper-mami juukikouhei-zenon kimagure-joushaken
+NEW	ビッグコミック増刊号	12	big-comic-zokan	ビッグコミック増刊号	ビッグコミック増刊号	小学館	shogakukan	seinen	分類:青年漫画雑誌		手で決めた		byoushitsu-de-nenbutsu-o-tonaenaide-kudasai hana-china hokkyoku-hyakkaten-no-concierge-san juui-dolittle kikai-jikake-no-ai-mamajin
+NEW	ミラクルジャンプ	12	miracle-jump	ミラクルジャンプ	ミラクルジャンプ	集英社	shueisha	seinen	分類:青年漫画雑誌	Miracle Jump	Wikidata英語名		ex-vita gantz-g godspeed haiyore-nyaruko-san kaguya-sama-wa-kokurasetai
+NEW	COMIC メテオ	12	comic-meteor	COMIC メテオ	COMIC メテオ	フレックスコミックス	flex-comix	seinen	頁の多数 {'seinen': 13, 'shounen': 3}	Comic Meteor	Wikidata英語名		elf-o-karu-monotachi-2 houkago-assault-girls jashin-chan-drop-kick kagaku-chop kaijin-kaihatsubu-no-kreuz-san
+NEW	ヤングマガジンサード	12	young-magazine-the-3rd	ヤングマガジンサード	ヤングマガジンサード	講談社	kodansha	seinen	分類:青年漫画雑誌	Young Magazine the 3rd	Wikidata英語名		arakure-ojou-sama-wa-monmon-shite-iru candy-cigarettes code-black-hayabiki-no-lelouch dainihon-samurai-girl-shintou demi-chan-wa-kataritai
+NEW	月刊ブシロード	12	monthly-bushiroad	月刊ブシロード	月刊ブシロード	KADOKAWA	kadokawa	shounen	分類:少年漫画雑誌	Monthly Bushiroad	英文誌名		assault-lily-league-of-gardens-full-bloom d4dj-4-koma-mix d4dj-the-story-of-happy-around fire-leon gurizaia-chronos-rebellion-dead-stock
+NEW	月刊コミックドラゴン	12	monthly-comic-dragon	月刊コミックドラゴン	月刊コミックドラゴン	富士見書房	fujimi-shobo	shounen	分類:少年漫画雑誌	Monthly Comic Dragon	Wikidata英語名		chou-seiki-tan-maze-bakunetsu-jikuu chrno-crusade full-metal-panic full-metal-panic-family inyou-tantei-takanashi-ranto-mashouroku
+NEW	月刊少年キャプテン	12	shonen-captain	月刊少年キャプテン	月刊少年キャプテン	徳間書店	tokuma	shounen	分類:少年漫画雑誌	Shōnen Captain	Wikidata英語名		aozora-shoujo-tai doyou-wide-satsujin-jiken ganjou-ningen-suparutakasu getter-robo-gou hidari-no-okurokku
+NEW	コロコロアニキ	12	corocoro-aniki	コロコロアニキ	コロコロアニキ	小学館	shogakukan	seinen	分類:青年漫画雑誌	CoroCoro Aniki	Wikidata英語名		bakusou-kyoudai-let-s-goo-return-racers bakuten-shoot-beyblade-rising banbandoridori dangerous-riiman desu-dot-teiibii
+NEW	まんがライフWIN	11	manga-life-win	まんがライフWIN	まんがライフWIN	竹書房	takeshobo	seinen	頁の多数 {'seinen': 8, 'shoujo': 2, 'shounen': 1}	Manga Life WIN	Wikidata英語名		aimaimii ane-to-otouto-ga-maamaa-nakayoku-class-nichijou kimi-no-tame-nara-shineru monoroogu-shotengai nakahara-kun-no-kahogo-na-imouto
+NEW	まんがホーム	11	manga-home	まんがホーム	まんがホーム	芳文社	houbunsha	seinen	頁の多数 {'seinen': 4, 'shoujo': 4, 'kodomo': 1}	Manga Home	Wikidata英語名		koumei-no-yome love-lab marika-chan-otsu mio-nikki raika-days
+NEW	月刊ドラゴンジュニア	10	dragon-jr	月刊ドラゴンジュニア	月刊ドラゴンジュニア	富士見書房	fujimi-shobo	shounen	分類:少年漫画雑誌	Dragon Jr.	Wikidata英語名		gokudoo-kun-manyuuki-za-badesuto ikinari-full-metal-panic lost-universe-yoshinaka mahou-suit-riui muteki-ou-toraizenon-fire
+NEW	ジーンピクシブ	10	gene-pixiv	ジーンピクシブ	ジーンピクシブ	KADOKAWA	kadokawa	seinen	頁の多数 {'seinen': 4, 'shoujo': 3, 'shounen': 2}	Gene Pixiv	Wikidata英語名		afurika-no-salaryman chuubyou-gekihatsu-boy gaikotsu-shotenin-honda-san kimi-niwa-todokanai milgram
+NEW	やわらかスピリッツ	10	yawaraka-spirits	やわらかスピリッツ	やわらかスピリッツ	小学館	shogakukan	seinen	頁の多数 {'seinen': 9, 'shounen': 1}	Yawaraka Spirits	Wikidata英語名		isekai-shikkaku kaii-to-otome-to-kamikakushi osake-wa-fuufu-ni-natte-kara saitsuyo-densetsu-nakane ukiwa
+NEW	コミックキューン	10	comic-cune	コミックキューン	コミックキューン	KADOKAWA	kadokawa	seinen	頁の多数 {'seinen': 5, 'josei': 3, 'shounen': 1}	Comic Cune	英文誌名		akarui-kioku-soushitsu goddochanzu haikei-koroshiya-san-to-kekkon-shimashita himegasaki-sakurako-wa-kyou-mo-fubin-kawaii ryouchou-wa-ryouri-jouzu
+NEW	まんがタイム	10	manga-time	まんがタイム	まんがタイム	芳文社	houbunsha	seinen	頁の多数 {'seinen': 6, 'josei': 2, 'shoujo': 1}	Manga Time	英文誌名		assistant barairo-company loco-motion misolala nippon-no-waka-oku-sama
+NEW	リイドコミック	9	leed-comic	リイドコミック	リイドコミック	リイド社	leed	seinen	分類:青年漫画雑誌	LEED Comic	Wikidata英語名		akatsuka-fujio-ura-1000-peeji goku-tsubushi gokudou-steak kenkaku-shoubai kenkaku-shoubai-saitou2003
+NEW	ビッグコミックオリジナル増刊	9	big-comic-original-zokan	ビッグコミックオリジナル増刊	ビッグコミックオリジナル増刊	小学館	shogakukan	seinen	分類:青年漫画雑誌	Big Comic Original Zōkan	Wikidata英語名		ai-shirisomeshi-koro-ni aino-kekkon-soudanjo battle-field ghost-mama-sousasen hyouden-no-torakutaa
+NEW	ガンガンpixiv	9	gangan-pixiv	ガンガンpixiv	ガンガンpixiv	スクウェア・エニックス	square-enix	seinen	頁の多数 {'seinen': 5, 'shoujo': 2, 'josei': 2}	Gangan Comics Pixiv	手で決めた		boyish-kanojo-ga-kawaisugiru cool-doji-otoko fudanshi-kazoku koori-zokusei-otoko-to-coolna-douryou-joshi kyuujitsu-no-warumono-san
+NEW	COMIC ポラリス	9	comic-polaris	COMIC ポラリス	COMIC ポラリス	フレックスコミックス	flex-comix	shoujo	分類:少女漫画雑誌	Comic Polaris	Wikidata英語名		doukyonin-wa-hiza-tokidoki-atama-no-ue kimi-o-aisuru-ki-wa-nai-to-itta-jiki-koushaku-sama-ga-naze-dekiai-shite-kimasu komekamitsu-girls kore-wa-seiryaku-kekkon-da-to-itta-outaishi-denka-kara-naze-dekiai-sarete-imasu kurosaki-san-no-ichizu-na-ai-ga-tomaranai
+NEW	ぶ〜け	9	bouquet	ぶ〜け	ぶ〜け	集英社	shueisha	shoujo	分類:少女漫画雑誌	Bouquet	Wikidata英語名		clover-2002 eien-no-nohara fukuyadou-honpo irokoi-guuwa itihasa
+NEW	ヒーロークロスライン	9	hero-cross-line	ヒーロークロスライン	ヒーロークロスライン	講談社	kodansha	seinen	分類:青年漫画雑誌	Sunday×Magazine Crossline	手で決めた		alcbane ao-no-kikka bousou-itai-nekuroman dark-queen-matsubara galactic-mansion
+NEW	月刊少年ギャグ王	9	monthly-shonen-gag-oh	月刊少年ギャグ王	月刊少年ギャグ王	エニックス	square-enix	shounen	分類:少年漫画雑誌		手で決めた		chipa-panic dragon-quest-tenkuu-monogatari gensou-tairiku gogo-mario-world hanjuku-ninpouchou
+NEW	少年ブック	8	shonen-book	少年ブック	少年ブック	集英社	shueisha	shounen	分類:少年漫画雑誌	Shōnen Book	Wikidata英語名		big-x chintara-kami-chan kaitei-sentai shinsengumi-tezuka tezuka-osamu-space-adventure-short-stories
+NEW	コミックトム	8	comic-tom	コミックトム	コミックトム	潮出版社	ushio-shuppan	shounen	分類:少年漫画雑誌	Comic Tom	Wikidata英語名		buddha inshuu-densetsu ishi-no-hana kou-u-to-ryuu-hou ludwig-b
+NEW	comic POOL	8	comic-pool	Comic POOL	Comic POOL	一迅社	ichijinsha	shoujo	頁の多数 {'shoujo': 4, 'seinen': 2, 'josei': 1}	Comic Pool	Wikidata英語名		akuyaku-reijou-no-naka-no-hito ameagari-no-bokura-ni-tsuite bl-drama-no-shuen-ni-narimashita ibitte-konai-gibo-to-gishi kusunoki-san-wa-koukou-debut-ni-shippai-shite-iru
+NEW	まんがライフMOMO	8	manga-life-momo	まんがライフMOMO	まんがライフMOMO	竹書房	takeshobo	seinen	頁の多数 {'seinen': 5, 'josei': 3}	Manga Life Momo	Wikidata英語名		hare-nochi-cinderella morita-san-wa-mukuchi oganiku-uu-chan oku-sama-wa-idol poyopoyo-kansatsu-nikki
+NEW	チャンピオンクロス	8	champion-cross	チャンピオンクロス	チャンピオンクロス	秋田書店	akita	shounen	頁の多数 {'shounen': 3, 'seinen': 3, 'josei': 1}	Champion Cross	Wikidata英語名		gurizaia-phantom-trigger hakataben-no-onnanoko-wa-kawaii-to-omoimasenka kagakuteki-ni-sonzai-shiuru-kuriichaamusume-no-kansatsu-nisshi kyochuu-rettou onegaidesu-kara-uke-tekure
+NEW	月刊コミックNORA	8	comic-nora	月刊コミックNORA	月刊コミックNORA	Gakken	gakken-2	shounen	分類:少年漫画雑誌	Comic NORA	Wikidata英語名		high-speed-jessie kirariteii legend-of-lemnear midnight-panther nervous-breakdown
+NEW	プチフラワー	7	petit-flower	プチフラワー	プチフラワー	小学館	shogakukan	shoujo	分類:少女漫画雑誌	Petit Flower	英文誌名		blue-moon hagio-moto jitensha-ni-notte kawa-yorimo-nagaku-yuruyakani mizu-makura-hane-makura
+NEW	月刊ニュータイプ	7	newtype	月刊ニュータイプ	月刊ニュータイプ	KADOKAWA	kadokawa	seinen	人が決めた(一般誌・アニメ誌)	Newtype	手で決めた		akuma-no-riddle biigata-doumei dog-days-fujima kobato seireitsukai
+NEW	ヤングアニマルあいらんど	7	young-animal-island	ヤングアニマルあいらんど	ヤングアニマルあいらんど	白泉社	hakusensha	seinen	分類:青年漫画雑誌	Young Animal Island	Wikidata英語名		ane-komi concerto glamorous henjo inumimi
+NEW	COMIC FUZ	7	comic-fuz	COMIC FUZ	COMIC FUZ	芳文社	houbunsha	seinen	頁の多数 {'seinen': 6, 'shoujo': 1}	Comic Fuz	Wikidata英語名		bocchi-za-rock-gaiden-hiroi-kikuri-no-fukazake-nikki chihaya-restart idol-idol-story isekai-anime-koubou kirara-fantasia
+NEW	コミックZERO-SUM増刊WARD	7	comic-zero-sum-zokan-ward	コミックZERO-SUM増刊WARD	コミックZERO-SUM増刊WARD	一迅社	ichijinsha	josei	分類:女性漫画雑誌	Comic Zero-Sum Zōkan Ward	Wikidata英語名		alosmente ameiro-kouchakan-kandan bokura-no-kiseki haigakura mr-morning
+NEW	別冊ヤングチャンピオン	7	bessatsu-young-champion	別冊ヤングチャンピオン	別冊ヤングチャンピオン	秋田書店	akita	seinen	分類:青年漫画雑誌	Bessatsu Young Champion	Wikidata英語名		ane-no-onaka-o-fukuramaseru-nowa-boku ane-no-onaka-o-fukuramaseru-nowa-boku-okawari bittare bouncer dr-kiriko-shiroi-shinigami
+NEW	まんがタイムジャンボ	7	manga-time-jumbo	まんがタイムジャンボ	まんがタイムジャンボ	芳文社	houbunsha	seinen	頁の多数 {'seinen': 3, 'shounen': 3, 'shoujo': 1}	Manga Time Jumbo	Wikidata英語名		chikkoincho hantoumei-kinmu-usui-san joshimon keisatsu-no-onii-san nanami-masshigura
+NEW	月刊ヤングキング	7	young-king-ours-gh	月刊ヤングキングアワーズGH	月刊ヤングキングアワーズGH	少年画報社	shonen-gahosha	seinen	分類:青年漫画雑誌	Young King OURs GH	手で決めた		hitsugi-tantei-dandow ishida-to-asakura koushounin-doumoto-reiji marusei-2014 oku-san
+NEW	まんがタイムきららミラク	7	manga-time-kirara-miracle	まんがタイムきららミラク	まんがタイムきららミラク	芳文社	houbunsha	seinen	頁の多数 {'seinen': 6, 'shounen': 1}	Manga Time Kirara Miracle!	英文誌名		joukamachi-no-dandelion koufuku-graffiti mono otonashi-san-wa-hakaishin sakura-trick
+NEW	まんがタイムオリジナル	7	manga-time-original	まんがタイムオリジナル	まんがタイムオリジナル	芳文社	houbunsha	seinen	頁の多数 {'seinen': 5, 'josei': 2}	Manga Time Original	Wikidata英語名		ane-gurumi hitori-de-nomerumon koko-kara-fuurin-kazan komori-san-wa-kotowarenai radical-hospital
+NEW	月刊アニマルハウス	7	monthly-animal-house	月刊アニマルハウス	月刊アニマルハウス	白泉社	hakusensha	seinen	分類:青年漫画雑誌	Monthly Animal House	Wikidata英語名		berserk buraiken fighter hospital ourou
+NEW	週刊プレイボーイ	7	weekly-playboy	週刊プレイボーイ	週刊プレイボーイ	集英社	shueisha	seinen	人が決めた(一般誌・アニメ誌)	Weekly Playboy	英文誌名		beat-shot kanojo-no-karera kinniku-man-nisei kinnikuman koropokkuru-no-makura
+NEW	Kiss PLUS	7	kiss-plus	Kiss PLUS	Kiss PLUS	講談社	kodansha	josei	分類:女性漫画雑誌	Kiss Plus	Wikidata英語名		deka-girl dobojo kimi-ga-kokoro-ni-sumitsuita noda-to-moushimasu shoujo-kyouwakoku
+NEW	comicキャンドール	7	comic-candoll	Comicキャンドール	Comicキャンドール	実業之日本社	jitsugyo-no-nihon	seinen	頁の多数 {'seinen': 3, 'shoujo': 3, 'josei': 1}		手で決めた		beautician boku-no-bandai-san iinari-princess kami-ing-doll maid-wa-miracle
+NEW	アニメージュ	6	animage	アニメージュ	アニメージュ	徳間書店	tokuma	seinen	頁の多数 {'seinen': 3, 'shounen': 1, 'shoujo': 1}	Animage	英文誌名		akatsuka-fujio-ura-1000-peeji apfelland-monogatari kaze-no-tani-no-naushika serafimu toukyou-monogatari
+NEW	マンガクロス	6	manga-cross	マンガクロス	マンガクロス	秋田書店	akita	seinen	頁の多数 {'seinen': 3, 'shounen': 2, 'josei': 1}	Manga Cross	Wikidata英語名		atarashii-joushi-wa-dotennen daikyochuu-rettou haruka-reset hitomi-chan-wa-hitomishiri kamiina-bo-tan-yoeru-sugata-wa-yuri-no-hana
+NEW	月刊コミックバンチ	6	monthly-comic-bunch	月刊コミックバンチ	月刊コミックバンチ	新潮社	shinchosha	seinen	分類:青年漫画雑誌	Monthly Comic Bunch	英文誌名		boku-no-tsuma-wa-hattatsu-shougai btooom-u-18 dinosan kaijuu-jieitai saihate-kara-toho-5fun
+NEW	MAGAZINE BE×BOY	6	magazine-be-boy	MAGAZINE BE×BOY	MAGAZINE BE×BOY	リブレ	libre	josei	分類:女性漫画雑誌	Magazine Be × Boy	Wikidata英語名		aiteru-door-kara-shitsurei-shimasu-yo buchou-no-koi fake kachou-no-koi saigo-no-door-o-shimero
+NEW	百合姉妹	6	yuri-shimai	百合姉妹	百合姉妹	マガジン・マガジン	magazine-magazine	shoujo	頁の多数 {'shoujo': 3, 'seinen': 3}	Yuri Shimai	Wikidata英語名		haru-natsu-aki-fuyu hatsukoi-shimai kotonoha-no-miko-to-kotoda-ma-no-majo-to kuchibiru-tameiki-sakurairo strawberry-shake
+NEW	WEBコミックぜにょん	6	web-comic-zenyon	ゼノン編集部	ゼノン編集部	コアミックス	coamix	seinen	頁の多数 {'seinen': 9, 'josei': 1}	Web Comic Zenyon	Wikidata英語名		hannari-girori-no-yoriko-san hokuto-no-ken-ichigoaji iburigurashi joshikousei-no-tsurezure pan-to-boku-no-momo-chan
+NEW	コミックゲーメスト	6	comicgamest	コミックゲーメスト	コミックゲーメスト	新声社	shinseisha-game	shounen	分類:少年漫画雑誌	ComicGAMEST	Wikidata英語名		continue giisu-hawaado-gaiden kaaman-ni-shirei-o sakura-ganbaru shiro-monogatari
+NEW	ミスターマガジン	6	mr-magazine	ミスターマガジン	ミスターマガジン	講談社	kodansha	seinen	分類:青年漫画雑誌	Mr. Magazine	Wikidata英語名		dooraku-bengoshi hanada-shounenshi kaji-ryuusuke-no-gi kirakira-hikaru nekogusu
+NEW	週刊現代	5	shukan-gendai	週刊現代	週刊現代	講談社	kodansha	seinen	頁の多数 {'seinen': 5}	Shūkan Gendai	Wikidata英語名		akatsuka-fujio-ura-1000-peeji katei-kyoushi-kamiyama-mika rakuten-papa shin-tokumei-kakarichou-tadano-hitoshi tokumei-kakarichou-tadano-hitoshi
+NEW	てれびくん	5	televi-kun	てれびくん	てれびくん	小学館	shogakukan	kodomo	分類:幼年雑誌	Televi-Kun	Wikidata英語名		inazuma-eleven-bakugaidenshuu kaibutsu-kun-1988 perman shin-ganbaraido-raita-kamen-rider-battle-gaiden-foozehen wazaguu
+NEW	まんがライフSTORIA	5	manga-life-storia	まんがライフSTORIA	まんがライフSTORIA	竹書房	takeshobo	seinen	頁の多数 {'seinen': 3, 'josei': 1, 'shoujo': 1}	Manga Life STORIA	Wikidata英語名		futari-no-jikan imouto-wa-meshimazu mahou-shoujo-ni-akogarete manga-no-mori-kara-joshi-joshikousei ramen-daisuki-koizumi-san
+NEW	メガミマガジン	5	megami-magazine	メガミマガジン	メガミマガジン	Gakken	gakken-2	seinen	頁の多数 {'seinen': 3, 'shounen': 2}	Megami Magazine	Wikidata英語名		binchou-tan magical-girl-lyrical-nanoha-movie-1st-the-comics mahou-shoujo-lyrical-nanoha-ace-za-comics mahou-shoujo-lyrical-nanoha-strikers-the-comics zero-no-tsukaima
+NEW	ジーンLINE	5	gene-line	ジーンLINE	ジーンLINE	KADOKAWA	kadokawa	shoujo	頁の多数 {'shoujo': 3, 'seinen': 1, 'josei': 1}		手で決めた		brother-trap kimi-no-koe murai-no-koi my-baker yabusaka-dewa-gozaimasen
+NEW	ゴーゴーバンチ	5	go-go-bunch	ゴーゴーバンチ	ゴーゴーバンチ	新潮社	shinchosha	seinen	分類:青年漫画雑誌	Go Go Bunch	手で決めた		henai-caf joshikousei-ni-korosaretai papa-to-oyaji-no-uchinomi rokuhoudou-yotsuiro-hiyori soutarou-no-shutchou-botchimeshi
+NEW	ホラーM	5	horror-m	ホラーM	ホラーM	ぶんか社	bunkasha	seinen	頁の多数 {'seinen': 4, 'shoujo': 1}	Horror M	Wikidata英語名		misu-misou mononoke-zoushi satanister sukkuto-kitsune zonbiya-reiko
+NEW	マンガPark	5	manga-park	マンガPark	マンガPark	白泉社	hakusensha	shounen	頁の多数 {'shounen': 2, 'shoujo': 2, 'josei': 1}	Manga Park	Wikidata英語名		gyakusatsu-happy-end idolish7 kimi-tonara-koi-o-shitemitemo maou-no-musume-wa-yasashisugiru shanpinion-no-majo
+NEW	MANGAオールマン	5	manga-allman	MANGAオールマン	MANGAオールマン	集英社	shueisha	seinen	分類:青年漫画雑誌	MANGA ALLMAN	Wikidata英語名		f-compo family-compo kansayaku-nozaki-shuuhei mad-buru-2000 senkai-no-tsurugi
+NEW	月刊エースネクスト	5	ace-next	月刊エースネクスト	月刊エースネクスト	角川書店	kadokawa	shounen	分類:少年漫画雑誌	Ace Next	Wikidata英語名		chikyuu-bouei-kigyou-dai-guard ginsou-kikou-oodian-oro mail niea-under-7 rizeru-mine
+NEW	まんがタイムスペシャル	5	manga-time-special	まんがタイムスペシャル	まんがタイムスペシャル	芳文社	houbunsha	seinen	頁の多数 {'seinen': 5}	Manga Time Special	Wikidata英語名		esupii-miyako-kenzan local-joshi-no-tooboe midnight-restaurant-7-to-7 mizuiro-museum super-maid-chirumi-san
+NEW	ヤングコミック	5	young-comic	ヤングコミック	ヤングコミック	少年画報社	shonen-gahosha	seinen	分類:青年漫画雑誌	Young Comic	Wikidata英語名		gekkan-aikawa-henshuuchou goyoukiba kowarete-itemo-kamaimasen shikkusu-pack todo-no-tsumari-no-uchouten
+NEW	ビッグゴールド	5	big-gold	ビッグゴールド	ビッグゴールド	小学館	shogakukan	seinen	分類:青年漫画雑誌		手で決めた		ginga-tetsudou-999-etaanaruhen kizuchi-no-sasoi shiki sutegataki-hitobito touzai-kikkai-shinshiroku
+NEW	コミッククリア	5	famitsu-comic-clear	コミッククリア	コミッククリア	KADOKAWA	kadokawa	seinen	頁の多数 {'seinen': 4, 'shounen': 1}	Famitsu Comic Clear	Wikidata英語名		endride guraburu-jaajibutsu kono-subarashii-sekai-ni-shukufuku-o-kappore konoyo-no-hate-de-koi-o-utau-shoujo-yuuno maitetsu
+NEW	週刊文春	4	shukan-bunshun	週刊文春	週刊文春	文藝春秋	bungei-shunju	seinen	頁の多数 {'seinen': 4}	Shūkan Bunshun	Wikidata英語名		adolf-ni-tsugu akatsuka-fujio-ura-1000-peeji hibi-ware-ningen tanma-kun
+NEW	平凡パンチ	4	heibon-punch	平凡パンチ	平凡パンチ	マガジンハウス	magazine-house	seinen	頁の多数 {'seinen': 4}	Heibon Punch	Wikidata英語名		akatsuka-fujio-ura-1000-peeji dai-furin-den kochira-bonjingumi live-odyssey
+NEW	ジャンプLIVE	4	jump-live	ジャンプLIVE	ジャンプLIVE	集英社	shueisha	shounen	分類:少年漫画雑誌	JUMP LIVE	英文誌名		eru-doraibu keppare-matsubara-san lady-cool tenjin
+NEW	S-Fマガジン	4	s-f-magazine	S-Fマガジン	S-Fマガジン	早川書房	hayakawa	seinen	人が決めた(一般誌・アニメ誌)	S-F Magazine	Wikidata英語名		mojiru-hito runna-hime-hourouki sf-taishou uchuu-daizakka
+NEW	凛花	4	zokan-flowers	増刊flowers	増刊flowers	小学館	shogakukan	josei	分類:女性漫画雑誌	Zōkan flowers	Wikidata英語名		amenashimura-yakuba-sangyouka-ken-kankougakari sakuragari shitsuren-chocolatier yorihime-ki-tan
+NEW	月刊コミックアヴァルス	4	monthly-comic-avarus	月刊コミックアヴァルス	月刊コミックアヴァルス	マッグガーデン	mag-garden	josei	分類:女性漫画雑誌	Monthly Comic Avarus	英文誌名		donten-ni-warau flat shiina-kun-no-torikemo-hyakka utakata-ni-warau
+NEW	電撃萌王	4	dengeki-moeo	電撃萌王	電撃萌王	メディアワークス	ascii-media-works	seinen	分類:青年漫画雑誌	Dengeki Moeō	Wikidata英語名		hana-hana r-g-b tenshi-no-3p-no-3p yumemitaina-hoshimitaina
+NEW	MAGCOMI	4	magcomi	MAGCOMI	MAGCOMI	マッグガーデン	mag-garden	shounen	ジャンル:青少年漫画 中高生・大学生・社会人男女	Mag Garden Comic Online	手で決めた		fukafuka-dungeon-kouryakuki madougushi-dariya-wa-utsumukanai tensei-kizoku-no-isekai-boukenroku yuujin-chara-wa-taihen-desuka
+NEW	電撃大王ジェネシス	4	dengeki-daioh-genesis	電撃大王ジェネシス	電撃大王ジェネシス	アスキー・メディアワークス	ascii-media-works	seinen	分類:青年漫画雑誌	Dengeki Daioh Genesis	英文誌名		ashita-no-kyouko-san evergreen girigiri-out yasashii-sekai-no-tsukurikata
+NEW	月刊コミコミ	4	monthly-comicomi	月刊コミコミ	月刊コミコミ	白泉社	hakusensha	shounen	分類:少年漫画雑誌	Monthly ComiComi	Wikidata英語名		elf-17 love-synchroid outlanders teizokureigari
+NEW	webアクション	4	web-action	Webアクション	Webアクション	双葉社	futabasha	shounen	頁の多数 {'shounen': 1, 'seinen': 1, 'josei': 1}	Web Action	Wikidata英語名		ayaka-chan-wa-hiroko-senpai-ni-koishiteru dungeon-no-naka-no-hito ishigami-senki mame-to-mugi
+NEW	ハツキス	4	hatsu-kisu	ハツキス	ハツキス	講談社	kodansha	josei	分類:女性漫画雑誌	Hatsu Kisu	Wikidata英語名		17-sai-no-tou batsukoi k-lost-small-world watashi-no-machi-no-chiba-kun-wa
+NEW	ITAN	4	itan	ITAN	ITAN	講談社	kodansha	josei	分類:女性漫画雑誌	ITAN	Wikidata英語名		azatsukai noumen-joshi-no-hanako-san olga-no-shinzou shouwa-genroku-rakugo-shinjuu
+NEW	月刊ステンシル	4	monthly-stencil	月刊ステンシル	月刊ステンシル	エニックス	square-enix	shoujo	分類:少女漫画雑誌	Gekkan Stencil	手で決めた		aqua boku-to-kanojo-no-peke-mittsu bus-gamer switch-2002
+NEW	SPA!	4	spa	SPA!	SPA!	扶桑社	fusosha	seinen	頁の多数 {'seinen': 3, 'josei': 1}		ヘボン式		arasa-chan okuda-tamio-ni-naritai-boy-deau-otoko-subete-kuruwaseru-girl shin-naniwa-kinyuudou-aaru shin-naniwa-kinyuudou-aoki-yuuji-monogatari
+NEW	メンズヤング	4	men-s-young	メンズヤング	メンズヤング	双葉社	futabasha	seinen	頁の多数 {'seinen': 2, 'shoujo': 1, 'shounen': 1}	Men's YOUNG	Wikidata英語名		boku-no-kanojo-ga-eroi-wake cheers kooshoo-19sai offline-game
+NEW	月刊コミックコンプ	4	comic-comp	月刊コミックコンプ	月刊コミックコンプ	角川書店	kadokawa	shounen	分類:少年漫画雑誌	Conp Comics	手で決めた		fortune-quest ginga-sengoku-gunyuuden-rai hisuikyou-kidan silent-m-bius
+NEW	ヤングキングBULL	4	young-king-bull	ヤングキングBULL	ヤングキングBULL	少年画報社	shonen-gahosha	seinen	分類:青年漫画雑誌	Young King Bull	Wikidata英語名		biriketsu gedou-gaiden rolls saru-lock-reboot
+NEW	コミック乱ツインズ	4	comic-ran-twins	コミック乱ツインズ	コミック乱ツインズ	リイド社	leed	seinen	分類:青年漫画雑誌		英文誌名		shikakenin-fujieda-baian-saitou shin-kagegari sobaya-genan sushiichi
+NEW	楽園 Le Paradis	4	rakuen-le-paradis	楽園 Le Paradis	楽園 Le Paradis	白泉社	hakusensha	seinen	頁の多数 {'seinen': 3, 'shoujo': 1}	Rakuen Le Paradis	Wikidata英語名		junsui-ruminessensu spotted-flower susume-natsu-rocket-rokettodan sutaaringuraado-no-kyouzoku
+NEW	電撃G's Festival! COMIC	4	dengeki-g-s-festival-comic	電撃G's Festival! COMIC	電撃G's Festival! COMIC	KADOKAWA	kadokawa	shounen	頁の多数 {'shounen': 3, 'seinen': 1}		ヘボン式		gakuen-kino roukyuubu-half-time super-elegant tantei-opera-milky-holmes-on-stage
+NEW	電撃コミックレグルス	4	dengeki-playstation	電撃PlayStation	電撃PlayStation	KADOKAWA Game Linkage	kadokawa-game-linkage	shounen	頁の多数 {'shounen': 3, 'shoujo': 1, 'seinen': 1}	Dengeki PlayStation	Wikidata英語名		aru-majo-ga-shinu-made esukyuu-guild-o-tsuihousareta-kedo-jitsu-wa-ore-dake-dragon-no-kotoba-ga-wakaru-no-de-kizuita-toki kajiya-de-hajimeru-isekai-slow-life leadale-no-daichi-nite
+NEW	コミックグロウル	4	comic-growl	コミックグロウル	コミックグロウル	ブシロードワークス	bushiroad-works	shoujo	頁の多数 {'shoujo': 2, 'seinen': 1}	Comic Growl	Wikidata英語名		arune-no-jikenbo-memory-of-blood bandori-ittsu-maigoo-ame-ni-soyoide-hare-o-kou bang-dream-ave-mujica-manuscriptus blue-archive-benriya-68-gyoumu-nisshi
+NEW	サンデー毎日	3	sunday-mainichi	サンデー毎日	サンデー毎日	毎日新聞出版	mainichi	seinen	頁の多数 {'seinen': 2, 'shounen': 1}	Sunday Mainichi	英文誌名		akatsuka-fujio-ura-1000-peeji ijiwaru-baa-san nagaiana
+NEW	週刊大衆	3	shukan-taishu	週刊大衆	週刊大衆	双葉社	futabasha	seinen	頁の多数 {'seinen': 3}	Shūkan Taishū	Wikidata英語名		akatsuka-fujio-ura-1000-peeji demodori-shainden kimura
+NEW	少女クラブ	3	shojo-club	少女クラブ	少女クラブ	講談社	kodansha	shoujo	人が決めた(一般誌・アニメ誌)	Shōjo Club	Wikidata英語名		1-2-3-to-4-5-roku akatsuka-fujio-ura-1000-peeji hinotori
+NEW	コミックチャージ	3	comic-charge	コミックチャージ	コミックチャージ	角川書店	kadokawa	seinen	分類:青年漫画雑誌	Comic CHARGE	Wikidata英語名		bucchigiri-shiiee mobile-suit-gundam-san small-world
+NEW	ミステリーサラ	3	mystery-sara	ミステリーサラ	ミステリーサラ	青泉社	seisensha	josei	分類:女性漫画雑誌	Mystery Sara	Wikidata英語名		kidan kidan-ningyoushi-ugetsu-no-hyakumonogatari muromachi-haru-no-ran-kurenai-no-ame
+NEW	Ohta Web Comic	3	ohta-web-comic	Ohta Web Comic	Ohta Web Comic	太田出版	ohta-shuppan	josei	頁の多数 {'josei': 2, 'seinen': 1}	Ohta Web Comic	Wikidata英語名		ashita-shinu-niwa awajima-hyakkei inaka
+NEW	アフタヌーンシーズン増刊	3	afternoon-season-zokan	アフタヌーンシーズン増刊	アフタヌーンシーズン増刊	講談社	kodansha	seinen	分類:青年漫画雑誌	Afternoon Season Zōkan	Wikidata英語名		minmin-mint mokke mushishi
+NEW	ウンポコ	3	unpoko	ウンポコ	ウンポコ	新書館	shinshokan	shoujo	分類:少女漫画雑誌		ヘボン式		hyakushou-kizoku milkman shounen-yo-tanbi-o-egake
+NEW	ミステリーDX	3	mystery-dx	ミステリーDX	ミステリーDX	角川書店	kadokawa	shoujo	頁の多数 {'shoujo': 2, 'josei': 1}	Mystery DX	Wikidata英語名		gouhou-drug suki-dakara-suki wish
+NEW	電撃帝王	3	dengeki-teioh	電撃帝王	電撃帝王	メディアワークス	ascii-media-works	seinen	分類:青年漫画雑誌	Dengeki Teioh	Wikidata英語名		iono-sama-fanatics kyouhaku-dog-s-another-secret murder-princess
+NEW	ネムキ	3	nemuki	ネムキ	ネムキ	朝日新聞出版	asahi-shimbun	shoujo	分類:少女漫画雑誌	Nemuki	Wikidata英語名		dokuhime hyakki-yagyou-show shiori-to-shimiko
+NEW	GORO	3	goro	GORO	GORO	小学館	shogakukan	seinen	頁の多数 {'seinen': 3}	GORO	Wikidata英語名		binetsu-mai-rabu jikken-doll-dummy-oscar samurai-non-grata
+NEW	コミックヘヴン	3	comic-heaven	コミックヘヴン	コミックヘヴン	日本文芸社	nihon-bungeisha	seinen	分類:青年漫画雑誌	CH Comics	英文誌名		chuusotsu-worker-kara-hajimeru-koukou-seikatsu kusozako-boukou-oshii-san mukashimukashi-aru-tokoro-ni-dewa-nakute-ima-boku-no-menomae-ni-onikko-ga-iru
+NEW	コミックノヴァ	3	comic-nova	コミックノヴァ	コミックノヴァ	一二三書房	hifumi-shobo	seinen	頁の多数 {'seinen': 2, 'shounen': 1}	Comic Nova	Wikidata英語名		isekai-kaeri-no-otsu-san-wa-shuumatsu-sekai-de-musou-suru lens-no-mukou-no-megamitachi orukusen-oukokushi
+NEW	Champion タップ!	3	champion-tap	Champion タップ!	Champion タップ!	秋田書店	akita	seinen	頁の多数 {'seinen': 2, 'shounen': 1}		手で決めた		mahou-shoujo-site mahou-shoujo-site-sept nonoyu
+NEW	いち＊ラキ	3	ichi-raki	いち*ラキ	いち*ラキ	冬水社	tousuisha	shoujo	分類:少女漫画雑誌		ヘボン式		hakkenden keishichou-tokuhanka-007 komatta-toki-niwa-hoshi-ni-kike
+NEW	ぴょんぴょん	3	pyon-pyon	ぴょんぴょん	ぴょんぴょん	小学館	shogakukan	kodomo	分類:児童・幼年漫画雑誌	Pyon Pyon	Wikidata英語名		hazunde-kyatchi hikari-no-pansy kocchi-muite-miiko
+NEW	ガンガンYG	3	gangan-yg	ガンガンYG	ガンガンYG	スクウェア・エニックス	square-enix	seinen	分類:青年漫画雑誌	Gangan YG	Wikidata英語名		sekirei shounen-tantei-inugami-geru ubel-blatt
+NEW	娘TYPE	3	nyantype	娘TYPE	娘TYPE	KADOKAWA	kadokawa	shounen	頁の多数 {'shounen': 2, 'seinen': 1}	Nyantype	Wikidata英語名		mahou-senki-lyrical-nanoha-force mahou-senki-lyrical-nanoha-force-touruu-karaado mayo-mayo
+NEW	マジキュー	3	magi-cu	マジキュー	マジキュー	エンターブレイン	enterbrain	seinen	分類:青年漫画雑誌	Magi-Cu	英文誌名		5kai-bishoujo-kaden-uriba-de-5-zaimasu maoyuu-4-koma-muitemasenyo-maousama yoshinagasanchi-no-gaagoiru
+NEW	アルティマエース	3	altima-ace	アルティマエース	アルティマエース	角川書店	kadokawa	shoujo	分類:少女漫画雑誌	Altima Ace	英文誌名		baka-ga-zenra-de-yatte-kuru biblia-koshodou-no-jiken-techou buratsu-to-buradora
+NEW	食漫	3	shoku-man	食漫	食漫	日本文芸社	nihon-bungeisha	seinen	頁の多数 {'seinen': 3}		ヘボン式		bungou-no-shokusai donna-mondai kita-no-sushihime
+NEW	もっと!	3	motto	もっと!	もっと!	秋田書店	akita	josei	分類:女性漫画雑誌		英文誌名		chii-chan-wa-chotto-tarinai fragtime koi-to-byounetsu
+NEW	コミックGOTTA	3	comic-gotta	コミックGOTTA	コミックGOTTA	小学館	shogakukan	shounen	分類:少年漫画雑誌	Comic Gotta	英文誌名		bunkasai-ura-jikkou-iinkai chouban-wanio ebiru-kun
+NEW	ガンガン戦-IXA-	3	gangan-ixa	ガンガン戦-IXA-	ガンガン戦-IXA-	スクウェア・エニックス	square-enix	shounen	分類:少年漫画雑誌	Gangan Ixa	手で決めた		blade-sangokushi-sekiheki date-ningen soushokukei-otoko
+NEW	週刊アスキー	3	weekly-ascii	週刊アスキー	週刊アスキー	アスキー	ascii-media-works	seinen	頁の多数 {'seinen': 1, 'kodomo': 1, 'josei': 1}	ASCII.jp	手で決めた		chaos-damonne-plus dokonjou-gaeru-no-musume parts-no-pa
+NEW	まんがぱれっとLite	3	manga-palette-lite	まんがぱれっとLite	まんがぱれっとLite	一迅社	ichijinsha	seinen	頁の多数 {'seinen': 2, 'shoujo': 1}		手で決めた		fushigina-somera-chan military yuki-no-saku-ni-wa
+NEW	主任がゆく!スペシャル	3	honto-ni-atta-waraeru-hanashi	本当にあった笑える話	本当にあった笑える話	ぶんか社	bunkasha	shoujo	頁の多数 {'shoujo': 1, 'josei': 1, 'seinen': 1}		手で決めた		asoko-no-project futago-complex gibo-to-musume-no-blues
+NEW	漫画ゴラクネクスター	3	manga-goraku-nexter	漫画ゴラクネクスター	漫画ゴラクネクスター	日本文芸社	nihon-bungeisha	seinen	頁の多数 {'seinen': 3}		手で決めた		hakuryuu kasai-chousakan kasai-chousakan-kurenai-renjirou
+NEW	アクションピザッツDX	3	action-pizazz-dx	アクションピザッツDX	アクションピザッツDX	双葉社	futabasha	seinen	人が決めた(一般誌・アニメ誌)	Action Pizazz DX	Wikidata英語名		himeka-sensei-no-iutoori moriage-7 oppai-festival
+NEW	ファミ通	3	famitsu	ファミ通	ファミ通	KADOKAWA Game Linkage	kadokawa-game-linkage	seinen	頁の多数 {'seinen': 3, 'shounen': 1}	Famitsu	Wikidata英語名		ii-denshi iiden terao
+NEW	週刊ポスト	3	shukan-post	週刊ポスト	週刊ポスト	小学館	shogakukan	seinen	頁の多数 {'seinen': 3}	Shūkan Post	Wikidata英語名		hyouden-no-torakutaa-gorin-kenzan kagegari nijitte-monogatari
+NEW	電撃文庫MAGAZINE	3	dengeki-bunko-magazine	電撃文庫MAGAZINE	電撃文庫MAGAZINE	KADOKAWA	kadokawa	shounen	頁の多数 {'shounen': 2, 'shoujo': 1}	Dengeki Bunko Magazine	Wikidata英語名		accel-world accel-world-hima kagerou-meikyuu
+NEW	ほんとうに怖い童話	3	honto-ni-kowai-douwa	ほんとうに怖い童話	ほんとうに怖い童話	ぶんか社	bunkasha	shoujo	頁の多数 {'shoujo': 3}		手で決めた		kijin-tantei-ginnezumi koushakuke-no-bara-no-mi shi-to-kanojo-to-boku-ikiru
+NEW	まんがタイムラブリー	3	manga-time-lovely	まんがタイムラブリー	まんがタイムラブリー	芳文社	houbunsha	shoujo	頁の多数 {'shoujo': 2, 'josei': 1}	Manga Time Lovely	Wikidata英語名		miss-poppyseed-no-meruhen-yokochou oyuya-e-youkoso tadaima-dokushinchuu
+NEW	電撃ホビーマガジン	3	dengeki-hobby-magazine	電撃ホビーマガジン	電撃ホビーマガジン	アスキー・メディアワークス	ascii-media-works	shounen	頁の多数 {'shounen': 3}	Dengeki Hobby Magazine	Wikidata英語名		super-robot-taisen-og-dibain-wars-record-of-atx super-robot-taisen-og-ji-inspector-record-of-atx zoids-ss
+NEW	少女フレンド	2	shojo-friend	少女フレンド	少女フレンド	講談社	kodansha	shoujo	分類:少女漫画雑誌	Shōjo Friend	Wikidata英語名		100-nen-no-raira akatsuka-fujio-ura-1000-peeji
+NEW	小説新潮	2	shosetsu-shincho	小説新潮	小説新潮	新潮社	shinchosha	seinen	頁の多数 {'seinen': 2}	Shōsetsu shinchō	Wikidata英語名		akatsuka-fujio-ura-1000-peeji ooya-san-to-boku
+NEW	女性自身	2	josei-jishin	女性自身	女性自身	光文社	kobunsha	josei	人が決めた(一般誌・アニメ誌)	Josei Jishin	Wikidata英語名		akatsuka-fujio-ura-1000-peeji shinseiki-akujo-seisho
+NEW	ベビーブック	2	babybook	ベビーブック	ベビーブック	小学館	shogakukan	kodomo	分類:幼年雑誌	BabyBook	Wikidata英語名		asari-chan shin-obake-no-qtarou
+NEW	まんが王	2	manga-ou	まんが王	まんが王	秋田書店	akita	kodomo	分類:児童・幼年漫画雑誌		ヘボン式		chouken-leap ozawa-satoru-mishuuroku-tanpenshuu
+NEW	ドラゴンマガジン	2	dragon-magazine	ドラゴンマガジン	ドラゴンマガジン	KADOKAWA	kadokawa	seinen	頁の多数 {'seinen': 1, 'shounen': 1}	Dragon Magazine	英文誌名		dragon-half seitokai-no-ichizon
+NEW	別冊少年サンデー	2	bessatsu-shonen-sunday	別冊少年サンデー	別冊少年サンデー	小学館	shogakukan	shounen	分類:少年漫画雑誌	Bessatsu Shōnen Sunday	Wikidata英語名		tezuka-osamu-space-adventure-short-stories umi-no-ouji-2009
+NEW	ゲーメスト	2	gamest	ゲーメスト	ゲーメスト	新声社	shinseisha-game	shounen	頁の多数 {'shounen': 2}	Gamest	Wikidata英語名		ryuuko-no-ken-2 street-fighter-zero
+NEW	ヤングアニマルZERO	2	young-animal-zero	ヤングアニマルZERO	ヤングアニマルZERO	白泉社	hakusensha	seinen	分類:青年漫画雑誌	Young Animal Zero	Wikidata英語名		doka-gui-daisuki-mochizuki-san hokuou-futari-gurashi
+NEW	POPEYE	2	popeye	POPEYE	POPEYE	マガジンハウス	magazine-house	seinen	人が決めた(一般誌・アニメ誌)	Popeye	Wikidata英語名		come-on-clash-baby kaettekita-highschool-kimengumi
+NEW	コミックガンマ	2	comic-ganma	コミックガンマ	コミックガンマ	竹書房	takeshobo	shounen	分類:少年漫画雑誌	Comic Ganma	Wikidata英語名		ao-kushi-mitama-blue-seed fantasia
+NEW	マンガごっちゃ	2	manga-goccha	マンガごっちゃ	マンガごっちゃ	マイクロマガジン社	micro-magazine	seinen	頁の多数 {'seinen': 2}	Manga Goccha	Wikidata英語名		kikai-doll-nanami-chan kotoura-san
+NEW	Zipper comic	2	zipper-comic	Zipper comic	Zipper comic	祥伝社	shodensha	shoujo	分類:少女漫画雑誌	Zipper Comic	Wikidata英語名		heart-o-uchinomese sex-no-ato-otokonoko-no-ase-wa-hachimitsu-no-nioi-ga-suru
+NEW	ビタマン	2	vitaman	ビタマン	ビタマン	竹書房	takeshobo	seinen	頁の多数 {'seinen': 2}	Vitaman	英文誌名		oishii-sanshimai velvet-kiss
+NEW	CUTiE	2	cutie	CUTiE	CUTiE	宝島社	takarajimasha	josei	頁の多数 {'josei': 2}		ヘボン式		jelly-in-the-merry-go-round ribaazu-edge
+NEW	アップルミステリー	2	mugenkan	夢幻館	夢幻館	朝日ソノラマ	asahi-sonorama	josei	分類:女性漫画雑誌	Mugenkan	Wikidata英語名		pet-shop-obu-horaazu petshop-of-horrors
+NEW	月刊少年ブラッド	2	monthly-shonen-blood	月刊少年ブラッド	月刊少年ブラッド	SBクリエイティブ	sb-creative	shounen	分類:少年漫画雑誌		手で決めた		act-on break-blade
+NEW	週刊ぼくらマガジン	2	weekly-bokura-magazine	週刊ぼくらマガジン	週刊ぼくらマガジン	講談社	kodansha	shounen	分類:少年漫画雑誌	Weekly Bokura Magazine	Wikidata英語名		baromu-1 kamen-rider
+NEW	コミックブレイドBROWNIE	2	comic-blade-brownie	コミックブレイドBROWNIE	コミックブレイドBROWNIE	マッグガーデン	mag-garden	seinen	頁の多数 {'seinen': 1, 'shounen': 1}	Comic Blade Brownie	英文誌名		boukyaku-no-cradle kyouraku-region
+NEW	まんがタウンオリジナル	2	manga-town-original	まんがタウンオリジナル	まんがタウンオリジナル	双葉社	futabasha	josei	頁の多数 {'josei': 1, 'seinen': 1}		手で決めた		chicchai-nurse shisukona-futari
+NEW	COMIC Crimson	2	comic-crimson	COMIC Crimson	COMIC Crimson	創美社	sobisha	shoujo	分類:少女漫画雑誌		ヘボン式		corseltel-no-ryuujitsushi corseltel-no-ryuujitsushi-koryuu-monogatari
+NEW	エース桃組	2	ace-momogumi	エース桃組	エース桃組	角川書店	kadokawa	shounen	分類:少年漫画雑誌		手で決めた		canvas2 dai-mahou-touge
+NEW	もえよん	2	moeyon	もえよん	もえよん	双葉社	futabasha	seinen	頁の多数 {'seinen': 2}	Moeyon	Wikidata英語名		danshaku-kouchou-hai kanimega-daisessen
+NEW	別冊ビバプリンセス	2	bessatsu-viva-princess	別冊ビバプリンセス	別冊ビバプリンセス	秋田書店	akita	shoujo	分類:少女漫画雑誌	Bessatsu Viva Princess	Wikidata英語名		eroika-yori-ai-o-komete fufufu-no-yami
+NEW	コミックギア	2	comic-gear	コミックギア	コミックギア	芳文社	houbunsha	shoujo	頁の多数 {'shoujo': 1, 'seinen': 1}	Comic Gear	Wikidata英語名		good-game super-ore-sama-rabu-story
+NEW	コミック乱ツインズ 戦国武将列伝	2	comic-ran-twins-sengoku-busho-retsuden	コミック乱ツインズ 戦国武将列伝	コミック乱ツインズ 戦国武将列伝	リイド社	leed	seinen	分類:青年漫画雑誌		手で決めた		onikirimaru-den sengoku-jieitai-2014
+NEW	ゴラクエッグ	2	goraku-web	ゴラクうぇぶ!	ゴラクうぇぶ!	日本文芸社	nihon-bungeisha	seinen	頁の多数 {'seinen': 2, 'josei': 1}		手で決めた		hagure-idol-jigokuhen-gaiden-princess-seera shasou-no-gourmet
+NEW	ヤングロゼ	2	young-rose	ヤングロゼ	ヤングロゼ	角川書店	kadokawa	josei	分類:女性漫画雑誌	Young Rose	英文誌名		sale shounen-nureyasuku-koi-narigatashi
+NEW	テイルズ オブ マガジン	2	tales-of-magazine	テイルズ オブ マガジン	テイルズ オブ マガジン	角川書店	kadokawa	seinen	頁の多数 {'seinen': 2}	VIVA☆TALES OF MAGAZINE	英文誌名		tales-of-ji-abyss-senketsu-no-asch tales-of-phantasia
+NEW	Nemuki+	2	nemuki-plus	Nemuki+	Nemuki+	朝日新聞出版	asahi-shimbun	shoujo	分類:少女漫画雑誌	Nemuki+	Wikidata英語名		bokuboku-sensei yami-no-moribito
+NEW	ボーイズライフ	1	boy-s-life	ボーイズライフ	ボーイズライフ	小学館	shogakukan	shounen	分類:少年漫画雑誌	Boy's Life	Wikidata英語名		akatsuka-fujio-ura-1000-peeji
+NEW	週刊宝石	1	shukan-hoseki	週刊宝石	週刊宝石	光文社	kobunsha	seinen	頁の多数 {'seinen': 1}		手で決めた		akatsuka-fujio-ura-1000-peeji
+NEW	ジャストコミック	1	popcorn	ポップコーン	ポップコーン (漫画雑誌)	光文社	kobunsha	seinen	分類:青年漫画雑誌		手で決めた		akatsuka-fujio-ura-1000-peeji
+NEW	COJI-COJI	1	coji-coji	コジコジ	コジコジ	ソニー・マガジンズ	sony-magazines	shoujo	分類:少女漫画雑誌掲載漫画	Coji-Coji	Wikidata英語名		coji-coji
+NEW	ケロロランド	1	keroro-land	ケロロランド	ケロロランド	角川書店	kadokawa	kodomo	分類:児童・幼年漫画雑誌	Keroro Land	Wikidata英語名		keroro-gunsou
+NEW	ポケモンワンダーランド	1	pokemon-wonderland	ポケモンワンダーランド	ポケモンワンダーランド	小学館	shogakukan	kodomo	分類:児童・幼年漫画雑誌		手で決めた		pocket-monsters-special
+NEW	月刊少年マガジン+	1	monthly-shonen-magazine-plus	月刊少年マガジン+	月刊少年マガジン+	講談社	kodansha	shounen	分類:少年漫画雑誌	Monthly Shōnen Magazine+	Wikidata英語名		q-e-d-shoumei-shuuryou
+NEW	ザ・ビーンズ	1	the-beans	ザ・ビーンズ	ザ・ビーンズ	角川書店	kadokawa	shoujo	頁の多数 {'shoujo': 1}	The Beans	Wikidata英語名		saiunkoku-monogatari
+NEW	サスペリアミステリー	1	suspension-mystery	サスペリアミステリー	サスペリアミステリー	秋田書店	akita	shoujo	分類:少女漫画雑誌	Suspension Mystery	Wikidata英語名		shinshi-to-shukujo-to-shounen-to
+NEW	たのしい二年生	1	tanoshii-ichinensei	たのしい一年生	たのしい一年生	講談社	kodansha	kodomo	分類:日本の児童雑誌		ヘボン式		the-complete-works-of-fujikoffujio
+NEW	季刊エス	1	kikan-s	季刊エス	季刊エス	パイ インターナショナル	pie-international	shounen	頁の多数 {'shounen': 1}		手で決めた		time-killers
+NEW	AERA	1	aera	AERA	AERA	朝日新聞出版	asahi-shimbun	josei	頁の多数 {'josei': 1}	Aera	英文誌名		ochibi-san
+NEW	電撃黒「マ）王	1	dengeki-black-maoh	電撃黒マ王	電撃黒マ王	アスキー・メディアワークス	ascii-media-works	seinen	分類:青年漫画雑誌	Dengeki Black Maoh	Wikidata英語名		shakugan-no-shana-x-eternal-song-harukanaru-uta
+NEW	ヤングドラゴンエイジ	1	young-dragon-age	ヤングドラゴンエイジ	ヤングドラゴンエイジ	KADOKAWA	kadokawa	seinen	分類:青年漫画雑誌	Young Dragon Age	英文誌名		kaijuuiro-no-shima
+NEW	月刊少年コミック	1	monthly-shonen-comic	月刊少年コミック	月刊少年コミック	少年画報社	shonen-gahosha	shounen	分類:少年漫画雑誌		手で決めた		hey-riki
+NEW	ジャパニズム	1	japanism	ジャパニズム	ジャパニズム	青林堂	seirindo	seinen	頁の多数 {'seinen': 1}	Japanism	英文誌名		hinomaru-gaisen-otome
+NEW	電撃コミック ジャパン	1	dengeki-comic-japan	電撃コミック ジャパン	電撃コミック ジャパン	アスキー・メディアワークス	ascii-media-works	seinen	頁の多数 {'seinen': 1}		手で決めた		bernard-jou-iwaku
+NEW	モデルグラフィックス	1	model-graphix	モデルグラフィックス	モデルグラフィックス	大日本絵画	dainippon-kaiga	seinen	頁の多数 {'seinen': 1}	Model Graphix	英文誌名		kaze-tachinu-hori
+NEW	野性時代	1	shosetsu-yasei-jidai	小説 野性時代	小説 野性時代	KADOKAWA	kadokawa	seinen	頁の多数 {'seinen': 1}		英文誌名		sekai-no-owari-to-yoakemae
+NEW	コミックブレイドZEBEL	1	comic-blade-zebel	コミックブレイドZEBEL	コミックブレイドZEBEL	マッグガーデン	mag-garden	shoujo	分類:少女漫画雑誌		手で決めた		vassalord
+NEW	エース特濃	1	ace-tokunou	エース特濃	エース特濃	角川書店	kadokawa	seinen	分類:青年漫画雑誌		手で決めた		inu-neko
+NEW	新潮45	1	shincho-45	新潮45	新潮45	新潮社	shinchosha	seinen	頁の多数 {'seinen': 1}	Shinchō 45	Wikidata英語名		plinivs
+NEW	COMIC SEED!	1	comic-seed	COMIC SEED!	COMIC SEED!	ぺんぎん書房	penginshobou	seinen	頁の多数 {'seinen': 1}		ヘボン式		tsugumomo
+NEW	Zipper	1	zipper	Zipper	Zipper	祥伝社	shodensha	josei	頁の多数 {'josei': 1}	Zipper	Wikidata英語名		paradise-kiss
+NEW	TECH GIAN	1	tech-gian	TECH GIAN	TECH GIAN	KADOKAWA	kadokawa	seinen	頁の多数 {'seinen': 1}	Tech Gian	Wikidata英語名		manyuu-hikenchou
+NEW	ヤングレディ	1	young-lady	ヤングレディ	ヤングレディ	講談社	kodansha	seinen	頁の多数 {'seinen': 1}	Young Lady	Wikidata英語名		akuma-no-youna-aitsu
+NEW	マガジン・ノン	1	comic-nostradamus	コミック・ノストラダムス	コミック・ノストラダムス	祥伝社	shodensha	seinen	頁の多数 {'seinen': 1}		手で決めた		blanca
+NEW	an・an	1	an-an	An・an	An・an	マガジンハウス	magazine-house	seinen	頁の多数 {'seinen': 1}	an an	Wikidata英語名		boku-no-nee-chan
+NEW	ファミリーコンピュータMagazine	1	family-computer-magazine	ファミリーコンピュータMagazine	ファミリーコンピュータMagazine	徳間書店インターメディア	tokumashotenintaamedia	shounen	頁の多数 {'shounen': 1}	Family Computer Magazine	Wikidata英語名		fire-emblem-1993
+NEW	週刊セブンティーン	1	seventeen	Seventeen	Seventeen (日本の雑誌)	集英社	shueisha	shoujo	頁の多数 {'shoujo': 1}	Seventeen	英文誌名		fire
+NEW	アクションピザッツSP	1	action-pizazz-sp	アクションピザッツSP	アクションピザッツSP	双葉社	futabasha	seinen	人が決めた(一般誌・アニメ誌)		手で決めた		fukushuu-no-miboujin
+NEW	スーパーロボットマガジン	1	super-robot-magazine	スーパーロボットマガジン	スーパーロボットマガジン	双葉社	futabasha	shounen	分類:少年漫画雑誌	Super Robot Magazine	Wikidata英語名		getter-robo-arc
+NEW	アクションピザッツ	1	action-pizazz	アクションピザッツ	アクションピザッツ	双葉社	futabasha	seinen	頁の多数 {'seinen': 1}	Action Pizazz	Wikidata英語名		gin-to-kin
+NEW	XOY	1	webtoon	LINE WEBTOON	LINE WEBTOON	NHN comico	nhn-comico	josei	頁の多数 {'josei': 1, 'shounen': 1}	Webtoon	Wikidata英語名		gisou-furin
+NEW	コミック・モエ	1	comic-moe	コミック・モエ	コミック・モエ	偕成社	kaiseisha	seinen	頁の多数 {'seinen': 1}		英文誌名		hamster-no-kenkyuu-report
+NEW	月刊ウイングス	1	wings	ウィングス	ウィングス (雑誌)	新書館	shinshokan	josei	分類:女性漫画雑誌	Wings	Wikidata英語名		hibikino-bb
+NEW	わしズム	1	washizumu	わしズム	わしズム	幻冬舎	gentosha	seinen	頁の多数 {'seinen': 1}		手で決めた		hikyoumono-no-shima
+NEW	わぁい!	1	waai	わぁい!	わぁい!	一迅社	ichijinsha	seinen	頁の多数 {'seinen': 1}		ヘボン式		himegoto-2013
+NEW	コミックFantasy	1	comic-fantasy	コミックFantasy	コミックFantasy	偕成社	kaiseisha	shoujo	頁の多数 {'shoujo': 1}		英文誌名		himitsu-no-kaidan
+NEW	月刊スーパーアクション	1	super-action	月刊スーパーアクション	月刊スーパーアクション	双葉社	futabasha	seinen	頁の多数 {'seinen': 1}	Super Action	Wikidata英語名		i-city
+NEW	漫革	1	monthly-young-jump	月刊ヤングジャンプ	月刊ヤングジャンプ	集英社	shueisha	seinen	分類:青年漫画雑誌	Monthly Young Jump	Wikidata英語名		idol-days
+NEW	ゲーマガ	1	gemaga	ゲーマガ	ゲーマガ	SBクリエイティブ	sb-creative	seinen	頁の多数 {'seinen': 1}	Gemaga	Wikidata英語名		ika-ryaku
+NEW	ファミ通ブロス	1	famitsu-bros	ファミ通ブロス	ファミ通ブロス	エンターブレイン	enterbrain	kodomo	分類:児童・幼年漫画雑誌		手で決めた		jibaku-kun
+NEW	ヤング・キャプテン	1	young-captain	ヤング・キャプテン	ヤング・キャプテン	徳間書店	tokuma	seinen	分類:青年漫画雑誌		手で決めた		kamenbokusaa
+NEW	COMICすもも	1	comic-sumomo	COMICすもも	COMICすもも	双葉社	futabasha	seinen	分類:青年漫画雑誌	COMIC SUMOMO	英文誌名		kono-onee-san-wa-fiction-desu
+NEW	yom yom	1	yomyom	Yom yom	Yom yom	新潮社	shinchosha	josei	頁の多数 {'josei': 1}	Yomyom	Wikidata英語名		konya-sukiyaki-dayo
+NEW	ねこぱんち	1	neko-panch	ねこぱんち	ねこぱんち	少年画報社	shonen-gahosha	shoujo	頁の多数 {'shoujo': 1}	Nekopanchi	手で決めた		kuroneko-ace
+NEW	CUTiE Comic	1	cutie-comic	CUTiE Comic	CUTiE Comic	宝島社	takarajimasha	shoujo	分類:少女漫画雑誌		ヘボン式		lovely
+NEW	週刊少年アクション	1	weekly-shonen-action	週刊少年アクション	週刊少年アクション	双葉社	futabasha	shounen	分類:少年漫画雑誌		手で決めた		majuu-sensen
+NEW	COMIC LO	1	comic-lo	コミックエルオー	コミックエルオー	茜新社	akaneshinsha	seinen	頁の多数 {'seinen': 1}	Comic LO	英文誌名		mako-chan-enikki
+NEW	オースーパージャンプ	1	oh-super-jump	オースーパージャンプ	オースーパージャンプ	集英社	shueisha	seinen	分類:青年漫画雑誌	Oh SUPER JUMP	Wikidata英語名		marii-antoinette-no-ryourinin
+NEW	コンプH's	1	comp-hs	コンプH's	コンプH's	角川書店	kadokawa	seinen	頁の多数 {'seinen': 1}		手で決めた		miyakawake-no-kuufuku
+NEW	模型情報	1	mokei-joho	模型情報	模型情報	バンダイ	bandai	shounen	頁の多数 {'shounen': 1}		手で決めた		mobile-suit-gundam-emuesu-generation
+NEW	MS SAGA	1	ms-saga	MS SAGA	MS SAGA	バンダイ	bandai	shounen	頁の多数 {'shounen': 1}		ヘボン式		mobile-suit-gundam-reon
+NEW	コミックエッセイ劇場	1	comic-essay-gekijo	コミックエッセイ劇場	コミックエッセイ劇場	メディアファクトリー	mediafactory	josei	頁の多数 {'josei': 1}		手で決めた		momoiro-shoten-e-youkoso
+NEW	朝日ジャーナル	1	asahi-journal	朝日ジャーナル	朝日ジャーナル	朝日新聞社	asahi-shimbun	seinen	頁の多数 {'seinen': 1}		手で決めた		neo-faust
+NEW	Beth	1	beth	Beth	Beth	講談社	kodansha	josei	分類:女性漫画雑誌	Beth	Wikidata英語名		ohitori-sama-monogatari
+NEW	プチセブン	1	petit-seven	プチセブン	プチセブン	小学館	shogakukan	shoujo	頁の多数 {'shoujo': 1}	Petit Seven	英文誌名		pink-no-seito-techou
+NEW	パチプロ7	1	pachipuro-7	パチプロ7	パチプロ7	辰巳出版	tatsumi	seinen	頁の多数 {'seinen': 1}		ヘボン式		ren-chan-papa
+NEW	電撃ゲームス	1	dengeki-games	電撃ゲームス	電撃ゲームス	アスキー・メディアワークス	ascii-media-works	seinen	頁の多数 {'seinen': 1}	Dengeki Games	Wikidata英語名		rorikura-hoorudo
+NEW	RPGマガジン	1	rpg-magazine	RPGマガジン	RPGマガジン	ホビージャパン	hobby-japan	seinen	頁の多数 {'seinen': 1}	PRG Magazine	手で決めた		rpg-nante-kowakunai
+NEW	小説現代	1	shosetsu-gendai	小説現代	小説現代	講談社	kodansha	seinen	頁の多数 {'seinen': 1}	Shōsetsu Gendai	Wikidata英語名		runashii
+NEW	JOTOMO	1	jogakusei-no-tomo	女学生の友	女学生の友	小学館	shogakukan	shoujo	頁の多数 {'shoujo': 1}		ヘボン式		sayounara-onnatachi
+NEW	ル・ノエル	1	le-noel	ル・ノエル	ル・ノエル	宙出版	ozora-shuppan	shoujo	頁の多数 {'shoujo': 1}		手で決めた		seiryaku-kekkon-no-danna-sama-kari-to-koi-o-hajimemasu
+NEW	COMICジャンク	1	comic-junk	COMICジャンク	COMICジャンク	あおば出版	aoba-shuppan	seinen	分類:青年漫画雑誌		手で決めた		shin-naniwa-kinyuudou
+NEW	テレビブロス	1	tv-bros	テレビブロス	テレビブロス	東京ニュース通信社	toukyounyuusutsuushinsha	seinen	頁の多数 {'seinen': 1}	TV Bros	Wikidata英語名		tooku-e-ikitai
+NEW	ファミコン必勝本	1	famicom-hisshoubon	ファミコン必勝本	ファミコン必勝本	宝島社	takarajimasha	seinen	頁の多数 {'seinen': 1}	Famicom Hisshoubon	Wikidata英語名		uizaadorii-gaiden
+NEW	レモンピープル	1	lemon-people	レモンピープル	レモンピープル	久保書店	kubo-shoten	josei	頁の多数 {'josei': 1}	Lemon People	Wikidata英語名		valkyrie
+NEW	DOS/V POWER REPORT	1	dos-v-power-report	DOS/V POWER REPORT	DOS/V POWER REPORT	インプレス	inpuresu	seinen	人が決めた(一般誌・アニメ誌)		ヘボン式		wagamama-diy
+NEW	IN★POCKET	1	in-pocket	IN★POCKET	IN★POCKET	講談社	kodansha	seinen	頁の多数 {'seinen': 1}		ヘボン式		youkoso-amazonesu-pocket-henshuubu-e
+NEW	漫画実話ナックルズ	1	manga-jitsuwa-knuckles	漫画実話ナックルズ	漫画実話ナックルズ	ミリオン出版	mirionshuppan	seinen	分類:青年漫画雑誌		手で決めた		zen-zen-shiranai-machi-o-aruite-mita-mono-no
+NEW	少年王	1	shonen-ou	少年王	少年王	光文社	kobunsha	shounen	分類:少年漫画雑誌		手で決めた		zeruda-no-densetsu-riruto-no-chikai
+NEW	週刊読売	1	yomiuri-weekly	読売ウイークリー	読売ウイークリー	読売新聞社	yomiurishinbunsha	seinen	人が決めた(一般誌・アニメ誌)		手で決めた		shin-kyojin-no-hoshi
+NEW	デジール	1	desir-sp	デジールSP	デジールSP	秋田書店	akita	josei	分類:女性漫画雑誌	Desir SP	Wikidata英語名		bokutachi-no-kankei
+NEW	週刊明星	1	weekly-myojo	週刊明星	週刊明星	集英社	shueisha	shoujo	頁の多数 {'shoujo': 1}	Weekly Myōjō	Wikidata英語名		omoide-poroporo
+NEW	ヤングキング別冊キングダム	1	young-king-bessatsu-kingdom	ヤングキング別冊キングダム	ヤングキング別冊キングダム	少年画報社	shonen-gahosha	seinen	分類:青年漫画雑誌		手で決めた		iketeru-police
+NEW	電撃Animation Magazine	1	dengeki-animaga	電撃アニマガ	電撃アニマガ	メディアワークス	ascii-media-works	shounen	頁の多数 {'shounen': 1}		ヘボン式		sumeba-miyako-no-cosmos-sou
+NEW	ザ・リバティ	1	the-liberty	ザ・リバティ	ザ・リバティ	幸福の科学出版	koufukunokagakushuppan	seinen	頁の多数 {'seinen': 1}	The Liberty	英文誌名		manga-eien-no-hou
+NEW	月刊少年ファング	1	monthly-fang	月刊少年ファング	月刊少年ファング	リイド社	leed	shounen	分類:少年漫画雑誌		英文誌名		keetai-shoujo
+NEW	ガッツポン	1	guts-pon	ガッツポン	ガッツポン	小池書院	koike-shoin	seinen	分類:青年漫画雑誌		英文誌名		shin-nijitte-monogatari-tsurujirou
+NEW	電撃HIME	1	dengeki-hime	DENGEKI HIME	DENGEKI HIME	アスキー・メディアワークス	ascii-media-works	seinen	頁の多数 {'seinen': 1}	Dengeki Hime	Wikidata英語名		dai-toshokan-no-hitsujikai-lovely-raiburarianzu
+NEW	花とゆめ 文系少女	1	hana-to-yume-bunkei-shojo	花とゆめ 文系少女	花とゆめ 文系少女	白泉社	hakusensha	shoujo	分類:少女漫画雑誌		手で決めた		wagashi-no-an
+NEW	週刊実話	1	shukan-jitsuwa	週刊実話	週刊実話	日本ジャーナル出版	nipponjaanarushuppan	seinen	頁の多数 {'seinen': 1}	Shukan Jitsuwa	Wikidata英語名		shin-oh-toumei-ningen
+NEW	Febri	1	febri	Febri	Febri	一迅社	ichijinsha	shounen	頁の多数 {'shounen': 1}	Febri	Wikidata英語名		the-idolm-ster-million-live-theater-days-brand-new-song
+NEW	たそがれ食堂	1	tasogare-shokudou	たそがれ食堂	たそがれ食堂	幻冬舎コミックス	gentosha-comics	seinen	頁の多数 {'seinen': 1}		ヘボン式		tasogare-yuusaku
