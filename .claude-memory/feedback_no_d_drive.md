@@ -16,5 +16,6 @@ metadata:
 **How to apply:**
 - 新しい置き場は **リポジトリ `.cache/`(C: 実体)** か C: の下。 `df` で空きを見る時も C: だけを見る・報告する。
 - 道具で大きいファイルの置き場を決める時は、 解決後のパスが D: なら止める(`scripts/_wiki_local.py` の `_assert_c_drive` が手本)。
-- 既存の D: 依存 = `_deploy-differential.py` の `DIFFDATA = D:\mangal-cache\diffdata` ハードコード([[pc_migration_2026_07_17]])。 移すかはユーザに確認してから。
+- 2026-11-07 時点でコードの D: 参照は 0(差分反映の DIFFDATA は 7/17 から `.cache/diffdata`=C:・`_enrich-captions.py` の D: 写し読みは外した)。 ★「D: を使っている」と言う前に**コードを grep して確かめる**(古い記憶で誤報した)。
+- D: = ユーザのバックアップ倉庫(7/17 裁定)。 `D:\mangal-cache` の残り(diffdata 551MB 等)は触らない・消さない。
 - 関連: [[d_drive_external_flaky]] [[feedback_user_directive_supremacy]]

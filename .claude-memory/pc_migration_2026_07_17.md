@@ -20,7 +20,7 @@ metadata:
 
 ## 環境の実態(このPC)
 
-- `.cache` は **C: の実体ディレクトリ**(junction ではない)。1,824件。★ただし `_deploy-differential.py` が `DIFFDATA = D:\mangal-cache\diffdata` を**ハードコード参照**しているので **D: は外せない**([[d-drive-external-flaky]] = 認識が外れたら挿し直し待ちのみ、レター探索/変更は絶対しない)。
+- `.cache` は **C: の実体ディレクトリ**(junction ではない)。1,824件。(旧記述: `_deploy-differential.py` の DIFFDATA が D: だった → ★7/17 に `.cache/diffdata`=C: へ移済み。 2026-11-07 時点でコードの D: 参照は 0)([[d-drive-external-flaky]] = 認識が外れたら挿し直し待ちのみ、レター探索/変更は絶対しない)。
 - `c.bat` / `d.bat` は先頭が `cd /d "%~dp0"` = **自己相対なので移行で書き換え不要**(旧PCの絶対パスは埋まっていない)。`claude` も PATH 解決OK(`~\.local\bin\claude.exe`)。★c.bat のモデルは `fable[1m]`、d.bat は `sonnet`(idle-run前提)= ユーザ裁定で**そのまま**。
 - ★**Defender除外は未設定の可能性**(確認に管理者権限が要り未確認)。旧PCでは repo と `D:\mangal-cache` を除外していた。I/Oが遅いと感じたらここを疑う。
 - R2認証はこのPCから疎通確認済み(mangal-site 読取OK / 134,066オブジェクト / 100%が単一part=ETagはMD5)。

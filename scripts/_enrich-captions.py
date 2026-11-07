@@ -70,12 +70,10 @@ if os.path.exists(pj):
 #   その後に収穫した rakuten-isbn-delta.jsonl(2026-06-28・828MB)の caption を丸ごと捨てていた。
 #   実測(本番 catch空×2巻以上 13,257頁): 旧=材料が取れるのは180頁 → delta込みで365頁(+185)。
 #   2026-07-26 の「キャッシュを見ていなかった」修正と同じ型の取りこぼし。
-#   D: は外付けで不在のことがある(= [[d_drive_external_flaky]])ので存在する物だけ読む。
+#   ★2026-11-07: D: の写し(6月版)は外した = C: の .cache の方が新しく、 D: にだけ在る ISBN は 0 件(実測)。 D: は使わない。
 _CAP_SOURCES = [
     f"{ROOT}/.cache/rakuten-isbn.jsonl",
     f"{ROOT}/.cache/rakuten-isbn-delta.jsonl",
-    "D:/mangal-cache/rakuten-isbn.jsonl",
-    "D:/mangal-cache/rakuten-isbn-delta.jsonl",
 ]
 _seen_src = set()
 for rj in _CAP_SOURCES:

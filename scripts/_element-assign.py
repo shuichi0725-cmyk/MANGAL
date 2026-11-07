@@ -106,7 +106,7 @@ judged = 「候補」の語すべてについて1件ずつ(違う も必ず書�
 
 
 
-def _rel(p):  # 表示用。 置き場が別ドライブ(D:\mangal-cache)の時 relpath は ValueError になる
+def _rel(p):  # 表示用。 置き場が別ドライブの時 relpath は ValueError になる
     try:
         return os.path.relpath(p, ROOT)
     except ValueError:
