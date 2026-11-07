@@ -168,13 +168,17 @@ def ident(key_or_name):
         return key_or_name
     if key_or_name.startswith("?"):
         key_or_name = key_or_name[1:]
-    c = canon(key_or_name)
+    # ★2026-11-07: canon は 週刊/月刊 と「+」を落とすので、 月刊少年ジャンプ・少年ジャンプ+ → 週刊少年ジャンプ、
+    #   月刊少年チャンピオン → 週刊少年チャンピオン に黙って寄っていた(マスタの先頭に在る方が勝つ)。 誌名の完全一致を先に見て、
+    #   canon で2誌以上に当たる時は寄せずに「?」で返す。 新しい照合は scripts/_magazine-ledger.py の resolve を使う。
+    ex = unicodedata.normalize("NFKC", key_or_name)
     for k, v in MAG.items():
-        if canon(v["name"]) == c:
+        if unicodedata.normalize("NFKC", v["name"]) == ex:
             return k
-    for a, k in WIKI2KEY.items():
-        if canon(a) == c:
-            return k
+    c = canon(key_or_name)
+    hit = {k for k, v in MAG.items() if canon(v["name"]) == c} | {k for a, k in WIKI2KEY.items() if canon(a) == c}
+    if len(hit) == 1:
+        return next(iter(hit))
     return "?" + c
 
 

@@ -86,3 +86,11 @@ ja.wikipedia「スーパージャンプ」掲載作品一覧 **144作** × 本�
 - ★誌でないもの(EXCLUDE): 単行本の題(神秘家水木しげる伝・新MS戦記)/ 増刊の一号(スレイヤーズ・レジェンド)/ 貸本選集(魔像別冊書下し選集2)/ 初出欄が「」/ 判別できない「別冊コミック」/ 複数増刊の短編集。
 - 雑誌の一覧頁は lib/hubs.ts の HUB_MIN.magazine=3 = 1〜2作の誌はマスタに足しても一覧頁は出来ない(作品頁の連載誌の表示だけ)。 → 小さい誌も気にせず足してよい。
 - ★**雑誌マスタの publisher は空でも `''` と書く**(2026-11-04 実踏): `publisher:`(値なし)= YAML の null → `lib/schema.ts` MagazineSchema の `z.string()` で落ち、 **テスト環境の next build が失敗**(本番の週次でも同じく落ちる)。 マスタを足したら push 前に `MANGAL_DATA_DIR=.preview-data FULL=1 npx tsx scripts/magazine-verify/check-masters.ts` と本番(`npx tsx …check-masters.ts`)を通す。
+
+## 2026-11-07 根拠台帳(ユーザ「漫画名・作者・原作・作画・根拠複数・最終確認日で、未調査と見つからずを分けたい」)
+- 正本 = `data/seeds/magazine-evidence/`(README あり)。 道具 = `scripts/_magazine-ledger.py`(sweep-madb / sweep-rakuten / import-legacy / build)。
+  表(写し) = `docs/production-diagnostics/magazine-ledger.tsv`(全69,903頁・18MB)+ `-summary.tsv`(誌×状態)。 build 約20秒・本番不変。
+- ソース: MADB初出(巻ISBN結合)・MADB目次(題+著者+年)・楽天説明(弱)・Wiki一覧(11/4の当たりのみ=外れは未調査扱い)・Wiki記事・人の裁定。 **NDL は連載誌を持たない**のでソースにしない(著者の役割には使える)。
+- 状態(11/7): 空欄でMADB/楽天に無くWiki未調査 52,848 / 値ありで根拠なし(AI埋め)Wiki未調査 10,041 / 一致2+ 2,537 / 一致1 2,461 / 空欄・根拠あり 925 / 食い違い 246 / 楽天だけ別誌 46。 → 次の手は Wikipedia(作品記事)。
+- ★**11/4 の照合関数 `wiki_mag_lib.canon` の不具合**: 週刊/月刊・「+」・「プラス」を落とすので 月刊少年チャンピオン→週刊少年チャンピオン、 少年ジャンプ+/月刊少年ジャンプ→週刊少年ジャンプ、 花とゆめプラス→花とゆめ に黙って寄っていた(ident がマスタ先頭を返す)。 ident は完全一致優先+2誌以上は「?」に直した。 新しい照合は `_magazine-ledger.py resolve`(落とさない・明示の別名だけ・11/4 CONFIG は損失のない名にだけ使う)。
+- ★これで誤って上書きした **6頁 = Go待ち**: drop / gokuman / hakaijuu / katteni-takahashi-hiroshi / worst-gaiden(正=月刊少年チャンピオン・マスタに無い)、 asa-ga-mata-kuru-kara(初出=花とゆめプラス→別冊花とゆめ)。 kaze-ga-gotoku は目次70回=週刊で正しい。
