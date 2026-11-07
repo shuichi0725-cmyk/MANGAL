@@ -3,7 +3,7 @@
   python scripts/magazine-verify/mag_master_3.py plan    # 計画表 docs/production-diagnostics/magazine-master-plan-2026-11-07.tsv(読むだけ)
   python scripts/magazine-verify/mag_master_3.py apply   # 計画の NEW を data/magazines.yml へ、 ALIAS を data/seeds/magazine-evidence/aliases.yml へ
 
-誌名ごとに: ① 本文ダンプの記事名(転送も辿る)で記事を引く ② 雑誌の記事か確かめる(Infobox 雑誌 / 分類「…漫画雑誌」「ウェブコミック…」)
+誌名ごとに: ① 手元の本文ダンプ(scripts/_wiki_local.py)の記事名(転送も辿る)で記事を引く ② 雑誌の記事か確かめる(Infobox 雑誌 / 分類「…漫画雑誌」「ウェブコミック…」)
 ③ 出版社 = Infobox の出版社 → publishers.yml のキー ④ 読者層 = 分類/ジャンル(少年/少女/青年/女性/児童)、 無ければ頁の多数
 ⑤ 既存の誌の記事に着いたら別名(ALIAS)。 キー = Wikidata の英語名(QLever)、 無ければヘボン式。
 ★守り: 増刊が親誌の記事へ転送されている(「週刊少年ジャンプ増刊」→「週刊少年ジャンプ」)= 親誌に寄せない(ユーザ裁定「増刊は別の誌」)。
@@ -14,9 +14,6 @@ from collections import Counter, defaultdict
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-DUMP = os.path.join(ROOT, ".cache", "jawiki-dump")
-ART = os.path.join(DUMP, "jawiki-latest-pages-articles-multistream.xml.bz2")
-IDX = os.path.join(DUMP, "jawiki-latest-pages-articles-multistream-index.txt.bz2")
 PLAN = os.path.join(ROOT, "docs", "production-diagnostics", "magazine-master-plan-2026-11-07.tsv")
 PLAN_JSON = os.path.join(ROOT, ".cache", "magazine-lists", "magazine-master-plan-3.json")
 ALIASES = os.path.join(ROOT, "data", "seeds", "magazine-evidence", "aliases.yml")
@@ -26,6 +23,8 @@ spec = importlib.util.spec_from_file_location("ml", os.path.join(ROOT, "scripts"
 ML = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(ML)
 import yaml
+sys.path.insert(0, os.path.join(ROOT, "scripts"))
+import _wiki_local as WL                                     # ★Wikipedia は手元のダンプ(C:)から
 
 MAG = ML.MAG
 PUB = yaml.safe_load(open(os.path.join(ROOT, "data", "publishers.yml"), encoding="utf-8"))
@@ -75,52 +74,6 @@ def title_forms(raw):
     if r[:1].isascii():
         out += [r[:1].upper() + r[1:]]
     return list(dict.fromkeys(x for x in out if x))
-
-
-def load_redirects(want):
-    red = {}
-    for line in open(os.path.join(DUMP, "redirects.tsv"), encoding="utf-8"):
-        a, _, b = line.rstrip("\n").partition("\t")
-        if a in want:
-            red[a] = b
-    return red
-
-
-def load_offsets(want):
-    off = {}
-    with bz2.open(IDX, "rt", encoding="utf-8") as f:
-        for line in f:
-            o, _, rest = line.partition(":")
-            _pid, _, t = rest.partition(":")
-            t = t.rstrip("\n")
-            if t in want:
-                off[t] = int(o)
-    return off
-
-
-def read_articles(off):
-    """multistream の該当ブロックだけ解凍して本文を取る。"""
-    by_off = defaultdict(set)
-    for t, o in off.items():
-        by_off[o].add(t)
-    got = {}
-    with open(ART, "rb") as f:
-        for o, ts in sorted(by_off.items()):
-            f.seek(o)
-            dec, buf = bz2.BZ2Decompressor(), []
-            while not dec.eof:
-                chunk = f.read(262144)
-                if not chunk:
-                    break
-                buf.append(dec.decompress(chunk))
-            xml = b"".join(buf).decode("utf-8", "replace")
-            for m in re.finditer(r"<page>.*?</page>", xml, re.S):
-                pg = m.group(0)
-                t = html.unescape(re.search(r"<title>(.*?)</title>", pg).group(1))
-                if t in ts:
-                    tm = re.search(r"<text[^>]*>(.*?)</text>", pg, re.S)
-                    got[t] = html.unescape(tm.group(1)) if tm else ""
-    return got
 
 
 # ---------------------------------------------------------------- 3. 記事を読む
@@ -305,20 +258,15 @@ def plan():
     print(f"マスタに無い誌名 {len(names):,}(頁 延べ {sum(len(v) for v in names.values()):,})", flush=True)
     forms = {n: title_forms(n) for n in names}
     want = {t for fs in forms.values() for t in fs}
-    red = load_redirects(want)
-    finals = {red.get(t, t) for t in want}
-    print("  索引を読む …", flush=True)
-    off = load_offsets(finals)
-    print(f"  記事名の候補 {len(want):,} → 在る記事 {len(off):,}", flush=True)
-    texts = read_articles(off)
-    print(f"  本文 {len(texts):,}", flush=True)
+    got = {t: g for t in want if (g := WL.get(t))}          # 手元の Wikipedia ダンプ(転送を辿る)
+    texts = {fin: wt for fin, wt in got.values()}
+    print(f"  記事名の候補 {len(want):,} → 在る記事 {len(texts):,}(ダンプ {WL.dump_date()})", flush=True)
     res = {}
     for n, fs in forms.items():
         hit = None
         for t in fs:
-            fin = red.get(t, t)
-            if fin in texts:
-                hit = (t, fin)
+            if t in got:
+                hit = (t, got[t][0])
                 break
         r = {"name": n, "pages": len(names[n]), "slugs": sorted(names[n])[:5]}
         if not hit:

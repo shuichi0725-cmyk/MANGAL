@@ -40,6 +40,7 @@ python scripts/_kobo-color-harvest.py --delta   # ⑪カラー版差分(Kobo新�
   復帰しても長時間回す仕事は無い。「何時間も回り続けている」のを見たら**それは異常**。
 
 ## ★429/冷却の共通ルール (= 2026-07-24 ユーザ指摘で機械化。運転者の判断ゼロ)
+- ★**2026-11-07〜 ⑤(wiki-fetch)⑧(kana-digit)は手元の Wikipedia ダンプ(`scripts/_wiki_local.py`・C:)から引く = Wikipedia の 429・冷却・排他はもう起きない**。 下の wiki 冷却の記述は過去の仕組み(_wiki_host.py は残置)。 ダンプが無い時は「_wiki_local.py update を先に」と出て止まる。
 - ⑤⑧(wikiホスト)は **script自身が排他ロック+冷却タイマーを持つ**(`scripts/_wiki_host.py`):
   同時起動→後発が即exit(3) / 429→冷却60分をファイルに記録して中断 / 冷却中の再起動→即exit(3)。
   ★wiki 429で「冷却60分中」が出るのは**設計通りの正常動作**(待たずに他の柱へ・次の手すきで自動再開)=異常ではない。

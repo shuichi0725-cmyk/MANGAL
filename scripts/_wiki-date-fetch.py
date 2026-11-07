@@ -5,13 +5,16 @@
       [stem, 本番title, 巻数, jawiki記事名] の配列)
 出力: .cache/wiki-sweep/<safe-key>.txt   (1記事1ファイル。既存はskip=中断再開可)
 
-礼儀: 1.1s/req・UA明示。11,268件で約3.4時間。
+★2026-11-07〜 手元の Wikipedia ダンプ(scripts/_wiki_local.py・C:)から引く(API・待ち時間なし。 11,268件で数分)。
 usage: python scripts/_wiki-date-fetch.py [--limit N]
 """
 import argparse, io, json, os, re, sys, time
 import urllib.request, urllib.parse
+sys_path = os.path.dirname(os.path.abspath(__file__))
 
 sys.stdout.reconfigure(encoding="utf-8")
+sys.path.insert(0, sys_path)
+import _wiki_local as WL
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CAND = os.path.join(ROOT, ".cache", "jawiki-title-hits.json")
 OUT = os.path.join(ROOT, ".cache", "wiki-sweep")
@@ -53,18 +56,12 @@ def main():
                 io.open(rp, encoding="utf-8", errors="replace").read())
             reused += 1
             continue
-        url = ("https://ja.wikipedia.org/w/index.php?action=raw&title="
-               + urllib.parse.quote(name))
-        try:
-            body = urllib.request.urlopen(
-                urllib.request.Request(url, headers=UA), timeout=30
-            ).read().decode("utf-8", "replace")
-        except Exception as e:
-            body = "__MISSING__ %s" % e
-            failed += 1
-        io.open(fp, "w", encoding="utf-8").write(body)
+        g = WL.get(name)                     # ★2026-11-07: 手元の Wikipedia ダンプ(C:)から。 API・1.1秒待ちは使わない
+        if g is None:
+            failed += 1                      # ダンプに無い(ダンプより新しい/消えた記事)= ファイルを書かない(次の版で拾う)
+            continue
+        io.open(fp, "w", encoding="utf-8").write(g[1])
         got += 1
-        time.sleep(1.1)
         if got % 200 == 0:
             el = time.time() - t0
             rate = got / el if el else 0

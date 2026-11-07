@@ -21,6 +21,12 @@ python scripts/_lookup.py --creator "ひおあきら" --title "宇宙戦艦ヤ�
 - ★**`--creator`(作品名+作者名でNDL SRU束縛)**=ユーザが手作業でやっていたNDL Search→TSVエクスポートの代替(2026-07-08)。`--title`だけでは楽天liveのみでNDLを叩かず、松本零士版/2199等の人気同名作に埋もれる(ひおあきら版ヤマトの教訓)。**版(seriesTitle)ごとに巻を束ねて表示・著者複数取得**(アンソロ/原作+作画の判定にそのまま使える)。古典・アンソロ・教育系の全巻/版回収はこれが本命。
 - ★**APIに無く標準WebFetchも弾かれるサイト**(潮出版社usio.co.jp等の公式・静的ページ)は `python scripts/_tinyfish.py fetch <URL>`(無料Fetch)。e-hon等セッション必須の検索は無料Fetch不可=有料Browser領域(要ユーザ承認)。詳細=**skill tinyfish**
 
+## ★Wikipedia(ja)= 手元の本文ダンプから(2026-11-07〜)
+- **`python scripts/_wiki_local.py`**(道具からは `import _wiki_local as W` → `W.get/text/categories/members/qid/links/prefix/resolve`)。 置き場 = **C: の `.cache/jawiki-dump`**(D: は使わない)。
+- ★**ja.wikipedia の API(api.php / index.php?action=raw)は使わない**: 10件ずつ3秒でも約15回で 429(11/4・11/7 実測)。 要素収集・素材ハーベスト・柱⑧・Wiki蒸留・ジャンル収集・連載誌の道具はすべて手元ダンプに切替済み。
+- 版の更新 = `python scripts/_wiki_local.py update`(日次蒸留の手順0で裏で回す)。 `status` で手元と配布元の版を見る。 ダンプより新しい記事は無い = 「無い」と記帳せず次の版で拾う。
+- できないこと: 全文検索(記事名の前方一致 `prefix` で代わり)/ テンプレートが付ける分類・隠し分類(本文の [[Category:]] だけ)。
+
 ## キャッシュ資産マップ (= どのファイルに何が入っているか。★往復根絶の核心)
 | ファイル | key | 入っているもの | ★入っていないもの |
 |---|---|---|---|

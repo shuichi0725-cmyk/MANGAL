@@ -15,9 +15,7 @@
   python scripts/_magazine-ledger.py sweep-madb      # MADB 単行本の初出欄 + 雑誌目次(手元 .cache/magazine-lists/madb-*.jsonl)
   python scripts/_magazine-ledger.py sweep-rakuten   # 楽天の商品説明(手元 .cache/rakuten-isbn-delta.jsonl)
   python scripts/_magazine-ledger.py sweep-wiki-local          # Wikipedia 作品記事: 手元に在る本文だけで判定(ネットに出ない)
-  python scripts/_magazine-ledger.py sweep-wiki-fetch [--limit N]  # まだ見ていない頁の記事を取る(10件ずつ・3秒・429で停止→再開可)。 後で sweep-wiki-local
-  python scripts/_magazine-ledger.py sweep-wiki-dump           # ★本命: 本文ダンプ(4.9GB・.cache/jawiki-dump)で全頁を判定(API は15回ほどで429になる)
-  python scripts/_magazine-ledger.py sweep-wiki-absent         # 題名の記事が全題名ダンプに無い頁を「記事なし」と記録(取得と判定の後)
+  python scripts/_magazine-ledger.py sweep-wiki-dump           # ★本命: 手元の本文ダンプ(scripts/_wiki_local.py が C: に置く)で全頁を判定。 API は使わない(15回ほどで429)
   python scripts/_magazine-ledger.py import-legacy   # 2026-11-04 までの Wikipedia 照合 / 上書きの根拠を取り込む(1回だけ)
   python scripts/_magazine-ledger.py build           # 一覧表 + 集計
 NDL は連載誌を持たない(2026-11-04 実測: MADB 内の NDL 由来 29,398 冊で初出 0 / live 5 冊も type:book だけ)= ソースにしない。
@@ -631,165 +629,20 @@ def _dump_key(t):
     return t[:1].upper() + t[1:] if t[:1].isascii() else t
 
 
-def sweep_wiki_fetch(limit=None):
-    """まだ記事を見ていない頁の題(と表記ゆれ・「(漫画)」)を全題名ダンプで引き、 在る記事だけ本文を取る(10件ずつ・3秒間隔)。
-    取った本文は .cache/magazine-wiki/ に貯め、 判定は sweep-wiki-local がする。 429 = 冷却を焼いて exit 2(同じコマンドで再開)。"""
-    import gzip, time, urllib.error, urllib.parse, urllib.request
-    sys.path.insert(0, os.path.join(ROOT, "scripts"))
-    from _wiki_host import acquire, cooldown_check, cooldown_set, release
-    W = _wl()
-    pages = load_pages()
-    wiki_src, _ = read_source("wiki-article")
-    dump = os.path.join(ROOT, ".cache", "jawiki-dump", "jawiki-latest-all-titles-in-ns0.gz")
-    print("  ダンプ読み込み …", flush=True)
-    titles = set(gzip.open(dump, "rt", encoding="utf-8").read().split("\n"))
-    idx = _wiki_index()
-    os.makedirs(WIKI_CACHE, exist_ok=True)
-    want = defaultdict(set)                        # 記事名 → slugs
-    for slug, p in pages.items():
-        if slug in wiki_src and any(not h.get("sub") for h in wiki_src[slug][1]):
-            continue                               # 掲載誌が取れた頁は取りに行かない
-        for v in _title_variants(p["title"]):
-            if _dump_key(v) in titles:
-                want[v].add(slug)
-    have = {os.path.basename(p)[:-4] for p in glob.glob(os.path.join(ROOT, ".cache", "wiki-sweep", "*.txt"))}
-    todo = [t for t in want if t not in idx["titles"] and W.safe_key(t) not in have]   # Wiki蒸留が取った本文は sweep-wiki-local が読む
-    print(f"  記事名が在る題 {len(want):,}(頁 {len({s for ss in want.values() for s in ss}):,})/ まだ取っていない {len(todo):,}", flush=True)
-    if limit:
-        todo = todo[:limit * 10]
-    UA = {"User-Agent": "MANGAL-research/1.0 (manga catalogue; magazine check)"}
-
-    def save_index():
-        for t, ss in want.items():
-            fin = idx["titles"].get(t, {}).get("final")
-            if fin:
-                for s in ss:
-                    lst = idx["by_slug"].setdefault(s, [])
-                    if fin not in lst:
-                        lst.append(fin)
-        tmp = os.path.join(WIKI_CACHE, "index.json.tmp")
-        json.dump(idx, open(tmp, "w", encoding="utf-8"), ensure_ascii=False)
-        os.replace(tmp, os.path.join(WIKI_CACHE, "index.json"))
-
-    cooldown_check()
-    acquire("magazine-ledger")
-    got_n = 0
-    try:
-        for i in range(0, len(todo), 10):
-            b = todo[i:i + 10]
-            q = urllib.parse.urlencode({"action": "query", "prop": "revisions", "rvprop": "content", "rvslots": "main", "format": "json",
-                                        "formatversion": "2", "redirects": "1", "titles": "|".join(b)})
-            req = urllib.request.Request("https://ja.wikipedia.org/w/api.php", data=q.encode(), headers=UA)
-            try:
-                d = json.load(urllib.request.urlopen(req, timeout=60))
-            except urllib.error.HTTPError as e:
-                if e.code == 429:
-                    cooldown_set(60, "magazine-ledger")
-                    print("  ★429 → 冷却60分を焼いて停止(同じコマンドで続きから)", flush=True)
-                    save_index()
-                    sys.exit(2)
-                print(f"  HTTP {e.code} → この10件は記帳せず飛ばす", flush=True)
-                time.sleep(3)
-                continue
-            except (urllib.error.URLError, TimeoutError, OSError) as e:
-                print(f"  通信失敗 {e} → この10件は記帳せず飛ばす", flush=True)
-                time.sleep(10)
-                continue
-            q2 = d.get("query", {})
-            nm = {x["from"]: x["to"] for x in q2.get("normalized", [])}
-            rd = {x["from"]: x["to"] for x in q2.get("redirects", [])}
-            pages_ = {p["title"]: p for p in q2.get("pages", [])}
-            for t in b:
-                f = nm.get(t, t)
-                f = rd.get(f, f)
-                p = pages_.get(f)
-                if p is None:
-                    continue                       # 応答に無い = 記帳しない(次回また取る)
-                if p.get("missing"):
-                    idx["titles"][t] = {"final": None, "missing": True}
-                    continue
-                if not p.get("revisions"):
-                    continue
-                wt = p["revisions"][0]["slots"]["main"]["content"]
-                open(os.path.join(WIKI_CACHE, W.safe_key(f) + ".txt"), "w", encoding="utf-8").write(wt)
-                idx["titles"][t] = {"final": f, "missing": False}
-                got_n += 1
-            if (i // 10) % 20 == 0:
-                save_index()
-                print(f"  {min(i + 10, len(todo)):,}/{len(todo):,}(本文 {got_n:,})", flush=True)
-            time.sleep(3)
-    finally:
-        save_index()
-        release("magazine-ledger")
-    print(f"  取得完了: 本文 {got_n:,} → 続けて sweep-wiki-local で判定")
-
-
-DUMP_DIR = os.path.join(ROOT, ".cache", "jawiki-dump")
-ART_DUMP = os.path.join(DUMP_DIR, "jawiki-latest-pages-articles-multistream.xml.bz2")
+DUMP_DIR = os.path.join(ROOT, ".cache", "jawiki-dump")      # ★C:(scripts/_wiki_local.py が作る・D: は使わない)
 MANGA_ARTS = os.path.join(DUMP_DIR, "manga-articles.jsonl")       # 漫画の Infobox を持つ記事だけ {title, text}
 REDIRECTS = os.path.join(DUMP_DIR, "redirects.tsv")               # 記事名 → 転送先(標準名前空間すべて)
-
-
-def _extract_dump():
-    """本文ダンプを1回だけ流し読みし、 漫画 Infobox を持つ記事とリダイレクトだけ書き出す(20〜40分)。"""
-    import bz2, html
-    n = keep = nred = 0
-    tmp_a, tmp_r = MANGA_ARTS + ".tmp", REDIRECTS + ".tmp"
-    with bz2.open(ART_DUMP, "rt", encoding="utf-8") as f, open(tmp_a, "w", encoding="utf-8", newline="\n") as fa, \
-            open(tmp_r, "w", encoding="utf-8", newline="\n") as fr:
-        title = ns = red = None
-        intext, want, buf = False, False, []
-        for line in f:
-            if intext:
-                i = line.find("</text>")
-                if want:
-                    buf.append(line if i < 0 else line[:i])
-                if i >= 0:
-                    intext = False
-                    if want:
-                        wt = html.unescape("".join(buf))
-                        if "Infobox animanga/Manga" in wt:
-                            fa.write(json.dumps({"title": title, "text": wt}, ensure_ascii=False) + "\n")
-                            keep += 1
-                continue
-            s = line.lstrip()
-            if s.startswith("<title>"):
-                title, ns, red = html.unescape(s[7:s.find("</title>")]), None, None
-                n += 1
-                if n % 200000 == 0:
-                    print(f"  {n:,} 頁 / 漫画記事 {keep:,} / 転送 {nred:,}", flush=True)
-            elif s.startswith("<ns>"):
-                ns = s[4:s.find("</ns>")]
-            elif s.startswith("<redirect title=\""):
-                red = html.unescape(s[17:s.find("\"", 17)])
-                if ns == "0":
-                    fr.write(f"{title}\t{red}\n")
-                    nred += 1
-            elif s.startswith("<text"):
-                if s.rstrip().endswith("/>"):
-                    continue
-                want = ns == "0" and red is None
-                j = s.find(">") + 1
-                rest = s[j:]
-                k = rest.find("</text>")
-                if k >= 0:
-                    if want and "Infobox animanga/Manga" in rest:
-                        fa.write(json.dumps({"title": title, "text": html.unescape(rest[:k])}, ensure_ascii=False) + "\n")
-                        keep += 1
-                    continue
-                intext, buf = True, ([rest] if want else [])
-    os.replace(tmp_a, MANGA_ARTS)
-    os.replace(tmp_r, REDIRECTS)
-    print(f"  抜き出し完了: {n:,} 頁 → 漫画記事 {keep:,} / 転送 {nred:,}", flush=True)
 
 
 def sweep_wiki_dump():
     """本文ダンプ(漫画 Infobox を持つ記事)で全頁を判定。 記事の探し方 = 題と表記ゆれ(転送も辿る)+ Infobox の題からの逆引き。
     どの探し方でも記事が無い頁は「記事なし」と記録する(題名違いの記事は拾えない = ref に明記)。"""
     W = _wl()
-    if not os.path.exists(MANGA_ARTS) or os.path.getmtime(MANGA_ARTS) < os.path.getmtime(ART_DUMP):
-        _extract_dump()
-    as_of = datetime.date.fromtimestamp(os.path.getmtime(ART_DUMP)).isoformat()
+    sys.path.insert(0, os.path.join(ROOT, "scripts"))
+    import _wiki_local
+    if not os.path.exists(MANGA_ARTS) or not _wiki_local.dump_date():
+        sys.exit("★手元の Wikipedia ダンプが無い = python scripts/_wiki_local.py update を先に")
+    as_of = _wiki_local.dump_date()
     pages = load_pages()
     _, roles = page_files()
     pp = _page_people(pages, roles)
@@ -849,27 +702,6 @@ def sweep_wiki_dump():
         c["hit" if hits else "none"] += 1
     append_log("wiki-article", rows)
     print(f"  掲載誌あり {c['hit']:,} / 記事はあるが掲載誌なし・欄が合わない {c['none']:,} / 漫画の記事なし {c['absent']:,}")
-
-
-def sweep_wiki_absent():
-    """題(と表記ゆれ・「(漫画)」)のどれも全題名ダンプに無い頁 = 「Wikipedia に記事名なし」と記録する。
-    ダンプは ja.wikipedia の全記事名の完全な一覧 = 手元で引いて無かった、 は書いてよい「見つからず」。 ただし題名違いの記事は拾えない(ref に明記)。"""
-    import gzip
-    W = _wl()
-    pages = load_pages()
-    wiki_src, _ = read_source("wiki-article")
-    dump = os.path.join(ROOT, ".cache", "jawiki-dump", "jawiki-latest-all-titles-in-ns0.gz")
-    as_of = datetime.date.fromtimestamp(os.path.getmtime(dump)).isoformat()
-    titles = set(gzip.open(dump, "rt", encoding="utf-8").read().split("\n"))
-    rows = []
-    for slug, p in pages.items():
-        if slug in wiki_src:
-            continue
-        if any(_dump_key(v) in titles for v in _title_variants(p["title"])):
-            continue                               # 記事名は在る = 本文を取って sweep-wiki-local が判定する
-        rows.append({"slug": slug, "hits": [], "at": as_of, "ref": f"題名の記事なし(全題名ダンプ {as_of}・題/表記ゆれ/(漫画) で照合。 題名違いの記事は未確認)",
-                     "keys": [f"{slug}|(dump-absent)"], "via": "sweep-wiki-absent"})
-    append_log("wiki-article", rows)
 
 
 # ---------------------------------------------------------------- 11/4 までの結果の取り込み(1回だけ)
@@ -1082,9 +914,5 @@ if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else ""
     if AMBIG and cmd != "build":
         print("  ※2誌に当たる書き方(使わない):", AMBIG)
-    if cmd == "sweep-wiki-fetch":
-        lim = sys.argv[sys.argv.index("--limit") + 1] if "--limit" in sys.argv else None
-        sweep_wiki_fetch(int(lim) if lim else None)
-    else:
-        {"sweep-madb": sweep_madb, "sweep-rakuten": sweep_rakuten, "sweep-wiki-local": sweep_wiki_local, "sweep-wiki-absent": sweep_wiki_absent, "sweep-wiki-dump": sweep_wiki_dump,
-         "import-legacy": import_legacy, "build": build}.get(cmd, lambda: sys.exit(__doc__))()
+    {"sweep-madb": sweep_madb, "sweep-rakuten": sweep_rakuten, "sweep-wiki-local": sweep_wiki_local, "sweep-wiki-dump": sweep_wiki_dump,
+     "import-legacy": import_legacy, "build": build}.get(cmd, lambda: sys.exit(__doc__))()

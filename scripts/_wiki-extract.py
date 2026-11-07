@@ -10,13 +10,13 @@ args = [a for i, a in enumerate(sys.argv[1:]) if not a.startswith("--") and sys.
 for i, a in enumerate(sys.argv):
     if a == '--chars':
         N = int(sys.argv[i+1])
+import os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import _wiki_local as WL   # ★2026-11-07: 手元の Wikipedia ダンプ(C:)から(API は使わない)
 for t in args:
-    q = {'action': 'query', 'prop': 'extracts', 'explaintext': 1, 'format': 'json', 'titles': t, 'redirects': 1}
-    r = urllib.request.Request('https://ja.wikipedia.org/w/api.php?' + urllib.parse.urlencode(q), headers=UA)
-    d = json.loads(urllib.request.urlopen(r, timeout=30).read())
-    p = list(d['query']['pages'].values())[0]
-    txt = p.get('extract') or ''
-    print('\n### %s -> %s %s (%d字)' % (t, p.get('title'), 'MISSING' if 'missing' in p else '', len(txt)))
+    g = WL.get(t)
+    txt = WL.to_text(g[1]) if g else ''
+    print('\n### %s -> %s %s (%d字・ダンプ %s)' % (t, g[0] if g else None, '' if g else 'MISSING', len(txt), WL.dump_date()))
     # あらすじ節があればそこを優先して見せる
     key = None
     for k in ('== あらすじ ==', '== ストーリー ==', '== 概要 =='):

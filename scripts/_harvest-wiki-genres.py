@@ -6,6 +6,8 @@ db-v2 の series と題名突合 → genre-wiki.yml(series_key→add[]) を出�
   他競技は sports に寄せる。 タクソノミー(master)は増やさない(warは別途追加済)。
 ★突合は野球/サッカーで実証済みの方式の一般化。 read-only(出力はseed、 本番不変)。
 """
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
 import sys, json, re, time, urllib.parse, urllib.request, sqlite3
 from collections import defaultdict
 from pathlib import Path
@@ -57,22 +59,9 @@ def api(params):
 
 
 def members(cat, kind):  # kind: "page"(記事) or "subcat"
-    out = []
-    cont = None
-    while True:
-        p = {"action": "query", "list": "categorymembers", "cmtitle": "Category:" + cat,
-             "cmlimit": "500", "cmtype": kind, "cmnamespace": "0" if kind == "page" else "14"}
-        if cont:
-            p["cmcontinue"] = cont
-        d = api(p)
-        for m in d.get("query", {}).get("categorymembers", []):
-            t = m.get("title", "")
-            out.append(t.replace("Category:", "") if kind == "subcat" else t)
-        cont = d.get("continue", {}).get("cmcontinue")
-        if not cont:
-            break
-        time.sleep(0.3)
-    return out
+    """★2026-11-07: 手元の Wikipedia ダンプ(scripts/_wiki_local.py・C:)から。 本文の [[Category:…]] だけ(テンプレートが付ける分類は入らない)。"""
+    import _wiki_local as WL
+    return WL.members(cat, kind)
 
 
 def norm(t):
@@ -119,21 +108,8 @@ def api_strict(params):
 
 
 def members_strict(cat, kind):
-    out, cont = [], None
-    while True:
-        p = {"action": "query", "list": "categorymembers", "cmtitle": "Category:" + cat, "cmlimit": "500",
-             "cmtype": kind, "cmnamespace": "0" if kind == "page" else "14"}
-        if cont:
-            p["cmcontinue"] = cont
-        d = api_strict(p)
-        if "query" not in d:
-            raise RuntimeError(f"categorymembers 応答異常: {cat} {str(d)[:200]}")
-        for m in d["query"].get("categorymembers", []):
-            t = m.get("title", "")
-            out.append(t.replace("Category:", "") if kind == "subcat" else t)
-        cont = d.get("continue", {}).get("cmcontinue")
-        if not cont:
-            return out
+    """手元ダンプなので 429 も部分結果も無い(members と同じ)。"""
+    return members(cat, kind)
 
 
 def thin_append(apply: bool):

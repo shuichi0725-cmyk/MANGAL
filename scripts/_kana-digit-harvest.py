@@ -67,29 +67,15 @@ def _retry_after_min(e, default=30):
 
 def wiki_lead(title):
     """記事wikitext冒頭を取り、『…』（よみ）候補を抽出。(lead抜粋, yomi候補) を返す。
-    ★2変種(plain / '(漫画)')を1リクエストに束ねる=wiki負荷半減で429被曝を下げる。"""
-    p = {"action": "query", "prop": "revisions", "rvprop": "content", "rvslots": "main",
-         "format": "json", "formatversion": "2", "redirects": "1",
-         "titles": f"{title}|{title} (漫画)"}
-    req = urllib.request.Request("https://ja.wikipedia.org/w/api.php?" + urllib.parse.urlencode(p))
-    req.add_header("User-Agent", "MANGAL-kana-harvest/1.0 (contact: shuichi0725@gmail.com)")
-    _rate_gate.wait("wiki", 1.2)  # ★wikiグローバル間隔(⑤material-harvestと共有=合算頻度を抑え429を減らす)
-    try:
-        d = json.loads(urllib.request.urlopen(req, timeout=25).read())
-    except urllib.error.HTTPError as e:
-        if e.code == 429:
-            cooldown_set(_retry_after_min(e, 30), by="kana-digit"); sys.exit(2)  # ★Retry-After尊重・既定30分
-        return None   # ★失敗=「読み無し」に変換しない(呼び側でdoneに入れずskip 2026-09-02)
-    except Exception:
-        return None
+    ★2026-11-07: 手元の Wikipedia ダンプ(scripts/_wiki_local.py・C:)から引く(API・429・冷却は使わない)。 題そのまま と「題 (漫画)」の2つを見る。"""
+    import _wiki_local as WL
+    texts = []
+    for t in (title, f"{title} (漫画)"):
+        g = WL.get(t)
+        if g:
+            texts.append(g[1])
     best_lead = ""
-    for pg in (d.get("query") or {}).get("pages") or []:
-        if pg.get("missing"):
-            continue
-        try:
-            text = pg["revisions"][0]["slots"]["main"]["content"]
-        except Exception:
-            continue
+    for text in texts:
         head = text[:2500].replace("\n", " ")
         m = re.search(r"『'''.{0,80}?'''』\s*（([^）]{1,60})）", head)
         if m:
@@ -100,12 +86,7 @@ def wiki_lead(title):
 
 
 def run(limit):
-    cooldown_check()          # 冷却中なら即exit(3)=待機せず他の柱へ
-    acquire("kana-digit")     # ⑤wiki-fetchと同ホスト排他(使用中なら即exit(3))
-    try:
-        _run_locked(limit)
-    finally:
-        release("kana-digit")
+    _run_locked(limit)        # ★手元ダンプから引くので Wikipedia ホストの排他・冷却は要らない(2026-11-07)
 
 
 def _run_locked(limit):

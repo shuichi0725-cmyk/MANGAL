@@ -37,15 +37,15 @@
 - 記事の探し方 = 題・表記ゆれ・「(漫画)」・転送(リダイレクト)・Infobox の題からの逆引き。
 - `ref` が「漫画の記事なし(本文ダンプ)」= 上のどの探し方でも、 漫画の Infobox を持つ記事が本文ダンプ(11/1 版・漫画記事 11,467 本)に無かった。
   ★**題名が大きく違う記事は拾えていない**(= 「無い」と言い切れるのは題で引ける範囲だけ)。
-- ★API(api.php)は 10件ずつ・3秒間隔でも **15回ほどで 429**(11/4・11/7 とも)。 大量に見る時は本文ダンプ
-  (`.cache/jawiki-dump/jawiki-latest-pages-articles-multistream.xml.bz2` 4.9GB・毎月1日ごろ更新)を落として `sweep-wiki-dump`。
-  抜き出し(漫画記事+転送)は約30分で `.cache/jawiki-dump/manga-articles.jsonl` / `redirects.tsv` に残る。
+- ★API(api.php)は 10件ずつ・3秒間隔でも **15回ほどで 429**(11/4・11/7 とも)= **使わない**。 Wikipedia は手元の本文ダンプから引く:
+  `scripts/_wiki_local.py`(置き場 = C: の `.cache/jawiki-dump`・D: は使わない)。 新版(毎月1日・20日ごろ)は日次蒸留の手順0で
+  `_wiki_local.py update` が落として作り直す。 その時に漫画記事+転送も `manga-articles.jsonl` / `redirects.tsv` に書き出す(この台帳の `sweep-wiki-dump` が読む)。
 
 ## 取り直し
 
 ```
 python scripts/_magazine-ledger.py sweep-madb      # MADB を新しいリリースで取り直した後(.cache/magazine-lists/madb-*.jsonl)
 python scripts/_magazine-ledger.py sweep-rakuten   # 楽天キャッシュが新しくなった後
-python scripts/_magazine-ledger.py sweep-wiki-dump # Wikipedia 本文ダンプを新しくした後(同じ記事の判定は2回しない)
+python scripts/_magazine-ledger.py sweep-wiki-dump # _wiki_local.py update で新版を取り込んだ後(同じ記事の判定は2回しない)
 python scripts/_magazine-ledger.py build
 ```

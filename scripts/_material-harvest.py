@@ -8,7 +8,7 @@
   triage       ローカルだけで worklist 構築(日付粗い巻 / catch,synopsis欠落頁 / QID有無)
   dates-local  楽天cache(delta+isbn)から発売日を精密化候補として収集(★prefix一致のみ/矛盾はhold)
   wiki-link    作品QID→jawiki記事名 (QLever一括)
-  wiki-fetch   記事wikitextを取得+infobox抽出(掲載誌/連載期間/休載/巻数/受賞/アニメ化) [--limit N]
+  wiki-fetch   記事wikitextを手元のWikipediaダンプ(_wiki_local.py)から取り+infobox抽出(掲載誌/連載期間/休載/巻数/受賞/アニメ化) [--limit N]
   awards       作者QID+作品QIDのP166(受賞)をQLever一括収集
   fish-residue wiki無し×caption無しの残差を魚(TinyFish)で収集(サイト台帳つき) [--limit N]
 
@@ -233,19 +233,18 @@ _INFO_PATTERNS = {
 
 
 def cmd_wiki_fetch(a):
-    # ★wikiホスト排他+冷却(2026-07-24): ⑧kana-digit-harvestと同ホスト。冷却中/使用中は即exit(3)
-    #   =運転者は待機・調査不要で他の柱へ(_wiki_host.py 参照)
+    # ★2026-11-07: Wikipedia は手元の本文ダンプ(scripts/_wiki_local.py・C:)から引く。 API(429の元)とホスト排他・冷却は使わない。
+    #   ダンプに無い記事(ダンプより新しい)は「無い」と書かずに残す = 次の版(_wiki_local.py update)で拾う。
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-    from _wiki_host import acquire, cooldown_check, cooldown_set, release
-    cooldown_check()
-    acquire("wiki-fetch")
+    import _wiki_local as WL
     try:
-        _wiki_fetch_locked(a, cooldown_set)
-    finally:
-        release("wiki-fetch")
+        print(f"wiki-fetch: 手元の Wikipedia ダンプ {WL.dump_date()} から")
+    except FileNotFoundError as e:
+        print(f"★{e}"); return
+    _wiki_fetch_local(a, WL)
 
 
-def _wiki_fetch_locked(a, cooldown_set):
+def _wiki_fetch_local(a, WL):
     links = [r for r in _jsonl_load(os.path.join(MAT, "wiki-links.jsonl")) if r.get("article")]
     rawdir = os.path.join(MAT, "wiki")
     os.makedirs(rawdir, exist_ok=True)
@@ -254,36 +253,14 @@ def _wiki_fetch_locked(a, cooldown_set):
     todo = [r for r in links if r["slug"] not in done]
     if a.limit:
         todo = todo[:a.limit]
-    print(f"wiki-fetch: 残{len([r for r in links if r['slug'] not in done]):,} / 今回{len(todo):,} (0.8s/req)")
-    # ★エラー方針(2026-07-18 改訂): 429/503=レート制限はバックオフ(60s→120s→240s)して続行、
-    #   3連続バックオフ後も429なら「冷却待ち」を明示して中断。その他エラーは連続5(成功でリセット)で中断。
-    #   旧実装の「累積5で即死」はアイドル運転が数分で止まる実害(2026-07-18朝=24件で停止)。
-    n_err = 0
-    n_backoff = 0
+    print(f"wiki-fetch: 残{len([r for r in links if r['slug'] not in done]):,} / 今回{len(todo):,}")
+    n_absent = 0
     for i, r in enumerate(todo):
-        p = {"action": "parse", "page": r["article"], "prop": "wikitext", "format": "json",
-             "formatversion": "2", "redirects": "1"}
-        req = urllib.request.Request(WIKI_API + "?" + urllib.parse.urlencode(p), headers={"User-Agent": UA})
-        _rate_gate.wait("wiki", 1.2)  # ★wikiグローバル間隔(⑧kana-digitと共有=合算頻度を抑え429を減らす)
-        try:
-            d = json.load(urllib.request.urlopen(req, timeout=60))
-            wt = (d.get("parse") or {}).get("wikitext") or ""
-            n_err = 0
-            n_backoff = 0
-        except Exception as e:
-            code = getattr(e, "code", None)
-            if code in (429, 503):
-                n_backoff += 1
-                if n_backoff > 3:
-                    cooldown_set(60, by="wiki-fetch")
-                    print(f"★429/503が継続({r['article']}) = 冷却60分を記録して中断。待機禁止=他の柱へ(再実行は冷却明けに自動で通る)"); return
-                wait = 60 * (2 ** (n_backoff - 1))
-                print(f"  429/503 → {wait}s バックオフ({n_backoff}/3)"); time.sleep(wait); continue
-            n_err += 1
-            print(f"  err({n_err}/5) {r['article']}: {str(e)[:80]}")
-            if n_err >= 5:
-                print("★連続エラー5 = 中断(再実行で再開)"); return
-            time.sleep(3); continue
+        g = WL.get(r["article"])
+        if g is None:
+            n_absent += 1          # ダンプより新しい記事 = 記帳しない(次の版で拾う)
+            continue
+        wt = g[1]
         io.open(os.path.join(rawdir, r["slug"] + ".wiki.txt"), "w", encoding="utf-8").write(wt)
         ex = {"slug": r["slug"], "article": r["article"]}
         for k, pat in _INFO_PATTERNS.items():
@@ -294,8 +271,7 @@ def _wiki_fetch_locked(a, cooldown_set):
         _jsonl_append(ext_path, [ex])
         if (i + 1) % 100 == 0:
             print(f"  ...{i+1}/{len(todo)}")
-        # wiki間隔は上の _rate_gate.wait("wiki") が担保(ここでの追加sleepは二重=削除)
-    print(f"wiki-fetch: 今回{len(todo)}件(err {n_err}) → {ext_path}")
+    print(f"wiki-fetch: 今回{len(todo)}件(ダンプに無い {n_absent}) → {ext_path}")
 
 
 # ---------------- awards ----------------

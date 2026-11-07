@@ -29,3 +29,4 @@ metadata:
 - [マンバ蒸留=title_id採取](manba_booklive_titleid_route.md)
 - [★外部サイトは門を通す(Claude拒否サイト実測)](site_gate_robots_claude_denied.md)
 - [⏳他言語名=言語名つき・AI訳題非表示(Wikidata言語別ラベル+AniList公式英題)](other_names_multilingual.md)
+- [★Wikipediaは手元ダンプ(_wiki_local.py・C:)](wiki_local_dump.md)

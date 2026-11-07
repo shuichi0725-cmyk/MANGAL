@@ -606,59 +606,32 @@ def anilist_merged(ani):
 
 
 def wiki_get(title):
-    from _wiki_host import cooldown_check, cooldown_set
-    cooldown_check()  # 冷却中はここで exit(3)
-    _rate_gate.wait("wiki", 1.2)
-    q = {"action": "query", "format": "json", "redirects": 1, "titles": title, "prop": "extracts|categories|pageprops",
-         "explaintext": 1, "exsectionformat": "wiki", "cllimit": "max", "clshow": "!hidden", "ppprop": "disambiguation"}
-    req = urllib.request.Request("https://ja.wikipedia.org/w/api.php?" + urllib.parse.urlencode(q), headers={"User-Agent": UA})
+    """★2026-11-07: 手元の Wikipedia ダンプ(scripts/_wiki_local.py・C:)から。 API(429)・ホスト冷却は使わない。
+    API の extracts(explaintext・見出しつき)+ categories + 曖昧さ回避の判定 と同じ形で返す。"""
+    import _wiki_local as WL
     try:
-        with urllib.request.urlopen(req, timeout=40) as r:
-            d = json.loads(r.read())
-    except urllib.error.HTTPError as e:
-        if e.code in (429, 503):
-            cooldown_set(60, by="element-harvest")
-        stop(f"Wikipedia が HTTP {e.code}")
-    except Exception as e:
-        stop(f"Wikipedia に届かない({type(e).__name__})")
-    pg = next(iter(((d.get("query") or {}).get("pages") or {}).values()), None)
-    if not pg or "missing" in pg or "invalid" in pg or "disambiguation" in (pg.get("pageprops") or {}):
+        g = WL.get(title)
+    except FileNotFoundError as e:
+        stop(str(e))
+    if not g or WL.DISAMBIG.search(g[1]):
         return None
-    text = pg.get("extract") or ""
+    text = WL.to_text(g[1])
     if len(text) < 200:
         return None
-    return {"title": pg.get("title"), "text": text,
-            "categories": [c["title"].split(":", 1)[-1] for c in pg.get("categories") or []]}
-
-
-def _wiki_api(params):
-    from _wiki_host import cooldown_check, cooldown_set
-    cooldown_check()
-    _rate_gate.wait("wiki", 1.2)
-    req = urllib.request.Request("https://ja.wikipedia.org/w/api.php?" + urllib.parse.urlencode({"action": "query", "format": "json", **params}),
-                                 headers={"User-Agent": UA})
-    try:
-        with urllib.request.urlopen(req, timeout=40) as r:
-            return json.loads(r.read())
-    except urllib.error.HTTPError as e:
-        if e.code in (429, 503):
-            cooldown_set(60, by="element-harvest")
-        stop(f"Wikipedia が HTTP {e.code}")
-    except Exception as e:
-        stop(f"Wikipedia に届かない({type(e).__name__})")
+    return {"title": g[0], "text": text, "categories": WL.categories(g[0])}
 
 
 def wiki_search(q):
-    """Wikipedia の検索API(記事名の候補)。"""
-    d = _wiki_api({"list": "search", "srsearch": q, "srlimit": 5, "srnamespace": 0})
-    return [x["title"] for x in (d.get("query") or {}).get("search") or []]
+    """記事名の候補 = 題で始まる記事名(手元ダンプ)。 旧 = 検索API(短い題に弱く、 429 の元)。"""
+    import _wiki_local as WL
+    head = q.split(" ")[0]
+    return WL.prefix(head, 5)
 
 
 def wiki_links(title):
-    """記事から張られたリンク先の記事名(作者の記事 → 作品の記事を辿るため)。"""
-    d = _wiki_api({"titles": title, "redirects": 1, "prop": "links", "plnamespace": 0, "pllimit": "max"})
-    pg = next(iter(((d.get("query") or {}).get("pages") or {}).values()), None) or {}
-    return [x["title"] for x in pg.get("links") or []]
+    """記事から張られたリンク先の記事名(作者の記事 → 作品の記事を辿るため)。 手元ダンプの本文の [[リンク]](テンプレート内のリンクは入らない)。"""
+    import _wiki_local as WL
+    return WL.links(title)
 
 
 def wiki_auto(st):

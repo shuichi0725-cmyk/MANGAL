@@ -96,7 +96,7 @@ ja.wikipedia「スーパージャンプ」掲載作品一覧 **144作** × 本�
 - ★これで誤って上書きした **6頁 = Go待ち**: drop / gokuman / hakaijuu / katteni-takahashi-hiroshi / worst-gaiden(正=月刊少年チャンピオン・マスタに無い)、 asa-ga-mata-kuru-kara(初出=花とゆめプラス→別冊花とゆめ)。 kaze-ga-gotoku は目次70回=週刊で正しい。
 
 ## 2026-11-07 調査(ユーザ「調査進めて」)= Wikipedia 作品記事を全頁に
-- ★**Wikipedia API は 10件ずつ3秒でも約15回目で 429**(今回も再現)= 大量照合は **本文ダンプ**(jawiki-latest-pages-articles-multistream.xml.bz2 4.9GB・Dドライブ空き17TB・約5MB/s で18分)。 `_magazine-ledger.py sweep-wiki-dump` が1回流し読み(約30分)で漫画Infobox記事 11,467本+転送を `.cache/jawiki-dump/` に抜き出し、全頁を判定。 他の柱(要素収集・外部エンリッチ)も手元で使える資産。
+- ★**Wikipedia API は 10件ずつ3秒でも約15回目で 429**(今回も再現)= 大量照合は **本文ダンプ**(jawiki-latest-pages-articles-multistream.xml.bz2 4.9GB・置き場は C: の .cache/jawiki-dump・約5MB/s で18分)。 `_magazine-ledger.py sweep-wiki-dump` が1回流し読み(約30分)で漫画Infobox記事 11,467本+転送を `.cache/jawiki-dump/` に抜き出し、全頁を判定。 他の柱(要素収集・外部エンリッチ)も手元で使える資産。
 - 手元の既存本文も使った: 素材ハーベスト(QIDリンク 3,478)・Wiki蒸留(.cache/wiki-sweep 10,861)。 判定の精度 = MADB と両方ある頁で 手元分94%・ダンプ分88% 一致(割れの大半は移籍・別名不足)。
 - 結果(全69,903頁): Wikiまで調べて根拠なし 空欄47,751 / 値あり7,935、 空欄だが根拠あり 3,101(マスタに在る誌=埋められる)、 マスタに無い誌の根拠 2,998頁、 **食い違い 1,533(ほぼ全部 AI埋めの誤り: ちゃお↔コロコロ・ビッグコミック↔スピリッツ・月刊少年エース↔コンプエース等)**。
 - ★**雑誌マスタに主要誌が無い**: イブニング74頁・月刊少年チャンピオン51・きららMAX49・Kiss45・裏サンデー43・ヤングチャンピオン41・ヤングキング40・デザート36 … 計1,110誌 = `docs/production-diagnostics/magazine-ledger-missing-mags.tsv`。 マスタ追加・埋める・直すは**Go待ち**(本番の連載誌が変わる)。
