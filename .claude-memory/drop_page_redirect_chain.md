@@ -36,4 +36,4 @@ Cloudflare の `_redirects` は連鎖を辿らない。
 - 非掲載 drop(アンソロジー20頁 5978f72cda・アメコミ4頁 f2c60259f0・すてきな結婚 fdd9fa1617、11/1〜2)で、
   その頁を**行き先にしていた古い alias 32件**が残り、次の週次 preflight が「リダイレクト衛生 死に転送32」で停止した。
 - 行き先が無い(=掲載外)ので張り替え先も無い → その alias 行を消す(backup + `audit-fix-changelog.jsonl` op=alias_hygiene_sweep)→ `_gen-redirects.py`。
-- ★非掲載 drop をする時は、drop と同時に `slug-aliases.yml` を**右辺で**検索して消しておく(週次で止まらないように)。
+- ★**機械化済み(2026-11-07)**: `_reflect-targeted.py --drop` が、連鎖解決後の最終行先が今回 drop した slug(索引に無い)の alias 行を自動削除する(手順2.9・backup+changelog op=alias_drop_dead)。統合 drop(drop→後継 alias 在り)は後継へ解決するので消えない。★reflect を通さずに頁を消した時だけ手で同じことをする。

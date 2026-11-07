@@ -280,6 +280,46 @@ def main():
     if remove_slugs: idx_data += ["--remove", rem]
     if only or remove_slugs: run(idx_data)
 
+    # 2.9 ★drop した頁「宛て」の alias を消す(2026-11-07 新設)。
+    #     後継の無い drop(非掲載)では、その頁を行き先にしていた古い alias が死に転送として残り、
+    #     次の週次 preflight が「リダイレクト衛生 死に転送」で止まる(11/1〜2 の非掲載24頁+1で 32件)。
+    #     消すのは「連鎖を解決した最終行先が今回 drop した slug で、かつ索引に無い」行だけ。
+    #     統合 drop(drop→後継 の alias が在る)は連鎖が後継へ解決するので触らない。
+    if remove_slugs:
+        import re as _re, shutil as _sh
+        _ap = os.path.join(ROOT, "data", "slug-aliases.yml")
+        _idx = json.load(open(os.path.join(ROOT, "data", "manga-list-index.json"), encoding="utf-8"))
+        _si = _idx["f"].index("slug")
+        _pub = {r[_si] for r in _idx["d"]}
+        _lines = open(_ap, encoding="utf-8").read().split("\n")
+        _al = {}
+        for _ln in _lines:
+            _m = _re.match(r"^(\S+):\s*(.+)$", _ln)
+            if _m:
+                _al[_m.group(1)] = _m.group(2).strip()
+
+        def _res(k):
+            seen, cur = set(), _al[k]
+            while cur in _al and cur not in seen:
+                seen.add(cur); cur = _al[cur]
+            return cur
+        _gone = {x for x in remove_slugs if x and x not in _pub}
+        _dead = {k: _res(k) for k in _al if _res(k) in _gone}
+        if _dead:
+            _bk = os.path.join(ROOT, ".cache", f"alias-bak-{datetime.datetime.now():%Y%m%d-%H%M%S}")
+            os.makedirs(_bk, exist_ok=True)
+            _sh.copy2(_ap, _bk)
+            _keep = [l for l in _lines
+                     if not ((_m := _re.match(r"^(\S+):\s*(.+)$", l)) and _m.group(1) in _dead)]
+            open(_ap, "w", encoding="utf-8", newline="\n").write("\n".join(_keep))
+            with open(os.path.join(ROOT, "data", "seeds", "audit-fix-changelog.jsonl"), "a",
+                      encoding="utf-8", newline="\n") as _f:
+                _f.write(json.dumps({"op": "alias_drop_dead", "at": datetime.date.today().isoformat(),
+                                     "reason": a.msg, "removed": _dead,
+                                     "backup": os.path.relpath(os.path.join(_bk, "slug-aliases.yml"), ROOT)},
+                                    ensure_ascii=False) + "\n")
+            print(f"  drop頁宛ての alias を削除: {len(_dead)}件 (backup {os.path.relpath(_bk, ROOT)})", flush=True)
+
     # 3a. ★転送ファイル(public/_redirects + .cache/redirects.json)を slug-aliases.yml から作り直す(2026-10-22 新設)。
     #     drop/統合で alias を足しても再生成を誰も呼ばず、週次 preflight の「リダイレクト衛生 形状NG」で
     #     毎回止まっていた(10/20 の二重頁4+ギャングキング等 6件)。 ~1秒・冪等(alias 不変なら差分なし)なので毎回回す。
