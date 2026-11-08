@@ -1,11 +1,11 @@
 ---
 name: author_kaisetsu_contamination
-description: 【8件是正済・残226】解説者が著者欄に混入する型。検出器=_audit-author-single-volume.py(1冊の書誌にだけ現れる著者)。worklist=docs/production-diagnostics/author-single-volume.tsv
+description: 【8件是正済・残226・★11/8 同じ series_key 2つで後勝ち=是正が消える型(公開22頁・裁定待ち)】解説者が著者欄に混入する型。検出器=_audit-author-single-volume.py(1冊の書誌にだけ現れる著者)。worklist=docs/production-diagnostics/author-single-volume.tsv
 metadata: 
   node_type: memory
   type: project
   originSessionId: 164c5cf9-b3fb-40f8-a19c-7cc4f6403843
-  modified: 2026-08-07T06:44:20.890Z
+  modified: 2026-11-08T09:57:08.890Z
 ---
 
 2026-08-07 ユーザ発見(手塚治虫『メトロポリス』に藤子不二雄Ⓐ)から型化。
@@ -45,5 +45,14 @@ loaderが credits を drop に畳む)。`remove:` でも消えるが、**役割�
 2. **アンソロジー疑い 102件** = 概ね正当。放置でよいが誤分類が無いか一度目視。
 3. ★**検出器の穴**: 水木しげる漫画大全集に残った **野坂昭如** は2冊以上に出るため掛からなかった。
    「1冊だけ」を「N冊以下(N=2,3)」に緩めた版も試す余地あり(偽陽性は増える)。
+
+## ★2026-11-08 是正済みが戻っていた型 = 同じ series_key の entry が2つ
+水木しげる漫画大全集の解説42人が本番の著者欄に戻っていた(ユーザ指摘)。 seed には6月の指定(解説42人)が在ったが、
+8/24 の役割マーカー掃引が**同じ key の別 entry**(京極夏彦=監修だけ)を足し、 `_load_author_corr` が dict で**後勝ち**=前の指定が丸ごと消えた。
+- この頁は2つを1つにまとめて反映済(著者=水木しげるだけ・解説40/編集/監修/原作・解説 野坂昭如=74巻書誌)。
+- 同型の全体 = `python scripts/_audit-author-corr-dupkey.py` → `docs/production-diagnostics/author-corr-dupkey.tsv`
+  (重複 key 455 / 結果が変わる77 / **公開頁22**・衝突10)。 ⏳**ローダーを「人ごとに後勝ち」で重ねる形に直すかはユーザ裁定待ち**
+  (直すと22頁が変わる。 次のフル promote でも効くので、 ローダー修正=全件の決定)。
+- ★seed に追記する掃引は、**既存の同じ key の entry へまとめる**(別 entry を足さない)。
 
 関連: [[author_not_in_volumes_audit]] [[author_pollution_overlay_fix]] [[feedback_one_bug_means_a_class]]
