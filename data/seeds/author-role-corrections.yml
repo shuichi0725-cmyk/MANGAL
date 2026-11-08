@@ -63118,6 +63118,9 @@ corrections:
     role: 解説
   - name: 水木悦子
     role: 解説
+  - name: 野坂昭如
+    role: 原作・解説
+  note: '2026-11-08 ユーザ指摘(水木しげる以外は著者でない): 同じ series_key の2つ目(役割マーカー掃引 2026-08-24 の京極夏彦=監修)が後勝ちでこの指定を上書きし、解説42人が著者欄に戻っていた。1つにまとめた。野坂昭如=74巻の書誌「[原作・解説]野坂昭如」(異色文藝シリーズの原作+解説)'
 - series_key: name:浜田廣介|name:水木しげる漫画大全集
   credits:
   - name: 魔夜峰央
@@ -79371,13 +79374,6 @@ corrections:
     role: 構成
   note: '役割マーカー掃引2026-08-24(監修-構成-編集): raw metadata101の[監修/構成/編集]マーカーを一次証拠に著者→credits'
 - series_key: name:京極夏彦|name:ゲゲゲの鬼太郎
-  remove:
-  - 京極夏彦
-  credits:
-  - name: 京極夏彦
-    role: 監修
-  note: '役割マーカー掃引2026-08-24(監修-構成-編集): raw metadata101の[監修/構成/編集]マーカーを一次証拠に著者→credits'
-- series_key: name:京極夏彦|name:水木しげる漫画大全集
   remove:
   - 京極夏彦
   credits:
