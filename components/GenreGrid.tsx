@@ -1,6 +1,7 @@
 import Link from "next/link";
 import CoverImage from "@/components/CoverImage";
 import MarqueeTitle from "@/components/MarqueeTitle";
+import BuyButtons, { BuyPrNote } from "@/components/BuyButtons";
 import { authorKeyFor } from "@/lib/authors";
 import { creditNames } from "@/lib/format";
 import type { MangaListItem } from "@/lib/schema";
@@ -10,6 +11,7 @@ import type { MangaListItem } from "@/lib/schema";
  *    <a>入れ子は不正HTMLなので、書影+題のLinkと著者行を分けて置く。 */
 export default function GenreGrid({ items, limit = 120 }: { items: MangaListItem[]; limit?: number }) {
   return (
+    <>
     <ul className="mt-5 grid grid-cols-3 gap-x-3 gap-y-5 sm:grid-cols-4">
       {items.slice(0, limit).map((m) => {
         const c = m.cover;
@@ -50,9 +52,13 @@ export default function GenreGrid({ items, limit = 120 }: { items: MangaListItem
                 );
               })}
             </p>
+            {/* ★Kindle・Amazon(2026-11-09 見本 v1 案A)。 [PR] 表記はジャンル頁の側 */}
+            <BuyButtons variant="tile" title={m.title} author={creditNames(m)[0]} />
           </li>
         );
       })}
     </ul>
+    <BuyPrNote className="mt-3" />
+    </>
   );
 }

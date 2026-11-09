@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { AiReviewSection } from "@/lib/loadData";
 import { characterFor, type AiCharacter } from "@/lib/aiCharacters";
+import BuyButtons, { BuyPrNote } from "@/components/BuyButtons";
 
 /** AIキャラのアバター(飾り)。 スプライト(img)があれば絵、 無ければ emoji フォールバック。
  *  ★ブランド名は名乗らせない=飾りのみ。 実名は別途テキストで表示([[ai_review_league_operation]])。 */
@@ -44,6 +45,20 @@ export default function AiReviewSectionView({ section }: { section: AiReviewSect
       <p className="mt-3 text-[12.5px] leading-relaxed text-ink/70">
         同じ本、同じ依頼文。それでも書評はこんなに違う——複数のAIに全く同じお題を渡し、出てきた紹介文をそのまま並べました（ネタバレなし・完結作限定）。
       </p>
+
+      {/* ★課題図書の札(2026-11-09 見本 v1 ⑤)= 詳細・Kindle・Amazon */}
+      <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1.5 rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] px-3 py-2">
+        <p className="min-w-0 text-[12.5px] font-bold">
+          {section.title}
+          <span className="ml-1.5 text-[11px] font-normal text-ink/55">{section.author}</span>
+        </p>
+        <div className="flex items-center gap-1.5">
+          <Link href={`/manga/${section.slug}`} className="spring-press border border-[var(--color-line)] px-2 py-0.5 text-[10.5px] font-bold text-ink/65">
+            詳細
+          </Link>
+          <BuyButtons title={section.title} author={section.author} />
+        </div>
+      </div>
 
       {/* 出演AI = キャラのラインナップ(飾り。 顔で誰の評か掴みやすく) */}
       <div className="mt-4 flex items-center gap-2 overflow-x-auto no-scrollbar rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] px-3 py-2.5">
@@ -92,6 +107,7 @@ export default function AiReviewSectionView({ section }: { section: AiReviewSect
         各書評は各AIサービスの出力をそのまま掲載（生成AI明記・無加工）。<br />
         キャラクターはイメージです。各AI企業・公式とは一切関係ありません。
       </p>
+      <BuyPrNote className="mt-2 text-center" />
     </div>
   );
 }

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { allAuthorKeys, getAuthor, type AuthorWork } from "@/lib/authors";
 import CoverImage from "@/components/CoverImage";
+import BuyButtons, { BuyPrNote } from "@/components/BuyButtons";
 
 /** 著者静的ページ(2026-08-10 preview試作)。
  *  「著者名 作品一覧」検索の受け皿+内部リンクハブ(/browse?author= クエリの静的置換)。 */
@@ -40,11 +41,12 @@ export async function generateMetadata({ params }: { params: Promise<{ key: stri
   };
 }
 
-function WorkGrid({ works }: { works: AuthorWork[] }) {
+function WorkGrid({ works, author }: { works: AuthorWork[]; author: string }) {
   return (
     <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6">
       {works.map((w) => (
-        <Link key={`${w.slug}-${w.role}`} href={`/manga/${w.slug}`} className="group">
+        <div key={`${w.slug}-${w.role}`}>
+        <Link href={`/manga/${w.slug}`} className="group block">
           <div className="relative overflow-hidden rounded-lg border border-[var(--color-line)] bg-[var(--color-surface-2)]" style={{ aspectRatio: "2 / 3" }}>
             {w.cover ? (
               <CoverImage src={w.cover} alt={w.title} sizes="140px" />
@@ -55,6 +57,9 @@ function WorkGrid({ works }: { works: AuthorWork[] }) {
           <div className="mt-1 line-clamp-2 text-[11.5px] font-semibold leading-tight group-hover:text-[var(--color-accent)]">{w.title}</div>
           {w.year && <div className="text-[10px] text-ink/45">{w.year}年</div>}
         </Link>
+        {/* ★Kindle・Amazon(2026-11-09 見本 v1 案A)。 検索語 = 題名+この頁の著者名 */}
+        <BuyButtons variant="tile" title={w.title} author={author} />
+        </div>
       ))}
     </div>
   );
@@ -97,15 +102,16 @@ export default async function AuthorPage({ params }: { params: Promise<{ key: st
         {a.works.length > 0 && (
           <section className="mt-6">
             <h2 className="mb-3 text-[15px] font-bold">作品({a.works.length})</h2>
-            <WorkGrid works={a.works} />
+            <WorkGrid works={a.works} author={a.name} />
           </section>
         )}
         {a.originals.length > 0 && (
           <section className="mt-8">
             <h2 className="mb-3 text-[15px] font-bold">原作を担当した作品({a.originals.length})</h2>
-            <WorkGrid works={a.originals} />
+            <WorkGrid works={a.originals} author={a.name} />
           </section>
         )}
+        <BuyPrNote className="mt-8" />
       </div>
     </div>
   );

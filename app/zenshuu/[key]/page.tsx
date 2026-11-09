@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import view from "@/data/zenshuu-view.json";
 import CoverImage from "@/components/CoverImage";
+import BuyButtons, { BuyPrNote } from "@/components/BuyButtons";
 import type { ZenshuuView, ZenshuuCollection, ZenshuuWork } from "@/lib/zenshuu";
 
 const V = (view as unknown as ZenshuuView).collections;
@@ -150,6 +151,8 @@ export default async function ZenshuuPage({ params }: { params: Promise<{ key: s
                 <span className="text-[10px] text-ink/50">
                   {w.vols.length}冊{w.vols.every((v) => v.nm) ? "・非漫画巻(特例掲載)" : ""}
                 </span>
+                {/* ★Kindle・Amazon(2026-11-09 見本 v1 ⑤)= 見出しの右に1組。 検索語 = 作品名+全集名(全集の版で探す) */}
+                <BuyButtons variant="mini" title={w.name} query={`${w.name} ${c.name}`} className="ml-auto self-center" />
               </div>
               <div className="grid grid-cols-5 gap-1.5 px-3.5 sm:grid-cols-7 md:grid-cols-8">
                 {w.vols.map((v, j) => (
@@ -158,6 +161,7 @@ export default async function ZenshuuPage({ params }: { params: Promise<{ key: s
               </div>
             </section>
           ))}
+          <BuyPrNote className="px-3.5" />
         </>
       )}
     </main>

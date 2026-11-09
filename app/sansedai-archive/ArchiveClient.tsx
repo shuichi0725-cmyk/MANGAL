@@ -1,6 +1,7 @@
 import Link from "next/link";
 import CoverImage from "@/components/CoverImage";
 import LikeButton from "@/components/LikeButton";
+import BuyButtons, { BuyPrNote } from "@/components/BuyButtons";
 import { jstDayIndex, picksForDay, personaName, PERSONA_BIOS, type SansedaiEntry } from "@/lib/sansedai";
 import { loadSansedaiLog, loadSansedaiStock } from "@/lib/cornerData";
 
@@ -100,6 +101,8 @@ export default function ArchiveClient() {
                             <p className="mt-0.5 text-[11px] leading-relaxed text-ink/70">{p.comment}</p>
                           </div>
                         </Link>
+                        {/* ★Kindle・Amazon(2026-11-09 見本 v1 ④)= ひとことの下。 書影の幅(48px)+隙間ぶん右へ寄せる */}
+                        <BuyButtons title={p.title} className="mt-1.5 pl-[60px]" />
                       </li>
                     ))}
                   </ul>
@@ -109,6 +112,7 @@ export default function ArchiveClient() {
           </div>
         </details>
       ))}
+      <BuyPrNote />
     </div>
   );
 }

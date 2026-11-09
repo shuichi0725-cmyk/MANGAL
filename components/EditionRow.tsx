@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import CoverImage from "./CoverImage";
-import { amazonDpUrlFromIsbn13, amazonSearchUrl } from "@/lib/amazon";
+import { amazonDpUrlFromIsbn13, amazonQuerySearchUrls, hasRakutenPaper } from "@/lib/amazon";
 
 /** 版もの一覧(/aizouban・/tokusouban)の1行。★2026-09-06 ユーザ指示
  *  「今月の新刊みたいに。画像を押すとアマゾン、小さい詳細を押すと漫画ページへ。画像の大きさも同じに」
@@ -24,17 +24,22 @@ export default function EditionRow({
   /** Amazon検索フォールバックのクエリ(既定=題名) */
   query?: string;
 }) {
-  const amz =
-    (isbn && amazonDpUrlFromIsbn13(isbn, AMZ_TAG)) || amazonSearchUrl(query ?? title, AMZ_TAG);
+  // ★2026-11-09(見本 v1 ④): 新刊(ShinkanRow)と同じ規則にそろえる = 書影が楽天ブックスの紙の画像なら ISBN-10 の /dp/
+  //   (紙も Kindle も)、それ以外は「題名 著者」で検索(旧 = ISBN があれば無条件に /dp/ = 紙の商品頁が無い巻で犬の404)
+  const dp = isbn && hasRakutenPaper(cover) ? amazonDpUrlFromIsbn13(isbn, AMZ_TAG) : null;
+  const buy = dp
+    ? { paper: dp, kindle: dp }
+    : amazonQuerySearchUrls([query ?? title, (authors ?? "").split("・")[0]].filter(Boolean).join(" "), AMZ_TAG);
+  const amz = buy.paper;
   return (
-    <div className="flex items-start gap-2.5 rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] p-2">
+    <div className="rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] p-2">
       {/* 書影+題 → Amazon(アフィ) */}
       <a
         href={amz}
         target="_blank"
         rel="nofollow sponsored noopener"
         title={`${title} をAmazonで見る`}
-        className="spring-press flex min-w-0 flex-1 items-start gap-2.5"
+        className="spring-press flex min-w-0 items-start gap-2.5"
       >
         <span className="relative block h-[150px] w-[105px] shrink-0 overflow-hidden rounded border border-[var(--color-line)] bg-[var(--color-surface-2)]">
           <CoverImage src={cover} alt={`${title} ${badge}`} sizes="105px" />
@@ -49,13 +54,21 @@ export default function EditionRow({
           {note ? <span className="mt-0.5 block truncate text-[10.5px] leading-snug text-ink/40">{note}</span> : null}
         </span>
       </a>
-      {/* 小さい「詳細」→ 作品ページ */}
-      <Link
-        href={`/manga/${slug}`}
-        className="spring-press shrink-0 self-start rounded border border-[var(--color-line)] px-1.5 py-0.5 text-[10px] font-bold text-ink/65 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
-      >
-        詳細
-      </Link>
+      {/* ★下に 詳細・Kindle・Amazon(新刊と同じ並び。 2026-11-09 見本 v1 ④)。 詳細 = 作品ページ */}
+      <div className="mt-1.5 flex items-center gap-1.5 pl-[115px]">
+        <Link
+          href={`/manga/${slug}`}
+          className="spring-press border border-[var(--color-line)] px-2 py-0.5 text-[10.5px] font-bold text-ink/65 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+        >
+          詳細
+        </Link>
+        <a href={buy.kindle} target="_blank" rel="nofollow sponsored noopener" className="spring-press bg-[#3b82f6] px-2.5 py-0.5 text-[11px] font-extrabold text-white">
+          Kindle
+        </a>
+        <a href={buy.paper} target="_blank" rel="nofollow sponsored noopener" className="spring-press bg-[#e69500] px-2.5 py-0.5 text-[11px] font-extrabold text-white">
+          Amazon
+        </a>
+      </div>
     </div>
   );
 }

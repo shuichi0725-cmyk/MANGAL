@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import CoverImage from "@/components/CoverImage";
 import MarqueeTitle from "@/components/MarqueeTitle";
+import BuyButtons, { BuyPrNote } from "@/components/BuyButtons";
 import view from "@/data/anime-seasons-view.json";
 import {
   adjacentSeasons,
@@ -92,6 +93,8 @@ export default async function AnimeSeasonPage({ params }: { params: Promise<{ se
                 <p className="truncate text-[10px] text-ink/45">アニメ: {e.anime_title}</p>
               )}
             </Link>
+            {/* ★Kindle・Amazon(2026-11-09 見本 v1 案A)= 題名の下に2つ。 書影/題は今どおり作品頁 */}
+            <BuyButtons variant="tile" title={e.title} author={e.authors?.[0]} />
           </li>
         ))}
       </ul>
@@ -113,7 +116,8 @@ export default async function AnimeSeasonPage({ params }: { params: Promise<{ se
         )}
       </div>
 
-      <p className="mt-8 text-[10px] leading-relaxed text-ink/40">
+      <BuyPrNote className="mt-8" />
+      <p className="mt-2 text-[10px] leading-relaxed text-ink/40">
         放送季・原作情報は AniList のデータを基にしています。原作が漫画以外(小説・ゲーム等)の作品は、
         コミカライズ版の漫画ページへリンクしています。
       </p>

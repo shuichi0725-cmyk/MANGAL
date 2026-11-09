@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { bundle, volCount, Cover, firstVolumeDate } from "@/lib/homeDesign";
 import type { Manga } from "@/lib/schema";
+import BuyButtons, { BuyPrNote } from "@/components/BuyButtons";
+import { creditNames } from "@/lib/format";
 
 export const metadata = {
   alternates: { canonical: "/rankings" },
@@ -68,18 +70,23 @@ export default function RankingsPage() {
             <p className="text-[10.5px] text-ink/45">{ax.note}</p>
             <ol className="mt-2 space-y-1.5">
               {ax.items.map((m, i) => (
-                <li key={m.slug}>
-                  <Link href={`/manga/${m.slug}`} className="spring-press flex items-center gap-2.5">
+                <li key={m.slug} className="flex items-center gap-2.5">
+                  <Link href={`/manga/${m.slug}`} className="spring-press flex shrink-0 items-center gap-2.5">
                     <span className={`w-6 shrink-0 text-center text-[13px] font-extrabold tabular-nums ${i < 3 ? "text-[var(--color-accent)]" : "text-ink/40"}`}>{i + 1}</span>
                     <div className="w-8 shrink-0"><Cover m={m} sizes="32px" /></div>
-                    <span className="min-w-0 flex-1 truncate text-[13px] font-medium">{m.title}</span>
-                    <span className="shrink-0 text-[11px] tabular-nums text-ink/55">{ax.value(m)}</span>
                   </Link>
+                  {/* ★Kindle・Amazon(2026-11-09 見本 v1 ④)= 題名の下に小さめの2つ */}
+                  <div className="min-w-0 flex-1">
+                    <Link href={`/manga/${m.slug}`} className="spring-press block truncate text-[13px] font-medium">{m.title}</Link>
+                    <BuyButtons variant="mini" title={m.title} author={creditNames(m)[0]} className="mt-0.5" />
+                  </div>
+                  <span className="shrink-0 text-[11px] tabular-nums text-ink/55">{ax.value(m)}</span>
                 </li>
               ))}
             </ol>
           </section>
         ))}
+        <BuyPrNote className="mt-4" />
       </div>
     </div>
   );

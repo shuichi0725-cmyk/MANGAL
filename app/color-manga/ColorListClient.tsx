@@ -1,4 +1,5 @@
 import CoverImage from "@/components/CoverImage";
+import BuyButtons from "@/components/BuyButtons";
 import { kindleSearchUrl } from "@/lib/kindleLink";
 import { loadColorEditions } from "@/lib/cornerData";
 
@@ -39,6 +40,8 @@ export default function ColorListClient() {
               <p className="mt-1 line-clamp-2 text-[11px] font-bold leading-snug">{e.t ?? slug}</p>
               <p className="text-[10px] text-ink/55">全{e.v}巻</p>
             </a>
+            {/* ★2026-11-09 見本 v1 案F1: Kindle だけ見えるボタンに(カラー版は電子だけ = 紙の Amazon は白黒の通常版に着く) */}
+            <BuyButtons variant="tile" title={e.t ?? slug} query={e.t ?? slug} kindleOnly kindleLabel="Kindleで読む" />
           </li>
           );
         })}
