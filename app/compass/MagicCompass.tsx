@@ -430,7 +430,7 @@ export default function MagicCompass({
     return () => clearTimeout(t);
   }, []);
 
-  // ── 旅の始まり: ?from=<slug> か、先頭100件(人気上位)からランダムに1冊 ──
+  // ── 旅の始まり: ?from=<slug> か、書影のある全作品からランダムに1冊 ──
   const resumeDrawn = useRef<{ key: string; items: UnitItem[] } | null>(null);
   const resumeRounds = useRef<RoundsMemo | null>(null);
   /** 入口から広げた時、その入口の書影の本(最初の24冊に必ず入れる)。 key = 広げる単位 */
@@ -494,9 +494,10 @@ export default function MagicCompass({
       }
       if (!full) return; // 先頭100件に無い = 全件を待つ
     }
-    const pool = (full ? [...index].sort((a, b) => (b.popularity ?? 0) - (a.popularity ?? 0)).slice(0, 100) : index).filter(
-      (m) => m.cover,
-    );
+    // ★2026-11-10 ユーザ「ランダムで選ばれる数が少ない」→ 案1: 人気上位100件をやめ、書影のある全作品から1冊(人気で優先しない)。
+    //   先頭100件(head)の時点では引かず、全件が届くのを待つ
+    if (!full) return;
+    const pool = index.filter((m) => m.cover);
     if (!pool.length) return;
     setPath([{ slug: pool[Math.floor(Math.random() * pool.length)].slug, kind: null, seed: newSeed() }]);
   }, [index, path.length, loadingHold]);
