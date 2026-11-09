@@ -33,3 +33,13 @@ shikakenin-fujieda-baian-saitou2002 / tales-of-the-abyss-rei2006)。
 - 「特定期間だけメタが全空」の症状を見たら、その期間の改名バッチ(slug-fix等)を疑う。
 - ★**新しいデプロイ経路を書いたら「PUT / DELETE / purge / 通知」で使うキー空間が揃っているか必ず見る**。
   1経路だけ stem のままでも本番からは消えず、症状は「消したのに残る」= [[r2_orphan_pages_prune_missing]] に化ける。
+
+**実踏3 = ★「公開slugと同じ名前のファイルが在る」でも別頁のことがある** (2026-11-09・反映の対象一覧):
+索引の公開slug → `data/manga.v2/{slug}.yml` が在ればそれ、無ければ slug-overrides の逆引き、で stem を作ったら、
+公開slug `shin-shiawase-no-jikan`(新・幸せの時間・ファイル `shinshiawasenojikan.yml`)を、同名ファイル
+`shin-shiawase-no-jikan.yml`(= シン幸せの時間・公開slug `-2026`。6/26 の slug衝突swap)に取り違えた。
+帰結 = `_reflect-targeted.py` の「slug変更検知」が**ファイル名の索引行 = 別頁の生きた行**を purge し、
+2.9 の死に転送掃除が `shinshiawasenojikan → shin-shiawase-no-jikan` の alias まで消した(alias を戻して正しい stem を反映し直して復旧)。
+- ★**引いたファイルの `slug:` 行が公開slugと一致するかを必ず確かめる**(一致しなければ逆引きへ)。 swap 型の衝突は slug-overrides の reason「slug衝突swap」で探せる。
+- 反映の後は「索引の頁数が前と同じか・前に在って今無い slug」を前の commit の索引と突き合わせる(今回はこれで1頁の消失を見つけた)。
+- 同じ原因で `_web-material.py` の器の題札も別頁の題(新・幸せの時間)になっていた(束のカードと付与先はファイル側 = シン幸せの時間 で一貫 = 実害なし)。
