@@ -45,7 +45,7 @@ function WorkGrid({ works, author }: { works: AuthorWork[]; author: string }) {
   return (
     <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6">
       {works.map((w) => (
-        <div key={`${w.slug}-${w.role}`}>
+        <div key={`${w.slug}-${w.role}`} className="flex flex-col">
         <Link href={`/manga/${w.slug}`} className="group block">
           <div className="relative overflow-hidden rounded-lg border border-[var(--color-line)] bg-[var(--color-surface-2)]" style={{ aspectRatio: "2 / 3" }}>
             {w.cover ? (

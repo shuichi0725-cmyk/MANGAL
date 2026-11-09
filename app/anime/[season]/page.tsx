@@ -68,7 +68,7 @@ export default async function AnimeSeasonPage({ params }: { params: Promise<{ se
 
       <ul className="mt-5 grid grid-cols-3 gap-x-3 gap-y-5 sm:grid-cols-4 md:grid-cols-5">
         {entries.map((e) => (
-          <li key={e.slug}>
+          <li key={e.slug} className="flex flex-col">
             <Link href={`/manga/${e.slug}`} className="block group spring-press">
               <div
                 className="relative overflow-hidden rounded-md border border-[var(--color-line)] bg-[var(--color-surface-2)]"

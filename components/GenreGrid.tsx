@@ -16,7 +16,7 @@ export default function GenreGrid({ items, limit = 120 }: { items: MangaListItem
       {items.slice(0, limit).map((m) => {
         const c = m.cover;
         return (
-          <li key={m.slug}>
+          <li key={m.slug} className="flex flex-col">
             <Link href={`/manga/${m.slug}`} className="block group spring-press">
               <div className="relative aspect-[2/3] w-full overflow-hidden rounded bg-[var(--color-surface-2)] border border-[var(--color-line)]">
                 {c ? (

@@ -38,7 +38,7 @@ export default function BuyButtons({
       : variant === "mini"
         ? "h-[18px] px-1.5 text-[9.5px]"
         : "px-2.5 py-0.5 text-[11px]";
-  const box = variant === "tile" ? "mt-1 flex gap-[3px]" : "flex items-center gap-1.5";
+  const box = variant === "tile" ? "mt-auto flex gap-[3px] pt-1" : "flex items-center gap-1.5";
   const base = `spring-press inline-flex items-center justify-center whitespace-nowrap font-extrabold text-white ${size}`;
   return (
     <div className={`${box} ${className}`}>

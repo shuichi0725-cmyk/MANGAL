@@ -19,7 +19,7 @@ export default function ColorListClient() {
           //   作品頁には飛ばさない=作品頁は紙の書誌でカラー版を出していないため。ブラウザ起動はopenKindleInBrowser。
           const href = kindleSearchUrl(e.t ?? slug);
           return (
-          <li key={slug}>
+          <li key={slug} className="flex flex-col">
             <a
               href={href}
               target="_blank"
