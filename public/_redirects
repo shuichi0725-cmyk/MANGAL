@@ -2,6 +2,7 @@
 # 旧 slug → 新 slug の 301(漫画頁は /manga/ 配下=この形状以外は届かない)
 # ★Cloudflare Pages は静的redirect上限2,000行(preview=部分カバー)。本番全件は KV REDIRECTS 側。
 
+/manga/mizuki-shigeru-manga-dai-zenshu /manga/mizuki-shigeru-manga-dai-zenshuu 301
 /manga/sodachisugita-tama-2 /manga/sodachisugita-tama 301
 /manga/0-1996 /manga/zero-1996 301
 /manga/0-2009 /manga/zero-2009 301
@@ -17566,7 +17567,6 @@
 /manga/mizuiro-pinku /manga/mizuiro-pink 301
 /manga/mizuiro-shinema /manga/mizuiro-cinema 301
 /manga/mizuki-shigeru-kaiki-to-fushi-sakuhinshu /manga/mizuki-shigeru-kaiki-to-fuushi-sakuhinshuu 301
-/manga/mizuki-shigeru-manga-dai-zenshu /manga/mizuki-shigeru-manga-dai-zenshuu 301
 /manga/mizuki-shigeru-no-fushigi-zoshi /manga/mizuki-shigeru-no-fushigi-zoushi 301
 /manga/mizuki-shigeru-no-ikai-tanboki /manga/mizuki-shigeru-no-ikai-tanbouki 301
 /manga/mizuki-shigeru-no-izumi-kyoka-den /manga/mizuki-shigeru-no-izumi-kyouka-den 301
@@ -24989,7 +24989,6 @@
 /manga/shinshi-kyotei-o-musubo /manga/shinshi-kyoutei-o-musubou 301
 /manga/shinshi-na-kare-wa-tondemonai-masho-no-kyo-pii-deshita /manga/shinshi-na-kare-wa-tondemonai-mashou-no-kyo-pii-deshita 301
 /manga/shinshi-to-shukujo-to-shonen-to /manga/shinshi-to-shukujo-to-shounen-to 301
-/manga/shinshiawasenojikan /manga/shin-shiawase-no-jikan 301
 /manga/shinshin-agatte-nanbo-taichi-yo-nakuna-2 /manga/shinshin-agatte-nanbo-taichi-yo-nakuna-2006 301
 /manga/shinshina-miitsu-gaaru /manga/shinshina-meets-girl 301
 /manga/shinsho-ogata-katsumi-shinrei-jikenbo /manga/shinshou-ogata-katsumi-shinrei-file 301
