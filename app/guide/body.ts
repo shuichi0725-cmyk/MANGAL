@@ -46,7 +46,7 @@ export const GUIDE_BODY = `
 <tr><th>分野</th><td>少年・少女・青年・女性・児童</td></tr>
 <tr><th>ジャンル</th><td>アクション・恋愛・ミステリー・グルメ など32種</td></tr>
 <tr><th>創刊</th><td>1巻が出た年代</td></tr>
-<tr><th>要素</th><td>バンド・料理・成長物語 など、ジャンルより細かい特徴</td></tr>
+<tr><th>要素</th><td>バンド・料理・成長 など、ジャンルより細かい特徴</td></tr>
 <tr><th>出版社・連載誌・著者</th><td>名前の一覧から選ぶ(著者は五十音)</td></tr>
 <tr><th>並び順</th><td>標準・年代(新しい順/古い順)・タイトル五十音・巻数の多い順</td></tr>
 </table>
@@ -98,7 +98,7 @@ export const GUIDE_BODY = `
   <div><i style="background:var(--c-author)"></i>作者が同じ</div>
   <div><i style="background:var(--c-mag)"></i>同じ雑誌</div>
   <div><i style="background:var(--c-year)"></i>同じ年に開始</div>
-  <div><i style="background:var(--c-theme)"></i>要素(料理・成長物語…)</div>
+  <div><i style="background:var(--c-theme)"></i>要素(料理・成長…)</div>
   <div><i style="background:var(--c-genre)"></i>ジャンル</div>
   <div><i style="background:var(--accent)"></i>よく似たジャンル</div>
   <div><i style="background:var(--c-simel)"></i>似た要素</div>
@@ -133,7 +133,7 @@ export const GUIDE_BODY = `
     <div class="ck ck-data" style="--d:.45s">
       <div class="ck-row"><b class="ck-years">2002〜2010 完結</b><b class="ck-vols">全25巻</b><span class="ck-stamp">アニメ化</span></div>
       <div class="ck-meta">講談社 ・ 女性</div>
-      <div class="ck-tags"><span class="ck-tag g">コメディ</span><span class="ck-tag g">ギャグ</span><span class="ck-tag g">音楽</span><span class="ck-tag g">恋愛</span><span class="ck-tag g">ラブコメ</span><span class="ck-tag g">日常</span><span class="ck-tag">ミュージカル</span><span class="ck-tag">言葉の壁</span><span class="ck-tag">成長物語</span><span class="ck-tag">オタク文化</span><span class="ck-tag">クラシック音楽</span><span class="ck-tag">大学</span><span class="ck-tag">ツンデレ</span></div>
+      <div class="ck-tags"><span class="ck-tag g">コメディ</span><span class="ck-tag g">ギャグ</span><span class="ck-tag g">音楽</span><span class="ck-tag g">恋愛</span><span class="ck-tag g">ラブコメ</span><span class="ck-tag g">日常</span><span class="ck-tag">ミュージカル</span><span class="ck-tag">言葉の壁</span><span class="ck-tag">成長</span><span class="ck-tag">オタク文化</span><span class="ck-tag">クラシック音楽</span><span class="ck-tag">大学</span><span class="ck-tag">ツンデレ</span></div>
       <div class="ck-btns"><span class="dt">詳細 ›</span><span class="kd">Kindle</span><span class="az">Amazon</span><span class="cl">閉じる</span></div>
     </div>
   </div></div>
@@ -226,7 +226,7 @@ export const GUIDE_BODY = `
 <dl class="faq">
 <dt>周りの本が毎回ちがうのは?</dt><dd>近い本ほど出やすい「くじ」で選んでいるからです。人気順ではありません。開き直すと別の出会いがあります。</dd>
 <dt>「ジャンル」と「似たジャンル」のちがいは?</dt><dd>ジャンル(橙)は「音楽」など1つのジャンルを持つ本。似たジャンル(黄)は、ジャンルの組み合わせ全体がこの本と近い本です(近さで「よく似た」「似た」「やや似た」と表示が変わります)。</dd>
-<dt>「要素」と「似た要素」のちがいは?</dt><dd>要素(青)は「成長物語」など1つの特徴を持つ本。似た要素(水色)は、要素をいくつも共有している本です。</dd>
+<dt>「要素」と「似た要素」のちがいは?</dt><dd>要素(青)は「成長」など1つの特徴を持つ本。似た要素(水色)は、要素をいくつも共有している本です。</dd>
 <dt>糸を1色だけにしたい</dt><dd>いちばん上の色の札(作者・同じ雑誌…)を押すと、その糸を消したり戻したりできます。</dd>
 </dl>
 <a class="cta cp" href="/compass">羅針盤をひらく ›</a>

@@ -60,6 +60,14 @@ def load_translation():
     return ja, set(noise), gnames
 
 
+def load_alias():
+    """和名の言い換え(wamei-tags.yml の alias)。 頁の表示と同じく、旧い語・表記ゆれを1語に寄せてから鍵にする
+    (2026-11-09 ユーザ「成長にまとめて」: 隠し要素の鍵に残る 成長物語 533頁・索引の themes の 成長物語 を 成長 と同じ鍵にする)。"""
+    import yaml
+    with open(os.path.join(ROOT, "data", "seeds", "wamei-tags.yml"), encoding="utf-8") as f:
+        return (yaml.safe_load(f) or {}).get("alias") or {}
+
+
 def slug_to_aid():
     """公開slug → anilist_id。 頁ファイルを YAML として解かずに行頭の2項目だけ拾う(全6.9万頁で十数秒)。
     ★ファイルは最後まで読む: anilist_id は先頭4000字より後ろに在る頁が2,509件ある(巻の多い頁。 最も後ろは9万字目 = 2026-10-09 実測)。
@@ -96,7 +104,7 @@ def tag_keys(tags, ja, noise, gnames):
     return keys
 
 
-def seed_keys(ja, noise, gnames):
+def seed_keys(ja, noise, gnames, alias=None):
     """要素付与(scripts/_element-assign.py apply / hidden)が書いた「隠して持つ」語 → 公開slug → 鍵。
     ani:<英名> は AniList のタグ(自分の頁だけでなく、アニメ・原作小説から引き継いだ分も入っている)。 それ以外は材料から拾った和名。"""
     p = os.path.join(ROOT, "data", "seeds", "element-hidden.json")
@@ -113,6 +121,8 @@ def seed_keys(ja, noise, gnames):
                 if name in noise or name.startswith(NOISE_PREFIX) or name in NOISE_NAMES:
                     continue
                 k = ja.get(name) or "en:" + name
+            else:
+                k = (alias or {}).get(k, k)
             if k not in gnames:
                 ks.add(k)
         out[slug] = ks
@@ -130,7 +140,8 @@ def main():
         idx = json.load(f)
     F = idx["f"]
     i_slug, i_themes = F.index("slug"), F.index("themes")
-    visible = {r[i_slug]: [t for t in (r[i_themes] or []) if t] for r in idx["d"]}
+    alias = load_alias()
+    visible = {r[i_slug]: list(dict.fromkeys(alias.get(t, t) for t in (r[i_themes] or []) if t)) for r in idx["d"]}
     s2a = slug_to_aid()
     need = set(s2a.values())
     ani = {}
@@ -140,7 +151,7 @@ def main():
             if d.get("id") in need:
                 ani[d["id"]] = d.get("tags") or []
 
-    seed = seed_keys(ja, noise, gnames)
+    seed = seed_keys(ja, noise, gnames, alias)
     keys_of, n_hidden = {}, 0
     for slug, vis in visible.items():
         ks = set(vis)
