@@ -15,8 +15,12 @@ metadata:
 ## ★UIを変えたら直す所
 - 羅針盤のボタン名・糸の種類・ツールバー(✕閉じる/年表/さらに絞る/次を見る/◎回)・フィルターの節を変えたら、**body.ts の文と写真の両方が古くなる**。 写真は撮り直し。
 - 2026-11-04 時点の写真は本番画面で「旅を保存」を DOM で「共有」に差し替えて撮った(機能蒸留前のため)。
+- ★語彙・データを変えた時も古くなる: 2026-11-09 に要素「成長物語」を「成長」にまとめ、main・c2・c5・c6・f2 の5枚と本文の数字(→41・41冊から 恋愛22/ミュージカル8)を撮り直した(c3・c7・c8・f1・browse は語が写っていないので据え置き)。 写真の数字は輪の「近い本の段」の冊数(compass.ts nearMix)= 少しのデータ変化で 118→27 のように跳ぶ(データ破損ではない)。
 
 ## 撮り方(scratchpad は消えるので要点だけ)
+- ★本番より先のデータで撮る(週次前)= 本番 mangal-db.com を開き、CDP の `Fetch.enable`(urlPattern `*manga-list-head.json*`・`*manga-list-cols.v1.json*`・`*manga-catch-index.json*`・`*compass-hidden.v1.json*`)→ `Fetch.requestPaused` で手元の data/ 3本と public/data/compass-hidden.v1.json を `Fetch.fulfillRequest`(body=base64・22MBでも通る)。 public/prod-idx を置かない・dev を立てない(2026-11-09)。
+- ★差し替えた写真は src に `?v=日付` を付ける = 画像は max-age 1日・s-maxage 7日で、worker のキャッシュ鍵は URL 全体(R2 の鍵は pathname)。 同名のままだと本番で最長7日古い写真が出る。
+- 構図: main=430x900全体→640x1340 / c2=y190〜690 / c5・c6=パネル(.cp-mix.cp-nar / .cp-mix.cp-more)/ f2=フィルターの中を「▼ 要素」が y180 に来るまでスクロール(上は「適用中の絞り込み」の札が重なる)→ x16・幅398・高さ384。 枠は描き込んで目で確かめる。
 - [[headless_edge_capture_cdp]] の CDP、430x900・DPR2・mobile。 本番 mangal-db.com を直接撮る(全件索引が要らない)。
 - ★クリックは**見える要素だけ**に絞る(PC用の隠れた側欄に同じ文言のボタンがあり、そちらを押して何も起きない)。
 - 枠の位置は getBoundingClientRect を撮影範囲に対する % で記録して HTML の箱にする。

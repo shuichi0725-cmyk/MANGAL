@@ -56,7 +56,7 @@ export const GUIDE_BODY = `
 <div class="step">
 <h3><span class="num">4</span>要素で「こういうの」を探す</h3>
 <p>ジャンルだけでは広すぎる時は「要素」を開きます。いまの条件の中で多い順にならぶので、そのまま「この中にどんな話があるか」の目次にもなります。</p>
-<div class="shot"><img src="/guide/f2.jpg" width="640" height="617" loading="lazy" decoding="async" alt="要素を開いたところ"><div class="mark" style="left:4.0%;top:3.1%;width:92.0%;height:8.9%"><b>1</b></div><div class="mark" style="left:4.0%;top:14.1%;width:19.7%;height:7.8%"><b>2</b></div></div>
+<div class="shot"><img src="/guide/f2.jpg?v=20261109" width="640" height="617" loading="lazy" decoding="async" alt="要素を開いたところ"><div class="mark" style="left:4.0%;top:3.1%;width:92.0%;height:8.9%"><b>1</b></div><div class="mark" style="left:4.0%;top:14.1%;width:19.7%;height:7.8%"><b>2</b></div></div>
 <p class="cap">完結 × 音楽 で絞った後に要素を開いたところ。① 押すと開く ② バンド・アイドル・クラシック音楽…から選べる</p>
 <div class="recipe">
 <div class="rh">組み合わせの例</div>
@@ -92,7 +92,7 @@ export const GUIDE_BODY = `
 
 <div class="step">
 <h3><span class="num">2</span>画面の見かた</h3>
-<div class="shot"><img src="/guide/main.jpg" width="640" height="1340" loading="lazy" decoding="async" alt="羅針盤の画面"><div class="mark" style="left:39.3%;top:40.7%;width:21.4%;height:14.2%"><b>1</b></div><div class="mark" style="left:43.7%;top:23.0%;width:12.6%;height:8.4%"><b>2</b></div><div class="mark" style="left:0.0%;top:4.9%;width:100.0%;height:6.2%"><b>3</b></div><div class="mark" style="left:0.0%;top:0.0%;width:100.0%;height:4.9%"><b>4</b></div><div class="mark" style="left:0.5%;top:88.1%;width:99.1%;height:11.7%"><b>5</b></div></div>
+<div class="shot"><img src="/guide/main.jpg?v=20261109" width="640" height="1340" loading="lazy" decoding="async" alt="羅針盤の画面"><div class="mark" style="left:39.3%;top:40.7%;width:21.4%;height:14.2%"><b>1</b></div><div class="mark" style="left:43.7%;top:23.0%;width:12.6%;height:8.4%"><b>2</b></div><div class="mark" style="left:0.0%;top:4.9%;width:100.0%;height:6.2%"><b>3</b></div><div class="mark" style="left:0.0%;top:0.0%;width:100.0%;height:4.9%"><b>4</b></div><div class="mark" style="left:0.5%;top:88.1%;width:99.1%;height:11.7%"><b>5</b></div></div>
 <p class="cap">① いまの本 ② 周りの本(=糸の入口) ③ 旅路(たどった本) ④ 糸の色の切り替え ⑤ いま選んでいる本の紹介</p>
 <div class="legend">
   <div><i style="background:var(--c-author)"></i>作者が同じ</div>
@@ -194,23 +194,23 @@ export const GUIDE_BODY = `
 
 <div class="step">
 <h3><span class="num">6</span>ジャンル・要素は「重ねて」広げる</h3>
-<p><b>ジャンル</b>(橙)と<b>要素</b>(青)の入口だけは、押してもすぐには広がりません。押すと「選んだ」状態で光り、ほかのジャンル・要素を押すと条件が<b>重なり</b>ます。数字は重ねた時に残る本の数(→31)。真ん中の下に出るボタンで広げます。</p>
-<div class="shot"><img src="/guide/c2.jpg" width="640" height="744" loading="lazy" decoding="async" alt="ジャンルと要素を重ねたところ"><div class="mark" style="left:63.1%;top:10.5%;width:12.6%;height:15.2%"><b>1</b></div><div class="mark" style="left:12.3%;top:51.8%;width:12.6%;height:15.2%"><b>2</b></div><div class="mark" style="left:38.4%;top:62.8%;width:23.2%;height:8.6%"><b>3</b></div></div>
-<p class="cap">のだめカンタービレから ① ジャンル「音楽」 ② 要素「成長物語」を押して重ねたところ。③「成長物語 × 音楽 31冊を広げる」で、音楽ものの成長物語だけが広がる。選んだ入口をもう一度押しても広がります。</p>
+<p><b>ジャンル</b>(橙)と<b>要素</b>(青)の入口だけは、押してもすぐには広がりません。押すと「選んだ」状態で光り、ほかのジャンル・要素を押すと条件が<b>重なり</b>ます。数字は重ねた時に残る本の数(→41)。真ん中の下に出るボタンで広げます。</p>
+<div class="shot"><img src="/guide/c2.jpg?v=20261109" width="640" height="744" loading="lazy" decoding="async" alt="ジャンルと要素を重ねたところ"><div class="mark" style="left:63.1%;top:10.5%;width:12.6%;height:15.2%"><b>1</b></div><div class="mark" style="left:12.3%;top:51.8%;width:12.6%;height:15.2%"><b>2</b></div><div class="mark" style="left:39.3%;top:62.8%;width:21.5%;height:8.6%"><b>3</b></div></div>
+<p class="cap">のだめカンタービレから ① ジャンル「音楽」 ② 要素「成長」を押して重ねたところ。③「成長 × 音楽 41冊を広げる」で、音楽ものの成長の話だけが広がる。選んだ入口をもう一度押しても広がります。</p>
 <div class="tip">重ねるほど「この本のどこが好きか」に近い本になります。0冊になる入口は押せなくなります。</div>
 </div>
 
 <div class="step">
 <h3><span class="num">7</span>広げた後に「さらに絞る」</h3>
 <p>広げた本が多すぎる時は、上の「⚗ さらに絞る」。いま広げている本を、真ん中の本が持っているジャンル・要素でもう一段しぼれます。</p>
-<div class="shot"><img src="/guide/c5.jpg" width="640" height="306" loading="lazy" decoding="async" alt="さらに絞る"><div class="mark" style="left:2.3%;top:28.0%;width:16.0%;height:11.4%"><b>1</b></div><div class="mark" style="left:2.3%;top:50.8%;width:21.1%;height:11.4%"><b>2</b></div></div>
-<p class="cap">31冊から ① ジャンル「恋愛」なら18冊 ② 要素「ミュージカル」なら4冊。札を選んで下のボタンで絞る(何も選ばずに押すと絞りを外す)</p>
+<div class="shot"><img src="/guide/c5.jpg?v=20261109" width="640" height="305" loading="lazy" decoding="async" alt="さらに絞る"><div class="mark" style="left:2.3%;top:28.0%;width:16.0%;height:11.4%"><b>1</b></div><div class="mark" style="left:2.3%;top:50.9%;width:21.1%;height:11.4%"><b>2</b></div></div>
+<p class="cap">41冊から ① ジャンル「恋愛」なら22冊 ② 要素「ミュージカル」なら8冊。札を選んで下のボタンで絞る(何も選ばずに押すと絞りを外す)</p>
 </div>
 
 <div class="step">
 <h3><span class="num">8</span>「ほか ▸」と、ジャンルの組み替え</h3>
 <p>輪に入りきらなかった要素・ジャンルは、下の「要素 ほか・ジャンル ほか ▸」にまとまっています。ここでも押して重ねられます。</p>
-<div class="shot"><img src="/guide/c6.jpg" width="640" height="367" loading="lazy" decoding="async" alt="ほかの糸の一覧"><div class="mark" style="left:2.3%;top:13.8%;width:95.3%;height:82.2%"><b>1</b></div><div class="mark" style="left:71.8%;top:56.9%;width:25.9%;height:6.7%"><b>2</b></div></div>
+<div class="shot"><img src="/guide/c6.jpg?v=20261109" width="640" height="366" loading="lazy" decoding="async" alt="ほかの糸の一覧"><div class="mark" style="left:2.3%;top:13.8%;width:95.3%;height:82.4%"><b>1</b></div><div class="mark" style="left:71.8%;top:57.0%;width:25.9%;height:6.7%"><b>2</b></div></div>
 <p class="cap">① 輪に出ていない要素とジャンル(押して重ねる) ② ジャンルを組み替える</p>
 <p>「⇄ ジャンルを組み替える」は、真ん中の本のジャンルを<b>外したり足したり</b>して似た本を探す道具です。たとえば「ギャグ」を外せば、笑いより音楽ドラマ寄りののだめに似た本が出ます。</p>
 <div class="shot"><img src="/guide/c7.jpg" width="640" height="432" loading="lazy" decoding="async" alt="ジャンルを組み替える"><div class="mark" style="left:2.3%;top:19.8%;width:95.3%;height:8.0%"><b>1</b></div><div class="mark" style="left:2.3%;top:35.9%;width:95.3%;height:47.1%"><b>2</b></div></div>
