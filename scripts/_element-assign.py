@@ -22,7 +22,7 @@ import argparse, ast, datetime, json, os, re, shutil, subprocess, sys, time, uni
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "v0.21"  # v0.21(2026-10-30): たとえ・宣伝文句・評論の言い回しを「違う」と例つきで明記 / 芯は材料が作品の事実として述べる時だけ(Haiku の比べで 哲学・探偵・下剋上 が芯で出た)
+VERSION = "v0.22"  # v0.22(2026-11-09): 検算が [C0](Wikipedia のカテゴリ)を材料の番号として引けるようにした(文面では見せているのに弾いていた) # v0.21(2026-10-30): たとえ・宣伝文句・評論の言い回しを「違う」と例つきで明記 / 芯は材料が作品の事実として述べる時だけ(Haiku の比べで 哲学・探偵・下剋上 が芯で出た)
 # v0.20: v0.20(2026-10-30): 材料の段落に収集時の印「全体/一編」を見せ、全体の段落の語は巻ごとの紹介文に無くても認める・一編だけの語は違う(長期連載で全部落ちる型)
 # v0.19: v0.19: AniList のネタバレ印でも序盤の材料に根拠がある語はネタバレにしない / 材料の語が訳語と同じなら英名で書く / plan_apply(一括と1頁の apply で同じ計算) # v0.18: 票が「平ら」なエントリ(既定値79/60/50/40/20のタグが6割以上 = 1人が付けただけ)に印 flat を付ける。 芯から下げるのはユーザ裁定で止めた(FLAT_DEMOTE) # v0.17: v0.17: 字が違うが意味が重なる語の組(OVERLAP)も、詳しい方だけ表に出す(見直しまとめて3回目: 漫画家+絵・漫画 47頁・タイムループ+やり直し 9頁) # v0.16: lift を {語: わけ} で受け、2回とも「在る」の語を先に、次に片方だけ「芯」の語を上げる # v0.15: 表が0語の頁は、2回判定で2回とも「在る」以上と読んだ語を強い順に最大3語まで表に上げる(lift)/ 否定文(「〜しない」)の中の語は「違う」(経路L 点検9回ぶんのまとめ) # v0.14: 語に付いて返った [要素] の印を外す(点検 L-20261013-0802: 猫村さんで2回の答えが食い違い扱いになった) # v0.13: ジャンルは作品全体をそう呼べる時だけ・ふつうの言い回しに1度出るだけの語は「違う」・表の語が別の表の語を含む時は詳しい方だけ出す・序盤の材料にも出る語はネタバレ扱いにしない(経路L 1,000件の点検) # v0.12: その巻だけの出来事・固有名の一部は「違う」(経路L 1回目の点検: ダイマジン=戦争・しずくちゃん=ミステリー・BUNGO=シニア) # v0.11: 語彙に無い新しい語も、隠し要素として持つ(付与案に載った=根拠の検査を通った語) # v0.10: ありふれた語(語ごとのユーザ裁定 rulings.yml word_rulings)は表に出さず隠して持つ  # v0.9: 関連作から引き継ぐのは本筋のエントリだけ(票は収集の道具 v0.5 が絞る。 ジャンルもそろえる)/ 使わなかったタグを付与案に見せる  # v0.8: 表に出すのは強い順に最大10語・語彙と訳が在る語だけ / AniList と材料が一致した語を先に / 隠して持つ語を欄に分ける  # v0.7: ネタバレ印は「その語を持つエントリの半分以上に付いている時だけ」有効 / 呼び出しは共通部品(_lean_claude)  # v0.6: 作品ごとのユーザ裁定(rulings.yml)を付与案より優先 / apply のジャンル追記を二重にしない  # v0.5: apply(表に出す案を seed へ書く口。ユーザの Go 発話の引用が必須)  # v0.4(2026-10-09 ユーザ裁定): ネタバレ印の語は表に出さない(控えへ)/ 控えはサイトに出さず記録だけ  # v0.2: 指示文から試金石の語の例を外す / タグ一覧の語を候補に / ありふれた名詞を候補から外す
 ME = "python scripts/_element-assign.py"
@@ -378,6 +378,9 @@ def bare(w):
 
 def verify(m, V, cands, ans):
     picks = {p["pid"]: p for p in m["picks"]}
+    cats = (m.get("wikipedia") or {}).get("categories") or []
+    if cats:  # ★文面で [C0](Wikipedia のカテゴリ)を見せているので、検算でも番号として引けるようにする(v0.22。 無いと C0 を根拠にした答えが全部「番号が無い」で弾かれていた = 2,001作で407件・芯210語)
+        picks["C0"] = {"pid": "C0", "text": " / ".join(cats), "as": "カテゴリ", "domain": "ja.wikipedia.org", "spoiler": False}
     cmap = {c["word"]: c for c in cands}
     specific = {n: k for k, n in V["genres"].items() if k not in GENERIC and k != "other"}
     generic_names = {V["genres"][k] for k in GENERIC if k in V["genres"]}
@@ -408,7 +411,7 @@ def verify(m, V, cands, ans):
         p = picks.get(str(row["pick"]).strip("[] "))
         if not p:
             return bad.append({**row, "reject": f"材料の番号 {row['pick']} が無い"})
-        if len(squash(row["quote"])) < (2 if p["as"] == "タグ" else 8) or squash(row["quote"]) not in squash(p["text"]):
+        if len(squash(row["quote"])) < {"タグ": 2, "カテゴリ": 4}.get(p["as"], 8) or squash(row["quote"]) not in squash(p["text"]):
             return bad.append({**row, "reject": "根拠の文が、その番号の材料に一字一句で無い"})
         if group == "new_words" or (group == "judged" and row["vocab"] == "新しい語"):
             if w not in row["quote"]:
