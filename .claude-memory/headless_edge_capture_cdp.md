@@ -25,6 +25,11 @@ metadata:
    `Runtime.evaluate` で `document.querySelector(...).click()` → `Page.captureScreenshot`。 雛形は当日の scratchpad `cdp_shot.py`(使い捨て)。
 3. 終わったら `--remote-debugging-port=933*` の msedge を Stop-Process。
 
+## ★本番の画面を「手元の新しいデータ」で動かす(2026-11-09・下の prod-idx より先にこれ)
+- 本番 mangal-db.com をそのまま開き、CDP `Fetch.enable`(urlPattern = `*manga-list-head.json*` `*manga-list-cols.v1.json*` `*manga-catch-index.json*` `*compass-hidden.v1.json*`)→ `Fetch.requestPaused` で data/ の3本と public/data/compass-hidden.v1.json を `Fetch.fulfillRequest`(body=base64・22MBでも通る)、それ以外は `Fetch.continueRequest`。
+- dev を立てない(コンパイル待ち0)・public/prod-idx を置かない(消し忘れの事故が起きない)・検索 /browse も全件で動く。 週次前の「次に本番で見える状態」を撮る/確かめるのに使う。 ★出せるのは本番に出ているコードだけ(コードの変更を見るなら下の dev)。
+- 出力の文字化け = `PYTHONIOENCODING=utf-8`。 実例 = [[usage_guide_page]] の撮り直し。
+
 ## 手元で羅針盤を「全件の索引」で動かす
 - `public/prod-idx/` に `data/manga-list-cols.v1.json`・`manga-list-head.json`・`manga-catch-index.json` を写し、`MANGAL_DATA_DIR=.preview-data npx next dev -p 3123`。
   ★テスト環境の機能(PREVIEW)は **MANGAL_DATA_DIR=.preview-data でだけ入る**(next.config.ts が NEXT_PUBLIC_PREVIEW_FEATURES を上書きで決める)。 `NEXT_PUBLIC_PREVIEW_FEATURES=1` を付けても無効(2026-10-31 実踏 = 本番の形で立ち上がり2分の作り直し)。 詳細 [[local_ui_verify_dev_edge_cdp]]

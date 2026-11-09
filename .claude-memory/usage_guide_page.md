@@ -1,11 +1,11 @@
 ---
 name: usage_guide_page
-description: 【状態+罠】使い方ページ /guide = 本文は静的HTML文字列(app/guide/body.ts)+本番画面の写真10枚(public/guide/*.jpg)。羅針盤/検索のUIを変えたら写真と説明が古くなる。撮り方と、説明を実装から書く戒め
+description: 【状態+罠】使い方ページ /guide(本番公開済・11/9確認)= 本文は静的HTML文字列(app/guide/body.ts)+本番画面の写真10枚(public/guide/*.jpg)。羅針盤/検索のUIや要素の語彙を変えたら写真と説明が古くなる。撮り方(本番+CDPで新しい索引を差し込む・?v=で画像キャッシュ回避)と、説明を実装から書く戒め
 metadata:
   type: project
 ---
 
-2026-11-04 ユーザ裁定で新設(commit 52334aac71)。 [[magic_shelf_virtual_bookstore]] の羅針盤と検索(/browse)の使い方。
+2026-11-04 ユーザ裁定で新設(commit 52334aac71)。 ★本番公開済み(2026-11-09 確認: mangal-db.com/guide が 200・羅針盤に「?」と「共有」と「🧭 使い方」が出ている)= 以後の本文・写真の直しは次の週次蒸留で本番へ。 [[magic_shelf_virtual_bookstore]] の羅針盤と検索(/browse)の使い方。
 
 ## 構成
 - app/guide/page.tsx(canonical /guide)→ `GUIDE_BODY`(app/guide/body.ts の HTML 文字列)を dangerouslySetInnerHTML。 CSS は guide.css(全規則 `.gd` 配下・keyframes は `gd-` 接頭)。

@@ -56,4 +56,8 @@ metadata:
 2. **`localStorage` はブラウザごと**。別ブラウザで検証してもらう時は `#debug` の踏み直しが要る。
 3. 体感が数字と桁で合わない時は、**推測で直さず計測を仕込む**([[search_perf_hotspots_2026_08]] の実機診断)。
 
+## 追記 2026-11-09: 画像も同名差し替えは古いまま出る
+- public/ の画像(jpg 等)は worker の ASSET = `max-age=86400, s-maxage=604800` = 同じファイル名で差し替えると**本番の端で最長7日、ブラウザで1日**古い画像が出る。
+- worker のキャッシュ鍵は URL 全体(クエリ込み)・R2 の鍵は pathname = 参照側に `?v=日付` を付ければ新しい画像になる(ファイル名を変えると R2 に古い実体が孤児で残る)。 実例 = 使い方の写真 [[usage_guide_page]]。
+
 関連 [[search_perf_hotspots_2026_08]] [[browse_ssr_shell_and_seo]] [[hosting_worker_r2_architecture]]

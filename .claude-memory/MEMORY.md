@@ -72,7 +72,7 @@
 - [AI書評家リーグ運用](ai_review_league_operation.md)
 - [ISBN/巻数是正の進捗](data_quality_cleanup_state.md)
 - [⏳本番待ち台帳(inflight)](inflight_state_2026_09_01.md)
-- [⏳使い方/guide+旅路共有=機能蒸留待ち](usage_guide_page.md)
+- [使い方/guide=本番公開済・語彙/UI変更で写真撮り直し](usage_guide_page.md)
 - [⏳電子書籍ストア一覧](ebook_store_sheet_homework.md)
 - [版/刷タブ・在庫・電子割引](version_tabs_stock_ebook.md)
 - [うる星=版/巻/刷タブ規則](urusei_version_display_rules.md)
