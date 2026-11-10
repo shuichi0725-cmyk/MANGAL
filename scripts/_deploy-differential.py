@@ -71,6 +71,7 @@ def load_env():
 
 def s3_client(env):
     import boto3
+    _r2_manifest.ensure_ca_bundle()
     return boto3.client("s3", endpoint_url=f"https://{env['R2_ACCOUNT_ID']}.r2.cloudflarestorage.com",
                         aws_access_key_id=env["R2_ACCESS_KEY_ID"],
                         aws_secret_access_key=env["R2_SECRET_ACCESS_KEY"])

@@ -12,6 +12,42 @@ import os
 import time
 
 
+def ensure_ca_bundle():
+    """boto3 を作る前に呼ぶ。 セキュリティソフトの通信検査の証明書を boto3 に信用させる。
+
+    ★2026-11-11 実踏: Norton が R2 への通信を検査して証明書を差し替えるようになり、boto3 だけが
+      `SSL: CERTIFICATE_VERIFY_FAILED (unable to get local issuer certificate)` で全滅した。
+      urllib は Windows の証明書ストアを見るので通るが、boto3 は同梱の cacert.pem しか見ない。
+      Norton は自分の根証明書の場所を NODE_EXTRA_CA_CERTS に入れているので、それを同梱の束に
+      足した束を .cache に作り AWS_CA_BUNDLE で渡す(= 検証は切らない。OS が既に信用している証明書を足すだけ)。
+    該当しない環境(変数なし/ファイルなし/既に AWS_CA_BUNDLE 指定あり)では何もしない。
+    返り値 = 使う束のパス or None。
+    """
+    if os.environ.get("AWS_CA_BUNDLE"):
+        return os.environ["AWS_CA_BUNDLE"]
+    extra = os.environ.get("NODE_EXTRA_CA_CERTS", "")
+    if not extra or not os.path.isfile(extra):
+        return None
+    try:
+        import botocore
+        base = os.path.join(os.path.dirname(botocore.__file__), "cacert.pem")
+        with open(base, encoding="utf-8") as f:
+            pem = f.read()
+        with open(extra, encoding="utf-8", errors="replace") as f:
+            pem += "\n" + f.read()
+        d = os.path.join(os.getcwd(), ".cache")
+        os.makedirs(d, exist_ok=True)
+        out = os.path.join(d, "r2-ca-bundle.pem")
+        with open(out, "w", encoding="utf-8", newline="\n") as f:
+            f.write(pem)
+        os.environ["AWS_CA_BUNDLE"] = out
+        print(f"  証明書の束: 同梱 + {extra} → AWS_CA_BUNDLE (通信検査ソフト対策)")
+        return out
+    except Exception as e:   # 束が作れなくても同期自体は試す(従来どおりの挙動)
+        print(f"  ※証明書の束を作れず: {type(e).__name__}: {str(e)[:100]}")
+        return None
+
+
 def load(path, quarantine=True):
     """(manifest, status) を返す。 status = "ok" | "missing" | "corrupt"。
 

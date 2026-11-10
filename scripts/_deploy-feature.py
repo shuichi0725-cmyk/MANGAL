@@ -301,6 +301,7 @@ def main():
             env[k.strip()] = v.strip()
     import boto3
     from botocore.config import Config
+    _r2_manifest.ensure_ca_bundle()
     s3 = boto3.client("s3", endpoint_url=f"https://{env['R2_ACCOUNT_ID']}.r2.cloudflarestorage.com",
                       aws_access_key_id=env["R2_ACCESS_KEY_ID"],
                       aws_secret_access_key=env["R2_SECRET_ACCESS_KEY"], region_name="auto",
