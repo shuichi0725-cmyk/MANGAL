@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: dff8a305-89f9-41d1-baa4-d9b9d0478784
-  modified: 2026-07-27T23:55:17.719Z
+  modified: 2026-11-10T15:39:52.281Z
 ---
 
 ★**本番サイトから消したはずの頁が消えていない**(2026-07-26 発見)。
@@ -33,6 +33,18 @@ metadata:
 - ★**2026-07-27の初回prune実績 = 322キー削除**(見込み2,100は上記の照合ミス由来の過大見積り)。
   もののけ姫/となりのトトロ/千と千尋/十二国記 が本番で404化したのを実地確認済み。
   中止された時はログを確認し `--prune-max <件数+100>` で再実行する。
+
+## ★残りの孤児を一掃(2026-11-11・完了)
+- R2 全186,390キーを台帳(r2-manifest 185,529)と突合 → **孤児861キー・35.5MB**(全部 7/3〜7/17 のPUT =
+  prune導入前の残り。 7/27以降の週次では新規孤児ゼロ = 仕組みは効いている)。
+- 内訳: 漫画364頁(うち**116頁が本番200のまま**・248頁は301転送で不可視)+古い_next 130+その他3。
+- 退避 `.cache/r2-orphan-bak-20261111/` → 削除 → edge purge → 116頁の404を実地確認。
+  記録 = `data/seeds/r2-orphan-prune-changelog.jsonl` / 一覧 `docs/production-diagnostics/r2-orphan-prune-2026-11-11.tsv`。
+- ★**容量対策にはならない**(R2 10.1GB はほぼ全部が現役。 無料枠10GB超過は月数円)。
+- ★調べ方 = `list_objects_v2` 全走査(約190回のClass A)で「R2に在り台帳に無いキー」。 台帳起点の prune は
+  **台帳に載っていない孤児を永久に見ない**ので、この全走査だけが見つける手段。
+- ★同日: Norton の通信検査で boto3 だけ SSL エラー → `_r2_manifest.ensure_ca_bundle()` で恒久対処
+  (週次/差分反映/機能蒸留の3本。 NODE_EXTRA_CA_CERTS の根証明書を AWS_CA_BUNDLE に足す)。
 
 ## ★孤児の第2の発生源 = 差分反映のDELETEがstem指定だった (2026-09-04 発見・是正済)
 prune 漏れとは別に、`_deploy-differential.py` の DELETE が **SRC stem** キーを消していた

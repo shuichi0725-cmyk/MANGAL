@@ -111,7 +111,7 @@
 - [⏳成年3分けレビューUI](adult_triage_review_pending.md)
 - [⏳試し読み再検査ループ](tameshiyomi_recheck_idle_loop.md)
 - [⏳本番軽量化(索引スリム)](index_lightening_plan.md)
-- [⏳R2孤児HTML](r2_orphan_pages_prune_missing.md)
+- [R2孤児HTML=11/11一掃済・探し方は全走査](r2_orphan_pages_prune_missing.md)
 - [⏳SEO構造の穴(5,7残)](seo_structure_gaps_2026_09_04.md)
 - [⏳鬼太郎本編の多版](kitaro_honpen_multiedition_pending.md)
 - [⏳OTOMO全集補完](otomo_complete_works_pending.md)
