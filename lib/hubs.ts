@@ -66,7 +66,8 @@ export function byYearStarted(a: MangaListItem, b: MangaListItem): number {
 
 function keyOf(kind: HubKind, m: MangaListItem): string | null {
   if (kind === "magazine") return m.magazine || null;
-  if (kind === "publisher") return m.publisher || null;
+  // ★"(unknown)" = 出版社未確定の受け皿キー。 社ではないのでハブ頁を作らない(= sitemap にも載らない。 2026-11-10)
+  if (kind === "publisher") return m.publisher && m.publisher !== "(unknown)" ? m.publisher : null;
   return m.year_started > 0 ? String(m.year_started) : null;
 }
 

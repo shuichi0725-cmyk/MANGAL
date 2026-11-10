@@ -73,7 +73,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
         {/* ★旧フッター(About・プライバシー・利用規約+外部遷移の注記)は撤去(2026-11-04)。
             SiteFooter の下に2段目として残っており、プライバシー/利用規約が全頁で2回出ていた。
-            /about は SiteFooter の「使い方」から、規約類は SiteFooter の最下段から到達できる。 */}
+            /about は SiteFooter の「MANGAL について」から、規約類は SiteFooter の最下段から到達できる。 */}
         <ScrollTopButton />
         {/* ValueCommerce LinkSwitch (2026-08-05): BookLive等の提携広告主への素リンクを
             クリック時に自動でアフィリエイトリンクへ変換する。個別リンク加工不要

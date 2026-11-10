@@ -98,7 +98,7 @@ const ZENSHUU: Array<[string, string]> = [
 ];
 
 const INFO: Array<[string, string, string]> = [
-  ["book", "使い方", "/about"],
+  ["book", "使い方", "/guide"],
   ["mail", "お問い合わせ", "/contact"],
   ["doc", "利用規約", "/terms"],
   ["lock", "プライバシー", "/privacy"],

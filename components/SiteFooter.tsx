@@ -15,7 +15,8 @@ export default function SiteFooter() {
     ["今日の一冊 過去ログ", "/sansedai-archive"],
     ["AI書評家リーグ", "/column-ai-league"],
     ["画集", "/art-books"],
-    ["使い方", "/about"],
+    ["使い方", "/guide"],
+    ["MANGAL について", "/about"],
   ];
   // ★コーナーの入口(2026-09-24): ホームのコーナー群はJS描画・≡メニューは開いた時だけ描画のため、
   //   ここに無いコーナーは配信HTMLのどこからもリンクされていなかった(sitemapにだけ載る孤立頁)。

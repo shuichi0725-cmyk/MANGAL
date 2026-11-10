@@ -24,7 +24,7 @@ export default function ScrollShortcutsMock() {
         {([
           ["📋", "一覧", "/list"],
           ["📚", "書庫", null],
-          ["🔰", "使い方", "/about"],
+          ["🔰", "使い方", "/guide"],
           ["🔍", "検索", "/browse"],
           ["≡", "メニュー", null],
         ] as const).map(([icon, label, href]) =>

@@ -118,7 +118,7 @@ export default function HomeSidebar({
             <Link href="/sansedai-archive" className="spring-press block rounded px-1.5 py-1 hover:bg-[var(--color-surface-2)]">🕘 今日の一冊 過去ログ</Link>
             <Link href="/column-ai-league" className="spring-press block rounded px-1.5 py-1 hover:bg-[var(--color-surface-2)]">📝 AI書評家リーグ</Link>
             <Link href="/art-books" className="spring-press block rounded px-1.5 py-1 hover:bg-[var(--color-surface-2)]">🎨 画集</Link>
-            <Link href="/about" className="spring-press block rounded px-1.5 py-1 hover:bg-[var(--color-surface-2)]">🔰 使い方</Link>
+            <Link href="/guide" className="spring-press block rounded px-1.5 py-1 hover:bg-[var(--color-surface-2)]">🔰 使い方</Link>
           </nav>
         </div>
       </div>

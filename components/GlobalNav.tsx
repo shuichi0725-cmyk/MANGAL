@@ -62,7 +62,7 @@ const RIGHT_FIXED: Array<[string, string]> = [
   ["検索", "/browse"],
   ["新刊", "/shinkan"],
 ];
-const RIGHT_TAIL: Array<[string, string]> = [["使い方", "/about"]];
+const RIGHT_TAIL: Array<[string, string]> = [["使い方", "/guide"]];
 /** ★いま居る面(2026-11-04): どの頁でもアイコンが同じ見た目で、現在地が分からなかった。
  *  ラベル → その面のパス(配下も含む)。 アニメ化は季ごとの頁(/anime/<季>)、使い方は /about と /guide。 */
 const ACTIVE_PATHS: Record<string, string[]> = {
