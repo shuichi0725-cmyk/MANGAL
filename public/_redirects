@@ -2,8 +2,6 @@
 # 旧 slug → 新 slug の 301(漫画頁は /manga/ 配下=この形状以外は届かない)
 # ★Cloudflare Pages は静的redirect上限2,000行(preview=部分カバー)。本番全件は KV REDIRECTS 側。
 
-/manga/mizuki-shigeru-manga-dai-zenshu /manga/mizuki-shigeru-manga-dai-zenshuu 301
-/manga/sodachisugita-tama-2 /manga/sodachisugita-tama 301
 /manga/0-1996 /manga/zero-1996 301
 /manga/0-2009 /manga/zero-2009 301
 /manga/0-hour /manga/zero-hour 301
@@ -17567,6 +17565,7 @@
 /manga/mizuiro-pinku /manga/mizuiro-pink 301
 /manga/mizuiro-shinema /manga/mizuiro-cinema 301
 /manga/mizuki-shigeru-kaiki-to-fushi-sakuhinshu /manga/mizuki-shigeru-kaiki-to-fuushi-sakuhinshuu 301
+/manga/mizuki-shigeru-manga-dai-zenshu /manga/mizuki-shigeru-manga-dai-zenshuu 301
 /manga/mizuki-shigeru-no-fushigi-zoshi /manga/mizuki-shigeru-no-fushigi-zoushi 301
 /manga/mizuki-shigeru-no-ikai-tanboki /manga/mizuki-shigeru-no-ikai-tanbouki 301
 /manga/mizuki-shigeru-no-izumi-kyoka-den /manga/mizuki-shigeru-no-izumi-kyouka-den 301
@@ -24823,6 +24822,7 @@
 /manga/shinigami-tantei-to-yurei-gakuen /manga/shinigami-tantei-to-yuurei-gakuen 301
 /manga/shinigami-tantei-to-yuutsu-onsen /manga/shinigami-tantei-to-yuuutsu-onsen 301
 /manga/shinigami-to-chokoreeto-pafe /manga/shinigami-to-chocolate-parfait 301
+/manga/shinigami-to-reijou-1-kan /manga/shinigami-to-reijou 301
 /manga/shinigami-yamashita-2025 /manga/shinigami-yamashita 301
 /manga/shinigamishonenkimu /manga/shinigami-shounen-kim 301
 /manga/shinigamishounenkimu /manga/shinigami-shounen-kim 301
@@ -26002,6 +26002,7 @@
 /manga/soda-oji-san-to-mashumaro /manga/oji-san-to-marshmallow 301
 /manga/soda-sodaa /manga/sooda-soodaa 301
 /manga/soda-tabehodai-iko /manga/souda-tabehoudai-ikou 301
+/manga/sodachisugita-tama-2 /manga/sodachisugita-tama 301
 /manga/sodamura-no-soda-san /manga/soodamura-no-sooda-san 301
 /manga/sodanyaku-shima-kosaku /manga/soudanyaku-shima-kousaku 301
 /manga/sodatechimao /manga/sodatechimaou 301
