@@ -16588,7 +16588,9 @@ volumes:
   release_date: '2026-11-19'
   pages: null
   publisher: ブライト出版
-  edition_type: standard
+  edition_type: shinsoban
+  edition_label: 新装版
+  imprint: Tulle Comics
   title_display: ただいま、おかえり 2 -かがやくひー　新装版
   source: rakuten-preorder
   added_at: '2026-09-02'
@@ -16600,7 +16602,9 @@ volumes:
   release_date: '2026-11-19'
   pages: null
   publisher: ブライト出版
-  edition_type: standard
+  edition_type: shinsoban
+  edition_label: 新装版
+  imprint: Tulle Comics
   title_display: ただいま、おかえり 1　新装版
   source: rakuten-preorder
   added_at: '2026-09-02'
@@ -49936,7 +49940,9 @@ volumes:
   release_date: '2026-12-17'
   pages: null
   publisher: ブライト出版
-  edition_type: standard
+  edition_type: shinsoban
+  edition_label: 新装版
+  imprint: Tulle Comics
   title_display: ただいま、おかえり 3 -またあしたー 新装版
   source: rakuten-preorder
   added_at: '2026-10-22'
@@ -49948,7 +49954,9 @@ volumes:
   release_date: '2026-12-17'
   pages: null
   publisher: ブライト出版
-  edition_type: standard
+  edition_type: shinsoban
+  edition_label: 新装版
+  imprint: Tulle Comics
   title_display: ただいま、おかえり 4 -ひとやすみー 新装版
   source: rakuten-preorder
   added_at: '2026-10-22'
@@ -54713,7 +54721,9 @@ volumes:
   release_date: '2027-01-22'
   pages: null
   publisher: ブライト出版
-  edition_type: standard
+  edition_type: shinsoban
+  edition_label: 新装版
+  imprint: Tulle Comics
   title_display: ただいま、おかえり　5 -はれのひー 新装版
   source: rakuten-preorder
   added_at: '2026-11-06'
@@ -56195,3 +56205,25 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-11-11'
   note: '日次11/11: 楽天題『MUJIN -無尽ー 15』。著者欄 崗田屋愉一=岡田屋鉄蔵の改名後の筆名(同じ少年画報社YKコミックス・巻14の次)で著者一致が取れず途中巻保留に落ちていた'
+- series_keys:
+  - 'name:つのだじろう|name:恐怖新聞 : オリジナル完全版. Vol'
+  number: 2
+  isbn13: '9784911636091'
+  release_date: '2026-08-28'
+  publisher: かや書房
+  edition_type: standard
+  title_display: 恐怖新聞オリジナル完全版(Vol.2)
+  source: rakuten-preorder
+  added_at: '2026-11-11'
+  note: 版違い保留から回収(頁は Vol.1 のみ)。楽天live 2026-11-11
+- series_keys:
+  - 'name:つのだじろう|name:恐怖新聞 : オリジナル完全版. Vol'
+  number: 3
+  isbn13: '9784911636213'
+  release_date: '2026-12-28'
+  publisher: かや書房
+  edition_type: standard
+  title_display: 恐怖新聞オリジナル完全版(Vol.3)
+  source: rakuten-preorder
+  added_at: '2026-11-11'
+  note: 版違い保留から回収。楽天live 2026-11-11

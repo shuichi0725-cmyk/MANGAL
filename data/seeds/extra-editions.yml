@@ -3033,6 +3033,9 @@ extra:
     - isbn13: '9784098640805'
       number: 3
       release_date: '2026-11-30'
+    - isbn13: '9784098640812'
+      number: 4
+      release_date: '2026-12-28'
   yume-de-aimashou-yamamoto-1993:
   - imprint: 山本直樹 ヴィンテージ・コレクション
     label: complete edition(2027)
@@ -3042,3 +3045,260 @@ extra:
     - isbn13: '9784778323462'
       number: 1
       release_date: '2027-01-20'
+
+  mirumo-de-pon:
+  - imprint: ちゃおコミックス
+    label: 愛蔵版
+    publisher: 小学館
+    type: aizoban
+    volumes:
+    - isbn13: '9784098736102'
+      number: 1
+      release_date: '2026-09-25'
+    - isbn13: '9784098736409'
+      number: 2
+      release_date: '2026-10-26'
+    - isbn13: '9784098736416'
+      number: 3
+      release_date: '2026-10-26'
+    - isbn13: '9784098736638'
+      number: 4
+      release_date: '2026-11-26'
+    - isbn13: '9784098736645'
+      number: 5
+      release_date: '2026-11-26'
+  shijou-saikyou-no-deshi-kenichi:
+  - imprint: 少年サンデーコミックス
+    label: 愛蔵版
+    publisher: 小学館
+    type: aizoban
+    volumes:
+    - isbn13: '9784098547388'
+      number: 1
+      release_date: '2026-08-18'
+    - isbn13: '9784098547517'
+      number: 2
+      release_date: '2026-08-18'
+    - isbn13: '9784098548095'
+      number: 3
+      release_date: '2026-09-16'
+    - isbn13: '9784098548620'
+      number: 4
+      release_date: '2026-10-16'
+    - isbn13: '9784098550111'
+      number: 5
+      release_date: '2026-11-18'
+    - isbn13: '9784098550340'
+      number: 6
+      release_date: '2026-12-17'
+  dengeki-daisy:
+  - label: 新装版
+    publisher: 小学館
+    type: shinsoban
+    volumes:
+    - isbn13: '9784091795250'
+      number: 1
+      release_date: '2026-10-26'
+    - isbn13: '9784091795267'
+      number: 2
+      release_date: '2026-10-26'
+    - isbn13: '9784091795304'
+      number: 3
+      release_date: '2026-11-26'
+    - isbn13: '9784091795311'
+      number: 4
+      release_date: '2026-11-26'
+    - isbn13: '9784091795328'
+      number: 5
+      release_date: '2026-12-24'
+    - isbn13: '9784091795335'
+      number: 6
+      release_date: '2026-12-24'
+    - isbn13: '9784091795342'
+      number: 7
+      release_date: '2027-01-26'
+    - isbn13: '9784091795359'
+      number: 8
+      release_date: '2027-01-26'
+  spirit-circle:
+  - imprint: YKコミックス
+    label: 新装版
+    publisher: 少年画報社
+    type: shinsoban
+    volumes:
+    - isbn13: '9784785983499'
+      number: 1
+      release_date: '2026-12-14'
+      volume_label: 上
+    - isbn13: '9784785983505'
+      number: 2
+      release_date: '2026-12-14'
+      volume_label: 下
+  act-out:
+  - imprint: 花音コミックス
+    label: 新装版
+    publisher: 芳文社
+    type: shinsoban
+    volumes:
+    - isbn13: '9784832293441'
+      number: 1
+      release_date: '2026-12-04'
+      volume_label: 上
+    - isbn13: '9784832293458'
+      number: 2
+      release_date: '2026-12-04'
+      volume_label: 下
+  inazuma-eleven-go:
+  - imprint: コロコロコミックス
+    label: 完全版
+    publisher: 小学館
+    type: kanzenban
+    volumes:
+    - isbn13: '9784091543813'
+      number: 1
+      release_date: '2026-10-28'
+      volume_label: 上巻
+    - isbn13: '9784091544049'
+      number: 2
+      release_date: '2026-11-27'
+      volume_label: 下巻
+  futaridaka:
+  - label: 完全版
+    publisher: 小学館
+    type: kanzenban
+    volumes:
+    - isbn13: '9784091794864'
+      number: 1
+      release_date: '2025-07-25'
+    - isbn13: '9784091794925'
+      number: 2
+      release_date: '2025-09-26'
+    - isbn13: '9784091794932'
+      number: 3
+      release_date: '2025-11-28'
+    - isbn13: '9784091794949'
+      number: 4
+      release_date: '2026-01-23'
+    - isbn13: '9784091794956'
+      number: 5
+      release_date: '2026-03-27'
+    - isbn13: '9784091794963'
+      number: 6
+      release_date: '2026-05-22'
+    - isbn13: '9784091794970'
+      number: 7
+      release_date: '2026-07-24'
+    - isbn13: '9784091794987'
+      number: 8
+      release_date: '2026-09-25'
+  tera-e:
+  - label: 愛蔵版
+    publisher: 小学館クリエイティブ
+    type: aizoban
+    volumes:
+    - isbn13: '9784778033873'
+      number: 1
+      release_date: '2026-09-30'
+      title_display: 永久愛蔵版
+    - isbn13: '9784778033880'
+      number: 2
+      release_date: '2026-10-30'
+      title_display: 永久愛蔵版
+    - isbn13: '9784778033897'
+      number: 3
+      release_date: '2026-11-27'
+      title_display: 永久愛蔵版
+  kanata-kara:
+  - imprint: 花とゆめコミックススペシャル
+    label: 愛蔵版
+    publisher: 白泉社
+    type: aizoban
+    volumes:
+    - isbn13: '9784592231660'
+      number: 1
+      release_date: '2026-10-05'
+    - isbn13: '9784592231677'
+      number: 2
+      release_date: '2026-10-05'
+    - isbn13: '9784592231684'
+      number: 3
+      release_date: '2026-11-05'
+    - isbn13: '9784592231691'
+      number: 4
+      release_date: '2026-11-05'
+    - isbn13: '9784592231707'
+      number: 5
+      release_date: '2026-12-04'
+    - isbn13: '9784592231714'
+      number: 6
+      release_date: '2026-12-04'
+    - isbn13: '9784592231721'
+      number: 7
+      release_date: '2027-01-04'
+  shigurui:
+  - label: 愛蔵版
+    publisher: 秋田書店
+    type: aizoban
+    volumes:
+    - isbn13: '9784253019255'
+      number: 1
+      release_date: '2026-09-17'
+    - isbn13: '9784253019262'
+      number: 2
+      release_date: '2026-09-17'
+    - isbn13: '9784253019279'
+      number: 3
+      release_date: '2026-10-20'
+    - isbn13: '9784253019286'
+      number: 4
+      release_date: '2026-10-20'
+    - isbn13: '9784253019293'
+      number: 5
+      release_date: '2026-11-19'
+    - isbn13: '9784253019309'
+      number: 6
+      release_date: '2026-11-19'
+    - isbn13: '9784253019316'
+      number: 7
+      release_date: '2026-12-18'
+  uchuu-deka-gyaban-kuroki-eiyuu:
+  - imprint: 少年チャンピオン・コミックス・エクストラ
+    label: 新装版
+    publisher: 秋田書店
+    type: shinsoban
+    volumes:
+    - isbn13: '9784253018449'
+      number: 1
+      release_date: '2026-07-17'
+  shounan-graffiti:
+  - imprint: 少年サンデーコミックス〔スペシャル〕
+    label: 愛蔵版
+    publisher: 小学館
+    type: aizoban
+    volumes:
+    - isbn13: '9784098548729'
+      number: 1
+      release_date: '2026-12-18'
+  bourei-gakkyuu:
+  - imprint: アケボノコミックス
+    label: 完全版
+    publisher: かや書房
+    type: kanzenban
+    volumes:
+    - isbn13: '9784911636138'
+      number: 1
+      release_date: '2026-10-28'
+      title_display: オリジナル完全版
+  mud-men:
+  - label: 完全版
+    publisher: 秋田書店
+    type: kanzenban
+    volumes:
+    - isbn13: '9784253019408'
+      number: 1
+      release_date: '2026-10-07'
+      title_display: 原典完全版 オンゴロの仮面
+    - isbn13: '9784253019415'
+      number: 2
+      release_date: '2026-10-07'
+      title_display: 原典完全版 大いなる復活
