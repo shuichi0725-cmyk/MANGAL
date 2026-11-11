@@ -54,3 +54,5 @@ metadata:
 - [差分反映の関連計算の穴](diff_deploy_subset_related.md)
 - [容量/速度の残りレバー](size_speed_levers_2026_09_24.md)
 - [ボット急増=対策保留(実害待ち)](bot_surge_2026_10_hold.md)
+- [漫画1頁2ファイル(.html+.txt)は残す=消すと往復が遅い](rsc_txt_keep_two_files_decision.md)
+- [R2使用量の実測11/11(容量だけ枠超え・27日始まり)](r2_usage_snapshot_2026_11.md)

@@ -21,3 +21,4 @@ metadata:
 - [クラウドセッション](cloud_sessions_usage.md)
 - [batは英数字のみ+CRLF(日本語remを命令として誤実行)](bat_ascii_crlf_cp932_rem_misparse.md)
 - [PCのLAN口2つ・固定IPは片側だけ](pc_lan_port_static_ip.md)
+- [Nortonの通信検査でboto3だけSSLエラー(束に根証明書を足す)](norton_tls_inspection_python_ssl.md)
