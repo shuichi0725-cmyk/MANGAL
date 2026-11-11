@@ -498,3 +498,11 @@ A: 収穫N件(月分布)/①続巻追加/②③④本番化した新作数+保�
 - 束ねた後に**巻番号の連続性を検査**((1)が2つ/系列飛び=別シリーズ混在signal)。
 - ★**著者集合は判定根拠にしない**(ユーザ裁定: スピンオフで作画が増えるとは限らない=同一人・減る・総入替すべてある。著者軸=分裂の根本原因 [[clustering_unit_is_series]])。
 - kana安全網32字の長題誤hold(不貞の子=基底40字なろう系)は**是正済**(2026-07-10): `clean_kana`が基底題の機械読み長と整合(比0.6〜1.5)なら32字超でも通す。副題汚染(読み長より膨らむ)は依然hold。gen-preview/midfill結線済。
+
+### ★版違い保留の足し方(2026-11-11 ユーザ裁定「漏れなく足せるなら足して」)
+- 対象の洗い出し = `.cache/preorders/harvest-history.jsonl`(累積)で題に 愛蔵版/新装版/完全版 等を含み、ISBN索引(`_exists.py --build`)に無い本。当日の triage だけ見ると過去の保留(1巻など)を落とす。
+- 版の全巻は **楽天liveの題検索1回**(`_lookup.rakuten_live_retry(title=…)`)で集める。巻番号が1から連続する版だけ足す。
+- 足す先: 普通の頁 = `data/seeds/extra-editions.yml`(★上下巻は `volume_label`。2026-11-11 に搬送を実装)/ canonical 結線頁 = canonical 本体(鬼平ワイド版66)/ overrides 固定頁 = edition-overrides.json(ギャングキング4)。書影は covers seed へ。記帳 = `edition-fix-changelog.jsonl`。
+- imprint が無い時は label を素の「愛蔵版/新装版/完全版」にする(「新装版(2026)」等にすると label がレーベル欄に焼かれる)。
+- ★新装版の途中巻が続巻として standard に入ることがある(ただいま、おかえり 新装版2-5 が2016年版1巻の続きに混ざり、新装版1は同番号で出ていなかった)→ 種4の `edition_type/edition_label/imprint` を書き換えて版を分ける。
+- 原版の頁が無いもの(意地悪サーキュレーション/pop one's cherry/社内恋愛の相手は俺ですけど?/昭和柔俠伝)は版タブでは足せない = 新規登録の手順へ。ゲームブックの復刊(ガンダム 最期の赤い彗星)は非漫画で deny。

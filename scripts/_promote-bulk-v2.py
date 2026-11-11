@@ -673,6 +673,8 @@ def apply_extra_editions(slug: str, editions: list, extra: dict) -> tuple[list, 
                  "cover_url": None, "release_date": v.get("release_date")}
             if v.get("title_display"):
                 o["title_display"] = v["title_display"]
+            if v.get("volume_label"):  # ★上下巻の版タブ(2026-11-11 スピリットサークル新装版 上/下)
+                o["volume_label"] = v["volume_label"]
             vols.append(o)
         if vols:
             editions.append({"type": xe.get("type") or "standard", "label": xe.get("label") or "別版",
