@@ -95,6 +95,14 @@ def norm_loose(t):
     return norm(t).replace("ー", "")
 
 
+def norm_loose_keep(t):
+    """★緩和正規化の別形(2026-11-11 恋する（おとめ）の作り方 (13) ⇔ 頁「恋する〈おとめ〉の作り方」):
+    題の途中のカナ括弧がルビ注記でなく**題の一部**の型。括弧だけ外して中身は残す。norm_loose と同じゲート(候補1件+巻連続)で使う。"""
+    t = unicodedata.normalize("NFKC", str(t or ""))
+    t = re.sub(r"[（(]([ぁ-んァ-ヶー]{1,12})[)）]", r"\1", t)
+    return norm_loose(t)
+
+
 def author_similar(a, b):
     """★著者名の表記ゆれ(2026-10-08): 常盤ギヨ⇔常盤魚 / saku⇔saku漫画家 / 和田フミ江⇔和田フミエ。
     楽天とMADBで同じ人の書き方が違う。一致・前方一致・共通の先頭2字以上(短い方の長さ-2以上)を「似ている」とする。
@@ -259,7 +267,8 @@ for r in rows:
     if mvi is not None and vol is not None and vol >= 2:
         _pl = auth_is_publisher(r)
         _tr = auth_truncated(r)
-        _lc = page_by_loose.get(norm_loose(_split_title(r["title"])["base"]), [])
+        _b4 = _split_title(r["title"])["base"]
+        _lc = page_by_loose.get(norm_loose(_b4), []) or page_by_loose.get(norm_loose_keep(_b4), [])   # ★後者=カナ括弧が題の一部の型(2026-11-11)
         if len(_lc) == 1:
             c = _lc[0]
             p_auth = page_auths(c)
