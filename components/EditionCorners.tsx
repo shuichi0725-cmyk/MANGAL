@@ -66,19 +66,21 @@ function Frame({
           </Link>
         </div>
         <p className="pt-0.5 text-[10.5px] text-ink/55">{note}</p>
-        <div className="mt-2.5 grid grid-cols-4 gap-2.5">{children}</div>
+        {/* ★2026-11-13: PC(lg以上)は6列。4列のままだと枠が約186px=楽天書影の実寸(横210px)に近く、
+            Windowsの表示倍率125〜150%で引き伸ばされてぼけた。5・6点目はスマホでは隠す(Card の pcOnly)。 */}
+        <div className="mt-2.5 grid grid-cols-4 gap-2.5 lg:grid-cols-6">{children}</div>
       </div>
     </section>
   );
 }
 
 function Card({
-  slug, cover, alt, badge, title, sub,
+  slug, cover, alt, badge, title, sub, pcOnly,
 }: {
-  slug: string; cover: string; alt: string; badge: string; title: string; sub: React.ReactNode;
+  pcOnly?: boolean; slug: string; cover: string; alt: string; badge: string; title: string; sub: React.ReactNode;
 }) {
   return (
-    <Link href={`/manga/${slug}`} className="spring-press block">
+    <Link href={`/manga/${slug}`} className={`spring-press ${pcOnly ? "hidden lg:block" : "block"}`}>
       <div
         className="relative overflow-hidden rounded-md border border-[var(--color-line)] bg-[var(--color-surface-2)]"
         style={{ aspectRatio: "2 / 3" }}
@@ -96,17 +98,18 @@ function Card({
 
 /** 📚 愛蔵版・合本 = 通常版より冊数が減った合本だけ(選別は生成器側) */
 export function AizoubanCorner({ initial }: { initial?: { picks: AizItem[]; total: number } } = {}) {
-  const s = usePicks<AizItem>("/data/aizouban-stock.json", 4, initial);
+  const s = usePicks<AizItem>("/data/aizouban-stock.json", 6, initial);
   if (!s || s.picks.length === 0) return null;
   return (
     <Frame
       emoji="📚"
       title="愛蔵版・合本"
-      note={`全巻がぐっと少ない冊数にまとまった版。${s.total}点から毎回ランダムで4点。`}
+      note={`全巻がぐっと少ない冊数にまとまった版。${s.total}点から毎回ランダムで表示。`}
       href="/aizouban"
     >
-      {s.picks.map((p) => (
+      {s.picks.map((p, i) => (
         <Card
+          pcOnly={i >= 4}
           key={`${p.s}-${p.e}-${p.v}`}
           slug={p.s}
           cover={p.c}
@@ -122,17 +125,18 @@ export function AizoubanCorner({ initial }: { initial?: { picks: AizItem[]; tota
 
 /** 🎁 特装版・限定版 = 巻のvariant(フィギュア・小冊子つき等) */
 export function TokusoubanCorner({ initial }: { initial?: { picks: TksItem[]; total: number } } = {}) {
-  const s = usePicks<TksItem>("/data/tokusouban-stock.json", 4, initial);
+  const s = usePicks<TksItem>("/data/tokusouban-stock.json", 6, initial);
   if (!s || s.picks.length === 0) return null;
   return (
     <Frame
       emoji="🎁"
       title="特装版・限定版"
-      note={`小冊子・グッズつきなどの特別仕様。${s.total}点から毎回ランダムで4点。`}
+      note={`小冊子・グッズつきなどの特別仕様。${s.total}点から毎回ランダムで表示。`}
       href="/tokusouban"
     >
-      {s.picks.map((p) => (
+      {s.picks.map((p, i) => (
         <Card
+          pcOnly={i >= 4}
           key={`${p.s}-${p.v}-${p.l}`}
           slug={p.s}
           cover={p.c}

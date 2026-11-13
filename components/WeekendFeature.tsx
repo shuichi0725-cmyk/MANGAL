@@ -22,7 +22,7 @@ export default function WeekendFeature({ pool, initialWeek }: { pool: WeekendPic
   const start = (((week * N) % pool.length) + pool.length) % pool.length;
   const picks = Array.from({ length: Math.min(N, pool.length) }, (_, i) => pool[(start + i) % pool.length]);
   return (
-    <ul className="mt-3 grid grid-cols-3 gap-3">
+    <ul className="mt-3 grid grid-cols-3 gap-3 lg:grid-cols-6">{/* ★2026-11-13: PCは6列1段(3列だと枠が約251px=書影の実寸210pxを超えてぼけた) */}
       {picks.map((p) => (
         <li key={p.slug}>
           <Link href={`/manga/${p.slug}`} className="spring-press group block">

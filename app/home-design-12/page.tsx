@@ -86,8 +86,8 @@ export default function Design12() {
   const aizStock = loadAizoubanStock();
   const tksStock = loadTokusoubanStock();
   const colorAll = Object.entries(loadColorEditions());
-  const aizInitial = { picks: seeded(aizStock, (p) => `${p.s}-${p.e}-${p.v}`, 4, 11), total: aizStock.length };
-  const tksInitial = { picks: seeded(tksStock, (p) => `${p.s}-${p.v}-${p.l}`, 4, 13), total: tksStock.length };
+  const aizInitial = { picks: seeded(aizStock, (p) => `${p.s}-${p.e}-${p.v}`, 6, 11), total: aizStock.length };
+  const tksInitial = { picks: seeded(tksStock, (p) => `${p.s}-${p.v}-${p.l}`, 6, 13), total: tksStock.length };
   // 14 = ColorCorner の SHOW と同じ枚数(★"use client" の export は server から値として import できない=定数も不可)
   const colorInitial = seeded(colorAll.filter(([, e]) => e.c), ([slug]) => slug, 14, 17);
 
