@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>グラフ頁 見本</title>
+<style>
+:root{--bg:#0b0b0d;--panel:#15151a;--line:#2a2a33;--ink:#f1efe9;--mute:#9a978f;--bar:#e0a030;--bar2:#3f3a2c;--hot:#ffd27a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,"Hiragino Sans","Noto Sans JP",sans-serif;-webkit-user-select:none;user-select:none}
+.wrap{max-width:420px;margin:0 auto;padding:16px}
+h1{font-size:17px;margin:4px 0 6px}
+.note{font-size:12px;color:var(--mute);line-height:1.6;margin:0 0 14px}
+.case{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 12px 16px;margin:0 0 22px}
+.case h2{font-size:15px;margin:0 0 2px}
+.case h2 b{color:var(--bar);margin-right:6px}
+.case .aim{font-size:12px;color:var(--mute);margin:0 0 12px;line-height:1.5}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 10px}
+.tabs button{font:inherit;font-size:13px;color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:999px;padding:6px 12px}
+.tabs button.on{background:var(--bar);border-color:var(--bar);color:#1a1405;font-weight:700}
+.head{font-size:12px;color:var(--mute);margin:0 0 8px;font-variant-numeric:tabular-nums}
+.head b{color:var(--ink);font-size:20px;margin-right:4px}
+/* 横棒 */
+.hb{position:relative;transition:height .6s}
+.row{position:absolute;left:0;right:0;height:26px;display:flex;align-items:center;gap:6px;transition:top .7s cubic-bezier(.2,.8,.2,1),opacity .4s}
+.row .rk{width:18px;font-size:11px;color:var(--mute);text-align:right;font-variant-numeric:tabular-nums}
+.row .nm{width:86px;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .tr{flex:1;height:16px;position:relative}
+.row .br{position:absolute;left:0;top:0;bottom:0;background:var(--bar);border-radius:0 4px 4px 0;transition:width .7s cubic-bezier(.2,.8,.2,1);min-width:2px}
+.row .vl{position:absolute;top:50%;transform:translateY(-50%);font-size:11.5px;color:var(--ink);font-variant-numeric:tabular-nums;transition:left .7s cubic-bezier(.2,.8,.2,1);padding-left:5px;white-space:nowrap}
+.row.top .br{background:var(--hot)}
+.more{font-size:12px;color:var(--mute);margin-top:8px;text-align:center}
+/* 年代 */
+.play{display:flex;align-items:center;gap:10px;margin:0 0 10px}
+.play button{font:inherit;font-size:13px;width:74px;padding:7px 0;border-radius:8px;border:1px solid var(--bar);background:transparent;color:var(--bar);font-weight:700}
+.play input{flex:1;accent-color:var(--bar)}
+.era{font-size:30px;font-weight:800;letter-spacing:.02em;font-variant-numeric:tabular-nums;line-height:1}
+.era small{font-size:12px;color:var(--mute);font-weight:400;margin-left:8px}
+/* 縦棒 */
+.vscroll{overflow-x:auto;padding-bottom:4px}
+.vb{display:flex;align-items:flex-end;gap:5px;height:260px;border-bottom:1px solid var(--line);width:max-content;padding:0 2px}
+.col{width:26px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+.col .cv{font-size:9.5px;color:var(--mute);margin-bottom:3px;font-variant-numeric:tabular-nums;writing-mode:vertical-rl;transition:color .3s}
+.col .cb{width:100%;background:var(--bar);border-radius:4px 4px 0 0;transition:height .8s cubic-bezier(.2,.9,.2,1.15);min-height:2px}
+.col.top .cb{background:var(--hot)} .col.top .cv{color:var(--ink)}
+.vl2{display:flex;gap:5px;width:max-content;padding:6px 2px 0}
+.vl2 span{width:26px;font-size:12px;writing-mode:vertical-rl;text-orientation:upright;height:112px;line-height:26px;white-space:nowrap;overflow:hidden}
+.foot{font-size:11.5px;color:var(--mute);line-height:1.6;border-top:1px solid var(--line);padding-top:12px}
+</style></head><body><div class="wrap">
+<h1>グラフ頁の見本(4案)</h1>
+<p class="note">数字はすべて今の本番データ(全 <span id="tot"></span> 作品)です。ボタンを押すと棒が動きます。<br>どの案でも同じにするところ:黒地・棒は1色(1位だけ明るく)・棒を押すとそのジャンル/要素の一覧へ進む。</p>
+
+<div class="case"><h2><b>A</b>切り替え式の横棒ランキング</h2>
+<p class="aim">「ジャンル/要素/分野/年代」を押すと、棒が伸び縮みして並び替わる。一番ふつうで読みやすい形。</p>
+<div class="tabs" id="aT"></div><div class="head" id="aH"></div><div class="hb" id="aB"></div><div class="more" id="aM"></div></div>
+
+<div class="case"><h2><b>B</b>年代で動く(順位が入れ替わる)</h2>
+<p class="aim">再生すると1970年代→2020年代へ進み、その年代に始まった作品のジャンルの棒が上がったり下がったりして順位が入れ替わる。</p>
+<div class="play"><button id="bP">▶ 再生</button><input id="bS" type="range" min="0" max="5" step="1" value="0"></div>
+<div class="era" id="bE"></div><div style="height:10px"></div><div class="hb" id="bB"></div></div>
+
+<div class="case"><h2><b>C</b>縦棒(音量メーター風)</h2>
+<p class="aim">棒が下から立ち上がる縦型。分野を押すと全部の棒がいっせいに上下する。横にスクロールして32ジャンル全部。</p>
+<div class="tabs" id="cT"></div><div class="head" id="cH"></div>
+<div class="vscroll"><div class="vb" id="cB"></div><div class="vl2" id="cL"></div></div></div>
+
+<div class="case"><h2><b>D</b>絞り込みで比べる横棒</h2>
+<p class="aim">分野で絞ると棒が動く。薄い棒が「全体」、濃い棒が「絞った結果」。全体と比べて多い・少ないが見える。</p>
+<div class="tabs" id="dT"></div><div class="head" id="dH"></div><div class="hb" id="dB"></div></div>
+
+<p class="foot">本番では出ない部品:この説明文と案の記号。<br>要素は全 <span id="nth"></span> 種のうち上位30だけを描いています(本番では「もっと見る」で全部)。<br>年代=その作品の1巻が出た年。ジャンルは1作品に複数付くので、棒の合計は作品数より多くなります。</p>
+</div>
+<script>
+const D=/*DATA*/;
+const fmt=n=>n.toLocaleString('ja-JP');
+document.getElementById('tot').textContent=fmt(D.total);
+document.getElementById('nth').textContent=D.ntheme;
+// 横棒: 行を名前で持ち回して top と width を動かす
+function hbar(el,items,opt={}){
+  const H=28,W=opt.w||78,max=opt.max||Math.max(...items.map(x=>x[1]),1);
+  el._rows=el._rows||{};
+  const seen=new Set();
+  items.forEach(([name,v,base],i)=>{
+    seen.add(name);let r=el._rows[name];
+    if(!r){r=document.createElement('div');r.className='row';r.style.top=(items.length*H)+'px';r.style.opacity=0;
+      r.innerHTML='<span class="rk"></span><span class="nm"></span><span class="tr"><i class="br bg" style="background:var(--bar2)"></i><i class="br fg" style="width:0"></i><span class="vl" style="left:0"></span></span>';
+      r.querySelector('.nm').textContent=name;el.appendChild(r);el._rows[name]=r;r.getBoundingClientRect();}
+    const w=Math.max(v/max*W,0.5);
+    r.style.top=(i*H)+'px';r.style.opacity=1;r.classList.toggle('top',i===0);
+    r.querySelector('.rk').textContent=i+1;
+    r.querySelector('.fg').style.width=w+'%';
+    const bg=r.querySelector('.bg');bg.style.width=(base!=null?Math.max(base/max*W,0.5):0)+'%';
+    const vl=r.querySelector('.vl');vl.style.left=Math.max(w,base!=null?base/max*W:0)+'%';
+    vl.textContent=fmt(v)+(opt.suffix?opt.suffix(v,base):'');
+  });
+  for(const k in el._rows) if(!seen.has(k)){const r=el._rows[k];r.style.opacity=0;r.style.top=(items.length*H)+'px';setTimeout(()=>{if(r.style.opacity==='0'){r.remove();}},500);delete el._rows[k];}
+  el.style.height=(items.length*H)+'px';
+}
+function tabs(el,names,fn,init=0){names.forEach((n,i)=>{const b=document.createElement('button');b.textContent=n;b.onclick=()=>{[...el.children].forEach(c=>c.classList.remove('on'));b.classList.add('on');fn(n,i)};el.appendChild(b);if(i===init){b.classList.add('on')}});fn(names[init],init)}
+// A
+const A={'ジャンル':[D.genre,32,'種'],'要素':[D.theme,D.ntheme,'種'],'分野':[D.demo,D.demo.length,'種'],'年代':[D.decade,D.decade.length,'区分']};
+tabs(document.getElementById('aT'),Object.keys(A),n=>{const [it,cnt,u]=A[n];const show=it.slice(0,12);
+  document.getElementById('aH').innerHTML='<b>'+cnt+'</b>'+u+'の'+n+' ・ 多い順';
+  hbar(document.getElementById('aB'),show);
+  document.getElementById('aM').textContent=it.length>12||cnt>12?'▼ 残り '+(cnt-show.length)+' 件を見る':'';});
+// B
+const eras=Object.keys(D.dec);let bi=0,timer=null;
+function drawB(){const e=eras[bi],m=D.dec[e];const it=Object.entries(m).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  document.getElementById('bE').innerHTML=e+'年代<small>この年代に始まった '+fmt(D.dtot[e])+' 作品</small>';
+  document.getElementById('bS').value=bi;hbar(document.getElementById('bB'),it);}
+document.getElementById('bS').oninput=e=>{bi=+e.target.value;drawB()};
+const bP=document.getElementById('bP');
+function stop(){clearInterval(timer);timer=null;bP.textContent='▶ 再生'}
+bP.onclick=()=>{if(timer){stop();return}if(bi>=eras.length-1)bi=-1;bP.textContent='■ 止める';
+  const step=()=>{bi++;drawB();if(bi>=eras.length-1)stop()};step();timer=setInterval(step,1700)};
+drawB();
+// C
+const order=D.genre.map(x=>x[0]);const cB=document.getElementById('cB'),cL=document.getElementById('cL');
+order.forEach(n=>{const c=document.createElement('div');c.className='col';c.innerHTML='<span class="cv"></span><i class="cb" style="height:0"></i>';cB.appendChild(c);const s=document.createElement('span');s.textContent=n;cL.appendChild(s)});
+function drawC(n){const m=n==='すべて'?Object.fromEntries(D.genre):D.dmg[n];const tot=n==='すべて'?D.total:D.dmtot[n];
+  const max=Math.max(...order.map(k=>m[k]||0));let top=order.reduce((a,k)=>(m[k]||0)>(m[a]||0)?k:a,order[0]);
+  document.getElementById('cH').innerHTML='<b>'+fmt(tot)+'</b>作品 ・ いちばん多いのは「'+top+'」';
+  [...cB.children].forEach((c,i)=>{const v=m[order[i]]||0;c.querySelector('.cb').style.height=(v/max*200)+'px';c.querySelector('.cv').textContent=fmt(v);c.classList.toggle('top',order[i]===top)});}
+tabs(document.getElementById('cT'),['すべて','少年','少女','青年','女性','子ども'],drawC);
+// D
+const all=Object.fromEntries(D.genre);
+function drawD(n){const m=n==='すべて'?all:D.dmg[n];const tot=n==='すべて'?D.total:D.dmtot[n];
+  const it=Object.entries(m).sort((a,b)=>b[1]-a[1]).slice(0,10).map(([k,v])=>[k,v,n==='すべて'?null:all[k]]);
+  document.getElementById('dH').innerHTML='<b>'+fmt(tot)+'</b>作品'+(n==='すべて'?'':' ・ 薄い棒=全体');
+  hbar(document.getElementById('dB'),it,{w:64,max:all[D.genre[0][0]],suffix:(v,b)=>b?'('+Math.round(v/tot*100)+'%)':''});}
+tabs(document.getElementById('dT'),['すべて','少年','少女','青年','女性','子ども'],drawD,1);
+</script></body></html>

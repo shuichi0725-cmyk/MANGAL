@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>グラフ頁 色違い</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0d0d0d;color:#f2f2ec;font-family:system-ui,"Hiragino Sans","Noto Sans JP",sans-serif;-webkit-user-select:none;user-select:none}
+.wrap{max-width:420px;margin:0 auto;padding:16px}
+h1{font-size:17px;margin:4px 0 6px}
+.note{font-size:12px;color:#9a978f;line-height:1.6;margin:0 0 14px}
+.case{--bar:#d9f843;--hot:#d9f843;--on:#0d0d0d;--r:0px;--ink:#f2f2ec;--mute:#9a978f;--line:rgba(242,242,236,.22);
+ background:#171717;border:1px solid var(--line);border-radius:var(--r);padding:14px 12px 16px;margin:0 0 22px}
+.case h2{font-size:15px;margin:0 0 2px}
+.case h2 b{color:var(--hot);margin-right:6px}
+.aim{font-size:12px;color:var(--mute);margin:0 0 12px;line-height:1.5}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 10px}
+.tabs button{font:inherit;font-size:13px;color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:var(--rc,999px);padding:6px 12px}
+.tabs button.on{background:var(--hot);border-color:var(--hot);color:var(--on);font-weight:700}
+.play{display:flex;align-items:center;gap:8px;margin:0 0 4px}
+.play button{font:inherit;font-size:13px;width:78px;flex:none;padding:7px 0;border-radius:var(--rc,8px);border:1px solid var(--hot);background:transparent;color:var(--hot);font-weight:700}
+.play input{flex:1;min-width:0;accent-color:var(--hot)}
+.ticks{display:flex;justify-content:space-between;font-size:9.5px;color:var(--mute);margin:0 0 10px 86px;font-variant-numeric:tabular-nums}
+.era{font-size:26px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1;margin:0 0 10px}
+.era small{display:block;font-size:12px;color:var(--mute);font-weight:400;margin-top:3px}
+.hb{position:relative;transition:height .6s}
+.row{position:absolute;left:0;right:0;height:26px;display:flex;align-items:center;gap:6px;transition:top .7s cubic-bezier(.2,.8,.2,1),opacity .4s}
+.rk{width:18px;font-size:11px;color:var(--mute);text-align:right;font-variant-numeric:tabular-nums}
+.nm{width:86px;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tr{flex:1;height:16px;position:relative}
+.br{position:absolute;left:0;top:0;bottom:0;background-color:var(--c,var(--bar));border-radius:0 var(--rb,4px) var(--rb,4px) 0;transition:width .7s cubic-bezier(.2,.8,.2,1),background-color .7s;min-width:2px}
+.vl{position:absolute;top:50%;transform:translateY(-50%);font-size:11.5px;font-variant-numeric:tabular-nums;transition:left .7s cubic-bezier(.2,.8,.2,1);padding-left:5px;white-space:nowrap}
+.row.top .br{background-color:var(--c,var(--hot))}
+.row.top .nm,.row.top .vl{font-weight:700}
+.more{font-size:12px;color:var(--mute);margin-top:8px;text-align:center}
+/* 色違い */
+.t1{--rc:0px;--rb:0px}
+.t2{--bar:#8a8a84;--hot:#d9f843;--rc:0px;--rb:0px}
+.t3{--bar:#e0a030;--hot:#ffd27a;--on:#1a1405;--r:12px}
+.t4{--bar:#d23f3f;--hot:#ff6b5e;--on:#fff;--r:12px}
+.t5{--bar:#f2f2ec;--hot:#f2f2ec;--on:#0d0d0d;--rc:0px;--rb:0px}
+.t5 .br{background-image:radial-gradient(#0d0d0d 1.1px,transparent 1.3px);background-size:5px 5px}
+.t5 .row.top .br{background-image:none}
+.t6{--hot:#f2f2ec;--on:#0d0d0d;--r:12px}
+.t7{--bar:#3aa6a0;--hot:#7fe3d8;--on:#06201e;--r:12px}
+.foot{font-size:11.5px;color:#9a978f;line-height:1.6;border-top:1px solid rgba(242,242,236,.22);padding-top:12px}
+</style></head><body><div class="wrap">
+<h1>グラフ頁 A+B の色違い(7案)</h1>
+<p class="note">どの案も中身と動きは同じです(全 <span id="tot"></span> 作品・今の本番データ)。<br>上の段=何を数えるか、下の段=年代。「▶ 再生」で1970年代から順に進み、棒が伸び縮みして順位が入れ替わります。</p>
+<div id="cases"></div>
+<p class="foot">本番では出ない部品:この説明文と案の番号。<br>要素は上位30種から描いています(全 <span id="nth"></span> 種)。年代=その作品の1巻が出た年。ジャンル・要素は1作品に複数付くので、棒の合計は作品数より多くなります。</p>
+</div>
+<script>
+const D=/*DATA*/;
+const fmt=n=>n.toLocaleString('ja-JP');
+document.getElementById('tot').textContent=fmt(D.total);document.getElementById('nth').textContent=D.ntheme;
+const CASES=[
+ ['1','t1','サイトの色(ライム・角ばった形)','いまのサイトと同じ黄緑1色。一番なじむ。'],
+ ['2','t2','灰色+1位だけライム','1位だけ光る。静かで、どれが一番かがすぐわかる。'],
+ ['3','t3','琥珀(前回の見本の色)','暖かい色。角は丸い。'],
+ ['4','t4','朱赤','漫画の表紙らしい強い色。'],
+ ['5','t5','白い棒+網点','題名の帯と同じ網点。1位だけ白ベタ。白黒漫画の雰囲気。'],
+ ['6','t6','ジャンルごとに色','棒ごとに色が決まっていて、順位が入れ替わる時に目で追いやすい。'],
+ ['7','t7','青緑','落ち着いた寒色。'],
+];
+const KINDS={'ジャンル':'genre','要素':'theme','分野':'demo'};
+const ERAS=['all',...Object.keys(D.dtot)];
+const hueOf={};let hn=0;
+function colorFor(name){if(!(name in hueOf)){hueOf[name]=(hn*47)%360;hn++}return 'hsl('+hueOf[name]+' 62% 58%)'}
+D.all.genre.forEach(x=>colorFor(x[0]));
+function hbar(el,items,multi){
+  const H=28,W=76,max=Math.max(...items.map(x=>x[1]),1);el._rows=el._rows||{};const seen=new Set();
+  items.forEach(([name,v],i)=>{seen.add(name);let r=el._rows[name];
+    if(!r){r=document.createElement('div');r.className='row';r.style.top=(items.length*H)+'px';r.style.opacity=0;
+      r.innerHTML='<span class="rk"></span><span class="nm"></span><span class="tr"><i class="br" style="width:0"></i><span class="vl" style="left:0"></span></span>';
+      r.querySelector('.nm').textContent=name;if(multi)r.style.setProperty('--c',colorFor(name));el.appendChild(r);el._rows[name]=r;r.getBoundingClientRect();}
+    const w=Math.max(v/max*W,0.5);r.style.top=(i*H)+'px';r.style.opacity=1;r.classList.toggle('top',i===0);
+    r.querySelector('.rk').textContent=i+1;r.querySelector('.br').style.width=w+'%';
+    const vl=r.querySelector('.vl');vl.style.left=w+'%';vl.textContent=fmt(v);});
+  for(const k in el._rows) if(!seen.has(k)){const r=el._rows[k];r.style.opacity=0;r.style.top=(items.length*H)+'px';setTimeout(()=>r.remove(),500);delete el._rows[k];}
+  el.style.height=(items.length*H)+'px';
+}
+function make(root,[no,cls,name,aim]){
+  const c=document.createElement('div');c.className='case '+cls;
+  c.innerHTML='<h2><b>'+no+'</b>'+name+'</h2><p class="aim">'+aim+'</p><div class="tabs"></div>'+
+   '<div class="play"><button>▶ 再生</button><input type="range" min="0" max="'+(ERAS.length-1)+'" step="1" value="0"></div>'+
+   '<div class="ticks">'+ERAS.map(e=>'<span>'+(e==='all'?'全部':e.slice(2)+'年代')+'</span>').join('')+'</div>'+
+   '<div class="era"></div><div class="hb"></div><div class="more"></div>';
+  root.appendChild(c);
+  const tabs=c.querySelector('.tabs'),btn=c.querySelector('.play button'),sl=c.querySelector('input'),era=c.querySelector('.era'),hb=c.querySelector('.hb'),more=c.querySelector('.more');
+  let kind='ジャンル',ei=0,timer=null;
+  function draw(){const e=ERAS[ei],k=KINDS[kind];const src=e==='all'?D.all[k]:D.dec[e][k];const it=src.slice(0,12);
+    era.innerHTML=(e==='all'?'すべての年代':e+'年代')+'<small>'+(e==='all'?'全 ':'この年代に始まった ')+fmt(e==='all'?D.total:D.dtot[e])+' 作品 ・ '+kind+'の多い順</small>';
+    sl.value=ei;hbar(hb,it,cls==='t6');
+    const n=kind==='ジャンル'?32:kind==='要素'?D.ntheme:src.length;more.textContent=n>it.length?'▼ 残り '+(n-it.length)+' 件を見る':'';}
+  Object.keys(KINDS).forEach((n,i)=>{const b=document.createElement('button');b.textContent=n;if(!i)b.classList.add('on');
+    b.onclick=()=>{[...tabs.children].forEach(x=>x.classList.remove('on'));b.classList.add('on');kind=n;draw()};tabs.appendChild(b)});
+  const stop=()=>{clearInterval(timer);timer=null;btn.textContent='▶ 再生'};
+  sl.oninput=()=>{ei=+sl.value;draw()};
+  btn.onclick=()=>{if(timer){stop();return}if(ei>=ERAS.length-1)ei=0;btn.textContent='■ 止める';
+    const step=()=>{ei++;draw();if(ei>=ERAS.length-1)stop()};step();timer=setInterval(step,1700)};
+  draw();
+}
+const root=document.getElementById('cases');CASES.forEach(x=>make(root,x));
+</script></body></html>

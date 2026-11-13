@@ -69,6 +69,7 @@
 - [⏳表示データ磨き](display_data_polish_tasks.md)
 - [⏳機能ロードマップ](feature_roadmap_post_db.md)
 - [⏳頁分裂5件](page_split_pending_5.md)
+- [⏳動く棒グラフの頁(形A+B決定・色7案返事待ち・他の出し物と一緒に出す)](graph_page_pending.md)
 - [AI書評家リーグ運用](ai_review_league_operation.md)
 - [ISBN/巻数是正の進捗](data_quality_cleanup_state.md)
 - [⏳本番待ち台帳(inflight)](inflight_state_2026_09_01.md)
