@@ -28,3 +28,4 @@ metadata:
 - [genre-append=union](genre_append_seed_mechanism.md)
 - [⏳要素収集の柱(Haiku材料集め・試金石=俺ガイル)](element_harvest_pillar_state.md)
 - [⏳ジャンル・要素の全件見直し(表+Haiku100件ずつ)](element_review_queue_state.md)
+- [⏳Sonnetでキャッチ(637作中約520済・未適用)](catch_sonnet_tool_state.md)
