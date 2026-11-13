@@ -97,7 +97,7 @@
 - [⏳巻説明が先頭タブに無い93](voldesc_not_in_top_block_93.md)
 - [⏳受賞歴データ未使用](awards_material_unused.md)
 - [⏳キャッチ/説明欠落補完](catch_synopsis_enrich_pending.md)
-- [⏳Sonnetでキャッチ(637作中約520済・未適用)](catch_sonnet_tool_state.md)
+- [⏳Sonnetでキャッチ(637作完了・323適用済・残りKobo分は裁定待ち)](catch_sonnet_tool_state.md)
 - [⏳ジャンル品質改善](genre_quality_improvement.md)
 - [⏳ジャンル・要素の全件見直し](element_review_queue_state.md)
 - [⏳長期連載の要素=Web収集の試し](long_series_web_harvest_trial.md)

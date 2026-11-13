@@ -301,6 +301,28 @@ def emit(a):
     print(f"batch-{a.n}: {len(out)}作 → {p1}")
 
 
+def hold(a):
+    """見送り分を理由つきで保留台帳へ追記(純粋追加・既に在る slug は飛ばす)。 次の stage で「書ける」に戻さないため。"""
+    works = {json.loads(l)["slug"]: json.loads(l) for l in io.open(WORKLIST, encoding="utf-8") if l.strip()}
+    have = {l.split("\t")[0] for l in io.open(HOLD, encoding="utf-8")}
+    rows = []
+    for r in load_answers().values():
+        if r["status"] == "ok" or r["src"] in have:
+            continue
+        why = re.sub(r"\s+", " ", r.get("reason") or "検査落ち: " + ",".join(r.get("bad") or [])).strip()
+        who = "Opus点検で除外" if r.get("model") == "opus-audit" else "Sonnet見送り"
+        rows.append("\t".join([r["src"], works.get(r["slug"], {}).get("title", ""), nows()[:10], "catch-sonnet", f"{who}: {why}"]))
+    if not a.apply:
+        print(f"追記予定 {len(rows)}行(--apply で書く)"); return
+    raw = io.open(HOLD, "rb").read()
+    nl = "\r\n" if b"\r\n" in raw else "\n"
+    with io.open(HOLD, "ab") as f:
+        if raw and not raw.endswith(b"\n"):
+            f.write(nl.encode())
+        f.write("".join(x + nl for x in rows).encode("utf-8"))
+    print(f"保留台帳へ {len(rows)}行 追記")
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -308,5 +330,6 @@ if __name__ == "__main__":
     s = sub.add_parser("run"); s.add_argument("--limit", type=int, default=200); s.add_argument("--model", default=MODEL); s.set_defaults(f=run)
     s = sub.add_parser("report"); s.set_defaults(f=report)
     s = sub.add_parser("emit"); s.add_argument("n"); s.set_defaults(f=emit)
+    s = sub.add_parser("hold"); s.add_argument("--apply", action="store_true"); s.set_defaults(f=hold)
     a = ap.parse_args()
     a.f(a)
