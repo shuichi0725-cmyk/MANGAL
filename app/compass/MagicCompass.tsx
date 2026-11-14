@@ -496,11 +496,13 @@ export default function MagicCompass({
     }
     // ★2026-11-10 ユーザ「ランダムで選ばれる数が少ない」→ 案1: 人気上位100件をやめ、書影のある全作品から1冊(人気で優先しない)。
     //   先頭100件(head)の時点では引かず、全件が届くのを待つ
-    if (!full) return;
-    const pool = index.filter((m) => m.cover);
+    // ★2026-11-14 ユーザ指摘「書影があるだけで出るようになってないか」: 書影だけで引くと、キャッチも要素もジャンルも無い本が
+    //   最初の中心になった(行き止まり)。 最初の1冊も羅針盤の対象(書影+キャッチ = graph.items)から引く。 対象が出来るまで待つ
+    if (!full || !graph) return;
+    const pool = graph.items;
     if (!pool.length) return;
     setPath([{ slug: pool[Math.floor(Math.random() * pool.length)].slug, kind: null, seed: newSeed() }]);
-  }, [index, path.length, loadingHold]);
+  }, [index, path.length, loadingHold, graph]);
 
   const curItem = useMemo<MangaListItem | null>(() => {
     if (!cur) return null;
