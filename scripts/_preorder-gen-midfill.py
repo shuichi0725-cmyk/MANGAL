@@ -127,8 +127,11 @@ def _pubkey(name):
     return _name2key.get(_ud.normalize("NFKC", str(name or "")))
 def author_names(s):
     out = []
-    for x in re.split(r"[/,、;；]", str(s or "")):
-        x = x.strip()
+    # ★著者欄の出版社注記「（GAノベル／SBクリエイティブ刊）」「(ファンタジア文庫/KADOKAWA刊)」を分割前に落とす(2026-11-14:
+    #   中の「/」で割れて「東夷(ファンタジア文庫」「KADOKAWA刊)」の2人になっていた)。「伏（龍）」型の筆名は 刊) で終わらないので残る。
+    s = re.sub(r"[（(][^（()）]*刊[)）]", "", str(s or ""))
+    for x in re.split(r"[/,、;；]", s):
+        x = re.sub(r"^キャラクター原案[:：]?", "", x.strip()).strip()
         if not x:
             continue
         # ★日本語のみの名前は姓名間の空白を除去(楽天「姓 名」形式→本番無空白慣行。蟹沢ちひろ分裂対策 2026-07-21)
