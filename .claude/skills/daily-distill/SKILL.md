@@ -377,6 +377,20 @@ addict 4件/adikuto 1件・robot 47/robotto 2・deep 28/diipu 0・abyss 13/abisu
   全題が78字以上の時は読点までの本編句で切る(seijo-shoukan-ni-makikomare-mashita)。
 - 出版社 A3(re:belle comics)は新キー `a3`(ISBN出版者記号 89219 は風濤社と同じだが同一実体の確証なし=別名にしない)。
 
+### ★2026-11-14 の恒久修正(実踏3型)
+1. ★**著者欄の出版社注記で著者が割れる**(東夷(ファンタジア文庫/KADOKAWA刊) → 「東夷(ファンタジア文庫」「KADOKAWA刊)」の2人+著者ヨミが1つずつずれる):
+   生成器2本の `author_names` が注記の中の「/」で割っていた。分割の前に `(…刊)` を落とす+「キャラクター原案」の前置きも落とす。
+   「伏（龍）」型の筆名は 刊) で終わらないので残る。全角「／」の注記は割れずに名前へ付いたまま頁化されていた=過去の予約頁10頁を是正済
+   (preorder-page-fix-changelog op=author_name_strip_publisher_note)。
+2. ★**extra-editions.yml の巻には release-date-override が効かない**(tu-casa: ドリフト適用が「seed直接更新」と出ても頁の日付は動かない)。
+   10.6 の適用後、対象が版タブ(extra-editions)の巻なら **extra-editions.yml 本体の release_date を直す**(適用後に頁の日付を1件ずつ検算する)。
+3. **同題・同著者の他社再刊は版タブへ**(王の庭 上下=朝日新聞出版→KADOKAWA あすかコミックスDX。tu-casa の先例どおり extra-editions・
+   label「新装版(KADOKAWA 2027)」・上下は volume_label)。続巻保留の「同巻番号N既在」が1巻から並んでいたらこの型。
+   ★白泉社 楽園コミックス → リイド社 蒼天コミックスの全巻再刊(微熱空間/ぱらのま/衒学始終相談/メジロバナの咲く/Spotted Flower)は裁定待ち(2026-11-14 報告)。
+- slug裁定の型(今日41件): アラサー=arasa(本番19対2)/ リアル=real(34対0)/ ヴィランズ=villains / 異文化同棲=ホームステイ(楽天ヨミの当て字)→homestay /
+  深夜0時=shinya-0-ji / 家系(ラーメン)=iekei(楽天ヨミ。家系女騎士は kakei)/ 続編は本編頁の綴りに揃える(misutaa-marou-blue-after-the-rain)/
+  alias と衝突したら -姓+年(ryuji → ryuji-kaneko2027)。
+
 ### ★今日の学び(runbookに焼いた恒久修正・再発防止)
 - 増加分ゲート(過去draft再カウント防止) / kana捏造hold / slug辞書装置 / 発売日=種2引き当て / 書影=実URL(構築禁止) / 1API全フィールド捕捉(caption→genre) / preview今回のみ。
 
