@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 60837ea9-16b4-4ef2-9200-391e3397c8aa
-  modified: 2026-10-09T01:14:50.910Z
+  modified: 2026-11-14T03:57:37.894Z
 ---
 
 2026-10-09 ユーザ発案: 「ネタバレの要素は隠し持つことは可能か？見えないけどもってる。それによって近い物が見つけやすい的な。羅針盤でもみえないけど近い要素でマンガ自体はつながるみたいな。」
@@ -48,5 +48,14 @@ metadata:
 - 源①は「その漫画自身」の AniList タグだけ。アニメ・原作小説からの引き継ぎ(関連作あり 約6,600作)は API を1作ずつ引く必要があり未着手(トークンは使わないが数時間)。
 - 登録者の少ない頁のタグ(1人が付けた票79)も鍵に入る(重み0.5・割引あり)。濁りが目立つなら登録者数で絞る。
 - ★道具の罠: 頁ファイルから anilist_id を拾う時は**最後まで読む**。先頭4000字より後ろに在る頁が2,509件ある(らんま1/2 は227行目)。`_audit-anilist-id-dup.py` も同じ穴で直した(重複組 559行→618行)。
+
+## 2026-11-14 追加(ユーザ「これをお願い」= 4件。上の未了のうち週次結線と関連作の引き継ぎは済)
+- **関連作の引き継ぎ(源③)**: `scripts/_compass-related-tags.py harvest → build` → git に残る表 `data/seeds/anilist-related-tags.json`(1.5MB・漫画5,419・関連作9,596 = アニメ6,634/小説2,962)。
+  生成器が読み、本筋のエントリだけ使う(小説 = 登録者1,000以上 / アニメ = 1,000以上・最大のアニメの1割以上・SPECIAL/MUSIC 以外 = 要素収集 ani_main と同じ線)。**鍵が増えた頁 2,624**(6,600 は関連作ありの総数で、効くのはこの数)。
+  ★「1作ずつ引くので数時間」は誤りだった: 関係は手元の dump に在り、API は id を50件ずつ引ける = **192回・約8分**。題が同じ関連だけ・3段まで。生の応答は `.cache/anilist-related/media.jsonl`(続きから可)。
+  取り直し = 月次で dump を更新した後に harvest → build(週次には入れていない = 通信が要る)。
+- **週次に結線**: `_weekly-step1.py` の STEPS 末尾 `compass-hidden`(list-index の後)。
+- **原作者を作者の糸に**: `authorNames` が original_authors も返す。原作者の欄にだけ在る名前は入口・理由の表示が「原作 ○○」(`authorLead` / `Unit.lead`)。対象45,773作のうち行き先が増える作品 9,223(北斗の拳 9→37・巨人の星 6→26)。テスト76本。
+- 本番へは未反映(コード = 機能蒸留か週次)。
 
 関連: [[element-harvest-pillar-state]] [[feedback-compass-reach-via-data-quality]] [[magic-shelf-virtual-bookstore]] [[index-format-change-versioned-filename]]
