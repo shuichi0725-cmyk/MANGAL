@@ -2973,7 +2973,23 @@ extra:
     volumes:
     - isbn13: '9784041180426'
       number: 1
-      release_date: '2026-11-24'
+      release_date: '2026-11-20'
+  ou-no-niwa:
+  # 2026-11-14: 2015年 朝日新聞出版 Nemuki+コミックス「王の庭」上下(9784022141569/576)と同題・同著者(かまたきみこ)の
+  # KADOKAWA再刊(楽天予約: あすかコミックスDX / 2027-01-22 / 上下)。tu-casa と同じ型=別頁を作らず版タブへ。
+  - imprint: あすかコミックスDX
+    label: 新装版(KADOKAWA 2027)
+    publisher: kadokawa
+    type: shinsoban
+    volumes:
+    - isbn13: '9784041181225'
+      number: 1
+      release_date: '2027-01-22'
+      volume_label: 上
+    - isbn13: '9784041181232'
+      number: 2
+      release_date: '2027-01-22'
+      volume_label: 下
   pocket-monsters-special:
   - imprint: てんとう虫コミックススペシャル
     label: pbk edition 赤緑青編(2017)
