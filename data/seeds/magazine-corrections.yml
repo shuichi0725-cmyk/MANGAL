@@ -39103,3 +39103,1755 @@ corrections:
     source: ledger:wiki-list+wiki-article
     evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04) / Wiki記事: 週刊少年マガジン×1(2026-11-07)。旧値 空(種3のAI埋め)'
     added_at: '2026-11-07'
+  # ★2026-11-14 保留を根拠の中身まで読んで解いた分(ユーザ「掲載誌の誤りと空欄を埋める」)。 型は scripts/magazine-verify/ledger_apply2.py の先頭
+  #   計画表 = docs/production-diagnostics/magazine-ledger-apply2-2026-11-14.tsv
+  1-2-3-to-4-5-roku:
+    magazine: shojo-club
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 少女クラブ×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  19-ban-hole-no-taka:
+    magazine: monthly-shonen-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 月刊少年ジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  6-nensei-to-shitai-koto:
+    magazine: champion
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年チャンピオン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  aga-kimi-chiruran:
+    magazine: weekly-shonen-sunday
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年サンデー×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  ai-datoka-fukushuu-datoka:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  aizawa-koharu-wa-shiniisogu:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  akaki-chi-no-eleven:
+    magazine: shonen-king
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 少年キング×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  akuma-no-youna-aitsu:
+    magazine: young-lady
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: ヤングレディ×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  akuryoukazoku:
+    magazine: saikyo-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 最強ジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  amakusa-shirou-wa-sukuitai:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  anata-no-soba-e:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  angel-naut:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  anima-karu-ribusu:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  anmetto:
+    magazine: morning
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: モーニング×1(2026-07-18)。型 F0・旧値 monthly-comic-bunch'
+    added_at: '2026-11-14'
+  anoyo-no-tasuku:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  ao-no-6-gou:
+    magazine: weekly-shonen-sunday
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 週刊少年サンデー×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  ao-no-sankutousu:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  apollo-no-uta:
+    magazine: shonen-king
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 少年キング×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  atwight-game:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  autoroo:
+    magazine: weekly-young-magazine
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 週刊ヤングマガジン×1(2026-09-04)。型 F0・旧値 monthly-comic-bunch'
+    added_at: '2026-11-14'
+  baby-shachuu-hackers:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  bake-bake-bake:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  bakukyuu-hit-kurasshu-biidaman:
+    magazine: corocoro-comic
+    source: ledger2:madb-shoshutsu+wiki-article
+    evidence: 'MADB初出: 月刊コロコロコミック×1 / 別冊コロコロコミック×1(2026-11-07) / Wiki記事: 月刊コロコロコミック×1(2026-09-04)。型 S2・旧値 空'
+    added_at: '2026-11-14'
+  bar-lemon-heart:
+    magazine: manga-action
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 漫画アクション×1 / アクションピザッツ×1(2026-09-04)。型 F0・旧値 comic-ran'
+    added_at: '2026-11-14'
+  batchiri-scratch:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  big-x:
+    magazine: shonen-book
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 少年ブック×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  bmx-hurricane:
+    magazine: fresh-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: フレッシュジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  boku-no-kanojo-wa-kessen-heiki:
+    magazine: jump-sq
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ジャンプSQ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  boku-no-mirai-wa-majo-no-naka:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  boku-no-shoukibona-seikatsu:
+    magazine: morning
+    source: ledger2:wiki-article
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04) / Wiki記事: モーニング×1(2026-11-07)。型 S1・旧値 空'
+    added_at: '2026-11-14'
+  bokura-wa-mahou-shounen:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list+wiki-article
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×2 / ウルトラジャンプ×1(2026-11-04) / Wiki記事: 週刊ヤングジャンプ×1 / となりのヤングジャンプ×1 / ウルトラジャンプ×1(2026-09-04)。型 S1・旧値 weekly-shonen-jump'
+    added_at: '2026-11-14'
+  bonobono:
+    magazine: manga-life
+    source: ledger2:madb-shoshutsu+wiki-article
+    evidence: 'MADB初出: まんがくらぶ×4 / まんがライフ×4(2026-11-07) / Wiki記事: まんがライフ×1 / まんがライフオリジナル×1 / ?天才くらぶ×1 / まんがくらぶ×1(2026-09-04)。型 S2・旧値 空'
+    added_at: '2026-11-14'
+  bouken-gabotenjima:
+    magazine: weekly-shonen-sunday
+    source: ledger2:wiki-list+wiki-article
+    evidence: 'Wiki一覧: 週刊少年サンデー×1(2026-11-04) / Wiki記事: 週刊少年サンデー×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  boukendoki-no-watashitachi-densetsu:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  boukenou-biito:
+    magazine: monthly-shonen-jump
+    source: ledger2:wiki-list+wiki-article
+    evidence: 'Wiki一覧: ジャンプSQ×2 / 月刊少年ジャンプ×1(2026-11-04) / Wiki記事: 月刊少年ジャンプ×1 / ?ジャンプSQ.CROWN×1 / ?ジャンプSQ.RISE×1(2026-09-04)。型 S1・旧値 weekly-shonen-jump'
+    added_at: '2026-11-14'
+  brave-bell:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  burudoggu:
+    magazine: fresh-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: フレッシュジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  butter:
+    magazine: afternoon
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: アフタヌーン×1 / アフタヌーン×1(2026-09-04)。型 F0・旧値 feel-young'
+    added_at: '2026-11-14'
+  champ:
+    magazine: monthly-shonen-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 月刊少年ジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  chinshimasu:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  chintara-kami-chan:
+    magazine: shonen-book
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 少年ブック×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  chotto-gomen-neko:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  chou-kakutou-densetsu-ashita-kagayake:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  choujin-x:
+    magazine: tonari-no-young-jump
+    source: ledger2:wiki-article
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×2(2026-11-04) / Wiki記事: となりのヤングジャンプ×1(2026-09-04)。型 S1・旧値 空'
+    added_at: '2026-11-14'
+  chouken-leap:
+    magazine: manga-ou
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: まんが王×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  cinderella-express:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  command-j:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  cosmos-rakuenki:
+    magazine: monthly-birz
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 月刊バーズ×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  dai-furin-den:
+    magazine: heibon-punch
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 平凡パンチ×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  daichi-ga-yuku:
+    magazine: monthly-shonen-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 月刊少年ジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  demodori-shainden:
+    magazine: shukan-taishu
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 週刊大衆×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  doragu-kyouryuuken:
+    magazine: corocoro-comic
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 月刊コロコロコミック×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  dororon-enma-kun:
+    magazine: weekly-shonen-sunday
+    source: ledger2:wiki-list+wiki-article
+    evidence: 'Wiki一覧: 週刊少年サンデー×1(2026-11-04) / Wiki記事: 週刊少年サンデー×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  eeai-supiikaa-to-dokushin-salaryman:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  eisen-no-lovelock:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  enigumatika:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  erunowa-love-jakusha-to-peke-tenshi:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  etchi:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  faraway:
+    magazine: champion
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年チャンピオン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  five:
+    magazine: betsuma
+    source: ledger2:madb-shoshutsu+wiki-article
+    evidence: 'MADB初出: 別冊マーガレット×1(2026-11-07) / Wiki記事: 別冊マーガレット×1(2026-09-04)。型 P1・旧値 shojo-comic'
+    added_at: '2026-11-14'
+  fukujinchou-ki-tan:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  funsou-deshitara-hatta-made:
+    magazine: morning
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: モーニング×1 / ?Dモーニング×1(2026-11-07)。型 F0・旧値 monthly-morning-two'
+    added_at: '2026-11-14'
+  funwari-hunter:
+    magazine: shojo-comic-legacy
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 少女コミック×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  futago-no-princess:
+    magazine: monthly-princess
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 月刊プリンセス×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  gakuen-tengoku:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  gambler-s-parade:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  ganbare-wada-radio:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  garufu-no-taka:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  gekiga-utau-rokunin-no-onna:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  gekisou-anii:
+    magazine: monthly-shonen-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 月刊少年ジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  gekkan-torirenma:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  ghost-kyacchaazu:
+    magazine: saikyo-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 最強ジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  giatrus:
+    magazine: manga-sunday
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 漫画サンデー×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  ginrou-ni-kodoku-o-mita:
+    magazine: weekly-manga-times
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 週刊漫画TIMES×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  gintama-sannen-z-gumi-ginpachi-sensei:
+    magazine: jump-sq
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ジャンプSQ×2(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  goo-goo-heaven:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  grandeek:
+    magazine: comic-gum
+    source: ledger2:wiki-article
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04) / Wiki記事: コミックガム×1(2026-09-04)。型 S1・旧値 空'
+    added_at: '2026-11-14'
+  gunnm:
+    magazine: business-jump
+    source: ledger2:wiki-article
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04) / Wiki記事: ビジネスジャンプ×1(2026-09-04)。型 S1・旧値 空'
+    added_at: '2026-11-14'
+  guts-jun:
+    magazine: champion
+    source: ledger2:wiki-list+wiki-article
+    evidence: 'Wiki一覧: 週刊少年チャンピオン×1(2026-11-04) / Wiki記事: 週刊少年チャンピオン×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  haai-akkodesu:
+    magazine: asahi-shimbun
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 朝日新聞×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  hadaka-samurai:
+    magazine: comic-bonbon
+    source: ledger2:wiki-article
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04) / Wiki記事: コミックボンボン×1 / 週刊ヤングマガジン×1(2026-09-04)。型 S1・旧値 空'
+    added_at: '2026-11-14'
+  haha-no-ai-wa-mamanaranai:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  hangyojin:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  haniihanii-no-sutekina-bouken:
+    magazine: ribon
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: りぼん×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  happy-people:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  hatsumeisonta:
+    magazine: shonen-kobunsha
+    source: ledger2:madb-shoshutsu
+    evidence: 'MADB初出: 少年×2(2026-11-07)。型 P1・旧値 空'
+    added_at: '2026-11-14'
+  hatsusuru-monta:
+    magazine: monthly-shonen-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 月刊少年ジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  heart-boiled-papa:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  heart-sugar-town:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  heiki-shoujo:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  hello-marian:
+    magazine: ribon
+    source: ledger2:madb-mokuji
+    evidence: 'MADB目次: りぼん×9(2026-11-07)。型 P1・旧値 空'
+    added_at: '2026-11-14'
+  higan-no-hotaru:
+    magazine: jump-sq
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ジャンプSQ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  high-kochira-kai-kibu-desu:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  high-school-agent:
+    magazine: monthly-birz
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 月刊バーズ×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  highschool-jingi:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  hipunoshisu-maiku-division-rap-battle-side-b-b-m-t-c:
+    magazine: monthly-shonen-sirius
+    source: ledger2:wiki-article
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04) / Wiki記事: 月刊少年シリウス×1(2026-11-07)。型 S1・旧値 空'
+    added_at: '2026-11-14'
+  hito-ka-no-yuika:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  hitoribocchi-no-rin:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  houkago-boka-ken-de:
+    magazine: weekly-shonen-sunday
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年サンデー×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  hypnosis-mic:
+    magazine: monthly-comic-zero-sum
+    source: ledger2:wiki-article
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04) / Wiki記事: 月刊コミックZERO-SUM×1(2026-11-07)。型 S1・旧値 空'
+    added_at: '2026-11-14'
+  ichigo-monogatari:
+    magazine: shojo-comic-legacy
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 少女コミック×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  igaguri-kun:
+    magazine: boukenou
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 冒険王×1(2026-11-07)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  ii-yu-dane:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  ijiranaide-nagatoro-san:
+    magazine: manga-pocket
+    source: ledger2:wiki-article
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04) / Wiki記事: マガジンポケット×1(2026-09-04)。型 S1・旧値 monthly-shonen-magazine'
+    added_at: '2026-11-14'
+  ijiwaru-baa-san:
+    magazine: sunday-mainichi
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: サンデー毎日×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  ikitagari-no-jinrou:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  iro-tsuku-monochrome:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  itoko-no-onee-chan-ni-amaechau:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  itsuka-no-main:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  jikken-doll-dummy-oscar:
+    magazine: goro
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: GORO×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  jun-1983:
+    magazine: weekly-shonen-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年ジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  juushin-no-katana:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  kagarike-no-8-kyoudai:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  kagome-kagome:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  kaitei-sentai:
+    magazine: shonen-book
+    source: ledger2:madb-shoshutsu
+    evidence: 'MADB初出: 少年ブック×2(2026-11-07)。型 P1・旧値 空'
+    added_at: '2026-11-14'
+  kaiten-tokoyami-restaurant:
+    magazine: saikyo-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 最強ジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  kakutou-shinseiki-go-bout:
+    magazine: champion
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年チャンピオン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  kamakura-monogatari:
+    magazine: manga-action
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 漫画アクション×1 / まんがタウン×1(2026-09-04)。型 F0・旧値 weekly-manga-times'
+    added_at: '2026-11-14'
+  kamen-rider:
+    magazine: weekly-bokura-magazine
+    source: ledger2:wiki-article
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1 / 週刊少年サンデー×1(2026-11-04) / Wiki記事: 週刊ぼくらマガジン×1 / 週刊少年マガジン×1(2026-09-04)。型 S1・旧値 空'
+    added_at: '2026-11-14'
+  kamoku-no-toki:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  kamome-no-kenjutsu:
+    magazine: saikyo-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 最強ジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  kangibanka:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  kanon-master:
+    magazine: weekly-shonen-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年ジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  kao-dake-ja-suki-ni-narimasen:
+    magazine: hana-to-yume
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 花とゆめ×1(2026-09-04)。型 F0・旧値 betsucomi'
+    added_at: '2026-11-14'
+  kappa-no-sanpei:
+    magazine: weekly-shonen-sunday
+    source: ledger2:wiki-list+wiki-article
+    evidence: 'Wiki一覧: 週刊少年サンデー×1(2026-11-04) / Wiki記事: 週刊少年サンデー×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  kappa-sen-ichiya:
+    magazine: manga-action
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 漫画アクション×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  kappa-tengoku:
+    magazine: weekly-asahi
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 週刊朝日×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  kattobi-heart:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  ken-to-mahou-to-ntr:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  kenja-ga-nakama-ni-natta:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  keshikasu-kun:
+    magazine: corocoro-comic
+    source: ledger2:madb-shoshutsu+wiki-article
+    evidence: 'MADB初出: 月刊コロコロコミック×5 / ?別冊コロコロコミックSpecial×5(2026-11-07) / Wiki記事: 月刊コロコロコミック×1 / 別冊コロコロコミック×1(2026-09-04)。型 S2・旧値 空'
+    added_at: '2026-11-14'
+  killer-killer-girls:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  killer-sitter:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  kimen-teikoku:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  kimi-akirameru-koto-nakare:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  kimi-dake-o-mitsumeteru:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  kimi-ga-megami-nara-ii-no-ni:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  kimi-to-mitai-race-ga-aru:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  kimi-wa-akeboshi:
+    magazine: weekly-shonen-sunday
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年サンデー×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  kiniro-no-hoshi:
+    magazine: betsucomi
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: ベツコミ×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  kiraboshi-ojou-sama-no-kyuukon:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  kitazawa-kun-wa-ee-class:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  koi-ka-mahou-ka-wakaranai:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  koi-wa-nintai:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  kokeka-kiikii:
+    magazine: manga-sunday
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 漫画サンデー×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  kono-kaisha-ni-suki-na-hito-ga-imasu:
+    magazine: morning
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: モーニング×1(2026-09-04)。型 F0・旧値 monthly-comic-bunch'
+    added_at: '2026-11-14'
+  koropokkuru-no-makura:
+    magazine: weekly-playboy
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 週刊プレイボーイ×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  koshien-no-wolf:
+    magazine: weekly-shonen-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年ジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  kozure-ookami:
+    magazine: manga-action
+    source: ledger2:madb-mokuji+wiki-article
+    evidence: 'MADB目次: 漫画アクション×277 / ?週刊漫画アクション増刊×24(2026-11-07) / Wiki記事: 漫画アクション×1(2026-09-04)。型 P1・旧値 空'
+    added_at: '2026-11-14'
+  kuro-no-shishi:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list+wiki-article
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04) / Wiki記事: 週刊少年マガジン×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  kusakanmuri-no-hime:
+    magazine: betsucomi
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: ベツコミ×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  kyoryuu-senki:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  kyrie:
+    magazine: champion
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年チャンピオン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  la-vie-en-doll:
+    magazine: jump-kai
+    source: ledger2:wiki-article
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04) / Wiki記事: ジャンプ改×1 / ウルトラジャンプ×1(2026-09-04)。型 S1・旧値 空'
+    added_at: '2026-11-14'
+  lemon-angel:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  lilpri:
+    magazine: ciao
+    source: ledger2:madb-shoshutsu+madb-mokuji
+    evidence: 'MADB初出: ぷっちぐみ×1 / 小学二年生×1 / 小学三年生×1 / ちゃお×1(2026-11-07) / MADB目次: ちゃお×9(2026-11-07)。型 S2・旧値 空'
+    added_at: '2026-11-14'
+  little-big-mama:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  love-live:
+    magazine: dengeki-g-s-magazine
+    source: ledger2:wiki-article
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04) / Wiki記事: 電撃G''s magazine×1 / 電撃G''sコミック×1(2026-11-07)。型 S1・旧値 空'
+    added_at: '2026-11-14'
+  ma-shirokun:
+    magazine: champion
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年チャンピオン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  machine-hayabusa:
+    magazine: monthly-shonen-jump
+    source: ledger2:wiki-list+wiki-article
+    evidence: 'Wiki一覧: 月刊少年ジャンプ×1(2026-11-04) / Wiki記事: 月刊少年ジャンプ×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  mad-dog-1983:
+    magazine: weekly-shonen-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年ジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  magatsu-wanashi-no-yuushagari:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  maguma-taishi:
+    magazine: shonen-gaho
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 少年画報×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  mahou-shoujo-201:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  mahou-shoujo-niwa-mukanai-shokugyou:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  mahoutsukai-sally:
+    magazine: ribon
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: りぼん×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  maid-no-kishi-san:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  majin-bone:
+    magazine: saikyo-jump
+    source: ledger2:wiki-list+wiki-article
+    evidence: 'Wiki一覧: Vジャンプ×1 / 最強ジャンプ×1(2026-11-04) / Wiki記事: 最強ジャンプ×1(2026-11-07)。型 S2・旧値 weekly-shonen-jump'
+    added_at: '2026-11-14'
+  majo-to-youhei:
+    magazine: manga-pocket
+    source: ledger2:wiki-article
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04) / Wiki記事: マガジンポケット×1(2026-11-07)。型 S1・旧値 空'
+    added_at: '2026-11-14'
+  maoujou-sideway:
+    magazine: jump-sq
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ジャンプSQ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  marino-syndrome:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  material-puzzle-zero-kreuz:
+    magazine: gangan
+    source: ledger2:madb-shoshutsu+wiki-article
+    evidence: 'MADB初出: ガンガンONLINE×4 / 月刊少年ガンガン×4(2026-11-07) / Wiki記事: 月刊少年ガンガン×1 / ガンガンONLINE×1(2026-09-04)。型 S2・旧値 空'
+    added_at: '2026-11-14'
+  mazin-garon:
+    magazine: boukenou
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 冒険王×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  melancholia:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  melanic-woman-iona:
+    magazine: fresh-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: フレッシュジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  meranko-killing:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  merry-chan-to-hitsuji:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  migawari-accidents:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  mii-chan-wa-kawaretai:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  min-min-harikeen:
+    magazine: monthly-shonen-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 月刊少年ジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  minami-the-super-evolution:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  minna-shinjae:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  miyakoochi-sensou:
+    magazine: ciao
+    source: ledger2:madb-mokuji
+    evidence: 'MADB目次: ちゃお×6(2026-11-07)。型 P1・旧値 空'
+    added_at: '2026-11-14'
+  miyuki-ni-omakase:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  mizu-makura-hane-makura:
+    magazine: petit-flower
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: プチフラワー×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  mohikan-tsuru-chan:
+    magazine: monthly-shonen-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 月刊少年ジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  momo-raba:
+    magazine: shojo-comic
+    source: ledger2:madb-shoshutsu+wiki-article
+    evidence: 'MADB初出: Sho-Comi×1 / Sho-Comi増刊×1(2026-11-07) / Wiki記事: Sho-Comi×1(2026-09-04)。型 S2・旧値 空'
+    added_at: '2026-11-14'
+  monkii-hantingu:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  moon-edge:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  muni-no-ichigeki:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  musashi-motomiya:
+    magazine: weekly-shonen-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年ジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  nagasaremono:
+    magazine: leed-comic
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: リイドコミック×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  nejishiki:
+    magazine: garo
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 月刊漫画ガロ×1(2026-11-07)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  neko-ga-gotoku:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  nekooku:
+    magazine: morning
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: モーニング×1(2026-09-04)。型 F0・旧値 monthly-morning-two'
+    added_at: '2026-11-14'
+  nekota-no-koto-ga-ki-ni-natte-shikatanai:
+    magazine: ribon
+    source: ledger2:madb-mokuji
+    evidence: 'MADB目次: りぼん×45(2026-11-07)。型 F0・旧値 betsucomi'
+    added_at: '2026-11-14'
+  ninja-hattori-kun:
+    magazine: shonen-kobunsha
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 少年×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  ninkuu:
+    magazine: weekly-shonen-jump
+    source: ledger2:wiki-list+wiki-article
+    evidence: 'Wiki一覧: 週刊少年ジャンプ×1 / ウルトラジャンプ×1(2026-11-04) / Wiki記事: 週刊少年ジャンプ×1(2026-11-07)。型 S1・旧値 空'
+    added_at: '2026-11-14'
+  ninkuu-2nd-stage:
+    magazine: ultra-jump
+    source: ledger2:madb-shoshutsu
+    evidence: 'MADB初出: ウルトラジャンプ×10(2026-11-07)。型 P1・旧値 空'
+    added_at: '2026-11-14'
+  odaroku:
+    magazine: jump-sq
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ジャンプSQ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  ohmygod:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  oji-san-ga-naze-kawaii:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  okaa-san-switch:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  oku-sama-guuten-taaku:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  olympus-no-pollon:
+    magazine: monthly-princess
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 月刊プリンセス×1(2026-11-07)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  omokagemaru:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  one-zero-nine:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  onryou-biyori:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×2(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  ookami-rise:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  ore-ga-kooki-da:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  otsukare-san:
+    magazine: weekly-shonen-magazine
+    source: ledger2:madb-mokuji+wiki-list
+    evidence: 'MADB初出: マガジンSPECIAL×5 / 週刊少年マガジン×3(2026-11-07) / MADB目次: 週刊少年マガジン×5(2026-11-07) / Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 S2・旧値 空'
+    added_at: '2026-11-14'
+  oukoku-monogatari:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  ouritsuin-kumomaru-no-shougai:
+    magazine: weekly-shonen-sunday
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年サンデー×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  panpii-panpii:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  pascal-city:
+    magazine: shonen-big-comic
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 少年ビッグコミック×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  penguin-musume-max:
+    magazine: champion-red
+    source: ledger2:wiki-article
+    evidence: 'Wiki一覧: 週刊少年チャンピオン×1(2026-11-04) / Wiki記事: チャンピオンRED×1(2026-11-07)。型 S1・旧値 空'
+    added_at: '2026-11-14'
+  pilot-a:
+    magazine: shonen-gaho
+    source: ledger2:madb-shoshutsu
+    evidence: 'MADB初出: 少年画報×3(2026-11-07)。型 P1・旧値 空'
+    added_at: '2026-11-14'
+  pokettomonsutaa-black-howaitohen:
+    magazine: bessatsu-corocoro-comic
+    source: ledger2:madb-shoshutsu+wiki-article
+    evidence: 'MADB初出: 月刊コロコロコミック×2 / 別冊コロコロコミック×2(2026-11-07) / Wiki記事: 別冊コロコロコミック×1 / 月刊コロコロコミック×1(2026-11-07)。型 S2・旧値 空'
+    added_at: '2026-11-14'
+  puroburemu-child:
+    magazine: champion
+    source: ledger2:madb-mokuji+wiki-list
+    evidence: 'MADB目次: 週刊少年チャンピオン×9(2026-11-07) / Wiki一覧: 週刊少年チャンピオン×1(2026-11-04)。型 P1・旧値 空'
+    added_at: '2026-11-14'
+  q-e-d-shoumei-shuuryou:
+    magazine: magazine-great
+    source: ledger2:madb-shoshutsu+wiki-article
+    evidence: 'MADB初出: マガジンイーノ×8 / マガジンGREAT×8 / 月刊少年マガジン×3 / 月刊少年マガジン+×1(2026-11-07) / Wiki記事: マガジンGREAT×1 / マガジンイーノ×1 / 月刊少年マガジン+×1(2026-09-04)。型 S2・旧値 monthly-shonen-magazine'
+    added_at: '2026-11-14'
+  rabbit-chaser:
+    magazine: jump-sq
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ジャンプSQ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  rabu-shimyureeshon:
+    magazine: monthly-shonen-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 月刊少年ジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  rakudai-ninja-rantarou:
+    magazine: asahi-shogakusei-shimbun
+    source: ledger2:madb-shoshutsu+wiki-article
+    evidence: 'MADB初出: 朝日小学生新聞×14(2026-11-07) / Wiki記事: 朝日小学生新聞×1(2026-09-04)。型 P1・旧値 comic-bonbon'
+    added_at: '2026-11-14'
+  re-modelling-r:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  reibaidei:
+    magazine: jump-sq
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ジャンプSQ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  riezon:
+    magazine: morning
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: モーニング×1(2026-07-18)。型 F0・旧値 monthly-morning-two'
+    added_at: '2026-11-14'
+  riri-mu-holic:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  robotics-notes:
+    magazine: comic-blade
+    source: ledger2:wiki-article
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04) / Wiki記事: 月刊コミックブレイド×1(2026-11-07)。型 S1・旧値 空'
+    added_at: '2026-11-14'
+  roman:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  route-33:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  rukkarie-no-kawarimono:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  saiko:
+    magazine: big-comic
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: ビッグコミック×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  saikyou-no-kensei-to-kenja-no-moto-ni-tensei-shita-ore:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  saikyou-seitokai-tsubakiyo:
+    magazine: nakayoshi
+    source: ledger2:madb-shoshutsu+wiki-article
+    evidence: 'MADB初出: なかよしラブリー×1 / なかよし×1(2026-11-07) / Wiki記事: なかよし×1(2026-09-04)。型 S2・旧値 空'
+    added_at: '2026-11-14'
+  saishuu-sister-yomogida:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  saiyuuki-den-daienou:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  saiyuuki-hero-gokuuden:
+    magazine: corocoro-comic
+    source: ledger2:madb-shoshutsu+wiki-article
+    evidence: 'MADB初出: 月刊コロコロコミック×3 / 別冊コロコロコミック×3(2026-11-07) / Wiki記事: 月刊コロコロコミック×1 / 別冊コロコロコミック×1(2026-09-04)。型 S2・旧値 ciao'
+    added_at: '2026-11-14'
+  sakura-yoroshiku:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  samuraigan-gekkou:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  sanada-juuyuushi:
+    magazine: monthly-shonen-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 月刊少年ジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  sasen-sareta-dai-san-oujo-wa-henkyou-kaikaku-o-hajimemasu:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  second-break:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  sei-pisutachio-gakuen:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  seibonjinden:
+    magazine: weekly-manga-goraku
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 週刊漫画ゴラク×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  seikatsu:
+    magazine: ax
+    source: ledger2:wiki-article
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04) / Wiki記事: アックス×1 / モーニング×1(2026-09-04)。型 S1・旧値 空'
+    added_at: '2026-11-14'
+  seishuku-ni-tensai-tadaima-benkyouchuu:
+    magazine: comic-tom
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: コミックトム×1 / コミックトム×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  seishun-soukanzu:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  sen-wa-boku-o-egaku:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  senshu-no-koutai-o-oshiraseitashimasu:
+    magazine: champion
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年チャンピオン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  shakunetsu-no-takkyuumusume:
+    magazine: jump-sq-19
+    source: ledger2:wiki-article
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04) / Wiki記事: ジャンプSQ.19×1 / となりのヤングジャンプ×1(2026-09-04)。型 S1・旧値 weekly-shonen-jump'
+    added_at: '2026-11-14'
+  shepherd-house-hotel:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  shichinin-no-samurai:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  shidenkai-no-taka:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  shin-eikou-naki-tensaitachi:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  shin-lupin-sansei:
+    magazine: manga-action
+    source: ledger2:madb-mokuji
+    evidence: 'MADB目次: 漫画アクション×59 / ?週刊漫画アクション増刊×8(2026-11-07)。型 P1・旧値 空'
+    added_at: '2026-11-14'
+  shin-yamikaryuudo:
+    magazine: big-gangan
+    source: ledger2:wiki-article
+    evidence: 'Wiki一覧: 月刊少年ジャンプ×1(2026-11-04) / Wiki記事: 月刊ビッグガンガン×1(2026-11-07)。型 S1・旧値 空'
+    added_at: '2026-11-14'
+  shinanaide-asukawa-san:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  shinazu-no-agito:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  shinigami-saikoro-game:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  shinsetsu-sakamotsu-chan:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  shippo-to-gekirin:
+    magazine: weekly-shonen-sunday
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年サンデー×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  shirazu-no-sounanboshi:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  shiritsu-teii-joshi-gakuen:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  shounen-furaidee:
+    magazine: weekly-shonen-sunday
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年サンデー×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  shounen-jidai:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 週刊少年マガジン×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  shounen-ninja-kaze-yo:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  shounen-typhoon:
+    magazine: shonen-kobunsha
+    source: ledger2:madb-shoshutsu
+    evidence: 'MADB初出: 少年×3 / 少年キング×1 / ?少年・探偵ブック×1 / ?少年・スリラーブック×1(2026-11-07)。型 P1・旧値 空'
+    added_at: '2026-11-14'
+  shumeeru-seijin:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  shushou-chiinke-wakami:
+    magazine: magazine-special
+    source: ledger2:madb-shoshutsu+wiki-article
+    evidence: 'MADB初出: マガジンSPECIAL×10 / 週刊少年マガジン×2 / マガジンSPECIAL×1(2026-11-07) / Wiki記事: マガジンSPECIAL×1 / マガジンSPECIAL×1(2026-09-04) / Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 S1・旧値 空'
+    added_at: '2026-11-14'
+  shuumatsu-no-harem-fantasia:
+    magazine: ultra-jump
+    source: ledger2:wiki-list+wiki-article
+    evidence: 'Wiki一覧: 少年ジャンプ+×2 / ウルトラジャンプ×2(2026-11-04) / Wiki記事: ウルトラジャンプ×1 / 少年ジャンプ+×1 / 週刊ヤングジャンプ×1 / ?序盤の話が掲載されている。}}×1(2026-09-04)。型 S1・旧値 空'
+    added_at: '2026-11-14'
+  slime-boukenki:
+    magazine: v-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: Vジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  slime-daisakusen:
+    magazine: v-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: Vジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  soko-de-hoshikuzu-miagetero:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  sora-e:
+    magazine: weekly-shonen-sunday
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年サンデー×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  star-dust-11:
+    magazine: fresh-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: フレッシュジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  star-lord:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  street-fighter:
+    magazine: monthly-shonen-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 月刊少年ジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  subete-midori-ni-naru-hi-made:
+    magazine: betsucomi
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: ベツコミ×1(2026-11-07)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  sugarless:
+    magazine: champion
+    source: ledger2:madb-shoshutsu+wiki-list+wiki-article
+    evidence: 'MADB初出: 週刊少年チャンピオン×18 / 別冊少年チャンピオン×2(2026-11-07) / Wiki一覧: 週刊少年チャンピオン×1(2026-11-04) / Wiki記事: 週刊少年チャンピオン×1(2026-09-04)。型 F0・旧値 young-king'
+    added_at: '2026-11-14'
+  sukoyaka-naru-toki-mo-kakeru-toki-mo:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  super-angel:
+    magazine: monthly-shonen-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 月刊少年ジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  super-mario-kun:
+    magazine: corocoro-comic
+    source: ledger2:madb-shoshutsu+wiki-article
+    evidence: 'MADB初出: 月刊コロコロコミック×11 / 別冊コロコロコミック×11 / 小学三年生×2 / コロコロイチバン!×1(2026-11-07) / Wiki記事: 月刊コロコロコミック×1 / 別冊コロコロコミック×1 / 小学三年生×1 / 小学四年生×1(2026-09-04)。型 S2・旧値 空'
+    added_at: '2026-11-14'
+  sutoraikaa-yuuki:
+    magazine: fresh-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: フレッシュジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  tabidate-hirarin:
+    magazine: weekly-shonen-sunday
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年サンデー×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  tachiagare-orc-san:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  tada-no-ossan-maou-no-musume-no-henkyou-wonderful-life:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  tail-star:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  takeru-hime:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  tanuki-to-kitsune-to-satogurashi:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  taro:
+    magazine: saikyo-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 最強ジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  tatsujinden:
+    magazine: manga-action
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 漫画アクション×1(2026-11-07)。型 F0・旧値 weekly-comic-bunch'
+    added_at: '2026-11-14'
+  tengoku-de-pon:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  tenkuu-no-mon:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  tensei-kizoku-kantei-skill-de-nariagaru:
+    magazine: manga-pocket
+    source: ledger2:wiki-article
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04) / Wiki記事: マガジンポケット×1(2026-11-07)。型 S1・旧値 young-ace-up'
+    added_at: '2026-11-14'
+  tensei-shitara-dainana-ouji-datta-node-kimama-ni-majutsu-o-kiwamemasu:
+    magazine: manga-pocket
+    source: ledger2:wiki-article
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04) / Wiki記事: マガジンポケット×1(2026-11-07)。型 S1・旧値 monthly-shonen-magazine'
+    added_at: '2026-11-14'
+  tetsujin-28-gou:
+    magazine: shonen-kobunsha
+    source: ledger2:wiki-article
+    evidence: 'Wiki一覧: 最強ジャンプ×1(2026-11-04) / Wiki記事: 少年×1(2026-09-04)。型 S1・旧値 空'
+    added_at: '2026-11-14'
+  thermae-romae:
+    magazine: comic-beam
+    source: ledger2:wiki-article
+    evidence: 'Wiki一覧: 少年ジャンプ+×1(2026-11-04) / Wiki記事: コミックビーム×1(2026-09-04)。型 S1・旧値 空'
+    added_at: '2026-11-14'
+  tiger-mask:
+    magazine: bokura
+    source: ledger2:wiki-article
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04) / Wiki記事: ぼくら×1 / 週刊ぼくらマガジン×1 / 週刊少年マガジン×1(2026-09-04)。型 S1・旧値 空'
+    added_at: '2026-11-14'
+  tobakuni:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  tokidoki-bosotsu-to-roshiago-de-dereru-tonari-no-aarya-san:
+    magazine: manga-pocket
+    source: ledger2:wiki-article
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04) / Wiki記事: マガジンポケット×1(2026-11-07)。型 S1・旧値 空'
+    added_at: '2026-11-14'
+  tokiiro-kaima:
+    magazine: shonen-sunday-super
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 少年サンデーS×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  tokyo-babel:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  tokyo-esp:
+    magazine: shonen-ace
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 月刊少年エース×1(2026-09-04)。型 F0・旧値 young-gangan'
+    added_at: '2026-11-14'
+  toridori-kotori:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  toto:
+    magazine: magazine-special
+    source: ledger2:wiki-article
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04) / Wiki記事: マガジンSPECIAL×1(2026-09-04)。型 S1・旧値 空'
+    added_at: '2026-11-14'
+  tsuki-robot:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  tsukiiro-no-invader:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  tsuzura-senpai-wa-moto-kano-da-kara:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  twin-signal:
+    magazine: gangan
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 月刊少年ガンガン×1 / 月刊Gファンタジー×1(2026-07-18)。型 F0・旧値 monthly-comic-dragon'
+    added_at: '2026-11-14'
+  twindle-no-hakoniwa:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  uchuu-keibitai:
+    magazine: weekly-shonen-sunday
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年サンデー×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  uchuu-no-swan:
+    magazine: asahi-shogakusei-shimbun
+    source: ledger2:madb-shoshutsu+wiki-article
+    evidence: 'MADB初出: 朝日小学生新聞×2(2026-11-07) / Wiki記事: 朝日小学生新聞×1(2026-09-04)。型 P1・旧値 空'
+    added_at: '2026-11-14'
+  uchuu-shounendan-rocket-kun:
+    magazine: bokura
+    source: ledger2:madb-shoshutsu
+    evidence: 'MADB初出: ぼくら×2(2026-11-07)。型 P1・旧値 空'
+    added_at: '2026-11-14'
+  uchuujin-puruka:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  uikon:
+    magazine: ribon
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: りぼん×1(2026-09-04)。型 F0・旧値 betsucomi'
+    added_at: '2026-11-14'
+  umi-no-ouji:
+    magazine: weekly-shonen-sunday
+    source: ledger2:wiki-list+wiki-article
+    evidence: 'Wiki一覧: 週刊少年サンデー×1(2026-11-04) / Wiki記事: 週刊少年サンデー×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  uookurai:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  ura-toukyou-no-osoroshidokoro:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  violet-gradation:
+    magazine: lala
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: LaLa×1(2026-11-07)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  vtuber-wa-mama-naranai:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  wada-radio-no-yome-ni-konaika:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  wada-rajiwo-no-koko-ni-imasu:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  wakatono:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list+wiki-article
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04) / Wiki記事: 週刊少年マガジン×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  wanderlust:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  watari:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  wind-breaker:
+    magazine: manga-pocket
+    source: ledger2:wiki-article
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04) / Wiki記事: マガジンポケット×1(2026-09-04)。型 S1・旧値 monthly-shonen-magazine'
+    added_at: '2026-11-14'
+  winning-shot:
+    magazine: weekly-shonen-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年ジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  with:
+    magazine: lala
+    source: ledger2:madb-shoshutsu+wiki-article
+    evidence: 'MADB初出: LaLa×2 / LaLa DX×2(2026-11-07) / Wiki記事: LaLa×1 / LaLa DX×1(2026-09-04)。型 S2・旧値 hana-to-yume'
+    added_at: '2026-11-14'
+  xevec:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  yagate-efude-o-utsuroshi-kimi-wa:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  yakusai-kochou:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  yama-geki:
+    magazine: weekly-young-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  yaminodoki:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  yaruki-nanka-arimasen:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  yasetai-san-to-shitsuren-chan:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  yatsuhakamura:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  yo-koso-horror-gakka-e:
+    magazine: champion
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年チャンピオン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  yoarashi-ni-warau:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  yojigen:
+    magazine: lala
+    source: ledger2:madb-shoshutsu+wiki-article
+    evidence: 'MADB初出: LaLa×2 / LaLa DX×2(2026-11-07) / Wiki記事: LaLa×1 / LaLa DX×1(2026-09-04)。型 S2・旧値 空'
+    added_at: '2026-11-14'
+  yokokuhan:
+    magazine: jump-kai
+    source: ledger2:wiki-article
+    evidence: 'Wiki一覧: 週刊ヤングジャンプ×1(2026-11-04) / Wiki記事: ジャンプ改×1(2026-09-04)。型 S1・旧値 big-comic'
+    added_at: '2026-11-14'
+  yomotsuhirasaka-residence:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  yoru-yo-sayonara:
+    magazine: weekly-shonen-magazine
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年マガジン×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  yoshiwara-no-kakimushi:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  youkaihunter:
+    magazine: weekly-shonen-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 週刊少年ジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  yumemi-hakusho:
+    magazine: monthly-shonen-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: 月刊少年ジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  yuri-ni-hasamarete-esper:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  zenbu-kimi-no-sei-da:
+    magazine: ultra-jump
+    source: ledger2:wiki-list
+    evidence: 'Wiki一覧: ウルトラジャンプ×1(2026-11-04)。型 L1・旧値 空'
+    added_at: '2026-11-14'
+  zerachin-boy:
+    magazine: club-sunday
+    source: ledger2:madb-shoshutsu+wiki-article
+    evidence: 'MADB初出: 少年サンデーS×2 / クラブサンデー×2(2026-11-07) / Wiki記事: クラブサンデー×1(2026-09-04)。型 S2・旧値 weekly-shonen-sunday'
+    added_at: '2026-11-14'
+  zerozero-nine-one:
+    magazine: manga-action
+    source: ledger2:wiki-article
+    evidence: 'Wiki記事: 漫画アクション×1(2026-09-04)。型 P2・旧値 空'
+    added_at: '2026-11-14'
+  zettai-zetsumei-dangerous-jii-san:
+    magazine: corocoro-comic
+    source: ledger2:madb-shoshutsu+wiki-article
+    evidence: 'MADB初出: 月刊コロコロコミック×10 / 別冊コロコロコミック×10 / 小学四年生×8 / 小学三年生×3(2026-11-07) / Wiki記事: 月刊コロコロコミック×1 / 別冊コロコロコミック×1 / 小学四年生×1(2026-09-04)。型 S2・旧値 空'
+    added_at: '2026-11-14'
