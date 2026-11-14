@@ -277,6 +277,28 @@ describe("広げる単位", () => {
     );
   });
 
+  it("★原作者も作者の糸に入る(2026-11-14)= 相手の本では作画・原作のどちらに名前が在ってもつながり、入口は「原作 ○○」", () => {
+    const c = book("c", { authors: [{ name: "作画A" }], original_authors: [{ name: "原作X" }] });
+    const list = [
+      c,
+      book("same-writer", { authors: [{ name: "作画B" }], original_authors: [{ name: "原作X" }] }),
+      book("writer-draws", { authors: [{ name: "原作X" }] }), // 原作者が自分で描いた本
+      book("same-artist", { authors: [{ name: "作画A" }] }),
+      book("other", { authors: [{ name: "丙" }] }),
+    ];
+    const g = buildGraph(list);
+    const { ring, units } = neighborhood(g, c);
+    const byKey = Object.fromEntries(units.map((u) => [u.key, u]));
+    expect(byKey["author:作画A"].items.map((i) => i.slug)).toEqual(["same-artist"]);
+    expect(byKey["author:原作X"].items.map((i) => i.slug).sort()).toEqual(["same-writer", "writer-draws"]);
+    expect(byKey["author:作画A"].lead).toBeUndefined();
+    expect(byKey["author:原作X"].lead).toBe("原作");
+    expect(ring.find((r) => r.slug === "same-writer")?.label).toBe("原作 原作X");
+    expect(ring.find((r) => r.slug === "same-artist")?.label).toBe("作者 作画A");
+    const ent = threadEntrances(g, c, units);
+    expect(ent.ring.filter((e) => e.kind === "author").map((e) => e.label)).toEqual(["作者 作画A", "原作 原作X"]);
+  });
+
   it("単位は候補全体を持ち、画面に出す24冊は drawUnit で引く(中央の本自身は含まない)", () => {
     const c = book("c", { authors: [{ name: "甲" }] });
     const list = [c];

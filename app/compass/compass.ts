@@ -93,11 +93,18 @@ function uniq<T>(xs: readonly T[]): T[] {
   return [...new Set(xs)];
 }
 
-/** authors の名前部分(重複・空を除く)。 original_authors は数えない(依頼書どおり)。 */
-export function authorNames(m: Pick<MangaListItem, "authors">): string[] {
-  return uniq(
-    (m.authors ?? []).map((a) => (a?.name ?? "").trim()).filter(Boolean),
-  );
+/** 作者の糸に使う名前(重複・空を除く)= authors(作画側)に続けて original_authors(原作者)。
+ *  ★2026-11-14 ユーザ裁定「原作者を作者の糸に入れる」: 原作付きの作品から同じ原作者の別作品へ行けるようにする
+ *  (旧 = authors だけ)。 相手の本では作画・原作のどちらに名前が在ってもつながる。 */
+export function authorNames(m: Pick<MangaListItem, "authors"> & Partial<Pick<MangaListItem, "original_authors">>): string[] {
+  const nm = (xs: readonly { name?: string | null }[] | null | undefined) =>
+    (xs ?? []).map((a) => (a?.name ?? "").trim()).filter(Boolean);
+  return uniq([...nm(m.authors), ...nm(m.original_authors)]);
+}
+
+/** 中央の本での呼び名: 原作者の欄にだけ在る名前は「原作」、それ以外は「作者」。 */
+export function authorLead(m: Pick<MangaListItem, "authors">, name: string): "作者" | "原作" {
+  return (m.authors ?? []).some((a) => (a?.name ?? "").trim() === name) ? "作者" : "原作";
 }
 
 function push<K>(map: Map<K, number[]>, k: K, i: number): void {
@@ -192,6 +199,8 @@ export type Unit = {
   items: UnitItem[];
   /** どこまで条件を緩めたか(組み替え: 「残した6つのうち2つ以上一致」)。 無ければ出さない */
   note?: string;
+  /** 作者の単位だけ: 入口の呼び名(「原作」)。 無ければ「作者」 */
+  lead?: string;
 };
 export type Neighborhood = { ring: RingEntry[]; units: Unit[] };
 
@@ -437,7 +446,8 @@ export function neighborhood(
   };
   take([...authorSet], "author", (i) => {
     const theirs = new Set(authorNames(g.items[i]));
-    return `作者 ${names.find((n) => theirs.has(n)) ?? names[0]}`;
+    const n = names.find((x) => theirs.has(x)) ?? names[0];
+    return `${authorLead(center, n)} ${n}`;
   });
   take(
     magList.filter((i) => !taken.has(i) && px(i) >= 2),
@@ -477,8 +487,11 @@ export function neighborhood(
       }));
     if (items.length) units.push({ key, kind, label, items });
   };
-  for (const n of names)
+  for (const n of names) {
     unit(`author:${n}`, "author", n, (g.byAuthor.get(n) ?? []).filter(notSelf));
+    const u = units[units.length - 1];
+    if (u && u.key === `author:${n}` && authorLead(center, n) === "原作") u.lead = "原作";
+  }
   if (center.magazine)
     unit(
       `mag:${center.magazine}`,
@@ -1548,7 +1561,7 @@ export function threadEntrances(
   const fx = (u: Unit, kind: "author" | "mag" | "year" | "sim"): Entrance => ({
     key: `u:${u.key}`,
     kind,
-    label: kind === "author" ? `作者 ${u.label}` : kind === "year" ? `${u.label}に開始` : u.label,
+    label: kind === "author" ? `${u.lead ?? "作者"} ${u.label}` : kind === "year" ? `${u.label}に開始` : u.label,
     count: u.items.length,
     ...coverOf(u.items.map((i) => i.slug)),
     unitKey: u.key,

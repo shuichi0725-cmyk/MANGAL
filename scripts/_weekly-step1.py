@@ -78,6 +78,10 @@ STEPS = [
      "題名索引ハブJSON(/titles 50音×200件頁+sitemapの単一ソース。★索引から導出=list-indexの後)"),
     ("anime-season-view", ["_build-anime-season-view.py"],
      "/anime 季節ビューJSON(links+索引→anime-seasons-view.json。★索引から導出=list-indexの後。旧=未配線で凍結)"),
+    # ★2026-11-14 ユーザ依頼「隠し要素の作り直しを週次に結線する」: 旧 = 手動(要素の見直しが進んでも羅針盤に届かなかった)。
+    #   入力 = 本番索引の themes + AniList dump + data/seeds/element-hidden.json + anilist-related-tags.json(関連作の引き継ぎ)。
+    ("compass-hidden",    ["_build-compass-hidden.py"],
+     "羅針盤の隠し要素 public/data/compass-hidden.v1.json(~15秒・モデル不使用。★索引から導出=list-indexの後)"),
 ]
 
 # ★BookLive停止札(2026-08-31): 規制中はBookLive宛stepを自動skipして週次を完走させる。

@@ -9,6 +9,8 @@
   ① その頁に今出ている要素(一覧索引の themes)
   ② AniList のその漫画のタグのうち、票40以上で、頁には出していないもの
      (票が線に届かない語・人物/舞台系・ネタバレ印・競技名。 成人タグ・分野・どの作品にも付く語は除く)
+  ③ 関連作(アニメ・原作小説)の AniList タグ(禄40以上・本筋のエントリだけ)= data/seeds/anilist-related-tags.json
+     (作るのは scripts/_compass-related-tags.py harvest → build。2026-11-14)
   ★①も入れるのは、「Aでは見えている語」と「Bでは隠れている同じ語」を突き合わせるため。
 
 ■ 形(番号だけ。 語の一覧は載せない = データを覗いても語は読めない)
@@ -129,6 +131,36 @@ def seed_keys(ja, noise, gnames, alias=None):
     return out
 
 
+# ★関連作(アニメ・原作小説)から引き継ぐのは「本筋」だけ = 要素収集 _element-harvest.py の ani_main と同じ線(2026-10-09 の実害から)。
+REL = os.path.join(ROOT, "data", "seeds", "anilist-related-tags.json")
+REL_MIN_POP, REL_SIDE_RATIO, REL_SIDE_FORMATS = 1000, 0.1, {"SPECIAL", "MUSIC"}
+
+
+def related_keys(ja, noise, gnames):
+    """漫画の anilist_id → 関連作から引き継ぐ鍵(scripts/_compass-related-tags.py build が作る表。 無ければ空 = 今までと同じ)。"""
+    if not os.path.exists(REL):
+        return {}
+    with open(REL, encoding="utf-8") as f:
+        doc = json.load(f)
+    media, out = doc.get("media") or {}, {}
+    for aid, ids in (doc.get("family") or {}).items():
+        ents = [media[str(i)] for i in ids if str(i) in media]
+        top = max([e[2] for e in ents if e[0] == "A"] or [0])
+        ks = set()
+        for grp, fmt, pop, tags in ents:
+            if pop < REL_MIN_POP or (grp == "A" and (pop < REL_SIDE_RATIO * top or fmt in REL_SIDE_FORMATS)):
+                continue
+            for name, rank in tags:
+                if rank < RANK_MIN or name in noise or name.startswith(NOISE_PREFIX) or name in NOISE_NAMES:
+                    continue
+                j = ja.get(name)
+                if j not in gnames:
+                    ks.add(j or "en:" + name)
+        if ks:
+            out[int(aid)] = ks
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry", action="store_true")
@@ -152,11 +184,14 @@ def main():
                 ani[d["id"]] = d.get("tags") or []
 
     seed = seed_keys(ja, noise, gnames, alias)
-    keys_of, n_hidden = {}, 0
+    rel = related_keys(ja, noise, gnames)
+    keys_of, n_hidden, n_rel = {}, 0, 0
     for slug, vis in visible.items():
         ks = set(vis)
         aid = s2a.get(slug)
-        hid = ((tag_keys(ani.get(aid), ja, noise, gnames) if aid else set()) | seed.get(slug, set())) - ks
+        own = ((tag_keys(ani.get(aid), ja, noise, gnames) if aid else set()) | seed.get(slug, set())) - ks
+        hid = own | (rel.get(aid, set()) - ks if aid else set())
+        n_rel += 1 if len(hid) > len(own) else 0
         n_hidden += 1 if hid else 0
         if ks or hid:
             keys_of[slug] = (ks, hid)
@@ -180,7 +215,8 @@ def main():
         for k in h:
             freq[k] = freq.get(k, 0) + 1
     print(f"一覧索引 {len(visible)}作 / anilist_id のある頁 {len(s2a)} / AniList のタグが引けた {sum(1 for s in visible if s2a.get(s) in ani)}")
-    print(f"鍵を持つ作品 {len(keys_of)}(うち隠し要素あり {n_hidden})/ 鍵の種類 {len(allk)} / 要素付与が書いた隠し要素を持つ頁 {sum(1 for s in seed if s in visible)}")
+    print(f"鍵を持つ作品 {len(keys_of)}(うち隠し要素あり {n_hidden})/ 鍵の種類 {len(allk)} / 要素付与が書いた隠し要素を持つ頁 {sum(1 for s in seed if s in visible)}"
+          f" / 関連作(アニメ・原作小説)から鍵が増えた頁 {n_rel}")
     print(f"1作あたり: 見えている 平均 {sum(vis_counts) / max(1, len(vis_counts)):.2f} / 隠し 平均 {sum(hid_counts) / max(1, len(hid_counts)):.2f}"
           f"(隠しありの作品だけなら 平均 {sum(hid_counts) / max(1, n_hidden):.2f})")
     both = [len(v) + len(h) for v, h in keys_of.values()]

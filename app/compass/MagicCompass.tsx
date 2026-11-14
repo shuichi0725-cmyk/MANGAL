@@ -1227,7 +1227,7 @@ export default function MagicCompass({
     if (sel) {
       const it = unit.items.find((i) => i.slug === sel);
       sheetItem = lookup(sel) ?? curItem;
-      why = `${KIND_NAME[unit.kind]} — ${unit.label}${it?.shared ? ` ・ 共通の要素${it.shared}つ` : ""}`;
+      why = `${unit.lead ?? KIND_NAME[unit.kind]} — ${unit.label}${it?.shared ? ` ・ 共通の要素${it.shared}つ` : ""}`;
       goLabel = `〈${unit.label}〉の糸で進む →`;
     } else {
       const rr = ROUNDS && rounds && rounds.key === unit.key ? rounds : null;
