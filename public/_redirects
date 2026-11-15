@@ -2,6 +2,8 @@
 # 旧 slug → 新 slug の 301(漫画頁は /manga/ 配下=この形状以外は届かない)
 # ★Cloudflare Pages は静的redirect上限2,000行(preview=部分カバー)。本番全件は KV REDIRECTS 側。
 
+/manga/9-banme-no-musashi-2 /manga/9-banme-no-musashi 301
+/manga/kyubanme-no-musashi-silent-black /manga/kyuubanme-no-musashi-silent-black 301
 /manga/0-1996 /manga/zero-1996 301
 /manga/0-2009 /manga/zero-2009 301
 /manga/0-hour /manga/zero-hour 301
@@ -371,7 +373,6 @@
 /manga/89-nagano-rengo /manga/89-nagano-rengou 301
 /manga/8gatsu-19nichi-no-8-so /manga/8gatsu-19nichi-no-8-sou 301
 /manga/8ldk-shisha-no-o /manga/8ldk-shisha-no-ou 301
-/manga/9-banme-no-musashi-2 /manga/9-banme-no-musashi 301
 /manga/9-deizu-wandaa /manga/9-days-wonder 301
 /manga/9-ji-niwa-ochi-ni-kaeritai /manga/9-ji-niwa-ouchi-ni-kaeritai 301
 /manga/9-nenme-no-mibyo-seikatsu /manga/9-nenme-no-mibyou-seikatsu 301
@@ -15383,7 +15384,6 @@
 /manga/kyu-sensei-suki-tte-nandesuka /manga/kyuu-sensei-suki-tte-nandesuka 301
 /manga/kyu-wa-kyuketsuki-no-q /manga/kyuu-wa-kyuuketsuki-no-q 301
 /manga/kyuai-feromon /manga/kyuuai-pheromone 301
-/manga/kyubanme-no-musashi-silent-black /manga/kyuubanme-no-musashi-silent-black 301
 /manga/kyubanmenotoko /manga/kyuubanme-no-otoko 301
 /manga/kyubi /manga/kyuubi 301
 /manga/kyubigitsune-to-kemono-no-ishi /manga/kyuubigitsune-to-kemono-no-ishi 301
