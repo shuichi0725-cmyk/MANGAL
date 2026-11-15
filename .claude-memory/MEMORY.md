@@ -115,7 +115,6 @@
 - [⏳本番軽量化(索引スリム)](index_lightening_plan.md)
 - [R2孤児HTML=11/11一掃済・探し方は全走査](r2_orphan_pages_prune_missing.md)
 - [⏳SEO構造の穴(5,7残)](seo_structure_gaps_2026_09_04.md)
-- [⏳IndexNow未送信が8〜9万で横ばい(自動消化していない・裁定待ち)](indexnow_self_submit.md)
 - [⏳鬼太郎本編の多版](kitaro_honpen_multiedition_pending.md)
 - [⏳OTOMO全集補完](otomo_complete_works_pending.md)
 - [⏳三世代/今週ストック](sansedai_featured_stock_state.md)

@@ -240,4 +240,11 @@ python scripts/_weekly-finalize.py
 - `_r2-sync.py` が差分PUT/prune の頁URLを `.cache/indexnow-pending.json` に積み、`_weekly-finalize.py` が **edge purge 後**に送信(drain)する(Bing/Yandex/Naver 系の即時クロール。Google は読まない=sitemapが正)。
 - 鍵 = `public/efa08a89a5e7a14dc0bde143738fae20.txt`(公開ファイル・秘密ではない)。本番の鍵ファイルが200でないと送らず pending に保持。抑止は各スクリプト `--no-indexnow`、状態は `python scripts/_indexnow.py --status`、手動送信は `--drain`。
 - ★積むのは **本文が変わった頁だけ**(2026-09-04): 全頁HTMLにハッシュ付きチャンク名が埋まるのでコード変更週は byte 差分が全頁になる。`_indexnow.pending_add_files` が「クローラが読む部分」だけのハッシュ(台帳 `.cache/indexnow-content.json`)で実質無変更を落とす。台帳が空(初回/消失)は**台帳作成のみ・通知なし**。
+- ★**本文ハッシュは v2**(2026-11-15): 比べるのは head の title/meta/canonical/JSON-LD と、body の**文字・リンク先・画像**だけ。
+  `<header><footer><aside><nav>`(全頁共通の枠)・class・script の本数は比べない。旧式は共通部を直した週に全9万頁を「変更」と数え、
+  週1万しか送れないので未送信が2か月 8〜9万で横ばいだった(同日に全部送って空にした)。
+  ★**r2-sync ログの `本文ハッシュ判定: 通知 N` が数万に跳ねたら異常**(本当に全頁の本文を変えた週を除く)= 全頁共通の文言が
+  枠の外(`<nav>` 等で包まれていない所)に出ていないかを見る。式を変えたら台帳のファイル名の版を上げ、
+  `python scripts/_indexnow.py --rebuild-ledger out` で通知なしに作り直す(out/ が本番と同じ時だけ)。
+- ★**送る順 = 削除と新しい頁が先**、その後に変更(積んだ順)。未送信が残っていても新しい頁は次の送信で出る。
 - ★finalize の drain は `purge=True` = **送るURL自身を先に purge** してから送る(HTMLは s-maxage=86400。旧: 索引/JSONしか purge せず漫画頁は旧HTMLのままクローラを呼んでいた)。purge に失敗したURLはその回は送らず pending に残る。1回の上限 10,000 URL(超過は次回へ持ち越し・残数を表示)。
