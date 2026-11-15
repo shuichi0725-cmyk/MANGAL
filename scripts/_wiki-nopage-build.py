@@ -315,7 +315,24 @@ def plan(use_ndl=True):
         rkana = kana_key(clean_kana(its[0].get("titleKana")))
         nrec = (ndl.get(isbns[0]) or {}).get("rec")
         nkana = re.sub(r"\d+(カン)?$", "", kana_key((nrec or {}).get("title_kana")))   # NDL のヨミ末尾の巻次(01カン)を落とす
-        if isbns[0] not in ndl:
+        # ★ユーザ裁定 2026-11-15(NDL が 429 の日): NDL の書誌が取れない時に限り、次のどちらかでヨミ確定としてよい。
+        #   (a) 題が かな・カタカナだけ(記号を除く)で、題そのものが楽天のヨミと一致 = 読み違えようがない
+        #   (b) Wikipedia 記事冒頭の読み(『題』(よみ))が楽天のヨミと一致 = 独立した2つの出どころが一致
+        #   NDL の書誌が在る時は従来どおり NDL が正(下の不一致判定に進む)。
+        kana_src = "ndl"
+        if not nrec:
+            t_only = re.sub(r"[^ぁ-ゖァ-ヶーA-Za-z0-9一-龯々]", "", unicodedata.normalize("NFKC", r["題"]))
+            if t_only and re.fullmatch(r"[ぁ-ゖァ-ヶー]+", t_only) and kana_key(t_only) == rkana:
+                kana_src = "題がかなのみ"
+            else:
+                mw = re.search(r"'''" + re.escape(r["題"]) + r"'''』?\s*[（(]([^）)、,<]+)", text)
+                if mw and rkana and kana_key(mw.group(1)) == rkana:
+                    kana_src = "Wikipedia冒頭の読み"
+                else:
+                    kana_src = ""
+        if kana_src and kana_src != "ndl":
+            pass
+        elif isbns[0] not in ndl:
             why.append("NDL 未取得")
         elif not nrec:
             why.append("NDL に1巻の書誌なし(ヨミを確かめられない)")
@@ -373,9 +390,9 @@ def plan(use_ndl=True):
             vols.append({"number": n, "asin": None, "isbn13": i,
                          "cover_url": re.sub(r"_ex=\d+x\d+", "_ex=300x300", it.get("largeImageUrl") or ""), "release_date": rd})
         rec = {"key": key, "slug": old.get(key, ""), "title": r["題"], "title_kana": clean_kana(its[0].get("titleKana", "")),
-               "ndl_kana": (nrec or {}).get("title_kana", ""), "ndl_title": (nrec or {}).get("title", ""),
+               "ndl_kana": (nrec or {}).get("title_kana", ""), "ndl_title": (nrec or {}).get("title", ""), "kana_source": kana_src,
                "authors": authors, "publisher": pk, "publisher_name": its[0].get("publisherName", ""),
-               "imprint": re.sub(r"\s+", " ", re.sub(r"[\s　]*\d+$", "", unicodedata.normalize("NFKC", its[0].get("seriesName") or ""))).strip() or r["レーベル(Wiki)"],
+               "imprint": (r["レーベル(Wiki)"].split(" / ")[0].strip() or re.sub(r"\s+", " ", re.sub(r"[\s　]*\d+$", "", unicodedata.normalize("NFKC", its[0].get("seriesName") or ""))).strip()),   # レーベルは Wikipedia を先に(楽天は途切れ・全角・誤字がある)
                "demographic": demo, "magazine": magkey, "genres": genres, "genres_source": gsrc, "wiki_article": r["記事"],
                "wiki_volumes": r["Wiki巻数欄"], "anilist_id": (am or {}).get("id"), "in_seed2": len(s2), "vols": vols}
         if why:
@@ -429,7 +446,8 @@ def emit():
         if x.get("anilist_id"):
             page["anilist_id"] = x["anilist_id"]
         page["_note_origin"] = (f"wiki-nopage 2026-11-15: Wikipedia『{x['wiki_article']}』情報欄({x['wiki_volumes']})×楽天(題完全一致・"
-                                f"全{len(x['vols'])}冊・書影あり・漫画ジャンル)×NDL(ヨミ: {x['ndl_kana']})。 ジャンル根拠={x['genres_source']}。"
+                                f"全{len(x['vols'])}冊・書影あり・漫画ジャンル)。 ヨミの根拠={x.get('kana_source') or 'ndl'}"
+                                f"{'(' + x['ndl_kana'] + ')' if x['ndl_kana'] else '(楽天のヨミと一致・ユーザ裁定 2026-11-15)'}。 ジャンル根拠={x['genres_source']}。"
                                 f" キャッチ/あらすじは未作成")
         page["editions"] = [{"type": "standard", "label": "通常版", "publisher": x["publisher"], "imprint": x["imprint"],
                              "volumes": x["vols"]}]
@@ -439,8 +457,7 @@ def emit():
             f.write(yaml.safe_dump(page, allow_unicode=True, sort_keys=False, width=1000))
         allslugs.add(slug)
         wrote.append(slug)
-    open(os.path.join(WORK, "emitted-slugs.txt"), "w", encoding="utf-8", newline="
-").write("\n".join(wrote) + ("\n" if wrote else ""))
+    open(os.path.join(WORK, "emitted-slugs.txt"), "w", encoding="utf-8", newline="\n").write("\n".join(wrote) + ("\n" if wrote else ""))
     print(f"頁seed {len(wrote)} 件 → data/seeds/preorder-pages/ / 一覧 {os.path.join(WORK, 'emitted-slugs.txt')}")
     for t, e in errs:
         print(f"  見送り {t}: {e}")
