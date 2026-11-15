@@ -51,7 +51,9 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 HOST = "mangal-db.com"
 ENDPOINT = "https://api.indexnow.org/indexnow"
 PENDING = os.path.join(ROOT, ".cache", "indexnow-pending.json")
-CONTENT = os.path.join(ROOT, ".cache", "indexnow-content.json")   # R2キー → 本文ハッシュ
+# R2キー → 本文ハッシュ。 ★content_bytes の式を変えたら**ファイル名の版を上げる**(旧台帳と比べると全頁が「変更」になる)。
+#   上げた後は `--rebuild-ledger out` で、通知なしに今の配信物から作り直す。
+CONTENT = os.path.join(ROOT, ".cache", "indexnow-content.v2.json")
 LOG = os.path.join(ROOT, ".cache", "indexnow-log.jsonl")
 CHUNK = 10000            # 1 POST の上限(仕様)
 MAX_PER_DRAIN = 10000    # 1回の drain で送る上限(超過分は pending に残して次回。 黙って捨てない)
@@ -141,13 +143,42 @@ _LINK_RE = re.compile(
     rb"(?:\s[^\"]*)?\"[^>]*>", re.S)
 
 
+# ★v2 (2026-11-15): 共通の枠を外し、body は「読める文字とリンク先・画像」だけで比べる。
+#   v1 は body のマークアップを丸ごと残し、script を `<script/>` の置き石にしていた。 そのため
+#     ・チャンクの本数が1つ増減する(= 置き石の個数が変わる)
+#     ・ヘッダ/フッタ/左レール/ナビの文言や class を直す
+#     ・共通部品の class を直す
+#   のどれでも**全頁が「変更」**になり、CODE週は毎回 9万URL を積み直していた(10/31・11/7・11/15 の3週連続
+#   notify=全頁/unchanged 0。 送るのは週1万なので未送信は2か月 8〜9万で横ばい = 新しい頁の通知が列の最後尾に埋もれた)。
+#   残す = head の title/meta/canonical/JSON-LD + body の文字・href・src(書影の差し替えは変更に数える)。
+#   落とす = script/style/コメント、<header><footer><aside><nav>(全頁共通の枠)、タグと class。
+_HEAD_END_RE = re.compile(rb"</head\s*>", re.I)
+_SHELL_RE = re.compile(rb"<(header|footer|aside|nav)\b.*?</\1\s*>", re.S | re.I)
+_STYLE_RE = re.compile(rb"<(style|template|noscript)\b.*?</\1\s*>|<!--.*?-->", re.S | re.I)
+_REF_TAG_RE = re.compile(rb"<[^>]*?\s(?:href|src)=\"([^\"]*)\"[^>]*>", re.S)
+_TAG_RE = re.compile(rb"<[^>]*>", re.S)
+_WS_RE = re.compile(rb"\s+")
+
+
 def content_bytes(data):
     """HTML(bytes) → 比較用の本文(bytes)。"""
-    def _script(m):
+    def _script_head(m):
         if b"application/ld+json" in m.group(1).lower():   # 構造化データ = 内容なので残す
             return m.group(0)
-        return b"<script/>"
-    return _LINK_RE.sub(b"", _SCRIPT_RE.sub(_script, data))
+        return b""                                         # ★置き石を置かない(本数の増減を差にしない)
+
+    def _script_body(m):
+        if b"application/ld+json" in m.group(1).lower():
+            return b" " + _TAG_RE.sub(b"", m.group(0)) + b" "   # 中身(JSON)だけ残す
+        return b""
+
+    mh = _HEAD_END_RE.search(data)
+    head, body = (data[:mh.end()], data[mh.end():]) if mh else (b"", data)
+    head = _LINK_RE.sub(b"", _SCRIPT_RE.sub(_script_head, head))
+    body = _SCRIPT_RE.sub(_script_body, body)
+    body = _SHELL_RE.sub(b" ", _STYLE_RE.sub(b"", body))
+    body = _TAG_RE.sub(b" ", _REF_TAG_RE.sub(rb" \1 ", body))
+    return head + b"\n" + _WS_RE.sub(b" ", body).strip()
 
 
 def content_hash(path):
@@ -181,15 +212,21 @@ def _log(ev):
         f.write(json.dumps(ev, ensure_ascii=False) + "\n")
 
 
-def pending_add(put_keys, del_keys=(), source="?"):
-    """変更(put)/削除(del)された R2 キーを URL に写して pending へ積む。 戻り=人向け1行。"""
+def pending_add(put_keys, del_keys=(), source="?", new_keys=()):
+    """変更(put)/削除(del)された R2 キーを URL に写して pending へ積む。 戻り=人向け1行。
+
+    new_keys = put_keys のうち「台帳に無かった = 新しい頁」。 drain が先に送る(列の最後尾に埋めない)。"""
     d = _load_pending()
     now = time.strftime("%Y-%m-%d %H:%M")
     n_put = n_del = 0
+    new_urls = set(keys_to_urls(new_keys))
     for u in keys_to_urls(put_keys):
         if u not in d["urls"]:
             n_put += 1
+        was_new = d["urls"].get(u, {}).get("new")
         d["urls"][u] = {"op": "put", "src": source, "at": now}
+        if u in new_urls or was_new:
+            d["urls"][u]["new"] = True
     for u in keys_to_urls(del_keys):
         if u not in d["urls"]:
             n_del += 1
@@ -213,6 +250,7 @@ def pending_add_files(put_pairs, del_keys=(), source="?", seed_pairs=(), dry=Fal
     cm = _load_content()
     bootstrap = not cm
     notify, unchanged, fresh, unreadable = [], 0, 0, 0
+    fresh_keys = []
     for key, path in put_pairs or ():
         if key_to_url(key) is None:      # 送信対象外(.txt / _next/ / 除外面)は台帳にも積まない
             continue
@@ -230,6 +268,7 @@ def pending_add_files(put_pairs, del_keys=(), source="?", seed_pairs=(), dry=Fal
                 unchanged += 1           # 初回 = 既存頁の記録だけ
             else:
                 fresh += 1
+                fresh_keys.append(key)
                 notify.append(key)       # 台帳に無い = 新規URL
         else:
             notify.append(key)
@@ -245,7 +284,7 @@ def pending_add_files(put_pairs, del_keys=(), source="?", seed_pairs=(), dry=Fal
         _save_content(cm)
     _log({"ev": "content_gate", "src": source, "notify": len(notify), "unchanged": unchanged,
           "new": fresh, "unreadable": unreadable, "bootstrap": bootstrap, "ledger": len(cm)})
-    head = pending_add(notify, del_keys, source)
+    head = pending_add(notify, del_keys, source, new_keys=fresh_keys)
     detail = (f"  本文ハッシュ判定: 通知 {len(notify):,} / 実質無変更 {unchanged:,} は送らず"
               + (f" / 新規 {fresh:,}" if fresh else "")
               + (f" / 読めず {unreadable:,}" if unreadable else "")
@@ -400,7 +439,10 @@ def drain(dry=False, verify=True, max_urls=MAX_PER_DRAIN, exclude=None, purge=Fa
     ★purge=True で、送る直前に自分でそのURLを purge する(週次 finalize 用。
       finalize の purge は索引/JSONだけで、変更した漫画頁を落としていなかった)。"""
     d = _load_pending()
-    urls = list(d["urls"].keys())
+    # ★送る順 = 削除と新しい頁が先、その後に変更(それぞれ積んだ順)。 旧 = 積んだ順だけ =
+    #   未送信が溜まっている間、新しい頁も消えた頁も列の最後尾で何週も待たされた。
+    urls = sorted(d["urls"].keys(),
+                  key=lambda u: 0 if (d["urls"][u].get("op") == "del" or d["urls"][u].get("new")) else 1)
     if not urls:
         return "IndexNow: pending なし"
     skipped_purge = 0
@@ -414,7 +456,7 @@ def drain(dry=False, verify=True, max_urls=MAX_PER_DRAIN, exclude=None, purge=Fa
     held = 0
     if max_urls and len(urls) > max_urls:
         held = len(urls) - max_urls
-        urls = urls[:max_urls]           # dict は挿入順 = 古いものから送る
+        urls = urls[:max_urls]           # 削除・新規が先、あとは dict の挿入順 = 古いものから送る
     if purge and not dry:
         # ★送る前に自分で落とす。 失敗したURLは今回送らない(旧HTMLを掴ませないため pending に残す)
         tok = purge_token()
@@ -493,6 +535,40 @@ def selftest():
     assert b"ld+json" in content_bytes(page("aaaa1111", "ワンピース")), "JSON-LD は残すこと"
     assert b"__next_f" not in content_bytes(page("aaaa1111", "ワンピース")), "RSC flight は落とすこと"
 
+    # ★v2: 共通の枠・チャンク本数・class の差は同一、本文の文字/リンク先/書影の差は別。
+    def page2(body, nav="ホーム", cls="a", nscript=2, img="c1.jpg", href="/manga/x"):
+        return ('<html><head><title>T</title>' + '<script src="/a.js"></script>' * nscript + '</head><body>'
+                f'<header class="{cls}"><a href="/">MANGAL</a></header>'
+                f'<main class="{cls}"><aside><p>絞り込み{nav}</p></aside>'
+                f'<h1 class="{cls}">{body}</h1><a class="{cls}" href="{href}">1巻</a><img alt="" src="{img}"/>'
+                f'<footer><nav><a href="/x">{nav}</a></nav></footer></main>'
+                + '<script>1</script>' * nscript + '</body></html>').encode()
+    hh = lambda **k: hashlib.sha256(content_bytes(page2("ワンピース", **k))).hexdigest()
+    base = hh()
+    assert base == hh(nav="トップ"), "ナビ/フッタ/左レールの文言の差で変わってはいけない"
+    assert base == hh(cls="b c"), "class の差で変わってはいけない"
+    assert base == hh(nscript=5), "script の本数の差で変わってはいけない"
+    assert base != hh(img="c2.jpg"), "書影の差し替えを取り逃している"
+    assert base != hh(href="/manga/y"), "リンク先の変化を取り逃している"
+    assert base != hashlib.sha256(content_bytes(page2("ナルト"))).hexdigest(), "本文の変化を取り逃している"
+
+    # ★送る順: 削除と新規が先
+    global PENDING, LOG
+    import tempfile
+    _p, _l = PENDING, LOG
+    with tempfile.TemporaryDirectory() as td:
+        PENDING, LOG = os.path.join(td, "p.json"), os.path.join(td, "l.jsonl")
+        try:
+            pending_add(["manga/old1.html", "manga/old2.html"], [], "t")
+            pending_add(["manga/new1.html", "manga/old3.html"], ["manga/gone.html"], "t", new_keys=["manga/new1.html"])
+            pending_add(["manga/new1.html"], [], "t")            # 積み直しても新規の印は消えない
+            dd = _load_pending()["urls"]
+            order = sorted(dd, key=lambda u: 0 if (dd[u].get("op") == "del" or dd[u].get("new")) else 1)
+            assert set(order[:2]) == {"/manga/new1", "/manga/gone"}, order
+            assert order[2] == "/manga/old1", order
+        finally:
+            PENDING, LOG = _p, _l
+
     # ★URLの形の番人(Git Bash の `/` → `C:/Program Files/Git/` 化を送信の一点で止める)
     ok, bad = sanitize_urls(["/", "/manga/one-piece", "/genre/action/completed",
                              "/C:/Program Files/Git/", "/a b", "//evil.com", "https://x/y", "", "/x\\y"])
@@ -508,6 +584,9 @@ def main():
     ap.add_argument("--urls", help="即送信するパス(カンマ区切り。例 /manga/one-piece,/genre/action)")
     ap.add_argument("--add-keys-file", help="R2キー一覧(1行1キー)を pending に積む")
     ap.add_argument("--clear", action="store_true", help="pending を捨てる")
+    ap.add_argument("--rebuild-ledger", metavar="OUT_DIR",
+                    help="本文ハッシュ台帳を OUT_DIR(= 今の配信物と同じ out/)から作り直す。 通知はしない。"
+                         "content_bytes の式を変えた時に1回だけ使う")
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--purge", action="store_true",
                     help="送る直前に対象URLの edge cache を落とす(失敗分は送らず pending に残す)")
@@ -520,6 +599,25 @@ def main():
         selftest(); return
     if a.clear:
         _save_pending({"urls": {}}); print("pending cleared"); return
+    if a.rebuild_ledger:
+        cm, miss = {}, 0
+        for dp, _dn, fns in os.walk(a.rebuild_ledger):
+            for fn in fns:
+                if not fn.endswith(".html"):
+                    continue
+                path = os.path.join(dp, fn)
+                key = os.path.relpath(path, a.rebuild_ledger).replace(os.sep, "/")
+                if key_to_url(key) is None:
+                    continue
+                h = content_hash(path)
+                if h:
+                    cm[key] = h
+                else:
+                    miss += 1
+        _save_content(cm)
+        _log({"ev": "rebuild_ledger", "ledger": len(cm), "unreadable": miss})
+        print(f"本文ハッシュ台帳を作り直した: {len(cm):,} キー(読めず {miss}) → {CONTENT}  ※通知なし")
+        return
     if a.add_keys_file:
         keys = [ln.strip() for ln in open(a.add_keys_file, encoding="utf-8") if ln.strip()]
         print(pending_add(keys, [], "manual")); return

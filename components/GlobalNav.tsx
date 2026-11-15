@@ -121,8 +121,11 @@ export default function GlobalNav({ animeNow, animeNext }: { animeNow: string; a
   const frame = isHome
     ? "border-b-[3px] border-[var(--color-accent)] bg-[var(--color-paper)]"
     : "border-b border-[var(--color-line)] bg-[var(--color-surface)]";
+  // ★<nav> で包む(2026-11-15): 意味づけ(主要ナビ)に加え、IndexNow の本文ハッシュ(scripts/_indexnow.py content_bytes)が
+  //   <header><footer><aside><nav> を「全頁共通の枠」として比較から外す。 div のままだと、ここの文言や
+  //   季が替わるたびの /anime/<季> リンクの変化で全9万頁が「本文変更」になり通知の列が詰まる。
   return (
-    <div className={frame}>
+    <nav aria-label="メイン" className={frame}>
       <div className="mx-auto flex w-full max-w-6xl items-center px-4 py-1.5">
         {/* 左固定 = ホーム(ロゴは共通ヘッダーに一本化済み) */}
         <Link href="/" aria-label="ホーム" aria-current={here("ホーム") ? "page" : undefined} className={cell}>
@@ -143,6 +146,6 @@ export default function GlobalNav({ animeNow, animeNext }: { animeNow: string; a
           )}
         </div>
       </div>
-    </div>
+    </nav>
   );
 }
