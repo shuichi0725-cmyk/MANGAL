@@ -439,7 +439,8 @@ def emit():
             f.write(yaml.safe_dump(page, allow_unicode=True, sort_keys=False, width=1000))
         allslugs.add(slug)
         wrote.append(slug)
-    open(os.path.join(WORK, "emitted-slugs.txt"), "w", encoding="utf-8").write("\n".join(wrote) + ("\n" if wrote else ""))
+    open(os.path.join(WORK, "emitted-slugs.txt"), "w", encoding="utf-8", newline="
+").write("\n".join(wrote) + ("\n" if wrote else ""))
     print(f"頁seed {len(wrote)} 件 → data/seeds/preorder-pages/ / 一覧 {os.path.join(WORK, 'emitted-slugs.txt')}")
     for t, e in errs:
         print(f"  見送り {t}: {e}")
