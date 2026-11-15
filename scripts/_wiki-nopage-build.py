@@ -375,7 +375,7 @@ def plan(use_ndl=True):
         rec = {"key": key, "slug": old.get(key, ""), "title": r["題"], "title_kana": clean_kana(its[0].get("titleKana", "")),
                "ndl_kana": (nrec or {}).get("title_kana", ""), "ndl_title": (nrec or {}).get("title", ""),
                "authors": authors, "publisher": pk, "publisher_name": its[0].get("publisherName", ""),
-               "imprint": re.sub(r"[\s　]*\d+$", "", its[0].get("seriesName") or "") or r["レーベル(Wiki)"],
+               "imprint": re.sub(r"\s+", " ", re.sub(r"[\s　]*\d+$", "", unicodedata.normalize("NFKC", its[0].get("seriesName") or ""))).strip() or r["レーベル(Wiki)"],
                "demographic": demo, "magazine": magkey, "genres": genres, "genres_source": gsrc, "wiki_article": r["記事"],
                "wiki_volumes": r["Wiki巻数欄"], "anilist_id": (am or {}).get("id"), "in_seed2": len(s2), "vols": vols}
         if why:
