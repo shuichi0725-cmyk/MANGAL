@@ -160,7 +160,7 @@ def rakuten_live_retry(env, *, backoff=(2, 5, 15, 45), **kw):
     raise last
 
 
-def ndl_live(query, maximum=30, start=1, exit_on_429=True):
+def ndl_live(query, maximum=30, start=1, exit_on_429=True, raise_on_error=False):
     """NDL SRU live。 ★1.3秒/req厳守・429=即中断。 ★一般語のtitle単独クエリはtimeoutする
     → creator束縛を優先し、timeoutは握りつぶして続行してよい。 ★NDL不在≠不存在(BL/小出版は収録弱)。
     ★start=startRecord(2026-07-18追加): 大物(数百版)は 1,201,401… とページングして全取得する
@@ -180,9 +180,15 @@ def ndl_live(query, maximum=30, start=1, exit_on_429=True):
             if exit_on_429:
                 print("★NDL429 → 即中断。回復するので慌てず休ませる(1時間単位)"); sys.exit(2)
             raise Throttled("ndl 429")
+        if raise_on_error:
+            raise
         print(f"  NDL query失敗(続行可): HTTP {e.code}")
         return []
     except Exception as e:
+        # ★raise_on_error=True: 時間切れ等の失敗を [] (= 書誌なし)に化けさせない(2026-11-15 wiki-nopage 実踏:
+        #   NDL が重い日に 38件中32件が「書誌なし」と記録された。 失敗と不在を区別したい道具はこれを立てる)。
+        if raise_on_error:
+            raise
         print(f"  NDL query失敗(続行可): {e}")
         return []
     if "Too Many Requests" in xml:
