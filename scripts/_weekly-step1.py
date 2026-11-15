@@ -14,6 +14,7 @@
   - calendar-prod/preview: <当月YYYY-MM> はJSTで自動導出
   - cover-refresh: 終了後 .cache/cover-refresh-touched.txt が非空なら
     promote --only-file を自動連鎖(差し替え書影を頁へ反映してから索引を焼く)
+  - cover-unreflected: 終了後 .cache/cover-unreflected-slugs.txt が非空なら同じく promote を自動連鎖
 """
 from __future__ import annotations
 import argparse
@@ -48,6 +49,11 @@ STEPS = [
     #   (旧=今日までに発売した巻だけ=週次の日より後に出る今月の本は仮書影のまま次の週次まで残った)。
     ("cover-refresh",     ["_cover-release-refresh.py", "--days", "45", "--ahead-months", "1"],
      "書影差し替え追従: 発売後45日+発売前〜来月末の仮/無し(~65分=約2,500巻。touched非空→promote自動連鎖)"),
+    # ★2026-11-15 週次で結線: アイドル運転⑩(placeholder-cover-refresh)が cover-override.jsonl に足した書影は
+    #   頁再生成が挟まらず、旧=skillの散文手順(算出→promote)を人が索引の前に挟む約束だった。11/15 は索引の後に
+    #   気づいて索引3本+導出4本を焼き直した(16頁)。shinkan と索引は頁の書影を焼き込むので、その前に機械で反映する。
+    ("cover-unreflected", ["_cover-override-unreflected.py", "--out", ".cache/cover-unreflected-slugs.txt"],
+     "cover-override seed にあって頁に無い書影の算出(~10秒。非空→promote自動連鎖。shinkan・索引より前)"),
     ("shinkan",           ["_gen-shinkan-data.py"],
      "/shinkan 月別データ(カレンダー・書影refreshの後)"),
     ("corner-stocks",     ["_gen-corner-stocks.py"], "三世代/featured stock"),
@@ -173,6 +179,14 @@ def main() -> None:
                 run_step("cover-refresh-promote",
                          ["_promote-bulk-v2.py", "--only-file", str(touched)])
                 print(f"  (書影差し替え {len(slugs)} 頁を再生成)")
+        if name == "cover-unreflected":
+            # ★空の --only-file で promote を呼ばない(空--only=全消し事故の型)。非空の時だけ連鎖する。
+            unref = ROOT / ".cache" / "cover-unreflected-slugs.txt"
+            slugs = [l for l in unref.read_text(encoding="utf-8").splitlines() if l.strip()]                 if unref.exists() else []
+            if slugs:
+                run_step("cover-unreflected-promote",
+                         ["_promote-bulk-v2.py", "--only-file", str(unref)])
+                print(f"  (seed の書影が未反映だった {len(slugs)} 頁を再生成)")
 
     print(f"\n{'=' * 70}\n✓ 手順1 完了。次: 生成物commit+push → art-books昇格diff確認 → "
           f"python scripts/_weekly-preflight.py --fix")

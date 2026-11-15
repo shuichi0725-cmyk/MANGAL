@@ -43,6 +43,9 @@ python scripts/_weekly-step1.py        # 生成器14step順次(失敗で即exit 
   「版の取り違えを直した: N冊」と出す(0でなくてよい=直した数。内訳 = `--audit`)。旧=新装版・文庫版・全巻再刊の発売日に
   別の版の書影/ISBN(Amazonリンク・構造化データ)/出版社を出していた(熱愛プリンス 10/13 カルチュア版1〜25巻に2020年ネクストF版)。
 - ai-reviews 等 seed 由来はそのまま(生成不要)。
+- ★★**2026-11-15 から下の「未反映書影の反映」は step1 が自動でやる**(step `cover-unreflected` = cover-refresh の直後・shinkan と索引の前。
+  非空の時だけ promote を連鎖)。手で挟む必要は無い。step1 完了後に `_cover-override-unreflected.py` を回して「未反映 0」を見るだけでよい
+  (0 でなければ下の手順で反映し `--from list-index`)。旧=人が索引の前に挟む約束で、11/15 は索引の後になり索引を焼き直した(16頁)。
 - ★**アイドル運転⑩(placeholder-cover-refresh)が seed に足した書影は頁再生成が挟まらない**(2026-09-02リハーサルで実踏: cover-override.jsonl の
   最終行/ISBN の URL が data/manga.v2 に無い頁 = **337頁**、うち当日追記239)。step1の cover-refresh は自分の差替分しか promote しない。
   ★**算出は `python scripts/_cover-override-unreflected.py --out .cache/cover-unreflected-slugs.txt`**(2026-09-07 道具化。
@@ -187,7 +190,7 @@ python scripts/_weekly-finalize.py
 
 ## ★成功判定 (= 完了主張の前にこの数字を全部言えること)
 - preflight exit 0 / out/manga ≈ **132k files**(≥120kがfinalize下限) / R2 PUT数(全量=レイアウト週・少数=データ週)
-- smoke **PASS 10/10**(FAIL 0) / 索引 **25MB級**(5MB未満=preview索引化事故)
+- smoke **FAIL 0**(検査数は増える。2026-11-15 = PASS 17) / 索引 **25MB級**(5MB未満=preview索引化事故)
 - 本棚の巻の書影 = r2-sync ログ `本番 巻の書影 overlay: vc/ 64本 (約14MB)`(データ週は差分反映の `巻の書影 vc/: 変更 N/64本`)。作るのは step1 の vol-covers(2026-10-31 本棚の本番化)
 - marker `note=週次蒸留` + pages-manifest 初期化ログ
 - どれかが言えない=完了していない(finalizeがexit 0を返すまで完了報告禁止)
@@ -216,6 +219,11 @@ python scripts/_weekly-finalize.py
   Invoke-CimMethod と同じコマンドで先に)。ps1 の先頭で消すのを待つと、直後に張った待ちが**前週の EXIT=0 を拾って即「完了」と誤報**する(2026-11-07 実踏)。
   ★ビルド中は空きメモリが約3GBまで落ち、Claude Code が**待ちの shell だけ** kill することがある(ビルド本体はWMI起動なので無傷)。
   kill 通知が来たら勝手に張り直さず、`.exit` と node 本数で状態を告げてから再開する。
+  ★**ビルドの待ちは最初から前面で張る**(2026-11-15 実踏: run_in_background の待ちは開始13分で kill された)。
+  前面の Bash で「`.exit` が出るまで20秒刻み×28回(=約9分)で抜ける」待ちを timeout 600000 で繰り返す。前面の待ちは kill されず、
+  抜けるたびに `Generating static pages (N/M)` の最終値と node 本数を見れば進捗も分かる。R2同期の待ちも同じ形でよい。
+  ★**2026-11-15 実測(CODE週)**: 手順1 1h19m(書影refresh 63分)/ ビルド **61分**(92,829ルート・コンパイル6.9分・out/manga 140,038枚)/
+  R2同期 **29分**(PUT 185,797・prune 112・KV連鎖成功)/ 疎通 PASS 17・FAIL 0 / 索引24.3MB / IndexNow 10,000受理・82,938持ち越し。
 - (旧)Start-Process でのデタッチ起動: ツールのrun_in_backgroundは~10分で親ごとkillされworker巻き添え死。
   ★**-Fileのパスは引用符を引数の内側に埋め込む**(2026-07-22実害: ArgumentListは空白joinされるため
   「chiba shuichi」の空白で `-File 'C:\Users\chiba'` に分断→無音起動失敗。症状=ログ0バイト+node無し):
