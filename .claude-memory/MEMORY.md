@@ -57,6 +57,7 @@
 - [★仏BD翻訳は載せない](scope_bd_translation_not_listed.md)
 - [★非掲載はnon-manga-drop.ymlへ(tsvは未結線)](amecomi_drop_tsv_not_wired.md)
 - [★先読みは想定どおり(スマホも可・通信量で止めない・物差しは使った時のレスポンス)](feedback_prefetch_is_intended.md)
+- [★模擬の秒数は実機で較正してから言う(CPU4倍=水増し・実機は1〜1.5倍)](feedback_calibrate_emulation_to_device.md)
 ## 全体構造・台帳
 - [seeds pyramid=全体構造](project_architecture_seeds.md)
 - [★統合台帳](intake_manifest_ledger_live.md)
@@ -74,7 +75,7 @@
 - [AI書評家リーグ運用](ai_review_league_operation.md)
 - [ISBN/巻数是正の進捗](data_quality_cleanup_state.md)
 - [⏳本番待ち台帳(inflight)](inflight_state_2026_09_01.md)
-- [⏳先読み・キャッシュの調査11/16(先読みは想定どおり=直さない・残りは押した後の計算と羅針盤の控え不具合2・裁定待ち)](prefetch_cache_audit_2026_11_16.md)
+- [⏳先読み・キャッシュの調査11/16(先読みは想定どおり・実機では三カ所とも1〜3秒=急ぎなし・残りは羅針盤の控え不具合2と小さい掃除・裁定待ち)](prefetch_cache_audit_2026_11_16.md)
 - [使い方/guide=本番公開済・語彙/UI変更で写真撮り直し](usage_guide_page.md)
 - [⏳電子書籍ストア一覧](ebook_store_sheet_homework.md)
 - [版/刷タブ・在庫・電子割引](version_tabs_stock_ebook.md)
