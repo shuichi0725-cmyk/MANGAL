@@ -60,3 +60,4 @@ metadata:
 - [漫画1頁2ファイル(.html+.txt)は残す=消すと往復が遅い](rsc_txt_keep_two_files_decision.md)
 - [R2使用量の実測11/11(容量だけ枠超え・27日始まり)](r2_usage_snapshot_2026_11.md)
 - [⏳先読み・キャッシュの調査11/16(検索・羅針盤・本棚の実測と改善点)](prefetch_cache_audit_2026_11_16.md)
+- [★先読みは想定どおり(スマホも可・通信量で止めない)](feedback_prefetch_is_intended.md)
