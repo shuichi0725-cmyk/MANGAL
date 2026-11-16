@@ -46,7 +46,7 @@ metadata:
 - ✅2026-11-17 直した(commit a8f7ca2f95・本番は次の機能蒸留/週次)= 下の控えの不具合2件 と 見えない「周りの本」。ユーザ「その二つだけなおして」。
   直し方 = 控えに id を持たせ、控えを書いた頁の history.state にも同じ id を印(`__cpResume`)として書く → 印が同じ頁へ戻った時だけ使う(判定は純関数 `resumeVerdict`・compass.test.ts)。
   頁が生きたまま戻った時(bfcache)は pageshow(persisted) で控えと印を捨てる。周りの本は THREADS の時は nodes に入れない(placed は jumpBack の計算用に残す)。
-  手元(next dev+Edge)23項目 OK・ベルセルクの画面の書影 21件414KB → 13件238KB。★Next は最初の描画で history.state の自前キーを残す(initial pushRef.preserveCustomHistoryState=true)= 印が読める。
+  手元(next dev+Edge)23項目 OK・**テスト環境(mangal-preview.pages.dev)で本物の戻る(bfcache)を含む10項目 OK**(`run_preview_verify.py`)・ベルセルクの画面の書影 21件414KB → 13件238KB。★Next は最初の描画で history.state の自前キーを残す(initial pushRef.preserveCustomHistoryState=true)= 印が読める。
 - (経緯)控え(sessionStorage `mangal:compass:resume:v1`)の不具合2件(本番で再現):
   1. 「詳細」→ 作品頁 → 羅針盤リンク(`/compass?from=別の作品`)= **from が無視されて前の旅が出る**(控えが from/trail より先)。
   2. 「詳細」→ 戻る(bfcache で即復帰=良い)だと控えが消えずに残り、**1時間以内に羅針盤を開き直すと「詳細を押した時点」の旅に戻る**(新しい旅にならない)。

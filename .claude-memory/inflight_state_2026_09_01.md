@@ -316,4 +316,4 @@ IndexNow は 298 URL 受理(削除分の通知)。鍵ファイルも本番に載
 ## ⏳2026-11-17 羅針盤の控えの誤り2件 + 見えない周りの本 = コードだけ・本番未公開 → 次の「機能蒸留して」(週次でも出る)
 - a8f7ca2f95(app/compass の3ファイルだけ)。 ①作品頁の羅針盤マーク(`/compass?from=別の作品`)で開いても前の旅が出た ②「詳細」→戻る の後に開き直すと「詳細を押した時点」の旅に戻った
   → 控えは「控えを書いた頁へ戻ってきた時だけ」使う(history.state の印 `__cpResume`)。 ③案B(入口の輪)でいつも隠れている周りの本を書影つきで描いていた → 描かない。
-- 公開後の確認 = `.cache/bench/site-measure/run_resume.py`(本番で ③⑦ が新しい旅になること)。 経緯と数字 = [[prefetch_cache_audit_2026_11_16]]
+- テスト環境で確認済み(2026-11-17・本物の戻る含む10項目 = `run_preview_verify.py`)。 公開後の確認 = 同じ道具に本番のURLを渡す(`python run_preview_verify.py https://mangal-db.com`)。 経緯と数字 = [[prefetch_cache_audit_2026_11_16]]
