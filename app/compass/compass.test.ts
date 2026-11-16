@@ -58,6 +58,8 @@ import {
   SWAP_ORDERS,
   SWAP_SPAN,
   type Unit,
+  resumeVerdict,
+  RESUME_MAX_AGE_MS,
 } from "./compass";
 
 function book(slug: string, o: Partial<MangaListItem> = {}): MangaListItem {
@@ -1246,5 +1248,39 @@ describe("星屑 = 冊数で大きさ・置き場所はくじ(2026-11-01)", () =
       const b = spreadPositions("elem", mk(n, "b"), "dust", geoms[1], 2000, "elem:x").P;
       expect(a.map((p) => [Math.round(p.x), Math.round(p.y)]), `n=${n}`).not.toEqual(b.map((p) => [Math.round(p.x), Math.round(p.y)]));
     }
+  });
+});
+
+describe("控え(「詳細」へ飛ぶ直前の旅)を使うかの判定(2026-11-17)", () => {
+  const NOW = 1_800_000_000_000;
+  const rec = (o: Record<string, unknown> = {}) => ({ id: "abc123", path: [{ slug: "berserk", kind: null }], t: NOW - 5_000, ...o });
+
+  it("控えを書いた頁そのものへ戻ってきた(印が同じ)= 使う", () => {
+    expect(resumeVerdict(rec(), "abc123", NOW)).toBe("use");
+  });
+
+  it("新しく開いた頁(印が無い・別の印)= 使わずに残す(?from= で開き直しても前の旅を出さない)", () => {
+    // 作品頁の羅針盤マーク(/compass?from=別の作品)やヘッダーから開いた頁には印が無い
+    expect(resumeVerdict(rec(), null, NOW)).toBe("keep");
+    expect(resumeVerdict(rec(), undefined, NOW)).toBe("keep");
+    // 別の頁で書いた控え(印が違う)
+    expect(resumeVerdict(rec(), "zzz999", NOW)).toBe("keep");
+  });
+
+  it("期限切れは捨てる(印が同じでも)・期限ちょうど手前までは使う", () => {
+    expect(resumeVerdict(rec({ t: NOW - RESUME_MAX_AGE_MS }), "abc123", NOW)).toBe("drop");
+    expect(resumeVerdict(rec({ t: NOW - RESUME_MAX_AGE_MS - 1 }), null, NOW)).toBe("drop");
+    expect(resumeVerdict(rec({ t: NOW - RESUME_MAX_AGE_MS + 1 }), "abc123", NOW)).toBe("use");
+  });
+
+  it("id の無い古い形の控えは捨てる(持ち主を確かめられない = 旧の誤りを繰り返さない)", () => {
+    expect(resumeVerdict({ path: [{ slug: "berserk", kind: null }], t: NOW - 5_000 }, null, NOW)).toBe("drop");
+    expect(resumeVerdict(rec({ id: "" }), "", NOW)).toBe("drop");
+    expect(resumeVerdict(rec({ id: 123 }), "123", NOW)).toBe("drop");
+  });
+
+  it("壊れた控え(読めない・旅路が空・時刻が無い)は捨てる", () => {
+    for (const bad of [null, undefined, "x", 5, [], {}, rec({ path: [] }), rec({ path: "berserk" }), rec({ t: "now" }), rec({ t: NaN })])
+      expect(resumeVerdict(bad, "abc123", NOW), JSON.stringify(bad)).toBe("drop");
   });
 });

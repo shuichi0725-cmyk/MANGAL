@@ -64,6 +64,7 @@ import {
   SWAP_FX_NAME,
   type SwapOrder,
   type SwapFx,
+  resumeVerdict,
 } from "./compass";
 import { Halftone } from "./halftone";
 import { CompassShelveButton, CompassShelvePanel } from "./CompassShelve";
@@ -177,8 +178,36 @@ const parseTrail = (raw: string | null): { slug: string; kind: ThreadKind | null
     .filter((t) => t.slug);
 /** 詳細(作品頁)へ飛ぶ直前に旅の状態を書く = OS の戻るで帰ってきた時に復元する(2026-09-30 ユーザ要望) */
 const RESUME_KEY = "mangal:compass:resume:v1";
+/**
+ * ★控えの持ち主の印(2026-11-17)。 控えを書く時に、いまの頁(履歴の1こま)の history.state にも同じ id を書く。
+ *   開いた頁にこの印があり、控えの id と同じ時だけ「戻るで帰ってきた」と見て旅を戻す(判定 = compass.ts の resumeVerdict)。
+ *   旧 = 控えがあれば無条件に戻していた = ①作品頁の羅針盤マーク(/compass?from=別の作品)で開いても前の旅が出た
+ *        ②戻る(頁がそのまま生きて帰る時)では控えが使われずに残り、次に羅針盤を開き直した時に古い旅へ戻った(2026-11-16 本番で再現)。
+ *   Next は自分の持ち物(__NA 等)と一緒に、こちらが足したキーも残す(最初の描画は history.state を引き継ぐ)。
+ */
+const RESUME_MARK = "__cpResume";
+/** いまの頁(履歴の1こま)に付いている控えの印 */
+function readResumeMark(): string | null {
+  try {
+    const v = (window.history.state as Record<string, unknown> | null)?.[RESUME_MARK];
+    return typeof v === "string" && v ? v : null;
+  } catch {
+    return null;
+  }
+}
+/** いまの頁に控えの印を書く(null = 消す)。 履歴の中のほかの持ち物はそのまま残す・URLは変えない */
+function writeResumeMark(id: string | null): void {
+  try {
+    const st: Record<string, unknown> = { ...((window.history.state as Record<string, unknown> | null) ?? {}) };
+    if (id) st[RESUME_MARK] = id;
+    else delete st[RESUME_MARK];
+    window.history.replaceState(st, "");
+  } catch {
+    /* 書けなくても旅は動く(戻った時は新しい旅) */
+  }
+}
 type RoundsMemo = { key: string; seed: string; k: number; seen: number[] };
-type Resume = { path: Step[]; prev: string | null; backAng: number | null; sel: string | null; exp: string | null; drawn: { key: string; items: UnitItem[] } | null; mix?: Mix | null; re?: Regenre | null; narrow?: Mix | null; rounds?: RoundsMemo | null; t: number };
+type Resume = { id?: string; path: Step[]; prev: string | null; backAng: number | null; sel: string | null; exp: string | null; drawn: { key: string; items: UnitItem[] } | null; mix?: Mix | null; re?: Regenre | null; narrow?: Mix | null; rounds?: RoundsMemo | null; t: number };
 /** 回(ROUNDS): 広げた時に1回だけ決めた全冊の並び・回の切れ目・今の回(k)・見た回・いま描いている回(view = 方位盤を回している間は k と違う) */
 type Rounds = RoundsMemo & { order: UnitItem[]; ranges: [number, number][]; view: number };
 /** 回の入れ替わりの出し方(出ていく本の動き始め ms は slug ごと) */
@@ -438,12 +467,21 @@ export default function MagicCompass({
   useEffect(() => {
     if (path.length || !index || !index.length || loadingHold) return;
     // 詳細(作品頁)から OS の戻るで帰ってきた = 飛ぶ前の旅をそのまま出す(1時間以内・1回だけ使う)
+    // ★使うのは「控えを書いた頁そのものへ戻ってきた時」だけ(2026-11-17・印 = RESUME_MARK)。
+    //   別の頁の控え(作品頁から羅針盤を新しく開いた等)は触らずに残す = その頁へ戻った時に使える。
     try {
       const raw = window.sessionStorage.getItem(RESUME_KEY);
       if (raw) {
-        window.sessionStorage.removeItem(RESUME_KEY);
-        const r = JSON.parse(raw) as Resume;
-        if (r && Array.isArray(r.path) && r.path.length && Date.now() - r.t < 3600_000) {
+        let r: Resume | null = null;
+        try {
+          r = JSON.parse(raw) as Resume;
+        } catch {
+          r = null; // 壊れた控え = 下で捨てる
+        }
+        const verdict = resumeVerdict(r, readResumeMark(), Date.now());
+        if (verdict !== "keep") window.sessionStorage.removeItem(RESUME_KEY);
+        if (verdict === "use" && r) {
+          writeResumeMark(null); // 1回だけ使う(この後の再読み込みは普通に始める)
           resumeDrawn.current = r.drawn;
           resumeRounds.current = r.rounds ?? null;
           setPath(r.path);
@@ -503,6 +541,25 @@ export default function MagicCompass({
     if (!pool.length) return;
     setPath([{ slug: pool[Math.floor(Math.random() * pool.length)].slug, kind: null, seed: newSeed() }]);
   }, [index, path.length, loadingHold, graph]);
+
+  // ★戻るで「頁がそのまま生きて」帰ってきた時(bfcache)は、旅は画面に残っている = 控えは使わずに済んだ → その場で捨てる(2026-11-17)。
+  //   旧 = 捨てずに残り、1時間以内に羅針盤を開き直すと「詳細を押した時点」の旅に戻っていた。 この頁の控えだけ捨てる(印で見分ける)。
+  useEffect(() => {
+    const onShow = (e: PageTransitionEvent) => {
+      if (!e.persisted) return;
+      const mark = readResumeMark();
+      if (!mark) return;
+      try {
+        const r = JSON.parse(window.sessionStorage.getItem(RESUME_KEY) || "null") as Resume | null;
+        if (r && r.id === mark) window.sessionStorage.removeItem(RESUME_KEY);
+      } catch {
+        /* 読めない控えは、次に開いた時の判定で捨てられる */
+      }
+      writeResumeMark(null);
+    };
+    window.addEventListener("pageshow", onShow);
+    return () => window.removeEventListener("pageshow", onShow);
+  }, []);
 
   const curItem = useMemo<MangaListItem | null>(() => {
     if (!cur) return null;
@@ -1044,26 +1101,30 @@ export default function MagicCompass({
       spawn: { fx: 0, fy: 0, fs: 0.6, d: 0 },
     });
     const xs = spread ? new Map(spread.P.map((p) => [p.slug, p])) : null;
-    placed.forEach((o, i) => {
-      if (xs?.has(o.slug) || o.slug === cur) return; // 広げた本と同じ本は広げた側で描く
-      const color = KIND_COLOR[o.back ? "back" : o.kind];
-      out.push({
-        slug: o.slug,
-        x: cw.x + o.dx,
-        y: cw.y + o.dy,
-        w: S.nw,
-        h: S.nh,
-        label: o.back ? "← 来た道" : o.label,
-        color,
-        back: o.back,
-        hidden: !!xs || nebOpen || THREADS || (!o.back && off.has(o.kind as UnitKind)),
-        pick: !xs && sel === o.slug,
-        dim: !xs && !!sel && sel !== o.slug,
-        spawn: firstRing
-          ? { fx: -o.dx, fy: -o.dy, fs: 0.33, d: 120 + i * 55 }
-          : { fx: 0, fy: 0, fs: 1, d: 120 + i * 55 },
+    // ★案B(THREADS = 糸の入口の輪)では周りの本を描かない(2026-11-17)。 この形では周りの本はいつも隠れている(見えない)のに
+    //   書影つきで描いていた = 中心が替わるたびに書影5〜10枚(実測 ベルセルクで10枚・214KB = その画面の書影の半分)を
+    //   画面に出ないまま取っていた。 置き場所(placed)は「来た道へ戻る」動きの計算に使うので、そちらは残す。
+    if (!THREADS)
+      placed.forEach((o, i) => {
+        if (xs?.has(o.slug) || o.slug === cur) return; // 広げた本と同じ本は広げた側で描く
+        const color = KIND_COLOR[o.back ? "back" : o.kind];
+        out.push({
+          slug: o.slug,
+          x: cw.x + o.dx,
+          y: cw.y + o.dy,
+          w: S.nw,
+          h: S.nh,
+          label: o.back ? "← 来た道" : o.label,
+          color,
+          back: o.back,
+          hidden: !!xs || nebOpen || (!o.back && off.has(o.kind as UnitKind)),
+          pick: !xs && sel === o.slug,
+          dim: !xs && !!sel && sel !== o.slug,
+          spawn: firstRing
+            ? { fx: -o.dx, fy: -o.dy, fs: 0.33, d: 120 + i * 55 }
+            : { fx: 0, fy: 0, fs: 1, d: 120 + i * 55 },
+        });
       });
-    });
     if (spread && unit) {
       // ★回の入れ替わり(ROUNDS): 中央から飛び出さず、その場で「どこから順に × どうめくれるか」で入る
       const sw = ROUNDS ? swapRef.current : null;
@@ -1264,8 +1325,11 @@ export default function MagicCompass({
       : `/manga/${encodeURIComponent(slug)}`;
   const saveResume = () => {
     try {
-      const r: Resume = { path, prev, backAng, sel, exp, drawn, mix: exp && mixFull?.key === exp ? mixApplied : null, re: exp && reFull?.key === exp ? reApplied : null, narrow: exp ? narrowApplied : null, rounds: ROUNDS && rounds ? { key: rounds.key, seed: rounds.seed, k: rounds.k, seen: rounds.seen } : null, t: Date.now() };
+      // ★id = 控えの持ち主の印。 同じ値をいまの頁の履歴にも書く(RESUME_MARK)= この頁へ戻ってきた時だけ控えを使う
+      const id = newSeed();
+      const r: Resume = { id, path, prev, backAng, sel, exp, drawn, mix: exp && mixFull?.key === exp ? mixApplied : null, re: exp && reFull?.key === exp ? reApplied : null, narrow: exp ? narrowApplied : null, rounds: ROUNDS && rounds ? { key: rounds.key, seed: rounds.seed, k: rounds.k, seen: rounds.seen } : null, t: Date.now() };
       window.sessionStorage.setItem(RESUME_KEY, JSON.stringify(r));
+      writeResumeMark(id);
     } catch {
       /* 書けなくても飛ぶ(戻った時は新しい旅) */
     }

@@ -1705,3 +1705,31 @@ export function simThemeUnit(g: Graph, center: Pick<MangaListItem, "slug" | "the
     .map((x) => x.u);
   return { key: "simel", kind: "elem", label: "似た要素", items, note: `要素の重なり${Math.round(tier * 100)}%以上` };
 }
+
+// ───────────────────────── 控え(「詳細」へ飛ぶ直前の旅)を使うかの判定(2026-11-17) ─────────────────────────
+// 「詳細」を押す時に旅の状態を端末(sessionStorage)へ控え、OS の戻るで帰ってきた時に戻す(2026-09-30)。
+// 旧 = 控えがあれば無条件に戻していたので、2つの誤りがあった(2026-11-16 本番で再現):
+//   ① 作品頁の羅針盤マーク(/compass?from=別の作品)で開いても、from を無視して前の旅が出た
+//   ② 戻る(頁がそのまま生きて帰る = 控えを使わない)の後、羅針盤を開き直すと「詳細を押した時点」の旅に戻った
+// 新 = 控えに id を持たせ、控えを書いた頁(履歴の1こま)にも同じ id を印として付ける(MagicCompass.tsx の RESUME_MARK)。
+//      開いた頁の印が控えの id と同じ時だけ「戻ってきた」と見て使う。
+
+/** 控えの有効期間(これより古い控えは捨てる) */
+export const RESUME_MAX_AGE_MS = 3600_000;
+/** use = 旅を戻す / keep = 別の頁の控え(触らず残す = その頁へ戻った時に使う)/ drop = 捨てる */
+export type ResumeVerdict = "use" | "keep" | "drop";
+
+/**
+ * 控えをどうするか。 rec = 端末から読んだ控え(形は信用しない)/ mark = いま開いた頁の印(無ければ null)/ now = 今の時刻(ms)。
+ *   drop: 読めない・id の無い古い形・旅路が空・時刻が無い・期限切れ
+ *   use : 印が控えの id と同じ(= 控えを書いた頁そのものへ戻ってきた)
+ *   keep: それ以外(= 新しく開いた頁。 控えは別の頁のもの)
+ */
+export function resumeVerdict(rec: unknown, mark: string | null | undefined, now: number): ResumeVerdict {
+  if (!rec || typeof rec !== "object") return "drop";
+  const r = rec as { id?: unknown; t?: unknown; path?: unknown };
+  if (typeof r.id !== "string" || !r.id) return "drop";
+  if (!Array.isArray(r.path) || !r.path.length) return "drop";
+  if (typeof r.t !== "number" || !Number.isFinite(r.t) || now - r.t >= RESUME_MAX_AGE_MS) return "drop";
+  return mark === r.id ? "use" : "keep";
+}
