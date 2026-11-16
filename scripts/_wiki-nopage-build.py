@@ -176,7 +176,7 @@ def fetch_ndl(isbns):
                 done[ib] = d
             if n % 20 == 0:
                 print(f"  {n}/{len(todo)}", flush=True)
-            time.sleep(1.3)
+            time.sleep(3.0)   # 2026-11-16: 1.3秒でも同日2回 429 になったので広げた
     return done
 
 
