@@ -2,7 +2,10 @@
 name: memory-index-deploy-seo
 description: 記憶の分野別索引 = 公開・配信・検索・SEO(R2/Worker・preview・GSC/Bing)。MEMORY.md の容量対策(2026-10-06)で全件をここに置く
 metadata:
+  node_type: memory
   type: reference
+  originSessionId: 94f61a5a-429b-451a-96bc-82f426ea5060
+  modified: 2026-11-16T13:27:32.607Z
 ---
 
 # 公開・配信・検索・SEO(R2/Worker・preview・GSC/Bing)
@@ -56,3 +59,4 @@ metadata:
 - [ボット急増=対策保留(実害待ち)](bot_surge_2026_10_hold.md)
 - [漫画1頁2ファイル(.html+.txt)は残す=消すと往復が遅い](rsc_txt_keep_two_files_decision.md)
 - [R2使用量の実測11/11(容量だけ枠超え・27日始まり)](r2_usage_snapshot_2026_11.md)
+- [⏳先読み・キャッシュの調査11/16(検索・羅針盤・本棚の実測と改善点)](prefetch_cache_audit_2026_11_16.md)
