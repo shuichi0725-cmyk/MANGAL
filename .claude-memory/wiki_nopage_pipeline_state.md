@@ -21,6 +21,15 @@ metadata:
 - 残り80作品=保留(`wiki-nopage-hold.tsv`)。NDL 未取得23・NDLと楽天のヨミ不一致7・役割が確定しない(41+31)・「既刊」19・区分18・ジャンル根拠なし11 ほか。
 - slug は私が規則で付けた(英語綴りは明白な語だけ。ダブルナイト=knight/night 不明で `daburu-naito`)。
 
+## 2026-11-16 追記
+- 頁seed化は **32作品**(+へるしーへありーすけありー)。NDL は3秒間隔でも約70件で 429(2日連続)=1日に引ける量に上限がある模様。
+  ISBN直引きのヒット率は約半分(85件中41)。出した31頁の検算=NDLヨミ一致7・不一致0・ISBNで当たらず20・未照会4。
+- **SHORT(巻が足りない・確度A)の完結82件を調べた** = `scripts/_gen-wiki-short-review.py` →
+  `wiki-short-review.tsv`(作品)/`-books.tsv`(足せる本)。調べただけで seed 未記入。
+  足せる20+一部1(35冊。書影なし7冊・種2に在る7冊・35冊とも頁/seedに不在を全文検索で確認)/別の版21/別作・対象外11/番号なしの本(番外編・上下巻)15/当たらず14。
+  ★検出器の「確度A」は「同じ題の未掲載本が楽天に在る」だけ = 82件中、巻抜けとして足せるのは約4分の1。
+  ★Half&half(瀬尾公治・全2巻)は当て先の頁が別作(ラブレター)= 実は頁なし。氷室の天地16巻は楽天の発売日が17巻と同日=要確認。
+
 ## 続きのやり方
 1. NDL を休ませてから `python scripts/_wiki-nopage-build.py --plan`(取得済みは飛ばす・連続3失敗で自動中断)
 2. worksheet(.cache/wiki-nopage/worksheet.jsonl)の slug を記入 → `--emit` → `_reflect-targeted.py --only <slugs>` → .preview-data へコピー+索引
