@@ -75,7 +75,7 @@
 - [AI書評家リーグ運用](ai_review_league_operation.md)
 - [ISBN/巻数是正の進捗](data_quality_cleanup_state.md)
 - [⏳本番待ち台帳(inflight)](inflight_state_2026_09_01.md)
-- [⏳先読み・キャッシュの調査11/16(先読みは想定どおり・実機では三カ所とも1〜3秒=急ぎなし・残りは羅針盤の控え不具合2と小さい掃除・裁定待ち)](prefetch_cache_audit_2026_11_16.md)
+- [⏳先読み・キャッシュの調査11/16(先読みは想定どおり・実機では三カ所とも1〜3秒=急ぎなし・羅針盤の控え不具合2と見えない周りの本は11/17に直した=本番待ち・残りは任意の掃除)](prefetch_cache_audit_2026_11_16.md)
 - [使い方/guide=本番公開済・語彙/UI変更で写真撮り直し](usage_guide_page.md)
 - [⏳電子書籍ストア一覧](ebook_store_sheet_homework.md)
 - [版/刷タブ・在庫・電子割引](version_tabs_stock_ebook.md)

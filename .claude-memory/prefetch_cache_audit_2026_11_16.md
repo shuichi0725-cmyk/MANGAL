@@ -43,13 +43,17 @@ metadata:
 
 ## B. 羅針盤
 - 入口の輪が出るまで: 制限なし初回 2.3秒 / スマホ相当 初回 **16.6秒**・再訪 **5.9秒**(再訪はほぼ計算: cols解析0.9 + 復元1.5 + キャッチ0.9 + buildGraph 1.0〜1.5 + 最初の周り1.0)。初回のJSON 9.3MB。
-- ★控え(sessionStorage `mangal:compass:resume:v1`)の不具合2件(本番で再現):
+- ✅2026-11-17 直した(commit a8f7ca2f95・本番は次の機能蒸留/週次)= 下の控えの不具合2件 と 見えない「周りの本」。ユーザ「その二つだけなおして」。
+  直し方 = 控えに id を持たせ、控えを書いた頁の history.state にも同じ id を印(`__cpResume`)として書く → 印が同じ頁へ戻った時だけ使う(判定は純関数 `resumeVerdict`・compass.test.ts)。
+  頁が生きたまま戻った時(bfcache)は pageshow(persisted) で控えと印を捨てる。周りの本は THREADS の時は nodes に入れない(placed は jumpBack の計算用に残す)。
+  手元(next dev+Edge)23項目 OK・ベルセルクの画面の書影 21件414KB → 13件238KB。★Next は最初の描画で history.state の自前キーを残す(initial pushRef.preserveCustomHistoryState=true)= 印が読める。
+- (経緯)控え(sessionStorage `mangal:compass:resume:v1`)の不具合2件(本番で再現):
   1. 「詳細」→ 作品頁 → 羅針盤リンク(`/compass?from=別の作品`)= **from が無視されて前の旅が出る**(控えが from/trail より先)。
   2. 「詳細」→ 戻る(bfcache で即復帰=良い)だと控えが消えずに残り、**1時間以内に羅針盤を開き直すと「詳細を押した時点」の旅に戻る**(新しい旅にならない)。
   直し方の型 = 控えを「同じ履歴の頁へ戻って来た時だけ」使う(history.state に印 / pageshow persisted で消す / from・trail がある時は使わない)。
 - 1冊進むたびに固まる: 進むの動きが終わった直後に 0.5〜1.1秒(スマホ相当)。PC の Node 実測 = neighborhood 17〜60ms + threadEntrances 中央値68・90%点132・最大213ms + mixCounts 19〜57ms。
   主因 = threadEntrances が要素・ジャンルごとに全件を並べ替える(使うのは冊数と先頭の書影だけ)。nearMix を mixCounts と二重に計算。
-- 画面に出ない「周りの本」(THREADS=true で常に隠す `placed`)を書影つきで描いている = berserk で10枚・214KB(その画面の書影 414KB の半分)。乱数300冊の平均 6.4冊。
+- (経緯・✅上で直した)画面に出ない「周りの本」(THREADS=true で常に隠す `placed`)を書影つきで描いていた = berserk で10枚・214KB(その画面の書影 414KB の半分)。乱数300冊の平均 6.4冊。
 - キャッチ索引(3.6MB)の到着を待たないと糸が張れない(対象=書影+キャッチ)。必要なのは有無だけ → 索引の `fl` に「キャッチ有り」のビットを足せば cols+hidden だけで始められる。キャッチは年々増える(47,254件・生9.7MB)。
 - 隠し要素の待ち上限4秒は頁を開いた時から数える。スマホ相当で到着 2.8〜3.8秒 = ぎりぎり。もっと遅い回線では索引より先に時間切れ → その回は隠し要素なし。索引が揃ってから数えれば失わない。
 - PC幅: 全画面の裏で左レールが到着先読み = 別名索引1.7MB + masters + 検索の下ごしらえ(IndexedDB まで作る)。羅針盤では PageShell がレールを出さなければ消える。
