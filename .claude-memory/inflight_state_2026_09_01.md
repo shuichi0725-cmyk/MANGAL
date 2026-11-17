@@ -317,3 +317,8 @@ IndexNow は 298 URL 受理(削除分の通知)。鍵ファイルも本番に載
 - a8f7ca2f95(app/compass の3ファイルだけ)。 ①作品頁の羅針盤マーク(`/compass?from=別の作品`)で開いても前の旅が出た ②「詳細」→戻る の後に開き直すと「詳細を押した時点」の旅に戻った
   → 控えは「控えを書いた頁へ戻ってきた時だけ」使う(history.state の印 `__cpResume`)。 ③案B(入口の輪)でいつも隠れている周りの本を書影つきで描いていた → 描かない。
 - テスト環境で確認済み(2026-11-17・本物の戻る含む10項目 = `run_preview_verify.py`)。 公開後の確認 = 同じ道具に本番のURLを渡す(`python run_preview_verify.py https://mangal-db.com`)。 経緯と数字 = [[prefetch_cache_audit_2026_11_16]]
+
+## ⏳2026-11-17 索引の事前圧縮(brotli最高品質・−28%)= R2へ置く所は週次に結線済み・★Worker の出し直しが要る(週次だけでは配られない)
+- commit a7d2ae7b9d。 次の週次で r2-sync が4本の `<キー>.<元MD5>.br` を自動で置く → **同じ週次の中で `python scripts/_deploy-worker.py` を必ず実行**(素の wrangler deploy 禁止=メール転送が剥がれる)。
+- 公開後の確認 = `python scripts/_index_br.py --status`(4本とも「使用中」)+ 本番 curl(Accept-Encoding: br で etag `W/"<元MD5>"`・content-encoding br・cols 約3.4MB)。 手順は skill weekly-distill に追記済(389f1a3533)。
+- 止め方 = Worker の BR_KEYS を空にして出し直す(`--remove-all` で R2 から消してもエッジの分は元が変わるまで残る)。 経緯 = [[prefetch_cache_audit_2026_11_16]]
