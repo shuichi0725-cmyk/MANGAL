@@ -154,10 +154,14 @@ python scripts/_r2-sync.py --bucket mangal-site --prune
   ログインし直すのではなく **対話シェル側で `python scripts/_kv-redirects-sync.py` を単独実行**すれば通る(KV書込のみ=R2 PUTは発生しない)。
   ※exit 4 は「R2は成功・KVだけ未反映」の意味なので、**r2-sync の再実行は絶対にしない**(全量PUTのやり直し=Class A浪費)。
 - 疎通確認(_prod-smoke.py)に **301追跡テスト**が入っており(alias 1件を実プローブ)、KV陳腐化はそこでも鳴る。
-- ★**workers/r2-serve.js を変更した週は Worker も deploy**(R2同期はファイルだけ=Workerコードは別デプロイ):
+- ★**workers/ を変更した週は Worker も deploy**(R2同期はファイルだけ=Workerコードは別デプロイ)。
+  判定 = `git diff --stat <前回週次のcommit> HEAD -- workers/` に r2-serve.js / br-index.js 等が出たら必須:
 ```
-npx wrangler deploy -c wrangler-r2.jsonc
+python scripts/_deploy-worker.py
 ```
+  ★素の `npx wrangler deploy -c wrangler-r2.jsonc` は使わない(お問い合わせのメール転送バインディングが剥がれる=_deploy-worker.py の冒頭)。
+  ★索引の事前圧縮版(2026-11-17)は r2-sync が自動で R2 に置くが、**Worker を出し直すまで配られない**。
+  確認 = `python scripts/_index_br.py --status`(4本とも「使用中」)+ `curl -s -D - -o NUL -H "Accept-Encoding: br" https://mangal-db.com/manga-list-cols.v1.json` で etag が `W/"<元のMD5>"`・content-encoding br・本体 約3.4MB。
 - ★検索回帰は vitest に内蔵(lib/clientSearch.test.ts=イース型tier/数字表記揺れ/複数語AND)。緑でなければ出さない
 - ★**`--prune` 必須**(2026-07-26 追加)。 これが無いと **非掲載にした頁が本番で200のまま残る**。
   prune 無し運用の結果、孤児HTMLが **1,041頁** 溜まっていた([[r2_orphan_pages_prune_missing]])。
