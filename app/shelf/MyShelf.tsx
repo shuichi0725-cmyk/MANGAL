@@ -22,9 +22,23 @@ import {
   renameSlug,
   resolveMovedSlug,
   setOwned,
-  shelfShareUrl,
   volumeTiles,
 } from "@/lib/myShelf";
+import {
+  type BackupMark,
+  type ImportMark,
+  BACKUP_MARK_KEY,
+  IMPORT_MARK_KEY,
+  backupHeader,
+  codeSig,
+  encodeShelfCode,
+  mergeWithMark,
+  parseMark,
+  readShelfCode,
+  shelfCodeUrl,
+} from "@/lib/shelfCode";
+import { type DivideEntry, type DivideMode, DIVIDE_KEY, DIVIDE_MODES, divide, isDivideMode } from "@/lib/shelfDivide";
+import { useRailMasters } from "@/lib/useRailMasters";
 import type { MangaListItem } from "@/lib/schema";
 import { ensureFullIndex, isFullIndexLoaded, useMangaIndex } from "@/lib/useMangaIndex";
 import { useMyShelf } from "@/lib/useMyShelf";
@@ -100,6 +114,10 @@ type CardData = {
   note: OwnedNote | null;
   /** 版ごとにしまった1冊: その版の今の巻数と1巻の書影(巻の書影データから引けた時) */
   live: EditionFacts | undefined;
+  /** 段の上の日付「11/17 取り込み」「10/30 から棚に」(2026-11-17 見本②-5a) */
+  dateLabel: string;
+  /** 最後の取り込みで増えた本(「確認した」を押すまで = 赤茶の段・書影が光る・日付が赤い札) */
+  isNew: boolean;
 };
 type EditionFacts = { total: number; cover: string | null };
 
@@ -191,8 +209,11 @@ function Row({
   onOwned,
   onBought,
   readOnly,
+  select,
 }: {
   d: CardData;
+  /** おすすめを選ぶ(見本④)の間 = 段を押すとチェックが付く(作品頁へは行かない・操作は出さない) */
+  select?: { on: boolean; toggle: () => void } | null;
   onMenu: () => void;
   /** U1: 書影欄の「ここ(N巻)まで持ってる」 */
   onOwned: (n: number) => void;
@@ -212,6 +233,7 @@ function Row({
     <>
       <Cover src={cover} title={title} />
       <span className="shelf-c3-body">
+        {d.dateLabel && <span className="shelf-c3-date">{d.isNew ? `🆕 ${d.dateLabel}` : d.dateLabel}</span>}
         <span className="shelf-c3-title">{title}</span>
         {item.edition && <span className="shelf-c3-ed">{item.edition}</span>}
         {lost ? (
@@ -223,7 +245,7 @@ function Row({
               owned={item.owned ?? 0}
               total={note.total}
               on={vol}
-              onPick={(n) => setVol((v) => (v === n ? null : n))}
+              onPick={select ? undefined : (n) => setVol((v) => (v === n ? null : n))}
             />
           </>
         ) : (
@@ -242,8 +264,19 @@ function Row({
       </span>
     </>
   );
+  if (select)
+    return (
+      <li className={`shelf-c3-row is-select${select.on ? " is-on" : ""}${d.isNew ? " is-new" : ""}`}>
+        <button type="button" className="shelf-c3-link shelf-c3-selrow" aria-pressed={select.on} onClick={select.toggle}>
+          <span className="shelf-c3-check" aria-hidden="true">
+            {select.on ? "✓" : ""}
+          </span>
+          {body}
+        </button>
+      </li>
+    );
   return (
-    <li className="shelf-c3-row">
+    <li className={`shelf-c3-row${d.isNew ? " is-new" : ""}`}>
       {lost ? (
         <div className="shelf-c3-link shelf-press" {...(readOnly ? {} : press)}>
           {body}
@@ -448,6 +481,11 @@ function Case({
   onMenu,
   onOwned,
   onBought,
+  mode,
+  onMode,
+  sections,
+  importBar,
+  select,
 }: {
   id: ShelfId;
   cards: CardData[];
@@ -455,35 +493,97 @@ function Case({
   onMenu: (key: string) => void;
   onOwned: (key: string, n: number) => void;
   onBought: (key: string) => void;
+  /** 自動の仕切り(見本①)。 共有された棚を見ている時も使える */
+  mode: DivideMode;
+  onMode: (m: DivideMode) => void;
+  /** 仕切った段(先頭に「取り込みで増えた本」の段が来ることがある) */
+  sections: { id: string; label: string; isNew?: boolean; cards: CardData[] }[];
+  /** 「11/17 の取り込みで 3作 増えました [確認した]」(見本②-5a)。 無ければ null */
+  importBar: { text: string; onAck: () => void } | null;
+  select: { has: (key: string) => boolean; toggle: (key: string) => void } | null;
 }) {
   const def = SHELVES.find((s) => s.id === id)!;
+  const row = (c: CardData) => {
+    const k = itemKey(c.item);
+    return (
+      <Row
+        key={k}
+        d={c}
+        readOnly={readOnly}
+        onMenu={() => onMenu(k)}
+        onOwned={(n) => onOwned(k, n)}
+        onBought={() => onBought(k)}
+        select={select ? { on: select.has(k), toggle: () => select.toggle(k) } : null}
+      />
+    );
+  };
   return (
     <div className="shelf-c3-case" role="tabpanel" aria-label={def.label}>
       <p className="shelf-c3-casenote">{def.note}</p>
+      {importBar && (
+        <div className="shelf-newbar" role="status">
+          <b>{importBar.text}</b>
+          <button type="button" onClick={importBar.onAck}>
+            確認した
+          </button>
+        </div>
+      )}
+      {cards.length > 1 && (
+        <div className="shelf-chips" role="group" aria-label="仕切り">
+          <span>仕切り</span>
+          {DIVIDE_MODES.map((d) => (
+            <button key={d.id} type="button" aria-pressed={mode === d.id} onClick={() => onMode(d.id)}>
+              {d.label}
+            </button>
+          ))}
+        </div>
+      )}
       {cards.length === 0 ? (
         <p className="shelf-c3-empty">{readOnly ? "この棚は空です" : "作品頁の「しまう」から入れられます"}</p>
       ) : (
         <>
-          <ul className="shelf-c3-rows">
-            {cards.map((c) => {
-              const k = itemKey(c.item);
-              return (
-                <Row
-                  key={k}
-                  d={c}
-                  readOnly={readOnly}
-                  onMenu={() => onMenu(k)}
-                  onOwned={(n) => onOwned(k, n)}
-                  onBought={() => onBought(k)}
-                />
-              );
-            })}
-          </ul>
+          {sections.map((sec) =>
+            sec.label ? (
+              <section key={sec.id} aria-label={sec.label}>
+                <h3 className={`shelf-sec${sec.isNew ? " is-new" : ""}`}>
+                  {sec.label} <small>{sec.cards.length}作</small>
+                </h3>
+                <ul className="shelf-c3-rows">{sec.cards.map(row)}</ul>
+              </section>
+            ) : (
+              <ul key={sec.id} className="shelf-c3-rows">
+                {sec.cards.map(row)}
+              </ul>
+            ),
+          )}
           <p className="shelf-c3-pr">[PR] 店舗リンクにはアフィリエイト広告を含みます</p>
         </>
       )}
     </div>
   );
+}
+
+/** 日付「11/17」(端末の暦) */
+const md = (t: number) => {
+  const d = new Date(t);
+  return `${d.getMonth() + 1}/${d.getDate()}`;
+};
+
+/** 端末の小さな控え(取り込みの印・バックアップの印・仕切り)。 保存できない環境は黙って無し */
+function readLocal(key: string): string | null {
+  try {
+    return window.localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+function writeLocal(key: string, value: string | null): void {
+  try {
+    if (value === null) window.localStorage.removeItem(key);
+    else window.localStorage.setItem(key, value);
+  } catch {
+    /* 覚えられなくても棚は動く */
+  }
 }
 
 export default function MyShelf({ genres }: { genres: GenreDef[] }) {
@@ -495,14 +595,11 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
   const genreName = useMemo(() => new Map(genres.map((g) => [g.key, g.name])), [genres]);
 
   const { items, ready, persisted, update } = useMyShelf();
-  const [shared, setShared] = useState<ShelfItem[] | null>(null);
+  // 共有された棚(URL の #s= で開いた・貼って読んだ)。 kind = バックアップ / 旧URL / おすすめ(おすすめは「気になる」に入れるだけ)
+  const [shared, setShared] = useState<{ items: ShelfItem[]; kind: "backup" | "v1" | "recommend" } | null>(null);
   const [menu, setMenu] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const [confirmOverwrite, setConfirmOverwrite] = useState(false);
-  const [shareUrl, setShareUrl] = useState<string | null>(null);
-  const [copied, setCopied] = useState(false);
-  const [paste, setPaste] = useState("");
-  const [pasteError, setPasteError] = useState(false);
   // 転送を確かめ終えても見つからなかった slug(= 見つからなくなった作品)
   const [lost, setLost] = useState<Set<string>>(new Set());
   const tried = useRef(new Set<string>());
@@ -515,28 +612,59 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
     return () => window.clearTimeout(t);
   }, [toast]);
 
-  // 選んだタブは端末に覚える(水和後に読む。保存できない環境は既定の「もってる」のまま)
+  // ── 2026-11-17 見本 ①自動の仕切り / ②-5a 取り込みで増えた本 / ③バックアップ / ④おすすめを選ぶ ──
+  const [mode, setMode] = useState<DivideMode>("none");
+  const [importMark, setImportMark] = useState<ImportMark | null>(null);
+  const [backupMark, setBackupMark] = useState<BackupMark | null>(null);
+  const [panel, setPanel] = useState<"backup" | "select" | null>(null);
+  const [picked, setPicked] = useState<Set<string>>(new Set());
+  const [sendAs, setSendAs] = useState<"link" | "text">("link");
+  const [backupCode, setBackupCode] = useState<string | null>(null);
+  const [recCode, setRecCode] = useState<string | null>(null);
+  const [copied, setCopied] = useState<string | null>(null);
+  const [paste, setPaste] = useState("");
+  const [pasteError, setPasteError] = useState<string | null>(null);
+  const [origin, setOrigin] = useState("");
+  const [canShare, setCanShare] = useState(false);
+  const fileRef = useRef<HTMLInputElement>(null);
+  // 出版社の名前は仕切りを「出版社」にした時だけ取りに行く(レールと同じ静的JSON・1回だけ)
+  const publishers = useRailMasters(mode === "publisher").publishers;
+  const publisherName = useMemo(() => new Map(publishers.map((p) => [p.key, p.name])), [publishers]);
+
+  // 選んだタブ・仕切り・印は端末に覚える(水和後に読む。保存できない環境は既定のまま)
   useEffect(() => {
-    try {
-      const v = window.localStorage.getItem(TAB_KEY);
-      if (v === "own" || v === "wish" || v === "curious") setTab(v);
-    } catch {
-      /* 既定のまま */
-    }
+    const v = readLocal(TAB_KEY);
+    if (v === "own" || v === "wish" || v === "curious") setTab(v);
+    const d = readLocal(DIVIDE_KEY);
+    if (isDivideMode(d)) setMode(d);
+    setImportMark(parseMark<ImportMark>(readLocal(IMPORT_MARK_KEY), ["at", "n", "ack"]));
+    setBackupMark(parseMark<BackupMark>(readLocal(BACKUP_MARK_KEY), ["at", "sig"]));
+    setOrigin(window.location.origin);
+    setCanShare(typeof navigator.share === "function");
   }, []);
   const chooseTab = (id: ShelfId) => {
     setTab(id);
-    try {
-      window.localStorage.setItem(TAB_KEY, id);
-    } catch {
-      /* 覚えられなくても切り替えは効く */
-    }
+    writeLocal(TAB_KEY, id);
+  };
+  const chooseMode = (m: DivideMode) => {
+    setMode(m);
+    writeLocal(DIVIDE_KEY, m);
+  };
+  const saveImportMark = (m: ImportMark | null) => {
+    setImportMark(m);
+    writeLocal(IMPORT_MARK_KEY, m ? JSON.stringify(m) : null);
   };
 
-  // 棚のURL(#s=…)で開かれたら、まず「見るだけ」で出す(取り込むかは本人が選ぶ)
+  // 棚のURL(#s=…)で開かれたら、まず「見るだけ」で出す(取り込むかは本人が選ぶ)。 旧 v1. も読む
   useEffect(() => {
-    const got = decodeShelf(window.location.hash);
-    if (got) setShared(got);
+    if (!window.location.hash) return;
+    readShelfCode(window.location.hash).then((r) => {
+      if (r.ok) {
+        setShared({ items: r.items, kind: r.kind });
+        if (r.kind === "recommend") setTab("curious"); // おすすめは全部「気になる」に並ぶ(選んだタブの記憶は変えない)
+      } else if (r.reason === "broken")
+        setMessage("開いたURLの棚の文字列が欠けていて読めませんでした。送ってもらったURLを全部コピーし直してください。");
+    });
   }, []);
 
   // ★slug の解決: 全件が揃ってから(先頭100件だけで「無い」と判断しない)。索引に無い slug だけ、
@@ -574,7 +702,7 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
   }, [ready, index, items, bySlug, update]);
 
   const viewing = shared !== null;
-  const shown = viewing ? shared : items;
+  const shown = viewing ? shared.items : items;
 
   // ★版ごとにしまった1冊(版ラベル付き)は、その版の今の巻数と1巻の書影を巻の書影データ(lib/volCovers)から引く
   //   (2026-10-31 本棚 A+1)。 引けるまでは登録時点の巻数・索引の書影で出す(引けない = 版の名前が変わった等もそのまま)。
@@ -595,6 +723,10 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
   }, [shown]);
   const liveOf = (x: ShelfItem) => (x.edition ? edFacts.get(itemKey(x)) : undefined);
 
+  // ★増えた本 = 最後の取り込みの時刻と addedAt が同じ本(本ごとの欄は増やさない)。 共有された棚を見ている間は付けない
+  const importedAt = !viewing && importMark ? importMark.at : null;
+  const isNewItem = (x: ShelfItem) => importedAt !== null && !importMark!.ack && x.addedAt === importedAt;
+
   const factsOf = (slug: string): IndexFacts | null => {
     const m = bySlug.get(slug);
     return m ? { max_edition_volumes: m.max_edition_volumes, status: m.status } : null;
@@ -611,6 +743,9 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
           lost: !m && (viewing ? full : lost.has(item.slug)),
           note: id === "own" ? ownedNote(item, factsOf(item.slug), live?.total) : null,
           live,
+          // 日付は全部の本に(見本②-5a)。 共有された棚(見るだけ)には出さない = 受け取った時刻しか無いので
+          dateLabel: viewing ? "" : item.addedAt === importedAt ? `${md(item.addedAt)} 取り込み` : `${md(item.addedAt)} から棚に`,
+          isNew: isNewItem(item),
         };
       });
     const rank = (c: CardData) => (c.note && (c.note.kind === "behind" || c.note.kind === "complete-behind") ? 0 : 1);
@@ -623,6 +758,33 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
       else groups.set(c.item.slug, [c]);
     }
     return [...groups.values()].flat();
+  };
+  /** 仕切った段。 増えた本があれば「11/17 に取り込み」を先頭に、残りを仕切る(仕切りなし = 「前から棚にある本」) */
+  const sectionsOf = (cards: CardData[]) => {
+    const fresh = cards.filter((c) => c.isNew);
+    const rest = fresh.length ? cards.filter((c) => !c.isNew) : cards;
+    const entries: DivideEntry<CardData>[] = rest.map((c) => ({
+      value: c,
+      noteKind: c.note?.kind ?? null,
+      facts: c.m
+        ? {
+            status: c.m.status,
+            genres: c.m.genres,
+            author: c.m.authors[0] ? { name: c.m.authors[0].name, kana: c.m.authors[0].kana } : null,
+            publisher: c.m.publisher,
+            titleKana: c.m.title_kana,
+          }
+        : null,
+    }));
+    const divided = divide(entries, mode, { genre: (k) => genreName.get(k), publisher: (k) => publisherName.get(k) })
+      .map((sec) => ({
+        id: sec.id,
+        label: sec.label || (fresh.length ? "前から棚にある本" : ""),
+        cards: sec.entries.map((e) => e.value),
+      }))
+      .filter((sec) => sec.cards.length);
+    if (!fresh.length) return divided;
+    return [{ id: "new", label: `${md(importedAt!)} に取り込み`, isNew: true, cards: fresh }, ...divided];
   };
 
   const titleOf = (slug: string) => bySlug.get(slug)?.title || items.find((x) => x.slug === slug)?.title || slug;
@@ -650,52 +812,167 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
     }
     if (msg) setMessage(msg);
   };
-  const doImport = (mode: ImportMode) => {
+  /** 取り込む。 合流 = 手元に無かった本だけ「増えた本」の印(見本②-5a)。 上書き = 印は付けない(全部が新しくなるので) */
+  const takeIn = (incoming: ShelfItem[], how: ImportMode): number => {
+    const now = Date.now();
+    let added = 0;
+    update((s) => {
+      if (how === "overwrite") return importShelf(s, incoming, "overwrite");
+      const r = mergeWithMark(s, incoming, (a, b) => importShelf(a, b, "merge"), itemKey, now);
+      added = r.added;
+      return r.items;
+    });
+    if (how === "merge" && added > 0) saveImportMark({ at: now, n: added, ack: false });
+    return added;
+  };
+  const doImport = (how: ImportMode) => {
     if (!shared) return;
-    if (mode === "overwrite" && items.length > 0 && !confirmOverwrite) {
+    if (how === "overwrite" && items.length > 0 && !confirmOverwrite) {
       setConfirmOverwrite(true);
       return;
     }
-    const n = shared.length;
-    update((s) => importShelf(s, shared, mode));
-    leaveShared(mode === "merge" ? `${n}作を自分の棚に合流しました` : `棚を持ってきた${n}作で置き換えました`);
+    const n = shared.items.length;
+    // ★おすすめは「手元に無い本だけ」入れる(手元の本の棚・巻数を「気になる」で上書きしない)
+    const have = new Set(items.map(itemKey));
+    const added = takeIn(shared.kind === "recommend" ? shared.items.filter((x) => !have.has(itemKey(x))) : shared.items, how);
+    leaveShared(
+      how === "overwrite"
+        ? `棚を持ってきた${n}作で置き換えました`
+        : shared.kind === "recommend"
+          ? `おすすめ${n}作のうち${added}作を「気になる」に入れました`
+          : `${n}作を自分の棚に合流しました(新しく増えたのは${added}作)`,
+    );
   };
 
-  const makeUrl = () => {
-    setShareUrl(shelfShareUrl(window.location.origin, items));
-    setCopied(false);
+  // ── ③ バックアップ: 棚が変わるたびに今の文字列を作っておく(押した時に待たせない) ──
+  useEffect(() => {
+    if (!ready || viewing) return;
+    if (!items.length) {
+      setBackupCode(null);
+      return;
+    }
+    let alive = true;
+    encodeShelfCode(items, "backup").then((c) => {
+      if (alive) setBackupCode(c);
+    });
+    return () => {
+      alive = false;
+    };
+  }, [ready, viewing, items]);
+  const backupText = backupCode ? `${backupHeader(items)}\n${backupCode}` : "";
+  const backupStale = !!backupCode && (!backupMark || backupMark.sig !== codeSig(backupCode));
+  const markBackedUp = () => {
+    if (!backupCode) return;
+    const m = { at: Date.now(), sig: codeSig(backupCode) };
+    setBackupMark(m);
+    writeLocal(BACKUP_MARK_KEY, JSON.stringify(m));
   };
-  const copyUrl = async () => {
-    if (!shareUrl) return;
+  const copyText = async (text: string, tag: string, after?: () => void) => {
     try {
-      await navigator.clipboard.writeText(shareUrl);
-      setCopied(true);
+      await navigator.clipboard.writeText(text);
+      setCopied(tag);
+      after?.();
     } catch {
-      setCopied(false);
+      setCopied(null);
     }
   };
-  const shareNative = async () => {
-    if (!shareUrl || typeof navigator.share !== "function") return;
+  const shareText = async (text: string, after?: () => void) => {
+    if (typeof navigator.share !== "function") return;
     try {
-      await navigator.share({ title: "本棚", url: shareUrl });
+      await navigator.share({ title: "本棚", text });
+      after?.();
     } catch {
       /* キャンセルは無視 */
     }
   };
-  const readPaste = () => {
-    const got = decodeShelf(paste);
-    if (!got) {
-      setPasteError(true);
+  const saveTxt = () => {
+    if (!backupText) return;
+    const d = new Date();
+    const name = `mangal-shelf-${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, "0")}${String(d.getDate()).padStart(2, "0")}.txt`;
+    const url = URL.createObjectURL(new Blob([backupText + "\n"], { type: "text/plain;charset=utf-8" }));
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = name;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    window.setTimeout(() => URL.revokeObjectURL(url), 2000);
+    markBackedUp();
+  };
+  const readInput = async (text: string) => {
+    const r = await readShelfCode(text);
+    if (!r.ok) {
+      setPasteError(
+        r.reason === "broken"
+          ? "文字列が欠けているか、途中で変わっています。保存した時の文字列を全部コピーし直してください。"
+          : "読めませんでした。バックアップの文字列・棚のURL・おすすめのURLのどれかを貼ってください。",
+      );
       return;
     }
-    setPasteError(false);
+    setPasteError(null);
     setPaste("");
-    setShared(got);
+    setPanel(null);
+    setShared({ items: r.items, kind: r.kind });
+    if (r.kind === "recommend") setTab("curious");
     window.scrollTo({ top: 0 });
+  };
+  const readFile = async (f: File | undefined) => {
+    if (!f) return;
+    try {
+      await readInput(await f.text());
+    } catch {
+      setPasteError("ファイルを読めませんでした。");
+    }
+  };
+
+  // ── ④ おすすめを選ぶ ──
+  const togglePick = (key: string) =>
+    setPicked((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    });
+  const pickedItems = useMemo(() => items.filter((x) => picked.has(itemKey(x))), [items, picked]);
+  useEffect(() => {
+    if (panel !== "select" || !pickedItems.length) {
+      setRecCode(null);
+      return;
+    }
+    let alive = true;
+    encodeShelfCode(pickedItems, "recommend").then((c) => {
+      if (alive) setRecCode(c);
+    });
+    return () => {
+      alive = false;
+    };
+  }, [panel, pickedItems]);
+  const recUrl = recCode ? shelfCodeUrl(origin, recCode) : "";
+  const recText = recCode
+    ? [
+        "おすすめの漫画(MANGAL)",
+        ...pickedItems.map((x) => `・${titleOf(x.slug)}${x.edition ? `(${x.edition})` : ""} ${origin}/manga/${x.slug}`),
+        `まとめて棚に入れる → ${recUrl}`,
+      ].join("\n")
+    : "";
+  const recOut = sendAs === "link" ? recUrl : recText;
+  const togglePanel = (p: "backup" | "select") => {
+    setPanel((cur) => (cur === p ? null : p));
+    setCopied(null);
+    if (p === "select") setPicked(new Set());
   };
 
   const menuCard = menu ? cardsOf(shown.find((x) => itemKey(x) === menu)?.shelf ?? "own").find((c) => itemKey(c.item) === menu) : undefined;
   const counts = countByShelf(shown);
+  const tabCards = cardsOf(tab);
+  const newItems = !viewing && importMark && !importMark.ack ? items.filter(isNewItem) : [];
+  const newCount = newItems.length;
+  const newWhere = TAB_ORDER.map((id) => [id, newItems.filter((x) => x.shelf === id).length] as const)
+    .filter(([, n]) => n > 0)
+    .map(([id, n]) => `${SHELVES.find((s) => s.id === id)!.label} ${n}`)
+    .join("・");
+  const selecting = panel === "select" && !viewing;
+  const backupOpen = !viewing && (panel === "backup" || !persisted);
 
   if (!ready) return <p className="mt-8 text-center text-sm text-ink/55">本棚を開いています…</p>;
 
@@ -703,21 +980,38 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
     <div>
       {viewing && (
         <div className="mt-4 border-2 border-[var(--color-accent)] p-3 text-[13px]" role="region" aria-label="共有された棚">
-          <p className="font-bold">共有された棚を見ています(見るだけ・自分の棚はそのまま)</p>
-          <p className="mt-0.5 text-[11.5px] text-ink/60">
-            もってる {counts.own}・気になる {counts.curious}・ほしい {counts.wish}(計 {shared.length}作)
-          </p>
-          <div className="mt-2 flex flex-wrap gap-2">
-            <button type="button" onClick={() => doImport("merge")} className="rounded-full border-2 border-[var(--color-accent)] px-3 py-1.5 text-xs font-bold text-[var(--color-accent)]">
-              自分の棚に合流
-            </button>
-            <button type="button" onClick={() => doImport("overwrite")} className="rounded-full border border-[var(--color-line)] px-3 py-1.5 text-xs text-ink/80">
-              {confirmOverwrite ? `今の棚(${items.length}作)を消して置き換える=もう一度` : "上書きして取り込む"}
-            </button>
-            <button type="button" onClick={() => leaveShared()} className="rounded-full border border-[var(--color-line)] px-3 py-1.5 text-xs text-ink/70">
-              自分の棚に戻る
-            </button>
-          </div>
+          {shared.kind === "recommend" ? (
+            <>
+              <p className="font-bold">おすすめの漫画が届きました({shared.items.length}作・見るだけ)</p>
+              <p className="mt-0.5 text-[11.5px] text-ink/60">「気になるに入れる」を押すと、自分の棚に新しく増えた本として印が付きます。</p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                <button type="button" onClick={() => doImport("merge")} className="rounded-full border-2 border-[var(--color-accent)] px-3 py-1.5 text-xs font-bold text-[var(--color-accent)]">
+                  気になるに入れる
+                </button>
+                <button type="button" onClick={() => leaveShared()} className="rounded-full border border-[var(--color-line)] px-3 py-1.5 text-xs text-ink/70">
+                  自分の棚に戻る
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <p className="font-bold">共有された棚を見ています(見るだけ・自分の棚はそのまま)</p>
+              <p className="mt-0.5 text-[11.5px] text-ink/60">
+                もってる {counts.own}・気になる {counts.curious}・ほしい {counts.wish}(計 {shared.items.length}作)
+              </p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                <button type="button" onClick={() => doImport("merge")} className="rounded-full border-2 border-[var(--color-accent)] px-3 py-1.5 text-xs font-bold text-[var(--color-accent)]">
+                  自分の棚に合流
+                </button>
+                <button type="button" onClick={() => doImport("overwrite")} className="rounded-full border border-[var(--color-line)] px-3 py-1.5 text-xs text-ink/80">
+                  {confirmOverwrite ? `今の棚(${items.length}作)を消して置き換える=もう一度` : "上書きして取り込む"}
+                </button>
+                <button type="button" onClick={() => leaveShared()} className="rounded-full border border-[var(--color-line)] px-3 py-1.5 text-xs text-ink/70">
+                  自分の棚に戻る
+                </button>
+              </div>
+            </>
+          )}
         </div>
       )}
       {message && (
@@ -727,12 +1021,105 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
       )}
       {!persisted && (
         <p className="mt-4 text-[11.5px] text-ink/60">
-          この端末(ブラウザ)では保存できないため、頁を閉じると棚は消えます。下の「棚のURL」で持ち出せます。
+          この端末(ブラウザ)では保存できないため、頁を閉じると棚は消えます。下の「💾 棚のバックアップ」で持ち出せます。
         </p>
       )}
       {!full && <p className="mt-3 text-[11px] text-ink/45">作品データを読み込み中… 巻数と続きの巻は揃い次第出ます</p>}
 
       <Plaque stats={plaqueStats(shown, factsOf, (x) => liveOf(x)?.total)} />
+      {!viewing && (
+        <div className="shelf-tools">
+          <button type="button" aria-pressed={selecting} onClick={() => togglePanel("select")} disabled={!items.length}>
+            ⭐ おすすめを選ぶ
+          </button>
+          <button type="button" aria-pressed={backupOpen} onClick={() => togglePanel("backup")}>
+            💾 バックアップ
+            {backupStale && <i aria-label="取り直しをおすすめ" />}
+          </button>
+        </div>
+      )}
+
+      {backupOpen && (
+        <section className="shelf-backup" aria-label="棚のバックアップ">
+          <h2>💾 棚のバックアップ</h2>
+          {backupStale && (
+            <p className="shelf-backup-warn">
+              {backupMark
+                ? `前回のバックアップ(${md(backupMark.at)})のあと、棚が変わりました。取り直しておくと安心です。`
+                : "まだバックアップを取っていません。下の文字列を保存しておくと、棚が消えても戻せます。"}
+            </p>
+          )}
+          {backupCode ? (
+            <>
+              <pre className="shelf-code" aria-label="バックアップの文字列">
+                <b>{backupHeader(items)}</b>
+                {"\n"}
+                {backupCode}
+              </pre>
+              <div className="shelf-btns">
+                <button type="button" className="is-solid" onClick={() => copyText(backupText, "backup", markBackedUp)}>
+                  {copied === "backup" ? "コピーしました" : "コピー"}
+                </button>
+                <button type="button" onClick={saveTxt}>
+                  .txt で保存
+                </button>
+                {canShare && (
+                  <button type="button" onClick={() => shareText(backupText, markBackedUp)}>
+                    共有…
+                  </button>
+                )}
+                <button type="button" onClick={() => copyText(shelfCodeUrl(origin, backupCode), "backup-url", markBackedUp)}>
+                  {copied === "backup-url" ? "コピーしました" : "URLでコピー"}
+                </button>
+              </div>
+              <p className="shelf-backup-note">
+                {"メモ帳・自分宛てのメール/LINE、または .txt ファイルで残してください(iPhone は「ファイル」、Android と PC は「ダウンロード」に入ります)。文字は英数字だけなので、どの端末でも化けません。"}
+                <b>持っている巻数も入っています</b>
+                {"(人に送る時は「⭐ おすすめを選ぶ」を使ってください)。"}
+              </p>
+            </>
+          ) : (
+            <p className="shelf-backup-note">棚が空です。作品頁の「しまう」で入れると、ここでバックアップを取れます。</p>
+          )}
+          <h3>バックアップから戻す</h3>
+          <div className="shelf-restore">
+            <textarea
+              value={paste}
+              onChange={(e) => setPaste(e.target.value)}
+              placeholder="ここに貼る(文字列・URL・.txt の中身どれでも)"
+              aria-label="バックアップの文字列を貼る"
+              rows={3}
+              className="shelf-paste"
+            />
+            <button type="button" onClick={() => readInput(paste)} disabled={!paste.trim()}>
+              読む
+            </button>
+          </div>
+          <div className="shelf-btns">
+            <button type="button" onClick={() => fileRef.current?.click()}>
+              .txt ファイルを選ぶ
+            </button>
+            <input ref={fileRef} type="file" accept=".txt,text/plain" hidden onChange={(e) => readFile(e.target.files?.[0])} />
+          </div>
+          {pasteError && <p className="shelf-backup-warn">{pasteError}</p>}
+          <p className="shelf-backup-note">{"読むとまず「見るだけ」で並び、「合流(今の棚に足す)/上書き」を選べます。前の形式(v1. や棚のURL)もそのまま読めます。"}</p>
+        </section>
+      )}
+
+      {selecting && (
+        <div className="shelf-selbar" role="status">
+          <span>
+            ⭐ おすすめを選ぶ <b>{picked.size}作</b> 選択中
+          </span>
+          <button type="button" onClick={() => setPicked(new Set(items.map(itemKey)))}>
+            全部
+          </button>
+          <button type="button" onClick={() => togglePanel("select")}>
+            やめる
+          </button>
+        </div>
+      )}
+
       <div className="shelf-c3-tabs" role="tablist" aria-label="棚">
         {TAB_ORDER.map((id) => (
           <button key={id} type="button" role="tab" aria-selected={tab === id} onClick={() => chooseTab(id)} className="shelf-c3-tab">
@@ -741,7 +1128,26 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
           </button>
         ))}
       </div>
-      <Case id={tab} cards={cardsOf(tab)} readOnly={viewing} onMenu={setMenu} onOwned={ownTo} onBought={boughtFirst} />
+      <Case
+        id={tab}
+        cards={tabCards}
+        readOnly={viewing}
+        onMenu={setMenu}
+        onOwned={ownTo}
+        onBought={boughtFirst}
+        mode={mode}
+        onMode={chooseMode}
+        sections={sectionsOf(tabCards)}
+        importBar={
+          newCount > 0
+            ? {
+                text: `${md(importMark!.at)} の取り込みで ${newCount}作 増えました(${newWhere})`,
+                onAck: () => saveImportMark({ ...importMark!, ack: true }),
+              }
+            : null
+        }
+        select={selecting ? { has: (k) => picked.has(k), toggle: togglePick } : null}
+      />
       {toast && (
         <div className="shelf-toast" role="status">
           <span>{toast.text}</span>
@@ -758,70 +1164,39 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
         </div>
       )}
 
-
-      {!viewing && (
-        // U4(2026-10-31): 1行の見出しに畳む。 端末に保存できない時だけは開いたまま(消える前に持ち出してもらう)
-        <details className="shelf-url mt-10 border-t border-[var(--color-line)] pt-4 text-[12.5px]" open={!persisted}>
-          <summary className="text-[14px] font-bold">🔗 棚をURLで保存・復元する</summary>
-          {/* ★日本語の文は1行に書く(JSX は改行を空白1つにする=「を メモ帳」のような空白が出る) */}
-          <p className="mt-1 text-[11.5px] leading-relaxed text-ink/60">
-            {"この本棚は、この端末(ブラウザ)の中だけにあります。「棚のURLを作る」で出るURL(文字列)をメモ帳・メールの下書き・自分宛てのLINEなどに"}
-            <b>保存しておけば</b>
-            {"、棚が消えても(Safari は7日開かないと消えることがあります)・機種変更しても、そのURLを開くか下の欄に貼るだけで"}
-            <b>元の棚に戻せます</b>。
-          </p>
-          <p className="mt-1 text-[11.5px] leading-relaxed text-ink/60">
-            {"人に見せる時もこのURLを送ってください(開いた側で「合流/上書き/見るだけ」を選べます)。URL の「#」より後ろはサーバーに送られません。"}
-          </p>
-          <div className="mt-2 flex flex-wrap items-center gap-2">
-            <button type="button" onClick={makeUrl} disabled={!items.length} className="rounded-full border-2 border-[var(--color-accent)] px-3 py-1.5 text-xs font-bold text-[var(--color-accent)] disabled:opacity-40">
-              棚のURLを作る
+      {/* 下から出る送り方の画面で最後の段が隠れないように */}
+      {selecting && picked.size > 0 && <div aria-hidden="true" style={{ height: 340 }} />}
+      {selecting && picked.size > 0 && (
+        <div className="shelf-send" role="dialog" aria-label="おすすめを送る">
+          <p className="shelf-send-h">{picked.size}作を送る(持っている巻数・日付は送りません)</p>
+          <div className="shelf-seg" role="group" aria-label="送り方">
+            <button type="button" aria-pressed={sendAs === "link"} onClick={() => setSendAs("link")}>
+              リンク
             </button>
-            {shareUrl && (
-              <>
-                <button type="button" onClick={copyUrl} className="rounded-full border border-[var(--color-line)] px-3 py-1.5 text-xs">
-                  {copied ? "コピーしました" : "コピー"}
-                </button>
-                {typeof navigator !== "undefined" && typeof navigator.share === "function" && (
-                  <button type="button" onClick={shareNative} className="rounded-full border border-[var(--color-line)] px-3 py-1.5 text-xs">
-                    共有
-                  </button>
-                )}
-              </>
+            <button type="button" aria-pressed={sendAs === "text"} onClick={() => setSendAs("text")}>
+              文章
+            </button>
+          </div>
+          <pre className="shelf-code is-text">{recOut || "作っています…"}</pre>
+          <div className="shelf-btns">
+            <button type="button" className="is-solid" disabled={!recOut} onClick={() => copyText(recOut, "rec")}>
+              {copied === "rec" ? "コピーしました" : "コピー"}
+            </button>
+            {canShare && (
+              <button type="button" disabled={!recOut} onClick={() => shareText(recOut)}>
+                共有…(LINE など)
+              </button>
             )}
           </div>
-          {shareUrl && (
-            <input
-              readOnly
-              value={shareUrl}
-              onFocus={(e) => e.currentTarget.select()}
-              aria-label="棚のURL"
-              className="mt-2 w-full rounded border border-[var(--color-line)] bg-[var(--color-surface)] px-2 py-1.5 font-mono text-[11px] text-ink/80"
-            />
-          )}
-          {shareUrl && (
-            <p className="mt-1 text-[11px] leading-relaxed text-ink/55">
-              ↑ このURLを保存しておけば、いつでもこの棚に戻せます。作った時点の中身なので、棚を変えたら作り直して保存し直してください。
-            </p>
-          )}
-          <h3 className="mt-5 text-[13px] font-bold">保存しておいたURL(文字列)から復元する</h3>
-          <div className="mt-2 flex gap-2">
-            <input
-              value={paste}
-              onChange={(e) => setPaste(e.target.value)}
-              placeholder="https://…/shelf#s=v1.… または v1.…"
-              aria-label="棚のURLを貼る"
-              className="min-w-0 flex-1 rounded border border-[var(--color-line)] bg-[var(--color-surface)] shelf-paste px-2 py-1.5"
-            />
-            <button type="button" onClick={readPaste} disabled={!paste.trim()} className="shrink-0 rounded-full border border-[var(--color-line)] px-3 py-1.5 text-xs disabled:opacity-40">
-              読む
-            </button>
-          </div>
-          {pasteError && <p className="mt-1 text-[11px] text-ink/60">読めませんでした。棚のURLか「v1.」で始まる文字列を貼ってください。</p>}
-        </details>
+          <p className="shelf-backup-note">
+            {sendAs === "link"
+              ? "相手は開くと「見るだけ」で並び、「気になるに入れる」を選べます。"
+              : "相手は MANGAL を開かなくても題名が読めます。最後のURLから まとめて棚に入れられます。"}
+          </p>
+        </div>
       )}
 
-      {menuCard && !viewing && (
+      {menuCard && !viewing && !selecting && (
         <Sheet
           d={menuCard}
           genreName={genreName}
