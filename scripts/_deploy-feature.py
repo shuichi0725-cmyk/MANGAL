@@ -336,6 +336,14 @@ def main():
         json.dump(manifest, open(MANIFEST, "w", encoding="utf-8"))
         sys.exit(4)
     print(f"PUT {len(to_put)} 完了")
+    # ★索引の事前圧縮版(2026-11-17・scripts/_index_br.py)= 機能蒸留が配る対象は羅針盤の隠し要素だけ。 失敗しても止めない
+    try:
+        from _index_br import BR_SOURCES, sync_br
+        _br = {k: p for k, p, _ in to_put if k in BR_SOURCES}
+        if _br:
+            print(sync_br(s3, BUCKET, _br))
+    except Exception as _e:
+        print(f"(事前圧縮版 skip: {_e})")
     try:
         import _r2_ops_ledger as _rl
         _rl.record(len(to_put), 0, "feature-distill")

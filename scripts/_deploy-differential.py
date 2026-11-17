@@ -396,6 +396,14 @@ def main():
         s3.put_object(Bucket=BUCKET, Key=key, Body=body, ContentType=CT.get(ext, "application/octet-stream"))
         manifest[key] = hashlib.sha256(body).hexdigest()[:20]
     print(f"PUT {len(puts)} (頁{len(inner)}×2 + 索引{len(IDX)} + 巻の書影{len(vc_put)})")
+    # ★索引の事前圧縮版(2026-11-17・scripts/_index_br.py)。 元を PUT した後に置く・失敗しても止めない
+    try:
+        from _index_br import BR_SOURCES, sync_br
+        _br = {k: lp for k, lp in puts if k in BR_SOURCES}
+        if _br:
+            print(sync_br(s3, BUCKET, _br))
+    except Exception as _e:
+        print(f"(事前圧縮版 skip: {_e})")
     try:
         import _r2_ops_ledger as _rl
         _rl.record(len(puts), 0, "diff-deploy")
@@ -454,6 +462,14 @@ def main():
                     manifest[key] = h
                     json_synced.append(key)
         print(f"JSON面同期: PUT {len(json_synced)} (shinkan/data/idx のhash差分)")
+        # ★羅針盤の隠し要素の事前圧縮版(2026-11-17・scripts/_index_br.py)。 失敗しても止めない
+        try:
+            from _index_br import BR_SOURCES, sync_br
+            if "data/compass-hidden.v1.json" in json_synced:
+                print(sync_br(s3, BUCKET, {"data/compass-hidden.v1.json":
+                                           os.path.join(ROOT, "public", "data", "compass-hidden.v1.json")}))
+        except Exception as _e:
+            print(f"(事前圧縮版 skip: {_e})")
         try:
             import _r2_ops_ledger as _rl2
             _rl2.record(len(json_synced), 0, "diff-deploy-json")

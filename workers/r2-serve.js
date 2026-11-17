@@ -1,4 +1,5 @@
 import { EmailMessage } from "cloudflare:email";
+import { BR_KEYS, BR_CACHE_PREFIX, planBrIndex } from "./br-index.js";
 /**
  * MANGAL R2配信 Worker(★本番稼働中 mangal-db.com。 デプロイ= wrangler deploy -c wrangler-r2.jsonc)。
  *
@@ -187,6 +188,9 @@ export default {
         if (await cache.delete(new Request(u.toString()))) purged++;
         // trailing slash / index variant も念のため
         if (await cache.delete(new Request(u.toString() + "/"))) purged++;
+        // ★索引の事前圧縮版の「元の MD5 の控え」(br-index.js・60秒)も消す = 反映直後から新しい索引を返す
+        const bk = pathToKey(u.pathname);
+        if (BR_KEYS.has(bk)) await cache.delete(new Request(`${url.origin}${BR_CACHE_PREFIX}etag/${bk}`));
       }
       return new Response(JSON.stringify({ ok: true, purged, requested: paths.length }), {
         headers: { "content-type": "application/json", "cache-control": "no-store", ...CORS },
@@ -249,6 +253,35 @@ ${rec.body}`;
       const r = await getRedirects(env);
       const to = r[url.pathname] || r[url.pathname.replace(/\/+$/, "")];
       if (to) return Response.redirect(new URL(to, url.origin).toString(), 301);
+    }
+
+    // ①' ★索引の事前圧縮版(2026-11-17・workers/br-index.js)。 対象は索引4本だけ・br を受け取れる訪問者だけ。
+    //    R2 に「<元のキー>.<元の中身のMD5>.br」が在ればそれを圧縮済みのまま返す(その場の圧縮より約28%小さい)。
+    //    無い・合わない・失敗 = 何もせず下の従来の経路へ(= 止めたい時は R2 から *.br を消すだけ)。
+    //    ★「いま配っている元」の判定は従来の経路がエッジに焼いた元の応答から読む = 鮮度は従来とまったく同じ。
+    //      事前圧縮版もエッジに焼く(/__br/ 下・名前に中身の MD5)= 定常では R2 に当てない。
+    if (url.pathname.startsWith(BR_CACHE_PREFIX)) {
+      return new Response("Not Found", { status: 404, headers: { "strict-transport-security": HSTS } });
+    }
+    try {
+      const brTarget = pathToKey(url.pathname);
+      if (BR_KEYS.has(brTarget)) {
+        const base = new Headers();
+        base.set("content-type", contentType(brTarget));
+        base.set("cache-control", isListIndexKey(brTarget) ? INDEX_BROWSER_CACHE : cacheControl(brTarget));
+        base.set("strict-transport-security", HSTS);
+        const plan = await planBrIndex(request, env, brTarget, base, {
+          cache: caches.default,
+          origKey: new Request(url.toString(), request), // ② と同じキー = 従来の経路がエッジに焼いた元
+          origin: url.origin,
+          waitUntil: (p) => ctx.waitUntil(p),
+        });
+        if (plan) {
+          return new Response(plan.body, { status: plan.status, headers: plan.headers, encodeBody: plan.encodeBody });
+        }
+      }
+    } catch (e) {
+      console.error("BR_INDEX_FAIL", (e && e.message) || String(e)); // 失敗しても従来の経路で必ず返す
     }
 
     // ② エッジキャッシュ参照(ヒットなら R2 に当てない=Class B節約)

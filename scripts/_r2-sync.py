@@ -286,6 +286,15 @@ def main():
     json.dump(nextm, open(MANIFEST, "w", encoding="utf-8"))
     print(f"完了: put {len(to_put)} / manifest更新 {MANIFEST}")
 
+    # ★索引の事前圧縮版(2026-11-17・scripts/_index_br.py)。 元を全部置いた後に、out/ の中身と同じ MD5 の版を置く。
+    #   変わっていなければ head だけ(圧縮も PUT もしない)。 manifest には載せない(= --prune の対象外・古い版は sync_br が消す)。
+    #   失敗しても止めない(Worker は従来の配り方に戻るだけ)。
+    try:
+        from _index_br import BR_SOURCES, sync_br
+        print(sync_br(s3, a.bucket, {k: os.path.join(OUT, k) for k in BR_SOURCES if k in nextm}))
+    except Exception as _e:
+        print(f"(事前圧縮版 skip: {_e})")
+
     # ★IndexNow (2026-09-04): 変更/削除した頁URLを pending に積む。 送信は _weekly-finalize.py の
     #   edge purge 後(= エンジンが取りに来た時に旧キャッシュを掴ませない)。 失敗しても同期は止めない。
     # ★積むのは pending_add_files = **本文が変わった頁だけ**(2026-09-04 案A-2)。 全頁HTMLに

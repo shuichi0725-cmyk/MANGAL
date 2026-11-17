@@ -77,6 +77,9 @@ metadata:
 ## E. 全体
 - ヘッダー・フッターのリンク先読み = 1頁あたり18〜25本・560〜850KB(AI書評 200KB・新刊 165KB・三世代 85KB)。★想定どおり=量は問題にしない(A と同じ扱い)。
 - 配信は健全: 圧縮(ブラウザへは zstd)・ETag・304・エッジ命中・preload の二重取得なし。
+- ⏳2026-11-17 事前圧縮(brotli最高品質)を実装・**本番未適用(Worker出し直しにユーザGO待ち)**。 Worker=`workers/br-index.js`(元の隣の `<キー>.<元MD5>.br` を返す・元のETagはエッジの元の応答→無ければR2 head を60秒控え・br本体もエッジに /__br/ で焼く=定常R2ゼロ・purgeで控えも消す)。
+  置く道具=`scripts/_index_br.py`(R2の元ETag==手元MD5の時だけ置く・古い版を消す・`--status`/`--remove-all`)。 r2-sync/差分反映/機能蒸留の PUT 後に自動で呼ぶ。 手元miniflareで12項目OK。
+  fable 5.2 が Worker 部品を書いた所で利用上限で停止→Opus が仕上げ(旧案=毎回R2 head+getでエッジ素通り、を是正)。 実測: cols 本番zstd 4.81MB → br q11 3.45MB(圧縮32秒)。
 - その場圧縮は低品質(cols 4.80MB)。事前に brotli 最高品質で置けば cols 3.45 / catch 2.64 / alt 1.34 / hidden 0.63MB = 約28%減([[search_perf_hotspots_2026_08]] の残レバーと同じ・今は4本ぶん)。
 - エッジ命中の応答に `Age` が付く → ブラウザ側の `max-age`(HTML 60秒・JSON 4時間)は実質効かず毎回確認に行く。hidden は「古いのを使って裏で確認」で動く。HTML は ETag が無いので毎回取り直し。害は小さい(直すかは任意)。
 
