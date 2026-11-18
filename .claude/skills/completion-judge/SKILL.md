@@ -37,6 +37,11 @@ git add data/seeds/completion-judged.jsonl docs/production-diagnostics/completio
    → `status-corrections.yml` へ純粋追加(status=completed + year_ended=最終巻年)
 3. `python scripts/_reflect-targeted.py --only <touched> --push`
 4. NGな行はTSVから手で消す(judgedレジャーには記帳済=再浮上しない)
+5. ★**最終巻がまだ発売前の行**(2026-11-18 ユーザ裁定「発売後に適用」)は適用しない。再判定してOKなら
+   `python scripts/_completion-judge.py --approve --slugs a,b` で「承認済み」の印だけ付ける。
+   → 週次 step1 の `completion-released`(`--apply-released`)が**発売日を過ぎた週に自動で**適用+promote する(人手不要)。
+   ★「承認済み」が付くのは Opus+ が再判定した行だけ = 未承認の新しい候補は週次でも勝手に入らない。
+6. 別の経路で既に完結の頁(索引 status=completed)の行は候補TSVから外す(year_ended を上書きしないため適用しない)。
 
 ## NEVER
 - Sonnetは `--apply` を叩かない(適用=Opus+専権。ユーザ設計)

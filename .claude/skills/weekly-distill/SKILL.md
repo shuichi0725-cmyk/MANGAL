@@ -60,6 +60,9 @@ python scripts/_weekly-step1.py        # 生成器14step順次(失敗で即exit 
   **昇格コピーが無いと新規画集は永遠に出ない**。週次前に diff を確認し、検証(kana非空・yaml parse)して
   `.v2 → data/art-books` へコピー。掲載可否に迷う新規はユーザ裁定を仰いでから。
 - 生成物を commit+push。
+  ★step `completion-released`(2026-11-18)が完結を適用した週は `data/seeds/status-corrections.yml` と
+  `docs/production-diagnostics/completion-candidates.tsv` も変わる = 一緒に commit する(`git status` に出る)。
+  中身 = 「完結適用して」で承認済みにした行のうち、最終巻の発売日を過ぎた分だけ(未承認の行は触らない)。
 
 ### 2. ★preflight (= 2026-07-10 script化。手動チェックリスト全廃)
 ```

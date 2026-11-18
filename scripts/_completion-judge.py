@@ -13,6 +13,9 @@ modes:
   --backlog --limit N  連載中全頁のbacklog一括スイープ(resume=judgedレジャー。caption無しも記帳=一回きり)
   --collect          Sonnet記入済みworksheet → completion-candidates.tsv へ(true行のみ)+judged記帳
   --apply [--slugs a,b|--all]  候補TSV → status-corrections.yml へ純粋追加(既存キーskip)+touched出力
+  --approve --slugs a,b        (Opus+)再判定は済んだが**最終巻がまだ発売前**の行に「承認済み」の印だけ付ける(適用しない)
+  --apply-released [--out F]   印の付いた行のうち**発売日を過ぎた分だけ**適用し、反映する SRC stem を F に書く
+                               (= 週次 step1 の completion-released が毎週自動で呼ぶ。2026-11-18 ユーザ裁定「発売後に適用・週次で自動」)
   --stats            現在地
 
 caption源: ①preorders-latest-full(harvest) ②rakuten-isbn-delta.jsonl(cache) ③live楽天(1.2s/req・429即中断)。
@@ -223,7 +226,7 @@ def mode_collect(args):
 def mode_apply(args):
     if not os.path.exists(CAND):
         print("候補TSV無し"); return
-    rows = [l.rstrip("\n").split("\t") for l in open(CAND, encoding="utf-8") if l.strip()][1:]
+    rows = _read_cand()  # ★引用の中の改行で割れた行も1行に戻して読む(旧=IndexErrorで適用が止まった 2026-11-18)
     sel = None if args.all else {s.strip() for s in (args.slugs or "").split(",") if s.strip()}
     if not args.all and not sel:
         print("--apply には --all か --slugs a,b を指定(Opus+の再判定を経てから)"); return
@@ -251,6 +254,85 @@ def mode_apply(args):
         print("次: python scripts/_reflect-targeted.py --only " + ",".join(touched) + " --push")
 
 
+APPROVED = "承認済み(発売後に週次で自動適用)"
+
+
+def _read_cand():
+    """候補TSV(見出し除く)。 引用の中の改行で割れた行は前の行につなぐ(2026-11-18 着物ちゃんとロリータちゃん型)。"""
+    out = []
+    for l in open(CAND, encoding="utf-8").read().split("\n")[1:]:
+        if not l.strip():
+            continue
+        if out and len(l.split("\t")) < 3:
+            out[-1] = (out[-1] + " " + l.strip()).rstrip("\t")
+            continue
+        out.append(l)
+    rows = [r.split("\t") for r in out]
+    return [r + [""] * (6 - len(r)) for r in rows]
+
+
+def _write_cand(rows):
+    with open(CAND, "w", encoding="utf-8", newline="\n") as f:
+        f.write("slug\tvol\tisbn\tdate\tquote\tnote\n")
+        for r in rows:
+            f.write("\t".join(r[:6]) + "\n")
+
+
+def mode_approve(args):
+    sel = {s.strip() for s in (args.slugs or "").split(",") if s.strip()}
+    if not sel:
+        print("--approve には --slugs a,b を指定(Opus+の再判定を経てから)"); return
+    rows = _read_cand()
+    n = 0
+    for r in rows:
+        if r[0] in sel:
+            r[5] = APPROVED
+            n += 1
+    _write_cand(rows)
+    print(f"承認の印 {n}件(適用はしない。発売後に --apply-released が拾う)")
+
+
+def _src_stem(slug):
+    """公開 slug → manga.v2 の SRC stem(promote --only に渡す名前)。 予約頁は seed の名前。"""
+    if os.path.exists(os.path.join(ROOT, "data", "manga.v2", slug + ".yml")):
+        return slug
+    if os.path.exists(os.path.join(ROOT, "data", "seeds", "preorder-pages", slug + ".yml")):
+        return slug
+    import subprocess
+    pat = "^slug: ['\"]?" + re.escape(slug) + "['\"]?$"
+    r = subprocess.run(["git", "grep", "-l", "-E", pat, "--", "data/manga.v2"],
+                       cwd=ROOT, capture_output=True, text=True, encoding="utf-8")
+    hits = [os.path.basename(x)[:-4] for x in r.stdout.split() if x.endswith(".yml")]
+    return hits[0] if hits else slug
+
+
+def mode_apply_released(args):
+    out = args.out or os.path.join(WORK, "released-touched.txt")
+    rows = _read_cand() if os.path.exists(CAND) else []
+    doc = yaml.safe_load(open(CORR, encoding="utf-8")) or {"corrections": {}}
+    corr = doc.setdefault("corrections", {})
+    touched, kept = [], []
+    for r in rows:
+        slug, vol, isbn, date, quote, note = r[:6]
+        if note != APPROVED or not date or date[:10] > TODAY:
+            kept.append(r); continue                     # 未承認(=Opus+の再判定待ち)と発売前は残す
+        if slug in corr:
+            print(f"  既存キーskip: {slug}"); continue
+        y = re.match(r"(\d{4})", date)
+        corr[slug] = {"status": "completed", "year_ended": int(y.group(1)) if y else None,
+                      "source": "rakuten-caption", "evidence": quote[:120], "vol": int(vol) if str(vol).isdigit() else vol,
+                      "added_at": TODAY}
+        touched.append(slug)
+    if touched:
+        yaml.dump(doc, open(CORR, "w", encoding="utf-8"), allow_unicode=True, sort_keys=True, width=200)
+        _write_cand(kept)
+    stems = [_src_stem(s) for s in touched]
+    with open(out, "w", encoding="utf-8") as f:
+        f.write("".join(s + "\n" for s in stems))       # ★空なら空ファイル(呼び手は空で promote を呼ばない)
+    waiting = sum(1 for r in kept if r[5] == APPROVED)
+    print(f"発売済みの承認行を適用 {len(touched)}件 / 発売待ち {waiting}件 / 未承認 {len(kept) - waiting}件 → {out}")
+
+
 def mode_stats(args):
     done = load_ledger()
     from collections import Counter
@@ -270,6 +352,9 @@ ap.add_argument("--limit", type=int, default=300)
 ap.add_argument("--live", type=int, default=100, help="live楽天照会の上限/回")
 ap.add_argument("--slugs")
 ap.add_argument("--all", action="store_true")
+ap.add_argument("--approve", action="store_true")
+ap.add_argument("--apply-released", dest="apply_released", action="store_true")
+ap.add_argument("--out")
 a = ap.parse_args()
 if a.queue:
     mode_queue(a)
@@ -279,5 +364,9 @@ elif a.collect:
     mode_collect(a)
 elif a.apply:
     mode_apply(a)
+elif a.approve:
+    mode_approve(a)
+elif a.apply_released:
+    mode_apply_released(a)
 else:
     mode_stats(a)

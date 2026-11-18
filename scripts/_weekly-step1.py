@@ -15,6 +15,7 @@
   - cover-refresh: 終了後 .cache/cover-refresh-touched.txt が非空なら
     promote --only-file を自動連鎖(差し替え書影を頁へ反映してから索引を焼く)
   - cover-unreflected: 終了後 .cache/cover-unreflected-slugs.txt が非空なら同じく promote を自動連鎖
+  - completion-released: 承認済みの完結候補のうち最終巻が発売された分を適用 → 非空なら promote を自動連鎖
 """
 from __future__ import annotations
 import argparse
@@ -54,6 +55,11 @@ STEPS = [
     #   気づいて索引3本+導出4本を焼き直した(16頁)。shinkan と索引は頁の書影を焼き込むので、その前に機械で反映する。
     ("cover-unreflected", ["_cover-override-unreflected.py", "--out", ".cache/cover-unreflected-slugs.txt"],
      "cover-override seed にあって頁に無い書影の算出(~10秒。非空→promote自動連鎖。shinkan・索引より前)"),
+    # ★2026-11-18 ユーザ裁定「発売後に適用・週次で自動」: 「完結適用して」で Opus+ が再判定し、最終巻が発売前だった行に
+    #   「承認済み」の印を付けておく(_completion-judge.py --approve)。 毎週ここで発売日を過ぎた分だけ status-corrections へ入れ、
+    #   頁を再生成してから shinkan・索引を焼く(未承認の行=再判定待ちは触らない)。
+    ("completion-released", ["_completion-judge.py", "--apply-released", "--out", ".cache/completion/released-touched.txt"],
+     "完結: 承認済みで最終巻が発売された行を適用(~数秒。非空→promote自動連鎖。shinkan・索引より前)"),
     ("shinkan",           ["_gen-shinkan-data.py"],
      "/shinkan 月別データ(カレンダー・書影refreshの後)"),
     ("corner-stocks",     ["_gen-corner-stocks.py"], "三世代/featured stock"),
@@ -187,6 +193,14 @@ def main() -> None:
                 run_step("cover-unreflected-promote",
                          ["_promote-bulk-v2.py", "--only-file", str(unref)])
                 print(f"  (seed の書影が未反映だった {len(slugs)} 頁を再生成)")
+        if name == "completion-released":
+            # ★空の --only-file で promote を呼ばない(空--only=全消し事故の型)
+            rel = ROOT / ".cache" / "completion" / "released-touched.txt"
+            slugs = [l for l in rel.read_text(encoding="utf-8").splitlines() if l.strip()] if rel.exists() else []
+            if slugs:
+                run_step("completion-released-promote",
+                         ["_promote-bulk-v2.py", "--only-file", str(rel)])
+                print(f"  (発売された最終巻で完結にした {len(slugs)} 頁を再生成)")
 
     print(f"\n{'=' * 70}\n✓ 手順1 完了。次: 生成物commit+push → art-books昇格diff確認 → "
           f"python scripts/_weekly-preflight.py --fix")
