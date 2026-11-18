@@ -62,6 +62,11 @@ def main():
                     help="add+commitまでで止め、pushしない(日次/週次で途中反映を溜め、最後に1回だけpush=追いpush回避)")
     ap.add_argument("-m", "--msg", default="targeted反映")
     ap.add_argument("--no-preview", action="store_true", help="preview同期をskip")
+    # ★2026-11-18: 並走中のほかの柱(完結判定・仮書影など)が data/seeds に書きかけた行を、この反映のコミットに巻き込まない。
+    #   指定すると data/seeds まるごとではなく、ここに挙げた seed だけ add する(統合台帳 intake-manifest は常に add)。
+    #   アイドル運転の柱⑥後段(アニメ化フラグ)は --seeds data/seeds/anime-season-links.jsonl で呼ぶ(skill idle-run)。
+    ap.add_argument("--seeds", default="",
+                    help="commit する seed をカンマ区切りで限定(省略 = data/seeds まるごと = 従来どおり)")
     a = ap.parse_args()
     only = [s.strip() for s in a.only.split(",") if s.strip()]
     if a.only_file:
@@ -381,7 +386,8 @@ def main():
         # ★manga-alt-index/manga-list-head も索引出力(追跡対象)= addリスト漏れで未commitのまま残る事故
         #   (2026-07-27 日次蒸留で実踏)。list-index/search-index はgitignore(巨大)なので -f せず、
         #   ignored混在で git add が exit 1 を返しても他パスは add 済み = 続行してよい。
-        run(["git", "add", ".preview-data", "data/manga-catch-index.json", "data/seeds",
+        seed_paths = ([x.strip() for x in a.seeds.split(",") if x.strip()] + ["data/seeds/intake-manifest"]) if a.seeds else ["data/seeds"]
+        run(["git", "add", ".preview-data", "data/manga-catch-index.json", *seed_paths,
              "data/slug-aliases.yml", "public/_redirects",
              "data/manga-alt-index.json", "data/manga-list-head.json",
              "data/manga-list-index.json",

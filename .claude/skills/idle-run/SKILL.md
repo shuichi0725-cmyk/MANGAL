@@ -139,7 +139,9 @@ python scripts/_kobo-color-harvest.py --delta   # ⑪カラー版差分(Kobo新�
   ★⑥後段=**アニメ化フラグ差分**(=`_anime-flag-delta.py` 2026-08-11新設。ユーザ指摘「anime_adaptedが初回から更新されていない」の恒久対策):
   ⑥完走後に `python scripts/_anime-flag-delta.py` → dump+deltaのrelations(ADAPTATION×ANIME)を再計算し
   enrichマップへ anime:true をパッチ+未フラグ頁を `.cache/anime-flag-worklist.txt` に列挙。
-  worklistが出たら `_reflect-targeted.py --only <カンマ結合> --push -m "アニメ化フラグ差分適用N頁"` で適用
+  worklistが出たら `_reflect-targeted.py --only <カンマ結合> --seeds data/seeds/anime-season-links.jsonl --push -m "アニメ化フラグ差分適用N頁"` で適用
+  ★`--seeds` 必須(2026-11-18): 付けないと data/seeds まるごとを add し、並走中の④完結判定・⑩仮書影が書きかけた行まで
+  このコミットに入る(11/18 実踏 = 「アニメ化フラグ3頁」に完結判定248行・書影16行が混入。中身は無事だが見出しと中身が食い違う)。
   (多い時は~400頁/バッチに分割=コマンド行長対策)。判定は機械的(検証済みリンク×明示ADAPTATION関係)=Sonnet適用可。
   ★false化はしない(頁true・dump無の逆方向は報告のみ=実写誤フラグ/AniList関係欠落の混在層)。初回2026-08-11: 821頁適用。
 ④**完結判定backlogスイープ**(=skill completion-judge。`--backlog --limit 300`→worksheet記入(明示文言のみtrue)→`--collect`→commit。
