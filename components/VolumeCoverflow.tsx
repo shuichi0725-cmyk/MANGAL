@@ -149,10 +149,6 @@ export default function VolumeCoverflow({
   const n = vols.length;
   const init = Math.max(0, vols.findIndex((v) => v.number === 1));
   const [sel, setSel] = useState(init);
-  // ★「電子書籍で買う」の箱そのもののタップ = Kindle ボタンを押したのと同じ挙動にする
-  //   (2026-09-07 ユーザ要望)。実体のアンカーを click() するので、
-  //   将来 Kindle 側の挙動を変えても箱が自動で追従する(URL/属性の二重管理をしない)。
-  const kindleRef = useRef<HTMLAnchorElement>(null);
   const scroller = useRef<HTMLDivElement>(null);
 
   const loop = n > LOOP_MIN;
@@ -403,10 +399,11 @@ export default function VolumeCoverflow({
           href={`https://booklive.jp/bviewer/s/?cid=${bl.id}_${String(cur.number).padStart(3, "0")}`}
           target="_blank"
           rel="nofollow sponsored noopener"
-          className="spring-press mt-2.5 flex w-full items-center justify-center gap-2 rounded-full border-[1.6px] border-[#16a34a] bg-white py-2.5 text-[14px] font-extrabold text-[#16a34a]"
+          className="buy3d is-try mt-2.5 flex h-[46px] w-full gap-2 text-[14px]"
         >
+          {/* ★2026-11-19 B1「色の立体」に統一(旧=白地+緑枠) */}
           📖 {n > 1 ? `第${cur.number}巻を試し読み` : "試し読み"}
-          <span className="text-[10.5px] font-bold opacity-90">無料・BookLive</span>
+          <small>無料・BookLive</small>
         </a>
       )}
 
@@ -446,11 +443,11 @@ export default function VolumeCoverflow({
                   </div>
                   <div className="mt-2 grid grid-cols-3 gap-2">
                     <a href={vl.rakuten} onClick={(e) => openStoreApp(e, vl.rakuten, "rakuten")} target="_blank" rel="noopener noreferrer"
-                       className="spring-press rounded-full bg-[#bf0000] py-1.5 text-center text-[12px] font-bold text-white">楽天</a>
+                       className="buy3d is-rk is-sm h-[32px] text-[12px]">楽天</a>
                     <a href={vl.yahoo} target="_blank" rel="noopener noreferrer"
-                       className="spring-press rounded-full bg-[#ff0033] py-1.5 text-center text-[12px] font-bold text-white">Yahoo!</a>
+                       className="buy3d is-yh is-sm h-[32px] text-[12px]">Yahoo!</a>
                     <a href={vl.amazon} onClick={(e) => openStoreApp(e, vl.amazon, "amazon")} target="_blank" rel="noopener noreferrer"
-                       className="spring-press rounded-full bg-[#e69500] py-1.5 text-center text-[12px] font-bold text-white">Amazon</a>
+                       className="buy3d is-a is-sm h-[32px] text-[12px]">Amazon</a>
                   </div>
                 </div>
               );
@@ -459,53 +456,39 @@ export default function VolumeCoverflow({
         </div>
       )}
 
-      {/* カート(据え置き) ★[PR]表記=景表法ステマ規制対応(アフィリエイトリンクを含むことの明示) */}
-      <div className="mt-3 flex items-center justify-between">
-        <span className="text-[10px] text-ink/40">[PR] 店舗リンクにはアフィリエイト広告を含みます</span>
-      </div>
+      {/* ★2026-11-19 ユーザ裁定「全箇所B1形式」: 3段(試し読み・紙・電子)を同じ立体ボタンにそろえ、段の上に小見出し。
+          旧 = 色の丸ボタン + 青い箱に白いボタン(箱ごとタップ)。 行き先・アプリ/ブラウザの開き方は旧と同じ。 */}
       {/* 紙の店(楽天/Yahoo!/Amazon)= 電子書籍のみの巻では出さない(紙が無いので品切れ・別商品に見える) */}
       {!ebookOnly && (
-        <div className="mt-1 grid grid-cols-3 gap-2">
-          <a href={links.rakuten} onClick={(e) => openStoreApp(e, links.rakuten, "rakuten")} target="_blank" rel="noopener noreferrer"
-             className="spring-press rounded-full bg-[#bf0000] py-2 text-center text-sm font-bold text-white">楽天</a>
-          <a href={links.yahoo} target="_blank" rel="noopener noreferrer"
-             className="spring-press rounded-full bg-[#ff0033] py-2 text-center text-sm font-bold text-white">Yahoo!</a>
-          <a href={links.amazon} onClick={(e) => openStoreApp(e, links.amazon, "amazon")} target="_blank" rel="noopener noreferrer"
-             className="spring-press rounded-full bg-[#e69500] py-2 text-center text-sm font-bold text-white">Amazon</a>
-        </div>
+        <>
+          <div className="buy-lab text-ink/55">紙の本で買う</div>
+          <div className="grid grid-cols-3 gap-2">
+            <a href={links.rakuten} onClick={(e) => openStoreApp(e, links.rakuten, "rakuten")} target="_blank" rel="noopener noreferrer"
+               className="buy3d is-rk h-[46px] text-[14px]">楽天ブックス</a>
+            <a href={links.yahoo} target="_blank" rel="noopener noreferrer"
+               className="buy3d is-yh h-[46px] text-[14px]">Yahoo!</a>
+            <a href={links.amazon} onClick={(e) => openStoreApp(e, links.amazon, "amazon")} target="_blank" rel="noopener noreferrer"
+               className="buy3d is-a h-[46px] text-[14px]">Amazon</a>
+          </div>
+        </>
       )}
-      {/* ★箱ごとタップ可(2026-09-07): 押すと Kindle ボタンと同一の遷移。
-          <a> の入れ子は不正HTMLなので、箱は role="link" の div にして実アンカーを click() する。
-          内側の2ボタンは stopPropagation = 楽天Kobo を押した時に Kindle まで開かない。 */}
-      <div
-        role="link"
-        tabIndex={0}
-        aria-label={`${n > 1 ? `第${cur.number}巻を` : ""}Kindleで見る(${kindleAsin || amz.dp ? "ブラウザで開きます" : "Amazonで探します"})`}
-        onClick={() => kindleRef.current?.click()}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            kindleRef.current?.click();
-          }
-        }}
-        className="spring-press mt-2 cursor-pointer rounded-2xl px-5 py-3 text-white shadow-soft"
-        style={{ background: "#3b82f6" }}
-      >{/* 青5(2026-08-06 ユーザ確定。旧=紫グラデ) */}
-        <span className="block text-[15px] font-bold">📱 電子書籍で買う</span>
-        <span className="block text-[11px] text-white/80">
+      <div className="buy-lab text-ink/55">
+        電子書籍で買う
+        <small>
           {n > 1 ? `第${cur.number}巻を` : ""}
           {kindleAsin || amz.dp ? "ブラウザで開きます" : "Amazonで探します"}
           {!kindleAsin && amz.dp ? "(Kindleは商品ページで「Kindle版」を選択)" : ""}
-        </span>
-        <div className="mt-2 grid grid-cols-2 gap-2">
-          <a ref={kindleRef} href={ebook.kindle} target="_blank" rel="noopener noreferrer"
-             onClick={(e) => e.stopPropagation()}
-             className="rounded-full bg-white/95 py-1.5 text-center text-[12px] font-bold text-[#e69500]">Kindle</a>
-          <a href={ebook.kobo} target="_blank" rel="noopener noreferrer"
-             onClick={(e) => e.stopPropagation()}
-             className="rounded-full bg-white/95 py-1.5 text-center text-[12px] font-bold text-[#bf0000]">楽天Kobo</a>
-        </div>
+        </small>
       </div>
+      <div className="grid grid-cols-2 gap-2">
+        <a href={ebook.kindle} target="_blank" rel="noopener noreferrer"
+           aria-label={`${n > 1 ? `第${cur.number}巻を` : ""}Kindleで見る(${kindleAsin || amz.dp ? "ブラウザで開きます" : "Amazonで探します"})`}
+           className="buy3d is-k h-[46px] text-[14px]">Kindle</a>
+        <a href={ebook.kobo} target="_blank" rel="noopener noreferrer"
+           className="buy3d is-kb h-[46px] text-[14px]">楽天Kobo</a>
+      </div>
+      {/* カート(据え置き) ★[PR]表記=景表法ステマ規制対応(アフィリエイトリンクを含むことの明示) */}
+      <p className="mt-2 text-[10px] text-ink/40">[PR] 店舗リンクにはアフィリエイト広告を含みます</p>
     </div>
   );
 }

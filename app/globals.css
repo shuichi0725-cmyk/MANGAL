@@ -334,3 +334,55 @@ input[type="search"]::-webkit-search-decoration {
 @media (prefers-reduced-motion: reduce) {
   .compass-needle { animation: none; }
 }
+
+/* ============================================================
+   ★買うボタン B1「色の立体」(2026-11-19 ユーザ裁定「全箇所B1形式で置き換えて」)。
+   上から光るグラデ+下に濃い色の厚み(--t)。 押すと厚みのぶん沈む。
+   店の色は is-k(Kindle)/is-a(Amazon)/is-rk(楽天)/is-yh(Yahoo!)/is-kb(楽天Kobo)/is-try(試し読み)。
+   大きさ(padding/font/高さ)は呼び側の utility か各頁の CSS で決める(= components 層に置き utility が勝つ)。
+   ★spring-press と併用しない(transform が競合する。 沈みはこちらで持つ)。
+   ============================================================ */
+@layer components {
+  .buy3d {
+    --c: #3b82f6;
+    --d: #1d4fae;
+    --t: 3px;
+    --r: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    white-space: nowrap;
+    font-weight: 800;
+    color: #fff;
+    text-decoration: none;
+    border-radius: var(--r);
+    background: var(--c);
+    background: linear-gradient(180deg, color-mix(in srgb, var(--c) 78%, #fff) 0%, var(--c) 48%, color-mix(in srgb, var(--c) 86%, #000) 100%);
+    box-shadow: 0 var(--t) 0 var(--d), 0 calc(var(--t) + 2px) 6px #0009, inset 0 1px 0 #ffffff59;
+    text-shadow: 0 1px 0 #0005;
+    margin-bottom: var(--t);
+    transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .buy3d:active {
+    transform: translateY(var(--t));
+    box-shadow: 0 0 0 var(--d), 0 1px 3px #0008, inset 0 1px 0 #ffffff40;
+  }
+  .buy3d:focus-visible {
+    outline: 2px solid #f2f2ec;
+    outline-offset: 2px;
+  }
+  .buy3d.is-k { --c: #3b82f6; --d: #1d4fae; }
+  .buy3d.is-a { --c: #e69500; --d: #955f00; color: #1a1205; text-shadow: 0 1px 0 #fff4; }
+  .buy3d.is-rk { --c: #bf0000; --d: #780000; }
+  .buy3d.is-yh { --c: #ff0033; --d: #a50020; }
+  .buy3d.is-kb { --c: #d6222a; --d: #86131a; }
+  .buy3d.is-try { --c: #16a34a; --d: #0d6b30; }
+  /* 小さいボタン(新刊の行・升目・ランキング・版の行)= 厚み2px・角5px */
+  .buy3d.is-sm { --t: 2px; --r: 5px; }
+  .buy3d.is-pill { --r: 999px; }
+  .buy3d small { font-size: 10.5px; font-weight: 700; opacity: 0.9; }
+  .buy-lab { margin: 10px 2px 5px; font-size: 11px; font-weight: 700; color: color-mix(in srgb, currentColor 60%, transparent); }
+  .buy-lab small { margin-left: 4px; font-weight: 400; opacity: 0.75; }
+}

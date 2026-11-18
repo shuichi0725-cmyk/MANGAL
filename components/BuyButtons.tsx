@@ -37,16 +37,17 @@ export default function BuyButtons({
       ? "h-[22px] flex-1 text-[10px]"
       : variant === "mini"
         ? "h-[18px] px-1.5 text-[9.5px]"
-        : "px-2.5 py-0.5 text-[11px]";
+        : "h-[22px] px-2.5 text-[11px]";
   const box = variant === "tile" ? "mt-auto flex gap-[3px] pt-1" : "flex items-center gap-1.5";
-  const base = `spring-press inline-flex items-center justify-center whitespace-nowrap font-extrabold text-white ${size}`;
+  // ★2026-11-19 ユーザ裁定「全箇所B1形式」= 色の立体(globals.css .buy3d)。 小さいので厚み2px(is-sm)
+  const base = `buy3d is-sm ${size}`;
   return (
     <div className={`${box} ${className}`}>
-      <a href={buy.kindle} target="_blank" rel="nofollow sponsored noopener" aria-label={`${title} をKindleで探す`} className={`${base} bg-[#3b82f6]`}>
+      <a href={buy.kindle} target="_blank" rel="nofollow sponsored noopener" aria-label={`${title} をKindleで探す`} className={`${base} is-k`}>
         {kindleLabel}
       </a>
       {!kindleOnly && (
-        <a href={buy.paper} target="_blank" rel="nofollow sponsored noopener" aria-label={`${title} をAmazonで探す`} className={`${base} bg-[#e69500]`}>
+        <a href={buy.paper} target="_blank" rel="nofollow sponsored noopener" aria-label={`${title} をAmazonで探す`} className={`${base} is-a`}>
           Amazon
         </a>
       )}

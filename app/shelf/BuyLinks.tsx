@@ -26,10 +26,10 @@ export default function BuyLinks({
   return (
     <span className="shelf-buy">
       {label && <span className="shelf-buy-label">{label}</span>}
-      <a className="shelf-buy-btn is-k" href={buy.kindle} target="_blank" rel="noopener nofollow sponsored" aria-label={`${what} をKindleで探す`}>
+      <a className="shelf-buy-btn buy3d is-k" href={buy.kindle} target="_blank" rel="noopener nofollow sponsored" aria-label={`${what} をKindleで探す`}>
         Kindle
       </a>
-      <a className="shelf-buy-btn is-a" href={buy.paper} target="_blank" rel="noopener nofollow sponsored" aria-label={`${what} をAmazon(紙)で探す`}>
+      <a className="shelf-buy-btn buy3d is-a" href={buy.paper} target="_blank" rel="noopener nofollow sponsored" aria-label={`${what} をAmazon(紙)で探す`}>
         Amazon
       </a>
     </span>

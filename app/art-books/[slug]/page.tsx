@@ -125,9 +125,10 @@ export default async function ArtBookDetailPage({
                       href={href}
                       target="_blank"
                       rel="nofollow sponsored noopener"
-                      className="shrink-0 text-xs font-semibold text-[var(--color-accent)] hover:underline"
+                      className="buy3d is-a is-sm h-[26px] shrink-0 px-3 text-xs"
                     >
-                      Amazonで見る →
+                      {/* ★2026-11-19 B1「色の立体」(旧 = 文字リンク) */}
+                      Amazonで見る ›
                     </a>
                   </li>
                 );

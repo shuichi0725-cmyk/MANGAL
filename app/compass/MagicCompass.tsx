@@ -2348,10 +2348,10 @@ export default function MagicCompass({
                     <a className="cp-acts-detail" href={detailHref(sheetItem.slug)} onClick={saveResume}>
                       詳細 ›
                     </a>
-                    <a className="cp-acts-buy k" href={buy.kindle} target="_blank" rel="noopener noreferrer sponsored">
+                    <a className="cp-acts-buy buy3d is-k" href={buy.kindle} target="_blank" rel="noopener noreferrer sponsored">
                       Kindle
                     </a>
-                    <a className="cp-acts-buy a" href={buy.paper} target="_blank" rel="noopener noreferrer sponsored">
+                    <a className="cp-acts-buy buy3d is-a" href={buy.paper} target="_blank" rel="noopener noreferrer sponsored">
                       Amazon
                     </a>
                   </div>
@@ -2403,10 +2403,10 @@ export default function MagicCompass({
             </a>
             <div className="cp-buytabs" style={{ bottom: sheetH }}>
               <span className="cp-buytabs-pr">[PR]</span>
-              <a className="cp-buytab k" href={buy.kindle} target="_blank" rel="noopener noreferrer sponsored">
+              <a className="cp-buytab buy3d is-k" href={buy.kindle} target="_blank" rel="noopener noreferrer sponsored">
                 Kindle
               </a>
-              <a className="cp-buytab a" href={buy.paper} target="_blank" rel="noopener noreferrer sponsored">
+              <a className="cp-buytab buy3d is-a" href={buy.paper} target="_blank" rel="noopener noreferrer sponsored">
                 Amazon
               </a>
             </div>
