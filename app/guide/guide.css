@@ -135,7 +135,7 @@
 .gd .ck-btns span{border:2.5px solid #111;font-weight:900;font-size:12px;padding:2px 11px;box-shadow:3px 3px 0 #111;line-height:1.6}
 .gd .ck-btns .dt{background:#d9f843;color:#111}.gd .ck-btns .kd{background:#3b82f6;color:#fff}.gd .ck-btns .az{background:#e69500;color:#fff}
 /* ★2026-11-19 買うボタン B1「色の立体」に合わせる(羅針盤 .ck-buy と同じ見た目) */
-.gd .ck-btns .kd,.gd .ck-btns .az{border-width:2px;border-radius:6px;box-shadow:0 3px 0 #111,inset 0 1px 0 #ffffff59;text-shadow:0 1px 0 #0005}
+.gd .ck-btns .kd,.gd .ck-btns .az{min-width:6.2em;text-align:center;border-width:2px;border-radius:6px;box-shadow:0 3px 0 #111,inset 0 1px 0 #ffffff59;text-shadow:0 1px 0 #0005}
 .gd .ck-btns .kd{background:linear-gradient(180deg,#6aa1f8,#3b82f6 48%,#3370d4)}.gd .ck-btns .az{background:linear-gradient(180deg,#eeb043,#e69500 48%,#c68000);color:#1a1205;text-shadow:0 1px 0 #fff4}
 .gd .ck-btns .cl{border:0;box-shadow:none;color:#555;font-weight:400;text-decoration:underline;font-size:11.5px}
 .gd .k-step{position:absolute;left:10px;right:10px;bottom:8px;height:20px;font-size:11px;color:#ddd;z-index:11}

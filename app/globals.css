@@ -382,6 +382,9 @@ input[type="search"]::-webkit-search-decoration {
   /* 小さいボタン(新刊の行・升目・ランキング・版の行)= 厚み2px・角5px */
   .buy3d.is-sm { --t: 2px; --r: 5px; }
   .buy3d.is-pill { --r: 999px; }
+  /* ★Kindle・Amazon の2つ並びは同じ幅(= 長い方 Amazon に合わせる。2026-11-19 ユーザ要望)。
+     inline-grid の 1fr 列 = 中身の一番広いボタンの幅で全列そろう */
+  .buy-pair { display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 6px; align-items: start; }
   .buy3d small { font-size: 10.5px; font-weight: 700; opacity: 0.9; }
   .buy-lab { margin: 10px 2px 5px; font-size: 11px; font-weight: 700; color: color-mix(in srgb, currentColor 60%, transparent); }
   .buy-lab small { margin-left: 4px; font-weight: 400; opacity: 0.75; }

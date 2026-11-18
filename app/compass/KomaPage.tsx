@@ -108,12 +108,14 @@ export default function KomaPage({
             <a className="ck-detail" href={href} onClick={onDetail}>
               詳細 ›
             </a>
-            <a className="ck-buy buy3d is-k" href={buy.kindle} target="_blank" rel="noopener noreferrer sponsored">
-              Kindle
-            </a>
-            <a className="ck-buy buy3d is-a" href={buy.paper} target="_blank" rel="noopener noreferrer sponsored">
-              Amazon
-            </a>
+            <span className="buy-pair ck-pair">
+              <a className="ck-buy buy3d is-k" href={buy.kindle} target="_blank" rel="noopener noreferrer sponsored">
+                Kindle
+              </a>
+              <a className="ck-buy buy3d is-a" href={buy.paper} target="_blank" rel="noopener noreferrer sponsored">
+                Amazon
+              </a>
+            </span>
             <button type="button" className="ck-close" onClick={onClose}>
               閉じる
             </button>

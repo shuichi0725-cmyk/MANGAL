@@ -38,7 +38,8 @@ export default function BuyButtons({
       : variant === "mini"
         ? "h-[18px] px-1.5 text-[9.5px]"
         : "h-[22px] px-2.5 text-[11px]";
-  const box = variant === "tile" ? "mt-auto flex gap-[3px] pt-1" : "flex items-center gap-1.5";
+  // tile = 升目の幅いっぱい2等分(flex-1)/ row・mini = 2つを同じ幅(長い方に合わせる = .buy-pair)
+  const box = variant === "tile" ? "mt-auto flex gap-[3px] pt-1" : kindleOnly ? "flex items-center" : "buy-pair";
   // ★2026-11-19 ユーザ裁定「全箇所B1形式」= 色の立体(globals.css .buy3d)。 小さいので厚み2px(is-sm)
   const base = `buy3d is-sm ${size}`;
   return (

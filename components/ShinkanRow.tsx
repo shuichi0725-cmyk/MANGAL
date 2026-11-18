@@ -53,12 +53,14 @@ export function ShinkanRow({ it, known }: { it: ShinkanItem; known: boolean }) {
               詳細
             </Link>
           )}
-          <a href={buy.kindle} target="_blank" rel="nofollow sponsored noopener" className="buy3d is-k is-sm h-[22px] px-2.5 text-[11px]">
-            Kindle
-          </a>
-          <a href={buy.paper} target="_blank" rel="nofollow sponsored noopener" className="buy3d is-a is-sm h-[22px] px-2.5 text-[11px]">
-            Amazon
-          </a>
+          <span className="buy-pair">
+            <a href={buy.kindle} target="_blank" rel="nofollow sponsored noopener" className="buy3d is-k is-sm h-[22px] px-2.5 text-[11px]">
+              Kindle
+            </a>
+            <a href={buy.paper} target="_blank" rel="nofollow sponsored noopener" className="buy3d is-a is-sm h-[22px] px-2.5 text-[11px]">
+              Amazon
+            </a>
+          </span>
         </div>
       </div>
     </div>

@@ -2403,12 +2403,14 @@ export default function MagicCompass({
             </a>
             <div className="cp-buytabs" style={{ bottom: sheetH }}>
               <span className="cp-buytabs-pr">[PR]</span>
-              <a className="cp-buytab buy3d is-k" href={buy.kindle} target="_blank" rel="noopener noreferrer sponsored">
-                Kindle
-              </a>
-              <a className="cp-buytab buy3d is-a" href={buy.paper} target="_blank" rel="noopener noreferrer sponsored">
-                Amazon
-              </a>
+              <span className="buy-pair cp-buypair">
+                <a className="cp-buytab buy3d is-k" href={buy.kindle} target="_blank" rel="noopener noreferrer sponsored">
+                  Kindle
+                </a>
+                <a className="cp-buytab buy3d is-a" href={buy.paper} target="_blank" rel="noopener noreferrer sponsored">
+                  Amazon
+                </a>
+              </span>
             </div>
             </>
           );
