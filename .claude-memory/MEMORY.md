@@ -76,6 +76,7 @@
 - [ISBN/巻数是正の進捗](data_quality_cleanup_state.md)
 - [⏳本番待ち台帳(inflight)](inflight_state_2026_09_01.md)
 - [⏳本棚の改善4点(実装済=本番待ち・配色C適用・レイアウトは今度)](shelf_upgrade_2026_11_17.md)
+- [⏳買うボタン=全箇所B1「色の立体」.buy3d(本番は次の週次)](buy_button_b1_unified.md)
 - [⏳先読み・キャッシュの調査11/16(先読みは想定どおり・実機では三カ所とも1〜3秒=急ぎなし・羅針盤の控え不具合2と見えない周りの本は11/17に直した=本番待ち・索引の事前圧縮も実装済=週次+Worker出し直し待ち・残りは任意の掃除)](prefetch_cache_audit_2026_11_16.md)
 - [使い方/guide=本番公開済・語彙/UI変更で写真撮り直し](usage_guide_page.md)
 - [⏳電子書籍ストア一覧](ebook_store_sheet_homework.md)
