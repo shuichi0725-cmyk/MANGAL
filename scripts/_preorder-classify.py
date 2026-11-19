@@ -127,6 +127,18 @@ def auth_is_publisher(r):
     return bool(auths) and bool(pub) and all(norm(a) == pub for a in auths)
 
 
+def auth_is_kana_reading(r):
+    """★楽天の author がカタカナのヨミだけ(2026-11-19 うちの弟どもがすみません16=「オザキ アキラ」/
+    ハボウの轍8=「ナガテ ユカ」/ わたしが恋人に…11=「むっしゅ/みかみ てれん」)。発売前の楽天は著者を漢字でなく
+    ヨミで登録することがあり、頁の著者(尾崎あきら)と1人も重ならず続巻が途中巻(ex_mid)の保留に埋もれていた。
+    判定=著者名の過半がカタカナ(+空白・中黒)だけ。★④の緩和一致(候補1件+巻連続)でだけ免除に使う。"""
+    auths = [x.strip() for x in re.split(r"[/／,、;；]", str(r.get("author") or "")) if x.strip()]
+    if not auths:
+        return False
+    kk = [a for a in auths if re.fullmatch(r"[ァ-ヶー\s　・]+", a)]
+    return len(kk) * 2 > len(auths)
+
+
 # ★scope外ゲート(2026-07-06 ユーザ指摘=特装版/アンソロ/N巻誤1巻化): これらは新作1巻(new1a/b)にしない
 import re as _re
 SCOPE_BAN = _re.compile(r"特装版|限定版|初回限定|豪華版|特別版|特典付|小冊子付|ドラマCD|CD付き?|DVD付|Blu-?ray|OAD|アンソロジ|総集編|選集|傑作|名作選|セレクション|新装版|愛蔵版|完全版|画集|イラスト集|ファンブック|設定資料|ガイドブック|公式ガイド|コミックガイド|データブック|ビジュアルブック|原画|ぬりえ|ムック|フィギュア付|BOXセット|ボックス|スターターセット|スペシャルプライス|語辞典|第?\s*[2-9２-９][0-9０-９]*\s*巻|第[二三四五六七八九十]+[集部]|(?:II|Ⅱ|III|Ⅲ|IV|Ⅳ|V|Ⅴ|VI|Ⅵ|VII|Ⅶ)\s*$|シーズン\s*[2-9]|[2-9]nd\s|3rd\s|第\d+号|別冊|【楽天ブックス限定特典】|[^\sA-Za-z]Selection\s*$", _re.I)  # ★「松本あやかSelection」= 作家別の再録セレクション(2026-10-13。カタカナの セレクション は既存)
@@ -272,7 +284,8 @@ for r in rows:
         if len(_lc) == 1:
             c = _lc[0]
             p_auth = page_auths(c)
-            if (r_auth & p_auth) or _pl or _tr or not r_auth:
+            _kn = auth_is_kana_reading(r)
+            if (r_auth & p_auth) or _pl or _tr or _kn or not r_auth:
                 try:
                     mx = max(int(c[mvi] or 0), int(c[tvi] or 0) if tvi is not None else 0)
                 except Exception:
@@ -280,7 +293,8 @@ for r in rows:
                 if mx >= 1 and mx + 1 <= vol <= mx + 3:
                     r["_slug"] = c[si]
                     _why = ("著者=出版社placeholder免除" if (_pl and not (r_auth & p_auth))
-                            else "著者欄が「ほか」で切れている=免除" if (_tr and not (r_auth & p_auth)) else "題の表記揺れ")
+                            else "著者欄が「ほか」で切れている=免除" if (_tr and not (r_auth & p_auth))
+                            else "著者がカタカナのヨミだけ=免除" if (_kn and not (r_auth & p_auth)) else "題の表記揺れ")
                     r["reason"] = f"④緩和一致({_why}, 頁max{mx}→巻{vol})"
                     out["zokkan"].append(r); continue
     # ★⑤次マッチ(2026-10-08): 著者名の表記ゆれで①〜④が外れた続巻(織田ちゃんと明智くん9=常盤ギヨ⇔常盤魚 /
