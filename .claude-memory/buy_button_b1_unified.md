@@ -8,7 +8,7 @@ metadata:
   modified: 2026-11-18T15:43:03.984Z
 ---
 
-2026-11-19 ユーザ裁定「全箇所B1形式で置き換えて」(見本 B1〜B6 と 今/B1/B5 比較から選択)。commit 742af6fbf6、本番は次の週次蒸留で。
+2026-11-19 ユーザ裁定「全箇所B1形式で置き換えて」(見本 B1〜B6 と 今/B1/B5 比較から選択)。commit 742af6fbf6。**2026-11-20 週次蒸留で本番公開済み**。
 
 - 実体 = `app/globals.css` の `@layer components` に `.buy3d` + 店の色 `is-k/is-a/is-rk/is-yh/is-kb/is-try`、小さい物は `is-sm`(厚み2px)。上から光るグラデ+下に濃い色の厚み(--t)・押すと沈む。Amazon は文字を濃い色(#1a1205)。
 - ★spring-press と併用しない(transform 競合)。大きさは utility か各頁 CSS。

@@ -43,7 +43,7 @@ metadata:
 
 ## B. 羅針盤
 - 入口の輪が出るまで: 制限なし初回 2.3秒 / スマホ相当 初回 **16.6秒**・再訪 **5.9秒**(再訪はほぼ計算: cols解析0.9 + 復元1.5 + キャッチ0.9 + buildGraph 1.0〜1.5 + 最初の周り1.0)。初回のJSON 9.3MB。
-- ✅2026-11-17 直した(commit a8f7ca2f95・本番は次の機能蒸留/週次)= 下の控えの不具合2件 と 見えない「周りの本」。ユーザ「その二つだけなおして」。
+- ✅2026-11-17 直した(commit a8f7ca2f95・**2026-11-20 週次で本番公開済み**)= 下の控えの不具合2件 と 見えない「周りの本」。ユーザ「その二つだけなおして」。
   直し方 = 控えに id を持たせ、控えを書いた頁の history.state にも同じ id を印(`__cpResume`)として書く → 印が同じ頁へ戻った時だけ使う(判定は純関数 `resumeVerdict`・compass.test.ts)。
   頁が生きたまま戻った時(bfcache)は pageshow(persisted) で控えと印を捨てる。周りの本は THREADS の時は nodes に入れない(placed は jumpBack の計算用に残す)。
   手元(next dev+Edge)23項目 OK・**テスト環境(mangal-preview.pages.dev)で本物の戻る(bfcache)を含む10項目 OK**(`run_preview_verify.py`)・ベルセルクの画面の書影 21件414KB → 13件238KB。★Next は最初の描画で history.state の自前キーを残す(initial pushRef.preserveCustomHistoryState=true)= 印が読める。
@@ -77,7 +77,9 @@ metadata:
 ## E. 全体
 - ヘッダー・フッターのリンク先読み = 1頁あたり18〜25本・560〜850KB(AI書評 200KB・新刊 165KB・三世代 85KB)。★想定どおり=量は問題にしない(A と同じ扱い)。
 - 配信は健全: 圧縮(ブラウザへは zstd)・ETag・304・エッジ命中・preload の二重取得なし。
-- ⏳2026-11-17 事前圧縮(brotli最高品質)を実装・**本番未適用(Worker出し直しにユーザGO待ち)**。 Worker=`workers/br-index.js`(元の隣の `<キー>.<元MD5>.br` を返す・元のETagはエッジの元の応答→無ければR2 head を60秒控え・br本体もエッジに /__br/ で焼く=定常R2ゼロ・purgeで控えも消す)。
+- ✅事前圧縮(brotli最高品質)= **2026-11-20 週次で本番適用済み**(Worker出し直し Version 0a35212e・4本とも「使用中」・本番で br 3.45MB/ETag=元MD5 を確認)。
+  ★以後は**自動**: r2-sync(週次)/ `_deploy-differential.py`(差分反映・DATA週)/ `_deploy-feature.py`(機能蒸留)が元の PUT 後に `sync_br` を呼ぶ。Worker の出し直しは今回限り(br-index.js を変えた時だけ再度)。
+  ★安全弁 = 事前圧縮版の名前に元のMD5が入る → 元だけ更新されて圧縮版が古い/置き損ねた時は「見つからない」で従来の配り方に戻るだけ(取り違えは起きない)。sync_br の失敗は配信を止めない。 Worker=`workers/br-index.js`(元の隣の `<キー>.<元MD5>.br` を返す・元のETagはエッジの元の応答→無ければR2 head を60秒控え・br本体もエッジに /__br/ で焼く=定常R2ゼロ・purgeで控えも消す)。
   置く道具=`scripts/_index_br.py`(R2の元ETag==手元MD5の時だけ置く・古い版を消す・`--status`/`--remove-all`)。 r2-sync/差分反映/機能蒸留の PUT 後に自動で呼ぶ。 手元miniflareで12項目OK。
   fable 5.2 が Worker 部品を書いた所で利用上限で停止→Opus が仕上げ(旧案=毎回R2 head+getでエッジ素通り、を是正)。 実測: cols 本番zstd 4.81MB → br q11 3.45MB(圧縮32秒)。
 - その場圧縮は低品質(cols 4.80MB)。事前に brotli 最高品質で置けば cols 3.45 / catch 2.64 / alt 1.34 / hidden 0.63MB = 約28%減([[search_perf_hotspots_2026_08]] の残レバーと同じ・今は4本ぶん)。
