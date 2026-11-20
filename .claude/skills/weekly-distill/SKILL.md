@@ -157,8 +157,9 @@ python scripts/_r2-sync.py --bucket mangal-site --prune
   ログインし直すのではなく **対話シェル側で `python scripts/_kv-redirects-sync.py` を単独実行**すれば通る(KV書込のみ=R2 PUTは発生しない)。
   ※exit 4 は「R2は成功・KVだけ未反映」の意味なので、**r2-sync の再実行は絶対にしない**(全量PUTのやり直し=Class A浪費)。
 - 疎通確認(_prod-smoke.py)に **301追跡テスト**が入っており(alias 1件を実プローブ)、KV陳腐化はそこでも鳴る。
-- ★**workers/ を変更した週は Worker も deploy**(R2同期はファイルだけ=Workerコードは別デプロイ)。
-  判定 = `git diff --stat <前回週次のcommit> HEAD -- workers/` に r2-serve.js / br-index.js 等が出たら必須:
+- ★**workers/ か wrangler-r2.jsonc を変更した週は Worker も deploy**(R2同期はファイルだけ=Workerコードと設定は別デプロイ)。
+  判定 = `git diff --stat <前回週次のcommit> HEAD -- workers/ wrangler-r2.jsonc` に r2-serve.js / br-index.js / wrangler-r2.jsonc 等が出たら必須
+  (★設定だけの変更も含む= 2026-11-20 ログ間引き head_sampling_rate はここで初めて本番に効く):
 ```
 python scripts/_deploy-worker.py
 ```

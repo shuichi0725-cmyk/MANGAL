@@ -31,5 +31,8 @@
     { "pattern": "mangal-db.com", "custom_domain": true },
     { "pattern": "www.mangal-db.com", "custom_domain": true }
   ],
-  "observability": { "enabled": true }
+  // ★ログ間引き(2026-11-20): Observability が 2026-12-01 から取り込み量課金(含む50GB/月・超過$0.25/GB)。
+  //   ログ量はリクエスト数に比例(1件≈6KB)し、AIクローラの波で 10/27〜11/20 に 29.2GB(前サイクル 9.19GB)。
+  //   10件に1件だけ残す。アクセス解析(_cf-analytics.py)は Workers Analytics の集計を読むので影響なし。
+  "observability": { "enabled": true, "head_sampling_rate": 0.1 }
 }
