@@ -238,6 +238,28 @@ def _desc_for(isbn13):
         return None
     return _VOLDESC.get(str(isbn13).replace("-", ""))
 
+# ★Kindle版ASIN(2026-11-21 新設): 紙の巻(isbn13)→ Kindle版ASIN(B0…)。 Creators API で照合した物だけ。
+#   VolumeCoverflow は kindle_asin があれば Kindle ボタンを /dp/<ASIN> 直行にする(= ブラウザで開く)。
+#   書影・巻説明と同じ最終passで充填(canonical 再構築で消えないように)。 既に値がある巻は上書きしない。
+KINDLE_ASIN_SEED = ROOT / "data" / "seeds" / "kindle-asin.jsonl"
+_KINDLE = None
+def _kindle_for(isbn13):
+    global _KINDLE
+    if _KINDLE is None:
+        _KINDLE = {}
+        if KINDLE_ASIN_SEED.exists():
+            with KINDLE_ASIN_SEED.open(encoding="utf-8") as _f:
+                for _ln in _f:
+                    try:
+                        _o = json.loads(_ln)
+                        if _o.get("isbn13") and _o.get("kindle_asin"):
+                            _KINDLE[str(_o["isbn13"])] = str(_o["kindle_asin"])
+                    except Exception:
+                        pass
+    if not isbn13:
+        return None
+    return _KINDLE.get(str(isbn13).replace("-", ""))
+
 def _norm_date(s):
     """release_date を schema形式(YYYY / YYYY-MM / YYYY-MM-DD)へ正規化。
     NDL生形式(2014.8 / 1997-9 / 全角２００５．４)がZod検証(^\\d{4}(-\\d{2}(-\\d{2})?)?$)で
@@ -4624,6 +4646,10 @@ def main():
                         _dd = _desc_for(_v.get("isbn13"))
                         if _dd:
                             _v["description"] = _dd
+                    if not _v.get("kindle_asin"):
+                        _ka = _kindle_for(_v.get("isbn13"))
+                        if _ka:
+                            _v["kindle_asin"] = _ka
                     _nd = _date_fill_for(_v.get("isbn13"))
                     if _nd:
                         _cur = str(_v.get("release_date") or "")
