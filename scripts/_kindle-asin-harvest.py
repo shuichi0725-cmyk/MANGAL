@@ -218,6 +218,7 @@ def load_pages():
 # ---------------- 照合 ----------------
 def norm(s):
     s = unicodedata.normalize("NFKC", s or "").lower()
+    s = re.sub(r"【[^】]*】", "", s)  # ★【男女比1:100】型: 両側から同じく外す(Kindle 側だけ外すと題が合わなくなる)
     return re.sub(r"[\s・:：!！?？、。,.\-‐―ー~〜'\"「」『』【】\[\]()（）]", "", s)
 
 
@@ -476,6 +477,33 @@ def judge_page(pi, items):
     return out
 
 
+def search_kindle(pi, with_author):
+    items = []
+    pa, nt = norm(pi["author"]), norm(pi["title"])
+    for page in range(1, 11):
+        if with_author:
+            req = {"title": pi["title"], "author": pi["author"], "searchIndex": "KindleStore", "itemCount": 10,
+                   "itemPage": page, "resources": FULL}
+        else:
+            q = re.sub(r"[!！?？]+", " ", pi["title"]).strip()
+            req = {"title": q, "searchIndex": "KindleStore", "itemCount": 10, "itemPage": page, "resources": FULL}
+        st, resp = call("searchItems", req)
+        save_raw("kindle-search" + ("" if with_author else "-titleonly"), req, st, resp, pi["src"])
+        if st != 200:
+            break
+        its = (resp.get("searchResult") or {}).get("items") or []
+        br = [_item_brief(x) for x in its]
+        items += br
+        if len(its) < 10:
+            break
+        # 2頁目以降で「題も作者も合う物」が1件も無い頁が出たら、 その先は別作品ばかり = めくらない(回数の節約)
+        if page >= 2 and not any(nt in norm(vol_of(b["title"])[0]) and
+                                 (not pa or any(pa in norm(a) or norm(a) in pa for a in b["authors"] if a))
+                                 for b in br):
+            break
+    return items
+
+
 def harvest(order_seed, max_pages):
     done = set()
     if os.path.exists(DONE):
@@ -521,28 +549,13 @@ def harvest(order_seed, max_pages):
                     fo.write(f[:-4] + "\n")
                 stat["skip"] += 1
                 continue
-            items = []
-            for page in range(1, 11):
-                # ★題名だけで検索(作者を条件に入れると「こうじま 奈月」型の空白ゆれで0件になる)。 作者は照合側で確かめる。
-                q = re.sub(r"[!！?？]+", " ", pi["title"]).strip()
-                req = {"title": q, "searchIndex": "KindleStore", "itemCount": 10, "itemPage": page, "resources": FULL}
-                st, resp = call("searchItems", req)
-                save_raw("kindle-search", req, st, resp, pi["src"])
-                if st != 200:
-                    break
-                its = (resp.get("searchResult") or {}).get("items") or []
-                br = [_item_brief(x) for x in its]
-                items += br
-                if len(its) < 10:
-                    break
-                # 2頁目以降で「題も作者も合う物」が1件も無い頁が出たら、 その先は別作品ばかり = めくらない(回数の節約)
-                pa = norm(pi["author"])
-                nt = norm(pi["title"])
-                if page >= 2 and not any(nt in norm(vol_of(b["title"])[0]) and
-                                         (not pa or any(pa in norm(a) or norm(a) in pa for a in b["authors"] if a))
-                                         for b in br):
-                    break
+            # ★2段(2026-11-21 v3): ①題名+作者(精度が高い・短い題名でも埋もれない=シャッター型)
+            #   ②①で1冊も当たらない時だけ題名だけ(作者表記の空白ゆれ=「こうじま 奈月」型の救済)。 作者は照合側で空白抜きで確かめる。
+            items = search_kindle(pi, with_author=bool(pi["author"]))
             rows = judge_page(pi, items)
+            if pi["author"] and not any(r["verdict"] != "none" for r in rows):
+                items += search_kindle(pi, with_author=False)
+                rows = judge_page(pi, items)
             with open(CAND, "a", encoding="utf-8") as fo:
                 for r in rows:
                     fo.write(json.dumps({**r, "at": time.strftime("%Y-%m-%d")}, ensure_ascii=False) + "\n")
