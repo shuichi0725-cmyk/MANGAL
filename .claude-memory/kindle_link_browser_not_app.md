@@ -44,3 +44,9 @@ metadata:
   特装版の Amazon も同じ規則。 本番に出るのは週次(全頁のコード変更 = CODE週)。
 
 **★次段=Kindle ASINハーベスト(PA-API解錠後)**: マンバがKindle頁へ一発直行できる種明かし(ユーザ推理2026-07-29で確定的)=**各巻のKindle版ASIN(B0…)をDBに持ち /dp/B0…?tag= の普通の商品URLを作っているだけ**。正規入手路=PA-API(SearchItems×KindleStore、題+巻で照合)。mangal08-22の**180日3成果条件クリアでPA-API解錠**([[openbd-eol-amazon-required]]の書影と同じ解錠条件)→ Kindle ASIN収穫(楽天ハーベストと同型)→ Kindleボタンを電子版/dp直行に進化。現行の「紙/dp→Kindle版選択」はそれまでの暫定解。
+
+## ★2026-11-21 Creators API 解錠 → Kindle版ASIN 直行の第1号が実機で成功
+- こんにちはマイコン 1-2巻(紙頁なし=犬404だった巻)に Kindle版ASIN(B0CW1B581M / B0CW1JWZZZ)を入れてテスト環境へ → **ユーザ実機で「想定通りブラウザで開いた」**。
+- 仕組み: seed `data/seeds/kindle-asin.jsonl`(isbn13→kindle_asin)→ `_promote-bulk-v2.py` 最終passの `_kindle_for` で巻に充填 → VolumeCoverflow は kindle_asin があれば `kindleDpLink`(/dp/B0…)。表示コードは元から対応済みだった。
+- 次段 = 作者名で一括(searchItems author・KindleStore・1回10件・1検索最大100件)→ 100件超の作者だけ作者+題名で追加。照合は 題+巻番号+発売日(Kindleの publicationDate=紙の発売日)。 [[openbd-eol-amazon-required]]
+
