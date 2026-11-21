@@ -70,16 +70,31 @@ _last = [0.0]
 #   ①間隔 2.0秒(公表上限 1TPS の半分) ②回数の台帳(直近24時間・プロセスをまたいで数える)で 1日の予算を超えたら止める
 #     (2026-11-21 ユーザ裁定 8,000回=公表の初期上限 8,640/日の手前。 30日目以降は売上連動で下がり得る→429即停止で守る)
 #   ③429 が1回でも出たら取り直さずに即停止(その日は終わり)・非200が5回続いたら停止。
-PACE = 3.0  # ★2026-11-21 2.0秒(1時間約1,800回)で15:40に429→2.5時間後に復帰=短時間の詰め過ぎと判断し3秒へ
-DAILY_BUDGET = int(os.environ.get("KINDLE_ASIN_BUDGET", "8000"))
+# ★2026-11-21 実測で確定した枠の形(ユーザ指摘「8640/日=10秒に1回を24時間」):
+#   枠は「10秒に1単位ずつ戻る」桶で、 getItems は**冊数ぶん**数える(10冊まとめ=10単位)。
+#   15:40(冊数換算 約7,200で429)→ 18:18 再開 → 18:39 に約970単位で再び429 = 休んだ約3時間で戻った約1,070単位とほぼ一致。
+#   → 叩く間隔を「単位×11秒」(戻りより少し遅く)にすれば、 1日中流しても桶は減らない。
+PACE_PER_UNIT = 11.0
+PACE = PACE_PER_UNIT
+DAILY_BUDGET = int(os.environ.get("KINDLE_ASIN_BUDGET", "8000"))  # ★単位(getItemsは冊数)で数える
 _LEDGER = os.path.join(CACHE, "calls.log")  # 1行1呼び出し: epoch秒 op status
 _bad = [0]
+_next_ok = [0.0]  # 次に叩いてよい時刻(前回の単位数 × PACE_PER_UNIT 後)
+
+
+def _units(op, body):
+    return max(1, len(body.get("itemIds") or [])) if op == "getItems" else 1
 
 
 def _used_24h():
     now = time.time()
     try:
-        return sum(1 for ln in open(_LEDGER, encoding="utf-8") if ln.strip() and now - float(ln.split()[0]) < 86400)
+        tot = 0
+        for ln in open(_LEDGER, encoding="utf-8"):
+            p_ = ln.split()
+            if p_ and now - float(p_[0]) < 86400:
+                tot += int(p_[3]) if len(p_) > 3 else 1  # 4列目=単位(無い古い行は1)
+        return tot
     except FileNotFoundError:
         return 0
 
@@ -88,9 +103,10 @@ def call(op, body):
     used = _used_24h()
     if used >= DAILY_BUDGET:
         raise SystemExit(f"1日の予算 {DAILY_BUDGET} 回に達した(直近24時間 {used} 回)= 今日はここまで。続きは明日")
-    w = PACE - (time.time() - _last[0])
+    w = _next_ok[0] - time.time()
     if w > 0:
         time.sleep(w)
+    u = _units(op, body)
     body = {"marketplace": "www.amazon.co.jp", "partnerTag": "mangal08-22", **body}
     _last[0] = time.time()
     try:
@@ -99,8 +115,10 @@ def call(op, body):
     except Exception as e:  # 通信エラーも1回と数える
         st, t = 0, f"{type(e).__name__}"
     CALLS[op] += 1
+    CALLS["units"] += u
+    _next_ok[0] = time.time() + u * PACE_PER_UNIT
     with open(_LEDGER, "a", encoding="utf-8") as f:
-        f.write(f"{time.time():.0f} {op} {st}\n")
+        f.write(f"{time.time():.0f} {op} {st} {u}\n")
     if st == 429:
         raise SystemExit(f"429(回数超過 or 停止)= 取り直さずに即停止。 本文: {t[:200]}")
     if st == 403 and "AssociateNotEligible" in t:
@@ -328,7 +346,7 @@ def _item_brief(it):
 
 def harvest_page(pg, author):
     """→ (kindle_items, paper_found{isbn13:asin}, paper_invalid[isbn13], calls)。 応答は全部 save_raw。"""
-    c0 = sum(CALLS.values())
+    c0 = (CALLS['searchItems'] + CALLS['getItems'])
     items = []
     for page in range(1, 11):
         req = {"title": pg["title"], "author": author, "searchIndex": "KindleStore", "itemCount": 10,
@@ -361,7 +379,7 @@ def harvest_page(pg, author):
             m = re.search(r"ItemIds (\S+) provided", e.get("message", ""))
             if m and m.group(1) in ids:
                 invalid.append(ids[m.group(1)])
-    return items, found, invalid, sum(CALLS.values()) - c0
+    return items, found, invalid, (CALLS['searchItems'] + CALLS['getItems']) - c0
 
 
 def first_author(slug):
@@ -573,7 +591,7 @@ def harvest(order_seed, max_pages):
             if n % 50 == 0:
                 el = time.time() - t0
                 print(f"[{time.strftime('%H:%M')}] {n}頁 / 巻 採る{stat['take']} 見直し{stat['review']} なし{stat['none']}"
-                      f" / 紙 有{stat['paper_ok']} 無{stat['paper_ng']} / 呼出{sum(CALLS.values())}"
+                      f" / 紙 有{stat['paper_ok']} 無{stat['paper_ng']} / 呼出{(CALLS['searchItems'] + CALLS['getItems'])}"
                       f" / {el / n:.1f}秒/頁 / 予算残 {DAILY_BUDGET - _used_24h()}", flush=True)
     except SystemExit as e:
         print(f"停止: {e}", flush=True)
@@ -646,7 +664,7 @@ def run(authors, by, tag):
     rep = []
     tot = Counter()
     for a in authors:
-        c0 = sum(CALLS.values())
+        c0 = (CALLS['searchItems'] + CALLS['getItems'])
         items, total, capped = kindle_by_author(a)
         for it in items:
             fi.write(json.dumps({"author_q": a, **it}, ensure_ascii=False) + "\n")
@@ -654,7 +672,7 @@ def run(authors, by, tag):
         for r in rows:
             fm.write(a + "\t" + "\t".join(str(x) for x in r) + "\n")
         g = Counter(r[5][0] for r in rows)
-        calls = sum(CALLS.values()) - c0
+        calls = (CALLS['searchItems'] + CALLS['getItems']) - c0
         line = (f"{a}: 呼出{calls} / Kindle {len(items)}件(総{total}{'・100件の壁' if capped else ''}) / "
                 f"自サイト {len(by.get(a, []))}頁 {len(rows)}巻 → A {g['A']} / B {g['B']} / なし {g['-']}")
         print(line, flush=True)
