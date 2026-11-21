@@ -49,4 +49,8 @@ metadata:
 - こんにちはマイコン 1-2巻(紙頁なし=犬404だった巻)に Kindle版ASIN(B0CW1B581M / B0CW1JWZZZ)を入れてテスト環境へ → **ユーザ実機で「想定通りブラウザで開いた」**。
 - 仕組み: seed `data/seeds/kindle-asin.jsonl`(isbn13→kindle_asin)→ `_promote-bulk-v2.py` 最終passの `_kindle_for` で巻に充填 → VolumeCoverflow は kindle_asin があれば `kindleDpLink`(/dp/B0…)。表示コードは元から対応済みだった。
 - 次段 = 作者名で一括(searchItems author・KindleStore・1回10件・1検索最大100件)→ 100件超の作者だけ作者+題名で追加。照合は 題+巻番号+発売日(Kindleの publicationDate=紙の発売日)。 [[openbd-eol-amazon-required]]
+- ★2026-11-21 作者10人の試行(`scripts/_kindle-asin-harvest.py trial`・呼出45回・出力 .cache/kindle-asin/trial-*): 自サイト332巻 → A(題+巻+日付±62日)80(24%)/ B 54 / なし198。
+  学び: ①作者名検索はキーワード扱いで**名前によっては無関係な雑誌等を大量に返す**(佐藤元=総1000・みさきのあ=325、どちらも照合0)②作者欄の2人目(原作・解説者)で引くと外れる(滝瀬源一=のたり松太郎の原作)
+  ③Kindleの発売日が**電子の配信日**の出版社がある(長谷川町子=2013/2020)= 日付照合だけでは取りこぼす ④多版の頁は別版の同番号に当たる(=Bは目視行き)
+  ⑤**頁ごとの「題名+第1作者」検索**は確実(のたり松太郎36件・紙の日付一致)。ただし1頁1回以上=全7.1万頁で8日超。→ 作者一括(総数が小さく照合が取れる作者だけ)+頁ごとの題名検索の併用が本命。
 
