@@ -69,3 +69,11 @@ metadata:
 - 議論で OpenBD が 出たら 「終了予定、 書影は Amazon API 必須」 と 即補足
 - L1 補完 / 書影 議論 では NDL + Amazon 前提
 - 関連: [[project-architecture-seeds]]
+
+## ★2026-11-21 Creators API 調べ(試験のみ・本番未適用)
+- 鍵は `.env`(AMAZON_CREATORS_CLIENT_ID / _SECRET / _VERSION=3.3)。試験道具は scratchpad の ca.py(リポジトリ未収録)。
+- **紙**: getItems(ASIN=ISBN-10・1回10件)。Amazon に紙頁が無い巻は `errors[] InvalidParameterValue "ItemIds … is invalid"` = 犬の404巻を**事前に判定できる**(こんにちはマイコン1 4091041019 で確認)。externalIds に eans/isbns。
+- **Kindle**: searchItems(searchIndex KindleStore・title/author 引数可・1頁10件・itemPage)。Kindle版の publicationDate = **紙の発売日**(ONE PIECE 1=1997-12-24・マイコン1=1982-10-01)= 題+巻+日付で照合できる。ONE PIECE はモノクロ版/カラー版が両方出る=版の選別が要る。**ASINは連番でない**(1=B009GZK2YE・2=B009GZK31Q・102=B09TKX1NX9)=1巻ずつ保存が要る。紙↔Kindleの関連を返す項目は無い。
+- **書影**: 抜き取り75件(書影なし25・Kobo借り25・楽天紙25)全部 Amazon 書影あり(500px高・代わり画像でない・目視確認)。Kobo借りの巻で Amazon が紙の元装丁=正しい例(あさってDANCE)。★規約: Images は**キャッシュ1日**(best practices)/Associates方針は画像の保存禁止・画像URLは24時間まで = 週次静的ビルドに焼くのは規約上危ない(未解決)。
+- **回数**: 初期 1TPS・8,640回/日、getItems 10件=1回。資格は直近30日に売上0件が続くと失効(売上発送後2日で復帰)・超過は429。
+- 現行リンクは画面側で ISBN→ISBN-10→ `https://www.amazon.co.jp/dp/<ASIN>?tag=mangal08-22` を組み立て(HTMLにURLは入っていない)。全巻 277,271(書影: 楽天紙 228,001 / なし 35,098 / Kobo 15,527)。
