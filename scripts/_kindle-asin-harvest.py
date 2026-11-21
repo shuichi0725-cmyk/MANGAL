@@ -10,7 +10,7 @@
   python scripts/_kindle-asin-harvest.py trial [--n 10] [--seed 1121]   # 作者を50音・年代で散らして選び試行
   python scripts/_kindle-asin-harvest.py author "<作者名>"              # 1人だけ
 出力: .cache/kindle-asin/<run>/ items.jsonl(取れたKindle版) / match.tsv(照合) / report.txt
-鍵: .env の AMAZON_CREATORS_CLIENT_ID / AMAZON_CREATORS_SECRET。 ★安全側: 2秒間隔・1日3,000回(KINDLE_ASIN_BUDGET)・429で即停止。 台帳 .cache/kindle-asin/calls.log
+鍵: .env の AMAZON_CREATORS_CLIENT_ID / AMAZON_CREATORS_SECRET。 ★安全側: 2秒間隔・1日8,000回(KINDLE_ASIN_BUDGET)・429で即停止。 台帳 .cache/kindle-asin/calls.log
 """
 import os, re, sys, json, time, random, argparse, unicodedata, datetime, urllib.request, urllib.error
 from collections import defaultdict, Counter
@@ -66,10 +66,10 @@ def _token():
 _last = [0.0]
 # ★2026-11-21 ユーザ「一番まずいのはやりすぎて使えなくなること」= 安全側に倒す3点:
 #   ①間隔 2.0秒(公表上限 1TPS の半分) ②回数の台帳(直近24時間・プロセスをまたいで数える)で 1日の予算を超えたら止める
-#     (公表の初期上限 8,640/日の約1/3。 30日目以降は売上連動で下がり得る=数字を当てにしない)
+#     (2026-11-21 ユーザ裁定 8,000回=公表の初期上限 8,640/日の手前。 30日目以降は売上連動で下がり得る→429即停止で守る)
 #   ③429 が1回でも出たら取り直さずに即停止(その日は終わり)・非200が5回続いたら停止。
 PACE = 2.0
-DAILY_BUDGET = int(os.environ.get("KINDLE_ASIN_BUDGET", "3000"))
+DAILY_BUDGET = int(os.environ.get("KINDLE_ASIN_BUDGET", "8000"))
 _LEDGER = os.path.join(CACHE, "calls.log")  # 1行1呼び出し: epoch秒 op status
 _bad = [0]
 
