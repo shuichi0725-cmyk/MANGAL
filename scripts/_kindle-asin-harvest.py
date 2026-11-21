@@ -9,6 +9,8 @@
 使い方:
   python scripts/_kindle-asin-harvest.py trial [--n 10] [--seed 1121]   # 作者を50音・年代で散らして選び試行
   python scripts/_kindle-asin-harvest.py author "<作者名>"              # 1人だけ
+  python scripts/_kindle-asin-harvest.py harvest [--max-pages N]        # ★本番収穫(全頁・続きから・予算/429で自然停止)
+  python scripts/_kindle-asin-harvest.py status                         # 進み具合
 出力: .cache/kindle-asin/<run>/ items.jsonl(取れたKindle版) / match.tsv(照合) / report.txt
 鍵: .env の AMAZON_CREATORS_CLIENT_ID / AMAZON_CREATORS_SECRET。 ★安全側: 2秒間隔・1日8,000回(KINDLE_ASIN_BUDGET)・429で即停止。 台帳 .cache/kindle-asin/calls.log
 """
@@ -388,6 +390,179 @@ def run_pages(authors, by, tag, max_pages):
     print("出力:", od, "/ 生の応答:", RAW_DIR)
 
 
+# ---------------- 本番収穫(harvest): 全頁・再開可・紙照会は頁をまたいで10冊ずつ ----------------
+# 判定(2026-11-21 ユーザ裁定「そろってれば取る」):
+#   A  = 題+巻番号+発売日(±62日)一致 → 採る
+#   B  = 題+巻番号は一致・日付ズレ(電子の復刊で Kindle の日付が配信日)→ その版の巻番号が Kindle 側で
+#        **全部そろっている時だけ**採る(版が1冊なら、その1冊の題が完全一致で当たっていれば「そろっている」)
+#   それ以外(版の一部だけ当たった B・同点の候補が複数)= 見直し行き(review)。 照合なし = none。
+HV = os.path.join(CACHE, "harvest")
+os.makedirs(HV, exist_ok=True)
+DONE = os.path.join(HV, "done.txt")           # 済んだ頁(slug)
+CAND = os.path.join(HV, "candidates.jsonl")   # 巻ごとの判定結果(採る/見直し/なし)
+PAPER = os.path.join(HV, "paper.jsonl")       # 紙の商品頁 有/無(isbn13)
+
+
+def page_info(path):
+    import yaml
+    d = yaml.load(open(path, encoding="utf-8"), Loader=yaml.CSafeLoader)
+    if not isinstance(d, dict):
+        return None
+    au = ""
+    for a in d.get("authors") or []:
+        if a.get("role") in ("writer_artist", "artist"):
+            au = a.get("name") or ""; break
+    if not au and d.get("authors"):
+        au = d["authors"][0].get("name") or ""
+    eds = []
+    for i, e in enumerate(d.get("editions") or []):
+        vs = []
+        for v in e.get("volumes") or []:
+            if v.get("isbn13") and v.get("number") is not None:
+                try:
+                    vs.append((float(v["number"]), str(v["isbn13"]), str(v.get("release_date") or ""), v.get("kindle_asin")))
+                except (TypeError, ValueError):
+                    pass
+        if vs:
+            eds.append({"idx": i, "label": e.get("label") or e.get("type"), "vols": vs})
+    if not eds or not d.get("title"):
+        return None
+    return {"slug": d.get("slug") or os.path.basename(path)[:-4], "src": os.path.basename(path)[:-4],
+            "title": str(d["title"]), "author": au, "eds": eds}
+
+
+def judge_page(pi, items):
+    """→ [{isbn13, number, edition, verdict(take/review/none), grade, asin, ...}]"""
+    out = []
+    for ed in pi["eds"]:
+        pg = {"slug": pi["slug"], "title": pi["title"], "vols": [(n, i, dt) for n, i, dt, _ in ed["vols"]]}
+        rows = match_author([pg], items)
+        graded = [r for r in rows if r[5] != "-"]
+        asins = [r[6] for r in graded]
+        complete = (len(graded) == len(rows)) and len(set(asins)) == len(asins)
+        for r, (_, _, _, cur) in zip(rows, ed["vols"]):
+            g = r[5]
+            if g == "-":
+                v = "none"
+            elif g.endswith("?"):
+                v = "review"
+            elif g == "A":
+                v = "take"
+            else:
+                v = "take" if complete else "review"
+            out.append({"src": pi["src"], "slug": pi["slug"], "edition": ed["label"], "number": r[2], "isbn13": r[3],
+                        "our_date": r[4], "grade": g, "verdict": v, "kindle_asin": r[6], "kindle_date": r[7],
+                        "kindle_title": r[8], "days": r[9], "already": cur or None})
+    return out
+
+
+def harvest(order_seed, max_pages):
+    done = set()
+    if os.path.exists(DONE):
+        done = set(open(DONE, encoding="utf-8").read().split())
+    d = os.path.join(ROOT, "data", "manga.v2")
+    files = sorted(f for f in os.listdir(d) if f.endswith(".yml"))
+    random.Random(order_seed).shuffle(files)  # ★人気順にしない(決まった種で混ぜた順=途中で止めても偏らない)
+    todo = [f for f in files if f[:-4] not in done]
+    print(f"全{len(files)}頁 / 済{len(done)} / 残{len(todo)} / 今日の残り予算 {DAILY_BUDGET - _used_24h()} 回", flush=True)
+    queue = []  # 紙照会待ち (isbn10, isbn13, src)
+    stat = Counter()
+    t0 = time.time()
+
+    def flush(force=False):
+        while len(queue) >= 10 or (force and queue):
+            chunk, queue[:] = queue[:10], queue[10:]
+            ids = {a: (i13, src) for a, i13, src in chunk}
+            req = {"itemIds": list(ids), "itemIdType": "ASIN", "resources": FULL}
+            st, resp = call("getItems", req)
+            save_raw("paper-get", req, st, resp, None)
+            if st != 200:
+                continue
+            ok = {it["asin"] for it in (resp.get("itemsResult") or {}).get("items") or []}
+            with open(PAPER, "a", encoding="utf-8") as f:
+                for a, (i13, src) in ids.items():
+                    f.write(json.dumps({"isbn13": i13, "isbn10": a, "src": src, "paper": a in ok,
+                                        "at": time.strftime("%Y-%m-%d")}, ensure_ascii=False) + "\n")
+                    stat["paper_ok" if a in ok else "paper_ng"] += 1
+
+    n = 0
+    try:
+        for f in todo:
+            if max_pages and n >= max_pages:
+                break
+            pi = page_info(os.path.join(d, f))
+            if pi is not None and pi["author"] in ("(unknown)", "unknown", "不明"):
+                pi["author"] = ""  # 作者不明 = 題名だけで検索(照合は題名一致で絞られる)
+            if pi is None:
+                with open(DONE, "a", encoding="utf-8") as fo:
+                    fo.write(f[:-4] + "\n")
+                stat["skip"] += 1
+                continue
+            items = []
+            for page in range(1, 11):
+                req = {"title": pi["title"], "searchIndex": "KindleStore", "itemCount": 10, "itemPage": page, "resources": FULL}
+                if pi["author"]:
+                    req["author"] = pi["author"]
+                st, resp = call("searchItems", req)
+                save_raw("kindle-search", req, st, resp, pi["src"])
+                if st != 200:
+                    break
+                its = (resp.get("searchResult") or {}).get("items") or []
+                items += [_item_brief(x) for x in its]
+                if len(its) < 10:
+                    break
+            rows = judge_page(pi, items)
+            with open(CAND, "a", encoding="utf-8") as fo:
+                for r in rows:
+                    fo.write(json.dumps({**r, "at": time.strftime("%Y-%m-%d")}, ensure_ascii=False) + "\n")
+                    stat[r["verdict"]] += 1
+            for ed in pi["eds"]:
+                for _, i13, _, _ in ed["vols"]:
+                    a10 = i10(i13)
+                    if a10:
+                        queue.append((a10, i13, pi["src"]))
+            flush()
+            with open(DONE, "a", encoding="utf-8") as fo:
+                fo.write(pi["src"] + "\n")
+            n += 1
+            if n % 50 == 0:
+                el = time.time() - t0
+                print(f"[{time.strftime('%H:%M')}] {n}頁 / 巻 採る{stat['take']} 見直し{stat['review']} なし{stat['none']}"
+                      f" / 紙 有{stat['paper_ok']} 無{stat['paper_ng']} / 呼出{sum(CALLS.values())}"
+                      f" / {el / n:.1f}秒/頁 / 予算残 {DAILY_BUDGET - _used_24h()}", flush=True)
+    except SystemExit as e:
+        print(f"停止: {e}", flush=True)
+        # ★紙照会待ちは done にした頁の分。 次回は該当頁を再走しないので、 ここで捨てずに保留ファイルへ。
+        with open(os.path.join(HV, "paper-pending.jsonl"), "a", encoding="utf-8") as fo:
+            for a, i13, src in queue:
+                fo.write(json.dumps({"isbn10": a, "isbn13": i13, "src": src}, ensure_ascii=False) + "\n")
+        queue.clear()
+    else:
+        try:
+            flush(force=True)
+        except SystemExit as e:
+            print(f"停止(紙照会の最後): {e}", flush=True)
+    print(f"\n今回 {n}頁 / 巻 採る{stat['take']} 見直し{stat['review']} なし{stat['none']} / 紙 有{stat['paper_ok']}"
+          f" 無{stat['paper_ng']} / skip{stat['skip']} / 呼出{dict(CALLS)} / 予算残 {DAILY_BUDGET - _used_24h()}", flush=True)
+
+
+def summary():
+    c, seen = Counter(), {}
+    if os.path.exists(CAND):
+        for ln in open(CAND, encoding="utf-8"):
+            r = json.loads(ln)
+            seen[(r["src"], r["edition"], r["number"], r["isbn13"])] = r
+    for r in seen.values():
+        c[r["verdict"]] += 1
+    p = Counter()
+    if os.path.exists(PAPER):
+        for ln in open(PAPER, encoding="utf-8"):
+            p["有" if json.loads(ln)["paper"] else "無"] += 1
+    done = len(open(DONE, encoding="utf-8").read().split()) if os.path.exists(DONE) else 0
+    print(f"済 {done}頁 / 巻: 採る {c['take']} / 見直し {c['review']} / なし {c['none']} / 紙の商品頁: {dict(p)}"
+          f" / 直近24時間の呼出 {_used_24h()} / 予算 {DAILY_BUDGET}")
+
+
 # ---------------- 実行 ----------------
 ROW = "アカサタナハマヤラワ"
 
@@ -454,7 +629,13 @@ def main():
     o = sub.add_parser("author"); o.add_argument("name")
     pp = sub.add_parser("pages"); pp.add_argument("--n", type=int, default=10); pp.add_argument("--seed", type=int, default=2211)
     pp.add_argument("--max-pages", type=int, default=60)
+    hv = sub.add_parser("harvest"); hv.add_argument("--max-pages", type=int, default=0); hv.add_argument("--seed", type=int, default=20261121)
+    sub.add_parser("status")
     a = ap.parse_args()
+    if a.cmd == "harvest":
+        return harvest(a.seed, a.max_pages)
+    if a.cmd == "status":
+        return summary()
     print("自サイトの頁を読み込み中…", flush=True)
     by = load_pages()
     if a.cmd == "trial":
