@@ -10,7 +10,7 @@
   python scripts/_kindle-asin-harvest.py trial [--n 10] [--seed 1121]   # 作者を50音・年代で散らして選び試行
   python scripts/_kindle-asin-harvest.py author "<作者名>"              # 1人だけ
 出力: .cache/kindle-asin/<run>/ items.jsonl(取れたKindle版) / match.tsv(照合) / report.txt
-鍵: .env の AMAZON_CREATORS_CLIENT_ID / AMAZON_CREATORS_SECRET。 1TPS(1.1秒間隔)・初期8,640回/日。
+鍵: .env の AMAZON_CREATORS_CLIENT_ID / AMAZON_CREATORS_SECRET。 ★安全側: 2秒間隔・1日3,000回(KINDLE_ASIN_BUDGET)・429で即停止。 台帳 .cache/kindle-asin/calls.log
 """
 import os, re, sys, json, time, random, argparse, unicodedata, datetime, urllib.request, urllib.error
 from collections import defaultdict, Counter
@@ -64,27 +64,52 @@ def _token():
 
 
 _last = [0.0]
+# ★2026-11-21 ユーザ「一番まずいのはやりすぎて使えなくなること」= 安全側に倒す3点:
+#   ①間隔 2.0秒(公表上限 1TPS の半分) ②回数の台帳(直近24時間・プロセスをまたいで数える)で 1日の予算を超えたら止める
+#     (公表の初期上限 8,640/日の約1/3。 30日目以降は売上連動で下がり得る=数字を当てにしない)
+#   ③429 が1回でも出たら取り直さずに即停止(その日は終わり)・非200が5回続いたら停止。
+PACE = 2.0
+DAILY_BUDGET = int(os.environ.get("KINDLE_ASIN_BUDGET", "3000"))
+_LEDGER = os.path.join(CACHE, "calls.log")  # 1行1呼び出し: epoch秒 op status
+_bad = [0]
+
+
+def _used_24h():
+    now = time.time()
+    try:
+        return sum(1 for ln in open(_LEDGER, encoding="utf-8") if ln.strip() and now - float(ln.split()[0]) < 86400)
+    except FileNotFoundError:
+        return 0
 
 
 def call(op, body):
-    w = 1.1 - (time.time() - _last[0])
+    used = _used_24h()
+    if used >= DAILY_BUDGET:
+        raise SystemExit(f"1日の予算 {DAILY_BUDGET} 回に達した(直近24時間 {used} 回)= 今日はここまで。続きは明日")
+    w = PACE - (time.time() - _last[0])
     if w > 0:
         time.sleep(w)
     body = {"marketplace": "www.amazon.co.jp", "partnerTag": "mangal08-22", **body}
-    for k in range(4):
-        _last[0] = time.time()
+    _last[0] = time.time()
+    try:
         st, t = _post(f"https://creatorsapi.amazon/catalog/v1/{op}", body,
                       {"Authorization": "Bearer " + _token(), "x-marketplace": "www.amazon.co.jp"})
-        CALLS[op] += 1
-        if st == 429 and k < 3:
-            time.sleep(5 * (k + 1)); continue
-        if st == 403 and "AssociateNotEligible" in t:
-            raise SystemExit("403 AssociateNotEligible = 直近30日の売上条件を外れた(API停止)")
-        try:
-            return st, json.loads(t)
-        except Exception:
-            return st, {"raw": t[:300]}
-    return st, {}
+    except Exception as e:  # 通信エラーも1回と数える
+        st, t = 0, f"{type(e).__name__}"
+    CALLS[op] += 1
+    with open(_LEDGER, "a", encoding="utf-8") as f:
+        f.write(f"{time.time():.0f} {op} {st}\n")
+    if st == 429:
+        raise SystemExit(f"429(回数超過 or 停止)= 取り直さずに即停止。 本文: {t[:200]}")
+    if st == 403 and "AssociateNotEligible" in t:
+        raise SystemExit("403 AssociateNotEligible = 直近30日の売上条件を外れた(API停止)")
+    _bad[0] = 0 if st == 200 else _bad[0] + 1
+    if _bad[0] >= 5:
+        raise SystemExit(f"200 以外が5回続いた(最後 HTTP {st})= 停止して調べる。 {t[:200]}")
+    try:
+        return st, json.loads(t)
+    except Exception:
+        return st, {"raw": t[:300]}
 
 
 RES = ["itemInfo.title", "itemInfo.byLineInfo", "itemInfo.contentInfo", "itemInfo.classifications"]
