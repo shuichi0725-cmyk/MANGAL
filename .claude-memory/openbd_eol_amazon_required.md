@@ -18,6 +18,8 @@ metadata:
 - ★**2026-10-21 鍵を発行済み**(アプリ名 Mangal・Version 3.3 = 極東/日本)。鍵の CSV はユーザが持つ(会話に添付 = `~/.claude/uploads/d6d1e4c1-…/…-Mangal-credentials.csv`。★repo は公開なので git・記憶に鍵を書かない。本運用は GitHub Secrets)。
   - 1回だけ試した結果: トークン取得 = **200(鍵は有効)** / getItems = **403 `AssociateNotEligible`**「Your account does not currently meet the eligibility requirements.」= 売上条件が未達。条件を満たせば同じ鍵でそのまま通るはず。
   - ★2026-10-23 再試験(ユーザ「申請から使えるまで時間がかかるらしい・1回試して」): トークン 200 / getItems **403 AssociateNotEligible のまま**(10/21と同じ)= 待ち時間ではなく売上条件。CSV の列は `Credential Id`(=client_id)と `Secret`。
+  - ★★**2026-11-21 再試験: getItems = 200 で通った**(ONE PIECE 1 = ASIN 4088725093 → 題・書影 500px・tag=mangal08-22 付き detailPageURL が返った)= **売上条件を満たして使えるようになった**。トークン取得 `https://api.amazon.co.jp/auth/o2/token`(client_credentials・scope `creatorsapi::default`)→ `POST https://creatorsapi.amazon/catalog/v1/getItems`(Bearer・`x-marketplace: www.amazon.co.jp`・itemIdType ASIN・ASIN=ISBN-10)。
+  - ★鍵の CSV は uploads から消えていた(10/21 の会話記録にだけ残っていた)。資格は直近30日の売上で外れることがある=使う前に1回試す。
   - 通った呼び方: トークン = POST `https://api.amazon.co.jp/auth/o2/token`・JSON `{grant_type: client_credentials, client_id, client_secret, scope: "creatorsapi::default"}` → getItems = POST `https://creatorsapi.amazon/catalog/v1/getItems`・`Authorization: Bearer <token>`・`x-marketplace: www.amazon.co.jp`・JSON `{itemIds:[ISBN-10], itemIdType:"ASIN", marketplace:"www.amazon.co.jp", partnerTag:"mangal08-22", resources:[images.primary.large, itemInfo.title, parentASIN]}`。
 
 ## OpenBD 状況
