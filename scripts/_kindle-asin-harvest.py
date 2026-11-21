@@ -225,10 +225,19 @@ _LABEL = re.compile(r"\s*[\(（][^()（）]*(コミックス|comics|文庫|digit
 _BAD = re.compile(r"分冊|単話|話売り|連載版|第\d+話|特装|限定版|試し読み|無料|お試し|合本|セット|画集|ファンブック|公式ガイド|小説|ノベル|ベストセレクション|傑作選|傑作集|総集編|名作選|アンソロジー", re.I)
 
 
+_UEGE = {"上": "U", "前編": "U", "前": "U", "中": "M", "下": "S", "後編": "S", "後": "S"}
+
+
 def vol_of(t):
-    """Kindle題 → (本体題, 巻番号 or None)"""
+    """Kindle題 → (本体題, 巻番号 or None or "U"/"M"/"S"=上中下)。
+    ★2026-11-21 「完全版 紳士協定を結ぼう! 上【電子特典付き】」を読めなかった → 【…】[…]を外し、上中下/前後編を読む。"""
     t = unicodedata.normalize("NFKC", t)
     t = _LABEL.sub("", t).strip()
+    t = re.sub(r"[【\[][^】\]]*[】\]]", "", t).strip()
+    t = _LABEL.sub("", t).strip()
+    m = re.match(r"^(.*?)[\s]*(上|中|下|前編|後編)(巻)?$", t)
+    if m and m.group(1):
+        return m.group(1).strip(), _UEGE[m.group(2)]
     for p in (r"^(.*?)[\s　]*[\(（](\d+)[\)）]\s*$", r"^(.*?)[\s　]*第?(\d+)巻?\s*$", r"^(.*?)\s*(\d+)\s*[\(（]", r"^(.*?\D)(\d+)$"):
         m = re.match(p, t)
         if m:
@@ -254,10 +263,17 @@ def match_author(pages, items):
         if _BAD.search(it["title"]):
             continue
         base, n = vol_of(it["title"])
-        kin.append({**it, "base": norm(base), "n": n, "color": "カラー" in it["title"]})
+        kin.append({**it, "base": norm(base), "n": n, "color": "カラー" in it["title"],
+                    "au": [norm(a) for a in it.get("authors") or [] if a]})
+    # 上中下 → 番号(同じ本体題に「中」があれば 下=3、無ければ 下=2)
+    has_mid = {k["base"] for k in kin if k["n"] == "M"}
+    for k in kin:
+        if k["n"] in ("U", "M", "S"):
+            k["n"] = {"U": 1, "M": 2, "S": 3 if k["base"] in has_mid else 2}[k["n"]]
     rows = []
     for pg in pages:
         nt = norm(pg["title"])
+        pa = norm(pg.get("author") or "")
         single = len(pg["vols"]) == 1
         for num, isbn, dt in pg["vols"]:
             cands = []
@@ -265,6 +281,9 @@ def match_author(pages, items):
                 # ★Kindle題 ⊇ 自サイト題 のみ(「まんが版 〜」の前置きは許す)。 逆向き(自サイト題がKindle題を含む)は
                 #   「〜対マイコン電児ラン」に「マイコン電児ラン(1)」が当たる誤りになる(2026-11-21 試行で実踏)。
                 if not nt or nt not in k["base"]:
+                    continue
+                # ★作者は空白・中黒を抜いて照合(Amazon「こうじま 奈月」⇔ サイト「こうじま奈月」 2026-11-21)
+                if pa and k["au"] and not any(pa in a or a in pa for a in k["au"]):
                     continue
                 if k["n"] is None and k["base"] != nt:  # 巻番号なしのKindle題は題が完全一致の時だけ
                     continue
@@ -435,7 +454,8 @@ def judge_page(pi, items):
     """→ [{isbn13, number, edition, verdict(take/review/none), grade, asin, ...}]"""
     out = []
     for ed in pi["eds"]:
-        pg = {"slug": pi["slug"], "title": pi["title"], "vols": [(n, i, dt) for n, i, dt, _ in ed["vols"]]}
+        pg = {"slug": pi["slug"], "title": pi["title"], "author": pi["author"],
+              "vols": [(n, i, dt) for n, i, dt, _ in ed["vols"]]}
         rows = match_author([pg], items)
         graded = [r for r in rows if r[5] != "-"]
         asins = [r[6] for r in graded]
@@ -466,6 +486,9 @@ def harvest(order_seed, max_pages):
     todo = [f for f in files if f[:-4] not in done]
     print(f"全{len(files)}頁 / 済{len(done)} / 残{len(todo)} / 今日の残り予算 {DAILY_BUDGET - _used_24h()} 回", flush=True)
     queue = []  # 紙照会待ち (isbn10, isbn13, src)
+    paper_known = set()
+    if os.path.exists(PAPER):
+        paper_known = {json.loads(ln)["isbn13"] for ln in open(PAPER, encoding="utf-8")}
     stat = Counter()
     t0 = time.time()
 
@@ -500,16 +523,24 @@ def harvest(order_seed, max_pages):
                 continue
             items = []
             for page in range(1, 11):
-                req = {"title": pi["title"], "searchIndex": "KindleStore", "itemCount": 10, "itemPage": page, "resources": FULL}
-                if pi["author"]:
-                    req["author"] = pi["author"]
+                # ★題名だけで検索(作者を条件に入れると「こうじま 奈月」型の空白ゆれで0件になる)。 作者は照合側で確かめる。
+                q = re.sub(r"[!！?？]+", " ", pi["title"]).strip()
+                req = {"title": q, "searchIndex": "KindleStore", "itemCount": 10, "itemPage": page, "resources": FULL}
                 st, resp = call("searchItems", req)
                 save_raw("kindle-search", req, st, resp, pi["src"])
                 if st != 200:
                     break
                 its = (resp.get("searchResult") or {}).get("items") or []
-                items += [_item_brief(x) for x in its]
+                br = [_item_brief(x) for x in its]
+                items += br
                 if len(its) < 10:
+                    break
+                # 2頁目以降で「題も作者も合う物」が1件も無い頁が出たら、 その先は別作品ばかり = めくらない(回数の節約)
+                pa = norm(pi["author"])
+                nt = norm(pi["title"])
+                if page >= 2 and not any(nt in norm(vol_of(b["title"])[0]) and
+                                         (not pa or any(pa in norm(a) or norm(a) in pa for a in b["authors"] if a))
+                                         for b in br):
                     break
             rows = judge_page(pi, items)
             with open(CAND, "a", encoding="utf-8") as fo:
@@ -519,8 +550,9 @@ def harvest(order_seed, max_pages):
             for ed in pi["eds"]:
                 for _, i13, _, _ in ed["vols"]:
                     a10 = i10(i13)
-                    if a10:
+                    if a10 and i13 not in paper_known:
                         queue.append((a10, i13, pi["src"]))
+                        paper_known.add(i13)
             flush()
             with open(DONE, "a", encoding="utf-8") as fo:
                 fo.write(pi["src"] + "\n")
