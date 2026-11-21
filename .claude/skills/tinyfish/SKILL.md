@@ -30,6 +30,10 @@ python scripts/_tinyfish.py fetch <URL> [<URL>...]   # ページ→Markdown本�
 python scripts/_tinyfish.py search "<クエリ>"          # Web検索→構造化JSON(★GET。POSTは失敗する)
 ```
 コード内: `from _tinyfish import fetch, search`
+- ★**2026-11-21〜 `fetch()` は「直接 → Jina Reader → 魚」の順**(魚 Fetch の 1,000URL/日を節約)。返り値は従来と同形で、各 result に `via`(direct/jina/fish)が付く。
+  直接で本文200字未満(JS組み立て頁の疑い)・403/429/5xx → Jina(r.jina.ai・キー無し≈20/分=3.2秒間隔・`.env` に `JINA_API_KEY` があれば短縮)→ それでも取れない時だけ魚。404/410 は直接の時点で確定(魚の枠を使わない)。
+  魚まで落ちて魚が失敗(枠切れ)した時は従来どおり SystemExit(呼び出し側の中断契約は不変)。魚だけで取りたい時は `fetch(urls, route="fish")`(漫画全巻ドットコム harvest は表の書式が魚前提なのでこれ)。
+  経路別の日次件数 = `.cache/fetch-route-stats.json`(UTC日付)。
 - `fetch(urls, live=True)` = キャッシュ無視(ttl=0)。既定はTinyFish側キャッシュ応答。
 - `search(query, purpose=...)` = 応答 `{query, results:[{position,title,url,snippet,site_name,date?}], total_results}`。purposeで検索意図を補足できる(任意・2000字まで)。
 - fetch応答には `results[]` と別に `errors[]`(url/error/status)が出る。エラーは黙って捨てない=件数を報告。

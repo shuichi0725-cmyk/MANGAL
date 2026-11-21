@@ -17,3 +17,4 @@ metadata:
 - **実証**: Fetch=usio.co.jp(潮出版社)取得成功。Search=スゴ盛が実話系4コマ雑誌(Wikipedia+版元ドットコム)と確定=「これはアンソロ/雑誌か」の性質判定に強い。
 - **使いどころ**: 出版社公式(潮/小さい版元)・電書ストア(cmoa/BookWalker JS重)・Amazon書影/在庫など「APIが無い＋WebFetchが弾かれる」時。**主力は今まで通りNDL(_lookup.py)+楽天**で、それで埋まらない時だけTinyFish。[[external_data_access]]の補完。
 - 位置づけ=**必須でない便利ツール**(ユーザ評)。per-case/蒸留で「公式にしか無い版情報」を取る時に想起する。
+- ★2026-11-21 ユーザ裁定「直接→Jina→魚」に組込済(`_tinyfish.fetch` の route=auto が既定)。実測: 潮出版社・ジャンプ公式は直接で取れた(7月に「WebFetch不通」だった潮も素のurllibなら通る)/漫画全巻ドットコムはJinaキー無しで通る。経路別件数=.cache/fetch-route-stats.json。

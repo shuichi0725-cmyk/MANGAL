@@ -72,7 +72,7 @@ def main():
         end = start + a.test - 1 if a.test else a.max
         while page <= end:
             url = f"https://www.mangazenkan.com/s/?tags={tagq}&page={page}"
-            res = fetch([url])
+            res = fetch([url], route="fish")  # 表の書式(作者 | …)が魚のMarkdown前提
             txt = (res.get("results") or [{}])[0].get("text", "") if isinstance(res, dict) else ""
             works = parse_page(txt)
             if not works:
