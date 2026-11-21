@@ -76,7 +76,9 @@ _last = [0.0]
 #   → 叩く間隔を「単位×11秒」(戻りより少し遅く)にすれば、 1日中流しても桶は減らない。
 PACE_PER_UNIT = 11.0
 PACE = PACE_PER_UNIT
-DAILY_BUDGET = int(os.environ.get("KINDLE_ASIN_BUDGET", "8000"))  # ★単位(getItemsは冊数)で数える
+# ★2026-11-21 ユーザ裁定 A: 24時間の予算チェックは既定で外す(0=無効)。 守りは「単位×11秒の間隔(=戻る速さより遅い)」+「429で即停止」。
+#   使いたい時は KINDLE_ASIN_BUDGET=<単位> で有効化(単位=getItemsは冊数)。
+DAILY_BUDGET = int(os.environ.get("KINDLE_ASIN_BUDGET", "0"))
 _LEDGER = os.path.join(CACHE, "calls.log")  # 1行1呼び出し: epoch秒 op status
 _bad = [0]
 _next_ok = [0.0]  # 次に叩いてよい時刻(前回の単位数 × PACE_PER_UNIT 後)
@@ -100,8 +102,8 @@ def _used_24h():
 
 
 def call(op, body):
-    used = _used_24h()
-    if used >= DAILY_BUDGET:
+    used = _used_24h() if DAILY_BUDGET else 0
+    if DAILY_BUDGET and used >= DAILY_BUDGET:
         raise SystemExit(f"1日の予算 {DAILY_BUDGET} 回に達した(直近24時間 {used} 回)= 今日はここまで。続きは明日")
     w = _next_ok[0] - time.time()
     if w > 0:
@@ -530,7 +532,7 @@ def harvest(order_seed, max_pages):
     files = sorted(f for f in os.listdir(d) if f.endswith(".yml"))
     random.Random(order_seed).shuffle(files)  # ★人気順にしない(決まった種で混ぜた順=途中で止めても偏らない)
     todo = [f for f in files if f[:-4] not in done]
-    print(f"全{len(files)}頁 / 済{len(done)} / 残{len(todo)} / 今日の残り予算 {DAILY_BUDGET - _used_24h()} 回", flush=True)
+    print(f"全{len(files)}頁 / 済{len(done)} / 残{len(todo)} / 直近24時間 {_used_24h()} 単位", flush=True)
     queue = []  # 紙照会待ち (isbn10, isbn13, src)
     paper_known = set()
     if os.path.exists(PAPER):
@@ -592,7 +594,7 @@ def harvest(order_seed, max_pages):
                 el = time.time() - t0
                 print(f"[{time.strftime('%H:%M')}] {n}頁 / 巻 採る{stat['take']} 見直し{stat['review']} なし{stat['none']}"
                       f" / 紙 有{stat['paper_ok']} 無{stat['paper_ng']} / 呼出{(CALLS['searchItems'] + CALLS['getItems'])}"
-                      f" / {el / n:.1f}秒/頁 / 予算残 {DAILY_BUDGET - _used_24h()}", flush=True)
+                      f" / {el / n:.1f}秒/頁 / 24h {_used_24h()}単位", flush=True)
     except SystemExit as e:
         print(f"停止: {e}", flush=True)
         # ★紙照会待ちは done にした頁の分。 次回は該当頁を再走しないので、 ここで捨てずに保留ファイルへ。
@@ -606,7 +608,7 @@ def harvest(order_seed, max_pages):
         except SystemExit as e:
             print(f"停止(紙照会の最後): {e}", flush=True)
     print(f"\n今回 {n}頁 / 巻 採る{stat['take']} 見直し{stat['review']} なし{stat['none']} / 紙 有{stat['paper_ok']}"
-          f" 無{stat['paper_ng']} / skip{stat['skip']} / 呼出{dict(CALLS)} / 予算残 {DAILY_BUDGET - _used_24h()}", flush=True)
+          f" 無{stat['paper_ng']} / skip{stat['skip']} / 呼出{dict(CALLS)} / 24h {_used_24h()}単位", flush=True)
 
 
 def summary():
