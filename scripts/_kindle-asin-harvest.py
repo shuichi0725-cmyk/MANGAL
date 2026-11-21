@@ -88,6 +88,48 @@ def call(op, body):
 
 
 RES = ["itemInfo.title", "itemInfo.byLineInfo", "itemInfo.contentInfo", "itemInfo.classifications"]
+# ★2026-11-21 ユーザ「一緒に取れる情報を捨てて取り直すことがあった」→ 取得前に全項目を調査して、価格・在庫(offersV2=
+#   静的表示禁止・規約上1時間)以外は全部取る。 成人判定(productInfo.isAdultProduct)・ジャンル売り場(browseNodes)・
+#   役割つき著者(byLineInfo)・頁数/紙の発売日/電子の配信日(contentInfo/productInfo)・書影URL(images=手元だけ・公開しない)。
+FULL = ["browseNodeInfo.browseNodes", "browseNodeInfo.browseNodes.ancestor", "browseNodeInfo.browseNodes.salesRank",
+        "browseNodeInfo.websiteSalesRank", "images.primary.large", "images.variants.large",
+        "itemInfo.byLineInfo", "itemInfo.classifications", "itemInfo.contentInfo", "itemInfo.contentRating",
+        "itemInfo.externalIds", "itemInfo.features", "itemInfo.manufactureInfo", "itemInfo.productInfo",
+        "itemInfo.technicalInfo", "itemInfo.title", "itemInfo.tradeInInfo", "parentASIN"]
+RAW_DIR = os.path.join(CACHE, "raw")
+os.makedirs(RAW_DIR, exist_ok=True)
+_CAMPAIGN = re.compile(r"キャンペーン|ポイント|クーポン|セール|まとめ買い|まとめ|Custom Stores|Experiment|Mystery|Offer|"
+                       r"CompMatch|スタンプ|チャレンジ|円以下|_delete|\d{4}年|manga \d", re.I)
+
+
+def _chain(bn):
+    out = []
+    while bn:
+        out.append(bn.get("displayName", ""))
+        bn = bn.get("ancestor")
+    return out
+
+
+def strip_item(it):
+    """生の応答から販促用の売り場分類(1件80KB の大半)だけ落とす。 他は全部残す。"""
+    bi = it.get("browseNodeInfo") or {}
+    if not bi:
+        return it
+    keep = [b for b in bi.get("browseNodes") or [] if not any(_CAMPAIGN.search(x) for x in _chain(b))]
+    return {**it, "browseNodeInfo": {**bi, "browseNodes": keep}}
+
+
+def save_raw(kind, req, st, d, slug=None):
+    """生の応答を .cache/kindle-asin/raw/YYYYMM.jsonl.gz へ追記(取り直し防止の一次保存)。"""
+    import gzip
+    d2 = d
+    if isinstance(d, dict):
+        for key in ("searchResult", "itemsResult"):
+            if isinstance(d.get(key), dict) and d[key].get("items"):
+                d2 = {**d, key: {**d[key], "items": [strip_item(x) for x in d[key]["items"]]}}
+    rec = {"at": time.strftime("%Y-%m-%dT%H:%M:%S"), "kind": kind, "slug": slug, "req": req, "status": st, "resp": d2}
+    with gzip.open(os.path.join(RAW_DIR, time.strftime("%Y%m") + ".jsonl.gz"), "at", encoding="utf-8") as f:
+        f.write(json.dumps(rec, ensure_ascii=False) + "\n")
 
 
 def kindle_by_author(name):
@@ -125,6 +167,8 @@ def load_pages():
     by = defaultdict(list)
     d = os.path.join(ROOT, "data", "manga.v2")
     for f in os.listdir(d):
+        if not f.endswith(".yml"):
+            continue
         s = open(os.path.join(d, f), encoding="utf-8").read()
         m = re.search(r"^title: (.*)$", s, re.M)
         yr = re.search(r"^year_started: (\d+)", s, re.M)
@@ -217,6 +261,108 @@ def match_author(pages, items):
     return rows
 
 
+# ---------------- 頁モード(題名+第1作者で Kindle 検索 + 紙ISBNを getItems) ----------------
+def i10(s):
+    s = str(s)
+    if len(s) != 13 or not s.startswith("978"):
+        return None
+    b = s[3:12]
+    c = (11 - sum((10 - i) * int(b[i]) for i in range(9)) % 11) % 11
+    return b + ("X" if c == 10 else str(c))
+
+
+def _item_brief(it):
+    ii = it.get("itemInfo") or {}
+    return {"asin": it["asin"], "title": (ii.get("title") or {}).get("displayValue", ""),
+            "date": ((ii.get("contentInfo") or {}).get("publicationDate") or {}).get("displayValue", "")[:10],
+            "binding": ((ii.get("classifications") or {}).get("binding") or {}).get("displayValue", ""),
+            "authors": [c.get("name") for c in ((ii.get("byLineInfo") or {}).get("contributors") or [])]}
+
+
+def harvest_page(pg, author):
+    """→ (kindle_items, paper_found{isbn13:asin}, paper_invalid[isbn13], calls)。 応答は全部 save_raw。"""
+    c0 = sum(CALLS.values())
+    items = []
+    for page in range(1, 11):
+        req = {"title": pg["title"], "author": author, "searchIndex": "KindleStore", "itemCount": 10,
+               "itemPage": page, "resources": FULL}
+        st, d = call("searchItems", req)
+        save_raw("kindle-search", req, st, d, pg["slug"])
+        if st != 200:
+            break
+        its = (d.get("searchResult") or {}).get("items") or []
+        items += [_item_brief(x) for x in its]
+        if len(its) < 10:
+            break
+    found, invalid = {}, []
+    ids = {}
+    for _, isbn, _ in pg["vols"]:
+        k = i10(isbn)
+        if k:
+            ids[k] = isbn
+    keys = list(ids)
+    for j in range(0, len(keys), 10):
+        req = {"itemIds": keys[j:j + 10], "itemIdType": "ASIN", "resources": FULL}
+        st, d = call("getItems", req)
+        save_raw("paper-get", req, st, d, pg["slug"])
+        if st != 200:
+            continue
+        for it in (d.get("itemsResult") or {}).get("items") or []:
+            if it["asin"] in ids:
+                found[ids[it["asin"]]] = it["asin"]
+        for e in d.get("errors") or []:
+            m = re.search(r"ItemIds (\S+) provided", e.get("message", ""))
+            if m and m.group(1) in ids:
+                invalid.append(ids[m.group(1)])
+    return items, found, invalid, sum(CALLS.values()) - c0
+
+
+def first_author(slug):
+    s = open(os.path.join(ROOT, "data", "manga.v2", slug + ".yml"), encoding="utf-8").read()
+    head = s.split("\noriginal_authors:")[0]
+    ms = re.findall(r"^- name: (.*)\n\s+role: (\S+)", head, re.M)
+    for n, r in ms:  # 作画・作画兼作者を優先(原作者名だと Kindle 側の著者表記とずれることがある)
+        if r in ("writer_artist", "artist"):
+            return n.strip().strip("'\"")
+    return ms[0][0].strip().strip("'\"") if ms else ""
+
+
+def run_pages(authors, by, tag, max_pages):
+    od = os.path.join(CACHE, tag)
+    os.makedirs(od, exist_ok=True)
+    fm = open(os.path.join(od, "match.tsv"), "w", encoding="utf-8")
+    fm.write("author\tslug\ttitle\tnumber\tisbn13\tour_date\tgrade\tkindle_asin\tkindle_date\tkindle_title\tdays\tpaper\n")
+    seen, rep, tot = set(), [], Counter()
+    pages = []
+    for a in authors:
+        for pg in by.get(a, []):
+            if pg["slug"] in seen or first_author(pg["slug"]) != a:
+                continue
+            seen.add(pg["slug"])
+            pages.append((a, pg))
+    pages = pages[:max_pages]
+    print(f"対象 {len(pages)}頁 / {sum(len(p['vols']) for _, p in pages)}巻", flush=True)
+    for a, pg in pages:
+        items, found, invalid, calls = harvest_page(pg, a)
+        rows = match_author([pg], items)
+        g = Counter(r[5][0] for r in rows)
+        for r in rows:
+            pap = "有" if r[3] in found else ("無" if r[3] in invalid else "?")
+            fm.write(a + "\t" + "\t".join(str(x) for x in r) + "\t" + pap + "\n")
+        line = (f"{pg['title'][:24]}({a}) 呼出{calls} Kindle{len(items)} / {len(rows)}巻 → A{g['A']} B{g['B']} なし{g['-']}"
+                f" / 紙 有{len(found)} 無{len(invalid)}")
+        print(" ", line, flush=True)
+        rep.append(line)
+        tot.update({"calls": calls, "vols": len(rows), "A": g["A"], "B": g["B"], "none": g["-"],
+                    "paper_ok": len(found), "paper_ng": len(invalid), "kitems": len(items)})
+    s = (f"\n計: {len(pages)}頁 呼出{tot['calls']} / Kindle {tot['kitems']}件 / 自サイト{tot['vols']}巻 → "
+         f"A {tot['A']} ({tot['A'] / max(1, tot['vols']):.0%}) / B {tot['B']} / なし {tot['none']}"
+         f" / 紙の商品頁 有{tot['paper_ok']} 無{tot['paper_ng']}")
+    print(s)
+    open(os.path.join(od, "report.txt"), "w", encoding="utf-8").write("\n".join(rep) + s + "\n")
+    print("出力:", od, "/ 生の応答:", RAW_DIR)
+
+
 # ---------------- 実行 ----------------
 ROW = "アカサタナハマヤラワ"
 
@@ -281,6 +427,8 @@ def main():
     sub = ap.add_subparsers(dest="cmd", required=True)
     t = sub.add_parser("trial"); t.add_argument("--n", type=int, default=10); t.add_argument("--seed", type=int, default=1121)
     o = sub.add_parser("author"); o.add_argument("name")
+    pp = sub.add_parser("pages"); pp.add_argument("--n", type=int, default=10); pp.add_argument("--seed", type=int, default=2211)
+    pp.add_argument("--max-pages", type=int, default=60)
     a = ap.parse_args()
     print("自サイトの頁を読み込み中…", flush=True)
     by = load_pages()
@@ -288,6 +436,10 @@ def main():
         au = pick_authors(by, a.n, a.seed)
         print("選んだ作者:", " / ".join(au))
         run(au, by, f"trial-{time.strftime('%Y%m%d-%H%M')}")
+    elif a.cmd == "pages":
+        au = pick_authors(by, a.n, a.seed)
+        print("選んだ作者:", " / ".join(au))
+        run_pages(au, by, f"pages-{time.strftime('%Y%m%d-%H%M')}", a.max_pages)
     else:
         run([a.name], by, f"author-{time.strftime('%Y%m%d-%H%M')}")
 
