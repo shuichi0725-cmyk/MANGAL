@@ -10590,7 +10590,8 @@
 "merge_keys": [
 "name:Yoshimo|name:大自然の魔法師アシュト、廃れた領地でスローライフ",
 "name:Yoshimo|name:大自然の魔法師アシュト、廃れた領地でスローライフ.",
-"name:さとう|name:大自然の魔法師アシュト、廃れた領地でスローライフ"
+"name:さとう|name:大自然の魔法師アシュト、廃れた領地でスローライフ",
+"name:さとうライトノベル作家|name:大自然の魔法師アシュト、廃れた領地でスローライフ"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -11900,6 +11901,14 @@
 "merge_keys": [
 "name:opon|name:代打屋ガンちゃん!",
 "qid:Q11303436|name:代打屋ガンちゃん!"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "麗子の風儀",
+"merge_keys": [
+"name:otakumi|name:麗子の風儀",
+"name:ミト|name:麗子の風儀|sub:悪役令嬢と呼ばれていますが、ただの貧乏娘です"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -15827,6 +15836,14 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
+"main": "執着ヤンデレに愛されすぎて",
+"merge_keys": [
+"name:おうぎまちこ|name:執着ヤンデレに愛されすぎて",
+"name:はんそで|name:執着ヤンデレに愛されすぎて"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
 "main": "おっさんはうぜぇぇぇんだよ!ってギルドから追放したくせに、後から復帰要請を出されても遅い。最高の仲間と出会った俺はこっちで最強を目指す!",
 "merge_keys": [
 "name:おうすけ|name:おっさんはうぜぇぇぇんだよ!ってギルドから追放したくせに、後から復帰要請を出されても遅い。最高の仲間と出会った俺はこっちで最強を目指す!",
@@ -18746,7 +18763,16 @@
 "main": "勇者にみんな寝取られたけど諦めずに戦おう。きっと最後は俺が勝つ。",
 "merge_keys": [
 "name:さとう|name:勇者にみんな寝取られたけど諦めずに戦おう。きっと最後は俺が勝つ。",
-"name:さとう|name:勇者にみんな寝取られたけど諦めずに戦おう。きっと最後は俺が勝つ。."
+"name:さとう|name:勇者にみんな寝取られたけど諦めずに戦おう。きっと最後は俺が勝つ。.",
+"name:さとうライトノベル作家|name:勇者にみんな寝取られたけど諦めずに戦おう。きっと最後は俺が勝つ。"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "聖剣が最強の世界で、少年は弓に愛される",
+"merge_keys": [
+"name:さとう|name:聖剣が最強の世界で、少年は弓に愛される",
+"name:さとうライトノベル作家|name:聖剣が最強の世界で、少年は弓に愛される"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -20858,6 +20884,14 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
+"main": "『ショップ』スキルさえあれば、ダンジョン化した世界でも楽勝だ",
+"merge_keys": [
+"name:たのそ|name:『ショップ』スキルさえあれば、ダンジョン化した世界でも楽勝だ",
+"name:夜ノみつき|name:『ショップ』スキルさえあれば、ダンジョン化した世界でも楽勝だ|sub:迫害された少年の最強ざまぁライフ"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
 "main": "ワルハメ",
 "merge_keys": [
 "name:たべこーじ|name:ワルハメ",
@@ -22420,7 +22454,7 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
-"main": "現実(リアル)もたまには嘘をつく",
+"main": "現実もたまには嘘をつく",
 "merge_keys": [
 "name:にいち|name:現実(リアル)もたまには嘘をつく",
 "name:にいち|name:現実もたまには嘘をつく"
@@ -22457,6 +22491,14 @@
 "merge_keys": [
 "name:にしのムラサキ|name:エリート自衛官に溺愛されてる…らしいです?|sub:もしかして、これって恋ですか?",
 "name:炎かりよ|name:エリート自衛官に溺愛されてる…らしいです?|sub:もしかして、これって恋ですか?"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "極上!!めちゃモテ委員長外伝めちゃモテ委員長だった私が異世界でも極上めざします!!",
+"merge_keys": [
+"name:にしむらともこ|name:極上!!めちゃモテ委員長外伝めちゃモテ委員長だった私が異世界でも極上めざします!!",
+"qid:Q11274761|name:極上!!めちゃモテ委員長外伝めちゃモテ委員長だった私が異世界でも極上めざします!!"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -25057,6 +25099,15 @@
 "merge_keys": [
 "name:まるせい|name:ハズレスキル『添い寝』が覚醒し、僕が最強ハーレムを築くまで",
 "name:まるせい|name:ハズレスキル『添い寝』が覚醒し、僕が最強ハーレムを築くまで|sub:密着添い寝で願望解放!?誘惑されまくって困ってます!!"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "生贄になった俺が、なぜか邪神を滅ぼしてしまった件",
+"merge_keys": [
+"name:まるせい|name:生贄になった俺が、なぜか邪神を滅ぼしてしまった件",
+"name:チワワ丸|name:生贄になった俺が、なぜか邪神を滅ぼしてしまった件",
+"name:チワワ丸|name:生贄になった俺が、なぜか邪神を滅ぼしてしまった件."
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -30602,6 +30653,22 @@
 "merge_keys": [
 "name:ウダジョ|name:Moongazer",
 "name:叶瀬あつこ|name:Moongazer."
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "スライムは最強たる可能性を秘めている～2回目の人生、ちゃんとスライムと向き合います～@COMIC",
+"merge_keys": [
+"name:ウチツカサ|name:スライムは最強たる可能性を秘めている～2回目の人生、ちゃんとスライムと向き合います～@COMIC",
+"name:オサフネオウジ|name:スライムは最強たる可能性を秘めている～2回目の人生、ちゃんとスライムと向き合います～@COMIC"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "借金令嬢とひきこもり竜王子",
+"merge_keys": [
+"name:ウラシマ|name:借金令嬢とひきこもり竜王子|sub:専属お世話係は危険がいっぱい!?",
+"name:キシダチカ|name:借金令嬢とひきこもり竜王子"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -45583,14 +45650,6 @@
 "merge_keys": [
 "name:チリツモル|name:チリもつもれば福となる",
 "name:チリツモル|name:チリもつもれば福となる|sub:愉快なチリツモ一家"
-],
-"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
-},
-{
-"main": "生贄になった俺が、なぜか邪神を滅ぼしてしまった件",
-"merge_keys": [
-"name:チワワ丸|name:生贄になった俺が、なぜか邪神を滅ぼしてしまった件",
-"name:チワワ丸|name:生贄になった俺が、なぜか邪神を滅ぼしてしまった件."
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -66394,6 +66453,14 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
+"main": "名探偵コナン 探偵たちの鎮魂歌",
+"merge_keys": [
+"name:丸伝次郎|name:名探偵コナン探偵たちの鎮魂歌",
+"qid:Q313945|name:名探偵コナン 探偵たちの鎮魂歌"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
 "main": "名探偵コナン純黒の悪夢",
 "merge_keys": [
 "name:丸伝次郎|name:名探偵コナン純黒の悪夢",
@@ -77797,6 +77864,14 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
+"main": "シグルイ",
+"merge_keys": [
+"name:南条範夫|name:シグルイ",
+"name:南條範夫|name:シグルイ"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
 "main": "キャンパス釣り日記",
 "merge_keys": [
 "name:南条英樹|name:キャンパス釣り日記",
@@ -81097,7 +81172,7 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
-"main": "じつは義妹(いもうと)でした。",
+"main": "じつは義妹でした。",
 "merge_keys": [
 "name:堺しょうきち|name:じつは義妹でした。",
 "qid:Q116937131|name:じつは義妹(いもうと)でした。|sub:最近できた義理の弟の距離感がやたら近いわけ",
@@ -84778,6 +84853,7 @@
 {
 "main": "百雌繚乱",
 "merge_keys": [
+"name:実倉なる|name:百雌繚乱",
 "name:実倉なる|name:百雌繚乱|sub:俺のアソコを狙う百人のメス",
 "name:実倉なる|name:百雌繚乱|sub:俺のアソコを狙う百人のメス."
 ],
@@ -86074,6 +86150,14 @@
 "merge_keys": [
 "name:富野由悠季|name:重戦機エルガイム",
 "qid:Q11551540|name:重戦機エルガイム"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "怪奇!死肉の男",
+"merge_keys": [
+"name:寺井広樹|name:怪奇!死肉の男",
+"qid:Q1617383|name:怪奇!死肉の男"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -87460,6 +87544,14 @@
 "merge_keys": [
 "name:小迎裕美子|name:本日もいとをかし!!枕草子",
 "name:赤間恵都子|name:本日もいとをかし!!枕草子"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "悪役令嬢の遺言状",
+"merge_keys": [
+"name:小野おのこ|name:悪役令嬢の遺言状",
+"name:巻村螢|name:悪役令嬢の遺言状"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -97162,6 +97254,14 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
+"main": "夜伽の悪女",
+"merge_keys": [
+"name:松井トミー|name:夜伽の悪女",
+"name:松井トミー|name:夜伽の悪女|sub:発情体質令嬢は、夜ごと皇帝に愛される."
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
 "main": "行き倒れもできないこんな異世界じゃ",
 "merge_keys": [
 "name:松井トミー|name:行き倒れもできないこんな異世界じゃ",
@@ -100014,6 +100114,14 @@
 "name:椿野イメリ|name:今夜、うちにおいで",
 "name:椿野イメリ|name:今夜、うちにおいで|sub:冷徹上司の理性が溶けたら",
 "name:椿野イメリ|name:今夜、うちにおいで|sub:冷徹上司の理性が溶けたら."
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "命がけの証言",
+"merge_keys": [
+"name:楊海英|name:命がけの証言",
+"qid:Q76523668|name:命がけの証言"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -110761,6 +110869,14 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
+"main": "放課後の!入間くん",
+"merge_keys": [
+"name:秋田書店|name:放課後の!入間くん",
+"qid:Q44395039|name:放課後の!入間くん|sub:「魔入りました!入間くん」公式アンソロジー"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
 "main": "KAFKA",
 "merge_keys": [
 "name:秋野あさづけ|name:KAFKA",
@@ -120584,6 +120700,14 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
+"main": "いたいのいたいのそらをとべ",
+"merge_keys": [
+"name:黒崎冬子|name:いたいのいたいのそらをとべ",
+"qid:Q100454841|name:いたいのいたいのそらをとべ"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
 "main": "後妻業の女",
 "merge_keys": [
 "name:黒川博行|name:後妻業の女",
@@ -128694,6 +128818,7 @@
 "main": "Duel Masters LOST～月下の死神～",
 "merge_keys": [
 "qid:Q11530791|name:Duel Masters LOST～忘却の太陽～",
+"qid:Q11530791|name:Duel Masters LOST～断罪の少年～",
 "qid:Q11530791|name:Duel Masters LOST～月下の死神～"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
@@ -131307,6 +131432,14 @@
 "merge_keys": [
 "qid:Q11623724|name:S -最後の警官-",
 "qid:Q11623724|name:S 最後の警官"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "Xinobi",
+"merge_keys": [
+"qid:Q11623724|name:Xinobi",
+"qid:Q11623724|name:Xinobi|sub:乱世のアウトローたち"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },

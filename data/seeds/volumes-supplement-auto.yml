@@ -1,3 +1,7 @@
+# 種4 auto = MADB取込もれ巻の**蓄積台帳** (日次zokkan/巻抜けfill/NDL確認の合流先)。
+# 手動版 data/seeds/volumes-supplement.yml は不変。 promote/audit が両方 load。
+# ★全消し禁止: _register-seed4-ndl.py は source: ndl-auto の entry だけを差し替え、
+#   他 source (rakuten-preorder/rakuten-local/rakuten-live 等) は必ず保存する (2026-08-26恒久修正)。
 schema_version: 1
 generator: ndl-auto
 volumes:
