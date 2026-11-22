@@ -85,7 +85,7 @@ _next_ok = [0.0]  # 次に叩いてよい時刻(前回の単位数 × PACE_PER_U
 # ★2026-11-22 ユーザ裁定: 「429 が出るまで1秒間隔、出たら 10.2秒間隔で電子・紙問わず回す」。
 #   FAST=1 の間は種別・冊数に関係なく1秒。 429 が出たら FAST=0 にして 10.2秒/回(冊数で掛けない)へ落とし、
 #   その1件は少し待って取り直す。 落とした後にもう一度 429 が出たら、 従来どおり即停止。
-MODE = {"fast": os.environ.get("KINDLE_ASIN_FAST", "1") == "1", "slow_pace": 10.2, "fast_pace": 1.0}
+MODE = {"fast": os.environ.get("KINDLE_ASIN_FAST", "0") == "1", "slow_pace": 10.2, "fast_pace": 1.0}
 
 
 def _units(op, body):
@@ -122,7 +122,9 @@ def call(op, body):
         st, t = 0, f"{type(e).__name__}"
     CALLS[op] += 1
     CALLS["units"] += u
-    _next_ok[0] = time.time() + (MODE["fast_pace"] if MODE["fast"] else MODE["slow_pace"])
+    # ★2026-11-22 確定: 10.2秒/回(冊数で掛けない)で54分・126回目に429 = 冊数換算369単位 > 戻り約320単位。
+    #   = getItems は冊数で数えられる。 既定(FAST=0)は「単位×11秒」(11/21夜〜16時間429なしの実績)に戻す。
+    _next_ok[0] = time.time() + (MODE["fast_pace"] if MODE["fast"] else u * PACE_PER_UNIT)
     with open(_LEDGER, "a", encoding="utf-8") as f:
         f.write(f"{time.time():.0f} {op} {st} {u}\n")
     if st == 429:
