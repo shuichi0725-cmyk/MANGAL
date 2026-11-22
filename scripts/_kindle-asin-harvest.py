@@ -124,7 +124,8 @@ def call(op, body):
     CALLS["units"] += u
     # ★2026-11-22 確定: 10.2秒/回(冊数で掛けない)で54分・126回目に429 = 冊数換算369単位 > 戻り約320単位。
     #   = getItems は冊数で数えられる。 既定(FAST=0)は「単位×11秒」(11/21夜〜16時間429なしの実績)に戻す。
-    _next_ok[0] = time.time() + (MODE["fast_pace"] if MODE["fast"] else u * PACE_PER_UNIT)
+    # ★2026-11-22 ユーザ裁定: 検索=10.2秒・紙照会(10冊)=101秒(=冊数×10.1秒)。
+    _next_ok[0] = time.time() + (MODE["fast_pace"] if MODE["fast"] else (10.2 if u == 1 else u * 10.1))
     with open(_LEDGER, "a", encoding="utf-8") as f:
         f.write(f"{time.time():.0f} {op} {st} {u}\n")
     if st == 429:
