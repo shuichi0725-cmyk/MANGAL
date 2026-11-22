@@ -68,3 +68,4 @@ skill 実体 = `.claude/skills/<name>/SKILL.md`(git追跡。Opus 4.8 等でも�
 - push後のpreview反映は15-20分・追いpush禁止
 
 - **ISBNダブリの続き/ISBNダブリ潰して** = skill `isbn-dup-cleanup`(検出→層別→判定→適用→検証。進行状態=memory isbn-dup-cleanup-state)
+- **Kindle収穫して/続けて/止めて/どう?** = skill `kindle-harvest`(Creators APIでKindle版ASINを電子優先で収集・11秒/単位・429/403即停止・二重起動禁止・集めるだけ。Sonnet運転可)

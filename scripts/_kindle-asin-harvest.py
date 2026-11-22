@@ -537,7 +537,31 @@ def search_kindle(pi, with_author):
     return items
 
 
-def harvest(order_seed, max_pages):
+STOPF = os.path.join(HV, "STOP")              # ★これが在ると次の頁の前で止まる(skill「Kindle収穫止めて」)
+
+
+def _another_running():
+    """台帳(calls.log)の最終行が5分以内 = 別の収穫が走っている(二重起動は叩く速さが倍になる=禁止)。"""
+    if not os.path.exists(_LEDGER):
+        return False
+    last = ""
+    with open(_LEDGER, "rb") as f:
+        f.seek(0, 2); n = f.tell(); f.seek(max(0, n - 200))
+        ls = f.read().decode("utf-8", "ignore").strip().splitlines()
+        last = ls[-1] if ls else ""
+    try:
+        return time.time() - float(last.split()[0]) < 300
+    except (ValueError, IndexError):
+        return False
+
+
+def harvest(order_seed, max_pages, kindle_only=False):
+    # ★2026-11-23 ユーザ裁定「まずは電子書籍を優先して落としたい」= --kindle-only は紙の照会(getItems・単位の約7割)をしない。
+    #   紙は後で isbn13 ごとに paper.jsonl と突き合わせて未照会分だけ回せる(done.txt とは独立)。
+    if _another_running():
+        raise SystemExit("台帳に5分以内の呼出あり = 別の収穫が走っている。二重起動しない(止めるなら STOP ファイル)")
+    if os.path.exists(STOPF):
+        os.remove(STOPF)
     done = set()
     if os.path.exists(DONE):
         done = set(open(DONE, encoding="utf-8").read().split())
@@ -574,6 +598,10 @@ def harvest(order_seed, max_pages):
         for f in todo:
             if max_pages and n >= max_pages:
                 break
+            if os.path.exists(STOPF):
+                print(f"[{time.strftime('%H:%M')}] STOP ファイルを見て停止", flush=True)
+                os.remove(STOPF)
+                break
             pi = page_info(os.path.join(d, f))
             if pi is not None and pi["author"] in ("(unknown)", "unknown", "不明"):
                 pi["author"] = ""  # 作者不明 = 題名だけで検索(照合は題名一致で絞られる)
@@ -593,7 +621,7 @@ def harvest(order_seed, max_pages):
                 for r in rows:
                     fo.write(json.dumps({**r, "at": time.strftime("%Y-%m-%d")}, ensure_ascii=False) + "\n")
                     stat[r["verdict"]] += 1
-            for ed in pi["eds"]:
+            for ed in ([] if kindle_only else pi["eds"]):
                 for _, i13, _, _ in ed["vols"]:
                     a10 = i10(i13)
                     if a10 and i13 not in paper_known:
@@ -637,7 +665,9 @@ def summary():
         for ln in open(PAPER, encoding="utf-8"):
             p["有" if json.loads(ln)["paper"] else "無"] += 1
     done = len(open(DONE, encoding="utf-8").read().split()) if os.path.exists(DONE) else 0
-    print(f"済 {done}頁 / 巻: 採る {c['take']} / 見直し {c['review']} / なし {c['none']} / 紙の商品頁: {dict(p)}"
+    total = sum(1 for f in os.listdir(os.path.join(ROOT, "data", "manga.v2")) if f.endswith(".yml"))
+    run = "走っている" if _another_running() else "止まっている"
+    print(f"[{run}] 全{total}頁中 済 {done}頁 (残{total - done}) / 巻: 採る {c['take']} / 見直し {c['review']} / なし {c['none']} / 紙の商品頁: {dict(p)}"
           f" / 直近24時間の呼出 {_used_24h()} / 予算 {DAILY_BUDGET}")
 
 
@@ -708,10 +738,11 @@ def main():
     pp = sub.add_parser("pages"); pp.add_argument("--n", type=int, default=10); pp.add_argument("--seed", type=int, default=2211)
     pp.add_argument("--max-pages", type=int, default=60)
     hv = sub.add_parser("harvest"); hv.add_argument("--max-pages", type=int, default=0); hv.add_argument("--seed", type=int, default=20261121)
+    hv.add_argument("--kindle-only", action="store_true", help="紙の照会をしない(電子優先)")
     sub.add_parser("status")
     a = ap.parse_args()
     if a.cmd == "harvest":
-        return harvest(a.seed, a.max_pages)
+        return harvest(a.seed, a.max_pages, a.kindle_only)
     if a.cmd == "status":
         return summary()
     print("自サイトの頁を読み込み中…", flush=True)
