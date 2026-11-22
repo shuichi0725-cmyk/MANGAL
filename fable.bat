@@ -13,7 +13,7 @@ cd /d "%~dp0"
 set "SID="
 for /f %%i in ('python scripts\_session-latest.py fable') do set "SID=%%i"
 if not defined SID goto new
-claude --resume %SID% --remote-control fable --model "claude-fable-5-1[1m]" --dangerously-skip-permissions %*
+claude --resume %SID% --remote-control fable --model "claude-fable-5-2[1m]" --dangerously-skip-permissions %*
 if not errorlevel 1 goto :eof
 :new
-claude --remote-control fable --model "claude-fable-5-1[1m]" --dangerously-skip-permissions %*
+claude --remote-control fable --model "claude-fable-5-2[1m]" --dangerously-skip-permissions %*
