@@ -82,6 +82,10 @@ DAILY_BUDGET = int(os.environ.get("KINDLE_ASIN_BUDGET", "0"))
 _LEDGER = os.path.join(CACHE, "calls.log")  # 1行1呼び出し: epoch秒 op status
 _bad = [0]
 _next_ok = [0.0]  # 次に叩いてよい時刻(前回の単位数 × PACE_PER_UNIT 後)
+# ★2026-11-22 ユーザ裁定: 「429 が出るまで1秒間隔、出たら 10.2秒間隔で電子・紙問わず回す」。
+#   FAST=1 の間は種別・冊数に関係なく1秒。 429 が出たら FAST=0 にして 10.2秒/回(冊数で掛けない)へ落とし、
+#   その1件は少し待って取り直す。 落とした後にもう一度 429 が出たら、 従来どおり即停止。
+MODE = {"fast": os.environ.get("KINDLE_ASIN_FAST", "1") == "1", "slow_pace": 10.2, "fast_pace": 1.0}
 
 
 def _units(op, body):
@@ -118,11 +122,17 @@ def call(op, body):
         st, t = 0, f"{type(e).__name__}"
     CALLS[op] += 1
     CALLS["units"] += u
-    _next_ok[0] = time.time() + u * PACE_PER_UNIT
+    _next_ok[0] = time.time() + (MODE["fast_pace"] if MODE["fast"] else MODE["slow_pace"])
     with open(_LEDGER, "a", encoding="utf-8") as f:
         f.write(f"{time.time():.0f} {op} {st} {u}\n")
     if st == 429:
-        raise SystemExit(f"429(回数超過 or 停止)= 取り直さずに即停止。 本文: {t[:200]}")
+        if MODE["fast"]:
+            MODE["fast"] = False
+            print(f"[{time.strftime('%H:%M:%S')}] 429 → 1秒間隔をやめて {MODE['slow_pace']}秒間隔へ(この1件は60秒待って取り直す)", flush=True)
+            time.sleep(60)
+            _next_ok[0] = 0.0
+            return call(op, {k: v for k, v in body.items() if k not in ("marketplace", "partnerTag")})
+        raise SystemExit(f"429(10.2秒間隔でも出た)= 取り直さずに即停止。 本文: {t[:200]}")
     if st == 403 and "AssociateNotEligible" in t:
         raise SystemExit("403 AssociateNotEligible = 直近30日の売上条件を外れた(API停止)")
     _bad[0] = 0 if st == 200 else _bad[0] + 1
