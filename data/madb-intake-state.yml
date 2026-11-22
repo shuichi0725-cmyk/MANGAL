@@ -4,27 +4,33 @@
 # リリースは月次(毎月17〜22日頃)。GitHub release 経路は月次で十分(日次=楽天予約/NDL新着の別経路)。
 last_intake:
   source_repo: mediaarts-db/dataset
-  release_tag: 1.2.21
-  release_published: '2026-10-16'
-  db_built_at: '2026-10-19'
-  prev_tag: 1.2.20
+  release_tag: 1.2.22
+  release_published: '2026-11-20'
+  db_built_at: '2026-11-23'
+  prev_tag: 1.2.21
   asset: metadata101_json.zip + metadata504_json.zip
-  merge_manifest: C:\Users\chiba shuichi\code\MANGAL/.cache/madb-distill/merge-manifest-1.2.21-2026-10-19.json
-  db_backup: C:\Users\chiba shuichi\code\MANGAL/.cache/db-v2.sqlite.bak-distill-20261019-211546
+  merge_manifest: C:\Users\chiba shuichi\code\MANGAL/.cache/madb-distill/merge-manifest-1.2.22-2026-11-23.json
+  db_backup: C:\Users\chiba shuichi\code\MANGAL/.cache/db-v2.sqlite.bak-distill-20261123-065503
   stats:
-    new_series: 259
-    append_series: 583
-    vol_new_series: 271
-    vol_append: 588
-    ed_new: 272
-    total_new_vol: 859
+    new_series: 393
+    append_series: 904
+    vol_new_series: 408
+    vol_append: 931
+    ed_new: 423
+    total_new_vol: 1339
   seed1:
-    new_ids: 882
-    new_isbns: 866
+    new_ids: 1405
+    new_isbns: 1368
     vanished_ids: 0
     vanished_isbns: 0
-  go_sign: はい
+  go_sign: ok
 history:
+- tag: 1.2.22
+  at: '2026-11-23'
+  new_series: 393
+  append_series: 904
+  total_new_vol: 1339
+  prev_tag: 1.2.21
 - tag: 1.2.21
   at: '2026-10-19'
   new_series: 259
