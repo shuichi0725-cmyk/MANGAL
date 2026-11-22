@@ -129,6 +129,8 @@ def call(op, body):
     with open(_LEDGER, "a", encoding="utf-8") as f:
         f.write(f"{time.time():.0f} {op} {st} {u}\n")
     if st == 429:
+        if MODE["fast"] and os.environ.get("KINDLE_ASIN_STOP_ON_429") == "1":
+            raise SystemExit(f"429(1秒間隔で枠切れ)= 即停止(KINDLE_ASIN_STOP_ON_429)。 本文: {t[:200]}")
         if MODE["fast"]:
             MODE["fast"] = False
             print(f"[{time.strftime('%H:%M:%S')}] 429 → 1秒間隔をやめて {MODE['slow_pace']}秒間隔へ(この1件は60秒待って取り直す)", flush=True)
