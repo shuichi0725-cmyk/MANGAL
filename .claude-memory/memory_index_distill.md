@@ -32,3 +32,4 @@ metadata:
 - [dedup退役→予約頁にstub](dedup_retire_srcstub_vs_preorder.md)
 - [★日次=ドラフト廃止・途中報告なし・結果から](feedback_daily_distill_no_drafts_quiet.md)
 - [少年画報社YK2026の版(BADBOYS別頁/ギャングキング=overrides/おちこぼれ=新装版)](shonen_gahosha_yk_2026_editions.md)
+- [2026-11 月次1.2.22 完了記録](distill_2026_11_1222.md)

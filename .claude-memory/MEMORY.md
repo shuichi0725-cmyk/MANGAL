@@ -86,6 +86,7 @@
 ## 未完(⏳・他分野から)
 - [⏳他言語名=言語名つき・AI訳題非表示](other_names_multilingual.md)
 - [⏳連載誌の残り(根拠台帳・11/7に5,152頁+11/14に350頁是正・保留は実質約700=1件ずつ)](magazine_corrections_mechanism.md)
+- [⏳月次1.2.22の残り(ゲート保留15・ヨミ保留6・新頁の著者役割が一律writer_artist)](distill_2026_11_1222.md)
 - [⏳月次1.2.21の残り(予約頁の二重頁5・recall付替提案・予約頁の著者役割)](distill_2026_10_1221.md)
 - [⏳抜粋本=楽天副題だけの層](excerpt_subtitle_hidden_layer.md)
 - [⏳種2に在るのに出ない版](hidden_editions_pending.md)
