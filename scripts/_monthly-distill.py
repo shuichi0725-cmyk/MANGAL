@@ -362,7 +362,9 @@ def job_state(stage: str) -> dict | None:
             if "EXIT=" in l:
                 exit_line = l.strip()
                 break
-    j.update({"alive": alive(j.get("pid")), "tail": tail, "exit": exit_line})
+    # ★2026-11-23 PID再利用の誤判定(10/20 の custom が EXIT=0 で終わった後、同じ pid 5840 を grep.exe が使い
+    #   「実行中」と判定→phase1 起動を拒否)。 ログに EXIT= が書かれていれば終了済み(EXIT 行は wrapper が最後に書く)。
+    j.update({"alive": (exit_line is None) and alive(j.get("pid")), "tail": tail, "exit": exit_line})
     return j
 
 
