@@ -10,7 +10,7 @@ import "./my-shelf.css";
 //   依頼書 = docs/cloud-briefs/my-shelf.md。非索引(中身は端末ごと=検索結果に出す本文が無い)・sitemap にも入れない。
 export const metadata: Metadata = {
   title: "本棚",
-  description: "作品頁の「しまう」で入れた漫画を、もってる/気になる/ほしいの3段の棚に並べる。",
+  description: "作品頁の「しまう」で入れた漫画を、もってる/おすすめ！/ほしいの3段の棚に並べる。",
   robots: { index: false, follow: false },
 };
 

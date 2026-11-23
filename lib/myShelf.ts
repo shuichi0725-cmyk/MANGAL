@@ -14,7 +14,7 @@ export type ShelfId = "own" | "curious" | "wish";
 
 export const SHELVES: { id: ShelfId; label: string; note: string }[] = [
   { id: "own", label: "もってる", note: "何巻まで持っているかを覚えて、続きの巻を知らせます" },
-  { id: "curious", label: "気になる", note: "読むか迷っている作品" },
+  { id: "curious", label: "おすすめ！", note: "すすめられた作品・読むか迷っている作品" },
   { id: "wish", label: "ほしい", note: "買い物リスト" },
 ];
 

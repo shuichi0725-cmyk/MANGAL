@@ -618,7 +618,6 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
   const [backupMark, setBackupMark] = useState<BackupMark | null>(null);
   const [panel, setPanel] = useState<"backup" | "select" | null>(null);
   const [picked, setPicked] = useState<Set<string>>(new Set());
-  const [sendAs, setSendAs] = useState<"link" | "text">("link");
   const [backupCode, setBackupCode] = useState<string | null>(null);
   const [recCode, setRecCode] = useState<string | null>(null);
   const [copied, setCopied] = useState<string | null>(null);
@@ -839,7 +838,7 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
       how === "overwrite"
         ? `棚を持ってきた${n}作で置き換えました`
         : shared.kind === "recommend"
-          ? `おすすめ${n}作のうち${added}作を「気になる」に入れました`
+          ? `おすすめ${n}作のうち${added}作を「おすすめ！」に入れました`
           : `${n}作を自分の棚に合流しました(新しく増えたのは${added}作)`,
     );
   };
@@ -948,14 +947,8 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
     };
   }, [panel, pickedItems]);
   const recUrl = recCode ? shelfCodeUrl(origin, recCode) : "";
-  const recText = recCode
-    ? [
-        "おすすめの漫画(MANGAL)",
-        ...pickedItems.map((x) => `・${titleOf(x.slug)}${x.edition ? `(${x.edition})` : ""} ${origin}/manga/${x.slug}`),
-        `まとめて棚に入れる → ${recUrl}`,
-      ].join("\n")
-    : "";
-  const recOut = sendAs === "link" ? recUrl : recText;
+  // ★送り方はURLだけ(2026-11-23 ユーザ裁定: 題名を並べる「文章」方式は使い勝手が悪いので廃止)
+  const recOut = recUrl;
   const togglePanel = (p: "backup" | "select") => {
     setPanel((cur) => (cur === p ? null : p));
     setCopied(null);
@@ -983,10 +976,10 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
           {shared.kind === "recommend" ? (
             <>
               <p className="font-bold">おすすめの漫画が届きました({shared.items.length}作・見るだけ)</p>
-              <p className="mt-0.5 text-[11.5px] text-ink/60">「気になるに入れる」を押すと、自分の棚に新しく増えた本として印が付きます。</p>
+              <p className="mt-0.5 text-[11.5px] text-ink/60">「おすすめ！に入れる」を押すと、自分の棚の「おすすめ！」に新しく増えた本として印が付きます。</p>
               <div className="mt-2 flex flex-wrap gap-2">
                 <button type="button" onClick={() => doImport("merge")} className="rounded-full border-2 border-[var(--color-accent)] px-3 py-1.5 text-xs font-bold text-[var(--color-accent)]">
-                  気になるに入れる
+                  おすすめ！に入れる
                 </button>
                 <button type="button" onClick={() => leaveShared()} className="rounded-full border border-[var(--color-line)] px-3 py-1.5 text-xs text-ink/70">
                   自分の棚に戻る
@@ -997,7 +990,7 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
             <>
               <p className="font-bold">共有された棚を見ています(見るだけ・自分の棚はそのまま)</p>
               <p className="mt-0.5 text-[11.5px] text-ink/60">
-                もってる {counts.own}・気になる {counts.curious}・ほしい {counts.wish}(計 {shared.items.length}作)
+                もってる {counts.own}・おすすめ！ {counts.curious}・ほしい {counts.wish}(計 {shared.items.length}作)
               </p>
               <div className="mt-2 flex flex-wrap gap-2">
                 <button type="button" onClick={() => doImport("merge")} className="rounded-full border-2 border-[var(--color-accent)] px-3 py-1.5 text-xs font-bold text-[var(--color-accent)]">
@@ -1169,14 +1162,6 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
       {selecting && picked.size > 0 && (
         <div className="shelf-send" role="dialog" aria-label="おすすめを送る">
           <p className="shelf-send-h">{picked.size}作を送る(持っている巻数・日付は送りません)</p>
-          <div className="shelf-seg" role="group" aria-label="送り方">
-            <button type="button" aria-pressed={sendAs === "link"} onClick={() => setSendAs("link")}>
-              リンク
-            </button>
-            <button type="button" aria-pressed={sendAs === "text"} onClick={() => setSendAs("text")}>
-              文章
-            </button>
-          </div>
           <pre className="shelf-code is-text">{recOut || "作っています…"}</pre>
           <div className="shelf-btns">
             <button type="button" className="is-solid" disabled={!recOut} onClick={() => copyText(recOut, "rec")}>
@@ -1189,9 +1174,7 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
             )}
           </div>
           <p className="shelf-backup-note">
-            {sendAs === "link"
-              ? "相手は開くと「見るだけ」で並び、「気になるに入れる」を選べます。"
-              : "相手は MANGAL を開かなくても題名が読めます。最後のURLから まとめて棚に入れられます。"}
+            {"相手は開くと「見るだけ」で並び、「おすすめ！に入れる」で自分の棚の「おすすめ！」に入れられます。"}
           </p>
         </div>
       )}
