@@ -2,7 +2,7 @@
 
 ★2026-11-23 新設(ユーザ「一つ落として作ってみて」): 照会API(opensearch)は NDL 429 が長引くため、
   全件ファイル https://ndlsearch.ndl.go.jp/files/oaipmhAllData/xmlList.txt (約26,400本・各5,000件・圧縮約4MB)を
-  1本ずつ落とし → 抜き出し → 元ファイルは消す(ディスクに置くのは常に1本だけ)。
+  1本ずつ 落とす → 抜き出す → 元ファイルを D:/NDL へコピー → 手元を消す(2026-11-23 ユーザ指示で保管)。
   中身は NDL 蔵書以外(論文・雑誌記事・デジコレ…)も混ざる = setSpec が iss-ndl-opac* の書誌だけ見る。
 
 残す条件(どれか): ①ISBN が MANGAL の ISBN 索引(.cache/isbn-page-index.json)に在る
@@ -19,6 +19,7 @@ import gzip
 import json
 import os
 import re
+import shutil
 import sys
 import time
 import urllib.request
@@ -32,6 +33,7 @@ DONE = os.path.join(CACHE, "done.txt")
 LIST_URL = "https://ndlsearch.ndl.go.jp/files/oaipmhAllData/xmlList.txt"
 LIST = os.path.join(CACHE, "xmlList.txt")
 STOP = os.path.join(CACHE, "STOP")
+STORE = os.environ.get("NDL_DUMP_STORE", "D:/NDL")  # 元ファイルの保管先(2026-11-23 ユーザ指示)。空=保管しない
 UA = "MANGAL-ndl-dump/1.0"
 
 NS = {
@@ -215,6 +217,8 @@ def _done():
 def cmd_run(limit, pace):
     os.makedirs(RAW, exist_ok=True)
     os.makedirs(OUT, exist_ok=True)
+    if STORE:
+        os.makedirs(STORE, exist_ok=True)
     urls = _urls()
     done = _done()
     todo = [u for u in urls if u.rsplit("/", 1)[-1] not in done]
@@ -238,6 +242,11 @@ def cmd_run(limit, pace):
                 os.remove(raw)
             raise SystemExit(f"HTTP {e.code} {name} → 即停止(再開可)")
         n_all, n_opac, kept = extract_file(raw, os.path.join(OUT, name.replace(".gz", ".jsonl.gz")))
+        if STORE:  # ★ユーザ指示(2026-11-23): 落とした元ファイルは D:/NDL に保管(コピー→大きさ照合→手元を消す)
+            dst = os.path.join(STORE, name)
+            shutil.copy2(raw, dst)
+            if os.path.getsize(dst) != os.path.getsize(raw):
+                raise SystemExit(f"D: へのコピーの大きさが合わない {name} → 停止")
         os.remove(raw)
         with open(DONE, "a", encoding="utf-8") as f:
             f.write(name + "\n")
