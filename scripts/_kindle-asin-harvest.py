@@ -604,6 +604,8 @@ def harvest(order_seed, max_pages, kindle_only=False):
                 print(f"[{time.strftime('%H:%M')}] STOP ファイルを見て停止", flush=True)
                 os.remove(STOPF)
                 break
+            if not os.path.exists(os.path.join(d, f)):
+                continue  # 頁の作り直し中などで一時的に無い = 記録せず次回に回す(落ちない)
             pi = page_info(os.path.join(d, f))
             if pi is not None and pi["author"] in ("(unknown)", "unknown", "不明"):
                 pi["author"] = ""  # 作者不明 = 題名だけで検索(照合は題名一致で絞られる)
