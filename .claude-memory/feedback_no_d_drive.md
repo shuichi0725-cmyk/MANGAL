@@ -19,3 +19,4 @@ metadata:
 - 2026-11-07 時点でコードの D: 参照は 0(差分反映の DIFFDATA は 7/17 から `.cache/diffdata`=C:・`_enrich-captions.py` の D: 写し読みは外した)。 ★「D: を使っている」と言う前に**コードを grep して確かめる**(古い記憶で誤報した)。
 - D: = ユーザのバックアップ倉庫(7/17 裁定)。 `D:\mangal-cache` の残り(diffdata 551MB 等)は触らない・消さない。
 - 関連: [[d_drive_external_flaky]] [[feedback_user_directive_supremacy]]
+- ★例外(2026-11-23 ユーザ明示指示): **NDL全件ファイル(OAI-PMH dcndl)の元 .gz は `D:\NDL` に保管**(「落とした物をDドライブにコピー」)。 道具 `scripts/_ndl-dump-extract.py` の STORE(既定 D:/NDL)。 作業・抜き出し結果は C:(`.cache/ndl-dump/extract`)。 これ以外の D: 利用は従来どおり禁止。
