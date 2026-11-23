@@ -117,7 +117,9 @@ def scan(a):
                     continue
                 if which == "last":
                     # 1巻でうちの著者が揃えば最終巻は引かない(回数の節約)
-                    got = {norm(nm) for c in rec["ndl"].get(t["first"], []) for nm, _ in parse_creator(c)}
+                    if rec["ndl"].get(t["first"]) is None:
+                        continue  # 1巻の照会が失敗 = この頁は記録しない(次回取り直し)
+                    got = {norm(nm) for c in rec["ndl"].get(t["first"]) or [] for nm, _ in parse_creator(c)}
                     if all(norm(x) in got for x in t["names"]):
                         continue
                 try:
@@ -125,6 +127,8 @@ def scan(a):
                 except SystemExit:
                     print("NDL 429/停止 → 中断(再開可)", flush=True); return
                 except Exception as e:  # noqa: BLE001
+                    if "429" in str(e) or "403" in str(e):
+                        print(f"NDL {str(e)[:40]} → 即停止(再開可・規則: 429は止める)", flush=True); return
                     r = None
                     print(f"  {t['stem']}: NDL失敗 {str(e)[:60]}", flush=True)
                 if r is None:
