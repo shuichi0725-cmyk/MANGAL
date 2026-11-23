@@ -7,15 +7,15 @@ year_started: 2026
 year_ended: null
 status: ongoing
 authors:
-- name: 百瀬祐一郎
-  role: writer_artist
-  kana: モモセユウイチロウ
-  romaji: momoseyuuichirou
 - name: 星河シワス
-  role: writer_artist
+  role: artist
   kana: ホシカワシワス
   romaji: hoshikawashiwasu
-original_authors: []
+original_authors:
+- name: 百瀬祐一郎
+  role: writer
+  kana: モモセユウイチロウ
+  romaji: momoseyuuichirou
 publisher: kodansha
 magazine: afternoon
 demographic: shounen

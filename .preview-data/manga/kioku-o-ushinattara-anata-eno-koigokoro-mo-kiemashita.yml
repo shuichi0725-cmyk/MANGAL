@@ -7,15 +7,15 @@ year_started: 2026
 year_ended: null
 status: ongoing
 authors:
-- name: ごろごろみかん
-  role: writer_artist
-  kana: ゴロゴロミカン
-  romaji: gorogoromikan
 - name: 小豆こま
-  role: writer_artist
+  role: artist
   kana: コマメコマ
   romaji: komamekoma
-original_authors: []
+original_authors:
+- name: ごろごろみかん
+  role: writer
+  kana: ゴロゴロミカン
+  romaji: gorogoromikan
 publisher: kodansha
 magazine: null
 demographic: shounen

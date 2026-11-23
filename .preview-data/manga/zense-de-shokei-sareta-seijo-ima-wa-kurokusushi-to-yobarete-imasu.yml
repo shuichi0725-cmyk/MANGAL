@@ -7,13 +7,14 @@ year_started: 2026
 year_ended: null
 status: ongoing
 authors:
-- name: 矢野りと
-  role: writer_artist
-  kana: ヤノリト
 - name: 末永萌乃
-  role: writer_artist
-  kana: スエナガモエノ
-original_authors: []
+  role: artist
+original_authors:
+- name: 矢野りと
+  role: writer
+credits:
+- name: Nyansan
+  role: キャラクター原案
 publisher: seiunsha
 magazine: null
 demographic: shounen
