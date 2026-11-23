@@ -12,7 +12,7 @@
   python scripts/_kindle-asin-harvest.py harvest [--max-pages N]        # ★本番収穫(全頁・続きから・予算/429で自然停止)
   python scripts/_kindle-asin-harvest.py status                         # 進み具合
 出力: .cache/kindle-asin/<run>/ items.jsonl(取れたKindle版) / match.tsv(照合) / report.txt
-鍵: .env の AMAZON_CREATORS_CLIENT_ID / AMAZON_CREATORS_SECRET。 ★安全側: 2秒間隔・1日8,000回(KINDLE_ASIN_BUDGET)・429で即停止。 台帳 .cache/kindle-asin/calls.log
+鍵: .env の AMAZON_CREATORS_CLIENT_ID / AMAZON_CREATORS_SECRET。 ★15秒/回・直近24時間2,700回で自動休止(KINDLE_ASIN_BUDGET)・429/403で即停止。 台帳 .cache/kindle-asin/calls.log
 """
 import os, re, sys, json, time, random, argparse, unicodedata, datetime, urllib.request, urllib.error
 from collections import defaultdict, Counter
@@ -34,14 +34,15 @@ def _env():
     return kv
 
 
-def _post(url, body, h):
+def _post(url, body, h, with_headers=False):
     req = urllib.request.Request(url, data=json.dumps(body).encode(), method="POST",
                                  headers={"Content-Type": "application/json", **h})
     try:
         with urllib.request.urlopen(req, timeout=30) as r:
-            return r.status, r.read().decode("utf-8", "replace")
+            out = (r.status, r.read().decode("utf-8", "replace"), dict(r.headers))
     except urllib.error.HTTPError as e:
-        return e.code, e.read().decode("utf-8", "replace")
+        out = (e.code, e.read().decode("utf-8", "replace"), dict(e.headers or {}))
+    return out if with_headers else out[:2]
 
 
 _TOK = os.path.join(CACHE, "token.json")
@@ -74,11 +75,17 @@ _last = [0.0]
 #   枠は「10秒に1単位ずつ戻る」桶で、 getItems は**冊数ぶん**数える(10冊まとめ=10単位)。
 #   15:40(冊数換算 約7,200で429)→ 18:18 再開 → 18:39 に約970単位で再び429 = 休んだ約3時間で戻った約1,070単位とほぼ一致。
 #   → 叩く間隔を「単位×11秒」(戻りより少し遅く)にすれば、 1日中流しても桶は減らない。
-PACE_PER_UNIT = 11.0
+# ★2026-11-23 見直し(ユーザ相談「止まる法則が謎」): 公式 api-rates = 「1回の呼び出し=1 transaction」(getItems は10冊でも1回)・
+#   TPD は最初の30日 8,640、以後は直近30日の売上で毎日更新。 台帳9,700回の照合で 429 時点の「直近24時間の呼出数」が
+#   11/22 約6,400 → 11/23 2,839〜2,893 に揃って下がっていた = 直近24時間の回数で切る TPD(売上連動で縮小中)。
+#   上の「10秒に1単位戻る桶/getItemsは冊数」は誤り(休むと24時間前の分が抜けて空くだけ)。
+#   → 間隔は呼び出し1回につき PACE 秒(ユーザ裁定 15秒で試す)+ 直近24時間の呼出数が予算に達したら 429 を待たずに休む。
+PACE_PER_UNIT = float(os.environ.get("KINDLE_ASIN_PACE", "15"))
 PACE = PACE_PER_UNIT
 # ★2026-11-21 ユーザ裁定 A: 24時間の予算チェックは既定で外す(0=無効)。 守りは「単位×11秒の間隔(=戻る速さより遅い)」+「429で即停止」。
 #   使いたい時は KINDLE_ASIN_BUDGET=<単位> で有効化(単位=getItemsは冊数)。
-DAILY_BUDGET = int(os.environ.get("KINDLE_ASIN_BUDGET", "0"))
+DAILY_BUDGET = int(os.environ.get("KINDLE_ASIN_BUDGET", "2700"))  # 直近24時間の呼出数(推定TPD約2,850の手前)。0=無効
+_429LOG = os.path.join(CACHE, "throttle-429.jsonl")  # 429/403 の見出し・本文・その時の直近24時間回数(上限の推移を追う)
 _LEDGER = os.path.join(CACHE, "calls.log")  # 1行1呼び出し: epoch秒 op status
 _bad = [0]
 _next_ok = [0.0]  # 次に叩いてよい時刻(前回の単位数 × PACE_PER_UNIT 後)
@@ -89,7 +96,7 @@ MODE = {"fast": os.environ.get("KINDLE_ASIN_FAST", "0") == "1", "slow_pace": 10.
 
 
 def _units(op, body):
-    return max(1, len(body.get("itemIds") or [])) if op == "getItems" else 1
+    return 1  # 公式: getItems は10冊まとめても1 transaction
 
 
 def _used_24h():
@@ -98,26 +105,54 @@ def _used_24h():
         tot = 0
         for ln in open(_LEDGER, encoding="utf-8"):
             p_ = ln.split()
-            if p_ and now - float(p_[0]) < 86400:
-                tot += int(p_[3]) if len(p_) > 3 else 1  # 4列目=単位(無い古い行は1)
+            if len(p_) > 1 and p_[1] != "wait" and now - float(p_[0]) < 86400:
+                tot += 1  # 呼び出し回数で数える(公式どおり。 旧4列目の冊数は使わない)
         return tot
     except FileNotFoundError:
         return 0
 
 
+def _wait_budget():
+    """直近24時間の呼出数が予算に達していたら、24時間前の分が抜けて空くまで休む(429を待たない)。 STOP札は休み中も見る。"""
+    announced = False
+    while True:
+        now = time.time()
+        ts = []
+        try:
+            for ln in open(_LEDGER, encoding="utf-8"):
+                p_ = ln.split()
+                if len(p_) > 1 and p_[1] != "wait" and now - float(p_[0]) < 86400:
+                    ts.append(float(p_[0]))
+        except FileNotFoundError:
+            return
+        if len(ts) < DAILY_BUDGET:
+            return
+        ts.sort()
+        until = ts[len(ts) - DAILY_BUDGET] + 86400 + 5
+        if not announced:
+            print(f"[{time.strftime('%H:%M')}] 直近24時間 {len(ts)} 回 = 予算 {DAILY_BUDGET} → "
+                  f"{time.strftime('%H:%M', time.localtime(until))} まで休む(429を待たない)", flush=True)
+            announced = True
+        if os.path.exists(os.path.join(CACHE, "harvest", "STOP")):
+            raise SystemExit("休み中に STOP 札を見て停止")
+        with open(_LEDGER, "a", encoding="utf-8") as f:  # 二重起動ガード用の生存印(回数には数えない)
+            f.write(f"{now:.0f} wait 0 0\n")
+        time.sleep(min(60, max(1, until - now)))
+
+
 def call(op, body):
-    used = _used_24h() if DAILY_BUDGET else 0
-    if DAILY_BUDGET and used >= DAILY_BUDGET:
-        raise SystemExit(f"1日の予算 {DAILY_BUDGET} 回に達した(直近24時間 {used} 回)= 今日はここまで。続きは明日")
+    if DAILY_BUDGET:
+        _wait_budget()
     w = _next_ok[0] - time.time()
     if w > 0:
         time.sleep(w)
     u = _units(op, body)
     body = {"marketplace": "www.amazon.co.jp", "partnerTag": "mangal08-22", **body}
     _last[0] = time.time()
+    hd = {}
     try:
-        st, t = _post(f"https://creatorsapi.amazon/catalog/v1/{op}", body,
-                      {"Authorization": "Bearer " + _token(), "x-marketplace": "www.amazon.co.jp"})
+        st, t, hd = _post(f"https://creatorsapi.amazon/catalog/v1/{op}", body,
+                          {"Authorization": "Bearer " + _token(), "x-marketplace": "www.amazon.co.jp"}, with_headers=True)
     except Exception as e:  # 通信エラーも1回と数える
         st, t = 0, f"{type(e).__name__}"
     CALLS[op] += 1
@@ -128,6 +163,14 @@ def call(op, body):
     _next_ok[0] = time.time() + (MODE["fast_pace"] if MODE["fast"] else u * PACE_PER_UNIT)  # ★11/22 16:26 10.2/101秒は3時間で429 → 実績のある 11秒/単位に戻す
     with open(_LEDGER, "a", encoding="utf-8") as f:
         f.write(f"{time.time():.0f} {op} {st} {u}\n")
+    if st in (429, 403):
+        with open(_429LOG, "a", encoding="utf-8") as f:
+            f.write(json.dumps({"at": time.strftime("%Y-%m-%d %H:%M:%S"), "status": st, "op": op,
+                                "used_24h": _used_24h(), "pace": PACE_PER_UNIT, "headers": hd, "body": t[:2000]},
+                               ensure_ascii=False) + "\n")
+        ra = hd.get("Retry-After") or hd.get("retry-after")
+        if ra:
+            print(f"[{time.strftime('%H:%M:%S')}] 429 Retry-After={ra}", flush=True)
     if st == 429:
         if MODE["fast"] and os.environ.get("KINDLE_ASIN_STOP_ON_429") == "1":
             raise SystemExit(f"429(1秒間隔で枠切れ)= 即停止(KINDLE_ASIN_STOP_ON_429)。 本文: {t[:200]}")
@@ -137,9 +180,10 @@ def call(op, body):
             time.sleep(60)
             _next_ok[0] = 0.0
             return call(op, {k: v for k, v in body.items() if k not in ("marketplace", "partnerTag")})
-        raise SystemExit(f"429(10.2秒間隔でも出た)= 取り直さずに即停止。 本文: {t[:200]}")
-    if st == 403 and "AssociateNotEligible" in t:
-        raise SystemExit("403 AssociateNotEligible = 直近30日の売上条件を外れた(API停止)")
+        raise SystemExit(f"429 = 取り直さずに即停止(直近24時間 {_used_24h()} 回・記録 {_429LOG})。 本文: {t[:200]}")
+    if st == 403:
+        raise SystemExit(("403 AssociateNotEligible = 直近30日の売上条件(適格売上10件)を外れた=資格切れ。売上が戻れば数日で自動復旧"
+                          if "AssociateNotEligible" in t else f"403 = 停止して調べる。 本文: {t[:200]}"))
     _bad[0] = 0 if st == 200 else _bad[0] + 1
     if _bad[0] >= 5:
         raise SystemExit(f"200 以外が5回続いた(最後 HTTP {st})= 停止して調べる。 {t[:200]}")
