@@ -21,6 +21,7 @@ import StatusDate from "./StatusDate";
 import { DOT_HEADING } from "@/lib/fonts";
 import { loadAizoubanStock, loadColorEditions, loadTokusoubanStock } from "@/lib/cornerData";
 import { jstDayIndex } from "@/lib/sansedai";
+import SaleBanner from "@/components/SaleBanner";
 
 export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
 
@@ -143,6 +144,8 @@ export default function Design12() {
           (「タップで絞り込み」)が切れていた。タイルの数は nOn/nDone のまま(2026-09-05 の数の食い違い是正は不変)。 */}
 
       {/* ここから下は案11と完全同一(コーナー順・データ・リンク不変) */}
+      {/* ★Amazon セールバナー(2026-11-24・期限で自動消滅・SaleBanner の SALE を差し替えて使い回す) */}
+      <SaleBanner className="mt-4" />
       <AnimeSeasonCorner />
       <DailyFeatureCorner />
 
