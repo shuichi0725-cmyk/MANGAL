@@ -59,7 +59,7 @@ def isbn13(s):
     d = re.sub(r"[^0-9Xx]", "", s or "").upper()
     if len(d) == 13 and d.isdigit():
         return d
-    if len(d) == 10:
+    if len(d) == 10 and d[:9].isdigit():
         core = "978" + d[:9]
         tot = sum(int(c) * (1 if i % 2 == 0 else 3) for i, c in enumerate(core))
         return core + str((10 - tot % 10) % 10)
