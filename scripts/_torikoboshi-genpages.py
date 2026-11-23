@@ -175,6 +175,10 @@ def main():
     ap.add_argument("--run", action="store_true")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--keys-file", default=None)
+    # ★2026-11-23: 保留を「調べて裁定した」keyだけ vol1不在/近似題 ゲートを通す(--keys-file 必須)。
+    #   欠け巻は先に種4へ入れておくこと(頁化は種2の巻で判定するので、ここで通すだけでは巻は増えない)。
+    #   ISBN既在・同じ_skeyの源頁 の重複防止ゲートは通さない(そのまま効く)。
+    ap.add_argument("--approved", action="store_true", help="--keys-file の key は裁定済み=vol1不在/近似題ゲートを通す")
     ap.add_argument("--manifest", default=None, help="merge-manifest json(既定=最新mtime)")
     a = ap.parse_args()
 
@@ -278,7 +282,8 @@ def main():
         #   分裂cluster。頁化すると「5巻だけの頁」(Dr.Slump愛蔵5巻/サクラ大戦二部5巻/QP外伝4巻)
         #   ができる。★頁化せず保留リストに落とし、種2横断(_ledger/_exists --isbn)で裁定してから。
         _nums = [n for _, n, _ in vv if isinstance(n, int) and n > 0]
-        if _nums and min(_nums) > 1:
+        _ok = bool(a.approved and a.keys_file)
+        if _nums and min(_nums) > 1 and not _ok:
             skip["★vol1不在=途中巻断片(彼岸島型/分裂疑い→保留)"] += 1
             hold_gate.append((meta[sid][0], meta[sid][1], f"vol1不在(巻{sorted(set(_nums))})=彼岸島型/分裂疑い"))
             continue
@@ -291,7 +296,7 @@ def main():
                 if len(_pt) >= 4 and abs(len(_pt) - len(_tn)) <= 2 and (_tn in _pt or _pt in _tn):
                     _hit = _ps
                     break
-        if _hit:
+        if _hit and not _ok:
             skip["★近似題=既存頁と分裂疑い(→保留)"] += 1
             hold_gate.append((meta[sid][0], meta[sid][1], f"近似題: 既存頁 {_hit} と包含一致=分裂/誤題疑い"))
             continue
@@ -406,15 +411,18 @@ def main():
                 continue
         used.add(slug)
         if a.run:
-            body = [f"slug: {slug}", f"title: {title}", f"_skey: {key}",
-                    f"title_kana: {kana}"]
+            # ★2026-11-23 「#ギャルとギャルの百合」が YAML のコメント扱いで title=None → promote が落ちた。
+            #   文字列は JSON 形式(=YAML の二重引用符)で書き、書いた後に読み戻して一致を確かめる。
+            _q = lambda v: json.dumps(str(v), ensure_ascii=False)
+            body = [f"slug: {slug}", f"title: {_q(title)}", f"_skey: {_q(key)}",
+                    f"title_kana: {_q(kana)}"]
             if not db_authors.get(sid):
                 it0 = rk_item or next((rk.get(ib) for ib, _, _ in vv if rk.get(ib)), None) or {}
                 aus = _authors_from(it0, ndl_creators, ndl_ck)
                 if aus:
                     body.append("authors:")
                     for au in aus:
-                        body.append(f"- name: {au['name']}")
+                        body.append(f"- name: {_q(au['name'])}")
                         body.append("  role: writer_artist")
                         if au.get("kana"):
                             body.append(f"  kana: {au['kana']}")
@@ -423,6 +431,10 @@ def main():
             body.append(f"_note_origin: torikoboshi 2026-07-25 (種2新規series・ヨミ={'NDL' if seg else '楽天'})")
             SRC.mkdir(parents=True, exist_ok=True)
             (SRC / f"{slug}.yml").write_text("\n".join(body) + "\n", encoding="utf-8")
+            import yaml as _yv
+            _rd = _yv.safe_load((SRC / f"{slug}.yml").read_text(encoding="utf-8")) or {}
+            if str(_rd.get("title")) != str(title) or str(_rd.get("_skey")) != str(key):
+                raise SystemExit(f"✗ 源頁の読み戻し不一致(YAML記法の罠): {slug} title={_rd.get('title')!r}")
         made.append((slug, title, kana, "NDL" if seg else "楽天"))
         if n % 25 == 0:
             print(f"  ...{n}/{len(todo)} 生成{len(made)} 保留{len(hold)}", flush=True)

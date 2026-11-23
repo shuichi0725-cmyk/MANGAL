@@ -93,6 +93,8 @@ python scripts/_monthly-distill.py promote-made         # 作った頁だけ pro
 - manifest既定=最新mtime(旧=1.2.18固定で翌月以降は前月分を掴む罠→2026-09-02是正)。
 - **3ゲート保留は自動頁化しない**(ISBN既在skip / vol1不在→保留 / 近似題→保留)。種2横断(`_ledger` / `_exists --isbn`)で彼岸島型・分裂・コンビニ断片を裁定しユーザ報告してから。前回1.2.19の保留54件= `docs/production-diagnostics/torikoboshi-1219-holds.tsv`(未消化=持ち越し)。
 - ★後始末3点(2026-08-22確立): ①**書影live補充**(新規ISBNはcovers seed未収録が普通。楽天live by ISBN→cover-override.jsonl→再promote) ②**slugレビュー→公開前rename**(ヘボンfallbackの外来語英綴り化/促音バグ。未公開ならalias不要) ③**コンビニ/再録の目視**(レーベル名題・故人作家の新刊=再録→non-manga-drop)。
+- ★保留を調べて決めた分(2026-11-23〜): 欠け巻を種4へ入れてから `--keys-file <裁定済みkey> --approved --run`(vol1不在/近似題ゲートだけ通す・重複防止ゲートは効いたまま)。既存頁へ足す分は `series-merge.yml`(+changelog)。
+- ★著者の役割(2026-11-23〜): 頁化した頁は `python scripts/_ndl-author-roles.py scan --slugs <作った頁>` → `plan` → `apply` → 該当頁を promote。MADB の NDL由来レコードには役割語が無く、種2既定 writer_artist のまま出る(原作者・漫画担当の抜けも NDL で補う)。見直し= `docs/production-diagnostics/ndl-author-roles-review.tsv`。
 - preview投入= skill test-deploy(セット入替→索引→push→15-20分待ち)。★源頁は `data/seeds/source-pages/` にあることを確認(data/mangaはgitignore=消えると次のフルpromoteで頁が黙って消える。2026-08-26に源なし258頁復元)。
 
 ### 6. 月次サニティ
