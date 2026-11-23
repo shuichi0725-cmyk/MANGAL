@@ -239,6 +239,11 @@ export default function ServicePage() {
         無料体験は「初めての方」など条件があります。期間中に解約すれば料金はかかりません。
       </p>
       <p className="mt-4 text-sm">
+        <Link href="/devices" className="font-bold text-[var(--color-accent)]">
+          電子書籍を読むのにおすすめの端末(運営者が使っているもの) →
+        </Link>
+      </p>
+      <p className="mt-3 text-sm">
         <Link href="/" className="text-ink/60 hover:text-ink">
           ← トップへ戻る
         </Link>

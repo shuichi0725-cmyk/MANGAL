@@ -16,7 +16,8 @@ export default function SiteFooter() {
     ["AI書評家リーグ", "/column-ai-league"],
     ["画集", "/art-books"],
     ["使い方", "/guide"],
-    ["Amazonのサービス(PR)", "/service"],  // ★2026-11-24 サブスク紹介頁(新設)
+    ["Amazonのサービス(PR)", "/service"],
+    ["おすすめの読書端末(PR)", "/devices"],  // ★2026-11-24 運営者が使う端末  // ★2026-11-24 サブスク紹介頁(新設)
     ["MANGAL について", "/about"],
   ];
   // ★コーナーの入口(2026-09-24): ホームのコーナー群はJS描画・≡メニューは開いた時だけ描画のため、

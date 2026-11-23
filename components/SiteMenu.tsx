@@ -99,7 +99,8 @@ const ZENSHUU: Array<[string, string]> = [
 
 const INFO: Array<[string, string, string]> = [
   ["book", "使い方", "/guide"],
-  ["book", "Amazonのサービス", "/service"],  // ★2026-11-24 サブスク紹介頁(PR)
+  ["book", "Amazonのサービス", "/service"],
+  ["book", "おすすめの読書端末", "/devices"],  // ★2026-11-24 サブスク紹介頁(PR)
   ["mail", "お問い合わせ", "/contact"],
   ["doc", "利用規約", "/terms"],
   ["lock", "プライバシー", "/privacy"],
