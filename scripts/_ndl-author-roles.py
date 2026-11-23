@@ -193,7 +193,7 @@ def decide(rec):
             for x in parts:
                 q = people.setdefault(norm(x), {"name": x.strip(), "kinds": set(), "roles": set()})
                 q["kinds"] |= p0["kinds"]; q["roles"] |= p0["roles"]
-    odd = [p["name"] for p in people.values() if re.search(r"[&＆]|[Ѐ-ӿ]", p["name"])]
+    odd = [p["name"] for p in people.values() if re.search(r"[&＆;；]|[Ѐ-ӿ]|ほか$|他$|著$", p["name"].strip())]
     if odd:
         return None, "NDLの名前表記が変則(割れない&・キリル文字等): " + "/".join(odd)
     if len(people) > MANY_AUTHORS:
