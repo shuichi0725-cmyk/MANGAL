@@ -322,6 +322,9 @@ input[type="search"]::-webkit-search-decoration {
    作品頁のボタン(components/CompassLink.tsx)・ヘッダー(GlobalNav)・≡メニュー(SiteMenu)の羅針盤だけ赤にして、
    針だけを左右にゆっくり揺らす(押されない=何のボタンか分からない対策。 他のマークはライムのまま)。 */
 :root { --color-compass: #ff5a5a; }
+/* ★上端固定の帯(ヘッダー+アイコンナビ)の高さ。 実値は ChromeHeightVar が入れる(これは描画前の既定)。 */
+:root { --chrome-h: 100px; }
+html { scroll-padding-top: var(--chrome-h); }
 .compass-needle {
   transform-box: view-box;
   transform-origin: 12px 12px;

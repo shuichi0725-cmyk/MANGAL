@@ -6,7 +6,7 @@ import SiteMenu from "@/components/SiteMenu";
  *  全ページ旧ヘッダーに統一。日付はホームのマーキー帯先頭が担う(MarqueeDate)。 */
 export default function SiteHeader() {
   return (
-    <header className="border-b border-[var(--color-line)] bg-[var(--color-surface)]/80 backdrop-blur sticky top-0 z-20">
+    <header className="border-b border-[var(--color-line)] bg-[var(--color-surface)]/80 backdrop-blur">
       <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between gap-3">
         {/* 左 = ロゴ + 「日本の漫画データベース」。 ロゴ寄りに少し左へ。 */}
         <div className="flex items-baseline gap-2 min-w-0">

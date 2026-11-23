@@ -40,7 +40,7 @@ export default function ShinkanDayHeader({
     if (el) fastScrollTo(el);
   };
   return (
-    <div className="sticky top-0 z-10 flex items-center gap-2 border-b-2 border-[var(--color-accent)] bg-[color-mix(in_srgb,var(--color-bg)_92%,transparent)] px-3.5 pb-1.5 pt-2 backdrop-blur-[2px]">
+    <div className="sticky top-[var(--chrome-h)] z-10 flex items-center gap-2 border-b-2 border-[var(--color-accent)] bg-[color-mix(in_srgb,var(--color-bg)_92%,transparent)] px-3.5 pb-1.5 pt-2 backdrop-blur-[2px]">
       <h2 className={`${dotGothic.className} text-[19px] font-black leading-none text-[var(--color-accent)]`}>{label}</h2>
       {sub ? <span className="text-[11px] text-ink/55">({sub})</span> : null}
       <span className="mx-auto flex items-center gap-1.5">

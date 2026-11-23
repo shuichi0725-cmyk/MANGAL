@@ -152,4 +152,4 @@
 .gd .foot{margin-top:40px;font-size:13px}
 .gd .foot a{color:var(--sub)}
 .gd .shot img{max-width:100%}
-.gd .step{scroll-margin-top:72px}.gd section{scroll-margin-top:72px}
+.gd .step{scroll-margin-top:calc(var(--chrome-h) + 16px)}.gd section{scroll-margin-top:calc(var(--chrome-h) + 16px)}

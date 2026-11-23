@@ -58,7 +58,7 @@ export type RailMasters = Pick<ListBundle, "genres" | "demographics">;
  *  ★FilterPanel の「適用中の絞り込み」(`sticky top-0`)は、この器が
  *    スクロールコンテナになることで**レールの上端に貼り付く**= 従来のヘッダー裏貼りより正しい。 */
 const RAIL_BOX =
-  "sticky top-16 max-h-[calc(100dvh-5rem)] overflow-y-auto overflow-x-hidden overscroll-contain rail-scroll -mx-1 px-1 pb-4 space-y-3";
+  "sticky top-[calc(var(--chrome-h)+0.5rem)] max-h-[calc(100dvh-var(--chrome-h)-1.5rem)] overflow-y-auto overflow-x-hidden overscroll-contain rail-scroll -mx-1 px-1 pb-4 space-y-3";
 
 const CARD = "border-2 border-[var(--color-accent)] bg-[#050505] px-2.5 py-2 shadow-[3px_3px_0_rgba(217,248,67,0.14)]";
 const BTN = "mt-2 w-full border-2 border-[var(--color-accent)] bg-[#050505] py-1.5 text-[12px] font-black text-[var(--color-accent)] transition active:scale-[0.97]";

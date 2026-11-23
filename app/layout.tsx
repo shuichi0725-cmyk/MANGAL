@@ -5,6 +5,7 @@ import ScrollTopButton from "@/components/ScrollTopButton";
 import GlobalDragScroll from "@/components/GlobalDragScroll";
 import SiteHeader from "@/components/SiteHeader";
 import GlobalNav from "@/components/GlobalNav";
+import ChromeHeightVar from "@/components/ChromeHeightVar";
 import PageShell from "@/components/PageShell";
 import FilterRail from "@/components/FilterRail";
 import animeView from "@/data/anime-seasons-view.json";
@@ -63,11 +64,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <GlobalDragScroll />
         {/* 共通ヘッダー(SiteHeader=client): ★ホームでは非表示 = Design12のE型ステータスバーが代替
             (2026-08-15 E融合型)。購入モードトグルは廃止済(2026-07-12)。 */}
-        <SiteHeader />
+        {/* ★上端固定の帯(2026-11-24 ユーザ指示「ホームや検索ボタンがスクロールで消える。全ページで固定に」):
+            共通ヘッダーとアイコンナビを1つの sticky 器に入れる(旧= ヘッダーだけ sticky・ナビは main の中で流れていた)。
+            実高は ChromeHeightVar が --chrome-h に入れ、下に貼り付く sticky と #飛び先がそれを使う。 */}
+        <div id="site-chrome" className="sticky top-0 z-30">
+          <SiteHeader />
+          <GlobalNav animeNow={animeNav.now} animeNext={animeNav.next} />
+        </div>
+        <ChromeHeightVar />
         {/* ★2026-09-07: アイコンナビと PC左レールを layout へ一本化(旧= 47箇所が各自 DesignNav
             を呼び、レールはホームと漫画頁だけ)。ホームは PageShell 側で対象外にしている。 */}
         <main className="flex-1">
-          <GlobalNav animeNow={animeNav.now} animeNext={animeNav.next} />
           <PageShell rail={<FilterRail masters={masters} />}>{children}</PageShell>
           <SiteFooter />
         </main>
