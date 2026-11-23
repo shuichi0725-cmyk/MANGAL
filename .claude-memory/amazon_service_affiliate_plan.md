@@ -70,3 +70,14 @@ D ブルータル帯(94px・カテゴリ帯と誤認の懸念) / E 主役1件+�
 ★**本来この空き枠に「サービス(サブスク)」を出したい**というのがユーザの意図。導線の形が決まったら入れる。
 
 [[store_affiliate_architecture]] [[feedback_no_static_prices]] [[anilist_matching_state]]
+
+## ★2026-11-24 公式ヘルプで確認した紹介リンク(tag=mangal08-22 を付ける)
+出所 = アソシエイト・セントラル ヘルプの「◯◯メンバー紹介プログラムについて」(左の一覧に並ぶ)。
+- Kindle Unlimited(=2026-10-22〜 **Kindle+** に改名・中身同じ) 500円: `https://www.amazon.co.jp/kindle-dbs/hz/signup?tag=` (GDFUA9UXMWT4L5UR)
+- Music Unlimited 1,000円: `https://www.amazon.co.jp/music/unlimited/?tag=` (GMZN3JL942CST9EG)。★Unlimited会員はAudibleを月1冊聴ける(2025-06〜)
+- Prime Student 1,000円(6か月無料): `https://www.amazon.co.jp/b?node=2410972051&tag=` (GPFVPGSRT8S6RWGK)
+- Audible プレミアムプラン 1,500円: `https://www.amazon.co.jp/b/ref=adbl_JP_as_0068?ie=UTF8&node=7471076051&tag=` (GSQVXX57YEX6QXEH)
+- Prime Videoチャンネル 250円: `https://www.amazon.co.jp/gp/video/storefront?benefitId=default&tag=` (G7FHPFJWMFVT464R)
+- らくらくベビー 500円(登録+初購入) / Amazonビジネス 3,000円 / Amazonファミリー=2021-07終了
+- ★**Amazonプライム本体の紹介プログラムはヘルプに無い**(ブログの「500円」は古い可能性)= プライムは通常リンク扱い、要管理画面確認。
+- 見本 = /service の中身(プライム特典を5分類で網羅・料金は書かない)を 2026-11-24 にHTMLで提示。ユーザ決定=まず/service頁だけ作る(作品頁導線は後)。
