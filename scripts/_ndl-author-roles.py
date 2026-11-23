@@ -19,7 +19,7 @@
 役割語: 原作/脚本/作/シナリオ/ストーリー=writer(→original_authors) / 漫画/作画/画/まんが/絵=artist /
   著・役割なし=writer_artist(原作の人が別に居れば artist) / 構成・監修・キャラクター原案・原案・原作イラスト・編・訳 等=credits
 """
-import os, re, sys, json, time, argparse, importlib.util, unicodedata
+import os, re, sys, json, time, argparse, importlib.util, unicodedata, html
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -31,10 +31,12 @@ OVR = os.path.join(ROOT, "data", "seeds", "author-overrides.json")
 PLAN = os.path.join(OUT, "plan.json")
 REVIEW = os.path.join(ROOT, "docs", "production-diagnostics", "ndl-author-roles-review.tsv")
 
-WRITER = ("原作", "脚本", "シナリオ", "ストーリー", "原作・脚本")
+WRITER = ("原作", "脚本", "脚色", "シナリオ", "ストーリー", "原作・脚本")
 ARTIST = ("漫画", "作画", "画", "まんが", "マンガ", "絵", "コミカライズ")
 CREDIT_HINT = ("構成", "監修", "キャラクター原案", "キャラクターデザイン", "原案", "原作イラスト", "イラスト", "編", "編集",
-               "訳", "翻訳", "解説", "協力", "企画", "考案", "デザイン", "取材", "資料", "写真", "協賛", "校閲", "文")
+               "訳", "翻訳", "解説", "協力", "企画", "考案", "デザイン", "取材", "資料", "写真", "協賛", "校閲", "文",
+               "指導", "その他", "著作", "原著")
+MANY_AUTHORS = 6  # これより多い頁(合同誌・アンソロジー型)は自動にしない=見直しへ
 
 
 def _lk():
@@ -51,26 +53,52 @@ def norm(s):
 
 def parse_creator(raw):
     """「春原ロビンソン, 筒井大志 著」→ [(name, roleword)]。 役割語は末尾の語。"""
-    raw = unicodedata.normalize("NFKC", raw).strip()
-    m = re.match(r"^(.*?)\s+(\S+)$", raw)
-    names, role = (m.group(1), m.group(2)) if m else (raw, "")
+    raw = unicodedata.normalize("NFKC", html.unescape(html.unescape(raw))).strip()
+    m = re.match(r"^(.*?)\s*/\s*([^/\s]+)$", raw)   # 「うえやま とち/著」型(名前に/を含む「yui/サウスのサウス」は役割語でないので残る)
+    if m and _is_role(m.group(2)):
+        names, role = m.group(1), m.group(2)
+    else:
+        m = re.match(r"^(.*?)\s+(\S+)$", raw)
+        names, role = (m.group(1), m.group(2)) if m else (raw, "")
+    role = re.sub(r"[\[\]()]", "", role)
     # 役割語に見えない末尾(人名の一部)なら役割なし
-    if role and not any(w in role for w in WRITER + ARTIST + CREDIT_HINT + ("著", "作")):
+    if role and not _is_role(role):
         names, role = raw, ""
     return [(n.strip(), role) for n in re.split(r",\s*", names) if n.strip()]
 
 
-def classify(role):
-    if not role or role in ("著", "作・画", "作画・原作", "文・絵", "著・画"):
-        return "main"
-    if "キャラクター" in role or "イラスト" in role:
-        return "credit"
-    if any(w in role for w in WRITER) or role == "作":
-        return "writer"
-    if any(w in role for w in ARTIST):
-        return "artist"
-    return "credit"
+ROLE_TAILS = WRITER + ARTIST + CREDIT_HINT + ("著", "作", "共著", "著者", "イラストレーター", "デザイナー", "原作者")
 
+
+def _is_role(w):
+    """役割語か(各「・」区切りの部分が役割語で終わる)。 「絵美」「とち」のような名前の一部は役割語にしない。"""
+    w = re.sub(r"[\[\]()]", "", w)
+    parts = [x for x in w.split("・") if x]
+    return bool(parts) and all(any(x.endswith(t) for t in ROLE_TAILS) for x in parts)
+
+
+def classify(role):
+    """役割語を「・」で割り、部分ごとに 著/原作側/作画側/協力 を決めて合成する(「企画」の「画」を作画と読まない)。"""
+    if not role or role in ("文・絵", "作・絵", "著・画"):
+        return "main"
+    kinds = set()
+    for x in [y for y in role.split("・") if y]:
+        if x in ("著", "共著", "著者") or x.endswith("著") and not x.endswith("原著"):
+            kinds.add("main")
+        elif "キャラクター" in x or "イラスト" in x:
+            kinds.add("credit")
+        elif x in ("作", "原著", "原著作") or any(x.endswith(w) for w in WRITER):
+            kinds.add("writer")
+        elif x == "画" or any(x.endswith(w) for w in ARTIST if w != "画"):
+            kinds.add("artist")
+        else:
+            kinds.add("credit")
+    if "main" in kinds or {"writer", "artist"} <= kinds:
+        return "main"
+    for k in ("writer", "artist"):
+        if k in kinds:
+            return k
+    return "credit"
 
 def page_targets(slugs=None, all_=False):
     out = []
@@ -157,6 +185,19 @@ def decide(rec):
     if not people:
         return None, "NDLに著者なし"
     ours = [norm(x) for x in rec["names"]]
+    # 「Dr.モロー&スタジオ寿」型 = 区切りで割った全部がうちの著者なら割る
+    for k in list(people):
+        parts = [x for x in re.split(r"[&＆]", people[k]["name"]) if x.strip()]
+        if len(parts) > 1 and all(norm(x) in ours for x in parts):
+            p0 = people.pop(k)
+            for x in parts:
+                q = people.setdefault(norm(x), {"name": x.strip(), "kinds": set(), "roles": set()})
+                q["kinds"] |= p0["kinds"]; q["roles"] |= p0["roles"]
+    odd = [p["name"] for p in people.values() if re.search(r"[&＆]|[Ѐ-ӿ]", p["name"])]
+    if odd:
+        return None, "NDLの名前表記が変則(割れない&・キリル文字等): " + "/".join(odd)
+    if len(people) > MANY_AUTHORS:
+        return None, f"著者が{len(people)}人(合同誌・アンソロジー型)=自動にしない"
     missing = [rec["names"][j] for j, k in enumerate(ours) if k not in people]
     if missing:
         return None, "うちの著者がNDLに無い: " + "/".join(missing) + " | NDL: " + "/".join(f"{p['name']}({'・'.join(sorted(r or '著' for r in p['roles']))})" for p in people.values())
