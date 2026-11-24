@@ -18,3 +18,6 @@ metadata:
 - MADBの全集の扱い(手塚治虫漫画全集/石ノ森萬画大全集)に倣い、 ★各収録作を**個別ページ**として扱い、 全集名を imprint に。 全集を1ページに束ねない。
 - 種4 形式に従い、 各巻の確定ISBN13・発売日・publisher・edition_type・収録作の series_keys 紐付けを Amazon/NDL/講談社公式で裏取りして登録([[project_architecture_seeds]] の種4 protocol、 CLAUDE.md「種4」節)。
 - 種2 sqlite は不変、 audit+本番yml生成時に補完反映。
+
+**2026-11-24 ユーザ裁定**: 「全部発売されてから(登録で)いい」。公式の巻一覧= https://otomo-complete.com/list/index.html 。
+→ 月次蒸留のゲート保留(OTOMO 15巻=AKIRA4 等)は**全巻発売まで寝かせる**。毎月の保留報告で「未完結のため待ち」と1行で済ませ、掘り返さない。全巻出たら公式一覧+NDL+楽天で一括登録(単巻先行登録は禁止の原則どおり)。

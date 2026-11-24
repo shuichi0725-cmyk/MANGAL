@@ -123,7 +123,7 @@
 - [⏳SEO構造の穴(5,7残)](seo_structure_gaps_2026_09_04.md)
 - [⏳Wikiで出てない物を探す柱(32作品をテストへ・残り79は保留/巻不足の完結82件=足せる21作品35冊は未適用・★足せなかった61作品の調査は後日の宿題)](wiki_nopage_pipeline_state.md)
 - [⏳鬼太郎本編の多版](kitaro_honpen_multiedition_pending.md)
-- [⏳OTOMO全集補完](otomo_complete_works_pending.md)
+- [⏳OTOMO全集=全巻発売後に一括(11/24裁定)](otomo_complete_works_pending.md)
 - [⏳三世代/今週ストック](sansedai_featured_stock_state.md)
 - [⏳オーフェン見直し](oofen_franchise_state.md)
 ## 厳守(★・他分野から)
