@@ -4509,11 +4509,13 @@ def main():
         _sfm = _special_fix_map()
         _sef_rewritten = []   # ★置換した巻(下の重複つぶしで使う)= (edition, volume)
         for _ce in (new_yml.get("editions") or []):
-            if _ce.get("type") != "standard":
-                continue
             for _v in (_ce.get("volumes") or []):
                 _c = _sfm.get(str(_v.get("isbn13") or ""))
                 if not _c or not _c.get("normal_cover"):
+                    continue
+                # standard 以外の版(愛蔵版/完全版等)は seed が any_edition_type: true で明示した時だけ
+                # (2026-11-25 テニスの王子様完全版Season3 8巻=版の型が aizoban で効かなかった)
+                if _ce.get("type") != "standard" and not _c.get("any_edition_type"):
                     continue
                 _v["isbn13"] = _c["normal_isbn"]
                 _v["cover_url"] = _norm_cover_ex(_c["normal_cover"])
@@ -4558,13 +4560,11 @@ def main():
         # ★通常版が既に主枠の巻にも特装variantを添付(2026-07-03拡張: 落語心中/ろこどる型)
         _sbn = _special_by_normal()
         for _ce in (new_yml.get("editions") or []):
-            if _ce.get("type") != "standard":
-                continue
             for _v in (_ce.get("volumes") or []):
                 if _v.get("variants"):
                     continue
                 _c = _sbn.get(str(_v.get("isbn13") or ""))
-                if _c and _c.get("variant"):
+                if _c and _c.get("variant") and (_ce.get("type") == "standard" or _c.get("any_edition_type")):
                     _var = _c["variant"]
                     _v["variants"] = [{k: _var.get(k) for k in ("label", "isbn13", "cover_url", "price")}]
         # ★volume-exclude 再適用(2026-07-26): 上の特装版是正は special_isbn を normal_isbn に**置換**するため、
