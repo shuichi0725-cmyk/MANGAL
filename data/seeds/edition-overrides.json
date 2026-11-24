@@ -41779,5 +41779,80 @@
    }
   ],
   "year_ended": 2007
+ },
+ "utakoi": {
+  "_note": "2026-11-25 6月の特装版seedが【フルカラー特装版】(2015)を新版1(2023)の特装版と誤って対にしていた→seed除去。頁は種2で新版/フルカラー版(2023)が番号衝突で混ざっていた(1=2015特装・2=フルカラー版2・3,4=新版)ので、楽天/NDLの版表示どおり3タブに分けた。旧版(2010-13)は別頁 chouyaku-hyakunin-isshu-utakoi",
+  "editions": [
+   {
+    "imprint": null,
+    "label": "新版",
+    "type": "standard",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5407/9784046825407_1_16.jpg?_ex=200x200",
+      "isbn13": "9784046825407",
+      "number": 1,
+      "release_date": "2023-06-07"
+     },
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7319/9784046827319_1_11.jpg?_ex=200x200",
+      "isbn13": "9784046827319",
+      "number": 2,
+      "release_date": "2023-08-08"
+     },
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0869/9784046830869_1_13.jpg?_ex=200x200",
+      "isbn13": "9784046830869",
+      "number": 3,
+      "release_date": "2023-10-06"
+     },
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2566/9784046832566_1_14.jpg?_ex=200x200",
+      "isbn13": "9784046832566",
+      "number": 4,
+      "release_date": "2023-12-08"
+     }
+    ]
+   },
+   {
+    "imprint": null,
+    "label": "フルカラー版",
+    "type": "kanzenban",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4226/9784046824226_1_5.jpg?_ex=200x200",
+      "isbn13": "9784046824226",
+      "number": 1,
+      "release_date": "2023-04-01"
+     },
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4233/9784046824233_1_5.jpg?_ex=200x200",
+      "isbn13": "9784046824233",
+      "number": 2,
+      "release_date": "2023-04-01"
+     }
+    ]
+   },
+   {
+    "imprint": null,
+    "label": "フルカラー特装版",
+    "type": "kanzenban",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3240/9784040673240_1_3.jpg?_ex=200x200",
+      "isbn13": "9784040673240",
+      "number": 1,
+      "release_date": "2015-02-20"
+     }
+    ]
+   }
+  ]
  }
 }
