@@ -172,6 +172,43 @@ def scan(a):
     print("照会おわり", flush=True)
 
 
+def scan_dump(a):
+    """NDL 全件ダウンロード(_ndl-dump-extract.py の .cache/ndl-dump/extract)から dc:creator を引く = NDL に1回も照会しない。
+    2026-11-24 新設(opensearch が 429 続きで 2,471頁が残った)。 live の creators_raw と同じ dc:creator 文字列。
+    ダンプに無い ISBN の頁は記録しない(否定記録にしない)= 後で live scan が拾える。"""
+    import gzip, glob
+    idx = {}
+    for f in sorted(glob.glob(os.path.join(ROOT, ".cache", "ndl-dump", "extract", "*.jsonl.gz"))):
+        for l in gzip.open(f, "rt", encoding="utf-8"):
+            r = json.loads(l)
+            dc = r.get("dc_creator") or []
+            for i in r.get("isbn") or []:
+                cur = idx.setdefault(i, [])
+                for c in dc:
+                    if c not in cur:
+                        cur.append(c)
+    print(f"ダンプ索引 ISBN {len(idx)}", flush=True)
+    done = set()
+    if os.path.exists(SCAN):
+        done = {json.loads(l)["stem"] for l in open(SCAN, encoding="utf-8")}
+    T = page_targets(a.slugs.split(",") if a.slugs else None, a.all)
+    T = [t for t in T if t["stem"] not in done and t["first"]]
+    print(f"対象 {len(T)} 頁(済 {len(done)})", flush=True)
+    hit = miss = 0
+    with open(SCAN, "a", encoding="utf-8") as fo:
+        for t in T:
+            if t["first"] not in idx:
+                miss += 1
+                continue
+            rec = {**t, "ndl": {t["first"]: idx[t["first"]]}, "src": "ndl-dump-20261107"}
+            got = {norm(nm) for c in idx[t["first"]] for nm, _ in parse_creator(c)}
+            if t["last"] and t["last"] != t["first"] and not all(norm(x) in got for x in t["names"]) and t["last"] in idx:
+                rec["ndl"][t["last"]] = idx[t["last"]]
+            fo.write(json.dumps(rec, ensure_ascii=False) + "\n")
+            hit += 1
+    print(f"記録 {hit} 頁 / ダンプに1巻なし {miss} 頁(未記録=live で後日)", flush=True)
+
+
 def decide(rec):
     people = {}   # norm -> {name, kinds}
     for i, raws in rec["ndl"].items():
@@ -272,9 +309,10 @@ def main():
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
     s = sub.add_parser("scan"); s.add_argument("--slugs"); s.add_argument("--all", action="store_true"); s.add_argument("--limit", type=int, default=0)
+    s = sub.add_parser("scan-dump"); s.add_argument("--slugs"); s.add_argument("--all", action="store_true")
     sub.add_parser("plan"); sub.add_parser("apply")
     a = ap.parse_args()
-    {"scan": scan, "plan": plan, "apply": apply}[a.cmd](a)
+    {"scan": scan, "scan-dump": scan_dump, "plan": plan, "apply": apply}[a.cmd](a)
 
 
 if __name__ == "__main__":
