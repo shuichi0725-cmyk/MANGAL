@@ -210,9 +210,14 @@ editions:
     release_date: '2006-05-17'
   - number: 36
     asin: null
-    isbn13: '9784063620603'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0603/9784063620603.jpg?_ex=200x200
+    isbn13: '9784063637069'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7069/9784063637069.jpg?_ex=300x300
     release_date: 2006-08
+    variants:
+    - label: 限定版
+      isbn13: '9784063620603'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0603/9784063620603.jpg?_ex=200x200
+      price: null
   - number: 37
     asin: null
     isbn13: '9784063637434'
@@ -251,10 +256,13 @@ tags:
 - name: Shounen
   category: Demographic
   rank: 60
+- name: Conspiracy
+  category: Theme-Drama
+  rank: 60
 - name: Urban Fantasy
   category: Setting-Universe
   rank: 79
-popularity: 3946
+popularity: 4005
 score: 73
 work_wikidata_qid: Q138117
 other_names:
