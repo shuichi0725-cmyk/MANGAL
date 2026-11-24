@@ -65,6 +65,7 @@
 - [★著者データ全源](author_data_map.md)
 - [完了・歴史の記憶(アーカイブ索引)](memory_archive_index.md)
 ## 本番待ち・宿題
+- [NDL全件データの使い道と11/25実施結果](ndl_dump_uses.md)
 - [⏳4軸監査候補](preproduction_review.md)
 - [⏳Amazonサブスクアフィ](amazon_service_affiliate_plan.md)
 - [収益設計=ストア連動](store_affiliate_architecture.md)
