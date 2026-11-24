@@ -52,9 +52,14 @@ editions:
     release_date: '2023-02-20'
   - number: 5
     asin: null
-    isbn13: '9784592228875'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8875/9784592228875.jpg?_ex=200x200
+    isbn13: '9784592224303'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4303/9784592224303_1_4.jpg?_ex=300x300
     release_date: '2023-06-20'
+    variants:
+    - label: 神ファンサ小冊子付き特装版
+      isbn13: '9784592228875'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8875/9784592228875.jpg?_ex=200x200
+      price: null
   - number: 6
     asin: null
     isbn13: '9784592224655'
@@ -67,9 +72,14 @@ editions:
     release_date: '2024-01-19'
   - number: 8
     asin: null
-    isbn13: '9784592230229'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0229/9784592230229.jpg?_ex=200x200
+    isbn13: '9784592224891'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4891/9784592224891_1_4.jpg?_ex=300x300
     release_date: '2024-06-20'
+    variants:
+    - label: まるごとF/ACE小冊子付き特装版
+      isbn13: '9784592230229'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0229/9784592230229.jpg?_ex=200x200
+      price: null
   - number: 9
     asin: null
     isbn13: '9784592224990'
@@ -158,7 +168,7 @@ tags:
 - name: 推し活
   category: AI
   rank: 55
-popularity: 9618
+popularity: 9915
 score: 80
 work_wikidata_qid: Q116825658
 other_names:
