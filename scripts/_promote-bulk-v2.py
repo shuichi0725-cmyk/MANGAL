@@ -4658,6 +4658,16 @@ def main():
                             stats["date_filled"] = stats.get("date_filled", 0) + 1
                         elif _cur != _nd:
                             stats["date_conflict_skip"] = stats.get("date_conflict_skip", 0) + 1
+                    else:
+                        # ★NDL補完(release-date-supplement)を最終passでも通す(2026-11-25 NDL全件データ #7):
+                        #   本流の _eff_date を通らない頁(源頁・種4経由など)で日付なしの巻が残っていた(122中102)。
+                        #   規則は上と同じ「純粋な精密化だけ」= 空 or 年だけ → その年で始まる年月。 食い違いは書かない。
+                        _sd = get_release_date_supplement().get(_norm_isbn(_v.get("isbn13") or ""))
+                        if _sd:
+                            _cur = str(_v.get("release_date") or "")
+                            if not _cur or (len(_cur) == 4 and str(_sd).startswith(_cur) and len(str(_sd)) > 4):
+                                _v["release_date"] = _sd
+                                stats["date_supp_final"] = stats.get("date_supp_final", 0) + 1
         # ★同名タブの回避 (2026-08-29 ユーザ報告 orenosora型): 1頁に **まったく同じ label の版**が
         #   2つ以上並ぶことがある(同じレーベルで刷を重ねた別run / 種2のクラスタ分裂の残骸)。
         #   読者にはどちらがどちらか判別できないので、**表示名だけ**に初刊年を足して区別する。
