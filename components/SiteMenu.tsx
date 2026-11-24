@@ -31,6 +31,8 @@ const IC: Record<string, Ic> = {
   lock: { d: "M6 11h12v9H6zM9 11V8a3 3 0 0 1 6 0v3" },
   compass: { d: "M15.5 8.5l-2 5-5 2 2-5z", c: [12, 12, 8.5] },
   shelves: { d: "M4 4h4v16H4zM9 7h4v13H9zM14.2 6.3l3.8-1 3.3 12.6-3.8 1zM3 20h18" },
+  tablet: { d: "M6 3h12v18H6zM10.5 18h3" },
+  play: { d: "M3 5h18v12H3zM10 8.5l5 2.5-5 2.5zM8 21h8" },
 };
 
 function Svg({ k, className = "h-5 w-5" }: { k: string; className?: string }) {
@@ -68,6 +70,9 @@ const FIND_VIEW: Tile[] = [
   { icon: "compass", label: "羅針盤", href: "/compass", reload: PREVIEW },
   { icon: "shelves", label: "本棚", href: "/shelf" },
   ...FIND.slice(2),
+  // ★2026-11-24 ユーザ指示「おすすめハードとサブスクのリンクをメニューの探すの一番下に」(どちらもPR頁)
+  { icon: "tablet", label: "おすすめの読書端末", href: "/devices" },
+  { icon: "play", label: "Amazonのサービス", href: "/service" },
 ];
 
 const CORNERS: Tile[] = [
@@ -99,8 +104,6 @@ const ZENSHUU: Array<[string, string]> = [
 
 const INFO: Array<[string, string, string]> = [
   ["book", "使い方", "/guide"],
-  ["book", "Amazonのサービス", "/service"],
-  ["book", "おすすめの読書端末", "/devices"],  // ★2026-11-24 サブスク紹介頁(PR)
   ["mail", "お問い合わせ", "/contact"],
   ["doc", "利用規約", "/terms"],
   ["lock", "プライバシー", "/privacy"],
