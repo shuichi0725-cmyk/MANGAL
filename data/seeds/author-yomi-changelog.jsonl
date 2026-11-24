@@ -3068,3 +3068,25 @@
 {"op": "ndl-yomi-fix", "name": "よしの", "before": "よしの", "after": "ヨシノ", "at": "2026-11-25", "source": "ndl-dump-20261107 典拠ヨミ(元値がヨミになっていない)", "backup": ".cache/author-yomi.yml.bak-20261125"}
 {"op": "ndl-yomi-fix", "name": "とりマイア", "before": "とりマイア", "after": "トリマイア", "at": "2026-11-25", "source": "ndl-dump-20261107 典拠ヨミ(元値がヨミになっていない)", "backup": ".cache/author-yomi.yml.bak-20261125"}
 {"op": "ndl-yomi-fix", "name": "クドウあや", "before": "クドウあや", "after": "クドウアヤ", "at": "2026-11-25", "source": "ndl-dump-20261107 典拠ヨミ(元値がヨミになっていない)", "backup": ".cache/author-yomi.yml.bak-20261125"}
+{"op": "ndl-yomi-report-fix", "name": "そら美容師", "before": "ソラ", "after": "ソラビヨウシ", "at": "2026-11-25", "source": "NDL典拠(値が欠けていた)", "backup": ".cache/author-yomi.yml.bak-20261125b"}
+{"op": "ndl-yomi-report-fix", "name": "また", "before": "ロビーナ", "after": "マタ", "at": "2026-11-25", "source": "楽天の著者並びずれで別人のヨミが入っていた", "backup": ".cache/author-yomi.yml.bak-20261125b"}
+{"op": "ndl-yomi-report-fix", "name": "やましたれお", "before": "ヤマシタレオ2004-", "after": "ヤマシタレオ", "at": "2026-11-25", "source": "生年がヨミに混入", "backup": ".cache/author-yomi.yml.bak-20261125b"}
+{"op": "ndl-yomi-report-fix", "name": "中島みるく", "before": "ナカジマミルク", "after": "ナカシマミルク", "at": "2026-11-25", "source": "楽天+NDL典拠", "backup": ".cache/author-yomi.yml.bak-20261125b"}
+{"op": "ndl-yomi-report-fix", "name": "十時", "before": "ジュウジ", "after": "トトキ", "at": "2026-11-25", "source": "楽天+NDL典拠", "backup": ".cache/author-yomi.yml.bak-20261125b"}
+{"op": "ndl-yomi-report-fix", "name": "岩崎訓", "before": "ナナユメ", "after": "イワサキサトシ", "at": "2026-11-25", "source": "NDL典拠(値が別人)", "backup": ".cache/author-yomi.yml.bak-20261125b"}
+{"op": "ndl-yomi-report-fix", "name": "李惠成", "before": "リケイセイ", "after": "イヘソン", "at": "2026-11-25", "source": "楽天+NDL典拠", "backup": ".cache/author-yomi.yml.bak-20261125b"}
+{"op": "ndl-yomi-report-fix", "name": "桑乃あやせ", "before": "クワタクワ", "after": "クワノアヤセ", "at": "2026-11-25", "source": "楽天+NDL典拠(値が壊れていた)", "backup": ".cache/author-yomi.yml.bak-20261125b"}
+{"op": "ndl-yomi-report-fix", "name": "桜井寛", "before": "サクライカン", "after": "サクライユタカ", "at": "2026-11-25", "source": "楽天(魔王2099)+NDL典拠(写真家 櫻井寛=サクライカン は別人・頁なし)", "backup": ".cache/author-yomi.yml.bak-20261125b"}
+{"op": "ndl-yomi-report-fix", "name": "橋本きんいち", "before": "ハシモトキニチ", "after": "ハシモトキンイチ", "at": "2026-11-25", "source": "Wikipedia+楽天(誤字)", "backup": ".cache/author-yomi.yml.bak-20261125b"}
+{"op": "ndl-yomi-report-fix", "name": "的野アンジ", "before": "テキノアンジ", "after": "マトノアンジ", "at": "2026-11-25", "source": "楽天+NDL典拠", "backup": ".cache/author-yomi.yml.bak-20261125b"}
+{"op": "ndl-yomi-report-fix", "name": "紅", "before": "コウ", "after": "ベニ", "at": "2026-11-25", "source": "NDL典拠10件", "backup": ".cache/author-yomi.yml.bak-20261125b"}
+{"op": "ndl-yomi-report-fix", "name": "紫式部", "before": "シキブムラサキ", "after": "ムラサキシキブ", "at": "2026-11-25", "source": "姓名が逆転していた", "backup": ".cache/author-yomi.yml.bak-20261125b"}
+{"op": "ndl-yomi-report-fix", "name": "紫式部平安中期", "before": "ムラサキ シキブ", "after": "ムラサキシキブ", "at": "2026-11-25", "source": "NDL典拠の時代注記がヨミに混入", "backup": ".cache/author-yomi.yml.bak-20261125b"}
+{"op": "ndl-yomi-report-fix", "name": "背筋", "before": "ハイキン", "after": "セスジ", "at": "2026-11-25", "source": "楽天+NDL典拠(同名のハイキン=別人BL作家は頁なし)", "backup": ".cache/author-yomi.yml.bak-20261125b"}
+{"op": "ndl-yomi-report-fix", "name": "赤城慧", "before": "アカギサトル", "after": "アカギケイ", "at": "2026-11-25", "source": "楽天+NDL典拠", "backup": ".cache/author-yomi.yml.bak-20261125b"}
+{"op": "ndl-yomi-report-fix", "name": "長谷邦夫", "before": "ハセクニオ", "after": "ナガタニクニオ", "at": "2026-11-25", "source": "NDL典拠+楽天", "backup": ".cache/author-yomi.yml.bak-20261125b"}
+{"op": "ndl-yomi-report-fix", "name": "青木健", "before": "アオキタケシ", "after": "アオキケン", "at": "2026-11-25", "source": "NDL典拠+楽天", "backup": ".cache/author-yomi.yml.bak-20261125b"}
+{"op": "ndl-yomi-report-fix", "name": "天瀬晴之", "before": "アマセハルユキ", "after": "ソラセハルユキ", "at": "2026-11-25", "source": "楽天+NDL典拠", "backup": ".cache/author-yomi.yml.bak-20261125b"}
+{"op": "ndl-yomi-report-fix", "name": "宮月新", "before": "ミヤツキシン", "after": "ミヤツキアラタ", "at": "2026-11-25", "source": "Wikipedia「みやつき あらた」+楽天+NDL典拠", "backup": ".cache/author-yomi.yml.bak-20261125b"}
+{"op": "ndl-yomi-report-fix", "name": "渡辺電機(株)", "before": "ワタナベデンキカブ", "after": "ワタナベデンキ", "at": "2026-11-25", "source": "楽天+NDL典拠", "backup": ".cache/author-yomi.yml.bak-20261125b"}
+{"op": "ndl-yomi-report-fix", "name": "淡田青", "before": "アワダセイ", "after": "アワタセイ", "at": "2026-11-25", "source": "楽天+NDL典拠", "backup": ".cache/author-yomi.yml.bak-20261125b"}
