@@ -4,6 +4,7 @@ import { hubHrefIfExists } from "@/lib/hubs";
 import { notFound } from "next/navigation";
 import RelatedWorks, { computeRelated } from "@/components/RelatedWorks";
 import CompassLink from "@/components/CompassLink";
+import ShopGuideLinks from "@/components/ShopGuideLinks";
 import ToneBand from "@/components/ToneBand";
 import ShareButtons from "@/components/ShareButtons";
 import VolumeRow, { displayBlocks } from "@/components/VolumeRow";
@@ -543,6 +544,8 @@ export default async function MangaDetailPage({
                   </Link>
                   {/* ★右に羅針盤マーク(この作品から羅針盤を開く)。 2026-10-03 ユーザ裁定で本番にも出す(旧=テスト環境のみ) */}
                   <CompassLink slug={manga.slug} title={manga.title} />
+                  {/* ★2026-11-24 ユーザ指示: 羅針盤の右に おすすめ端末 / サブスク への入口 */}
+                  <ShopGuideLinks />
                 </>
               ) : null
             }
