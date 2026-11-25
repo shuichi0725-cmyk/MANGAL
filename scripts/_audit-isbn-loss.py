@@ -53,6 +53,11 @@ def current():
                 for v in vs:
                     if v.get("isbn13"):
                         m[str(v["isbn13"])] = slug
+                    # ★2026-11-26: 巻の版違い(特装版/限定版)も本番に載っている。数えないと、特装版を通常版の位置から
+                    #   variants へ移しただけの是正(11/25 184冊)が「理由なく消えた」206件として preflight を止めた。
+                    for va in (v.get("variants") or []):
+                        if isinstance(va, dict) and va.get("isbn13"):
+                            m.setdefault(str(va["isbn13"]), slug)
     return m
 
 
