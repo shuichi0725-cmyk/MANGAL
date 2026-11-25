@@ -185,7 +185,8 @@ def call(op, body):
         raise SystemExit(("403 AssociateNotEligible = 直近30日の売上条件(適格売上10件)を外れた=資格切れ。売上が戻れば数日で自動復旧"
                           if "AssociateNotEligible" in t else f"403 = 停止して調べる。 本文: {t[:200]}"))
     _bad[0] = 0 if st == 200 else _bad[0] + 1
-    if _bad[0] >= 5:
+    # ★2026-11-25 ユーザ裁定「エラー出たらすぐ止める」: KINDLE_ASIN_STOP_ON_ANY_ERROR=1 なら 200 以外(通信エラー含む)1回で停止
+    if _bad[0] >= (1 if os.environ.get("KINDLE_ASIN_STOP_ON_ANY_ERROR") == "1" else 5):
         raise SystemExit(f"200 以外が5回続いた(最後 HTTP {st})= 停止して調べる。 {t[:200]}")
     try:
         return st, json.loads(t)
