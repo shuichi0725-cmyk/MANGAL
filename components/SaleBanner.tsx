@@ -37,7 +37,7 @@ export default function SaleBanner({ className = "" }: { className?: string }) {
         {SALE.name}(12月7日まで)
       </p>
       <a href={SALE.href} target="_blank" rel="sponsored noopener" className="spring-press block">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
+        {/* eslint-disable-next-line @next/next/no-img-element -- not-a-cover: Amazonのセールバナー(JPG・透過なし。書影ではないので白地不要) */}
         <img
           src={SALE.img}
           width={SALE.w}
