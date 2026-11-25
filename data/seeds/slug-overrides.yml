@@ -8120,10 +8120,6 @@ overrides:
 
 # ★not_applied = 2026-09-05 の死に形移行で**適用しなかった**既裁定の記録(消さずに残す)。
 #   promote は overrides: しか読まないのでここは効かない。復活させるなら理由を潰してから overrides: へ移す。
-  kiyoshi-ken-to-bikini-armor:
-    at: '2026-11-25'
-    reason: 聖剣を「きよし・けん」と誤読。他の聖剣頁(seiken-*)に揃える(ユーザGO 2026-11-25)
-    slug: seiken-to-bikini-armor
 not_applied:
   anima-1452:
     at: '2026-09-05'
