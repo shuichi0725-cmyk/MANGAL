@@ -86,7 +86,9 @@ CONTENT_FLOOR_BY_PREFIX = {"art-books/": 60, "author/": 40}
 #       「1作品しか載らない正当な末尾頁」と「クライアント専用描画」は本文長で十分に分かれる。
 #   よって床は 60(1作品=140字に対し余裕2.3倍)。既定150のままだと毎週この1頁で週次が止まり、
 #   偽陽性で番人そのものが無視される形になるため、クラスとして切り出す。
-RE_PAGINATED = re.compile(r"^(?:magazine|publisher|year)/[^/]+/\d+\.html$")
+#   ★2026-11-26: 著者一覧の行別ページ送り(authors/<行>-<n>.html)も同じクラス。ら行2頁目=末尾に著者10人で
+#     頁固有141字(床150割れ)・著者リンクは10本在る=正常描画なのに週次 postbuild が止まった。
+RE_PAGINATED = re.compile(r"^(?:(?:magazine|publisher|year)/[^/]+/\d+|authors/[a-z]+-\d+)\.html$")
 CONTENT_FLOOR_PAGINATED = 60
 # シェル長の実測に使うサンプル数(共通prefix/suffixを取るだけなので少数で十分)
 SHELL_SAMPLE = 60
