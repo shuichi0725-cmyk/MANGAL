@@ -12,7 +12,7 @@
   python scripts/_kindle-asin-harvest.py harvest [--max-pages N]        # ★本番収穫(全頁・続きから・予算/429で自然停止)
   python scripts/_kindle-asin-harvest.py status                         # 進み具合
 出力: .cache/kindle-asin/<run>/ items.jsonl(取れたKindle版) / match.tsv(照合) / report.txt
-鍵: .env の AMAZON_CREATORS_CLIENT_ID / AMAZON_CREATORS_SECRET。 ★15秒/回・直近24時間2,700回で自動休止(KINDLE_ASIN_BUDGET)・429/403で即停止。 台帳 .cache/kindle-asin/calls.log
+鍵: .env の AMAZON_CREATORS_CLIENT_ID / AMAZON_CREATORS_SECRET。 ★12秒/回・24時間の回数上限なし(既定 KINDLE_ASIN_BUDGET=0)・200以外1回で即停止(2026-11-25 ユーザ指定を既定に)。 台帳 .cache/kindle-asin/calls.log
 """
 import os, re, sys, json, time, random, argparse, unicodedata, datetime, urllib.request, urllib.error
 from collections import defaultdict, Counter
@@ -80,11 +80,12 @@ _last = [0.0]
 #   11/22 約6,400 → 11/23 2,839〜2,893 に揃って下がっていた = 直近24時間の回数で切る TPD(売上連動で縮小中)。
 #   上の「10秒に1単位戻る桶/getItemsは冊数」は誤り(休むと24時間前の分が抜けて空くだけ)。
 #   → 間隔は呼び出し1回につき PACE 秒(ユーザ裁定 15秒で試す)+ 直近24時間の呼出数が予算に達したら 429 を待たずに休む。
-PACE_PER_UNIT = float(os.environ.get("KINDLE_ASIN_PACE", "15"))
+PACE_PER_UNIT = float(os.environ.get("KINDLE_ASIN_PACE", "12"))  # ★2026-11-25 ユーザ指定 12秒(既定に焼いた)
 PACE = PACE_PER_UNIT
 # ★2026-11-21 ユーザ裁定 A: 24時間の予算チェックは既定で外す(0=無効)。 守りは「単位×11秒の間隔(=戻る速さより遅い)」+「429で即停止」。
 #   使いたい時は KINDLE_ASIN_BUDGET=<単位> で有効化(単位=getItemsは冊数)。
-DAILY_BUDGET = int(os.environ.get("KINDLE_ASIN_BUDGET", "2700"))  # 直近24時間の呼出数(推定TPD約2,850の手前)。0=無効
+DAILY_BUDGET = int(os.environ.get("KINDLE_ASIN_BUDGET", "0"))  # ★2026-11-25 ユーザ「総計をみて開始しないので修正して」= 既定は上限なし(0=無効)。
+#   旧既定2700のまま起動すると直近24時間の総数だけ見て何時間も休み、始まらなかった。守りは間隔+200以外1回で即停止
 _429LOG = os.path.join(CACHE, "throttle-429.jsonl")  # 429/403 の見出し・本文・その時の直近24時間回数(上限の推移を追う)
 _LEDGER = os.path.join(CACHE, "calls.log")  # 1行1呼び出し: epoch秒 op status
 _bad = [0]
@@ -186,7 +187,7 @@ def call(op, body):
                           if "AssociateNotEligible" in t else f"403 = 停止して調べる。 本文: {t[:200]}"))
     _bad[0] = 0 if st == 200 else _bad[0] + 1
     # ★2026-11-25 ユーザ裁定「エラー出たらすぐ止める」: KINDLE_ASIN_STOP_ON_ANY_ERROR=1 なら 200 以外(通信エラー含む)1回で停止
-    if _bad[0] >= (1 if os.environ.get("KINDLE_ASIN_STOP_ON_ANY_ERROR") == "1" else 5):
+    if _bad[0] >= (1 if os.environ.get("KINDLE_ASIN_STOP_ON_ANY_ERROR", "1") == "1" else 5):  # ★既定=1(2026-11-25 焼いた)
         raise SystemExit(f"200 以外が5回続いた(最後 HTTP {st})= 停止して調べる。 {t[:200]}")
     try:
         return st, json.loads(t)
