@@ -54,6 +54,7 @@
 - [★日次=ドラフト廃止・途中報告なし・結果から](feedback_daily_distill_no_drafts_quiet.md)
 - [★全件ものは流し切ってから見直す](feedback_run_to_end_then_review.md)
 - [★Amazonリンク=エラー回避>ブラウザ](kindle_link_browser_not_app.md)
+- [★Kindle収穫は予約起動しない・Haiku/12秒/上限なし/エラー即停止](feedback_kindle_no_scheduled_start.md)
 - [★仏BD翻訳は載せない](scope_bd_translation_not_listed.md)
 - [★非掲載はnon-manga-drop.ymlへ(tsvは未結線)](amecomi_drop_tsv_not_wired.md)
 - [★先読みは想定どおり(スマホも可・通信量で止めない・物差しは使った時のレスポンス)](feedback_prefetch_is_intended.md)
