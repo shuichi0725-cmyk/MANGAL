@@ -1,6 +1,6 @@
 ---
 name: ndl_authority_homonym_state
-description: B=NDL典拠ID回収で同名異人分離の進捗。抜き忘れ是正/回収148/分類(known56・new44)/homonym104。残=throttle top-up+DB適用
+description: 同名異人=NDL典拠で分離。★11/25 頁で分ける型(生年つき改名+author-overrides+AUTHOR_KEY_PIN)確立。B=典拠ID回収の進捗。抜き忘れ是正/回収148/分類(known56・new44)/homonym104。残=throttle top-up+DB適用
 metadata: 
   node_type: memory
   type: project
@@ -28,3 +28,10 @@ B(NDL典拠ID取得で同名異人分離)の進捗(2026-06-27)。[[acquire_all_o
 1. 残54 ISBN top-up(NDL回復後 `_ndl-recover-authority.py` 再実行→classify再実行)→unresolved171を圧縮。
 2. **本番DB適用**: known56は既存mangakaへ結線/homonymは別人物としてseries分離。★再クラスタは危険([[feedback_dont_repeat_regrouping_error]])=多数決+人手+可逆+小バッチ、要GO。
 3. 全discovery1997 ISBNへ拡張(--all)も可(40分・throttle注意)。
+
+## ★同名別人を頁で分ける型 (2026-11-25 確立・ユーザ裁定)
+著者頁は**名前だけ**で束ねる(lib/authors.ts)= 読みが違っても同名なら1人に合流する(涼スズミ/リョウで実踏)。分けるには名前を変えるしかない。
+- 手順: ①`author-overrides.json`(key=公開slug)で分ける側の頁だけ著者名を「名前（生年-）」に ②`author-yomi.yml` に新名→読み ③`lib/authors.ts` の `AUTHOR_KEY_PIN` に新名→固定key(読みが同じ/衝突する romaji の -2 が読込順で入れ替わり**元の人のURLが動く**のを防ぐ) ④reflect。コード変更を伴うので本番は週次。
+- 命名: 生年がNDL典拠にあれば「前川かずお（1937-1993）」「あき（1951-）」「佐藤良治（1931-）」、生年不明は読みで「涼（リョウ）」。元からいる(件数の多い)側は名前・URLとも不変。
+- 典拠が別でも「分ける」でなく**著者欄から外す**型がある: 翻訳家が著者欄(高木亮→ダークナイツは訳クレジットへ) / 原作ゲームの会社(アカツキ→ハチナイS)。
+- NDL典拠が2つでも同一人物の二重登録が多い(森田ゆき・キリエ・GUNP・うめ・さつきあしゃ・めきめき・青乃下=分けない)。すけまるは判断保留。
