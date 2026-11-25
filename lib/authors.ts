@@ -25,6 +25,15 @@ export type AuthorPage = {
 
 let _map: Map<string, AuthorPage> | null = null;
 
+/** 同名別人を生年つきの名前で分けた著者の頁key(2026-11-25 ユーザ裁定)。
+ *  読みが同じなので romaji 由来の key が衝突し、-2 の割当が作品の読込順で入れ替わり得る。
+ *  分けた側を固定keyにして、元からいる人の URL(連番なし)を動かさない。 */
+const AUTHOR_KEY_PIN: Record<string, string> = {
+  "前川かずお（1937-1993）": "maekawakazuo-1937",
+  "あき（1951-）": "aki-1951",
+  "佐藤良治（1931-）": "satouryouji-1931",
+};
+
 function slugify(romaji: string): string {
   return romaji
     .toLowerCase()
@@ -66,10 +75,16 @@ export function authorMap(): Map<string, AuthorPage> {
   const used = new Map<string, number>();
   _map = new Map();
   for (const a of list) {
+    const pinned = AUTHOR_KEY_PIN[a.name];
     const base = slugify(a.romaji!);
-    const n = (used.get(base) ?? 0) + 1;
-    used.set(base, n);
-    const key = n === 1 ? base : `${base}-${n}`;
+    let key: string;
+    if (pinned) {
+      key = pinned;
+    } else {
+      const n = (used.get(base) ?? 0) + 1;
+      used.set(base, n);
+      key = n === 1 ? base : `${base}-${n}`;
+    }
     const sortWorks = (ws: AuthorWork[]) =>
       ws.sort((p, q) => (p.year ?? 9999) - (q.year ?? 9999) || p.title.localeCompare(q.title, "ja"));
     _map.set(key, { key, name: a.name, kana: a.kana, works: sortWorks(a.works), originals: sortWorks(a.originals) });
