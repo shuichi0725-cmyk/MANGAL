@@ -32,6 +32,8 @@ const AUTHOR_KEY_PIN: Record<string, string> = {
   "前川かずお（1937-1993）": "maekawakazuo-1937",
   "あき（1951-）": "aki-1951",
   "佐藤良治（1931-）": "satouryouji-1931",
+  // 生年不明=読みで区別。 romaji ryou は 凌/りょう と衝突するので固定(既存の -2/-3 を動かさない)
+  "涼（リョウ）": "ryou-samesakura",
 };
 
 function slugify(romaji: string): string {
