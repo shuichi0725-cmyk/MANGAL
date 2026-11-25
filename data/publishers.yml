@@ -727,6 +727,8 @@ kodamashuppan:
   name: こだま出版
 kodansha:
   name: 講談社
+  aliases:
+  - 星海社          # 2026-11-25 日次: 星海社COMICSのISBNは講談社の出版者記号 06(9784065465943)。既存の星海社COMICS頁はすべて publisher=kodansha
 koei:
   name: 光栄
 kogumasha:

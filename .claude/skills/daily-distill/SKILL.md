@@ -391,6 +391,15 @@ addict 4件/adikuto 1件・robot 47/robotto 2・deep 28/diipu 0・abyss 13/abisu
   深夜0時=shinya-0-ji / 家系(ラーメン)=iekei(楽天ヨミ。家系女騎士は kakei)/ 続編は本編頁の綴りに揃える(misutaa-marou-blue-after-the-rain)/
   alias と衝突したら -姓+年(ryuji → ryuji-kaneko2027)。
 
+### ★2026-11-25 の恒久修正(実踏3型)
+1. ★**題末尾の「〜N」「(コミック)N」が剥がれない**(“愛されない運命”…〜時戻り王妃の二度目の結婚〜1 / 学園一かわいい後輩の…。（コミック）1):
+   `_VOL_TAIL` に2規則(閉じ〜直後の数字=直前が数字/〜でない時だけ・(コミック)+任意の数字)。楽天累積8,871題で突合=変化114題・悪化0
+   (「本宮ひろ志漫画大全集 001〜008」は読まない)。過去の予約頁4頁の題に残っていた(是正済・preorder-page-fix-changelog op=title_strip_vol_residue)。
+2. **固定頁(edition-overrides)への手動転送は種4では出ない**: `_preorder-transfer-continuation.py` は種4にしか書かない。
+   転送先が overrides 固定頁なら巻の並びへ直接追記(記帳 edition-fix-changelog op=override_zokkan_append)。★転送後は**頁に巻が出たかを必ず数える**。
+3. **星海社 → kodansha の別名**(星海社COMICSのISBNは講談社の出版者記号06)。publisher=null で索引skip になっていた。
+- ★未対応= 本番の予約頁 `ryuujin-koutei-to-himitsu-no-tsugai-no-chouhi-fukaai-o-sosogare-yotsug` はヨミに「ブンサツバン」= 分冊版(非掲載が基本)。頁dropはユーザ確認待ち。
+
 ### ★今日の学び(runbookに焼いた恒久修正・再発防止)
 - 増加分ゲート(過去draft再カウント防止) / kana捏造hold / slug辞書装置 / 発売日=種2引き当て / 書影=実URL(構築禁止) / 1API全フィールド捕捉(caption→genre) / preview今回のみ。
 
