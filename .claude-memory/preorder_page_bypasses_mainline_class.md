@@ -35,7 +35,7 @@ metadata:
 検証は `bff`(seed 4件が 8/16 から在る)= 修正前は `promote --only` を回しても
 description 0件・**バイト数すら不変**。 修正後 4件入り 1467→1998バイト。
 
-| 11 | **slug-overrides.yml**= 予約頁には効かない(書いても slug が変わらず reflect も黙って通る)。★予約頁の改名手順(2026-10-31 kimi-ni-dake-haato-be-to→heart-beat / kuro-no-jiiku→sieg で実施): ①`_preorder-rename-draft.py old=new`(preview/drafts/kana-pending)②`git mv data/seeds/preorder-pages/old.yml new.yml`+中の `slug`/`title_romaji` を書換 ③`data/slug-aliases.yml` に `old: new` ④`_reflect-targeted.py --drop old --only new`(旧manga.v2削除+索引+_redirects 301)⑤changelog に op=preorder_page_rename | **2026-10-31** |
+| 11 | **slug-overrides.yml**= 予約頁には効かない(書いても slug が変わらず reflect も黙って通る)。★予約頁の改名手順(2026-10-31 kimi-ni-dake-haato-be-to→heart-beat / kuro-no-jiiku→sieg で実施): ①`_preorder-rename-draft.py old=new`(preview/drafts/kana-pending)②`git mv data/seeds/preorder-pages/old.yml new.yml`+中の `slug`/`title_romaji` を書換 ③`data/slug-aliases.yml` に `old: new` ④`_reflect-targeted.py --drop old --only new`(旧manga.v2削除+索引+_redirects 301)⑤changelog に op=preorder_page_rename ⑥★**slugキーのseedを付け替える**(catch/genres/tags/elements/covers/tameshiyomi/magazine-evidence 等。grep で旧slugを全seedから探す。2026-11-26 seiken-to-bikini-armor で11本=忘れると頁からジャンル・キャッチが消える) | **2026-10-31** |
 
 **How to apply:**
 - ★**本流に充填を足したら、同じ規則を予約合流ループにも足す**。 規則の型は2つだけ:

@@ -54,6 +54,22 @@ def main() -> int:
         print("\n★abort: sitemap生成に失敗。R2同期に進まないこと")
         return 2
 
+    # 1.5 ★索引⊆生成頁(2026-11-26 新設。finalize にも同じ検査があるが、あちらは R2同期の**後**):
+    #   ビルドの検証で頁ごとskipされた頁(ガラスの城=2巻の発売日が全角「１９９１」)は out/ に無いので、
+    #   そのまま --prune 付きで同期すると**公開中の頁が本番から消える**。同期の前に止める(--no-gate でも止める)。
+    import json
+    out_manga = os.path.join(OUT, "manga")
+    idx = json.load(open(os.path.join(ROOT, "data", "manga-list-index.json"), encoding="utf-8"))
+    si = idx["f"].index("slug")
+    have = {f[:-5] for f in os.listdir(out_manga) if f.endswith(".html")} if os.path.isdir(out_manga) else set()
+    missing = sorted({str(r[si]) for r in idx["d"]} - have)
+    if missing:
+        print(f"\n★abort: 索引に居るのに未生成 {len(missing)}頁: {missing[:8]}{' …' if len(missing) > 8 else ''}")
+        print("  = ビルドの検証で頁ごとskipされている。このまま --prune で同期すると本番から消える。")
+        print("  ビルドログで slug を探して原因(発売日・ISBN等の形式)を直し、手順3からやり直す。")
+        return 1
+    print(f"\n  OK   索引⊆生成頁(索引 {len(idx['d']):,} 行すべてHTMLあり)")
+
     if a.no_gate:
         print("\n※ --no-gate: 配信HTMLの中身ゲートを飛ばした(理由を作業ログに残すこと)")
         return 0

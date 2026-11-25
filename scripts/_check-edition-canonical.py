@@ -32,6 +32,7 @@ reflect は「再生成N / 検証ゲートOK」と成功を返すので、頁が
 """
 import argparse
 import io
+import re
 import sys
 from pathlib import Path
 
@@ -221,6 +222,9 @@ def check_volumes(where, vols, problems):
         d = v.get("release_date")
         if d is not None and not isinstance(d, str):
             problems.append("%s: release_date が文字列でない (%r) = 引用符が要る" % (where, d))
+        elif isinstance(d, str) and not re.fullmatch(r"[0-9]{4}(-[0-9]{2}(-[0-9]{2})?)?", d):
+            # ★2026-11-26: ガラスの城2巻「１９９１」(全角)がビルド検証で頁ごとskip→週次pruneで本番から消えた
+            problems.append("%s: release_date の形式が YYYY[-MM[-DD]](半角)でない (%r)" % (where, d))
         i = v.get("isbn13")
         if i is not None and not (isinstance(i, str) and len(i) == 13 and i.isdigit()):
             problems.append("%s: isbn13 が13桁文字列でない (%r)" % (where, i))

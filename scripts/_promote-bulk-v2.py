@@ -4650,7 +4650,11 @@ def main():
                         _ka = _kindle_for(_v.get("isbn13"))
                         if _ka:
                             _v["kindle_asin"] = _ka
-                    _nd = _date_fill_for(_v.get("isbn13"))
+                    # ★2026-11-26: 最終passの充填は clean_vol の _norm_date を通らない(ガラスの城2巻=「１９９１」が
+                    #   ここから入り、ビルド検証で頁ごとskip→週次pruneで本番から消えた)。充填値も既存値も正規化する。
+                    if _v.get("release_date"):
+                        _v["release_date"] = _norm_date(_v["release_date"])
+                    _nd = _norm_date(_date_fill_for(_v.get("isbn13")))
                     if _nd:
                         _cur = str(_v.get("release_date") or "")
                         if not _cur or (_nd.startswith(_cur) and len(_nd) > len(_cur)):

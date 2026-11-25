@@ -22,3 +22,8 @@ metadata:
 - ★恒久策: **promote clean_vol に `_norm_date` 統合済**(NFKC正規化 + ドット/スラッシュを ハイフンへ + 月を2桁ゼロ埋め)。種4 seedも正規化済。今後の日付入りseedは自動正規化される。
 - ★preview同期の罠: **内部slug≠ファイル名(slug-override頁)を、ファイル名一致で同期すると消える**。preview欠落23作はこれ(slug-aliasesで逆引き回収)。同期は内部slug基準で。
 - 検証法: `.preview-data/manga/*.yml` の release_date が全て YYYY-MM形式か + 検索索引slug==頁内部slug を確認(不整合0が正)。
+
+## 2026-11-26 追記: 頁skip+週次prune=公開中の頁が本番から消える
+- ガラスの城2巻の発売日「１９９１」(全角)でビルド検証が頁ごとskip→`--prune` 同期で本番から削除→finalize の索引⊆生成頁で初めて止まった(同期の後=手遅れ)。部分ビルドで戻した。
+- ★恒久策3点: ①`_weekly-postbuild.py` に索引⊆生成頁ゲート(**同期の前**・--no-gate でも止める)②promote 最終pass で release_date を `_norm_date`(clean_vol を通らない経路があった)③`_check-edition-canonical.py` が半角 YYYY[-MM[-DD]] 以外を異常に。
+- ★Python の `\d` は全角数字にも当たる = 日付の形式検査は `[0-9]` で書く。
