@@ -155,7 +155,7 @@ def call(op, body):
         st, t, hd = _post(f"https://creatorsapi.amazon/catalog/v1/{op}", body,
                           {"Authorization": "Bearer " + _token(), "x-marketplace": "www.amazon.co.jp"}, with_headers=True)
     except Exception as e:  # 通信エラーも1回と数える
-        st, t = 0, f"{type(e).__name__}"
+        st, t = 0, f"{type(e).__name__}: {getattr(e, 'reason', e)}"  # ★11/26: 理由も残す(旧=型名だけで原因が追えなかった)
     CALLS[op] += 1
     CALLS["units"] += u
     # ★2026-11-22 確定: 10.2秒/回(冊数で掛けない)で54分・126回目に429 = 冊数換算369単位 > 戻り約320単位。
@@ -188,7 +188,7 @@ def call(op, body):
     _bad[0] = 0 if st == 200 else _bad[0] + 1
     # ★2026-11-25 ユーザ裁定「エラー出たらすぐ止める」: KINDLE_ASIN_STOP_ON_ANY_ERROR=1 なら 200 以外(通信エラー含む)1回で停止
     if _bad[0] >= (1 if os.environ.get("KINDLE_ASIN_STOP_ON_ANY_ERROR", "1") == "1" else 5):  # ★既定=1(2026-11-25 焼いた)
-        raise SystemExit(f"200 以外が5回続いた(最後 HTTP {st})= 停止して調べる。 {t[:200]}")
+        raise SystemExit(f"200 以外で停止(連続{_bad[0]}回・最後 HTTP {st}{'=通信エラー' if st == 0 else ''})= 停止して調べる。 {t[:200]}")
     try:
         return st, json.loads(t)
     except Exception:
