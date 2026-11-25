@@ -53,7 +53,7 @@ extra_editions:
     release_date: null
   - number: 2
     isbn13: '9784834280326'
-    release_date: null
+    release_date: 1991-06  # 2026-11-26 楽天=1991年06月(null時に種2の全角「１９９１」が入りビルド検証で頁ごとskipされた)
   - number: 3
     isbn13: '9784834280333'
     release_date: 1991-07
