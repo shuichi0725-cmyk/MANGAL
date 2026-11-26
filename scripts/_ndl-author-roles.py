@@ -35,7 +35,8 @@ WRITER = ("原作", "脚本", "脚色", "シナリオ", "ストーリー", "原�
 ARTIST = ("漫画", "作画", "画", "まんが", "マンガ", "絵", "コミカライズ")
 CREDIT_HINT = ("構成", "監修", "キャラクター原案", "キャラクターデザイン", "原案", "原作イラスト", "イラスト", "編", "編集",
                "訳", "翻訳", "解説", "協力", "企画", "考案", "デザイン", "取材", "資料", "写真", "協賛", "校閲", "文",
-               "指導", "その他", "著作", "原著")
+               "指導", "その他", "著作", "原著", "装幀", "装丁", "装画", "制作")
+EN_ROLE = {"Art": "漫画", "Story": "原作", "art": "漫画", "story": "原作"}  # 「たむろ未知 Art」型(2026-11-27 実踏)
 MANY_AUTHORS = 6  # これより多い頁(合同誌・アンソロジー型)は自動にしない=見直しへ
 
 
@@ -61,6 +62,7 @@ def parse_creator(raw):
         m = re.match(r"^(.*?)\s+(\S+)$", raw)
         names, role = (m.group(1), m.group(2)) if m else (raw, "")
     role = re.sub(r"[\[\]()]", "", role)
+    role = EN_ROLE.get(role, role)
     # 役割語に見えない末尾(人名の一部)なら役割なし
     if role and not _is_role(role):
         names, role = raw, ""
@@ -73,6 +75,8 @@ ROLE_TAILS = WRITER + ARTIST + CREDIT_HINT + ("著", "作", "共著", "著者", 
 def _is_role(w):
     """役割語か(各「・」区切りの部分が役割語で終わる)。 「絵美」「とち」のような名前の一部は役割語にしない。"""
     w = re.sub(r"[\[\]()]", "", w)
+    if w in EN_ROLE:
+        return True
     parts = [x for x in w.split("・") if x]
     return bool(parts) and all(any(x.endswith(t) for t in ROLE_TAILS) for x in parts)
 
@@ -238,6 +242,10 @@ def decide(rec):
     missing = [rec["names"][j] for j, k in enumerate(ours) if k not in people]
     if missing:
         return None, "うちの著者がNDLに無い: " + "/".join(missing) + " | NDL: " + "/".join(f"{p['name']}({'・'.join(sorted(r or '著' for r in p['roles']))})" for p in people.values())
+    # NDLにだけ居る名前に空白が残る(役割語を割れなかった「伊藤博 装幀」型)・団体名(「コミックス 編」型)=見直しへ(2026-11-27 実踏)
+    bad = [p["name"] for k, p in people.items() if k not in ours and (re.search(r"\s", p["name"].strip()) or re.search(r"(コミックス|編集部|プロダクション)$", p["name"].strip()))]
+    if bad:
+        return None, "NDLにだけ居る名前が変則(役割語の割り残し・団体名): " + "/".join(bad)
     has_writer = any("writer" in p["kinds"] for p in people.values())
     authors, credits = [], []
     for k, p in people.items():
@@ -251,6 +259,9 @@ def decide(rec):
         elif "artist" in ks or "main" in ks:
             authors.append({"name": nm, "role": "artist" if has_writer else "writer_artist"})
         else:
+            ck = norm(re.sub(r"[(（].*?[)）]", "", nm))
+            if any(norm(re.sub(r"[(（].*?[)）]", "", c["name"])) == ck for c in credits):
+                continue  # 「川島健三(水野プロ)」と「川島健三」の二重(1巻と最終巻で表記違い)
             credits.append({"name": nm, "role": "・".join(sorted(r for r in p["roles"] if r)) or "協力"})
     if not any(a["role"] in ("artist", "writer_artist") for a in authors):
         return None, "作画側が決まらない | " + "/".join(f"{p['name']}({'・'.join(sorted(p['roles']))})" for p in people.values())
