@@ -16,7 +16,6 @@ import ColorCorner from "@/components/ColorCorner";
 import DailyFeatureCorner from "@/components/DailyFeatureCorner";
 import { KotobaDaily, TriviaDaily, GenreRouletteDaily } from "@/components/DailyBits";
 import HeroD3 from "./HeroD3";
-import Card from "@/components/ui/Card";
 import StatusDate from "./StatusDate";
 import { DOT_HEADING } from "@/lib/fonts";
 import { loadAizoubanStock, loadColorEditions, loadTokusoubanStock } from "@/lib/cornerData";
@@ -34,12 +33,6 @@ export const metadata = { robots: { index: false, follow: false } };  // 実験�
 
 // ★NavIcon / D3Nav は components/GlobalNav.tsx へ移設(2026-09-07 ナビを layout に一本化)。
 //   ホームだけ太線+paper地という差はパス判定で GlobalNav 側が出し分ける。
-
-const CatIcon = ({ children }: { children: React.ReactNode }) => (
-  <svg viewBox="0 0 24 24" className="mx-auto h-5 w-5" style={{ stroke: "var(--color-ink)", fill: "none", strokeWidth: 1.8 }}>
-    {children}
-  </svg>
-);
 
 export default function Design12() {
   const { data, manga, byNew } = bundle();
@@ -60,22 +53,6 @@ export default function Design12() {
     longest && `収録最長は『${longest.title}』の 全${volCount(longest)}巻。1日1冊でも読破に${Math.ceil(volCount(longest) / 30)}ヶ月。`,
     oldest && `最も古い収録作は『${oldest.title}』(${oldest.year_started}年〜)。`,
   ].filter(Boolean) as string[];
-
-  // カテゴリ8枚(browseと同構成・件数はビルド時集計)
-  const nAnime = manga.filter((m) => m.anime_adapted).length;
-  const nDone = manga.filter((m) => m.status === "completed").length;
-  const nOn = manga.filter((m) => m.status === "ongoing").length;
-  const demo = (k: string) => manga.filter((m) => m.demographic === k).length;
-  const cats: Array<[React.ReactNode, string, number, string]> = [
-    [<CatIcon key="a"><rect x="3" y="5" width="18" height="14" /><path d="M7 5v14M17 5v14M3 9h4M3 15h4M17 9h4M17 15h4" /></CatIcon>, "アニメ化", nAnime, "/browse?anime=true"],
-    [<CatIcon key="b"><rect x="4" y="4" width="16" height="16" /><path d="M8 12l3 3 5-6" /></CatIcon>, "完結", nDone, "/browse?status=completed"],
-    [<CatIcon key="c"><path d="M12 6c-2-1.6-5-1.6-8-.6V19c3-1 6-1 8 .6 2-1.6 5-1.6 8-.6V5.4c-3-1-6-1-8 .6zM12 6v14" /></CatIcon>, "連載中", nOn, "/browse?status=ongoing"],
-    [<CatIcon key="d"><circle cx="12" cy="9" r="3.4" /><path d="M6.5 20c.6-4 3-6 5.5-6s4.9 2 5.5 6M9 5.5C10 4.5 11 4 12 4s2 .5 3 1.5" /></CatIcon>, "児童", demo("kodomo"), "/browse?demographic=kodomo"],
-    [<CatIcon key="e"><circle cx="12" cy="8" r="3.6" /><path d="M5.5 20c.8-4.5 3.4-7 6.5-7s5.7 2.5 6.5 7" /></CatIcon>, "少年", demo("shounen"), "/browse?demographic=shounen"],
-    [<CatIcon key="f"><circle cx="12" cy="8" r="3.6" /><path d="M5.5 20c.8-4.5 3.4-7 6.5-7s5.7 2.5 6.5 7M9 20v-3M15 20v-3" /></CatIcon>, "青年", demo("seinen"), "/browse?demographic=seinen"],
-    [<CatIcon key="g"><circle cx="12" cy="8" r="3.6" /><path d="M5.5 20c.8-4.5 3.4-7 6.5-7s5.7 2.5 6.5 7M8 6.5C7.4 9 6.8 10.5 6 12M16 6.5c.6 2.5 1.2 4 2 5.5" /></CatIcon>, "少女", demo("shoujo"), "/browse?demographic=shoujo"],
-    [<CatIcon key="h"><circle cx="12" cy="8" r="3.6" /><path d="M5.5 20c.8-4.5 3.4-7 6.5-7s5.7 2.5 6.5 7M8.5 6C7.5 9.5 7 12 6.5 14M15.5 6c1 3.5 1.5 6 2 8" /></CatIcon>, "女性", demo("josei"), "/browse?demographic=josei"],
-  ];
 
   const Tile = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
     <div className={`rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] shadow-sm ${className}`}>{children}</div>
@@ -112,32 +89,9 @@ export default function Design12() {
 
       <HeroD3 total={manga.length} books={totalBooks} />
 
-      {/* カテゴリ8枚(SVG線画・/browseのカテゴリカードと同じ行き先) */}
-      <section className="mt-5 px-4">
-        <div className="flex items-baseline gap-2.5">
-          <h2 className={`${DOT_HEADING} text-[18px] font-black`}>カテゴリ</h2>
-          <span className="text-[9px] font-extrabold tracking-[0.26em] text-ink/45">BROWSE BY</span>
-        </div>
-        {/* ★独立カード方式(2026-09-08 ユーザ「そろえる」)= /browse の CategoryHub と同一。
-            旧=太枠1本の帯。帯は枚数が減ると枠内に空マスが残る作りで、/browse 側で実害が出たため
-            両頁とも「独立カード + gap」に統一した(落ちたカードは消えて残りが詰まる)。
-            ★PCで「でかすぎる」(2026-09-07 ユーザ指摘)への是正=lg以上は8列1段、は維持。 */}
-        <ul className="mt-2.5 grid grid-cols-4 gap-2 lg:grid-cols-8 lg:gap-1.5">
-          {cats.map(([icon, label, n, href]) => (
-            <li key={label}>
-              <Card href={href} className="h-full px-1 py-2.5 text-center lg:py-2">
-                <span className="flex flex-col items-center justify-center gap-1">
-                  {icon}
-                  <span className="text-[11px] font-semibold leading-tight">{label}</span>
-                  <span className="cat-count text-[10px] font-medium leading-none tabular-nums text-ink/40">
-                    {n.toLocaleString()}
-                  </span>
-                </span>
-              </Card>
-            </li>
-          ))}
-        </ul>
-      </section>
+      {/* ★カテゴリ8枚(アニメ化/完結/連載中/児童/少年/青年/少女/女性)は撤去(2026-11-26 ユーザ相談→テストで試す)。
+          行き先の /browse に同じ並び(CategoryHub)があり、PCは左のFilterRailでも絞れる。スマホで画面の約半分を使っていた。
+          戻す時は git log で本コミットを引く。 */}
 
       {/* ★カテゴリ直下の数字の帯(作品|漫画本|連載中|完結|タップで絞り込み)は撤去(2026-11-04)。
           作品数・冊数はヒーロー、連載中・完結の数と行き先は上のタイルと同じで、スマホでは帯の右端
