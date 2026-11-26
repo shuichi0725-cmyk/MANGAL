@@ -82,6 +82,7 @@
 - [⏳先読み・キャッシュの調査11/16(先読みは想定どおり・実機では三カ所とも1〜3秒=急ぎなし・羅針盤の控え不具合2・見えない周りの本・索引の事前圧縮=11/20本番公開済(事前圧縮は以後の週次/差分/機能蒸留で自動)・残りは任意の掃除)](prefetch_cache_audit_2026_11_16.md)
 - [使い方/guide=本番公開済・語彙/UI変更で写真撮り直し](usage_guide_page.md)
 - [⏳電子書籍ストア一覧](ebook_store_sheet_homework.md)
+- [⏳ホームのカテゴリ撤去=テスト試行中・次の週次で本番へ](home_category_removed_trial.md)
 - [版/刷タブ・在庫・電子割引](version_tabs_stock_ebook.md)
 - [うる星=版/巻/刷タブ規則](urusei_version_display_rules.md)
 - [⏳広域監査修正queue](audit_fix_queue_post_kobo.md)
