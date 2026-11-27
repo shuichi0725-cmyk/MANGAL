@@ -1,0 +1,62 @@
+# レーベル→対象読者(demographic)の対応表。2026-11-27 ユーザ裁定(BL・女性向け=女性 / 男性向け異世界=少年=既存多数派 / 少女 / 青年)。
+# promote 最終passが「頁の demographic が空の時だけ」使う(既に値がある頁は書き換えない)。
+# キー = 版の imprint を NFKC・空白1つ・末尾の数字除去・「同語 同語」は先頭語・末尾 CM/CMK/C 除去 した形。
+# 混在レーベル(KCデラックス/MFC等)は載せない=空のまま。根拠表 = docs/production-diagnostics/label-demographic-review.tsv
+labels:
+  'フロース コミック': josei  # 女性向け
+  'ノヴァコミックス': shounen  # 男性向け異世界
+  'ハーレクインコミックス': josei  # 女性向け
+  'B''s-LOG COMICS': josei  # 女性向け
+  'KCx': josei  # 女性向け
+  'ハーレクインコミックス・キララ': josei  # 女性向け
+  'GUSH COMICS': josei  # BL
+  'ラワーレコミックス': josei  # 女性向け
+  'モンスターコミックスf': josei  # 女性向け
+  'レジーナCOMICS': josei  # 女性向け
+  'アルファポリスCOMICS': shounen  # 男性向け異世界
+  'gateauコミックス': josei  # BL
+  'Charaコミックス': josei  # BL
+  'Bivy comic': josei  # BL
+  'モンスターコミックス': shounen  # 男性向け異世界
+  'B''s-LOVEY COMICS': josei  # BL
+  'ハルタコミックス': seinen  # 青年
+  'フルールコミックス': josei  # BL
+  'リキューレコミックス': josei  # BL
+  'ナイトマ': seinen  # 青年
+  'drapコミックスDX': josei  # BL
+  '花音コミックス': josei  # BL
+  'アンダルシュCOMICS': josei  # BL
+  'ZERO-SUMコミックス': josei  # 女性向け
+  'Celicaコミックス': josei  # 女性向け
+  'comic LAKE': josei  # 女性向け
+  'KiR comics': josei  # BL
+  'GAコミック': shounen  # 男性向け異世界
+  'ディアプラス・コミックス': josei  # BL
+  'B.Pilz COMICS': josei  # BL
+  'マッグガーデンコミックスアヴァルスシリーズ': josei  # 女性向け
+  '蒼天コミックス': seinen  # 青年
+  'from RED COMICS': josei  # BL
+  '彗星社コミックス': seinen  # 青年
+  'G-Lish Comics': josei  # BL
+  'ダリアコミックス': josei  # BL
+  'マッグガーデンコミックスBeat''sシリーズ': shounen  # 男性向け異世界
+  'チルシェコミックス': josei  # BL
+  'ベリーズファンタジーコミックス': josei  # 女性向け
+  'プリンセス・コミックス プチプリ': shoujo  # 少女
+  'ボニータ・コミックス': shoujo  # 少女
+  'マーブルコミックス': josei  # BL
+  '講談社コミックス別冊フレンド': shoujo  # 少女
+  'ベリーズコミックス': josei  # 女性向け
+  'グラストCOMICS': shounen  # 男性向け異世界
+  'Tulle Comics': josei  # BL
+  'G-Lish comics LiKo': josei  # BL
+  'プリンセス・コミックス': shoujo  # 少女
+  'caramelコミックス': josei  # BL
+  'MFコミックス フラッパーシリーズ': seinen  # 青年
+  'H&C Comics CRAFTシリーズ': josei  # BL
+  '乙女ドルチェ・コミックス': josei  # 女性向け
+  'アルファノルンCOMICS': josei  # 女性向け
+  'Glanz BLcomics': josei  # BL
+# レーベル欄が空の頁だけ、出版社キーで決める(BL専門の出版社など)
+publishers_without_imprint:
+  libre: josei  # BL
