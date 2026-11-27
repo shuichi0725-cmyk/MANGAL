@@ -13,6 +13,11 @@ metadata:
 ## ★2026-11-27 本番再計測(br・mangal-db.com): /browse = 約6.1MB(+検索時 別名1.35MB = 7.5MB)
 - 一覧 = manga-list-cols.v1.json **3.46MB**(9/23 列形式化で 5.78→3.46)/ キャッチ manga-catch-index.json **2.64MB**(11/20 事前圧縮で 2.77→2.64=ほぼ不変)/ 別名 1.35MB / head 0.015MB。
 - = 9/9 の 9.85MB から約4割減ったのは**一覧索引の列形式化**の効果。**キャッチ索引は中身を軽くしていない**(残る最大の候補)。
+- ✅2026-11-27 ユーザ「Aだけやる」= キャッチの並び版 `manga-catch.v1.json`(slug を外し列形式と同じ行順・同じ src)。br 2.64→**2.20MB**。
+  作り = `_index_files.py` の `build_catch_array`(ensure_columnar が一緒に作る=全配信経路が自動)/ 読み = useMangaIndex `fetchCatchMerge`(src 一致時だけ並びで当て、違えば旧 slug 付きへ)。
+  旧 manga-catch-index.json は残す(Python道具・サーバ描画・古い端末)。テスト環境で /browse 100枚の題とキャッチ全一致・/compass も並び版で表示を確認(commit 99d1175fae)。
+  ★本番は次の週次(CODE週)。Worker の BR_KEYS に足したので事前圧縮版は Worker 出し直し後から(それまではエッジのその場圧縮)。
+  見送り = B(羅針盤/本棚を64分割で必要分だけ)・C(head にキャッチ)。
 
 ## (旧)2026-09-09 実測: /browse が実際に落とす量(圧縮後・本番)
 

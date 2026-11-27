@@ -122,7 +122,7 @@
 - [⏳成人=版単位](adult_per_edition_angel.md)
 - [⏳成年3分けレビューUI](adult_triage_review_pending.md)
 - [⏳試し読み再検査ループ](tameshiyomi_recheck_idle_loop.md)
-- [⏳本番軽量化(索引スリム)](index_lightening_plan.md)
+- [⏳本番軽量化(索引スリム・キャッチ並び版=11/27テスト済・次の週次で本番)](index_lightening_plan.md)
 - [R2孤児HTML=11/11一掃済・探し方は全走査](r2_orphan_pages_prune_missing.md)
 - [⏳SEO構造の穴(5,7残)](seo_structure_gaps_2026_09_04.md)
 - [⏳Wikiで出てない物を探す柱(32作品をテストへ・残り79は保留/巻不足の完結82件=足せる21作品35冊は未適用・★足せなかった61作品の調査は後日の宿題)](wiki_nopage_pipeline_state.md)
