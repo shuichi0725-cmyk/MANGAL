@@ -16,5 +16,6 @@ metadata:
 - ★対応表 = `data/seeds/imprint-demographic.yml`(54レーベル+レーベル欄なしのlibre)。裁定: **BL・女性向け(恋愛/TL/女性向け異世界)=josei** / 男性向け異世界=shounen(既存多数派) / 少女 / 青年。混在レーベル(KCデラックス/MFC/コロナ等49)は載せない。
 - promote `_fill_demographic_from_imprint` = 本流の最終pass + **予約頁経路(preorder-pages)の両方**(予約頁は本流を通らない穴の11件目)。空の頁だけ・版ごとに値が割れたら埋めない。今後の新頁にも自動で効く。
 - 結果: demographic 空 1,725 → **987**(738頁反映・a29358580d)。
-- ⏳未裁定: 表と既存値の食い違い(書き換えていない)= 女性向けレーベルなのに shoujo 262 / shounen 50(ハーレクインが少年=promote既定値 `src_yml.get("demographic","shounen")` の疑い)/ 男性向け異世界なのに seinen 99 など。
+- ✅ ユーザ裁定「b」: 女性向けレーベルなのに shoujo 258 / shounen 50 の **308頁を josei に揃えた**(seed `realign:` = ここに在る頁だけ既存値を上書き・changelog imprint-demographic-changelog.jsonl)。テスト環境に計1,044頁投入。
+- ⏳残り: 男性向け異世界なのに seinen 99・少女レーベルなのに josei 31 等は未裁定のまま / promote の既定値 `src_yml.get("demographic","shounen")`(不明を少年で埋める)を空にするかは未裁定。
 - ついでに発見: `data/manga.v2/` に 6/18 の `*.yml.offbak` が1,189個残っている(`_offset_harvest.py` の退避)。未処理。
