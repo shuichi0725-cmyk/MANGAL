@@ -43,6 +43,7 @@ let _gen = 0;
 function idxUrl(path: string): string {
   return _base + path;
 }
+let _fullSrc: string | null = null; // フル索引(列形式)の src = キャッチの並び版を当ててよいかの鍵
 let _catchReady = false; // キャッチの merge まで終わったか(取得開始の _catchLoaded とは別)
 let _failed = false;
 const _failListeners = new Set<() => void>();
@@ -58,6 +59,7 @@ export function setIndexBase(base: string): void {
   _inflight = null;
   _catchLoaded = false;
   _catchReady = false;
+  _fullSrc = null;
   _fullState = "idle";
   _dl = null;
   _dlT0 = 0;
@@ -80,19 +82,47 @@ export function onIndexFailed(fn: () => void): () => void {
 
 const decode = decodeListIndex; // 共有デコーダ(fl展開・authorsパック復元・cover復元)
 
+// ★キャッチの並び版(2026-11-27): manga-catch.v1.json = slug を外し、列形式索引と同じ行順に並べた配列
+//   (圧縮後 2.64MB → 2.20MB)。 列形式の src(元の行配列のハッシュ)と一致した時だけ並びで当てる。
+//   不一致・取得失敗・行配列で動いている時は従来の manga-catch-index.json(slug 付き)を読む = 表示は同じ。
+type CatchArr = { src?: string; n?: number; c?: (string | null)[] };
+
+async function fetchCatchMerge(items: MangaListItem[], src: string | null): Promise<void> {
+  if (src) {
+    try {
+      const r = await fetch(idxUrl("/manga-catch.v1.json"));
+      if (r.ok) {
+        const a = (await r.json()) as CatchArr;
+        if (a.src === src && Array.isArray(a.c) && a.c.length === items.length) {
+          perfDiag.catchFormat = "arr";
+          for (let i = 0; i < items.length; i++) {
+            const c = a.c[i];
+            if (c) (items[i] as { catch?: string }).catch = c;
+          }
+          return;
+        }
+      }
+    } catch {
+      // 下の slug 付きへ
+    }
+  }
+  const r = await fetch(idxUrl("/manga-catch-index.json"));
+  const cm: Record<string, string> = r.ok ? await r.json() : {};
+  perfDiag.catchFormat = "keyed";
+  for (const m of items) {
+    const c = cm[m.slug];
+    if (c) (m as { catch?: string }).catch = c;
+  }
+}
+
 function loadCatch(): void {
   if (_catchLoaded || !_cache) return;
   _catchLoaded = true;
   const g = _gen;
-  fetch(idxUrl("/manga-catch-index.json"))
-    .then((r) => (r.ok ? r.json() : {}))
-    .then((cm: Record<string, string>) => {
+  const items = _cache;
+  fetchCatchMerge(items, _fullSrc)
+    .then(() => {
       if (g !== _gen) return;
-      if (_cache)
-        for (const m of _cache) {
-          const c = cm[m.slug];
-          if (c) (m as { catch?: string }).catch = c;
-        }
       _catchReady = true;
       _catchListeners.forEach((fn) => fn());
     })
@@ -172,6 +202,7 @@ export function ensureFullIndex(): void {
       perfDiag.fullFetchMs = since(_t0); // 取得+解凍+JSON.parse
       _tDecode = nowMs();
       return decodeChunked(raw).then((items) => {
+        _fullSrc = indexVersionOf(raw); // 行配列(版なし)なら null = キャッチは slug 付きを読む
         tagIndexVersion(items, indexVersionOf(raw)); // 検索の下ごしらえ保存の鍵(版の無い行配列は保存しない)
         return items;
       });

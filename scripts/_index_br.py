@@ -38,6 +38,7 @@ CACHE_DIR = os.path.join(ROOT, ".cache", "index-br")
 BR_SOURCES = {
     "manga-list-cols.v1.json": "data/manga-list-cols.v1.json",
     "manga-catch-index.json": "data/manga-catch-index.json",
+    "manga-catch.v1.json": "data/manga-catch.v1.json",
     "manga-alt-index.json": "data/manga-alt-index.json",
     "data/compass-hidden.v1.json": "public/data/compass-hidden.v1.json",
 }

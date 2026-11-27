@@ -71,6 +71,8 @@ jobs:
           # ★列形式索引(2026-09-23 ブラウザ用・行配列から派生)。行配列と内容ハッシュで照合し、古ければ作り直す
           python3 scripts/_index_files.py ensure .preview-data
           cp .preview-data/manga-list-cols.v1.json public/manga-list-cols.v1.json
+          # ★キャッチの並び版(2026-11-27・ensure が列形式と同じ行順で作る)
+          cp .preview-data/manga-catch.v1.json public/manga-catch.v1.json
           # ★本棚の「番号タイルを押すと書影」= 作品ごとの巻の書影(64分割 public/vc/NN.json・2026-10-04)。
           #   テスト環境の作品データから作る(git には入れない)。 本番は週次 step1 の vol-covers が data/vc に作る(2026-10-31)。
           python3 -c "import yaml" 2>/dev/null || python3 -m pip install --quiet pyyaml
@@ -92,7 +94,7 @@ jobs:
             curl -fsS --retry 3 -A "Mozilla/5.0" -o /tmp/prod-idx/$f https://mangal-db.com/$f
           done
           python3 scripts/_index_files.py ensure /tmp/prod-idx
-          cp /tmp/prod-idx/manga-list-cols.v1.json /tmp/prod-idx/manga-list-head.json /tmp/prod-idx/manga-catch-index.json public/prod-idx/
+          cp /tmp/prod-idx/manga-list-cols.v1.json /tmp/prod-idx/manga-list-head.json /tmp/prod-idx/manga-catch-index.json /tmp/prod-idx/manga-catch.v1.json public/prod-idx/
           # ★Cloudflare Pages は1ファイル 25MiB まで(列形式は今約21MB)。 超えたら警告して外す(デプロイ全体は落とさない)
           for f in public/prod-idx/*.json; do
             size=$(stat -c %s "$f")

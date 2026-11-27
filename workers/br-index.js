@@ -37,6 +37,7 @@
 export const BR_KEYS = new Set([
   "manga-list-cols.v1.json",
   "manga-catch-index.json",
+  "manga-catch.v1.json",
   "manga-alt-index.json",
   "data/compass-hidden.v1.json",
 ]);

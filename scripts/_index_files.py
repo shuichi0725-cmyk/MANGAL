@@ -26,6 +26,13 @@ import sys
 ROW = "manga-list-index.json"
 # ★列形式の器を変える時は v を上げて別名にする(lib/useMangaIndex.ts の fetch 先も同時に)。
 COLUMNAR = "manga-list-cols.v1.json"
+# ★キャッチの並び版(2026-11-27 ユーザ裁定「Aだけやる」): manga-catch-index.json({slug: catch})から slug を外し、
+#   列形式と同じ行順の配列にした派生ファイル。 slug 4.7万個ぶんが消えて 圧縮後 2.64MB → 約2.19MB。
+#   ★行順で突き合わせるので、列形式と同じ「元ファイル(行配列)のハッシュ」を src に焼く。 ブラウザは
+#     列形式の src と一致した時だけ並びで当て、違えば従来の manga-catch-index.json(slug 付き)に戻る。
+#   元の manga-catch-index.json は残す(Python の道具とサーバ描画が読む・古い端末の控え)。
+CATCH_ARR = "manga-catch.v1.json"
+CATCH_KEYED = "manga-catch-index.json"
 
 # ★配信する索引の全リスト。r2-sync / 差分反映 / 機能蒸留 / 週次preflight・finalize は全部ここを読む
 #   (旧: 各scriptが4本のタプルを個別に持っていた=1本足すたびに結線漏れの危険があった)。
@@ -35,6 +42,7 @@ INDEX_FILES = (
     "manga-list-head.json",
     "manga-alt-index.json",
     COLUMNAR,
+    CATCH_ARR,
 )
 
 # ★本棚の「番号タイルを押すと書影」= 作品ごとの巻の書影(64分割 vc/NN.json・2026-10-31 本番化)。
@@ -92,6 +100,41 @@ def build_columnar(dirpath: str) -> str:
     return src
 
 
+def build_catch_array(dirpath: str) -> bool:
+    """dirpath/manga-catch-index.json を行配列の順に並べた dirpath/manga-catch.v1.json を作る。
+    形式: {"src": 行配列のハッシュ, "cs": キャッチ索引のハッシュ, "n": 行数, "c": [キャッチ or null](行順)}
+    ★src・cs を先頭にする(catch_array_is_fresh が先頭だけ読んで照合する)。 キャッチ索引が無ければ作らない(False)。"""
+    row_p = os.path.join(dirpath, ROW)
+    cat_p = os.path.join(dirpath, CATCH_KEYED)
+    out_p = os.path.join(dirpath, CATCH_ARR)
+    if not os.path.exists(row_p) or not os.path.exists(cat_p):
+        return False
+    with open(row_p, encoding="utf-8") as f:
+        raw = json.load(f)
+    with open(cat_p, encoding="utf-8") as f:
+        cm = json.load(f)
+    i = raw["f"].index("slug")
+    c = [cm.get(r[i]) if i < len(r) else None for r in raw["d"]]
+    obj = {"src": _sha(row_p), "cs": _sha(cat_p), "n": len(c), "c": c}
+    tmp = out_p + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as fo:
+        json.dump(obj, fo, ensure_ascii=False, separators=(",", ":"))
+    os.replace(tmp, out_p)
+    return True
+
+
+def catch_array_is_fresh(dirpath: str) -> bool:
+    row_p = os.path.join(dirpath, ROW)
+    cat_p = os.path.join(dirpath, CATCH_KEYED)
+    out_p = os.path.join(dirpath, CATCH_ARR)
+    if not (os.path.exists(row_p) and os.path.exists(cat_p) and os.path.exists(out_p)):
+        return False
+    with open(out_p, encoding="utf-8") as f:
+        head = f.read(80)
+    m = re.search(r'"src":"([0-9a-f]+)","cs":"([0-9a-f]+)"', head)
+    return bool(m) and m.group(1) == _sha(row_p) and m.group(2) == _sha(cat_p)
+
+
 def columnar_is_fresh(dirpath: str) -> bool:
     row_p = os.path.join(dirpath, ROW)
     out_p = os.path.join(dirpath, COLUMNAR)
@@ -107,6 +150,9 @@ def ensure_columnar(dirpath: str) -> str:
     """行配列と合っていなければ列形式を作り直す。戻り値 = "fresh" / "rebuilt" / "no-row"。"""
     if not os.path.exists(os.path.join(dirpath, ROW)):
         return "no-row"
+    # ★キャッチの並び版も同じ時に揃える(列形式と同じ行順・同じ src)。 列形式だけ新しくて並び版が古い、を起こさない
+    if not catch_array_is_fresh(dirpath):
+        build_catch_array(dirpath)
     if columnar_is_fresh(dirpath):
         return "fresh"
     build_columnar(dirpath)
@@ -120,11 +166,15 @@ if __name__ == "__main__":
     d = sys.argv[2]
     if sys.argv[1] == "build":
         build_columnar(d)
+        build_catch_array(d)
         st = "rebuilt"
     else:
         st = ensure_columnar(d)
     p = os.path.join(d, COLUMNAR)
     sz = os.path.getsize(p) / 1e6 if os.path.exists(p) else 0
     print(f"列形式索引 {COLUMNAR}: {st} ({sz:.1f}MB) @ {d}")
+    cp = os.path.join(d, CATCH_ARR)
+    if os.path.exists(cp):
+        print(f"キャッチの並び版 {CATCH_ARR}: {'fresh' if catch_array_is_fresh(d) else 'STALE'} ({os.path.getsize(cp) / 1e6:.1f}MB) @ {d}")
     if st == "no-row":
         sys.exit(1)

@@ -23,11 +23,11 @@ export default function CompassPage() {
   if (process.env.NEXT_PUBLIC_PREVIEW_FEATURES === "1") {
     preload("/prod-idx/manga-list-head.json", { as: "fetch", crossOrigin: "anonymous" });
     preload("/prod-idx/manga-list-cols.v1.json", { as: "fetch", crossOrigin: "anonymous", fetchPriority: "low" });
-    preload("/prod-idx/manga-catch-index.json", { as: "fetch", crossOrigin: "anonymous", fetchPriority: "low" });
+    preload("/prod-idx/manga-catch.v1.json", { as: "fetch", crossOrigin: "anonymous", fetchPriority: "low" });
   } else {
     preload("/manga-list-head.json", { as: "fetch", crossOrigin: "anonymous" });
     preload("/manga-list-cols.v1.json", { as: "fetch", crossOrigin: "anonymous", fetchPriority: "low" });
-    preload("/manga-catch-index.json", { as: "fetch", crossOrigin: "anonymous", fetchPriority: "low" });
+    preload("/manga-catch.v1.json", { as: "fetch", crossOrigin: "anonymous", fetchPriority: "low" });
   }
   // ★隠し要素(近さにだけ使う・番号だけの小さいファイル)。 本番・テスト環境とも同じ場所(useHidden.ts の HIDDEN_URL と揃える)
   preload("/data/compass-hidden.v1.json", { as: "fetch", crossOrigin: "anonymous" });

@@ -35,9 +35,9 @@ const base = () => new Headers({ "content-type": "application/json; charset=utf-
 const full = () => ({ [KEY]: { etag: MD5, body: "RAW" }, [brKey(KEY, MD5)]: { etag: "x", body: "BR-BYTES" } });
 
 describe("索引の事前圧縮版: 対象と名前", () => {
-  it("対象は索引4本・scripts/_index_br.py の BR_SOURCES と同じ(片方だけ足す結線漏れを防ぐ)", () => {
+  it("対象は索引5本・scripts/_index_br.py の BR_SOURCES と同じ(片方だけ足す結線漏れを防ぐ)", () => {
     expect([...BR_KEYS].sort()).toEqual(
-      ["data/compass-hidden.v1.json", "manga-alt-index.json", "manga-catch-index.json", "manga-list-cols.v1.json"].sort(),
+      ["data/compass-hidden.v1.json", "manga-alt-index.json", "manga-catch-index.json", "manga-catch.v1.json", "manga-list-cols.v1.json"].sort(),
     );
     const py = readFileSync(new URL("../scripts/_index_br.py", import.meta.url), "utf-8");
     const block = /BR_SOURCES = \{([\s\S]*?)\n\}/.exec(py)[1];

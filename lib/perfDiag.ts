@@ -33,6 +33,8 @@ export type PerfDiag = {
   altFetchMs: number | null;
   /** ★2026-09-23: フル索引の形式(col=列形式・軽い / row=行配列へフォールバック) */
   idxFormat: "col" | "row" | null;
+  /** ★2026-11-27: キャッチの読み方(arr=並び版 manga-catch.v1.json / keyed=slug 付きへ戻った) */
+  catchFormat: "arr" | "keyed" | null;
   /** ★2026-09-23: 下ごしらえの端末保存(hit=保存分を使った / miss=作って保存 / off=保存不可・版なし) */
   hayCache: "hit" | "miss" | "off" | null;
   /** hit 時の読み出し時間(IndexedDB→復元) */
@@ -53,6 +55,7 @@ export const perfDiag: PerfDiag = {
   searchHits: null,
   altFetchMs: null,
   idxFormat: null,
+  catchFormat: null,
   hayCache: null,
   hayCacheMs: null,
   romaIdleRows: 0,
