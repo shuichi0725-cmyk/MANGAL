@@ -1,10 +1,10 @@
-# レーベル→対象読者(demographic)の対応表。2026-11-27 ユーザ裁定(BL・女性向け=女性 / 男性向け異世界=少年=既存多数派 / 少女 / 青年)。
+# レーベル→対象読者(demographic)の対応表。2026-11-27 ユーザ裁定(BL・女性向け=女性 / 男性向け異世界=青年(11-27 改訂) / 少女 / 青年)。
 # promote 最終passが「頁の demographic が空の時だけ」使う(既に値がある頁は書き換えない)。
 # キー = 版の imprint を NFKC・空白1つ・末尾の数字除去・「同語 同語」は先頭語・末尾 CM/CMK/C 除去 した形。
 # 混在レーベル(KCデラックス/MFC等)は載せない=空のまま。根拠表 = docs/production-diagnostics/label-demographic-review.tsv
 labels:
   'フロース コミック': josei  # 女性向け
-  'ノヴァコミックス': shounen  # 男性向け異世界
+  'ノヴァコミックス': seinen  # 男性向け異世界(2026-11-27 ユーザ裁定「男性向けは青年でよい」で shounen→seinen)
   'ハーレクインコミックス': josei  # 女性向け
   'B''s-LOG COMICS': josei  # 女性向け
   'KCx': josei  # 女性向け
@@ -13,11 +13,11 @@ labels:
   'ラワーレコミックス': josei  # 女性向け
   'モンスターコミックスf': josei  # 女性向け
   'レジーナCOMICS': josei  # 女性向け
-  'アルファポリスCOMICS': shounen  # 男性向け異世界
+  'アルファポリスCOMICS': seinen  # 男性向け異世界(2026-11-27 ユーザ裁定「男性向けは青年でよい」で shounen→seinen)
   'gateauコミックス': josei  # BL
   'Charaコミックス': josei  # BL
   'Bivy comic': josei  # BL
-  'モンスターコミックス': shounen  # 男性向け異世界
+  'モンスターコミックス': seinen  # 男性向け異世界(2026-11-27 ユーザ裁定「男性向けは青年でよい」で shounen→seinen)
   'B''s-LOVEY COMICS': josei  # BL
   'ハルタコミックス': seinen  # 青年
   'フルールコミックス': josei  # BL
@@ -30,7 +30,7 @@ labels:
   'Celicaコミックス': josei  # 女性向け
   'comic LAKE': josei  # 女性向け
   'KiR comics': josei  # BL
-  'GAコミック': shounen  # 男性向け異世界
+  'GAコミック': seinen  # 男性向け異世界(2026-11-27 ユーザ裁定「男性向けは青年でよい」で shounen→seinen)
   'ディアプラス・コミックス': josei  # BL
   'B.Pilz COMICS': josei  # BL
   'マッグガーデンコミックスアヴァルスシリーズ': josei  # 女性向け
@@ -39,7 +39,7 @@ labels:
   '彗星社コミックス': seinen  # 青年
   'G-Lish Comics': josei  # BL
   'ダリアコミックス': josei  # BL
-  'マッグガーデンコミックスBeat''sシリーズ': shounen  # 男性向け異世界
+  'マッグガーデンコミックスBeat''sシリーズ': seinen  # 男性向け異世界(2026-11-27 ユーザ裁定「男性向けは青年でよい」で shounen→seinen)
   'チルシェコミックス': josei  # BL
   'ベリーズファンタジーコミックス': josei  # 女性向け
   'プリンセス・コミックス プチプリ': shoujo  # 少女
@@ -47,7 +47,7 @@ labels:
   'マーブルコミックス': josei  # BL
   '講談社コミックス別冊フレンド': shoujo  # 少女
   'ベリーズコミックス': josei  # 女性向け
-  'グラストCOMICS': shounen  # 男性向け異世界
+  'グラストCOMICS': seinen  # 男性向け異世界(2026-11-27 ユーザ裁定「男性向けは青年でよい」で shounen→seinen)
   'Tulle Comics': josei  # BL
   'G-Lish comics LiKo': josei  # BL
   'プリンセス・コミックス': shoujo  # 少女

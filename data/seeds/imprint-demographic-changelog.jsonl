@@ -336,3 +336,4 @@
 {"op": "demographic-realign", "slug": "suki-ni-naruna-to-iwaretemo", "stem": "suki-ni-naruna-to-iwaretemo", "before": "josei", "after": "shoujo", "at": "2026-11-27", "revert": "imprint-demographic.yml の realign から外して反映"}
 {"op": "demographic-realign", "slug": "uso-kon-roze", "stem": "uso-kon-roze", "before": "josei", "after": "shoujo", "at": "2026-11-27", "revert": "imprint-demographic.yml の realign から外して反映"}
 {"op": "demographic-realign", "slug": "usokon", "stem": "usokon", "before": "josei", "after": "shoujo", "at": "2026-11-27", "revert": "imprint-demographic.yml の realign から外して反映"}
+{"op": "label-table-change", "labels": ["ノヴァコミックス","アルファポリスCOMICS","モンスターコミックス","GAコミック","マッグガーデンコミックスBeat'sシリーズ","グラストCOMICS"], "before": "shounen", "after": "seinen", "at": "2026-11-27", "note": "ユーザ「男性向けは青年でよい。成年は使いたくない」。空欄を表で埋めた頁だけ変わる", "revert": ".cache/imprint-demographic.yml.bak-20261127c"}
