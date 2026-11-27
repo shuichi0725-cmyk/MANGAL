@@ -22,3 +22,4 @@ metadata:
 
 - 2026-11-27 追: 少女レーベル(プリンセス・コミックス/講談社コミックス別冊フレンド)なのに josei だった30頁を realign で shoujo に揃えた(ユーザ「なおして」)。realign計338(josei308/shoujo30)。残る未裁定=男性向け異世界レーベルでseinenの99頁・promoteのshounen既定。
 - 2026-11-27 追2: ユーザ「男性向けは青年でよい。成年は使いたくない」→ 表の男性向け異世界6レーベルを shounen→seinen。空欄充填分99頁が seinen に。元データで shounen の211頁は未変更(揃えるか裁定待ち)。
+- 2026-11-27 追3: ユーザ「211頁は調べて男性向けなら青年で」→ 209頁を realign seinen。連載誌が少年誌(月刊少年シリウス=必勝ダンジョン運営方法 / マンガUP!=ハズレ判定から始まったチート魔術士生活)の2頁は shounen のまま。判定根拠=レーベル(男性向け6)+連載誌(magazines.yml の demographic)。realign計547(josei308/seinen209/shoujo30)。残=promoteのshounen既定。
