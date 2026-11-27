@@ -21,3 +21,4 @@ metadata:
 - ついでに発見: `data/manga.v2/` に 6/18 の `*.yml.offbak` が1,189個残っている(`_offset_harvest.py` の退避)。未処理。
 
 - 2026-11-27 追: 少女レーベル(プリンセス・コミックス/講談社コミックス別冊フレンド)なのに josei だった30頁を realign で shoujo に揃えた(ユーザ「なおして」)。realign計338(josei308/shoujo30)。残る未裁定=男性向け異世界レーベルでseinenの99頁・promoteのshounen既定。
+- 2026-11-27 追2: ユーザ「男性向けは青年でよい。成年は使いたくない」→ 表の男性向け異世界6レーベルを shounen→seinen。空欄充填分99頁が seinen に。元データで shounen の211頁は未変更(揃えるか裁定待ち)。
