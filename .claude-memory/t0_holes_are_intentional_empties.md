@@ -11,3 +11,10 @@ metadata:
 - genres 空には非漫画の疑い(例 1-noshitsuketokenkou「1・2・3歳のしつけと健康」BABY BOOKS)も混ざる。
 
 **How to apply:** 「機械で一括充填」は不可。進めるなら ①レーベル→対象読者の対応表を上位レーベルだけユーザ裁定で作る ②genres 空はエンリッチ(楽天紹介文)の経路で、非漫画の疑いは掲載範囲として別に拾う。AIで推定して埋めるのは provisional 付きのジャンルだけ([[ai_genre_closed_vocabulary]])。
+
+## 2026-11-27 適用済み(ユーザ「作る」「お願い」)
+- ★対応表 = `data/seeds/imprint-demographic.yml`(54レーベル+レーベル欄なしのlibre)。裁定: **BL・女性向け(恋愛/TL/女性向け異世界)=josei** / 男性向け異世界=shounen(既存多数派) / 少女 / 青年。混在レーベル(KCデラックス/MFC/コロナ等49)は載せない。
+- promote `_fill_demographic_from_imprint` = 本流の最終pass + **予約頁経路(preorder-pages)の両方**(予約頁は本流を通らない穴の11件目)。空の頁だけ・版ごとに値が割れたら埋めない。今後の新頁にも自動で効く。
+- 結果: demographic 空 1,725 → **987**(738頁反映・a29358580d)。
+- ⏳未裁定: 表と既存値の食い違い(書き換えていない)= 女性向けレーベルなのに shoujo 262 / shounen 50(ハーレクインが少年=promote既定値 `src_yml.get("demographic","shounen")` の疑い)/ 男性向け異世界なのに seinen 99 など。
+- ついでに発見: `data/manga.v2/` に 6/18 の `*.yml.offbak` が1,189個残っている(`_offset_harvest.py` の退避)。未処理。
