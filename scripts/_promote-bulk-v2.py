@@ -3627,7 +3627,9 @@ def build_yml(
     o["magazine"] = mag_cand
 
     # ★"other"は出荷しない(2026-07-13 ユーザ裁定: 意味がないカテゴリ。不明=キー自体を出さない=UI非表示)
-    _demo = (seed3 or {}).get("demographic") or src_yml.get("demographic", "shounen")
+    # ★既定 "shounen" は廃止(2026-11-27 ユーザ裁定): 根拠の無い頁を少年で埋めない。不明は空のまま
+    #   一覧(scripts/_demographic-worklist.py)に載せ、後から調べて imprint-demographic.yml へ。
+    _demo = (seed3 or {}).get("demographic") or src_yml.get("demographic")
     if _demo and _demo != "other":
         o["demographic"] = _demo
     else:
