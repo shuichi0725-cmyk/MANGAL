@@ -19,3 +19,5 @@ metadata:
 - ✅ ユーザ裁定「b」: 女性向けレーベルなのに shoujo 258 / shounen 50 の **308頁を josei に揃えた**(seed `realign:` = ここに在る頁だけ既存値を上書き・changelog imprint-demographic-changelog.jsonl)。テスト環境に計1,044頁投入。
 - ⏳残り: 男性向け異世界なのに seinen 99・少女レーベルなのに josei 31 等は未裁定のまま / promote の既定値 `src_yml.get("demographic","shounen")`(不明を少年で埋める)を空にするかは未裁定。
 - ついでに発見: `data/manga.v2/` に 6/18 の `*.yml.offbak` が1,189個残っている(`_offset_harvest.py` の退避)。未処理。
+
+- 2026-11-27 追: 少女レーベル(プリンセス・コミックス/講談社コミックス別冊フレンド)なのに josei だった30頁を realign で shoujo に揃えた(ユーザ「なおして」)。realign計338(josei308/shoujo30)。残る未裁定=男性向け異世界レーベルでseinenの99頁・promoteのshounen既定。
