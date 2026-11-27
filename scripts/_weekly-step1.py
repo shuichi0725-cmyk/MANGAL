@@ -80,6 +80,13 @@ STEPS = [
     #   per-case の著者是正で一致/不一致が動くので週次で焼き直す(外部へは出ない・手元の作家表/AniList dump/種2のみ)。
     ("author-qid-hide",   ["_audit-author-qid.py"],
      "著者QID不一致の頁一覧(著者: Wikidata リンクの非表示用)+監査TSV"),
+    # ★2026-11-27 ユーザ裁定「たして」: 対象読者の調査一覧を毎週作り直す(読み取り専用・本番には書かない)。
+    #   連載誌の根拠台帳を先に焼き直す(一覧の「連載誌の裏付け」の入力)。確かさAの新規が出たら週次の報告で件数を言い、
+    #   適用は「反映して」のGOの後(seed realign へ追記 → reflect)。日次で作った新頁もここで自動的に一覧に載る。
+    ("magazine-ledger",   ["_magazine-ledger.py", "build"],
+     "連載誌の根拠台帳の表を焼き直す(~20秒・読み取り専用)"),
+    ("demographic-worklist", ["_demographic-worklist.py"],
+     "対象読者の調査一覧+確かさA/B(~1分・読み取り専用。docs/production-diagnostics/demographic-worklist*.)"),
     ("masters-json",      ["gen-masters-json.ts"],
      "左レール用マスタJSON(publishers+magazines 48.6KB を全頁RSCから外す受け皿。★2026-09-09新設)"),
     ("list-index",        ["_build-list-index.py", "data/manga.v2", "data"],

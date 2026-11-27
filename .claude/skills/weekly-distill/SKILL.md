@@ -195,6 +195,10 @@ python scripts/_weekly-finalize.py
 
 ### 7. 報告
 工程表(ビルド頁数/PUT数/疎通結果)で完了報告。異常は隠さずそのまま。
+- ★対象読者(2026-11-27 ユーザ裁定「たして」): step1 の `demographic-worklist` が出す **「確かさA(食い違い+空)= N 頁」** を報告に1行入れる。
+  N>0 なら「適用しますか」と聞くだけ(週次の中では適用しない)。GO後 = `python scripts/_demographic-worklist.py --seed-a`
+  → `.cache/demographic-seed-a.txt` を400頁ずつ `_reflect-targeted.py --only` で反映(次の週次で本番へ)。
+  B(連載誌の裏付けなし)・根拠なしは埋めない。経緯=記憶 t0_holes_are_intentional_empties。
 
 ## ★成功判定 (= 完了主張の前にこの数字を全部言えること)
 - preflight exit 0 / out/manga ≈ **132k files**(≥120kがfinalize下限) / R2 PUT数(全量=レイアウト週・少数=データ週)

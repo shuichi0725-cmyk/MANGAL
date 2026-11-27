@@ -23,7 +23,8 @@ kind(調査の種類):
     一致(根拠1つ) / 一致(根拠2つ以上) / 人が裁定 で、かつ台帳の「今の連載誌」が頁の連載誌と同じ。
     ★NDL は連載誌を持たない(magazine-evidence/README)= 裏付けに使わない。
 
-使い方: python scripts/_demographic-worklist.py
+使い方: python scripts/_demographic-worklist.py            (一覧を作るだけ。週次 step1 が毎週回す)
+      python scripts/_demographic-worklist.py --seed-a   (★ユーザGO後: 確かさAを seed realign へ追記)
 結果を seed へ書くのは別工程(imprint-demographic.yml の realign へ、ユーザ裁定の後)。
 """
 import glob
@@ -210,7 +211,42 @@ def main():
     OUT_SUM.write_text(json.dumps(summ, ensure_ascii=False, indent=1), encoding="utf-8")
     print(json.dumps(summ, ensure_ascii=False, indent=1))
     print(f"→ {OUT_TSV.relative_to(ROOT)} ({len(rows)} 行)")
+    a_new = [r for r in rows if r[1] == "A" and r[0] in ("conflict", "empty") and r[6] in JA_KEY]
+    print(f"確かさA(食い違い+空)= {len(a_new)} 頁" + ("  → 適用は ユーザGO後に --seed-a → 反映して" if a_new else ""))
+    return a_new
+
+
+JA_KEY = {v: k for k, v in LABEL_JA.items()}
+
+
+def seed_a(a_rows):
+    """確かさA の頁を imprint-demographic.yml の realign へ追記(+changelog)。 ★ユーザGOの後だけ使う。
+    追記した stem を .cache/demographic-seed-a.txt に書く(= _reflect-targeted.py --only に渡す)。"""
+    import shutil
+    from datetime import date
+    if not a_rows:
+        print("確かさA の新規なし = 何もしない")
+        return
+    seed = ROOT / "data" / "seeds" / "imprint-demographic.yml"
+    today = date.today().isoformat()
+    shutil.copy(seed, ROOT / ".cache" / f"imprint-demographic.yml.bak-{today}-seed-a")
+    with seed.open("a", encoding="utf-8", newline="\n") as f:
+        f.write(f"# ★{today} 確かさA(_demographic-worklist.py --seed-a): 裏付けのある根拠だけで決まり食い違いなし\n")
+        for r in a_rows:
+            f.write(f"  {r[2]}: {JA_KEY[r[6]]}  # 旧 {JA_KEY.get(r[4], '空')} 根拠 {r[7]}\n")
+    with (ROOT / "data" / "seeds" / "imprint-demographic-changelog.jsonl").open("a", encoding="utf-8", newline="\n") as f:
+        for r in a_rows:
+            f.write(json.dumps({"op": "demographic-realign", "slug": r[2], "stem": r[2],
+                                "before": JA_KEY.get(r[4]), "after": JA_KEY[r[6]], "at": today, "grade": "A",
+                                "evidence": r[7], "revert": "imprint-demographic.yml の realign から外して反映"},
+                               ensure_ascii=False) + "\n")
+    out = ROOT / ".cache" / "demographic-seed-a.txt"
+    out.write_text("\n".join(r[2] for r in a_rows) + "\n", encoding="utf-8")
+    print(f"realign へ {len(a_rows)} 頁追記 → 反映対象 {out.relative_to(ROOT)}"
+          f"(多い時は400頁ずつ _reflect-targeted.py --only)")
 
 
 if __name__ == "__main__":
-    main()
+    a = main()
+    if "--seed-a" in sys.argv[1:]:
+        seed_a(a)
