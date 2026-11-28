@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import CoverImage from "./CoverImage";
-import LikeButton from "./LikeButton";
 import { jstDayIndex, jstDateStr, picksForDay, useSansedaiStock, personaName } from "./SansedaiDaily";
 import { DOT_HEADING } from "@/lib/fonts";
 
@@ -68,10 +67,8 @@ export default function FeaturedDaily({ slot = 0 }: { slot?: number }) {
         <ul className="mt-2.5 space-y-3">
           {mine.map((p) => (
             <li key={`${p.gen}-${p.slug}`} className="border-t border-[var(--color-line)]/60 pt-2.5 first:border-t-0 first:pt-0">
-              {/* いいね=案内人名の行の右端(2026-07-06 ユーザ要望: 縦を消費せず書影を潰さない。Link外=クリック競合なし) */}
               <div className="flex items-center justify-between">
                 <p className="text-[11px] font-bold text-[var(--color-accent)]">{personaName(p.persona)}</p>
-                <LikeButton id={`sansedai:${date}:${p.gen}`} />
               </div>
               <Link href={`/manga/${p.slug}`} className="spring-press mt-1 flex gap-3">
                 <div

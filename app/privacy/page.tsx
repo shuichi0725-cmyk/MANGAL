@@ -17,7 +17,7 @@ export default function PrivacyPage() {
       </Link>
 
       <h1 className="mt-6 text-2xl md:text-3xl font-bold">プライバシーポリシー</h1>
-      <p className="mt-2 text-xs text-ink/50">最終更新: 2026年4月</p>
+      <p className="mt-2 text-xs text-ink/50">最終更新: 2026年11月</p>
 
       <section className="mt-8 space-y-3 text-sm leading-relaxed text-ink/80">
         <h2 className="text-base font-semibold text-ink">1. 個人情報の収集について</h2>
@@ -43,13 +43,6 @@ export default function PrivacyPage() {
         </p>
         <p>
           各作品の購入ボタンをクリックすると楽天ブックス等の商品ページに遷移し、その後の購入に応じて運営者に紹介料が支払われる場合があります。リンクのクリックによって読者が追加の費用を負担することはありません。
-        </p>
-      </section>
-
-      <section className="mt-8 space-y-3 text-sm leading-relaxed text-ink/80">
-        <h2 className="text-base font-semibold text-ink">4. いいね機能</h2>
-        <p>
-          「いいね（♥）」は匿名の集計カウンタで、個人を特定する情報は取得・保存しません。押した状態の記憶にはブラウザのローカルストレージのみを使用します。
         </p>
       </section>
 

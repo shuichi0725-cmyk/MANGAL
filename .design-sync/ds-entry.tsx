@@ -23,7 +23,6 @@ export { default as MarqueeTitle } from "@/components/MarqueeTitle";
 export { default as CoverImage } from "@/components/CoverImage";
 export { default as ColorEditionNote } from "@/components/ColorEditionNote";
 export { default as CoverLightbox } from "@/components/CoverLightbox";
-export { default as LikeButton } from "@/components/LikeButton";
 export { default as LikeButtonMock } from "@/components/LikeButtonMock";
 export { default as ScrollTopButton } from "@/components/ScrollTopButton";
 export { default as SearchBox } from "@/components/SearchBox";

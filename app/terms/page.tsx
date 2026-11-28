@@ -16,7 +16,7 @@ export default function TermsPage() {
       </Link>
 
       <h1 className="mt-6 text-2xl md:text-3xl font-bold">利用規約</h1>
-      <p className="mt-2 text-xs text-ink/50">最終更新: 2026年7月</p>
+      <p className="mt-2 text-xs text-ink/50">最終更新: 2026年11月</p>
 
       <section className="mt-8 space-y-3 text-sm leading-relaxed text-ink/80">
         <h2 className="text-base font-semibold text-ink">1. 適用範囲</h2>
@@ -59,13 +59,6 @@ export default function TermsPage() {
         <h2 className="text-base font-semibold text-ink">3-3. 広告について（アフィリエイト開示）</h2>
         <p>
           本サイトは各種アフィリエイトプログラムに参加しており、店舗リンクにはアフィリエイト広告を含みます。該当箇所には [PR] を表示しています。リンク経由で商品が購入された場合、運営者が紹介料を受け取ることがありますが、利用者の購入価格に影響はありません。
-        </p>
-      </section>
-
-      <section className="mt-8 space-y-3 text-sm leading-relaxed text-ink/80">
-        <h2 className="text-base font-semibold text-ink">3-4. いいね機能について</h2>
-        <p>
-          本サイトの「いいね（♥）」は匿名の集計カウンタです。個人を特定する情報は取得・保存しません。押した状態の記憶にはブラウザのローカルストレージのみを使用します。
         </p>
       </section>
 

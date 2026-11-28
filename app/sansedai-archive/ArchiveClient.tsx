@@ -1,6 +1,5 @@
 import Link from "next/link";
 import CoverImage from "@/components/CoverImage";
-import LikeButton from "@/components/LikeButton";
 import BuyButtons, { BuyPrNote } from "@/components/BuyButtons";
 import { jstDayIndex, picksForDay, personaName, PERSONA_BIOS, type SansedaiEntry } from "@/lib/sansedai";
 import { loadSansedaiLog, loadSansedaiStock } from "@/lib/cornerData";
@@ -11,8 +10,8 @@ import { loadSansedaiLog, loadSansedaiStock } from "@/lib/cornerData";
  *  未凍結の日(直近のビルド後に増えた日)だけホームと同じ式(picksForDay)でfallback表示する。
  *
  *  ★2026-09-18 server化: 旧は "use client" + fetch(stock/log)で、配信HTMLが「読み込み中…」
- *  だけ=作品リンク0本だった(番人 _check-ssr-content.py が検出)。この頁の対話は LikeButton
- *  (それ自体が client component)だけなので、server で読んで全部HTMLに焼ける。
+ *  だけ=作品リンク0本だった(番人 _check-ssr-content.py が検出)。この頁に対話部品は無い
+ *  (いいねボタンは 2026-11-28 廃止)ので、server で読んで全部HTMLに焼ける。
  *  ★「今日」は **build時のJST** になる = 次の週次までの数日分が出ない。過去ログなので実害は無く、
  *  逆にビルド時点までの全日がGoogleに見えるようになる(旧は1日分も見えていなかった)。 */
 
@@ -83,7 +82,6 @@ export default function ArchiveClient() {
                       <li key={`${p.gen}-${p.slug}`} className="border-t border-[var(--color-line)]/60 pt-2 first:border-t-0 first:pt-1">
                         <div className="flex items-center justify-between">
                           <p className="text-[10.5px] font-bold text-[var(--color-accent)]">{personaName(p.persona)}</p>
-                          <LikeButton id={`sansedai:${date}:${p.gen}`} />
                         </div>
                         <Link href={`/manga/${p.slug}`} className="spring-press mt-1 flex gap-3">
                           <div

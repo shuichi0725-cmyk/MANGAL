@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import CoverImage from "./CoverImage";
-import LikeButton from "./LikeButton";
 
 /** 三世代、今日の一冊(クライアント日替わり版)。
  *  静的サイトでも毎日変わるよう、public/data/sansedai-stock.json(741件)から
@@ -59,10 +58,8 @@ export default function SansedaiDaily() {
         <div className="mt-2.5 space-y-2.5">
           {picks.map((p) => (
             <div key={p.gen} className="rounded-lg border border-[var(--color-line)] bg-[var(--color-surface-2)]/40 p-2.5">
-              {/* いいね=案内人名の行の右端(2026-07-06 ユーザ要望: 縦を消費せず書影を潰さない。Link外=クリック競合なし) */}
               <div className="flex items-center justify-between">
                 <p className="text-[10px] font-bold text-[var(--color-accent)]">{p.persona}</p>
-                <LikeButton id={`sansedai:${date}:${p.gen}`} />
               </div>
               <Link href={`/manga/${p.slug}`} className="spring-press mt-1 flex gap-3">
                 <div
